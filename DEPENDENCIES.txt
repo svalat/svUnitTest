@@ -1,0 +1,13 @@
+Current dependcies for this project are :
+
+ - BUILD \
+         + gcc             (tested version 4.3)
+         + g++             (tested version 4.3)
+         + cmake           (tested version 2.6)
+         + make            (tested version 3.81)
+         + glibc           (tested version 2.9)
+ - RUN svUnitTest  \
+
+Tested systèmes are :
+
+ - Gentoo x86_64 (2009)
