@@ -6,6 +6,9 @@ set(svUnitTest_VERSION "0.0.2")
 #load cmake modules
 include(CheckIncludeFileCXX)
 
+#deps
+include(cmake/FindCppUnit.cmake)
+
 #global setup
 enable_testing()
 add_definitions(-DVERSION="${svUnitTest_VERSION}")
