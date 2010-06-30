@@ -1,7 +1,7 @@
 /*****************************************************
-             PROJECT  : svmath
-             VERSION  : 0.0.1
-             DATE     : 08/2009
+             PROJECT  : svUnitTest
+             VERSION  : 0.0.2
+             DATE     : 06/2010
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/

@@ -1,16 +1,19 @@
 /*****************************************************
-             PROJECT  : svmath
-             VERSION  : 0.0.1
+             PROJECT  : svUnitTest
+             VERSION  : 0.0.2
              DATE     : 06/2010
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
+
+/********************  HEADERS  *********************/
 #include <cppunit/TestRunner.h>
 #include <cppunit/TestResult.h>
 #include <cppunit/TestResultCollector.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/BriefTestProgressListener.h>
 
+/********************  METHODE  *********************/
 int main( int ac, char **av )
 {
 	//Create the event manager and test controller
