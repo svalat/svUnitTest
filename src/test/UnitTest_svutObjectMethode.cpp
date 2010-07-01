@@ -13,7 +13,7 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutObjectMethode.h>
 
-using namespace CPPUNIT_NS;
+using namespace CppUnit;
 using namespace svUnitTest;
 
 /********************  CLASSE  **********************/
