@@ -7,7 +7,7 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
-#include "helpers.h"
+#include "UnitTestExtra.h"
 #include <iostream>
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>

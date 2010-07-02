@@ -6,8 +6,8 @@
              LICENSE  : CeCILL-C
 *****************************************************/
 
-#ifndef UNIT_TEST_HELPERS_HEADER
-#define UNIT_TEST_HELPERS_HEADER
+#ifndef UNIT_TEST_EXTRA_HEADER
+#define UNIT_TEST_EXTRA_HEADER
 
 /********************  HEADERS  *********************/
 #include <cppunit/extensions/HelperMacros.h>

@@ -1,4 +1,4 @@
-set(svutUnitTest_SRCS main.cpp BasicTest.cpp UnitTest_svutObjectMethode.cpp UnitTest_svutCodeLocation.cpp helpers.cpp)
+set(svutUnitTest_SRCS UnitTestMain.cpp BasicTest.cpp UnitTest_svutObjectMethode.cpp UnitTest_svutCodeLocation.cpp UnitTestExtra.cpp)
 
 include_directories (${svUnitTest_SOURCE_DIR}/src/lib/)
 

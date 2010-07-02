@@ -7,7 +7,8 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
-#include "helpers.h"
+#include "UnitTestExtra.h"
+
 namespace CppUnit
 {
 
