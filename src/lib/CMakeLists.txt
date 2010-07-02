@@ -1,9 +1,10 @@
 #setup svUnitTest library
 
 #group files
-set(svUnitTest_SRC svutCodeLocation.cpp)
+set(svUnitTest_SRC svutCodeLocation.cpp svutException.cpp)
 
-set(svUnitTest_INC svutObjectMethodeGenericImpl.h svutObjectMethode.h svutCodeLocation.h)
+set(svUnitTest_INC svutObjectMethodeGenericImpl.h svutObjectMethode.h svutCodeLocation.h 
+	svutException.h)
 
 #define targets
 add_library (svunittest ${svUnitTest_SRC})
