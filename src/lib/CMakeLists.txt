@@ -1,7 +1,7 @@
 #setup svUnitTest library
 
 #group files
-set(svUnitTest_SRC svutCodeLocation.cpp svutException.cpp)
+set(svUnitTest_SRC svutStatusInfo.cpp svutCodeLocation.cpp svutException.cpp)
 
 set(svUnitTest_INC svutObjectMethodeGenericImpl.h svutObjectMethode.h svutCodeLocation.h 
 	svutException.h)
