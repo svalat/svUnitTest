@@ -19,31 +19,31 @@ namespace svUnitTest
 
 /********************  TYPES  ***********************/
 /**
- * Définit la liste des status autorisés dans la librairie.
- * @brief Définit les status autorisés dans la librairie.
+ * Define the list of authorized status of tests in the library.
+ * @brief Define authorized status of unit tests.
 **/
 enum svutStatus
 {
-	/** Le test est à rédiger ou modifier. **/
+	/** The test need to be implemented or re-implemented. **/
 	SVUT_STATUS_TODO,
-	/** Le test est en cours de rédaction ou modification. **/
+	/** The test is in writing mode. **/
 	SVUT_STATUS_INDEV,
-	/** Le test n'a pas été exécuté. **/
+	/** The test wasn't called. **/
 	SVUT_STATUS_SKIPED,
-	/** Le test a été passé avec succès. **/
+	/** The test was executed with success. **/
 	SVUT_STATUS_SUCCESS,
-	/** Une erreur est survenue lors du test. **/
+	/** An error occurd while running the test. **/
 	SVUT_STATUS_FAILED,
-	/** Une erreur inconnue est survenue lors du test. **/
+	/** An unknown error occured while running the test.**/
 	SVUT_STATUS_UNKNOWN,
 };
 
 /********************  CLASSE  **********************/
 /**
- * Classe permettant de stocker les informations des assertions renvoyées par les tests sous une
- * forme plus simple à utiliser par les formatters. Elle sera typiquement renvoyée via les
- * levée d'exception lorsqu'une assertion n'est pas vérifiée.
- * @brief Classe de mise en forme des informations de status.
+ * This class store informations related to the exit status of a test. It provite a simple agregation
+ * of data which is easy to format for output. It may bt typicaly returned via exception on
+ * assertions failure.
+ * @brief Class to agregate extra status informations.
  * @author Valat Sébastien.
  * @version 0.0.1
 **/
@@ -58,13 +58,13 @@ class svutStatusInfo
 		void formatEntries(std::ostream & out,std::string prefix,std::string separator,std::string postfix) const;
 		std::map<std::string,std::string> getEntries(void) const;
 	protected:
-		/** Définit un message associé aux informations. **/
+		/** Define the message related to the status of the test. **/
 		std::string message;
-		/** Liste les paramêtres donnant de l'information sur l'assertion. **/
+		/** Extra parameters to describe the current status, mainly for errors debugging. **/
 		std::map<std::string,std::string> entries;
-		/** Garde la position de l'assertion dans le code source. **/
+		/** Keep the postition of failing assertion in the source code. **/
 		svutCodeLocation location;
-		/** Définit le status courrant du test.**/
+		/** Define the current status of the test.**/
 		svutStatus status;
 };
 

@@ -14,10 +14,10 @@ namespace svUnitTest
 
 /********************  CLASSE  **********************/
 /**
- * Classe de base utilisé pour créer une forme de pointeur de fonction pour les membres de classe.
- * Cette classe de base doit être surchargée par une forme généric pour pouvoir prendre en charge
- * tous les types de classes possible.
- * @brief Classe de base définissant une forme de pointeur de fonction membre.
+ * Base class used to build a C++ function pointer on class member.
+ * This is an abstract class which must be override to form a geneic class to support each required
+ * classes.
+ * @brief Base class to define member method pointer on C++ objects.
  * @author Valat Sébastien
  * @version 0.0.1
 **/
@@ -27,16 +27,16 @@ class svutObjectMethode
 		svutObjectMethode() {};
 		virtual ~svutObjectMethode() {};
 		/**
-		 * Méthode permettant de lancer l'appel.
+		 * Method used ta call the function.
 		**/
 		virtual void call(void) = 0;
 };
 
 /********************  CLASSE  **********************/
 /**
- * Implémentation générique  de svutObjectMethode afin de prendre en charge tous les types d'objets
- * utilisés. Attention, l'implémentation de fonctionne pas pour les membres virtuels.
- * @brief Implémentation générique de la classe pointeur de fonction.
+ * Generic implementation of svutObjectMethode to manage all class types. Caution, this implementation
+ * didn't work with virtual members.
+ * @brief Genric implementation of C++ function pointer.
  * @author Valat Sébastien
  * @version 0.0.1
 **/
@@ -47,9 +47,9 @@ class svutObjectMethodeGeneric : public svutObjectMethode
 		svutObjectMethodeGeneric(T * object,void (T::*methode)(void));
 		virtual void call(void);
 	protected:
-		/** Pointeur vers l'objet à utiliser pour appeler la méthode membre. **/
+		/** Pointer to the objet on which call the method. **/
 		T * object;
-		/** Adresse de la méthode membre. **/
+		/** Adress of the method to call. **/
 		void (T::*methode)(void);
 };
 

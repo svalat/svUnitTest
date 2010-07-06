@@ -19,9 +19,10 @@ namespace svUnitTest
 
 /********************  METHODE  *********************/
 /**
- * Constructeur par défaut.
- * @param message Définit le message d'information associé aux informations.
- * @param location Position de l'assertion dans le code source.
+ * Default constructor of the class.
+ * @param message Define a message to describe the current status, mainly describe the source of error.
+ * @param location Source code location of the assertion used to emit this status notification if
+ * there is one.
 **/
 svutStatusInfo::svutStatusInfo(svUnitTest::svutStatus status, string message, const svUnitTest::svutCodeLocation& location)
 	:location(location)
@@ -32,7 +33,7 @@ svutStatusInfo::svutStatusInfo(svUnitTest::svutStatus status, string message, co
 
 /********************  METHODE  *********************/
 /**
- * @return Renvoie la position dans le code source associée à l'assertion.
+ * @return Return the source location of the assertion which emit this status notification.
 **/
 svutCodeLocation svutStatusInfo::getLocation(void) const
 {
@@ -41,7 +42,7 @@ svutCodeLocation svutStatusInfo::getLocation(void) const
 
 /********************  METHODE  *********************/
 /**
- * @return Renvoie le message de l'assertion.
+ * @return Return the message which describe more precisely the current status.
 **/
 std::string svutStatusInfo::getMessage(void) const
 {
@@ -50,7 +51,7 @@ std::string svutStatusInfo::getMessage(void) const
 
 /********************  METHODE  *********************/
 /**
- * @return Renvoie le status actuellement associé au test.
+ * @return Return the current status of the test.
 **/
 svutStatus svutStatusInfo::getStatus ( void ) const
 {
@@ -59,9 +60,9 @@ svutStatus svutStatusInfo::getStatus ( void ) const
 
 /********************  METHODE  *********************/
 /**
- * Ajoute une entré dans la listes des paramêtres de l'assertion.
- * @param name Définit le nom du champ.
- * @param value Définit la valeur associée.
+ * Add a new entry into the parameters list related to the assetion.
+  * @param name Define the parameter name.
+ * @param value Define the parameter value.
  */
 void svutStatusInfo::addEntry(std::string name,std::string value)
 {
@@ -70,7 +71,7 @@ void svutStatusInfo::addEntry(std::string name,std::string value)
 
 /********************  METHODE  *********************/
 /**
- * @return Renvoie la liste des entrée d'information.
+ * @return Return the list of parameters related to the current status.
 **/
 std::map<std::string,std::string> svutStatusInfo::getEntries(void) const
 {
@@ -79,11 +80,11 @@ std::map<std::string,std::string> svutStatusInfo::getEntries(void) const
 
 /********************  METHODE  *********************/
 /**
- * Met en forme les informations et les affiche dans le flux passé en paramètre.
- * @param out Définit le flux de sortie à utiliser.
- * @param prefix Définit la chaine à placer avant chaque nom de champ.
- * @param separator Définit la chaine à placer entre le nom du champ et la valeur.
- * @param postfix Définit la chaine à placer après la valeur.
+ * Format the current status information and place it in the given stream.
+ * @param out Define the output stream to use.
+ * @param prefix Define the string th place before each parameter name.
+ * @param separator Define the string to place between the parameter name and the value.
+ * @param postfix Define the string to place after the parameter value.
  */
 void svutStatusInfo::formatEntries(std::ostream & out,std::string prefix,std::string separator,std::string postfix) const
 {

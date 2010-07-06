@@ -18,20 +18,19 @@ namespace svUnitTest
 
 /********************  MACROS  **********************/
 /**
- * Macro à utiliser pour créer les instances de svutCodeLocation. Elle permet d'utiliser
- * automatiquement les macros du compilateur pour renseigner les arguements fichier, méthode et
- * ligne.
+ * Macro used to quicly create an instance of svutCodeLocation pointed to the current source
+ * This is recommended to use this macro to create instances of svutCodeLocation.
+ * It permit to use compiler macro to fill arguments (file, method and line).
 **/
 #define SVUT_CODE_LOCATION svUnitTest::svutCodeLocation(__FILE__,__FUNCTION__,__LINE__)
 
 /********************  CLASSE  **********************/
 /**
- * Classe de localisation dans le code de l'application. Elle permet de transporter l'information
- * lié à une erreur d'assertion dans les tests. Les instances de cette classes sont normalement
- * créé à l'aide de la macro SVUT_CODE_LOCATION afin de définir automatiquement les informations
- * de la classe en utilisant les macros du compilateur.
- * La localisation se fait sous la forme, fichier, fonction, ligne.
- * @brief Classe de localisation des assertions dans le code source.
+ * Class used to manage locations in sources of the application. It permet to transport location
+ * of an error in unit tests. Instances of this class are normaly create via the macro
+ * SVUT_CODE_LOCATION which automaticaly define the current location with the compiler macros.
+ * The locatino is define by filename, function name and line.
+ * @brief Class used to locate things in the original source code.
  * @author Valat Sébastien
  * @version 0.0.1
 **/
@@ -48,23 +47,21 @@ class svutCodeLocation
 		friend std::ostream & operator << (std::ostream & out,const svutCodeLocation & location);
 		friend bool operator == (const svutCodeLocation & loc1,const svutCodeLocation & loc2);
 	protected:
-		/** Définie le fichier source. **/
+		/** Define the source filename. **/
 		std::string file;
-		/** Définie la méthode **/
+		/** Define the method name. **/
 		std::string methode;
-		/** Définie la ligne dans le fichier source. **/
+		/** Define the line in the file. **/
 		int line;
 		/**
-		 * Permet de savoir si les informations sont renseignées ou bien s'il s'agit d'une non
-		 * localisation.
+		 * Define if a location is attached to the current instance or not.
 		**/
 		bool located;
 };
 
 /********************  CONSTS  **********************/
 /**
- * Constrante permettant disposer d'une instance non localisé de la classe svutCodeLocation sous
- * la forme d'une constante utilisable partout.
+ * Constant used to define non located objets..
 **/
 extern const svutCodeLocation SVUT_NO_LOCATION;
 

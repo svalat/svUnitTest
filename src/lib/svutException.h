@@ -20,10 +20,10 @@ namespace svUnitTest
 
 /********************  CLASSE  **********************/
 /**
- * Classe de base pour les exception utilisée au sein de la bibliothèque de test unitaire.
- * Cette classe surcharge simplement std::exception pour s'intérer dans le flux normal d'erreur
- * de la librairie standard.
- * @brief Classe de base pour les exceptions de la bibliothèque de tests unitaires.
+ * Base class for exception used by the unit test library.
+ * This class is just an override of std::exception to base all library exception on the same
+ * class.
+ * @brief Base class for all exceptions used by the unit test library.
  * @author Valat Sébastien
  * @version 0.0.1
 **/
@@ -36,7 +36,7 @@ class svutException : public std::exception
 		virtual const char* what() const  throw();
 		std::string getMessage(void) const;
 	private:
-		/** Attache un message de description de l'erreur. **/
+		/** Message attached to the current exception to describe the error. **/
 		std::string message;
 };
 

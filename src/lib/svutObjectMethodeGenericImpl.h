@@ -18,10 +18,10 @@ namespace svUnitTest
 
 /********************  METHODE  *********************/
 /**
- * Constructeur de la classe.
- * @param object Définit l'objet à utiliser pour appeler la méthode.
- * @param methode Définit la méthode à appeler sur l'objet. Attention il ne peux pas s'agir d'une
- * méthode virtuelle.
+ * Default class constructor.
+ * @param object Define the object on which to call the method.
+ * @param methode Define the metho to call on the selected object. Caution, it can't be a virtual
+ * function.
 **/
 template<class T>
 svutObjectMethodeGeneric<T>::svutObjectMethodeGeneric(T * object,void (T::*methode)(void))

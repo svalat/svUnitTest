@@ -18,7 +18,7 @@ namespace svUnitTest
 
 /********************  METHODE  *********************/
 /**
- * Constructeur de la classe.
+ * Default constructor the the class.
 **/
 svutException::svutException(void) throw()
 {
@@ -26,8 +26,8 @@ svutException::svutException(void) throw()
 
 /********************  METHODE  *********************/
 /**
- * surcharge du constructeur par défaut.
- * @param message Définit un message à associer à l'erreur.
+ * Constructor of the classe.
+ * @param message Define a message to describe the exception.
 **/
 svutException::svutException(std::string message) throw()
 {
@@ -36,17 +36,17 @@ svutException::svutException(std::string message) throw()
 
 /********************  METHODE  *********************/
 /**
- * Destructeur de la classe. Utilisée principalement pour l'héritage.
- */
+ * Destructor of the class. Done nothing, but defined to ensure inheritance.
+**/
 svutException::~svutException(void) throw()
 {
 }
 
 /********************  METHODE  *********************/
 /**
- * Surcharge de la méthode requise par std::exception.
- * @return Renvoie le message contenu dans l'exception sous a forme d'une chaine de caractère C.
- */
+ * Implement method required by std::exception.
+ * @return Return the message stored in the ecxeption as a C string.
+**/
 const char* svutException::what() const  throw()
 {
 	return message.c_str();
@@ -54,8 +54,8 @@ const char* svutException::what() const  throw()
 
 /********************  METHODE  *********************/
 /**
- * @return Renvoie le message associé à l'exception sous la forme d'un string.
- */
+ * @return Return the message stored in the exception as a std::string.
+**/
 std::string svutException::getMessage(void) const
 {
 	return message;

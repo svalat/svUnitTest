@@ -19,14 +19,13 @@ namespace svUnitTest
 
 /********************  CONSTS  **********************/
 /**
- * Constrante permettant disposer d'une instance non localisé de la classe svutCodeLocation sous
- * la forme d'une constante utilisable partout.
+ * Constant used to define non located objects.
  **/
 const svutCodeLocation SVUT_NO_LOCATION;
 
 /********************  METHODE  *********************/
 /**
- * Constructeur de la classe pour créer une instance non localisée.
+ * Default class constructor. It produce a non located instance.
 **/
 svutCodeLocation::svutCodeLocation(void)
 {
@@ -36,12 +35,12 @@ svutCodeLocation::svutCodeLocation(void)
 
 /********************  METHODE  *********************/
 /**
- * Constructeur de la classe permettant de définir les informations de coordonnées dans les sources.
- * Ce constructeur est normalement appelé via la macro SVUT_CODE_LOCATION afin de définir
- * automatiquement les informations de localisation en utilisant les macro du compilateur.
- * @param file Définie le ficier source.
- * @param methode Définie la méthode.
- * @param line Définie la ligne dans le fichier source.
+ * Class constructor wich permit to setup a location. Normaly the fields are setup via
+ * the macro SVUT_CODE_LOCATION which use compiler macros to fetch the current line, file and
+ * function.
+ * @param file Define the source filename.
+ * @param methode Define the function name.
+ * @param line Define the line in source file.
 **/
 svutCodeLocation::svutCodeLocation(std::string file,std::string methode,int line)
 {
@@ -53,7 +52,7 @@ svutCodeLocation::svutCodeLocation(std::string file,std::string methode,int line
 
 /********************  METHODE  *********************/
 /**
- * @return Renvoie le nom du fichier source ou "unknown"
+ * @return Return the source filename or "unknown"
  */
 std::string svutCodeLocation::getFilename(void) const
 {
@@ -65,7 +64,7 @@ std::string svutCodeLocation::getFilename(void) const
 
 /********************  METHODE  *********************/
 /**
- * @return  Renvoie le nom de la méthode ou "unknown"
+ * @return  Return the method name or "unknown"
  */
 std::string svutCodeLocation::getMethodeName(void) const
 {
@@ -77,7 +76,7 @@ std::string svutCodeLocation::getMethodeName(void) const
 
 /********************  METHODE  *********************/
 /**
- * @return Renvoie la ligne dans le fichier source ou -1.
+ * @return Return the line in source file or -1.
 **/
 int svutCodeLocation::getLine(void) const
 {
@@ -89,8 +88,8 @@ int svutCodeLocation::getLine(void) const
 
 /********************  METHODE  *********************/
 /**
- * @return Renvoie true si l'insance contient une localisation ou false si elle ne définit aucune
- * localisation précise (cas de SVUT_NO_LOCATION).
+ * @return Return true if current instance define a location, of false if not
+ * (equivalent to SVUT_NO_LOCATION).
 **/
 bool svutCodeLocation::hasLocation(void) const
 {
@@ -99,11 +98,10 @@ bool svutCodeLocation::hasLocation(void) const
 
 /********************  METHODE  *********************/
 /**
- * Opérateur de flux sortant permettant de formater la localisation sous la forme d'une chaine
- * de caractère.
- * @param out Définie le flux à utiliser.
- * @param location Définie la localisation à formater.
- * @return Renvoie le flux de sortie utilisé.
+ * Output stream operator used to format the location in a string format.
+ * @param out Define the output stream to use.
+ * @param location Define the location to format.
+ * @return Return the output stream used.
  */
 std::ostream & operator << (std::ostream & out,const svutCodeLocation & location)
 {
@@ -118,10 +116,11 @@ std::ostream & operator << (std::ostream & out,const svutCodeLocation & location
 
 /********************  METHODE  *********************/
 /**
- * Définit l'opérateur de test d'égalité de deux localisation dans le code source.
- * @param loc1 Définit la première localisation
- * @param loc2 Définit la seconde localisation
- * @return Renvoie true si les deux localisation sont égales membres à membres.
+ * Operator used to compares two locations. Two locations are equals if they have the same
+ * filename, function name and line ; or if the two are equivalent to SVUT_NO_LOCATION.
+ * @param loc1 Define the first location.
+ * @param loc2 Define the second location.
+ * @return Return true if the two location are equals member per memner.
 **/
 bool operator == (const svutCodeLocation & loc1,const svutCodeLocation & loc2)
 {

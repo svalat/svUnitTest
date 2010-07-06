@@ -1,4 +1,4 @@
-Pour compiler le projet :
+To compile the project :
 
 $> mkdir build
 $> cd build
@@ -8,13 +8,13 @@ $> make install
 
                     -----------------------
 
-On peut changer le chemin d'installation (prefix) à l'aide de la commande :
+You can change the prefix path for installation with the command : 
 
 $> cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local/myprefix
 
                     -----------------------
 
-Les test sont exécuté à l'aide de  :
+You can run the internal unit test before installing  :
 
 $> make test
 
