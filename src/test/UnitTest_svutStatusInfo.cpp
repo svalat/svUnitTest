@@ -34,6 +34,8 @@ class UnitTest_svutStatusInfo : public TestCase
 	CPPUNIT_TEST(testGetLocation);
 	CPPUNIT_TEST(testGetMessage);
 	CPPUNIT_TEST(testGetStatus);
+	CPPUNIT_TEST(testGetNbEntries);
+	CPPUNIT_TEST(testGetEntry);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -46,6 +48,8 @@ class UnitTest_svutStatusInfo : public TestCase
 		void testGetLocation(void);
 		void testGetMessage(void);
 		void testGetStatus(void);
+		void testGetNbEntries(void);
+		void testGetEntry(void);
 
 		svutStatusInfo * info;
 };
@@ -101,6 +105,20 @@ void UnitTest_svutStatusInfo::testGetMessage ( void )
 void UnitTest_svutStatusInfo::testGetStatus ( void )
 {
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,info->getStatus());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutStatusInfo::testGetEntry(void )
+{
+	info->addEntry("name_test","value_test");
+	CPPUNIT_ASSERT_EQUAL("value_test",info->getEntry("name_test"));
+	CPPUNIT_ASSERT_EQUAL("",info->getEntry("unknown"));
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutStatusInfo::testGetNbEntries(void )
+{
+	CPPUNIT_ASSERT_EQUAL(0,info->getNbEntries());
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutStatusInfo);

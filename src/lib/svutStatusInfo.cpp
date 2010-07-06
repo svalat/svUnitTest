@@ -92,4 +92,27 @@ void svutStatusInfo::formatEntries(std::ostream & out,std::string prefix,std::st
 		out << prefix << it->first << separator << it->second << postfix;
 }
 
+/********************  METHODE  *********************/
+/**
+ * @return Return the number of entries in the status informations.
+**/
+unsigned int svutStatusInfo::getNbEntries(void ) const
+{
+	return this->entries.size();
+}
+
+/********************  METHODE  *********************/
+/**
+ * @return Return a specific entry, empty if non existant.
+ * @param name Define the name of the requested entry.
+**/
+string svutStatusInfo::getEntry(string name) const
+{
+	for (map<string,string>::const_iterator it=entries.begin() ; it != entries.end(); it++ )
+		if (it->first == name)
+			return it->second;
+	return "";
+}
+
+
 };

@@ -34,7 +34,7 @@ class svutException : public std::exception
 		svutException(std::string message) throw();
 		virtual ~svutException(void) throw();
 		virtual const char* what() const  throw();
-		std::string getMessage(void) const;
+		virtual std::string getMessage(void) const;
 	private:
 		/** Message attached to the current exception to describe the error. **/
 		std::string message;

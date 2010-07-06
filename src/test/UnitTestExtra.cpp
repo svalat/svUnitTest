@@ -25,6 +25,18 @@ void assertEquals( const char * expected,const std::string & actual,CppUnit::Sou
 }
 
 /********************  METHOD  **********************/
+void assertEquals( const std::string & expected,const char * actual,CppUnit::SourceLine sourceLine,const std::string &message )
+{
+	if ( actual!=expected) // lazy toString conversion...
+	{
+		Asserter::failNotEqual( expected,
+								 assertion_traits<const char *>::toString(actual),
+										sourceLine,
+		  message );
+	}
+}
+
+/********************  METHOD  **********************/
 void assertEquals( int expected,unsigned int actual,SourceLine sourceLine,const std::string &message )
 {
 	if ( (unsigned int)expected!=actual) // lazy toString conversion...

@@ -57,6 +57,8 @@ class svutStatusInfo
 		void addEntry(std::string name,std::string value);
 		void formatEntries(std::ostream & out,std::string prefix,std::string separator,std::string postfix) const;
 		std::map<std::string,std::string> getEntries(void) const;
+		unsigned int getNbEntries(void) const;
+		std::string getEntry(std::string name) const;
 	protected:
 		/** Define the message related to the status of the test. **/
 		std::string message;
