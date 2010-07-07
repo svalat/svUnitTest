@@ -38,6 +38,7 @@ class svutCodeLocation
 {
 	public:
 		svutCodeLocation(void);
+		svutCodeLocation(const svutCodeLocation & location);
 		svutCodeLocation(std::string file,std::string methode,int line);
 		std::string getFilename(void) const;
 		std::string getMethodeName(void) const;

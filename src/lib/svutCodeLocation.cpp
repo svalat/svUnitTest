@@ -27,11 +27,25 @@ const svutCodeLocation SVUT_NO_LOCATION;
 /**
  * Default class constructor. It produce a non located instance.
 **/
-svutCodeLocation::svutCodeLocation(void)
+svutCodeLocation::svutCodeLocation()
 {
 	this->line = -1;
 	this->located = false;
 }
+
+/********************  METHODE  *********************/
+/**
+ * Copy constructor of the class.
+ * @param location Define the original location to copy.
+**/
+svutCodeLocation::svutCodeLocation(const svUnitTest::svutCodeLocation& location)
+{
+	this->line = location.line;
+	this->located = location.located;
+	this->file = location.file;
+	this->methode = location.methode;
+}
+
 
 /********************  METHODE  *********************/
 /**
