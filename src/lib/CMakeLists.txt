@@ -10,7 +10,7 @@ set(svUnitTest_INC svutObjectMethodeGenericImpl.h svutObjectMethode.h svutCodeLo
 IF (TEST_COVERAGE)
 	set(CMAKE_CXX_FLAGS "-O0 -fprofile-arcs -ftest-coverage")
 	set(CMAKE_C_FLAGS "-O0 -fprofile-arcs -ftest-coverage")
-	set(CMAKE_EXE_LINKER_FLAGS "-O0 -fprofile-arcs -ftest-coverage")
+	set(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
 ENDIF (TEST_COVERAGE)
 
 #define targets

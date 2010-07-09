@@ -10,7 +10,7 @@ set(svutUnitTest_CASES svutCodeLocation svutException svutObjectMethode svutStat
 		svutExTestStatus svutExNotify svutExAssert svutAssert)
 IF (TEST_COVERAGE) ############ HERE THE CASE FOR COVERAGE
 	set(svutUnitTest_ALLSRC)
-	set(CMAKE_EXE_LINKER_FLAGS "-O0 -fprofile-arcs -ftest-coverage")
+	set(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
 	foreach(i ${svutUnitTest_CASES})
 		list(APPEND svutUnitTest_ALLSRC UnitTest_${i}.cpp)
 	endforeach(i)
