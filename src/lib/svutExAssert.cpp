@@ -121,7 +121,7 @@ svutExAssertFailNotExec::svutExAssertFailNotExec(svutCodeLocation location) thro
 svutExAssertFailThrow::svutExAssertFailThrow(string expected, string actual, svutCodeLocation location) throw()
 	: svutExAssertFail("AssertThrow",SVUT_STATUS_FAILED,location,"Failed on waiting exception.")
 {
-	info.addEntry("Expect",expected);
+	info.addEntry("Expected",expected);
 	info.addEntry("Actual",actual);
 }
 
