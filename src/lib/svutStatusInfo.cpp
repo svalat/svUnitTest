@@ -23,8 +23,9 @@ namespace svUnitTest
  * @param message Define a message to describe the current status, mainly describe the source of error.
  * @param location Source code location of the assertion used to emit this status notification if
  * there is one.
+ * @param status Define the related status.
 **/
-svutStatusInfo::svutStatusInfo(svUnitTest::svutStatus status, string message, const svUnitTest::svutCodeLocation& location)
+svutStatusInfo::svutStatusInfo(svUnitTest::svutStatus status, std::string message, const svUnitTest::svutCodeLocation& location)
 	:location(location)
 {
 	this->message = message;
@@ -106,7 +107,7 @@ unsigned int svutStatusInfo::getNbEntries(void ) const
  * @return Return a specific entry, empty if non existant.
  * @param name Define the name of the requested entry.
 **/
-string svutStatusInfo::getEntry(string name) const
+std::string svutStatusInfo::getEntry(std::string name) const
 {
 	for (map<string,string>::const_iterator it=entries.begin() ; it != entries.end(); it++ )
 		if (it->first == name)

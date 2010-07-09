@@ -22,7 +22,7 @@ namespace svUnitTest
  * @param name Define the name of the current notification.
  * @param info Define the related information (location, parameters...).
 **/
-svutExTestStatus::svutExTestStatus(string name, const svUnitTest::svutStatusInfo& info) throw()
+svutExTestStatus::svutExTestStatus(std::string name, const svUnitTest::svutStatusInfo& info) throw()
 	: svutException(""),info(info)
 {
 	this->name = name;
@@ -36,7 +36,7 @@ svutExTestStatus::svutExTestStatus(string name, const svUnitTest::svutStatusInfo
  * @param location Define the source location which emit this notification.
  * @param message Describe why this notification was emitted.
 **/
-svutExTestStatus::svutExTestStatus(string name, svutStatus status, svutCodeLocation location, string message) throw()
+svutExTestStatus::svutExTestStatus(std::string name, svutStatus status, svutCodeLocation location, std::string message) throw()
 	:svutException(""),info(status,message,location)
 {
 	this->name = name;
@@ -107,7 +107,7 @@ const char* svutExTestStatus::what() const throw()
 /**
  * @return Return the inner message which describe the exception.
 **/
-string svutExTestStatus::getMessage(void ) const
+std::string svutExTestStatus::getMessage(void ) const
 {
     return info.getMessage();
 }

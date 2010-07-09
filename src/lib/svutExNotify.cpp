@@ -15,25 +15,29 @@ namespace svUnitTest
 
 /********************  METHOD  **********************/
 /**
- * @todo Check that the code is took from base class
+ * @copydoc svutExTestStatus::svutExTestStatus
 **/
-svutExNotify::svutExNotify(string name, const svutStatusInfo & info) throw()
+svutExNotify::svutExNotify(std::string name, const svutStatusInfo & info) throw()
 	: svutExTestStatus("Notify:"+name, info)
 {
 }
 
 /********************  METHOD  **********************/
 /**
- * @todo Check that the code is took from base class
+ * Class constructor with some manual information.
+ * @param name Define the name of the current notification.
+ * @param message Define a message de describe the notification.
+ * @param location Define the location from which the assertion was emitted.
+ * @param status Define the status related to this notification.
 **/
-svutExNotify::svutExNotify(string name, svutStatus status, const svutCodeLocation & location, string message) throw()
+svutExNotify::svutExNotify(std::string name, svutStatus status, const svutCodeLocation & location, std::string message) throw()
 	: svutExTestStatus("Notify:"+name, status, location, message)
 {
 }
 
 /********************  METHOD  **********************/
 /**
- * @todo Check that the code is took from base class
+ * @copydoc svutExTestStatus::~svutExTestStatus
 **/
 svutExNotify::~svutExNotify(void ) throw()
 {
@@ -45,7 +49,7 @@ svutExNotify::~svutExNotify(void ) throw()
  * @param message Define a message to describe what need to be done in the test.
  * @param location Define the location from which is emit this notification.
 **/
-svutExNotifyTodo::svutExNotifyTodo(string message, const svutCodeLocation & location) throw()
+svutExNotifyTodo::svutExNotifyTodo(std::string message, const svutCodeLocation & location) throw()
 	:svutExNotify("Todo",SVUT_STATUS_TODO,location,message)
 {
 }
@@ -56,7 +60,7 @@ svutExNotifyTodo::svutExNotifyTodo(string message, const svutCodeLocation & loca
  * @param message Define a message to describe what we are doing in the test.
  * @param location Define the location from which is emit this notification.
 **/
-svutExNotifyIndev::svutExNotifyIndev(string message, svutCodeLocation location) throw()
+svutExNotifyIndev::svutExNotifyIndev(std::string message, svutCodeLocation location) throw()
 	:svutExNotify("Indev",SVUT_STATUS_INDEV,location,message)
 {
 }
