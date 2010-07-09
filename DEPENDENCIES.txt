@@ -10,7 +10,11 @@ Current dependcies for this project are :
  - RUN svUnitTest unit tests \
          + glibc           (tested version 2.11.2)
          + cppunit         (tested version 1.12.1)
- - RUN svUnitTest  \
+ - RUN svUnitTest test coverage \
+         + glibc           (tested version 2.11.2)
+         + cppunit         (tested version 1.12.1)
+         + lcov            (tested version 1.7)
+ - USE svUnitTest  \
          + glibc           (tested version 2.11.2)
 
 Tested systèmes are :

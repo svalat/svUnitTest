@@ -1,10 +1,17 @@
 #setup svUnitTest library
 
 #group files
-set(svUnitTest_SRC svutExNotify.cpp svutExAssert.cpp svutExTestStatus.cpp svutStatusInfo.cpp svutCodeLocation.cpp svutException.cpp)
+set(svUnitTest_SRC svutAssert.cpp svutExNotify.cpp svutExAssert.cpp svutExTestStatus.cpp svutStatusInfo.cpp svutCodeLocation.cpp svutException.cpp)
 
 set(svUnitTest_INC svutObjectMethodeGenericImpl.h svutObjectMethode.h svutCodeLocation.h 
 	svutException.h)
+
+#enable coverage profiling
+IF (TEST_COVERAGE)
+	set(CMAKE_CXX_FLAGS "-O0 -fprofile-arcs -ftest-coverage")
+	set(CMAKE_C_FLAGS "-O0 -fprofile-arcs -ftest-coverage")
+	set(CMAKE_EXE_LINKER_FLAGS "-O0 -fprofile-arcs -ftest-coverage")
+ENDIF (TEST_COVERAGE)
 
 #define targets
 add_library (svunittest ${svUnitTest_SRC})
