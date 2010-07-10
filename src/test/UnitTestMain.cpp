@@ -12,27 +12,34 @@
 #include <cppunit/TestResultCollector.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/BriefTestProgressListener.h>
-#include <cppunit/TextOutputter.h>
-#include <cppunit/TextOutputter.h>
+// #include <cppunit/TextOutputter.h>
+// #include <cppunit/XmlOutputter.h>
+#include <cppunit/CompilerOutputter.h>
+
+using namespace CppUnit;
 
 /********************  METHODE  *********************/
-int main( int ac, char **av )
+int main(int argc, char* argv[])
 {
-	//Create the event manager and test controller
-	CppUnit::TestResult controller;
+	// Get the top level suite from the registry
+	Test *suite = CppUnit::TestFactoryRegistry::getRegistry().makeTest();
 
-	//Add a listener that colllects test result
-	CppUnit::TestResultCollector result;
-	controller.addListener( &result );        
+	// Adds the test to the list of test to run
+	TextTestRunner runner;
+	runner.addTest( suite );
+	
 
-	//Add a listener that print dots as test run.
-	CppUnit::BriefTestProgressListener progress;
-	controller.addListener( &progress );      
+	// Change the default outputter to a compiler error format outputter
+	runner.setOutputter( new CompilerOutputter ( &runner.result(),std::cerr ));
 
-	//Add the top suite to the test runner
-	CppUnit::TextTestRunner runner(new CppUnit::TextOutputter ( &runner.result(),std::cerr ) );
-	runner.addTest( CppUnit::TestFactoryRegistry::getRegistry().makeTest() );
-	runner.run( controller );
+	//seup biref progress mode
+	BriefTestProgressListener progress;
+	runner.eventManager().addListener( &progress );
 
-	return result.wasSuccessful() ? 0 : 1;
+	// Run the tests.
+	bool wasSucessful = runner.run();
+
+	// Return error code 1 if the one of test failed.
+	return wasSucessful ? 0 : 1;
 }
+
