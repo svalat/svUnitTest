@@ -86,6 +86,66 @@ namespace svUnitTest
 #define SVUT_ASSERT_NOT_EQUAL(expected,actual) \
 	svUnitTest::assertNotEqual((expected),(actual),SVUT_CODE_LOCATION)
 
+/********************  MACRO  ***********************/
+/**
+ * Macro used to assert equality of members in term of values. In addition to SVUT_ASSERT_EQUAL,
+ * it force the  variables to use the same type by relying on compiler error if not just by playing
+ * with template declaration. In backend it simple redirect the filtered call to
+ * asserterOperatorEqual. For more detail on it, jump to SVUT_ASSERT_EQUAL.
+ *
+ * In case of failure, an exception of type svutExAssertFailEqual was throwed. This macro was built
+ * to be used in unit test cases.
+ * @param expected Define the wanted value.
+ * @param actual Define the current value to test.
+**/
+#define SVUT_ASSERT_EQUAL_TYPE(expected,actual) \
+	assertEqualType((expected),(actual),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+/**
+ * Macro used to assert equality of members in term of values. In addition to SVUT_ASSERT_NOT_EQUAL,
+ * it force the  variables to use the same type by relying on compiler error if not just by playing
+ * with template declaration. In backend it simple redirect the filtered call to
+ * asserterOperatorEqual. For more detail on it, jump to SVUT_ASSERT_NOT_EQUAL.
+ *
+ * In case of failure, an exception of type svutExAssertFailEqual was throwed. This macro was built
+ * to be used in unit test cases.
+ * @param expected Define the wanted value.
+ * @param actual Define the current value to test.
+**/
+#define SVUT_ASSERT_NOT_EQUAL_TYPE(expected,actual) \
+	assertNotEqualType((expected),(actual),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+/**
+ * Macro used to assert that two variables pointer to the same object, here it simply compare the
+ * addresses of the pointer. This is more for readibility of the test than a requirement as
+ * SVUT_ASSERT_EQUAL can made the job except for char * as it support a special override to use it
+ * as c string and not simple pointers.
+ *
+ * In case of failure, an exception of type svutExAssertFailEqual was throwed. This macro was built
+ * to be used in unit test cases.
+ * @param expected Définit un pointeur vers la valeur attendue.
+ * @param actual Définit un pointeut vers la valeur obtenue.
+**/
+#define SVUT_ASSERT_SAME(expected,actual) \
+	assertSame((expected),(actual),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+/**
+ * Macro used to assert that two variables pointer to the same object, here it simply compare the
+ * addresses of the pointer. This is more for readibility of the test than a requirement as
+ * SVUT_ASSERT_NOT_EQUAL can made the job except for char * as it support a special override to use it
+ * as c string and not simple pointers.
+ *
+ * In case of failure, an exception of type svutExAssertFailEqual was throwed. This macro was built
+ * to be used in unit test cases.
+ * @param expected Définit un pointeur vers la valeur attendue.
+ * @param actual Définit un pointeut vers la valeur obtenue.
+**/
+#define SVUT_ASSERT_NOT_SAME(expected,actual) \
+	assertNotSame((expected),(actual),SVUT_CODE_LOCATION)
+
 
 /*******************  METHOD  **********************/
 /**
@@ -180,9 +240,51 @@ void assertNotEqual(const T1 & expected,const T2 & actual,svutCodeLocation locat
 	}
 }
 
-/*******************  METHOD  **********************/
+/*******************  METHODE  *********************/
+/**
+ * Implementation used bu macro SVUT_ASSERT_EQUAL_TYPE. This methode only rely on assertEqual() by
+ * pre-filtering the types. For type filtering it rely on compiler error by using a restrict
+ * prototype, this the main goal of this metho is to made crash the compiler when types are not
+ * the same.
+ *
+ * You don't have to override this methode.
+ *
+ * @param expected Define the expected value.
+ * @param actual Define the current value to compared to the expected one.
+ * @param location Define the code location which call this test.
+**/
+template <class T>
+void assertEqualType(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+{
+	assertEqual(expected,actual,location);
+}
+
+/*******************  METHODE  *********************/
+/**
+ * Implementation used bu macro SVUT_ASSERT_NOT_EQUAL_TYPE. This methode only rely on assertEqual() by
+ * pre-filtering the types. For type filtering it rely on compiler error by using a restrict
+ * prototype, this the main goal of this metho is to made crash the compiler when types are not
+ * the same.
+ *
+ * You don't have to override this methode.
+ *
+ * @param expected Define the expected value.
+ * @param actual Define the current value to compared to the expected one.
+ * @param location Define the code location which call this test.
+**/
+template <class T>
+void assertNotEqualType(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+{
+	assertNotEqual(expected,actual,location);
+}
+
+/*******************  METHODE  *********************/
 void assertEqual(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 void assertNotEqual(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
+void assertEqualType(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
+void assertNotEqualType(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
+void assertSame(const void * expected,const void * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
+void assertNotSame(const void * expected,const void * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 
 };
 

@@ -42,6 +42,12 @@ class UnitTest_svutAssert : public TestCase
 	CPPUNIT_TEST(testMacroAssertNotEqual_cstr_bad);
 	CPPUNIT_TEST(testMacroAssertNotEqual_custotype_good);
 	CPPUNIT_TEST(testMacroAssertNotEqual_custotype_bad);
+	CPPUNIT_TEST(testMacroAssertEqualType_int_good);
+	CPPUNIT_TEST(testMacroAssertNotEqualType_int_good);
+	CPPUNIT_TEST(testMacroAssertEqualType_cstr_good);
+	CPPUNIT_TEST(testMacroAssertNotEqualType_cstr_good);
+	CPPUNIT_TEST(testMacroAssertSame_good);
+	CPPUNIT_TEST(testMacroAssertSame_bad);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -69,6 +75,12 @@ class UnitTest_svutAssert : public TestCase
 		void testMacroAssertNotEqual_cstr_bad(void);
 		void testMacroAssertNotEqual_custotype_good(void);
 		void testMacroAssertNotEqual_custotype_bad(void);
+		void testMacroAssertEqualType_int_good(void);
+		void testMacroAssertNotEqualType_int_good(void);
+		void testMacroAssertEqualType_cstr_good(void);
+		void testMacroAssertNotEqualType_cstr_good(void);
+		void testMacroAssertSame_good(void);
+		void testMacroAssertSame_bad(void);
 };
 
 /********************  STRUCT  **********************/
@@ -391,6 +403,84 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_custotype_bad(void)
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("10, 20",e.getInfos().getEntry("Not expected"));
 		CPPUNIT_ASSERT_EQUAL("10, 20",e.getInfos().getEntry("Actual"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutAssert::testMacroAssertEqualType_int_good(void)
+{
+	try {
+		SVUT_ASSERT_EQUAL_TYPE(10,10);
+	} catch (svutExAssertFailEqual e) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutAssert::testMacroAssertNotEqualType_int_good(void)
+{
+	try {
+		SVUT_ASSERT_NOT_EQUAL_TYPE(10,20);
+	} catch (svutExAssertFailEqual e) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutAssert::testMacroAssertEqualType_cstr_good(void)
+{
+	try {
+		SVUT_ASSERT_EQUAL_TYPE("Hello World !!","Hello World !!");
+	} catch (svutExAssertFailEqual e) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutAssert::testMacroAssertNotEqualType_cstr_good(void)
+{
+	try {
+		SVUT_ASSERT_NOT_EQUAL_TYPE("Hello World !!","Hello Bob !!");
+	} catch (svutExAssertFailEqual e) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutAssert::testMacroAssertSame_good(void)
+{
+	try {
+		int a = 66;
+		SVUT_ASSERT_SAME(&a,&a);
+	} catch (svutExAssertFailEqual e) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutAssert::testMacroAssertSame_bad(void)
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 3);
+	int a = 66;
+	try {
+		SVUT_ASSERT_NOT_SAME(&a,&a);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailEqual exception.");
+	} catch (svutExAssertFailEqual e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL(asserterToString(&a),e.getInfos().getEntry("Not expected"));
+		CPPUNIT_ASSERT_EQUAL(asserterToString(&a),e.getInfos().getEntry("Actual"));
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
 	}
