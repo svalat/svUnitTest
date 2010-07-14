@@ -99,7 +99,7 @@ svutExAssertFailEqual::svutExAssertFailEqual(bool expectTestRes, std::string exp
  * @param message Define a message to describe the reason of failure.
  * @param location Define the location from which it was emitted.
 **/
-svutExAssertFailCustom::svutExAssertFailCustom(std::string message, svutCodeLocation& location) throw()
+svutExAssertFailCustom::svutExAssertFailCustom(std::string message, svutCodeLocation location) throw()
 	: svutExAssertFail("AssertCustom",SVUT_STATUS_FAILED,location,message)
 {
 }

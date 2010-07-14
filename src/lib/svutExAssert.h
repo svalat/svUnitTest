@@ -83,7 +83,7 @@ class svutExAssertFailEqual : public svutExAssertFail
 class svutExAssertFailCustom : public svutExAssertFail
 {
 	public:
-		svutExAssertFailCustom(std::string message, svutCodeLocation & location) throw();
+		svutExAssertFailCustom(std::string message, svUnitTest::svutCodeLocation location) throw();
 };
 
 /********************  CLASSE  **********************/

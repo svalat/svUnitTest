@@ -12,6 +12,7 @@
 /********************  HEADERS  *********************/
 #include <sstream>
 #include "svutExAssert.h"
+#include "svutExNotify.h"
 
 namespace svUnitTest
 {
@@ -146,6 +147,106 @@ namespace svUnitTest
 #define SVUT_ASSERT_NOT_SAME(expected,actual) \
 	assertNotSame((expected),(actual),SVUT_CODE_LOCATION)
 
+/********************  MACRO  ***********************/
+/**
+ * Macro used to throw custom error descibed by a message. This assertion always throw exception of
+ * type svutExAssertFailCustom. This macro was built to be used in unit test cases.
+ * @param message Define a message to describe why wy emit status failure.
+**/
+#define SVUT_ASSERT_FAIL(message) \
+	throw svUnitTest::svutExAssertFailCustom((message),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+/**
+ * Macro used to mark the current test as 'TODO', this is to notice that it must be implemented
+ * or some changes are waited on it.
+ * For now it was based one excption throwing, but the implementation of this macro may change in
+ * the future to avoid skipping the current writed tests. It throw svutExNotifyTodo exception.
+ * This macro was built to be used in unit test cases.
+ * @param message Message used to describe what to do in this test.
+**/
+#define SVUT_ASSERT_TODO(message) \
+	throw svUnitTest::svutExNotifyTodo((message),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+/**
+ * Macro used to mark the current test as 'INDEV', this is to notice that it is changing. It may
+ * also help to quicliy foudn the test we are writing in the restul list.
+ * For now it was based one excption throwing, but the implementation of this macro may change in
+ * the future to avoid skipping the current writed tests. It throw svutExNotifyIndev exception.
+ * This macro was built to be used in unit test cases.
+ * @param message Message used to describe what append in this test.
+**/
+#define SVUT_ASSERT_INDEV(message) \
+	throw svUnitTest::svutExNotifyIndev((message),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+/**
+ * Macro used to check that a piece of code wasn't execute. Il always fail with
+ * svutExAssertFailNotExec exception.
+ * In practice it's quite the same than SVUT_ASSERT_FAIL without message.
+ * This macro was built to be used in unit test cases.
+**/
+#define SVUT_ASSERT_NOT_EXEC_THIS() \
+	throw svUnitTest::svutExAssertFailNotExec(SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+/**
+ * Check that a piece of code thow a specific exception.
+ * @param name Define the type of required exception.
+ * @param what Define the piece of code to run and on which to catch the exception.
+**/
+#define SVUT_ASSERT_THROW(name,what) \
+	try {\
+		what;\
+		throw svUnitTest::svutExAssertFailThrow(#name,"NONE",SVUT_CODE_LOCATION);\
+	} catch(name & e) {\
+	}  catch(svUnitTest::svutExAssertFailThrow & e) { \
+		throw e; \
+	} catch(...) {\
+		throw svUnitTest::svutExAssertFailThrow(#name,"UNKNOWN",SVUT_CODE_LOCATION);\
+	}
+
+/********************  MACRO  ***********************/
+/**
+ * Check that the given piece of code throw exception without filtering the type.
+ * @param what Define the piece of code to run and on which to catch the exception.
+**/
+#define SVUT_ASSERT_THROW_SOMETHING(what) \
+	try {\
+		what;\
+		throw svUnitTest::svutExAssertFailThrow("...","NONE",SVUT_CODE_LOCATION);\
+	}  catch(svUnitTest::svutExAssertFailThrow & e) { \
+		throw e; \
+	} catch(...) {\
+	}
+
+/********************  MACRO  ***********************/
+/**
+ * Check that the given piece of code didn't throw the given exception. Caution, others exceptions
+ * are catched but didn't produce a failure. To avoid all exceptions, use SVUT_ASSERT_MAY_NOT_THROW.
+ * @param name Define the type of the non wanted exception.
+ * @param what Define the piece of code to run and on which to catch the exception.
+ **/
+#define SVUT_ASSERT_NOT_THROW(name,what) \
+	try {\
+		what;\
+	} catch(name & e) {\
+		throw svUnitTest::svutExAssertFailThrow("NONE",#name,SVUT_CODE_LOCATION);\
+	} catch(...) {\
+	}
+
+/********************  MACRO  ***********************/
+/**
+ * Check the the given piece of code didn't thow exception. It catch all exception without filtering types.
+ * @param what Define the piece of code to run and on which to catch the exception.
+ **/
+#define SVUT_ASSERT_MAY_NOT_THROW(what) \
+	try {\
+		what;\
+	} catch(...) {\
+		throw svUnitTest::svutExAssertFailThrow("NONE","...",SVUT_CODE_LOCATION);\
+	}
 
 /*******************  METHOD  **********************/
 /**
