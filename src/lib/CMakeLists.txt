@@ -1,7 +1,7 @@
 #setup svUnitTest library
 
 #group files
-set(svUnitTest_SRC svutAssert.cpp svutExNotify.cpp svutExAssert.cpp svutExTestStatus.cpp svutStatusInfo.cpp svutCodeLocation.cpp svutException.cpp)
+set(svUnitTest_SRC svutAsserter.cpp svutExNotify.cpp svutExAssert.cpp svutExTestStatus.cpp svutStatusInfo.cpp svutCodeLocation.cpp svutException.cpp)
 
 set(svUnitTest_INC svutObjectMethodeGenericImpl.h svutObjectMethode.h svutCodeLocation.h 
 	svutException.h)

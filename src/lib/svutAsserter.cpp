@@ -8,7 +8,7 @@
 
 /********************  HEADERS  *********************/
 #include <cstring>
-#include "svutAssert.h"
+#include "svutAsserter.h"
 
 namespace svUnitTest
 {
