@@ -21,11 +21,11 @@ namespace svUnitTest
  * @author Valat Sébastien
  * @version 0.0.1
 **/
-class svutObjectMethode
+class svutObjectMethod
 {
 	public:
-		svutObjectMethode() {};
-		virtual ~svutObjectMethode() {};
+		svutObjectMethod() {};
+		virtual ~svutObjectMethod() {};
 		/**
 		 * Method used ta call the function.
 		**/
@@ -41,10 +41,10 @@ class svutObjectMethode
  * @version 0.0.1
 **/
 template <class T>
-class svutObjectMethodeGeneric : public svutObjectMethode
+class svutObjectMethodGeneric : public svutObjectMethod
 {
 	public:
-		svutObjectMethodeGeneric(T * object,void (T::*methode)(void));
+		svutObjectMethodGeneric(T * object,void (T::*methode)(void));
 		virtual void call(void);
 	protected:
 		/** Pointer to the objet on which call the method. **/
@@ -56,6 +56,6 @@ class svutObjectMethodeGeneric : public svutObjectMethode
 };
 
 /*****************  GENERIC IMPLE  ******************/
-#include "svutObjectMethodeGenericImpl.h"
+#include "svutObjectMethodGenericImpl.h"
 
 #endif

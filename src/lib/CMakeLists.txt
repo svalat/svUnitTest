@@ -3,7 +3,7 @@
 #group files
 set(svUnitTest_SRC svutTestMethod.cpp svutAsserter.cpp svutExNotify.cpp svutExAssert.cpp svutExTestStatus.cpp svutStatusInfo.cpp svutCodeLocation.cpp svutException.cpp)
 
-set(svUnitTest_INC svutObjectMethodeGenericImpl.h svutObjectMethode.h svutCodeLocation.h 
+set(svUnitTest_INC svutObjectMethodGenericImpl.h svutObjectMethod.h svutCodeLocation.h 
 	svutException.h)
 
 #enable coverage profiling

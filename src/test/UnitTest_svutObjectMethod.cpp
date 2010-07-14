@@ -11,7 +11,7 @@
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
-#include <svutObjectMethode.h>
+#include <svutObjectMethod.h>
 
 using namespace CppUnit;
 using namespace svUnitTest;
@@ -28,9 +28,9 @@ class SimpleObject
 };
 
 /********************  CLASSE  **********************/
-class UnitTest_svutObjectMethode : public TestCase
+class UnitTest_svutObjectMethod : public TestCase
 {
-	CPPUNIT_TEST_SUITE(UnitTest_svutObjectMethode);
+	CPPUNIT_TEST_SUITE(UnitTest_svutObjectMethod);
 	CPPUNIT_TEST(testConstructor);
 	CPPUNIT_TEST(testCall);
 	CPPUNIT_TEST_SUITE_END();
@@ -42,34 +42,34 @@ class UnitTest_svutObjectMethode : public TestCase
 	protected:
 		void testConstructor(void);
 		void testCall(void);
-		svutObjectMethodeGeneric<SimpleObject> * caller;
+		svutObjectMethodGeneric<SimpleObject> * caller;
 		SimpleObject obj;
 };
 
 /********************  METHODE  *********************/
-void UnitTest_svutObjectMethode::setUp(void)
+void UnitTest_svutObjectMethod::setUp(void)
 {
-	caller = new svutObjectMethodeGeneric<SimpleObject>(&obj,&SimpleObject::clear);
+	caller = new svutObjectMethodGeneric<SimpleObject>(&obj,&SimpleObject::clear);
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutObjectMethode::tearDown(void)
+void UnitTest_svutObjectMethod::tearDown(void)
 {
 	delete caller;
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutObjectMethode::testConstructor(void)
+void UnitTest_svutObjectMethod::testConstructor(void)
 {
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutObjectMethode::testCall(void)
+void UnitTest_svutObjectMethod::testCall(void)
 {
 	CPPUNIT_ASSERT_EQUAL(20,obj.getValue());
 	caller->call();
 	CPPUNIT_ASSERT_EQUAL(0,obj.getValue());
 }
 
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutObjectMethode);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutObjectMethod);
 

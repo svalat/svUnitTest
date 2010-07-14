@@ -11,7 +11,7 @@
 
 
 /********************  HEADERS  *********************/
-#include "svutObjectMethode.h"
+#include "svutObjectMethod.h"
 
 namespace svUnitTest
 {
@@ -24,7 +24,7 @@ namespace svUnitTest
  * function.
 **/
 template<class T>
-svutObjectMethodeGeneric<T>::svutObjectMethodeGeneric(T * object,void (T::*methode)(void))
+svutObjectMethodGeneric<T>::svutObjectMethodGeneric(T * object,void (T::*methode)(void))
 {
 	this->object = object;
 	this->methode = methode;
@@ -32,7 +32,7 @@ svutObjectMethodeGeneric<T>::svutObjectMethodeGeneric(T * object,void (T::*metho
 
 /********************  METHODE  *********************/
 template<class T>
-void svutObjectMethodeGeneric<T>::call(void)
+void svutObjectMethodGeneric<T>::call(void)
 {
 	(object->*methode)();
 }

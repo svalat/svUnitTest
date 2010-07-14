@@ -54,7 +54,7 @@ void UnitTest_svutTestMethod::setUp(void)
 {
 	called = false;
 	meth = new svutTestMethod("theTest",
-		new svutObjectMethodeGeneric<UnitTest_svutTestMethod>(this,&UnitTest_svutTestMethod::methToCall),
+		new svutObjectMethodGeneric<UnitTest_svutTestMethod>(this,&UnitTest_svutTestMethod::methToCall),
 		loc);
 }
 

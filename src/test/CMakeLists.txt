@@ -6,7 +6,7 @@ add_library(svutUnitTestBase ${svutUnitTestBase_SRCS})
 
 
 ############# BUILD ALL TESTS ##################
-set(svutUnitTest_CASES svutCodeLocation svutException svutObjectMethode svutStatusInfo
+set(svutUnitTest_CASES svutCodeLocation svutException svutObjectMethod svutStatusInfo
 		svutExTestStatus svutExNotify svutExAssert svutAssert svutTestMethod)
 IF (TEST_COVERAGE) ############ HERE THE CASE FOR COVERAGE
 	set(svutUnitTest_ALLSRC)

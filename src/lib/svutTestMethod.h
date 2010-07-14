@@ -12,7 +12,7 @@
 /********************  HEADERS  *********************/
 #include <string>
 #include "svutCodeLocation.h"
-#include "svutObjectMethode.h"
+#include "svutObjectMethod.h"
 
 namespace svUnitTest
 {
@@ -30,7 +30,7 @@ namespace svUnitTest
 class svutTestMethod
 {
 	public:
-		svutTestMethod(std::string name,svutObjectMethode * methode,svutCodeLocation location);
+		svutTestMethod(std::string name,svutObjectMethod * methode,svutCodeLocation location);
 		virtual ~svutTestMethod();
 		std::string getName(void) const;
 		void call(void);
@@ -45,7 +45,7 @@ class svutTestMethod
 		 * Pointer to svutObjectMethode object wich permit to dynamicly call the function on the
 		 * test case object.
 		**/
-		svutObjectMethode * methode;
+		svutObjectMethod * methode;
 		/**
 		 * Define the source location of the methode. For moment, the position correspond the the
 		 * declaration line with SVUT_REG_TEST_FUNCTION macro which is not the implementation

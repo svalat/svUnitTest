@@ -20,7 +20,7 @@ namespace svUnitTest
  * the pointer given here will be destroy by the svutTestMethod objet.
  * @param location Define the source location the the test.
 **/
-svutTestMethod::svutTestMethod(std::string name,svutObjectMethode * methode,svutCodeLocation location)
+svutTestMethod::svutTestMethod(std::string name,svutObjectMethod * methode,svutCodeLocation location)
 	:location(location)
 {
 	this->name = name;
