@@ -1,0 +1,196 @@
+/*****************************************************
+             PROJECT  : svmath
+             VERSION  : 0.0.1
+             DATE     : 08/2009
+             AUTHOR   : Valat Sébastien
+             LICENSE  : CeCILL-C
+*****************************************************/
+
+/********************  HEADERS  *********************/
+#include "svutTestCase.h"
+
+using namespace std;
+namespace svUnitTest
+{
+
+/********************  GLOBALS  *********************/
+/*
+ * Liste contenant les cas de tests auto-enregistrés pour pouvoir les récupérer depuis
+ * svutRunner.
+ * @todo A déplacer.
+// list<svutTestCaseBuilder *> __SVUT_autoFoundTests__;
+*/
+
+/********************  METHODE  *********************/
+/**
+ * Class constructor of the test case.
+ * @param name Define the name of the test case. Generaly we may use the name of the class or module
+ * to test.
+**/
+svutTestCase::svutTestCase(std::string name)
+{
+	this->autodtected = false;
+	this->caseName = name;
+}
+
+/********************  METHODE  *********************/
+/**
+ * Class detroyer, it free the test methode register.
+**/
+svutTestCase::~svutTestCase(void)
+{
+	for (std::list<svutTestMethod *>::iterator it = tests.begin();it!=tests.end();++it)
+		delete *it;
+}
+
+/********************  METHODE  *********************/
+/**
+ * Start the test execution. It will run all the tests registerd in the test case in registration
+ * order for moment.
+**/
+void svutTestCase::runTestCase(void)
+{
+	for (std::list<svutTestMethod *>::iterator it = tests.begin();it!=tests.end();++it)
+	{
+		this->runTestMethod(*it);
+	}
+}
+
+/********************  METHODE  *********************/
+/**
+ * Run the given test method.
+ * @param test Define the test method to run.
+**/
+void svutTestCase::runTestMethod(svutTestMethod * test)
+{
+	bool needTearDown = false;
+	try {
+		//disable failIsTodo by default
+		this->tmpFailIsTodo = false;
+
+		this->setUp();
+		needTearDown = true;
+		test->call();
+		this->tearDown();
+		needTearDown = false;
+
+		//Support replacement of SUCCESS by INDEV if failIsTodo() was invoqued.
+		if (this->tmpFailIsTodo) {
+			svutExNotifyIndev indev("Success replace by temporary INDEV. "+tmpFailMessage,SVUT_NO_LOCATION);
+			//formater.reportStatusIndev(test->getName(),indev);
+		} else {
+			//formater.reportStatusOk(test->getName());
+		}
+	} catch (svutExTestStatus & e) {
+		if (needTearDown) this->tearDown();
+		//support remplacement of FAILURE by T\ODO
+		if (tmpFailIsTodo)
+		{
+			//svutExNotifyTodo todo("Failed replace by temporary TODO. "+tmpFailMessage,e.getLocation());
+			//formater.reportStatusTodo(test->getName(),todo);
+		}
+	} catch (std::exception & e) {
+		//formater.reportStatusUnknownFailed(test->getName(),e.what(),test->getLocation());
+	} catch (...) {
+		//formater.reportStatusUnknownFailed(test->getName());
+	}
+}
+
+/********************  METHODE  *********************/
+/**
+ * @return Return the name of the test case.
+**/
+std::string svutTestCase::getName(void) const
+{
+	return this->caseName;
+}
+
+/********************  METHODE  *********************/
+/**
+ * Add a test method to the current test case. This method may be called in the class constructor of
+ * each test case via the macro SVUT_REG_TEST_FUNCTION().
+ * @param test Define the pointer to the method to register to the test case.
+**/
+void svutTestCase::registerTestMethod(svutTestMethod * test)
+{
+	this->tests.push_back(test);
+}
+
+/********************  METHODE  *********************/
+/**
+ * If this method is invoqued during a test method, and this method terminate with FAILED status,
+ * so the finish status may be replace by T\ODO status. SUCCESS status will be replaced by INDEV
+ * status.
+ *
+ * This is used to distinguish known error where the tests must be updated from new and real error
+ * which my appear when you develop.
+ * @param message Define a message to associate to the new status if append.
+**/
+void svutTestCase::failIsTodo(std::string message)
+{
+	this->tmpFailIsTodo = true;
+	this->tmpFailMessage = message;
+}
+
+/********************  METHODE  *********************/
+/** Tag the current test case as buil by automatic registration. **/
+void svutTestCase::setAutodetected(void)
+{
+	autodtected = true;
+}
+
+/********************  METHODE  *********************/
+/**
+ * @return Return true is the current test case was built by the automatic test case builder.
+ * This is used to know if the clean method of svutRunner must free it's memory or not.
+**/
+bool svutTestCase::isAutodetected(void) const
+{
+	return autodtected;
+}
+
+/********************  METHODE  *********************/
+/**
+ * Return the list of test methods registers in the test case as a string list.
+ * @param prefix Define if the names are prefixed by the test case name or not (using :: as separator).
+ * @return Return the list of names in string list format.
+**/
+std::list<std::string> svutTestCase::getTestMethods(bool prefix) const
+{
+	list<string> res;
+	string pf;
+	if (prefix) pf = this->caseName + "::";
+	for (std::list<svutTestMethod *>::const_iterator it = tests.begin();it!=tests.end();++it)
+		res.push_back(pf + (*it)->getName());
+	return res;
+}
+
+/********************  METHODE  *********************/
+/**
+ * @return Return the number of test methods registered in the current test case. It may help to
+ * calculate progression.
+**/
+unsigned int svutTestCase::getNbTests(void) const
+{
+	return tests.size();
+}
+
+/********************  METHODE  *********************/
+/*
+ * Méthode permettant d'enregistrer le cas de test dans la liste des tests auto-détectés.
+ * Elle est utilisée par la macro SVUT_REGISTER_TEST_CASE().
+ * Ce mécanisme permet d'éviter de devoir instancier nous mêmes les cas de tests dans la
+ * méthode main, pour ajouter un nouveau test il suffit donc juste de le compiler avec l'exécuteur
+ * principal et la classe svutRunner se chargera de le trouver.
+ * @param builder Définit l'instance d'un constructeur de la classe de test afin de différer
+ * la construction au moment de chargement effectif dans svutRunner. Le constructeur lui est
+ * instancié avant l'exécution du main mais comme il ne contient rien ce n'est pas un
+ * problème. Nos tests peuvent ainsi utiliser des librairies nécessitant une pré-initialisation
+ * en début de programme via main.
+int registerTestCase(svutTestCaseBuilder & builder)
+{
+	__SVUT_autoFoundTests__.push_back(&builder);
+	return 0;
+}*/
+
+};
