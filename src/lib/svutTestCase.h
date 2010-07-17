@@ -30,8 +30,11 @@ namespace svUnitTest
  * the generic class svutObjectMethodeGeneric.
  * @param func Define the name of the test method to register.
 **/
-#define SVUT_REG_TEST_FUNCTION(type,func)\
-	this->registerTestMethod(new svUnitTest::svutTestMethod(#func,new svUnitTest::svutObjectMethodGeneric<type>(this,&type::func),SVUT_CODE_LOCATION))
+#define SVUT_REG_TEST_FUNCTION(type,func) do{\
+	svUnitTest::svutObjectMethod * meth = new svUnitTest::svutObjectMethodGeneric<type>(this,&type::func);\
+	svUnitTest::svutTestMethod * testMeth = new svUnitTest::svutTestMethod(#func,meth,SVUT_CODE_LOCATION); \
+	this->registerTestMethod(testMeth);\
+} while(0)
 
 /*
  * This macro must be used in the source file of all tests to register the test in the global

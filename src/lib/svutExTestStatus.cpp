@@ -95,11 +95,14 @@ svutStatus svutExTestStatus::getStatus(void ) const
 const char* svutExTestStatus::what() const throw()
 {
 	stringstream str;
-	str << this->name << " : "<< info.getMessage() << " : " << endl;
+	std::string mess = info.getMessage();
+	str << this->name << " : "<< mess << " : " << endl;
 	info.formatEntries(str,"  - "," : ","\n");
 	string tmp = str.str();
 	char * buffer = new char[tmp.size()+1];
-	memcpy(buffer,tmp.c_str(),tmp.size()+1);
+	int size = tmp.size();
+	const char * source = tmp.c_str();
+	memcpy(buffer,source,size+1);
 	return buffer;
 }
 

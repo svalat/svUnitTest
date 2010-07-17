@@ -62,13 +62,43 @@ svutStatus svutStatusInfo::getStatus ( void ) const
 /********************  METHODE  *********************/
 /**
  * Add a new entry into the parameters list related to the assetion.
-  * @param name Define the parameter name.
+ * @param name Define the parameter name.
  * @param value Define the parameter value.
  */
-void svutStatusInfo::addEntry(std::string name,std::string value)
+void svutStatusInfo::addEntry(const std::string & name,std::string const & value)
 {
 	this->entries.insert(pair<string,string>(name,value));
 }
+
+/********************  METHODE  *********************/
+/**
+ * Add a new entry into the parameters list related to the assetion.
+ * The main goal of this override is to remove remark #981 from icc when calling this method
+ * with constant c string.
+ * @param name Define the parameter name.
+ * @param value Define the parameter value.
+ */
+void svutStatusInfo::addEntry ( const char* name, const char* value )
+{
+	std::string n = name;
+	std::string v = value;
+	this->addEntry(n,v);
+}
+
+/********************  METHODE  *********************/
+/**
+ * Add a new entry into the parameters list related to the assetion.
+ * The main goal of this override is to remove remark #981 from icc when calling this method
+ * with constant c string.
+ * @param name Define the parameter name.
+ * @param value Define the parameter value.
+ */
+void svutStatusInfo::addEntry ( const char* name, const std::string& value )
+{
+	std::string n = name;
+	this->addEntry(n,value);
+}
+
 
 /********************  METHODE  *********************/
 /**
@@ -87,11 +117,33 @@ std::map<std::string,std::string> svutStatusInfo::getEntries(void) const
  * @param separator Define the string to place between the parameter name and the value.
  * @param postfix Define the string to place after the parameter value.
  */
-void svutStatusInfo::formatEntries(std::ostream & out,std::string prefix,std::string separator,std::string postfix) const
+void svutStatusInfo::formatEntries(std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix) const
 {
 	for (map<string,string>::const_iterator it=entries.begin() ; it != entries.end(); it++ )
-		out << prefix << it->first << separator << it->second << postfix;
+	{
+		out << prefix;
+		out << it->first << separator;
+		out << it->second << postfix;
+	}
 }
+
+/********************  METHODE  *********************/
+/**
+ * Format the current status information and place it in the given stream.
+ * The main goal of this override is to avoir remark #981 of icc.
+ * @param out Define the output stream to use.
+ * @param prefix Define the string th place before each parameter name.
+ * @param separator Define the string to place between the parameter name and the value.
+ * @param postfix Define the string to place after the parameter value.
+ */
+void svutStatusInfo::formatEntries ( std::ostream& out, const char* prefix, const char* separator, const char* postfix ) const
+{
+	std::string pre(prefix);
+	std::string  sep(separator);
+	std::string post(postfix);
+	formatEntries(out,pre,sep,post);
+}
+
 
 /********************  METHODE  *********************/
 /**

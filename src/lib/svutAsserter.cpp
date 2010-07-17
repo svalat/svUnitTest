@@ -81,7 +81,9 @@ void assertSame(const void * expected,const void * actual,svutCodeLocation  loca
 {
 	if ((expected == actual) == false)
 	{
-		throw svutExAssertFailEqual(true,asserterToString(expected),asserterToString(actual),location);
+		std::string str1 = asserterToString(expected);
+		std::string str2 = asserterToString(actual);
+		throw svutExAssertFailEqual(true,str1,str2,location);
 	}
 }
 
@@ -97,7 +99,9 @@ void assertNotSame(const void * expected,const void * actual,svutCodeLocation  l
 {
 	if ((expected != actual) == false)
 	{
-		throw svutExAssertFailEqual(false,asserterToString(expected),asserterToString(actual),location);
+		std::string str1 = asserterToString(expected);
+		std::string str2 = asserterToString(actual);
+		throw svutExAssertFailEqual(false,str1,str2,location);
 	}
 }
 

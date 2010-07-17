@@ -54,8 +54,11 @@ class svutStatusInfo
 		std::string getMessage(void) const;
 		svutCodeLocation getLocation(void) const;
 		svutStatus getStatus(void) const;
-		void addEntry(std::string name,std::string value);
-		void formatEntries(std::ostream & out,std::string prefix,std::string separator,std::string postfix) const;
+		void addEntry(const std::string & name,const std::string & value);
+		void addEntry(const char * name,const char * value);
+		void addEntry(const char * name,const std::string & value);
+		void formatEntries(std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix) const;
+		void formatEntries(std::ostream & out,const char * prefix,const char * separator,const char * postfix) const;
 		std::map<std::string,std::string> getEntries(void) const;
 		unsigned int getNbEntries(void) const;
 		std::string getEntry(std::string name) const;

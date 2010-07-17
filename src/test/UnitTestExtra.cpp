@@ -17,10 +17,8 @@ void assertEquals( const char * expected,const std::string & actual,CppUnit::Sou
 {
 	if ( actual!=expected) // lazy toString conversion...
 	{
-		Asserter::failNotEqual( assertion_traits<const char *>::toString(expected),
-								actual,
-										sourceLine,
-		  message );
+		std::string exp = assertion_traits<const char *>::toString(expected);
+		Asserter::failNotEqual( exp, actual,sourceLine,message );
 	}
 }
 
@@ -29,10 +27,8 @@ void assertEquals( const std::string & expected,const char * actual,CppUnit::Sou
 {
 	if ( actual!=expected) // lazy toString conversion...
 	{
-		Asserter::failNotEqual( expected,
-								 assertion_traits<const char *>::toString(actual),
-										sourceLine,
-		  message );
+		std::string act = assertion_traits<const char *>::toString(actual);
+		Asserter::failNotEqual( expected,act,sourceLine,message );
 	}
 }
 
@@ -41,10 +37,9 @@ void assertEquals( int expected,unsigned int actual,SourceLine sourceLine,const 
 {
 	if ( (unsigned int)expected!=actual) // lazy toString conversion...
 	{
-		Asserter::failNotEqual( assertion_traits<int>::toString(expected),
-		                        assertion_traits<unsigned int>::toString(actual),
-		                        sourceLine,
-		                        message );
+		std::string act = assertion_traits<unsigned int>::toString(actual);
+		std::string exp = assertion_traits<int>::toString(expected);
+		Asserter::failNotEqual( exp,act,sourceLine,message );
 	}
 }
 
