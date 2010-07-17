@@ -81,7 +81,7 @@ void svutTestCase::runTestMethod(svutTestMethod * test)
 		} else {
 			//formater.reportStatusOk(test->getName());
 		}
-	} catch (svutExTestStatus & e) {
+	} catch (svutExTestStatus) {
 		if (needTearDown) this->tearDown();
 		//support remplacement of FAILURE by T\ODO
 		if (tmpFailIsTodo)
@@ -89,7 +89,7 @@ void svutTestCase::runTestMethod(svutTestMethod * test)
 			//svutExNotifyTodo todo("Failed replace by temporary TODO. "+tmpFailMessage,e.getLocation());
 			//formater.reportStatusTodo(test->getName(),todo);
 		}
-	} catch (std::exception & e) {
+	} catch (std::exception) {
 		//formater.reportStatusUnknownFailed(test->getName(),e.what(),test->getLocation());
 	} catch (...) {
 		//formater.reportStatusUnknownFailed(test->getName());
@@ -193,4 +193,4 @@ int registerTestCase(svutTestCaseBuilder & builder)
 	return 0;
 }*/
 
-};
+}

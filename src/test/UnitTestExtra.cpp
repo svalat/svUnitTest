@@ -48,5 +48,5 @@ void assertEquals( int expected,unsigned int actual,SourceLine sourceLine,const 
 	}
 }
 
-};
+}
 

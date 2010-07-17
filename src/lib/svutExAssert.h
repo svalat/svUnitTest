@@ -114,6 +114,6 @@ class svutExAssertFailThrow : public svutExAssertFail
 };
 
 
-};
+}
 
 #endif

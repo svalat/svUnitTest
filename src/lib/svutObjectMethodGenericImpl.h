@@ -37,6 +37,6 @@ void svutObjectMethodGeneric<T>::call(void)
 	(object->*methode)();
 }
 
-};
+}
 
 #endif

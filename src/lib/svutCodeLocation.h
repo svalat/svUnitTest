@@ -66,6 +66,6 @@ class svutCodeLocation
 **/
 extern const svutCodeLocation SVUT_NO_LOCATION;
 
-};
+}
 
 #endif

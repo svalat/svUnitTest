@@ -40,6 +40,6 @@ class svutException : public std::exception
 		std::string message;
 };
 
-};
+}
 
 #endif

@@ -116,4 +116,4 @@ std::string svutStatusInfo::getEntry(std::string name) const
 }
 
 
-};
+}

@@ -64,4 +64,4 @@ svutCodeLocation svutTestMethod::getLocation(void) const
 	return location;
 }
 
-};
+}

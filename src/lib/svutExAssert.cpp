@@ -129,4 +129,4 @@ svutExAssertFailThrow::svutExAssertFailThrow(std::string expected, std::string a
 	info.addEntry("Actual",actual);
 }
 
-};
+}

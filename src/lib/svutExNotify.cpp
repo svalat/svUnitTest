@@ -65,4 +65,4 @@ svutExNotifyIndev::svutExNotifyIndev(std::string message, svutCodeLocation locat
 {
 }
 
-};
+}

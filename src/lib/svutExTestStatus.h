@@ -44,6 +44,6 @@ class svutExTestStatus : public svutException
 		std::string name;
 };
 
-};
+}
 
 #endif

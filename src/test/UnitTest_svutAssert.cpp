@@ -124,19 +124,19 @@ struct UnitTestCustoType
 };
 
 /********************  METHODE  *********************/
-bool asserterOperatorEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+static bool asserterOperatorEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
 {
 	return (v1.value1 == v2.value1 && v1.value2 == v2.value2);
 }
 
 /********************  METHODE  *********************/
-bool asserterOperatorNotEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+static bool asserterOperatorNotEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
 {
 	return (v1.value1 != v2.value1 || v1.value2 != v2.value2);
 }
 
 /********************  METHODE  *********************/
-std::string asserterToString(const UnitTestCustoType & value)
+static std::string asserterToString(const UnitTestCustoType & value)
 {
 	std::stringstream res;
 	res << value.value1 << ", " << value.value2;
@@ -158,7 +158,7 @@ void UnitTest_svutAssert::testMacroAssertTrue_good(void )
 {
 	try {
 		SVUT_ASSERT_TRUE(true);
-	} catch (svutExAssertFailBool e) {
+	} catch (svutExAssertFailBool) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailBool exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -186,7 +186,7 @@ void UnitTest_svutAssert::testMacroAssertFalse_good(void )
 {
 	try {
 		SVUT_ASSERT_FALSE(false);
-	} catch (svutExAssertFailBool e) {
+	} catch (svutExAssertFailBool) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailBool exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -214,7 +214,7 @@ void UnitTest_svutAssert::testMacroAssertNull_good(void )
 {
 	try {
 		SVUT_ASSERT_NULL(NULL);
-	} catch (svutExAssertFailNullPointer e) {
+	} catch (svutExAssertFailNullPointer) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailNullPointer exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -242,7 +242,7 @@ void UnitTest_svutAssert::testMacroAssertNotNull_good(void )
 {
 	try {
 		SVUT_ASSERT_NOT_NULL(0x55);
-	} catch (svutExAssertFailNullPointer e) {
+	} catch (svutExAssertFailNullPointer) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailNullPointer exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -270,7 +270,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_int_good(void)
 {
 	try {
 		SVUT_ASSERT_EQUAL(10,10);
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -298,7 +298,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_cstr_good(void)
 {
 	try {
 		SVUT_ASSERT_EQUAL("Hello World !!","Hello World !!");
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -328,7 +328,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_custotype_good(void)
 		UnitTestCustoType v1 = {10,20};
 		UnitTestCustoType v2 = {10,20};
 		SVUT_ASSERT_EQUAL(v1,v2);
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -358,7 +358,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_int_good(void)
 {
 	try {
 		SVUT_ASSERT_NOT_EQUAL(10,20);
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -386,7 +386,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_cstr_good(void)
 {
 	try {
 		SVUT_ASSERT_NOT_EQUAL("Hello World !!","Hello Bob !!");
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -416,7 +416,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_custotype_good(void)
 		UnitTestCustoType v1 = {10,20};
 		UnitTestCustoType v2 = {10,30};
 		SVUT_ASSERT_NOT_EQUAL(v1,v2);
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -446,7 +446,7 @@ void UnitTest_svutAssert::testMacroAssertEqualType_int_good(void)
 {
 	try {
 		SVUT_ASSERT_EQUAL_TYPE(10,10);
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -458,7 +458,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqualType_int_good(void)
 {
 	try {
 		SVUT_ASSERT_NOT_EQUAL_TYPE(10,20);
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -470,7 +470,7 @@ void UnitTest_svutAssert::testMacroAssertEqualType_cstr_good(void)
 {
 	try {
 		SVUT_ASSERT_EQUAL_TYPE("Hello World !!","Hello World !!");
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -482,7 +482,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqualType_cstr_good(void)
 {
 	try {
 		SVUT_ASSERT_NOT_EQUAL_TYPE("Hello World !!","Hello Bob !!");
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -495,7 +495,7 @@ void UnitTest_svutAssert::testMacroAssertSame_good(void)
 	try {
 		int a = 66;
 		SVUT_ASSERT_SAME(&a,&a);
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -527,7 +527,7 @@ void UnitTest_svutAssert::testMacroAssertNotSame_good(void)
 		int a = 66;
 		int b = 66;
 		SVUT_ASSERT_NOT_SAME(&a,&b);
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -615,7 +615,7 @@ void UnitTest_svutAssert::testMacroAssertThrow_good(void)
 {
 	try {
 		SVUT_ASSERT_THROW(int,throw 10);
-	} catch (svutExAssertFailThrow e) {
+	} catch (svutExAssertFailThrow) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailThrow exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -659,7 +659,7 @@ void UnitTest_svutAssert::testMacroAssertThrowSomething_good(void)
 {
 	try {
 		SVUT_ASSERT_THROW_SOMETHING(throw 10);
-	} catch (svutExAssertFailThrow e) {
+	} catch (svutExAssertFailThrow) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailThrow exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -688,7 +688,7 @@ void UnitTest_svutAssert::testMacroAssertNotThrow_good(void)
 {
 	try {
 		SVUT_ASSERT_NOT_THROW(int,);
-	} catch (svutExAssertFailThrow e) {
+	} catch (svutExAssertFailThrow) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailThrow exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -702,7 +702,7 @@ void UnitTest_svutAssert::testMacroAssertNotThrow_bad(void)
 	try {
 		SVUT_ASSERT_NOT_THROW(int,throw 10);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailThrow exception.");
-	} catch (svutExAssertFailThrow e) {
+	} catch (svutExAssertFailThrow & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("NONE",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("int",e.getInfos().getEntry("Actual"));
@@ -716,7 +716,7 @@ void UnitTest_svutAssert::testMacroAssertNotThrow_others(void)
 {
 	try {
 		SVUT_ASSERT_NOT_THROW(int,throw 1.0);
-	} catch (svutExAssertFailThrow e) {
+	} catch (svutExAssertFailThrow) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailThrow exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -728,7 +728,7 @@ void UnitTest_svutAssert::testMacroAssertMayNotThrow_good(void)
 {
 	try {
 		SVUT_ASSERT_MAY_NOT_THROW();
-	} catch (svutExAssertFailThrow e) {
+	} catch (svutExAssertFailThrow) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailThrow exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");

@@ -55,6 +55,6 @@ class svutTestMethod
 		svutCodeLocation location;
 };
 
-};
+}
 
 #endif

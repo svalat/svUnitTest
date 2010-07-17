@@ -112,4 +112,4 @@ std::string svutExTestStatus::getMessage(void ) const
     return info.getMessage();
 }
 
-};
+}

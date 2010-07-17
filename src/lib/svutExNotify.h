@@ -62,6 +62,6 @@ class svutExNotifyIndev : public svutExNotify
 		virtual ~svutExNotifyIndev(void) throw() {};
 };
 
-};
+}
 
 #endif

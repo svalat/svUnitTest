@@ -88,7 +88,7 @@ class UnitTest_svutTestCase : public TestCase
 };
 
 /********************  METHODE  *********************/
-std::ostream & operator << (std::ostream & out,const std::list<std::string> & lst)
+static std::ostream & operator << (std::ostream & out,const std::list<std::string> & lst)
 {
 	for (std::list<std::string>::const_iterator it = lst.begin() ; it != lst.end() ; ++it)
 	{

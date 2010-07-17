@@ -201,7 +201,7 @@ namespace svUnitTest
 	try {\
 		what;\
 		throw svUnitTest::svutExAssertFailThrow(#name,"NONE",SVUT_CODE_LOCATION);\
-	} catch(name & e) {\
+	} catch(name) {\
 	}  catch(svUnitTest::svutExAssertFailThrow & e) { \
 		throw e; \
 	} catch(...) {\
@@ -232,7 +232,7 @@ namespace svUnitTest
 #define SVUT_ASSERT_NOT_THROW(name,what) \
 	try {\
 		what;\
-	} catch(name & e) {\
+	} catch(name) {\
 		throw svUnitTest::svutExAssertFailThrow("NONE",#name,SVUT_CODE_LOCATION);\
 	} catch(...) {\
 	}

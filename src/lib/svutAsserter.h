@@ -27,7 +27,7 @@ namespace svUnitTest
  * @return Return true is the values are equals.
 **/
 template <class T1,class T2>
-bool asserterOperatorEqual(const T1 & v1,const T2 & v2)
+static bool asserterOperatorEqual(const T1 & v1,const T2 & v2)
 {
 	return (v1 == v2);
 }
@@ -43,7 +43,7 @@ bool asserterOperatorEqual(const T1 & v1,const T2 & v2)
  * @return Return false is the values are equals.
 **/
 template <class T1,class T2>
-bool asserterOperatorNotEqual(const T1 & v1,const T2 & v2)
+static bool asserterOperatorNotEqual(const T1 & v1,const T2 & v2)
 {
 	return (v1 != v2);
 }
@@ -58,7 +58,7 @@ bool asserterOperatorNotEqual(const T1 & v1,const T2 & v2)
  * @return Return the value represented in string format.
 **/
 template <class T>
-std::string asserterToString(const T & value)
+static std::string asserterToString(const T & value)
 {
 	std::stringstream res;
 	res << value;
@@ -79,7 +79,7 @@ std::string asserterToString(const T & value)
  * @param location Define the code location which call this test.
 **/
 template <class T1,class T2>
-void assertEqual(const T1 & expected,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+static void assertEqual(const T1 & expected,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
 {
 	if (asserterOperatorEqual(expected,actual) == false)
 	{
@@ -101,7 +101,7 @@ void assertEqual(const T1 & expected,const T2 & actual,svutCodeLocation location
  * @param location Define the code location which call this test.
 **/
 template <class T1,class T2>
-void assertNotEqual(const T1 & expected,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+static void assertNotEqual(const T1 & expected,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
 {
 	if (asserterOperatorNotEqual(expected,actual) == false)
 	{
@@ -123,7 +123,7 @@ void assertNotEqual(const T1 & expected,const T2 & actual,svutCodeLocation locat
  * @param location Define the code location which call this test.
 **/
 template <class T>
-void assertEqualType(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+static void assertEqualType(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
 {
 	assertEqual(expected,actual,location);
 }
@@ -142,7 +142,7 @@ void assertEqualType(const T & expected,const T & actual,svutCodeLocation locati
  * @param location Define the code location which call this test.
 **/
 template <class T>
-void assertNotEqualType(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+static void assertNotEqualType(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
 {
 	assertNotEqual(expected,actual,location);
 }
@@ -155,6 +155,6 @@ void assertNotEqualType(const char * expected,const char * actual,svutCodeLocati
 void assertSame(const void * expected,const void * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 void assertNotSame(const void * expected,const void * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 
-};
+}
 
 #endif

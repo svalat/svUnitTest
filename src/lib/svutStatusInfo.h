@@ -35,7 +35,7 @@ enum svutStatus
 	/** An error occurd while running the test. **/
 	SVUT_STATUS_FAILED,
 	/** An unknown error occured while running the test.**/
-	SVUT_STATUS_UNKNOWN,
+	SVUT_STATUS_UNKNOWN
 };
 
 /********************  CLASSE  **********************/
@@ -70,6 +70,6 @@ class svutStatusInfo
 		svutStatus status;
 };
 
-};
+}
 
 #endif

@@ -53,7 +53,7 @@ class svutObjectMethodGeneric : public svutObjectMethod
 		void (T::*methode)(void);
 };
 
-};
+}
 
 /*****************  GENERIC IMPLE  ******************/
 #include "svutObjectMethodGenericImpl.h"

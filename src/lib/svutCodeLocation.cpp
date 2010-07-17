@@ -141,4 +141,4 @@ bool operator == (const svutCodeLocation & loc1,const svutCodeLocation & loc2)
 	return loc1.file == loc2.file && loc1.line == loc2.line && loc1.methode == loc2.methode;
 }
 
-};
+}

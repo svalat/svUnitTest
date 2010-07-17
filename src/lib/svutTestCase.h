@@ -114,6 +114,6 @@ class svutTestCase
 };
 
 //int registerTestCase(svutTestCaseBuilder & builder);
-};
+}
 
 #endif

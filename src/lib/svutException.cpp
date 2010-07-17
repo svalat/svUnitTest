@@ -61,4 +61,4 @@ std::string svutException::getMessage(void) const
 	return message;
 }
 
-};
+}
