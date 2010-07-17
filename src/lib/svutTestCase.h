@@ -16,6 +16,7 @@
 #include "svutTestMethod.h"
 #include "svutExAssert.h"
 #include "svutExNotify.h"
+#include "svutListener.h"
 //#include "svutResultFormater.h"
 //#include "svutAutoRegister.h"
 
@@ -30,10 +31,10 @@ namespace svUnitTest
  * the generic class svutObjectMethodeGeneric.
  * @param func Define the name of the test method to register.
 **/
-#define SVUT_REG_TEST_FUNCTION(type,func) do{\
-	svUnitTest::svutObjectMethod * meth = new svUnitTest::svutObjectMethodGeneric<type>(this,&type::func);\
-	svUnitTest::svutTestMethod * testMeth = new svUnitTest::svutTestMethod(#func,meth,SVUT_CODE_LOCATION); \
-	this->registerTestMethod(testMeth);\
+#define SVUT_REG_TEST_METHOD(type,func) do{\
+	svUnitTest::svutObjectMethod * __svut__meth__ = new svUnitTest::svutObjectMethodGeneric<type>(this,&type::func);\
+	svUnitTest::svutTestMethod * __svut__testMeth__ = new svUnitTest::svutTestMethod(#func,__svut__meth__,SVUT_CODE_LOCATION); \
+	this->registerTestMethod(__svut__testMeth__);\
 } while(0)
 
 /*

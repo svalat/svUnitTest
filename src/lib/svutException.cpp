@@ -61,4 +61,18 @@ std::string svutException::getMessage(void) const
 	return message;
 }
 
+/********************  METHODE  *********************/
+svutExInternalError::svutExInternalError(std::string message) throw()
+	:svutException(message)
+{
+
+}
+
+/********************  METHODE  *********************/
+svutExInternalError::~svutExInternalError(void ) throw()
+{
+
+}
+
+
 }

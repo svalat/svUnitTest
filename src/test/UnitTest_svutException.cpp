@@ -25,6 +25,7 @@ class UnitTest_svutException : public TestCase
 	CPPUNIT_TEST(testConstructor_str);
 	CPPUNIT_TEST(testWhat);
 	CPPUNIT_TEST(testGetMessage);
+	CPPUNIT_TEST(testExInternalError);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -36,6 +37,7 @@ class UnitTest_svutException : public TestCase
 		void testConstructor_str(void);
 		void testWhat(void);
 		void testGetMessage(void);
+		void testExInternalError(void);
 		
 		svutException * exc;
 };
@@ -78,5 +80,13 @@ void UnitTest_svutException::testGetMessage(void)
 {
 	CPPUNIT_ASSERT_EQUAL("message",exc->getMessage());
 }
+
+/********************  METHODE  *********************/
+void UnitTest_svutException::testExInternalError(void )
+{
+	svutExInternalError error("test");
+	CPPUNIT_ASSERT_EQUAL("test",error.getMessage());
+}
+
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutException);

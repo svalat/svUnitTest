@@ -40,6 +40,20 @@ class svutException : public std::exception
 		std::string message;
 };
 
+/********************  CLASSE  **********************/
+/**
+ * Exception used for internal error in the library.
+ * @brief Class used to throw exception on internal error.
+ * @author Valat Sébastien
+ * @version 0.0.2
+**/
+class svutExInternalError : public svutException
+{
+	public:
+		svutExInternalError(std::string message) throw();
+		virtual ~svutExInternalError(void) throw();
+};
+
 }
 
 #endif

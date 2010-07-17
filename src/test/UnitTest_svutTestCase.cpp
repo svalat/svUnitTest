@@ -13,40 +13,11 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutTestCase.h>
+#include "UnitTestMockTestCase.h"
 
 using namespace std;
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
-
-/********************  CLASSE  **********************/
-class Mock_svutTestCase : public svutTestCase
-{
-	public:
-		Mock_svutTestCase(void);
-		virtual void setUp(void) {setup = calls++;}
-		virtual void tearDown(void) {teardown = calls++;}
-
-		void test1(void);
-		void test2(void);
-		void test3(void) { t3 = calls ++; }
-
-		void testRegister(void)
-		{
-			SVUT_REG_TEST_FUNCTION(Mock_svutTestCase,test2);
-		}
-
-		void testRunMeth(void)
-		{
-			this->runTestMethod(*(tests.begin()));
-		}
-
-		int calls;
-		int setup;
-		int teardown;
-		int t1;
-		int t2;
-		int t3;
-};
 
 /********************  CLASSE  **********************/
 class UnitTest_svutTestCase : public TestCase
@@ -84,7 +55,7 @@ class UnitTest_svutTestCase : public TestCase
 		void testFailIsTodo(void);
 		void testRunTestCase(void);
 
-		Mock_svutTestCase * obj;
+		UnitTestMockTestCase * obj;
 };
 
 /********************  METHODE  *********************/
@@ -100,35 +71,9 @@ static std::ostream & operator << (std::ostream & out,const std::list<std::strin
 }
 
 /********************  METHODE  *********************/
-Mock_svutTestCase::Mock_svutTestCase(void ):
-	svutTestCase("MyTest")
-{
-	calls = 0;
-	setup = -1;
-	teardown = -1;
-	t1 = -1;
-	t2 = -1;
-	t3 = -1;
-	SVUT_REG_TEST_FUNCTION(Mock_svutTestCase,test1);
-	SVUT_REG_TEST_FUNCTION(Mock_svutTestCase,test3);
-}
-
-/********************  METHODE  *********************/
-void Mock_svutTestCase::test1(void )
-{
-	t1 = calls ++;
-}
-
-/********************  METHODE  *********************/
-void Mock_svutTestCase::test2(void )
-{
-	t2 = calls ++;
-}
-
-/********************  METHODE  *********************/
 void UnitTest_svutTestCase::setUp(void)
 {
-	obj = new Mock_svutTestCase;
+	obj = new UnitTestMockTestCase;
 }
 
 /********************  METHODE  *********************/
