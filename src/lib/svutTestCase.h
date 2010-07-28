@@ -16,7 +16,6 @@
 #include "svutTestMethod.h"
 #include "svutExAssert.h"
 #include "svutExNotify.h"
-#include "svutListener.h"
 //#include "svutResultFormater.h"
 //#include "svutAutoRegister.h"
 
@@ -53,6 +52,9 @@ namespace svUnitTest
 //extern list<class svutTestCaseBuilder *> __SVUT_autoFoundTests__;
 
 /********************  CLASSE  **********************/
+class svutListener;
+
+/********************  CLASSE  **********************/
 /**
  * Define a test case. A test case is composed of multiple test methode which tests propoerties
  * and interactions of an object. Each test method is registered via svutTestFunction.
@@ -68,6 +70,7 @@ class svutTestCase
 {
 	public:
 		svutTestCase(std::string name);
+		svutTestCase(const svutTestCase & testCase);
 		virtual ~svutTestCase(void);
 		/**
 		 * The developer need to re-implement this method to initialized the tested objects.
@@ -92,9 +95,10 @@ class svutTestCase
 		unsigned int getNbTests(void) const;
 		void setAutodetected(void);
 		bool isAutodetected(void) const;
+		void setListener(svutListener * listener);
 	protected:
 		void registerTestMethod(svutTestMethod * test);
-		void runTestMethod(svutTestMethod * test);
+		svutStatusInfo runTestMethod(svutTestMethod * test);
 		void failIsTodo(std::string message);
 		/** Define the list of tests methods in the current test case. **/
 		std::list<svutTestMethod *> tests;
@@ -115,6 +119,12 @@ class svutTestCase
 		std::string tmpFailMessage;
 		/** Permit to now if the class was built by autodetection chain or not. **/
 		bool autodtected;
+		/**
+		 * Define the base listener class to dipatch test events, this is used to agregate results,
+		 * display current progression... Here we instanciate a svutListenerMultiplexer to dipatch
+		 * events to multiple sub listener->
+		**/
+		svutListener * listener;
 };
 
 //int registerTestCase(svutTestCaseBuilder & builder);

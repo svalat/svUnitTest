@@ -42,25 +42,25 @@ void UnitTestMockListener::onGlobalEnd(void )
 }
 
 /********************  METHOD  **********************/
-void UnitTestMockListener::onTestCaseStart(const svUnitTest::svutTestCase& testCase)
+void UnitTestMockListener::onTestCaseStart(const svUnitTest::svutTestCase& /*testCase*/)
 {
 	mockEvents.case_start = mockTime++;
 }
 
 /********************  METHOD  **********************/
-void UnitTestMockListener::onTestCaseEnd(const svUnitTest::svutTestCase& testCase)
+void UnitTestMockListener::onTestCaseEnd(const svUnitTest::svutTestCase& /*testCase*/)
 {
 	mockEvents.case_end = mockTime++;
 }
 
 /********************  METHOD  **********************/
-void UnitTestMockListener::onTestMethodStart(const svUnitTest::svutTestMethod& method)
+void UnitTestMockListener::onTestMethodStart(const svUnitTest::svutTestMethod& /*method*/)
 {
 	mockEvents.meth_start = mockTime++;
 }
 
 /********************  METHOD  **********************/
-void UnitTestMockListener::onTestMethodEnd(const svUnitTest::svutTestMethod& method, svUnitTest::svutStatusInfo status)
+void UnitTestMockListener::onTestMethodEnd(const svUnitTest::svutTestMethod& /*method*/, svUnitTest::svutStatusInfo /*status*/)
 {
 	mockEvents.meth_end = mockTime++;
 }

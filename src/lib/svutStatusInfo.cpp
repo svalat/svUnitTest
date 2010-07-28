@@ -167,5 +167,18 @@ std::string svutStatusInfo::getEntry(std::string name) const
 	return "";
 }
 
+/********************  METHODE  *********************/
+/**
+ * Permit to use the equal operator on svutStatusInfo objects.
+ * @param orig Define the original object to copy on the current one.
+**/
+svutStatusInfo& svUnitTest::svutStatusInfo::operator=(const svUnitTest::svutStatusInfo& orig)
+{
+	this->message = orig.message;
+	this->entries = orig.entries;
+	this->location = orig.location;
+	this->status = orig.status;
+	return *this;
+}
 
 }

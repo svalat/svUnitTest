@@ -8,6 +8,8 @@
 
 /********************  HEADERS  *********************/
 #include "svutTestCase.h"
+#include "svutListenerMultiplexer.h"
+#include <cassert>
 
 using namespace std;
 namespace svUnitTest
@@ -31,6 +33,19 @@ svutTestCase::svutTestCase(std::string name)
 {
 	this->autodtected = false;
 	this->caseName = name;
+	this->listener = NULL;
+}
+
+/********************  METHODE  *********************/
+/**
+ * Copy constructor of the class, it was required as we create interal dynamic object in constructor.
+ * Here for moment copying svutTestCase objects is not allowed, so we just throw an internal exception
+ * here.
+**/
+svutTestCase::svutTestCase(const svUnitTest::svutTestCase& testCase)
+{
+	assert(false);
+	throw new svutExInternalError("Can't made a copy of svutTestCase, it was forbidden.");
 }
 
 /********************  METHODE  *********************/
@@ -50,20 +65,43 @@ svutTestCase::~svutTestCase(void)
 **/
 void svutTestCase::runTestCase(void)
 {
+	svutStatusInfo res;
+	//send notification
+	if (listener != NULL)
+		listener->onTestCaseStart(*this);
+
+	//done the job
 	for (std::list<svutTestMethod *>::iterator it = tests.begin();it!=tests.end();++it)
 	{
-		this->runTestMethod(*it);
+		//send notification
+		if (listener != NULL)
+			listener->onTestMethodStart(**it);
+
+		//run the method
+		res = this->runTestMethod(*it);
+
+		//send notification
+		if (listener != NULL)
+			listener->onTestMethodEnd(**it,res);
 	}
+
+	//send notification
+	if (listener != NULL)
+		listener->onTestCaseEnd(*this);
 }
 
 /********************  METHODE  *********************/
 /**
  * Run the given test method.
  * @param test Define the test method to run.
+ * @return Return the final status of the test.
 **/
-void svutTestCase::runTestMethod(svutTestMethod * test)
+svutStatusInfo svutTestCase::runTestMethod(svutTestMethod * test)
 {
 	bool needTearDown = false;
+	svutStatusInfo res(SVUT_STATUS_SUCCESS,"SUCCESS",test->getLocation());
+
+	//notify start
 	try {
 		//disable failIsTodo by default
 		this->tmpFailIsTodo = false;
@@ -76,24 +114,25 @@ void svutTestCase::runTestMethod(svutTestMethod * test)
 
 		//Support replacement of SUCCESS by INDEV if failIsTodo() was invoqued.
 		if (this->tmpFailIsTodo) {
-			svutExNotifyIndev indev("Success replace by temporary INDEV. "+tmpFailMessage,SVUT_NO_LOCATION);
-			//formater.reportStatusIndev(test->getName(),indev);
-		} else {
-			//formater.reportStatusOk(test->getName());
+			svutExNotifyIndev indev("Success replace by temporary INDEV. "+tmpFailMessage,test->getLocation());
 		}
-	} catch (svutExTestStatus) {
+	} catch (const svutExTestStatus & e) {
 		if (needTearDown) this->tearDown();
 		//support remplacement of FAILURE by T\ODO
 		if (tmpFailIsTodo)
 		{
-			//svutExNotifyTodo todo("Failed replace by temporary TODO. "+tmpFailMessage,e.getLocation());
-			//formater.reportStatusTodo(test->getName(),todo);
+			svutExNotifyTodo todo("Failed replace by temporary TODO. "+tmpFailMessage,e.getInfos().getLocation());
+			res = todo.getInfos();
+		} else {
+			res = e.getInfos();
 		}
-	} catch (std::exception) {
-		//formater.reportStatusUnknownFailed(test->getName(),e.what(),test->getLocation());
+	} catch (std::exception & e) {
+		string tmp = "Unexpected std exception : ";
+		res = svutStatusInfo::svutStatusInfo(SVUT_STATUS_UNKNOWN,tmp+e.what(),test->getLocation());
 	} catch (...) {
-		//formater.reportStatusUnknownFailed(test->getName());
+		res = svutStatusInfo::svutStatusInfo(SVUT_STATUS_UNKNOWN,"Unexpected exception.",test->getLocation());
 	}
+	return res;
 }
 
 /********************  METHODE  *********************/
@@ -173,6 +212,17 @@ std::list<std::string> svutTestCase::getTestMethods(bool prefix) const
 unsigned int svutTestCase::getNbTests(void) const
 {
 	return tests.size();
+}
+
+/********************  METHODE  *********************/
+/**
+ * Define a listener to use to get event notification. This may be used to aggregate test results,
+ * display progress...
+ * @param listener Define the new listener to use, NULL for none.
+**/
+void svutTestCase::setListener(svutListener* listener)
+{
+	this->listener = listener;
 }
 
 /********************  METHODE  *********************/

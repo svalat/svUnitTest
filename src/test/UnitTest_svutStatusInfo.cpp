@@ -36,6 +36,7 @@ class UnitTest_svutStatusInfo : public TestCase
 	CPPUNIT_TEST(testGetStatus);
 	CPPUNIT_TEST(testGetNbEntries);
 	CPPUNIT_TEST(testGetEntry);
+	CPPUNIT_TEST(testOperatorEqual);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -50,6 +51,7 @@ class UnitTest_svutStatusInfo : public TestCase
 		void testGetStatus(void);
 		void testGetNbEntries(void);
 		void testGetEntry(void);
+		void testOperatorEqual(void);
 
 		svutStatusInfo * info;
 };
@@ -120,5 +122,17 @@ void UnitTest_svutStatusInfo::testGetNbEntries(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,info->getNbEntries());
 }
+
+/********************  METHODE  *********************/
+void UnitTest_svutStatusInfo::testOperatorEqual(void )
+{
+	svutCodeLocation loc(TEST_FILENAME,TEST_METHODE,TEST_LINE);
+	svutStatusInfo copy = *this->info;
+	CPPUNIT_ASSERT_EQUAL(loc,copy.getLocation());
+	CPPUNIT_ASSERT_EQUAL(TEST_MESSAGE,copy.getMessage());
+	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,copy.getStatus());
+	CPPUNIT_ASSERT_EQUAL(0,copy.getNbEntries());
+}
+
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutStatusInfo);

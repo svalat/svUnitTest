@@ -50,7 +50,7 @@ enum svutStatus
 class svutStatusInfo
 {
 	public:
-		svutStatusInfo(svutStatus status,std::string message,const svutCodeLocation & location);
+		svutStatusInfo(svutStatus status=SVUT_STATUS_UNKNOWN,std::string message="",const svutCodeLocation & location=SVUT_NO_LOCATION);
 		std::string getMessage(void) const;
 		svutCodeLocation getLocation(void) const;
 		svutStatus getStatus(void) const;
@@ -62,6 +62,7 @@ class svutStatusInfo
 		std::map<std::string,std::string> getEntries(void) const;
 		unsigned int getNbEntries(void) const;
 		std::string getEntry(std::string name) const;
+		svutStatusInfo & operator = (const svutStatusInfo & orig);
 	protected:
 		/** Define the message related to the status of the test. **/
 		std::string message;
