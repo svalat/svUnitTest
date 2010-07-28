@@ -18,6 +18,7 @@ IF (TEST_COVERAGE) ############ HERE THE CASE FOR COVERAGE
 	endforeach(i)
 	add_executable(all_tests ${svutUnitTest_ALLSRC})
 	target_link_libraries (all_tests svutUnitTestBase svunittest ${CPPUNIT_LIBRARY})
+	add_test(all_tests all_tests)
 ELSE (TEST_COVERAGE) ########### HERE THE NORMAL VERSION WITH MULTIPLE EXECUABLE
 	#defin test redirection for kdevelop
 	foreach(i ${svutUnitTest_CASES})
