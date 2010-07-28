@@ -50,7 +50,7 @@ enum svutStatus
 class svutStatusInfo
 {
 	public:
-		svutStatusInfo(svutStatus status=SVUT_STATUS_UNKNOWN,std::string message="",const svutCodeLocation & location=SVUT_NO_LOCATION);
+		svutStatusInfo(svutStatus status=SVUT_STATUS_SKIPED,std::string message="",const svutCodeLocation & location=SVUT_NO_LOCATION);
 		std::string getMessage(void) const;
 		svutCodeLocation getLocation(void) const;
 		svutStatus getStatus(void) const;

@@ -33,8 +33,6 @@ class UnitTest_svutTestCase : public TestCase
 	CPPUNIT_TEST(testSetAutodetected);
 	CPPUNIT_TEST(testIsAutodetected);
 	CPPUNIT_TEST(testRunMethod);
-	CPPUNIT_TEST(testFailIsTodo);
-	CPPUNIT_TEST(testRunTestCase);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -52,8 +50,6 @@ class UnitTest_svutTestCase : public TestCase
 		void testSetAutodetected(void);
 		void testIsAutodetected(void);
 		void testRunMethod(void);
-		void testFailIsTodo(void);
-		void testRunTestCase(void);
 
 		UnitTestMockTestCase * obj;
 };
@@ -175,18 +171,6 @@ void UnitTest_svutTestCase::testRunMethod(void)
 	CPPUNIT_ASSERT_EQUAL(0,obj->setup);
 	CPPUNIT_ASSERT_EQUAL(2,obj->teardown);
 	CPPUNIT_ASSERT_EQUAL(1,obj->t1);
-}
-
-/********************  METHODE  *********************/
-void UnitTest_svutTestCase::testFailIsTodo(void)
-{
-	CPPUNIT_FAIL("todo");
-}
-
-/********************  METHODE  *********************/
-void UnitTest_svutTestCase::testRunTestCase(void )
-{
-	CPPUNIT_FAIL("todo");
 }
 
 

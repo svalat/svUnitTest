@@ -10,7 +10,10 @@
 #define UNIT_TEST_MOCK_LISTENER_HEADER
 
 /********************  HEADERS  *********************/
+#include <svutTestMethod.h>
+#include <svutStatusInfo.h>
 #include <svutListener.h>
+#include <map>
 
 /********************* STRUCT ***********************/
 struct UnitTestMockListener_Events
@@ -38,6 +41,7 @@ class UnitTestMockListener : public svUnitTest::svutListener
 	
 		int mockTime;
 		UnitTestMockListener_Events mockEvents;
+		std::map<std::string,svUnitTest::svutStatusInfo> finalResults;
 };
 
 #endif

@@ -111,27 +111,36 @@ svutStatusInfo svutTestCase::runTestMethod(svutTestMethod * test)
 		test->call();
 		this->tearDown();
 		needTearDown = false;
-
-		//Support replacement of SUCCESS by INDEV if failIsTodo() was invoqued.
-		if (this->tmpFailIsTodo) {
-			svutExNotifyIndev indev("Success replace by temporary INDEV. "+tmpFailMessage,test->getLocation());
-		}
 	} catch (const svutExTestStatus & e) {
-		if (needTearDown) this->tearDown();
-		//support remplacement of FAILURE by T\ODO
-		if (tmpFailIsTodo)
-		{
-			svutExNotifyTodo todo("Failed replace by temporary TODO. "+tmpFailMessage,e.getInfos().getLocation());
-			res = todo.getInfos();
-		} else {
-			res = e.getInfos();
-		}
+		if (needTearDown)
+			this->tearDown();
+		res = e.getInfos();
 	} catch (std::exception & e) {
 		string tmp = "Unexpected std exception : ";
 		res = svutStatusInfo::svutStatusInfo(SVUT_STATUS_UNKNOWN,tmp+e.what(),test->getLocation());
 	} catch (...) {
 		res = svutStatusInfo::svutStatusInfo(SVUT_STATUS_UNKNOWN,"Unexpected exception.",test->getLocation());
 	}
+
+	//status replacement
+	if (tmpFailIsTodo)
+	{
+		if (res.getStatus() == SVUT_STATUS_SUCCESS)
+		{
+			//Support replacement of SUCCESS by INDEV if failIsTodo() was invoqued.
+			svutExNotifyIndev indev("Success replace by temporary INDEV. "+tmpFailMessage,test->getLocation());
+			res = indev.getStatus();
+		} else if (res.getStatus() == SVUT_STATUS_FAILED) {
+			//Support replacement of FAILED by TODO if failIsTodo() was invoqued.
+			svutExNotifyTodo todo("Failed replace by temporary TODO. "+tmpFailMessage,res.getLocation());
+			res = todo.getInfos();
+		} else if (res.getStatus() == SVUT_STATUS_UNKNOWN) {
+			//Support replacement of UNKNOWN by TODO if failIsTodo() was invoqued.
+			svutExNotifyTodo todo("Unknown replace by temporary TODO. "+tmpFailMessage,res.getLocation());
+			res = todo.getInfos();
+		}
+	}
+	
 	return res;
 }
 

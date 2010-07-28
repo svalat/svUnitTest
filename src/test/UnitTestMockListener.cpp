@@ -7,6 +7,7 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
+#include <svutTestMethod.h>
 #include "UnitTestMockListener.h"
 
 using namespace svUnitTest;
@@ -60,8 +61,9 @@ void UnitTestMockListener::onTestMethodStart(const svUnitTest::svutTestMethod& /
 }
 
 /********************  METHOD  **********************/
-void UnitTestMockListener::onTestMethodEnd(const svUnitTest::svutTestMethod& /*method*/, svUnitTest::svutStatusInfo /*status*/)
+void UnitTestMockListener::onTestMethodEnd(const svUnitTest::svutTestMethod& method, svUnitTest::svutStatusInfo status)
 {
 	mockEvents.meth_end = mockTime++;
+	finalResults[method.getName()] = status;
 }
 
