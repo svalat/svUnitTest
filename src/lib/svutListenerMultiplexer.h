@@ -37,6 +37,7 @@ class svutListenerMultiplexer : public svutListener
 		void removeListener(svutListener * listener);
 		unsigned int countListener(void) const;
 	private:
+		/** Define the list of listener on which to dipatch events. **/
 		std::list<svutListener *> listeners;
 		
 };

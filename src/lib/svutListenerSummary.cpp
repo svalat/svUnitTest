@@ -24,6 +24,9 @@ svutListenerSummary::svutListenerSummary(void )
 }
 
 /********************  METHOD  **********************/
+/**
+ * @return Return the current global summary.
+**/
 svutResultSummary svutListenerSummary::getSummary(void ) const
 {
 	return this->summary;

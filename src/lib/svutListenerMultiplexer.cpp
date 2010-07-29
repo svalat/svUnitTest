@@ -57,12 +57,21 @@ void svutListenerMultiplexer::onTestMethodStart(const svutTestMethod & method)
 }
 
 /********************  METHODE  *********************/
+/**
+ * Add a sub listener for event dispatching.
+ * @param listener Define the listener to add. It's your own responsability to free this memory at
+ * exit time.
+**/
 void svutListenerMultiplexer::addListener(svutListener* listener)
 {
 	listeners.push_back(listener);
 }
 
 /********************  METHODE  *********************/
+/**
+ * Remove a listener for event dispatching.
+ * @param listener Define the listener to remove.
+**/
 void svutListenerMultiplexer::removeListener(svutListener* listener)
 {
 	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
@@ -76,6 +85,9 @@ void svutListenerMultiplexer::removeListener(svutListener* listener)
 }
 
 /********************  METHODE  *********************/
+/**
+ * @return Return the number of sub listener contained in the multiplexer.
+**/
 unsigned int svutListenerMultiplexer::countListener(void ) const
 {
 	return listeners.size();

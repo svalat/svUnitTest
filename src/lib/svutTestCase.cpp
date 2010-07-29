@@ -41,6 +41,7 @@ svutTestCase::svutTestCase(std::string name)
  * Copy constructor of the class, it was required as we create interal dynamic object in constructor.
  * Here for moment copying svutTestCase objects is not allowed, so we just throw an internal exception
  * here.
+ * @param testCase Define the original testCase to copy on current object.
 **/
 svutTestCase::svutTestCase(const svUnitTest::svutTestCase& testCase)
 {
@@ -167,7 +168,7 @@ void svutTestCase::registerTestMethod(svutTestMethod * test)
 /********************  METHODE  *********************/
 /**
  * If this method is invoqued during a test method, and this method terminate with FAILED status,
- * so the finish status may be replace by T\ODO status. SUCCESS status will be replaced by INDEV
+ * so the finish status may be replace by TODO status. SUCCESS status will be replaced by INDEV
  * status.
  *
  * This is used to distinguish known error where the tests must be updated from new and real error

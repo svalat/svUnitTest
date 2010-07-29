@@ -62,6 +62,7 @@ std::string svutException::getMessage(void) const
 }
 
 /********************  METHODE  *********************/
+/** @copydoc svutException::svutException(std::string) **/
 svutExInternalError::svutExInternalError(std::string message) throw()
 	:svutException(message)
 {
@@ -69,6 +70,7 @@ svutExInternalError::svutExInternalError(std::string message) throw()
 }
 
 /********************  METHODE  *********************/
+/** @copydoc svutException::~svutException() **/
 svutExInternalError::~svutExInternalError(void ) throw()
 {
 
