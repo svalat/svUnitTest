@@ -39,6 +39,12 @@ class UnitTest_svutStatusInfo : public TestCase
 	CPPUNIT_TEST(testGetNbEntries);
 	CPPUNIT_TEST(testGetEntry);
 	CPPUNIT_TEST(testOperatorEqual);
+	CPPUNIT_TEST(testGetStatusName_1);
+	CPPUNIT_TEST(testGetStatusName_2);
+	CPPUNIT_TEST(testGetStatusName_3);
+	CPPUNIT_TEST(testGetStatusName_4);
+	CPPUNIT_TEST(testGetStatusName_5);
+	CPPUNIT_TEST(testGetStatusName_6);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -56,6 +62,13 @@ class UnitTest_svutStatusInfo : public TestCase
 		void testGetNbEntries(void);
 		void testGetEntry(void);
 		void testOperatorEqual(void);
+		void testGetStatusName_1(void);
+		void testGetStatusName_2(void);
+		void testGetStatusName_3(void);
+		void testGetStatusName_4(void);
+		void testGetStatusName_5(void);
+		void testGetStatusName_6(void);
+		
 
 		svutStatusInfo * info;
 };
@@ -159,5 +172,46 @@ void UnitTest_svutStatusInfo::testOperatorEqual(void )
 	CPPUNIT_ASSERT_EQUAL(0,copy.getNbEntries());
 }
 
+/********************  METHODE  *********************/
+void UnitTest_svutStatusInfo::testGetStatusName_1(void )
+{
+	svutStatusInfo info(SVUT_STATUS_SUCCESS,"",SVUT_NO_LOCATION);
+	CPPUNIT_ASSERT_EQUAL("SUCCESS",info.getStatusName());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutStatusInfo::testGetStatusName_2(void )
+{
+	svutStatusInfo info(SVUT_STATUS_FAILED,"",SVUT_NO_LOCATION);
+	CPPUNIT_ASSERT_EQUAL("FAILED",info.getStatusName());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutStatusInfo::testGetStatusName_3(void )
+{
+	svutStatusInfo info(SVUT_STATUS_TODO,"",SVUT_NO_LOCATION);
+	CPPUNIT_ASSERT_EQUAL("TODO",info.getStatusName());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutStatusInfo::testGetStatusName_4(void )
+{
+	svutStatusInfo info(SVUT_STATUS_INDEV,"",SVUT_NO_LOCATION);
+	CPPUNIT_ASSERT_EQUAL("INDEV",info.getStatusName());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutStatusInfo::testGetStatusName_5(void )
+{
+	svutStatusInfo info(SVUT_STATUS_UNKNOWN,"",SVUT_NO_LOCATION);
+	CPPUNIT_ASSERT_EQUAL("UNKNOWN",info.getStatusName());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutStatusInfo::testGetStatusName_6(void )
+{
+	svutStatusInfo info(SVUT_STATUS_SKIPED,"",SVUT_NO_LOCATION);
+	CPPUNIT_ASSERT_EQUAL("SKIPED",info.getStatusName());
+}
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutStatusInfo);

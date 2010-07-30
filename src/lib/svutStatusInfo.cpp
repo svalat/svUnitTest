@@ -12,6 +12,7 @@
 #endif
 
 #include "svutStatusInfo.h"
+#include "svutException.h"
 
 using namespace std;
 namespace svUnitTest
@@ -165,6 +166,36 @@ std::string svutStatusInfo::getEntry(std::string name) const
 		if (it->first == name)
 			return it->second;
 	return "";
+}
+
+/********************  METHODE  *********************/
+/**
+ * @return Return the name of the current status as a C++ string. The returned names are :
+ *      - SUCCESS
+ *      - FAILED
+ *      - TODO
+ *      - INDEV
+ *      - UNKNOWN
+ *      - SKIPED
+**/
+std::string svutStatusInfo::getStatusName(void ) const
+{
+	switch(this->status)
+	{
+		case SVUT_STATUS_SUCCESS:
+			return "SUCCESS";
+		case SVUT_STATUS_FAILED:
+			return "FAILED";
+		case SVUT_STATUS_TODO:
+			return "TODO";
+		case SVUT_STATUS_INDEV:
+			return "INDEV";
+		case SVUT_STATUS_UNKNOWN:
+			return "UNKNOWN";
+		case SVUT_STATUS_SKIPED:
+			return "SKIPED";
+	}
+	throw svutExInternalError("Unknown status value in svutStatusInfo::getStatusName()");
 }
 
 /********************  METHODE  *********************/

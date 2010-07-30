@@ -20,6 +20,7 @@ namespace svUnitTest
 /********************  TYPES  ***********************/
 /**
  * Define the list of authorized status of tests in the library.
+ * @todo definir des opérateurs de cast vers et depuis std::string
  * @brief Define authorized status of unit tests.
 **/
 enum svutStatus
@@ -63,6 +64,7 @@ class svutStatusInfo
 		unsigned int getNbEntries(void) const;
 		std::string getEntry(std::string name) const;
 		svutStatusInfo & operator = (const svutStatusInfo & orig);
+		std::string getStatusName(void) const;
 	protected:
 		/** Define the message related to the status of the test. **/
 		std::string message;
