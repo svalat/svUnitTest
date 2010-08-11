@@ -82,12 +82,6 @@ void UnitTest_svutListenerDirectOutputter::testOnGlobalStart(void )
 void UnitTest_svutListenerDirectOutputter::testOnGlobalEnd_1(void )
 {
 	svutResultSummary summary;
-	summary.failed = 0;
-	summary.indev = 0;
-	summary.skiped = 0;
-	summary.success = 0;
-	summary.todo = 0;
-	summary.unknown = 0;
 	
 	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
 
@@ -104,12 +98,6 @@ void UnitTest_svutListenerDirectOutputter::testOnGlobalEnd_1(void )
 void UnitTest_svutListenerDirectOutputter::testOnGlobalEnd_2(void )
 {
 	svutResultSummary summary;
-	summary.failed = 0;
-	summary.indev = 0;
-	summary.skiped = 0;
-	summary.success = 1;
-	summary.todo = 0;
-	summary.unknown = 2;
 	
 	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
 

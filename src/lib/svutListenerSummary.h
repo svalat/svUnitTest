@@ -11,32 +11,10 @@
 
 /********************  HEADERS  *********************/
 #include "svutListener.h"
+#include "svutResultSummary.h"
 
 namespace svUnitTest
 {
-
-/*********************  TYPES  **********************/
-/**
- * Structure used to aggregate global summary of tests.
- * @brief Structure used to aggregate global summary of tests.
- * @author Valat Sébastien
- * @version 0.0.2
-**/
-struct svutResultSummary
-{
-	/** Count the number of success occured during the tests.**/
-	unsigned int success;
-	/** Count the number of todo occured during the tests.**/
-	unsigned int todo;
-	/** Count the number of failed occured during the tests.**/
-	unsigned int failed;
-	/** Count the number of unknown occured during the tests.**/
-	unsigned int unknown;
-	/** Count the number of skiped occured during the tests.**/
-	unsigned int skiped;
-	/** Count the number of indev occured during the tests.**/
-	unsigned int indev;
-};
 
 /********************* CLASS ************************/
 /**

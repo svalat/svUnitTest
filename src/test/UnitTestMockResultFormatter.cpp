@@ -11,6 +11,7 @@
 #include <cstdio>
 #include <sstream>
 
+using namespace svUnitTest;
 using namespace std;
 
 /********************  METHOD  **********************/
@@ -120,8 +121,9 @@ void UnitTestMockResultFormater::printSummary(svUnitTest::svutResultSummary summ
 {
 	char buffer[4096];
 	sprintf(buffer,"success=%d, failed=%d, todo=%d, indev=%d, unknown=%d, skiped=%d",
-			summary.success,summary.failed,summary.todo,summary.indev,summary.unknown,
-			summary.skiped);
+			summary.getCount(SVUT_STATUS_SUCCESS),summary.getCount(SVUT_STATUS_FAILED),
+			summary.getCount(SVUT_STATUS_TODO),summary.getCount(SVUT_STATUS_INDEV),
+			summary.getCount(SVUT_STATUS_UNKNOWN),summary.getCount(SVUT_STATUS_SKIPED));
 	event.push_back(buffer);
 }
 
