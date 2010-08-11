@@ -1,7 +1,7 @@
 include_directories (${svUnitTest_SOURCE_DIR}/src/lib/)
 
 ############ LIB WITH MAIN AND EXTRA ###########
-set(svutUnitTestBase_SRCS UnitTestMockResultFormater.cpp UnitTestMockTestCase.cpp UnitTestMockListener.cpp UnitTestMain.cpp
+set(svutUnitTestBase_SRCS UnitTestMockResultFormatter.cpp UnitTestMockTestCase.cpp UnitTestMockListener.cpp UnitTestMain.cpp
 	UnitTestExtra.cpp UnitTestMockTestCase2.cpp)
 add_library(svutUnitTestBase ${svutUnitTestBase_SRCS}) 
 

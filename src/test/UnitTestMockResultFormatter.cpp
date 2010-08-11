@@ -7,7 +7,7 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
-#include "UnitTestMockResultFormater.h"
+#include "UnitTestMockResultFormatter.h"
 #include <cstdio>
 #include <sstream>
 

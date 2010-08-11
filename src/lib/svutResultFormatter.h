@@ -25,13 +25,13 @@ namespace svUnitTest
  * @author Sébastien Valat
  * @version 0.0.2
 **/
-class svutResultFormater
+class svutResultFormatter
 {
 	public:
 		/** Default constructor of the class, done nothing here. **/
-		svutResultFormater(void) {};
+		svutResultFormatter(void) {};
 		/** Destructor of the class, defined for inheritance support. **/
-		virtual ~svutResultFormater(void) {};
+		virtual ~svutResultFormatter(void) {};
 		/**
 		 * Method called when starting to output things. It's called when starting to run the
 		 * test to build the output header if needed.

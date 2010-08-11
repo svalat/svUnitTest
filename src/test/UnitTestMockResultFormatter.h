@@ -10,13 +10,13 @@
 #define UNIT_TEST_MOCK_RESULT_FORMATER_HEADER
 
 /********************  HEADERS  *********************/
-#include <svutResultFormater.h>
+#include <svutResultFormatter.h>
 #include <ostream>
 #include <list>
 #include <string>
 
 /********************* CLASS ************************/
-class UnitTestMockResultFormater : public svUnitTest::svutResultFormater
+class UnitTestMockResultFormater : public svUnitTest::svutResultFormatter
 {
 	public:
 		virtual void openOutput(void);
