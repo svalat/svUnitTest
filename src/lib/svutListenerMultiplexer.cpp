@@ -43,17 +43,17 @@ void svutListenerMultiplexer::onTestCaseStart(const svUnitTest::svutTestCase& te
 }
 
 /********************  METHODE  *********************/
-void svutListenerMultiplexer::onTestMethodEnd(const svutTestMethod & method, svutStatusInfo status)
+void svutListenerMultiplexer::onTestMethodEnd(const svUnitTest::svutTestCase & testCase,const svutTestMethod & method, svutStatusInfo status)
 {
 	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
-		(*it)->onTestMethodEnd(method,status);
+		(*it)->onTestMethodEnd(testCase,method,status);
 }
 
 /********************  METHODE  *********************/
-void svutListenerMultiplexer::onTestMethodStart(const svutTestMethod & method)
+void svutListenerMultiplexer::onTestMethodStart(const svUnitTest::svutTestCase & testCase,const svutTestMethod & method)
 {
 	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
-		(*it)->onTestMethodStart(method);
+		(*it)->onTestMethodStart(testCase,method);
 }
 
 /********************  METHODE  *********************/

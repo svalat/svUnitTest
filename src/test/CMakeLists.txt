@@ -9,7 +9,8 @@ add_library(svutUnitTestBase ${svutUnitTestBase_SRCS})
 ############# BUILD ALL TESTS ##################
 set(svutUnitTest_CASES svutCodeLocation svutException svutObjectMethod svutStatusInfo
 		svutExTestStatus svutExNotify svutExAssert svutAssert svutTestMethod svutTestCase
-		svutListenerMultiplexer svutListener svutTestCaseResult svutListenerSummary)
+		svutListenerMultiplexer svutListener svutTestCaseResult svutListenerSummary
+		svutListenerDirectOutputter)
 IF (TEST_COVERAGE) ############ HERE THE CASE FOR COVERAGE
 	set(svutUnitTest_ALLSRC)
 	set(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")

@@ -57,12 +57,12 @@ void svutListenerSummary::onTestCaseEnd(const svUnitTest::svutTestCase& /*testCa
 }
 
 /********************  METHOD  **********************/
-void svutListenerSummary::onTestMethodStart(const svUnitTest::svutTestMethod& /*method*/)
+void svutListenerSummary::onTestMethodStart(const svUnitTest::svutTestCase & /*testCase*/,const svUnitTest::svutTestMethod& /*method*/)
 {
 }
 
 /********************  METHOD  **********************/
-void svutListenerSummary::onTestMethodEnd(const svUnitTest::svutTestMethod& /*method*/, svutStatusInfo status)
+void svutListenerSummary::onTestMethodEnd(const svUnitTest::svutTestCase & /*testCase*/,const svUnitTest::svutTestMethod& /*method*/, svutStatusInfo status)
 {
 	switch (status.getStatus())
 	{

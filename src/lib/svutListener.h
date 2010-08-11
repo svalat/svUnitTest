@@ -51,16 +51,18 @@ class svutListener
 		/**
 		 * This method si called when a method start. Same as for test case, didn't suppose any order
 		 * or sequential properties here.
+		 * @param testCase Define the test case which contain the method.
 		 * @param method Define the methode which is starting.
 		**/
-		virtual void onTestMethodStart(const svutTestMethod & method) = 0;
+		virtual void onTestMethodStart(const svutTestCase & testCase,const svutTestMethod & method) = 0;
 		/**
 		 * This method si called when a method end. Same as for test case, didn't suppose any order
 		 * or sequential properties here.
+		 * @param testCase Define the test case which contain the method.
 		 * @param method Define the methode which is ended.
 		 * @param status Define the final status of the test method.
 		**/
-		virtual void onTestMethodEnd(const svutTestMethod & method,svutStatusInfo status) = 0;
+		virtual void onTestMethodEnd(const svutTestCase & testCase,const svutTestMethod & method,svutStatusInfo status) = 0;
 		/**
 		 * Method called at the end of all tests.
 		**/

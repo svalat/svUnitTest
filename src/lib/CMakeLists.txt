@@ -1,7 +1,7 @@
 #setup svUnitTest library
 
 #group files
-set(svUnitTest_SRC svutListenerSummary.cpp svutListenerMultiplexer.cpp svutException.cpp
+set(svUnitTest_SRC svutListenerDirectOutputter.cpp svutListenerSummary.cpp svutListenerMultiplexer.cpp svutException.cpp
 	svutTestCase.cpp svutTestMethod.cpp svutAsserter.cpp svutExNotify.cpp svutExAssert.cpp
 	svutExTestStatus.cpp svutStatusInfo.cpp svutCodeLocation.cpp)
 

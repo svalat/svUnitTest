@@ -55,13 +55,13 @@ void UnitTestMockListener::onTestCaseEnd(const svUnitTest::svutTestCase& /*testC
 }
 
 /********************  METHOD  **********************/
-void UnitTestMockListener::onTestMethodStart(const svUnitTest::svutTestMethod& /*method*/)
+void UnitTestMockListener::onTestMethodStart(const svUnitTest::svutTestCase & /*testCase*/,const svUnitTest::svutTestMethod& /*method*/)
 {
 	mockEvents.meth_start = mockTime++;
 }
 
 /********************  METHOD  **********************/
-void UnitTestMockListener::onTestMethodEnd(const svUnitTest::svutTestMethod& method, svUnitTest::svutStatusInfo status)
+void UnitTestMockListener::onTestMethodEnd(const svUnitTest::svutTestCase & /*testCase*/,const svUnitTest::svutTestMethod& method, svUnitTest::svutStatusInfo status)
 {
 	mockEvents.meth_end = mockTime++;
 	finalResults[method.getName()] = status;

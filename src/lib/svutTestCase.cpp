@@ -76,14 +76,14 @@ void svutTestCase::runTestCase(void)
 	{
 		//send notification
 		if (listener != NULL)
-			listener->onTestMethodStart(**it);
+			listener->onTestMethodStart(*this,**it);
 
 		//run the method
 		res = this->runTestMethod(*it);
 
 		//send notification
 		if (listener != NULL)
-			listener->onTestMethodEnd(**it,res);
+			listener->onTestMethodEnd(*this,**it,res);
 	}
 
 	//send notification

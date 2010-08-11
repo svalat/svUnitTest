@@ -34,8 +34,8 @@ class UnitTestMockListener : public svUnitTest::svutListener
 		virtual void onGlobalStart(void);
 		virtual void onTestCaseStart(const svUnitTest::svutTestCase & testCase);
 		virtual void onTestCaseEnd(const svUnitTest::svutTestCase & testCase);
-		virtual void onTestMethodStart(const svUnitTest::svutTestMethod & method);
-		virtual void onTestMethodEnd(const svUnitTest::svutTestMethod & method,svUnitTest::svutStatusInfo status);
+		virtual void onTestMethodStart(const svUnitTest::svutTestCase & testCase,const svUnitTest::svutTestMethod & method);
+		virtual void onTestMethodEnd(const svUnitTest::svutTestCase & testCase,const svUnitTest::svutTestMethod & method,svUnitTest::svutStatusInfo status);
 		virtual void onGlobalEnd(void);
 		void mockReset(void);
 	
