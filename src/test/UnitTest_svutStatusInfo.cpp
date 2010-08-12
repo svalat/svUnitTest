@@ -45,6 +45,7 @@ class UnitTest_svutStatusInfo : public TestCase
 	CPPUNIT_TEST(testGetStatusName_4);
 	CPPUNIT_TEST(testGetStatusName_5);
 	CPPUNIT_TEST(testGetStatusName_6);
+	CPPUNIT_TEST(testGetStatusName_static);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -68,6 +69,7 @@ class UnitTest_svutStatusInfo : public TestCase
 		void testGetStatusName_4(void);
 		void testGetStatusName_5(void);
 		void testGetStatusName_6(void);
+		void testGetStatusName_static(void);
 		
 
 		svutStatusInfo * info;
@@ -212,6 +214,17 @@ void UnitTest_svutStatusInfo::testGetStatusName_6(void )
 {
 	svutStatusInfo info(SVUT_STATUS_SKIPED,"",SVUT_NO_LOCATION);
 	CPPUNIT_ASSERT_EQUAL("SKIPED",info.getStatusName());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutStatusInfo::testGetStatusName_static(void )
+{
+	CPPUNIT_ASSERT_EQUAL("SUCCESS",svutStatusInfo::getStatusName(SVUT_STATUS_SUCCESS));
+	CPPUNIT_ASSERT_EQUAL("FAILED",svutStatusInfo::getStatusName(SVUT_STATUS_FAILED));
+	CPPUNIT_ASSERT_EQUAL("TODO",svutStatusInfo::getStatusName(SVUT_STATUS_TODO));
+	CPPUNIT_ASSERT_EQUAL("INDEV",svutStatusInfo::getStatusName(SVUT_STATUS_INDEV));
+	CPPUNIT_ASSERT_EQUAL("UNKNOWN",svutStatusInfo::getStatusName(SVUT_STATUS_UNKNOWN));
+	CPPUNIT_ASSERT_EQUAL("SKIPED",svutStatusInfo::getStatusName(SVUT_STATUS_SKIPED));
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutStatusInfo);

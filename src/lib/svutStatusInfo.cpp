@@ -180,7 +180,37 @@ std::string svutStatusInfo::getEntry(std::string name) const
 **/
 std::string svutStatusInfo::getStatusName(void ) const
 {
-	switch(this->status)
+	return getStatusName(this->status);
+}
+
+/********************  METHODE  *********************/
+/**
+ * Permit to use the equal operator on svutStatusInfo objects.
+ * @param orig Define the original object to copy on the current one.
+**/
+svutStatusInfo& svUnitTest::svutStatusInfo::operator=(const svUnitTest::svutStatusInfo& orig)
+{
+	this->message = orig.message;
+	this->entries = orig.entries;
+	this->location = orig.location;
+	this->status = orig.status;
+	return *this;
+}
+
+/********************  METHODE  *********************/
+/**
+ * @param status Define the status to convert to string.
+ * @return Return the name of the given status as a C++ string. The returned names are :
+ *      - SUCCESS
+ *      - FAILED
+ *      - TODO
+ *      - INDEV
+ *      - UNKNOWN
+ *      - SKIPED
+**/
+string svutStatusInfo::getStatusName(svutStatus status)
+{
+	switch(status)
 	{
 		case SVUT_STATUS_SUCCESS:
 			return "SUCCESS";
@@ -196,20 +226,6 @@ std::string svutStatusInfo::getStatusName(void ) const
 			return "SKIPED";
 	}
 	throw svutExInternalError("Unknown status value in svutStatusInfo::getStatusName()");
-}
-
-/********************  METHODE  *********************/
-/**
- * Permit to use the equal operator on svutStatusInfo objects.
- * @param orig Define the original object to copy on the current one.
-**/
-svutStatusInfo& svUnitTest::svutStatusInfo::operator=(const svUnitTest::svutStatusInfo& orig)
-{
-	this->message = orig.message;
-	this->entries = orig.entries;
-	this->location = orig.location;
-	this->status = orig.status;
-	return *this;
 }
 
 }

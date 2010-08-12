@@ -65,6 +65,7 @@ class svutStatusInfo
 		std::string getEntry(std::string name) const;
 		svutStatusInfo & operator = (const svutStatusInfo & orig);
 		std::string getStatusName(void) const;
+		static std::string getStatusName(svutStatus status);
 	protected:
 		/** Define the message related to the status of the test. **/
 		std::string message;

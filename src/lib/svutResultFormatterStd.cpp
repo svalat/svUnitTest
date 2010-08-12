@@ -62,7 +62,7 @@ void svutResultFormatterStd::setDisplaySuccess(bool state)
 /********************  METHOD  **********************/
 void svutResultFormatterStd::openOutput(void)
 {
-
+	//nothing to do for std mode
 }
 
 /********************  METHOD  **********************/
@@ -79,11 +79,13 @@ void svutResultFormatterStd::openTestCase(const svUnitTest::svutTestCase& testCa
 /********************  METHOD  **********************/
 void svutResultFormatterStd::closeTestCase(const svUnitTest::svutTestCase& testCase)
 {
+	//nothing to do for std mode
 }
 
 /********************  METHOD  **********************/
 void svutResultFormatterStd::openTestMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth)
 {
+	//nothing to do for std mode
 }
 
 /********************  METHOD  **********************/
@@ -163,6 +165,7 @@ void svutResultFormatterStd::printSummary(svutResultSummary summary)
 /********************  METHOD  **********************/
 void svutResultFormatterStd::closeOutput(void )
 {
+	//nothing to do for std mode
 }
 
 }
