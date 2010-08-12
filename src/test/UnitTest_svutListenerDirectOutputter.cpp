@@ -98,6 +98,8 @@ void UnitTest_svutListenerDirectOutputter::testOnGlobalEnd_1(void )
 void UnitTest_svutListenerDirectOutputter::testOnGlobalEnd_2(void )
 {
 	svutResultSummary summary;
+	summary.set(SVUT_STATUS_SUCCESS,1);
+	summary.set(SVUT_STATUS_UNKNOWN,2);
 	
 	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
 

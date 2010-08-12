@@ -28,10 +28,10 @@ class svutResultSummary
 	public:
 		svutResultSummary(void);
 		unsigned int getTotal(void) const;
-		unsigned int getCount(svutStatus status);
-		unsigned int getPercentage(svutStatus status);
-		void increment(svutStatus status,unsigned int nb=1);
-		void set(svutStatus status,unsigned int nb);
+		unsigned int getCount(svutStatus status) const;
+		unsigned int getPercentage(svutStatus status) const;
+		unsigned int increment(svutStatus status,unsigned int nb=1);
+		unsigned int set(svutStatus status,unsigned int nb);
 		void reset(void);
 		svutStatus getStatus(void) const;
 	protected:
