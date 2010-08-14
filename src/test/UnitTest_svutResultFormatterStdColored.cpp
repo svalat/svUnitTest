@@ -12,7 +12,7 @@
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
-#include <svutResultFormatterStdBW.h>
+#include <svutResultFormatterStdColored.h>
 #include "UnitTestMockTestCase.h"
 #include <sys/stat.h>
 
@@ -25,35 +25,35 @@ static const char * CST_STRING_SUMMARY_0 = "\n\
 +---------------------------+\n\
 |    SUMMARY                |\n\
 +---------------------------+\n\
-|  SUCCESS  :    0 (  0 %)  |\n\
-|  INDEV    :    0 (  0 %)  |\n\
-|  TODO     :    0 (  0 %)  |\n\
-|  FAILED   :    0 (  0 %)  |\n\
-|  UNKNOWN  :    0 (  0 %)  |\n\
+|  \e[32mSUCCESS  :    0 (  0 %)\e[0m  |\n\
+|  \e[34mINDEV    :    0 (  0 %)\e[0m  |\n\
+|  \e[33mTODO     :    0 (  0 %)\e[0m  |\n\
+|  \e[31mFAILED   :    0 (  0 %)\e[0m  |\n\
+|  \e[31mUNKNOWN  :    0 (  0 %)\e[0m  |\n\
 +---------------------------+\n\
 |  TOTAL    :    0          |\n\
-|  STATUS   : SUCCESS       |\n\
+|  STATUS   : \e[32mSUCCESS     \e[0m  |\n\
 +---------------------------+\n";
 static const char * CST_STRING_UNKNOWN_1 =
-" * testMethod                                   [ UNKNOWN ]\n\
+"\e[32m * \e[0mtestMethod                                   [ \e[31mUNKNOWN\e[0m ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 \n\
 unknown location\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
-static const char * CST_STRING_UNKNOWN_3 = " * testMethod                                   [ UNKNOWN ]\n\
+static const char * CST_STRING_UNKNOWN_3 = "\e[32m * \e[0mtestMethod                                   [ \e[31mUNKNOWN\e[0m ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 message for unknown status\n\
 line 33 of file file.cpp on methode methode()\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
-static const char * CST_STRING_UNKNOWN_2 = " * testMethod                                   [ UNKNOWN ]\n";
-static const char * CST_STRING_SUCCESS_1 = " * testMethod                                   [ SUCCESS ]\n";
-static const char * CST_STRING_SUCCESS_2 = " * MyTest:testMethod                            [ SUCCESS ]\n";
-static const char * CST_STRING_TODO      = " * testMethod                                   [ TODO ]\n";
-static const char * CST_STRING_INDEV     = " * testMethod                                   [ INDEV ]\n";
-static const char * CST_STRING_SKIPED    = " * testMethod                                   [ SKIPED ]\n";
+static const char * CST_STRING_UNKNOWN_2 = "\e[32m * \e[0mtestMethod                                   [ \e[31mUNKNOWN\e[0m ]\n";
+static const char * CST_STRING_SUCCESS_1 = "\e[32m * \e[0mtestMethod                                   [ \e[32mSUCCESS\e[0m ]\n";
+static const char * CST_STRING_SUCCESS_2 = "\e[32m * \e[0mMyTest:testMethod                            [ \e[32mSUCCESS\e[0m ]\n";
+static const char * CST_STRING_TODO      = "\e[32m * \e[0mtestMethod                                   [ \e[33mTODO\e[0m ]\n";
+static const char * CST_STRING_INDEV     = "\e[32m * \e[0mtestMethod                                   [ \e[34mINDEV\e[0m ]\n";
+static const char * CST_STRING_SKIPED    = "\e[32m * \e[0mtestMethod                                   [ \e[33mSKIPED\e[0m ]\n";
 static const char * CST_STRING_TEST_CASE = "=======  MyTest                                   ========\n";
-static const char * CST_STRING_FAILED_2  = " * testMethod                                   [ FAILED ]\n";
-static const char * CST_STRING_FAILED_1  = " * testMethod                                   [ FAILED ]\n\
+static const char * CST_STRING_FAILED_2  = "\e[32m * \e[0mtestMethod                                   [ \e[31mFAILED\e[0m ]\n";
+static const char * CST_STRING_FAILED_1  = "\e[32m * \e[0mtestMethod                                   [ \e[31mFAILED\e[0m ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 message for failed status\n\
 line 33 of file file.cpp on methode methode()\n\
@@ -61,11 +61,11 @@ line 33 of file file.cpp on methode methode()\n\
    - expected : toto\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
 static const char * CST_STRING_SEQ_1    = "=======  MyTest                                   ========\n\
- * testMethod                                   [ TODO ]\n\
- * testMethod                                   [ INDEV ]\n\
+\e[32m * \e[0mtestMethod                                   [ \e[33mTODO\e[0m ]\n\
+\e[32m * \e[0mtestMethod                                   [ \e[34mINDEV\e[0m ]\n\
 =======  MyTest                                   ========\n\
- * testMethod                                   [ SKIPED ]\n\
- * testMethod                                   [ FAILED ]\n\
+\e[32m * \e[0mtestMethod                                   [ \e[33mSKIPED\e[0m ]\n\
+\e[32m * \e[0mtestMethod                                   [ \e[31mFAILED\e[0m ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 message for unknown status\n\
 line 33 of file file.cpp on methode methode()\n\
@@ -73,7 +73,7 @@ line 33 of file file.cpp on methode methode()\n\
    - expected : toto\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 =======  MyTest                                   ========\n\
- * testMethod                                   [ UNKNOWN ]\n\
+\e[32m * \e[0mtestMethod                                   [ \e[31mUNKNOWN\e[0m ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 message for unknown status\n\
 line 33 of file file.cpp on methode methode()\n\
@@ -81,43 +81,43 @@ line 33 of file file.cpp on methode methode()\n\
 +---------------------------+\n\
 |    SUMMARY                |\n\
 +---------------------------+\n\
-|  SUCCESS  :    0 (  0 %)  |\n\
-|  INDEV    :    0 (  0 %)  |\n\
-|  TODO     :    0 (  0 %)  |\n\
-|  FAILED   :    0 (  0 %)  |\n\
-|  UNKNOWN  :    0 (  0 %)  |\n\
+|  \e[32mSUCCESS  :    0 (  0 %)\e[0m  |\n\
+|  \e[34mINDEV    :    0 (  0 %)\e[0m  |\n\
+|  \e[33mTODO     :    0 (  0 %)\e[0m  |\n\
+|  \e[31mFAILED   :    0 (  0 %)\e[0m  |\n\
+|  \e[31mUNKNOWN  :    0 (  0 %)\e[0m  |\n\
 +---------------------------+\n\
 |  TOTAL    :    0          |\n\
-|  STATUS   : SUCCESS       |\n\
+|  STATUS   : \e[32mSUCCESS     \e[0m  |\n\
 +---------------------------+\n";
 static const char * CST_STRING_SEQ_2    = "=======  MyTest                                   ========\n\
- * testMethod                                   [ SUCCESS ]\n\
- * testMethod                                   [ TODO ]\n\
- * testMethod                                   [ SUCCESS ]\n\
- * testMethod                                   [ INDEV ]\n\
+\e[32m * \e[0mtestMethod                                   [ \e[32mSUCCESS\e[0m ]\n\
+\e[32m * \e[0mtestMethod                                   [ \e[33mTODO\e[0m ]\n\
+\e[32m * \e[0mtestMethod                                   [ \e[32mSUCCESS\e[0m ]\n\
+\e[32m * \e[0mtestMethod                                   [ \e[34mINDEV\e[0m ]\n\
 =======  MyTest                                   ========\n\
- * testMethod                                   [ SKIPED ]\n\
- * testMethod                                   [ SUCCESS ]\n\
- * testMethod                                   [ FAILED ]\n\
+\e[32m * \e[0mtestMethod                                   [ \e[33mSKIPED\e[0m ]\n\
+\e[32m * \e[0mtestMethod                                   [ \e[32mSUCCESS\e[0m ]\n\
+\e[32m * \e[0mtestMethod                                   [ \e[31mFAILED\e[0m ]\n\
 =======  MyTest                                   ========\n\
- * testMethod                                   [ UNKNOWN ]\n\n\
+\e[32m * \e[0mtestMethod                                   [ \e[31mUNKNOWN\e[0m ]\n\n\
 +---------------------------+\n\
 |    SUMMARY                |\n\
 +---------------------------+\n\
-|  SUCCESS  :    0 (  0 %)  |\n\
-|  INDEV    :    0 (  0 %)  |\n\
-|  TODO     :    0 (  0 %)  |\n\
-|  FAILED   :    0 (  0 %)  |\n\
-|  UNKNOWN  :    0 (  0 %)  |\n\
+|  \e[32mSUCCESS  :    0 (  0 %)\e[0m  |\n\
+|  \e[34mINDEV    :    0 (  0 %)\e[0m  |\n\
+|  \e[33mTODO     :    0 (  0 %)\e[0m  |\n\
+|  \e[31mFAILED   :    0 (  0 %)\e[0m  |\n\
+|  \e[31mUNKNOWN  :    0 (  0 %)\e[0m  |\n\
 +---------------------------+\n\
 |  TOTAL    :    0          |\n\
-|  STATUS   : SUCCESS       |\n\
+|  STATUS   : \e[32mSUCCESS     \e[0m  |\n\
 +---------------------------+\n";
 
 /********************  CLASSE  **********************/
-class UnitTest_svutResultFormatterStdBW : public TestCase
+class UnitTest_svutResultFormatterStdColored : public TestCase
 {
-	CPPUNIT_TEST_SUITE(UnitTest_svutResultFormatterStdBW);
+	CPPUNIT_TEST_SUITE(UnitTest_svutResultFormatterStdColored);
 	CPPUNIT_TEST(testOpenOutput);
 	CPPUNIT_TEST(testCloseOutput);
 	CPPUNIT_TEST(testOpenTestCase);
@@ -164,33 +164,33 @@ class UnitTest_svutResultFormatterStdBW : public TestCase
 		void testGlobal_2(void);
 	protected:
 		void runTotalSequence(void);
-		svutResultFormatterStdBW * formatter;
+		svutResultFormatterStdColored * formatter;
 		stringstream * out;
 };
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::setUp(void)
+void UnitTest_svutResultFormatterStdColored::setUp(void)
 {
 	out = new stringstream;
-	formatter = new svutResultFormatterStdBW(*out);
+	formatter = new svutResultFormatterStdColored(*out);
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::tearDown(void)
+void UnitTest_svutResultFormatterStdColored::tearDown(void)
 {
 	delete formatter;
 	delete out;
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testCloseOutput(void )
+void UnitTest_svutResultFormatterStdColored::testCloseOutput(void )
 {
 	formatter->closeOutput();
 	CPPUNIT_ASSERT_EQUAL("",out->str());
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testCloseTestCase(void )
+void UnitTest_svutResultFormatterStdColored::testCloseTestCase(void )
 {
 	UnitTestMockTestCase testCase;
 	formatter->closeTestCase(testCase);
@@ -198,7 +198,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestCase(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_success_1(void )
+void UnitTest_svutResultFormatterStdColored::testCloseTestMethod_success_1(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -207,7 +207,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_success_1(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_success_2(void )
+void UnitTest_svutResultFormatterStdColored::testCloseTestMethod_success_2(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -217,7 +217,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_success_2(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_fullname(void )
+void UnitTest_svutResultFormatterStdColored::testCloseTestMethod_fullname(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -228,7 +228,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_fullname(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_todo(void )
+void UnitTest_svutResultFormatterStdColored::testCloseTestMethod_todo(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -237,7 +237,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_todo(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_indev(void )
+void UnitTest_svutResultFormatterStdColored::testCloseTestMethod_indev(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -246,7 +246,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_indev(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_skiped(void )
+void UnitTest_svutResultFormatterStdColored::testCloseTestMethod_skiped(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -255,7 +255,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_skiped(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_unknown_1(void )
+void UnitTest_svutResultFormatterStdColored::testCloseTestMethod_unknown_1(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -264,7 +264,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_unknown_1(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_unknown_2(void )
+void UnitTest_svutResultFormatterStdColored::testCloseTestMethod_unknown_2(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -274,7 +274,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_unknown_2(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_unknown_3(void )
+void UnitTest_svutResultFormatterStdColored::testCloseTestMethod_unknown_3(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -285,7 +285,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_unknown_3(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_failed_1(void )
+void UnitTest_svutResultFormatterStdColored::testCloseTestMethod_failed_1(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -298,7 +298,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_failed_1(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_failed_2(void )
+void UnitTest_svutResultFormatterStdColored::testCloseTestMethod_failed_2(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -312,7 +312,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_failed_2(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::runTotalSequence(void )
+void UnitTest_svutResultFormatterStdColored::runTotalSequence(void )
 {
 	UnitTestMockTestCase testCase;
 	svutCodeLocation location("file.cpp","methode",33);
@@ -356,22 +356,22 @@ void UnitTest_svutResultFormatterStdBW::runTotalSequence(void )
 	formatter->closeTestMethod(testCase,meth,infoUnknown);
 
 	formatter->closeTestCase(testCase);
-	
+
 	formatter->printSummary(summary);
-	
+
 	formatter->closeOutput();
 }
 
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testGlobal_1(void )
+void UnitTest_svutResultFormatterStdColored::testGlobal_1(void )
 {
 	this->runTotalSequence();
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SEQ_1,out->str());
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testGlobal_2(void )
+void UnitTest_svutResultFormatterStdColored::testGlobal_2(void )
 {
 	formatter->setDisplaySuccess(true);
 	formatter->setDisplayDetails(false);
@@ -380,14 +380,14 @@ void UnitTest_svutResultFormatterStdBW::testGlobal_2(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testOpenOutput(void )
+void UnitTest_svutResultFormatterStdColored::testOpenOutput(void )
 {
 	formatter->openOutput();
 	CPPUNIT_ASSERT_EQUAL("",out->str());
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testOpenTestCase(void )
+void UnitTest_svutResultFormatterStdColored::testOpenTestCase(void )
 {
 	UnitTestMockTestCase testCase;
 	formatter->openTestCase(testCase);
@@ -395,7 +395,7 @@ void UnitTest_svutResultFormatterStdBW::testOpenTestCase(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testOpenTestMethod(void )
+void UnitTest_svutResultFormatterStdColored::testOpenTestMethod(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_CODE_LOCATION);
@@ -404,11 +404,11 @@ void UnitTest_svutResultFormatterStdBW::testOpenTestMethod(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterStdBW::testPrintSummary(void )
+void UnitTest_svutResultFormatterStdColored::testPrintSummary(void )
 {
 	svutResultSummary summary;
 	formatter->printSummary(summary);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SUMMARY_0,out->str());
 }
 
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutResultFormatterStdBW);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutResultFormatterStdColored);
