@@ -45,7 +45,6 @@ void UnitTest_svutListenerSummary::setUp(void)
 {
 	listener = new svutListenerSummary();
 	testCase = new UnitTestMockTestCase2();
-	testCase->setListener(listener);
 	testCase->useTests(UnitTestMockTestCase2::REGISTER_ALL);
 }
 
@@ -79,7 +78,7 @@ void UnitTest_svutListenerSummary::testEvents_1(void )
 	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_UNKNOWN));
 	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_TODO));
 
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 	summary = listener->getSummary();
 	CPPUNIT_ASSERT_EQUAL(1,summary.getCount(SVUT_STATUS_FAILED));
 	CPPUNIT_ASSERT_EQUAL(2,summary.getCount(SVUT_STATUS_INDEV));
@@ -100,8 +99,8 @@ void UnitTest_svutListenerSummary::testEvents_2(void )
 	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_UNKNOWN));
 	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_TODO));
 
-	testCase->runTestCase();
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
+	testCase->runTestCase(listener);
 	summary = listener->getSummary();
 	CPPUNIT_ASSERT_EQUAL(2,summary.getCount(SVUT_STATUS_FAILED));
 	CPPUNIT_ASSERT_EQUAL(4,summary.getCount(SVUT_STATUS_INDEV));

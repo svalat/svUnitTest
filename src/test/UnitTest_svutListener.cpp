@@ -53,7 +53,6 @@ void UnitTestsvutListener::setUp(void)
 {
 	this->listener = new UnitTestMockListener();
 	this->testCase = new UnitTestMockTestCase();
-	this->testCase->setListener(this->listener);
 }
 
 /********************  METHODE  *********************/
@@ -69,7 +68,7 @@ void UnitTestsvutListener::testOnGlobalStart(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(-1,listener->mockEvents.global_start);
 
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(6,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(-1,listener->mockEvents.global_start);
@@ -81,7 +80,7 @@ void UnitTestsvutListener::testOnGlobalEnd(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(-1,listener->mockEvents.global_end);
 
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(6,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(-1,listener->mockEvents.global_end);
@@ -93,7 +92,7 @@ void UnitTestsvutListener::testOnTestCaseStart(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(-1,listener->mockEvents.case_start);
 
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(6,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockEvents.case_start);
@@ -105,7 +104,7 @@ void UnitTestsvutListener::testOnTestCaseEnd(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(-1,listener->mockEvents.case_end);
 
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(6,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(5,listener->mockEvents.case_end);
@@ -117,7 +116,7 @@ void UnitTestsvutListener::testOnTestMethodStart(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(-1,listener->mockEvents.meth_start);
 
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(6,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(3,listener->mockEvents.meth_start);
@@ -129,7 +128,7 @@ void UnitTestsvutListener::testOnTestMethodEnd(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(-1,listener->mockEvents.meth_end);
 
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(6,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(4,listener->mockEvents.meth_end);
@@ -143,8 +142,7 @@ void UnitTestsvutListener::testSetListener(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(0,list.mockTime);
 
-	testCase->setListener(&list);
-	testCase->runTestCase();
+	testCase->runTestCase(&list);
 	
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(6,list.mockTime);

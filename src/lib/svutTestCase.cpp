@@ -33,7 +33,6 @@ svutTestCase::svutTestCase(std::string name)
 {
 	this->autodtected = false;
 	this->caseName = name;
-	this->listener = NULL;
 }
 
 /********************  METHODE  *********************/
@@ -63,8 +62,10 @@ svutTestCase::~svutTestCase(void)
 /**
  * Start the test execution. It will run all the tests registerd in the test case in registration
  * order for moment.
+ * @param listener Give a listener to capture internal event as progression, tests results to
+ * redirect them to the user.
 **/
-void svutTestCase::runTestCase(void)
+void svutTestCase::runTestCase(svutListener * listener)
 {
 	svutStatusInfo res;
 	//send notification
@@ -222,17 +223,6 @@ std::list<std::string> svutTestCase::getTestMethods(bool prefix) const
 unsigned int svutTestCase::getNbTests(void) const
 {
 	return tests.size();
-}
-
-/********************  METHODE  *********************/
-/**
- * Define a listener to use to get event notification. This may be used to aggregate test results,
- * display progress...
- * @param listener Define the new listener to use, NULL for none.
-**/
-void svutTestCase::setListener(svutListener* listener)
-{
-	this->listener = listener;
 }
 
 /********************  METHODE  *********************/

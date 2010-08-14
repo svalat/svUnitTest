@@ -60,7 +60,6 @@ void UnitTestsvutTestCaseResult::setUp(void)
 {
 	this->listener = new UnitTestMockListener();
 	this->testCase = new UnitTestMockTestCase2();
-	this->testCase->setListener(this->listener);
 }
 
 /********************  METHODE  *********************/
@@ -76,7 +75,7 @@ void UnitTestsvutTestCaseResult::testSuccess(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 	
 	testCase->useTests(UnitTestMockTestCase2::REGISTER_SUCCESS);
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(4,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_SUCCESS,listener->finalResults["testSuccess"].getStatus());
@@ -88,7 +87,7 @@ void UnitTestsvutTestCaseResult::testFailure(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 
 	testCase->useTests(UnitTestMockTestCase2::REGISTER_FAILURE);
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(4,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,listener->finalResults["testFailure"].getStatus());
@@ -100,7 +99,7 @@ void UnitTestsvutTestCaseResult::testIndev(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 
 	testCase->useTests(UnitTestMockTestCase2::REGISTER_INDEV);
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(4,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,listener->finalResults["testIndev"].getStatus());
@@ -112,7 +111,7 @@ void UnitTestsvutTestCaseResult::testTodo(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 
 	testCase->useTests(UnitTestMockTestCase2::REGISTER_TODO);
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(4,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_TODO,listener->finalResults["testTodo"].getStatus());
@@ -124,7 +123,7 @@ void UnitTestsvutTestCaseResult::testUnknown_1(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 
 	testCase->useTests(UnitTestMockTestCase2::REGISTER_UNKNOWN_1);
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(4,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_UNKNOWN,listener->finalResults["testUnknown_1"].getStatus());
@@ -136,7 +135,7 @@ void UnitTestsvutTestCaseResult::testUnknown_2(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 
 	testCase->useTests(UnitTestMockTestCase2::REGISTER_UNKNOWN_2);
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(4,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_UNKNOWN,listener->finalResults["testUnknown_2"].getStatus());
@@ -148,7 +147,7 @@ void UnitTestsvutTestCaseResult::testFailIsTodo_1(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 
 	testCase->useTests(UnitTestMockTestCase2::REGISTER_FAIL_IS_TODO_1);
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(4,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_TODO,listener->finalResults["testFailIsTodo_1"].getStatus());
@@ -160,7 +159,7 @@ void UnitTestsvutTestCaseResult::testFailIsTodo_2(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 
 	testCase->useTests(UnitTestMockTestCase2::REGISTER_FAIL_IS_TODO_2);
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(4,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_TODO,listener->finalResults["testFailIsTodo_2"].getStatus());
@@ -172,7 +171,7 @@ void UnitTestsvutTestCaseResult::testFailIsTodo_3(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 
 	testCase->useTests(UnitTestMockTestCase2::REGISTER_FAIL_IS_TODO_3);
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(4,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_TODO,listener->finalResults["testFailIsTodo_3"].getStatus());
@@ -184,7 +183,7 @@ void UnitTestsvutTestCaseResult::testSuccessIsIndev(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
 
 	testCase->useTests(UnitTestMockTestCase2::REGISTER_SUCCESS_IS_INDEV);
-	testCase->runTestCase();
+	testCase->runTestCase(listener);
 
 	CPPUNIT_ASSERT_EQUAL(4,listener->mockTime);
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,listener->finalResults["testSuccessIsIndev"].getStatus());

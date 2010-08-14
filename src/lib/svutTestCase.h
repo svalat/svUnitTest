@@ -89,13 +89,12 @@ class svutTestCase
 		**/
 		virtual void tearDown(void) = 0;
 		//void runTestCase2(svutResultFormater & formater,const svutTestFilter & filter);
-		void runTestCase(void);
+		void runTestCase(svutListener * listener);
 		std::string getName(void) const;
 		std::list<std::string> getTestMethods(bool prefix) const;
 		unsigned int getNbTests(void) const;
 		void setAutodetected(void);
 		bool isAutodetected(void) const;
-		void setListener(svutListener * listener);
 	protected:
 		void registerTestMethod(svutTestMethod * test);
 		svutStatusInfo runTestMethod(svutTestMethod * test);
@@ -119,12 +118,6 @@ class svutTestCase
 		std::string tmpFailMessage;
 		/** Permit to now if the class was built by autodetection chain or not. **/
 		bool autodtected;
-		/**
-		 * Define the base listener class to dipatch test events, this is used to agregate results,
-		 * display current progression... Here we instanciate a svutListenerMultiplexer to dipatch
-		 * events to multiple sub listener->
-		**/
-		svutListener * listener;
 };
 
 //int registerTestCase(svutTestCaseBuilder & builder);
