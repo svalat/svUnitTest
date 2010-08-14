@@ -24,7 +24,7 @@ namespace svUnitTest
  * @author Valat Sébastien
  * @version 0.0.2
 **/
-class svutResultFormatterStd
+class svutResultFormatterStd : public svutResultFormatter
 {
 	public:
 		svutResultFormatterStd(std::ostream & out);

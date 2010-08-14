@@ -8,6 +8,7 @@
 
 /********************  HEADERS  *********************/
 #include "svutResultFormatterStd.h"
+#include <stdlib.h>
 
 using namespace std;
 
@@ -118,6 +119,13 @@ void svutResultFormatterStd::closeTestMethod(const svUnitTest::svutTestCase& tes
 }
 
 /********************  METHOD  **********************/
+/**
+ * Methode used to format failure status informations and to print them in ostream system. It done nothing
+ * if displayDetails is set to false.
+ * @param testCase Define the test case which contain the method.
+ * @param meth Define the method which failed.
+ * @param status Define the status informations related to the failure.
+**/
 void svutResultFormatterStd::printFailedInfo(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth, const svUnitTest::svutStatusInfo& status)
 {
 	if (this->displayDetails)
@@ -131,6 +139,13 @@ void svutResultFormatterStd::printFailedInfo(const svUnitTest::svutTestCase& tes
 }
 
 /********************  METHOD  **********************/
+/**
+ * Methode used to format unknown status informations and to print them in ostream system. It done nothing
+ * if displayDetails is set to false.
+ * @param testCase Define the test case which contain the method.
+ * @param meth Define the method which failed.
+ * @param status Define the status informations related to the unknown failure.
+**/
 void svutResultFormatterStd::printUnknownInfo(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth, const svUnitTest::svutStatusInfo& status)
 {
 	if (this->displayDetails && status.getMessage() != "UNKNOWN")

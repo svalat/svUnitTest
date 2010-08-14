@@ -15,6 +15,7 @@ namespace svUnitTest
 /********************  METHOD  **********************/
 /**
  * Constructor of the class, it only init the formatter pointer inside the listener.
+ * @param formatter Define the formatter to use for displaying.
 **/
 svutListenerDirectOutputter::svutListenerDirectOutputter(svutResultFormatter& formatter)
 	:svutListenerSummary()
