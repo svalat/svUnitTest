@@ -1,7 +1,7 @@
 include_directories (${svUnitTest_SOURCE_DIR}/src/lib/)
 
 ############ LIB WITH MAIN AND EXTRA ###########
-set(svutUnitTestBase_SRCS UnitTestMockResultFormatter.cpp UnitTestMockTestCase.cpp UnitTestMockListener.cpp UnitTestMain.cpp
+set(svutUnitTestBase_SRCS UnitTest_svutRunner.cpp UnitTestMockResultFormatter.cpp UnitTestMockTestCase.cpp UnitTestMockListener.cpp UnitTestMain.cpp
 	UnitTestExtra.cpp UnitTestMockTestCase2.cpp)
 add_library(svutUnitTestBase ${svutUnitTestBase_SRCS}) 
 
@@ -11,7 +11,7 @@ set(svutUnitTest_CASES svutCodeLocation svutException svutObjectMethod svutStatu
 		svutExTestStatus svutExNotify svutExAssert svutAssert svutTestMethod svutTestCase
 		svutListenerMultiplexer svutListener svutTestCaseResult svutListenerSummary
 		svutListenerDirectOutputter svutResultSummary svutResultFormatterStdBW
-		svutResultFormatterStdColored svutRunnerConfig)
+		svutResultFormatterStdColored svutRunnerConfig svutRunner)
 IF (TEST_COVERAGE) ############ HERE THE CASE FOR COVERAGE
 	set(svutUnitTest_ALLSRC)
 	set(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
