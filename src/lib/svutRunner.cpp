@@ -31,10 +31,10 @@ namespace svUnitTest
  * Class constructor to initialize the output formatting classe.
  * @param mode Define the prefered output mode.
 **/
-svutRunner::svutRunner(svutOutputMode mode)
+svutRunner::svutRunner(svutOutputMode mode,std::ostream & out)
 {
 	this->config = NULL;
-	this->init(mode);
+	this->init(mode,out);
 }
 
 /********************  METHODE  *********************/
@@ -46,7 +46,7 @@ svutRunner::svutRunner(svutOutputMode mode)
 svutRunner::svutRunner(svutRunnerConfig & config)
 {
 	this->config = &config;
-	this->init(config.getMode());
+	this->init(config.getMode(),config.getOutput());
 	this->setDisplay(config.hasDisplaySuccess(),config.hasDisplayDetails());
 	this->config = &config;
 }
@@ -160,19 +160,18 @@ void svutRunner::init(void)
 
 /********************  METHODE  *********************/
 /**
- * Permet à tout moment de change la verbosité des formatteur utilisés.
- * @param success Définit s'il faut ou no nafficher les succès, par défaut ils sont masqués
- * sauf en XML.
- * @param details Définit s'il faut afficher les détails des erreurs ou juste afficher le status.
+ * Permit to change the verbosity of the output formatter. It's available only for the internal
+ * formatter, if you provide your own one, this methode has no effect.
+ * @param success Define if the success must be displayed of not
+ * @param details Define if the failure details must be displayed or not.
 **/
 void svutRunner::setDisplay(bool success,bool details)
 {
-// 	if (formatter!=NULL)
-// 	{
-// 		formatter->setDisplayDetails(details);
-// 		formatter->setDisplaySuccess(success);
-// 	} else {
-// 	}
+ 	if (formatter != NULL && this->ownTheFormatter)
+	{
+		((svutResultFormatterStd*)formatter)->setDisplayDetails(details);
+		((svutResultFormatterStd*)formatter)->setDisplaySuccess(success);
+	}
 }
 
 /********************  METHODE  *********************/
@@ -242,20 +241,17 @@ void  svutRunner::registerTestCase(svutTestCase & tcase)
  * Methode used to init the class members.
  * @param mode Define the output mode to use.
 **/
-void svutRunner::init(svutOutputMode mode)
+void svutRunner::init(svutOutputMode mode,std::ostream & out)
 {
 	this->init();
 	this->ownTheFormatter = true;
-	ostream * out = &cout;
-	if (config != NULL)
-		out = &config->getOutput();
 	switch(mode)
 	{
 		case SVUT_OUT_STD_COLOR:
-			this->formatter = new svutResultFormatterStdColored(*out);
+			this->formatter = new svutResultFormatterStdColored(out);
 			break;
 		case SVUT_OUT_STD_BW:
-			this->formatter = new svutResultFormatterStdBW(*out);
+			this->formatter = new svutResultFormatterStdBW(out);
 			break;
 		/*case SVUT_OUT_XML:
 			this->formater = new svutResultFormaterXml(*out);
@@ -268,6 +264,7 @@ void svutRunner::init(svutOutputMode mode)
 			exit(1);
 	}
 	this->summary = new svutListenerDirectOutputter(*(this->formatter));
+	this->listener.addListener(this->summary);
 }
 
 /********************  METHODE  *********************/
@@ -281,6 +278,7 @@ void svutRunner::init(svutResultFormatter& formatter)
 	this->ownTheFormatter = false;
 	this->formatter = &formatter;
 	this->summary = new svutListenerDirectOutputter(formatter);
+	this->listener.addListener(this->summary);
 }
 
 /********************  METHODE  *********************/
@@ -293,6 +291,8 @@ void svutRunner::init(svutListener& listener)
 	this->init();
 	this->ownTheFormatter = false;
 	this->summary = new svutListenerSummary();
+	this->listener.addListener(&listener);
+	this->listener.addListener(this->summary);
 }
 
 };

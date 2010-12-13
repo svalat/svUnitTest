@@ -11,6 +11,7 @@
 
 /********************  HEADERS  *********************/
 #include <list>
+#include <iostream>
 #include "svutTestCase.h"
 #include "svutListener.h"
 #include "svutRunnerConfig.h"
@@ -32,7 +33,7 @@ namespace svUnitTest
 class svutRunner
 {
 	public:
-		svutRunner(svutOutputMode mode = SVUT_OUT_STD_BW);
+		svutRunner(svutOutputMode mode = SVUT_OUT_STD_BW,std::ostream & out = std::cout);
 		svutRunner(svutListener & listener);
 		svutRunner(svutResultFormatter & formatter);
 		svutRunner(svutRunnerConfig & config);
@@ -47,7 +48,7 @@ class svutRunner
 		bool run_list_tests(void);
 	private:
 		void init(void);
-		void init(svutOutputMode mode);
+		void init(svutOutputMode mode,std::ostream & out);
 		void init(svutResultFormatter & formatter);
 		void init(svutListener & listener);
 		bool hasMultipleTestCase(void);
