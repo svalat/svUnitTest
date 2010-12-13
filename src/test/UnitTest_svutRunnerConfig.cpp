@@ -56,7 +56,9 @@ class UnitTest_svutRunnerConfig : public TestCase
 	CPPUNIT_TEST(testGetAction);
 	CPPUNIT_TEST(testSetAction);
 	CPPUNIT_TEST(testSetOutput);
-	CPPUNIT_TEST(testSetOutput);
+	CPPUNIT_TEST(testGetOutput);
+	CPPUNIT_TEST(testSetOutput_stream_1);
+	CPPUNIT_TEST(testSetOutput_stream_2);
 	CPPUNIT_TEST(testAddBasicAccept_1);
 	CPPUNIT_TEST(testAddBasicAccept_2);
 	CPPUNIT_TEST(testOperator_ostream);
@@ -93,6 +95,8 @@ class UnitTest_svutRunnerConfig : public TestCase
 		void testSetAction(void);
 		void testSetOutput(void);
 		void testGetOutput(void);
+		void testSetOutput_stream_1(void);
+		void testSetOutput_stream_2(void);
 		void testAddBasicAccept_1(void);
 		void testAddBasicAccept_2(void);
 		void testOperator_ostream(void);
@@ -533,6 +537,24 @@ void UnitTest_svutRunnerConfig::testSetOutput(void)
 void UnitTest_svutRunnerConfig::testGetOutput(void)
 {
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutRunnerConfig::testSetOutput_stream_1(void )
+{
+	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
+	config->setOutput(std::cerr);
+	CPPUNIT_ASSERT(&std::cerr == &config->getOutput());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutRunnerConfig::testSetOutput_stream_2(void )
+{
+	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
+	config->setOutput("/dev/null");
+	CPPUNIT_ASSERT(&std::cout != &config->getOutput());
+	config->setOutput(std::cerr);
+	CPPUNIT_ASSERT(&std::cerr == &config->getOutput());
 }
 
 /********************  METHODE  *********************/

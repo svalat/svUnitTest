@@ -71,11 +71,14 @@ class svutRunnerConfig
 		svutRunnerAction getAction(void) const;
 		void setAction(svutRunnerAction action);
 		void setOutput(std::string filename);
+		void setOutput(std::ostream & stream);
 		std::ostream & getOutput(void);
 		void addBasicAccept(std::string caseName,std::string function);
 		bool addBasicAccept(std::string filter);
 // 		svutTestFilter & getFilter(void);
 	protected:
+		/** Close the file at the end, or while changing the output mode. **/
+		void closeFile(void);
 		/** Define the output mode to use. **/
 		svutOutputMode mode;
 		/** Define is the success need to be displayed or not. **/
@@ -88,6 +91,8 @@ class svutRunnerConfig
 		std::string filename;
 		/** Define the output stream to use. It we automaticaly closed at class destroy time. **/
 		std::ofstream * outputStream;
+		/** Define a specific output stram to use, it must be totaly managed by the user. **/
+		std::ostream * externalOutputStream;
 		/** Define a filter used to select which test we want to run if not want all. **/
 // 		svutTestFilterBasic filter;
 	private:

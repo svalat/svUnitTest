@@ -128,10 +128,21 @@ svutRunnerConfig::svutRunnerConfig(void)
 **/
 svutRunnerConfig::~svutRunnerConfig(void)
 {
+	this->closeFile();
+}
+
+/********************  METHODE  *********************/
+/**
+ * Close all the inner data of the class at destroy time. Mainly the output stream if
+ * one is defined.
+**/
+void svutRunnerConfig::closeFile(void )
+{
 	if (this->outputStream != NULL)
 	{
 		this->outputStream->close();
 		delete this->outputStream;
+		this->outputStream = NULL;
 	}
 }
 
@@ -206,6 +217,7 @@ void svutRunnerConfig::init(void)
 	action = SVUT_ACTION_RUN_TESTS;
 	filename = "";
 	outputStream = NULL;
+	externalOutputStream = NULL;
 }
 
 /********************  METHODE  *********************/
@@ -285,8 +297,23 @@ void svutRunnerConfig::qtCompat(int argc, char * argv[])
 **/
 void svutRunnerConfig::setOutput(std::string filename)
 {
+	this->closeFile();
 	this->filename = filename;
+	this->externalOutputStream = NULL;
 }
+
+/********************  METHODE  *********************/
+/**
+ * Define an external output stream totaly managed by the use.
+ * @param stream Define the output stream to use.
+**/
+void svutRunnerConfig::setOutput(ostream & stream)
+{
+	this->closeFile();
+	this->filename = "";
+	this->externalOutputStream = &stream;
+}
+
 
 /********************  METHODE  *********************/
 /**
@@ -296,19 +323,24 @@ void svutRunnerConfig::setOutput(std::string filename)
 **/
 std::ostream & svutRunnerConfig::getOutput(void)
 {
-	if (this->filename == "") {
-		return cout;
-	} else {
-		if (outputStream == NULL)
-		{
-			outputStream = new ofstream(filename.c_str());
+	if (this->externalOutputStream == NULL)
+	{
+		if (this->filename == "") {
+			return cout;
+		} else {
 			if (outputStream == NULL)
 			{
-				cerr << "Can't write into file : " << filename << endl;
-				exit(1);
+				outputStream = new ofstream(filename.c_str());
+				if (outputStream == NULL)
+				{
+					cerr << "Can't write into file : " << filename << endl;
+					exit(1);
+				}
 			}
+			return *outputStream;
 		}
-		return *outputStream;
+	} else {
+		return *this->externalOutputStream;
 	}
 }
 
