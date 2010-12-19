@@ -18,6 +18,7 @@
 #include "svutExNotify.h"
 //#include "svutResultFormater.h"
 //#include "svutAutoRegister.h"
+#include "svutAutoRegister.h"
 
 namespace svUnitTest
 {
