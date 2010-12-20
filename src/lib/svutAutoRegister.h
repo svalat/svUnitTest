@@ -29,6 +29,7 @@ namespace svUnitTest
 /********************  GLOBALS  **********************/
 int registerTestCase(svutTestCaseBuilder & builder);
 const std::list<class svutTestCaseBuilder *> & getRegistredTestCase(void);
+void clearTestCaseRegister(void);
 
 }
 

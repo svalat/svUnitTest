@@ -20,7 +20,7 @@
 #include "svutListenerDirectOutputter.h"
 #include "svutResultFormatterStdBW.h"
 #include "svutResultFormatterStdColored.h"
-//#include "svutAutoRegister.h"
+#include "svutAutoRegister.h"
 
 using namespace std;
 namespace svUnitTest
@@ -180,12 +180,12 @@ void svutRunner::setDisplay(bool success,bool details)
 **/
 void svutRunner::loadAutoDetected(void)
 {
-// 	for(list<svutTestCaseBuilder *>::iterator it=__SVUT_autoFoundTests__.begin();it!=__SVUT_autoFoundTests__.end();it++)
-// 	{
-// 		svutTestCase * tmp = (*it)->build();
-// 		tmp->setAutodetected();
-// 		this->suites.push_back(tmp);
-// 	}
+	for(list<svutTestCaseBuilder *>::const_iterator it=getRegistredTestCase().begin();it!=getRegistredTestCase().end();it++)
+	{
+		svutTestCase * tmp = (*it)->build();
+		tmp->setAutodetected();
+		this->suites.push_back(tmp);
+	}
 }
 
 /********************  METHODE  *********************/

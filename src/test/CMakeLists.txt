@@ -11,7 +11,8 @@ set(svutUnitTest_CASES svutCodeLocation svutException svutObjectMethod svutStatu
 		svutExTestStatus svutExNotify svutExAssert svutAssert svutTestMethod svutTestCase
 		svutListenerMultiplexer svutListener svutTestCaseResult svutListenerSummary
 		svutListenerDirectOutputter svutResultSummary svutResultFormatterStdBW
-		svutResultFormatterStdColored svutRunnerConfig svutRunner)
+		svutResultFormatterStdColored svutRunnerConfig svutRunner svutTestCaseBuilder
+		svutAutoRegister)
 IF (TEST_COVERAGE) ############ HERE THE CASE FOR COVERAGE
 	set(svutUnitTest_ALLSRC)
 	set(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")

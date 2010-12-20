@@ -32,9 +32,9 @@ class svutTestCaseBuilder
 {
 	public:
 		/** Class constructor responsible of the registration. **/
-		svutTestCaseBuilder(void);
+		svutTestCaseBuilder(void){};
 		/** Class destructor responsible of the unregistration. **/
-		virtual ~svutTestCaseBuilder(void);
+		virtual ~svutTestCaseBuilder(void){};
 		/**
 		 * Methode used to build the test case. Caution, this is your own responsability to free
 		 * the builded test case at the end.

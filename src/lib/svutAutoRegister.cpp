@@ -46,4 +46,11 @@ const std::list<class svutTestCaseBuilder *> & getRegistredTestCase(void)
 	return __SVUT_autoFoundTests__;
 }
 
+/********************  METHODE  *********************/
+/** Clearn the test case list. **/
+void clearTestCaseRegister(void)
+{
+	__SVUT_autoFoundTests__.clear();
+}
+
 }

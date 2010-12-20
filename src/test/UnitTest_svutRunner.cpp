@@ -99,6 +99,7 @@ static const char * CST_STRING_OUTPUT_4 = "=======  UnitTestMockTestCase2       
 |  TOTAL    :   10          |\n\
 |  STATUS   : UNKNOWN       |\n\
 +---------------------------+\n";
+static const char * CST_STRING_OUTPUT_5 = "openOutput(); openTestCase(UnitTestMockTestCase2); closeTestCase(UnitTestMockTestCase2); success=0, failed=0, todo=0, indev=0, unknown=0, skiped=0; closeOutput(); ";
 
 /********************  CLASSE  **********************/
 class UnitTest_svutRunner : public TestCase
@@ -287,7 +288,16 @@ void UnitTest_svutRunner::testSetDisplay_3(void)
 /********************  METHODE  *********************/
 void UnitTest_svutRunner::testLoadAutoDetected(void)
 {
-	CPPUNIT_FAIL("todo");
+	stringstream ss;
+	svutRunner localRunner(*formatter);
+	this->mock->useTests(UnitTestMockTestCase2::REGISTER_SUCCESS);
+	svutTestCaseBuilderGeneric<UnitTestMockTestCase2> builder;
+	registerTestCase(builder);
+	localRunner.loadAutoDetected();
+	CPPUNIT_ASSERT_EQUAL(true,localRunner.run());
+	ss << *formatter;
+	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_5,ss.str());
+	clearTestCaseRegister();
 }
 
 /********************  METHODE  *********************/
