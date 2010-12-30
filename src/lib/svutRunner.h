@@ -17,6 +17,7 @@
 #include "svutRunnerConfig.h"
 #include "svutResultFormatter.h"
 #include "svutListenerSummary.h"
+#include "svutTestFilter.h"
 #include "svutListenerMultiplexer.h"
 
 namespace svUnitTest
@@ -43,6 +44,7 @@ class svutRunner
 		void loadAutoDetected(void);
 		void unloadAutoDetected(void);
 		void registerTestCase(svutTestCase & tcase);
+		void setFilter(svutTestFilter * filter);
 	protected:
 		bool run_tests(void);
 		bool run_list_tests(void);
@@ -64,6 +66,8 @@ class svutRunner
 		std::list<svutTestCase *> suites;
 		/** Keep an hant to the config object. **/
 		svutRunnerConfig * config;
+		/** Used to filter the list of tests to execute. **/
+		svutTestFilter * testFilter;
 };
 
 };

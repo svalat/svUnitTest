@@ -45,10 +45,10 @@ svutRunner::svutRunner(svutOutputMode mode,std::ostream & out)
 **/
 svutRunner::svutRunner(svutRunnerConfig & config)
 {
-	this->config = &config;
 	this->init(config.getMode(),config.getOutput());
-	this->setDisplay(config.hasDisplaySuccess(),config.hasDisplayDetails());
 	this->config = &config;
+	this->setDisplay(config.hasDisplaySuccess(),config.hasDisplayDetails());
+	this->setFilter(&config.getFilter());
 }
 
 /********************  METHODE  *********************/
@@ -110,9 +110,8 @@ bool svutRunner::run_tests(void)
 	this->listener.onGlobalStart();
 	for(list<svutTestCase *>::iterator it=suites.begin();it!=suites.end();it++)
 	{
-		//TODO re-insert it when filters will be available
-		//if (config->getFilter().accept( (*it)->getName()))
-		(*it)->runTestCase(&listener);
+		if (testFilter == NULL || testFilter->accept((*it)->getName()))
+			(*it)->runTestCase(&listener);
 	}
 	this->listener.onGlobalEnd();
 	return (summary->getSummary().getStatus() == SVUT_STATUS_SUCCESS);
@@ -133,8 +132,7 @@ bool svutRunner::run_list_tests(void)
 		list<string> tmp = (*it)->getTestMethods(false);
 		for (list<string>::iterator it2=tmp.begin();it2!=tmp.end();++it2)
 		{
-			//if (config->getFilter().accept((*it)->getName(),*it2))
-			if (true)
+			if (testFilter == NULL || testFilter->accept((*it)->getName()))
 			{
 				if (fullName)
 					printf("%s::%s()\n",(*it)->getName().c_str(),it2->c_str());
@@ -156,6 +154,7 @@ void svutRunner::init(void)
 	this->ownTheFormatter = false;
 	this->formatter = NULL;
 	this->summary = NULL;
+	this->testFilter = NULL;
 }
 
 /********************  METHODE  *********************/
@@ -220,8 +219,8 @@ bool svutRunner::hasMultipleTestCase(void)
 	for(list<svutTestCase *>::iterator it=suites.begin();it!=suites.end();it++)
 	{
 		list<string> tmp = (*it)->getTestMethods(false);
-		//if (config->getFilter().accept((*it)->getName()))
-		cnt++;
+		if (testFilter == NULL || testFilter->accept((*it)->getName()))
+			cnt++;
 	}
 	return cnt > 1;
 }
@@ -279,6 +278,16 @@ void svutRunner::init(svutResultFormatter& formatter)
 	this->formatter = &formatter;
 	this->summary = new svutListenerDirectOutputter(formatter);
 	this->listener.addListener(this->summary);
+}
+
+/********************  METHODE  *********************/
+/**
+ * Define a test case filter to filter which test case and method to execute.
+ * @param filter Define the filter to use. Set NULL a not filter and execute all defined tests.
+**/
+void svutRunner::setFilter(svutTestFilter* filter)
+{
+	this->testFilter = filter;
 }
 
 /********************  METHODE  *********************/
