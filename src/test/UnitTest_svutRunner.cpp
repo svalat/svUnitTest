@@ -26,7 +26,7 @@ static const char * CST_STRING_OUTPUT_0 = "=======  UnitTestMockTestCase2       
  * testFailure                                  [ FAILED ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 Failed on expected value.\n\
-line 51 of file /home/sebv/projects/svUnitTest/svUnitTest/src/test/UnitTestMockTestCase2.cpp on methode testFailure()\n\
+line 51 of file " TEST_SRC_BASE_PATH "/UnitTestMockTestCase2.cpp on methode testFailure()\n\
    - Actual : 3\n\
    - Expected : 2\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
@@ -35,12 +35,12 @@ line 51 of file /home/sebv/projects/svUnitTest/svUnitTest/src/test/UnitTestMockT
  * testUnknown_1                                [ UNKNOWN ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 Unexpected std exception : std::bad_exception\n\
-line 133 of file /home/sebv/projects/svUnitTest/svUnitTest/src/test/UnitTestMockTestCase2.cpp on methode useTests()\n\
+line 133 of file " TEST_SRC_BASE_PATH "/UnitTestMockTestCase2.cpp on methode useTests()\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
  * testUnknown_2                                [ UNKNOWN ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 Unexpected exception.\n\
-line 134 of file /home/sebv/projects/svUnitTest/svUnitTest/src/test/UnitTestMockTestCase2.cpp on methode useTests()\n\
+line 134 of file " TEST_SRC_BASE_PATH "/UnitTestMockTestCase2.cpp on methode useTests()\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
  * testFailIsTodo_1                             [ TODO ]\n\
  * testFailIsTodo_2                             [ TODO ]\n\
