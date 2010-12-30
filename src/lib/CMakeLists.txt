@@ -1,7 +1,7 @@
 #setup svUnitTest library
 
 #group files
-set(svUnitTest_SRC svutAutoRegister.cpp svutRunner.cpp svutRunnerConfig.cpp svutResultFormatterStdColored.cpp svutResultSummary.cpp svutAsserter.cpp
+set(svUnitTest_SRC svutTestFilterBasic.cpp svutAutoRegister.cpp svutRunner.cpp svutRunnerConfig.cpp svutResultFormatterStdColored.cpp svutResultSummary.cpp svutAsserter.cpp
 	svutResultFormatterStd.cpp svutResultFormatterStdBW.cpp svutListenerDirectOutputter.cpp
 	svutListenerSummary.cpp svutListenerMultiplexer.cpp svutException.cpp svutTestCase.cpp
 	svutTestMethod.cpp  svutExNotify.cpp svutExAssert.cpp svutExTestStatus.cpp svutStatusInfo.cpp
