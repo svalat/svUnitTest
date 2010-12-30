@@ -61,6 +61,8 @@ class UnitTest_svutRunnerConfig : public TestCase
 	CPPUNIT_TEST(testSetOutput_stream_2);
 	CPPUNIT_TEST(testAddBasicAccept_1);
 	CPPUNIT_TEST(testAddBasicAccept_2);
+	CPPUNIT_TEST(testAddBasicAccept_3);
+	CPPUNIT_TEST(testAddBasicAccept_4);
 	CPPUNIT_TEST(testOperator_ostream);
 	CPPUNIT_TEST_SUITE_END();
 
@@ -99,6 +101,8 @@ class UnitTest_svutRunnerConfig : public TestCase
 		void testSetOutput_stream_2(void);
 		void testAddBasicAccept_1(void);
 		void testAddBasicAccept_2(void);
+		void testAddBasicAccept_3(void);
+		void testAddBasicAccept_4(void);
 		void testOperator_ostream(void);
 
 		svutRunnerConfig * config;
@@ -465,7 +469,20 @@ void UnitTest_svutRunnerConfig::testLoadParameters_output(void)
 /********************  METHODE  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_accept(void)
 {
-	CPPUNIT_FAIL("todo");
+	const char * args[] = {
+		"progName",
+		"-a",
+		"testCase1::",
+		""
+	};
+	svutRunnerConfig cfg(3,args);
+
+	CPPUNIT_ASSERT(cfg.getFilter().accept("testCase1","method1"));
+	CPPUNIT_ASSERT(cfg.getFilter().accept("testCase1","method2"));
+	CPPUNIT_ASSERT(cfg.getFilter().accept("testCase1","method11"));
+	CPPUNIT_ASSERT(!cfg.getFilter().accept("testCase2","method1"));
+	CPPUNIT_ASSERT(!cfg.getFilter().accept("testCase2","method2"));
+	CPPUNIT_ASSERT(!cfg.getFilter().accept("testCase2","method11"));
 }
 
 /********************  METHODE  *********************/
@@ -560,13 +577,49 @@ void UnitTest_svutRunnerConfig::testSetOutput_stream_2(void )
 /********************  METHODE  *********************/
 void UnitTest_svutRunnerConfig::testAddBasicAccept_1(void)
 {
-	CPPUNIT_FAIL("todo");
+	config->addBasicAccept("testCase1::method1");
+	CPPUNIT_ASSERT(config->getFilter().accept("testCase1","method1"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase1","method2"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase1","method11"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method1"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method2"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method11"));
 }
 
 /********************  METHODE  *********************/
 void UnitTest_svutRunnerConfig::testAddBasicAccept_2(void)
 {
-	CPPUNIT_FAIL("todo");
+	config->addBasicAccept("testCase1::");
+	CPPUNIT_ASSERT(config->getFilter().accept("testCase1","method1"));
+	CPPUNIT_ASSERT(config->getFilter().accept("testCase1","method2"));
+	CPPUNIT_ASSERT(config->getFilter().accept("testCase1","method11"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method1"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method2"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method11"));
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutRunnerConfig::testAddBasicAccept_3(void)
+{
+	config->addBasicAccept("::method1");
+	CPPUNIT_ASSERT(config->getFilter().accept("testCase1","method1"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase1","method2"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase1","method11"));
+	CPPUNIT_ASSERT(config->getFilter().accept("testCase2","method1"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method2"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method11"));
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutRunnerConfig::testAddBasicAccept_4(void)
+{
+	config->addBasicAccept("testCase1","method1");
+	CPPUNIT_ASSERT(config->getFilter().accept("testCase1","method1"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase1","method2"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase1","method11"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method1"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method2"));
+	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method11"));
 }
 
 /********************  METHODE  *********************/

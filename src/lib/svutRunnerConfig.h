@@ -11,6 +11,7 @@
 
 /********************  HEADERS  *********************/
 #include <iostream>
+#include "svutTestFilterBasic.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
@@ -75,7 +76,7 @@ class svutRunnerConfig
 		std::ostream & getOutput(void);
 		void addBasicAccept(std::string caseName,std::string function);
 		bool addBasicAccept(std::string filter);
-// 		svutTestFilter & getFilter(void);
+		svutTestFilter & getFilter(void);
 	protected:
 		/** Close the file at the end, or while changing the output mode. **/
 		void closeFile(void);
@@ -94,7 +95,7 @@ class svutRunnerConfig
 		/** Define a specific output stram to use, it must be totaly managed by the user. **/
 		std::ostream * externalOutputStream;
 		/** Define a filter used to select which test we want to run if not want all. **/
-// 		svutTestFilterBasic filter;
+		svutTestFilterBasic filter;
 	private:
 		void init(void);
 		void qtCompat(int argc, char * argv[]);

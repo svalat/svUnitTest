@@ -47,7 +47,7 @@ static struct argp_option RS_OPTIONS[] = {
 	{"functions",  'f',      NULL,      0,  "List all the accessible tests methods.",NULL},
 	{"qtxml",      'q',      NULL,      0,  "Equivalent to -m qt_xml.",NULL},
 	{"output",     'o',    "FILE",      0,  "Define the output file to use. Use - for stdout.",NULL},
-	{"accept",     'a',    "NAME",      0,  "Accept only methods add with -a. in format testCase::function.",NULL},
+	{"accept",     'a',    "NAME",      0,  "Accept only methods add with -a. in format 'testCase::method'. 'testCase::' will accept all all methods of testCase. '::method' will accept all methods named method without checking the test case name.",NULL},
 	{ 0,0,0,0,0,0 }
 };
 
@@ -352,7 +352,7 @@ std::ostream & svutRunnerConfig::getOutput(void)
 **/
 void svutRunnerConfig::addBasicAccept(std::string caseName,std::string function)
 {
-// 	filter.addAccepted(caseName,function);
+	filter.addAccepted(caseName,function);
 }
 
 /********************  METHODE  *********************/
@@ -389,10 +389,10 @@ bool svutRunnerConfig::addBasicAccept(std::string value)
 /**
  * @return Return the test filter to use.
 **/
-// svutTestFilter & svutRunnerConfig::getFilter(void)
-// {
-// 	return filter;
-// }
+svutTestFilter & svutRunnerConfig::getFilter(void)
+{
+	return filter;
+}
 
 /********************  METHODE  *********************/
 /**
