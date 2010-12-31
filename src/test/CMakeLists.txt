@@ -31,3 +31,13 @@ ELSE (TEST_COVERAGE) ########### HERE THE NORMAL VERSION WITH MULTIPLE EXECUABLE
 		add_test(${i} ${i})
 	endforeach(i)
 ENDIF (TEST_COVERAGE)
+
+############# BUILD MAIN TESTS ##################
+add_executable(svutDefaultMain UnitTest_defaultMain.cpp)
+target_link_libraries (svutDefaultMain svunittest)
+add_test(svutDefaultMain svutDefaultMain)
+
+############# BUILD MAIN TESTS ##################
+add_executable(svutStandeloneMain UnitTest_svutStandeloneMain.cpp)
+target_link_libraries (svutStandeloneMain svunittest)
+add_test(svutStandeloneMain svutStandeloneMain)
