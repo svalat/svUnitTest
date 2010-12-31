@@ -100,6 +100,21 @@ static const char * CST_STRING_OUTPUT_4 = "=======  UnitTestMockTestCase2       
 |  STATUS   : UNKNOWN       |\n\
 +---------------------------+\n";
 static const char * CST_STRING_OUTPUT_5 = "openOutput(); openTestCase(UnitTestMockTestCase2); closeTestCase(UnitTestMockTestCase2); success=0, failed=0, todo=0, indev=0, unknown=0, skiped=0; closeOutput(); ";
+static const char * CST_STRING_OUTPUT_6 = "testSuccess()\n\
+testFailure()\n\
+testTodo()\n\
+testIndev()\n\
+testUnknown_1()\n\
+testUnknown_2()\n\
+testFailIsTodo_1()\n\
+testFailIsTodo_2()\n\
+testFailIsTodo_3()\n\
+testSuccessIsIndev()\n";
+static const char * CST_STRING_OUTPUT_7 = "testSuccess()\n\
+testTodo()\n\
+testIndev()\n";
+static const char * CST_STRING_OUTPUT_8 = "openOutput(); openTestCase(UnitTestMockTestCase2); openTestMethod(UnitTestMockTestCase2, testSuccess); closeTestMethod(UnitTestMockTestCase2, testSuccess, SUCCESS); closeTestCase(UnitTestMockTestCase2); success=1, failed=0, todo=0, indev=0, unknown=0, skiped=0; closeOutput(); ";
+
 
 /********************  CLASSE  **********************/
 class UnitTest_svutRunner : public TestCase
@@ -119,6 +134,12 @@ class UnitTest_svutRunner : public TestCase
 	CPPUNIT_TEST(testLoadAutoDetected);
 	CPPUNIT_TEST(testUnloadAutoDetected);
 	CPPUNIT_TEST(testRegisterTestCase);
+	CPPUNIT_TEST(testListTests_1);
+	CPPUNIT_TEST(testListTests_2);
+	CPPUNIT_TEST(testSetFilter);
+	CPPUNIT_TEST(testSetFilterNull);
+	CPPUNIT_TEST(testConfigFilter);
+	CPPUNIT_TEST(testFilterTestExecution);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -139,6 +160,12 @@ class UnitTest_svutRunner : public TestCase
 		void testLoadAutoDetected(void);
 		void testUnloadAutoDetected(void);
 		void testRegisterTestCase(void);
+		void testListTests_1(void);
+		void testListTests_2(void);
+		void testSetFilter(void);
+		void testSetFilterNull(void);
+		void testConfigFilter(void);
+		void testFilterTestExecution(void);
 
 		svutRunner * runner;
 		UnitTestMockResultFormater * formatter;
@@ -321,6 +348,116 @@ void UnitTest_svutRunner::testRegisterTestCase(void)
 	CPPUNIT_ASSERT_EQUAL(false,localRunner.run());
 	ss << *formatter;
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_3,ss.str());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutRunner::testListTests_1(void )
+{
+	//TODO change this test when use listener to export the list
+	stringstream ss;
+	svutRunnerConfig config;
+	config.setOutput(ss);
+	config.setMode(SVUT_OUT_STD_BW);
+	config.setAction(SVUT_ACTION_LIST_TESTS);
+	this->mock->useTests(UnitTestMockTestCase2::REGISTER_ALL);
+	svutRunner localRunner(config);
+	localRunner.registerTestCase(*mock);
+	CPPUNIT_ASSERT_EQUAL(true,localRunner.run());
+	ss << *formatter;
+	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_6,ss.str());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutRunner::testListTests_2(void )
+{
+	//TODO change this test when use listener to export the list
+	stringstream ss;
+	svutRunnerConfig config;
+	config.setOutput(ss);
+	config.setMode(SVUT_OUT_STD_BW);
+	this->mock->useTests(UnitTestMockTestCase2::REGISTER_ALL);
+	svutRunner localRunner(config);
+	localRunner.registerTestCase(*mock);
+	CPPUNIT_ASSERT_EQUAL(true,localRunner.run(SVUT_ACTION_LIST_TESTS));
+	ss << *formatter;
+	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_6,ss.str());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutRunner::testSetFilter(void)
+{
+	svutTestFilterBasic filter;
+	filter.addAccepted("UnitTestMockTestCase2","testTodo");
+	filter.addAccepted("UnitTestMockTestCase2","testIndev");
+	filter.addAccepted("UnitTestMockTestCase2","testSuccess");
+	CPPUNIT_ASSERT(filter.accept("UnitTestMockTestCase2","testTodo"));
+	CPPUNIT_ASSERT(!filter.accept("UnitTestMockTestCase2","testFailure"));
+	//TODO change this test when use listener to export the list
+	stringstream ss;
+	svutRunnerConfig config;
+	config.setOutput(ss);
+	config.setMode(SVUT_OUT_STD_BW);
+	this->mock->useTests(UnitTestMockTestCase2::REGISTER_ALL);
+	svutRunner localRunner(config);
+	localRunner.registerTestCase(*mock);
+	localRunner.setFilter(&filter);
+	CPPUNIT_ASSERT_EQUAL(true,localRunner.run(SVUT_ACTION_LIST_TESTS));
+	ss << *formatter;
+	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_7,ss.str());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutRunner::testConfigFilter(void)
+{
+	//TODO change this test when use listener to export the list
+	stringstream ss;
+	svutRunnerConfig config;
+	config.setOutput(ss);
+	config.setMode(SVUT_OUT_STD_BW);
+	config.addBasicAccept("UnitTestMockTestCase2","testTodo");
+	config.addBasicAccept("UnitTestMockTestCase2","testIndev");
+	config.addBasicAccept("UnitTestMockTestCase2","testSuccess");
+	this->mock->useTests(UnitTestMockTestCase2::REGISTER_ALL);
+	svutRunner localRunner(config);
+	localRunner.registerTestCase(*mock);
+	CPPUNIT_ASSERT_EQUAL(true,localRunner.run(SVUT_ACTION_LIST_TESTS));
+	ss << *formatter;
+	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_7,ss.str());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutRunner::testSetFilterNull(void)
+{
+	//TODO change this test when use listener to export the list
+	stringstream ss;
+	svutRunnerConfig config;
+	config.setOutput(ss);
+	config.setMode(SVUT_OUT_STD_BW);
+	config.addBasicAccept("UnitTestMockTestCase2","testTodo");
+	config.addBasicAccept("UnitTestMockTestCase2","testIndev");
+	config.addBasicAccept("UnitTestMockTestCase2","testSuccess");
+	this->mock->useTests(UnitTestMockTestCase2::REGISTER_ALL);
+	svutRunner localRunner(config);
+	localRunner.registerTestCase(*mock);
+	localRunner.setFilter(NULL);
+	CPPUNIT_ASSERT_EQUAL(true,localRunner.run(SVUT_ACTION_LIST_TESTS));
+	ss << *formatter;
+	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_6,ss.str());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutRunner::testFilterTestExecution(void)
+{
+	svutTestFilterBasic filter;
+	filter.addAccepted("UnitTestMockTestCase2","testSuccess");
+	stringstream ss;
+	svutRunner localRunner(*formatter);
+	this->mock->useTests(UnitTestMockTestCase2::REGISTER_ALL);
+	localRunner.registerTestCase(*mock);
+	localRunner.setFilter(&filter);
+	CPPUNIT_ASSERT_EQUAL(true,localRunner.run());
+	ss << *formatter;
+	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_8,ss.str());
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutRunner);

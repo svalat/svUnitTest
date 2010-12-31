@@ -64,8 +64,9 @@ svutTestCase::~svutTestCase(void)
  * order for moment.
  * @param listener Give a listener to capture internal event as progression, tests results to
  * redirect them to the user.
+ * @param filter Provide a simple way to filter which test to execute.
 **/
-void svutTestCase::runTestCase(svutListener * listener)
+void svutTestCase::runTestCase(svutListener * listener,svutTestFilter * filter)
 {
 	svutStatusInfo res;
 	//send notification
@@ -75,16 +76,20 @@ void svutTestCase::runTestCase(svutListener * listener)
 	//done the job
 	for (std::list<svutTestMethod *>::iterator it = tests.begin();it!=tests.end();++it)
 	{
-		//send notification
-		if (listener != NULL)
-			listener->onTestMethodStart(*this,**it);
+		//check if need to execute the methode
+		if (filter == NULL || filter->accept(this->getName(),(*it)->getName()))
+		{
+			//send notification
+			if (listener != NULL)
+				listener->onTestMethodStart(*this,**it);
 
-		//run the method
-		res = this->runTestMethod(*it);
+			//run the method
+			res = this->runTestMethod(*it);
 
-		//send notification
-		if (listener != NULL)
-			listener->onTestMethodEnd(*this,**it,res);
+			//send notification
+			if (listener != NULL)
+				listener->onTestMethodEnd(*this,**it,res);
+		}
 	}
 
 	//send notification

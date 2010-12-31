@@ -19,6 +19,7 @@
 //#include "svutResultFormater.h"
 //#include "svutAutoRegister.h"
 #include "svutAutoRegister.h"
+#include "svutTestFilter.h"
 
 namespace svUnitTest
 {
@@ -90,7 +91,7 @@ class svutTestCase
 		**/
 		virtual void tearDown(void) = 0;
 		//void runTestCase2(svutResultFormater & formater,const svutTestFilter & filter);
-		void runTestCase(svutListener * listener);
+		void runTestCase(svutListener * listener,svutTestFilter * filter = NULL);
 		std::string getName(void) const;
 		std::list<std::string> getTestMethods(bool prefix) const;
 		unsigned int getNbTests(void) const;

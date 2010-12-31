@@ -87,15 +87,36 @@ svutRunner::~svutRunner(void)
 
 /********************  METHODE  *********************/
 /**
- * Run the test suites.
+ * Run the test suites. Run the test suites. The default action is SVUT_ACTION_RUN_TESTS or the one
+ * defined into svutRunnerConfig if available.
  * @return Return the final status of the test. True if all tests are SUCCESS, false otherwise.
 **/
 bool svutRunner::run(void)
 {
-	if (config == NULL || config->getAction() == SVUT_ACTION_RUN_TESTS)
-		return run_tests();
+	if (config == NULL)
+		return this->run(SVUT_ACTION_RUN_TESTS);
 	else
-		return run_list_tests();
+		return this->run(config->getAction());
+}
+
+/********************  METHODE  *********************/
+/**
+ * Run the test suites wihle using a specific action (default is SVUT_ACTION_RUN_TESTS or the one
+ * defined into svutRunnerConfig if defined).
+ * @return Return the final status of the test. True if all tests are SUCCESS, false otherwise.
+**/
+bool svutRunner::run(svutRunnerAction action)
+{
+	switch(action)
+	{
+		case SVUT_ACTION_RUN_TESTS:
+			return run_tests();
+		case SVUT_ACTION_LIST_TESTS:
+			return run_list_tests();
+		default:
+			cerr << "INTERNAL ERROR : bad action : " << action << endl;
+			return false;
+	}
 }
 
 /********************  METHODE  *********************/
@@ -111,7 +132,7 @@ bool svutRunner::run_tests(void)
 	for(list<svutTestCase *>::iterator it=suites.begin();it!=suites.end();it++)
 	{
 		if (testFilter == NULL || testFilter->accept((*it)->getName()))
-			(*it)->runTestCase(&listener);
+			(*it)->runTestCase(&listener,this->testFilter);
 	}
 	this->listener.onGlobalEnd();
 	return (summary->getSummary().getStatus() == SVUT_STATUS_SUCCESS);
@@ -122,22 +143,28 @@ bool svutRunner::run_tests(void)
  * Display the names of all the test methodes available in the programe.
  * This is mostly implemented for the compatibility of QT test suite.
  * @return Return true final state.
+ * @TODO utiliser les listener pour emettre la liste.
 **/
 bool svutRunner::run_list_tests(void)
 {
 	bool fullName = hasMultipleTestCase();
+	std::ostream * out = NULL;
+	if (config == NULL)
+		out = & cout;
+	else
+		out = & config->getOutput();
 	//search all
 	for(list<svutTestCase *>::iterator it=suites.begin();it!=suites.end();it++)
 	{
 		list<string> tmp = (*it)->getTestMethods(false);
 		for (list<string>::iterator it2=tmp.begin();it2!=tmp.end();++it2)
 		{
-			if (testFilter == NULL || testFilter->accept((*it)->getName()))
+			if (testFilter == NULL || testFilter->accept((*it)->getName(),*it2))
 			{
 				if (fullName)
-					printf("%s::%s()\n",(*it)->getName().c_str(),it2->c_str());
+					*out << (*it)->getName().c_str() << "::" << it2->c_str() << "()\n";
 				else
-					printf("%s()\n",it2->c_str());
+					*out << it2->c_str() << "()\n";
 			}
 		}
 	}

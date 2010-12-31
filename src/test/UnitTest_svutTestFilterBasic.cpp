@@ -21,9 +21,9 @@ using namespace svUnitTest;
 class UnitTest_svutTestFilterBasic : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutTestFilterBasic);
-	CPPUNIT_TEST(accept_StringString);
-	CPPUNIT_TEST(accept_String);
-	CPPUNIT_TEST(addAccepted);
+	CPPUNIT_TEST(testAccept_StringString);
+	CPPUNIT_TEST(testAccept_String);
+	CPPUNIT_TEST(testAddAccepted);
 	CPPUNIT_TEST(testClear);
 	CPPUNIT_TEST_SUITE_END();
 
@@ -32,9 +32,9 @@ class UnitTest_svutTestFilterBasic : public TestCase
 		void tearDown(void);
 
 	protected:
-		void accept_StringString(void);
-		void accept_String(void);
-		void addAccepted(void);
+		void testAccept_StringString(void);
+		void testAccept_String(void);
+		void testAddAccepted(void);
 		void testClear(void);
 
 		svutTestFilterBasic * obj;
@@ -56,7 +56,7 @@ void UnitTest_svutTestFilterBasic::tearDown(void)
 }
 
 /*********************  METHODE  ********************/
-void UnitTest_svutTestFilterBasic::accept_StringString(void)
+void UnitTest_svutTestFilterBasic::testAccept_StringString(void)
 {
 	CPPUNIT_ASSERT(obj->accept("case1","function1"));
 	CPPUNIT_ASSERT(!obj->accept("case1","function11"));
@@ -66,7 +66,7 @@ void UnitTest_svutTestFilterBasic::accept_StringString(void)
 }
 
 /*********************  METHODE  ********************/
-void UnitTest_svutTestFilterBasic::accept_String(void)
+void UnitTest_svutTestFilterBasic::testAccept_String(void)
 {
 	svutTestFilterBasic filter;
 	filter.addAccepted("case1","");
@@ -77,7 +77,7 @@ void UnitTest_svutTestFilterBasic::accept_String(void)
 }
 
 /*********************  METHODE  ********************/
-void UnitTest_svutTestFilterBasic::addAccepted(void)
+void UnitTest_svutTestFilterBasic::testAddAccepted(void)
 {
 	CPPUNIT_ASSERT(!obj->accept("case4","function4"));
 	obj->addAccepted("case4","function4");

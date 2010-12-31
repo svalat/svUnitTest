@@ -40,6 +40,7 @@ class svutRunner
 		svutRunner(svutRunnerConfig & config);
 		virtual ~svutRunner(void);
 		bool run(void);
+		bool run(svutRunnerAction action);
 		void setDisplay(bool success,bool details);
 		void loadAutoDetected(void);
 		void unloadAutoDetected(void);
