@@ -20,6 +20,7 @@
 #include "svutListenerDirectOutputter.h"
 #include "svutResultFormatterStdBW.h"
 #include "svutResultFormatterStdColored.h"
+#include "svutResultFormatterXml.h"
 #include "svutAutoRegister.h"
 
 using namespace std;
@@ -279,10 +280,10 @@ void svutRunner::init(svutOutputMode mode,std::ostream & out)
 		case SVUT_OUT_STD_BW:
 			this->formatter = new svutResultFormatterStdBW(out);
 			break;
-		/*case SVUT_OUT_XML:
-			this->formater = new svutResultFormaterXml(*out);
+		case SVUT_OUT_XML:
+			this->formatter = new svutResultFormatterXml(out);
 			break;
-		case SVUT_OUT_QT_XML:
+		/*case SVUT_OUT_QT_XML:
 			this->formater = new svutResultFormaterQtXml(*out);
 			break;*/
 		default:
