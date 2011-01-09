@@ -29,38 +29,6 @@ svutResultFormatterStd::svutResultFormatterStd(std::ostream& out)
 }
 
 /********************  METHOD  **********************/
-/**
- * Activate of desactivate the display of error details.
- * @param state True to activate, false otherwise.
-**/
-void svutResultFormatterStd::setDisplayDetails(bool state)
-{
-	this->displayDetails = state;
-}
-
-/********************  METHOD  **********************/
-/**
- * Activate of desactivate the display of fulle name (testCaseName::methodName). Or display only
- * the method name.
- * @param state True to activate, false otherwise.
-**/
-void svutResultFormatterStd::setDisplayFullName(bool state)
-{
-	this->displayFullName = state;
-}
-
-/********************  METHOD  **********************/
-/**
- * Activate of desactivate the display of success.
- * @param state True to activate, false otherwise.
-**/
-void svutResultFormatterStd::setDisplaySuccess(bool state)
-{
-	this->displaySuccess = state;
-}
-
-
-/********************  METHOD  **********************/
 void svutResultFormatterStd::openOutput(void)
 {
 	//nothing to do for std mode

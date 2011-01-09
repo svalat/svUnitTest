@@ -76,6 +76,17 @@ class svutResultFormatter
 		 * @param summary Define the global summary to print if needed.
 		**/
 		virtual void printSummary(svutResultSummary summary) = 0;
+
+		void setDisplaySuccess(bool state);
+		void setDisplayDetails(bool state);
+		void setDisplayFullName(bool state);
+	protected:
+		/** Define if success must be displayed ot not. **/
+		bool displaySuccess;
+		/** Define if error details must ne displayed or not. **/
+		bool displayDetails;
+		/** Define if need to display full test name or only the method name. **/
+		bool displayFullName;
 };
 
 }

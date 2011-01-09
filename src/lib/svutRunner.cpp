@@ -127,8 +127,8 @@ bool svutRunner::run(svutRunnerAction action)
 **/
 bool svutRunner::run_tests(void)
 {
-	//TODO how to support that now ?
-	//formater->setDisplayFullName(hasMultipleTestCase());
+	if (this->formatter != NULL)
+		formatter->setDisplayFullName(hasMultipleTestCase());
 	this->listener.onGlobalStart();
 	for(list<svutTestCase *>::iterator it=suites.begin();it!=suites.end();it++)
 	{
@@ -194,10 +194,10 @@ void svutRunner::init(void)
 **/
 void svutRunner::setDisplay(bool success,bool details)
 {
- 	if (formatter != NULL && this->ownTheFormatter)
+ 	if (formatter != NULL)
 	{
-		((svutResultFormatterStd*)formatter)->setDisplayDetails(details);
-		((svutResultFormatterStd*)formatter)->setDisplaySuccess(success);
+		formatter->setDisplayDetails(details);
+		formatter->setDisplaySuccess(success);
 	}
 }
 

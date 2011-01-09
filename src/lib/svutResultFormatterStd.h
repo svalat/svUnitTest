@@ -35,10 +35,6 @@ class svutResultFormatterStd : public svutResultFormatter
 		virtual void openTestMethod(const svutTestCase & testCase,const svutTestMethod & meth);
 		virtual void closeTestMethod(const svutTestCase & testCase,const svutTestMethod & meth,const svutStatusInfo & status);
 		virtual void printSummary(svutResultSummary summary);
-
-		void setDisplaySuccess(bool state);
-		void setDisplayDetails(bool state);
-		void setDisplayFullName(bool state);
 	protected:
 		/**
 		 * Print the global status of the test at the end of summary display.
@@ -67,13 +63,6 @@ class svutResultFormatterStd : public svutResultFormatter
 		
 		virtual void printFailedInfo(const svutTestCase & testCase,const svutTestMethod & meth,const svutStatusInfo & status);
 		virtual void printUnknownInfo(const svutTestCase & testCase,const svutTestMethod & meth,const svutStatusInfo & status);
-
-		/** Define if success must be displayed ot not. **/
-		bool displaySuccess;
-		/** Define if error details must ne displayed or not. **/
-		bool displayDetails;
-		/** Define if need to display full test name or only the method name. **/
-		bool displayFullName;
 	private:
 		
 		/** Store the pointer tout output stream. **/
