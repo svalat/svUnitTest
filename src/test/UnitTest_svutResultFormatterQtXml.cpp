@@ -12,7 +12,7 @@
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
-#include <svutResultFormatterXml.h>
+#include <svutResultFormatterQtXml.h>
 #include "UnitTestMockTestCase.h"
 #include <sys/stat.h>
 
@@ -21,121 +21,76 @@ using namespace svUnitTest;
 using namespace CPPUNIT_NS;
 
 /********************  CONSTS  ***********************/
-static const char * CST_STRING_SUMMARY_0 = "\t<GlobalResults>\n\
-\t\t<result type='success'>0</result>\n\
-\t\t<result type='indev'>0</result>\n\
-\t\t<result type='todo'>0</result>\n\
-\t\t<result type='failed'>0</result>\n\
-\t\t<result type='unknown'>0</result>\n\
-\t\t<total>0</total>\n\
-\t\t<status>SUCCESS</status>\n\
-\t</GlobalResults>\n";
-static const char * CST_STRING_UNKNOWN_1 = "\t\t\t<status>UNKNOWN</status>\n\
-\t\t\t<AssertInfo>\n\t\t\t\t<location>\n\t\t\t\t\t<unknown></unknown>\n\
-\t\t\t\t</location>\n\t\t\t\t<message></message>\n\t\t\t\t<entries>\n\
-\t\t\t\t</entries>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_UNKNOWN_3 = "\t\t\t<status>UNKNOWN</status>\n\
-\t\t\t<AssertInfo>\n\t\t\t\t<location>\n\t\t\t\t\t<file>file.cpp</file>\n\
-\t\t\t\t\t<methode>methode</methode>\n\t\t\t\t\t<line>33</line>\n\
-\t\t\t\t</location>\n\t\t\t\t<message>message for unknown status</message>\n\t\t\t\t<entries>\n\
-\t\t\t\t</entries>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_SUCCESS_1 = "\t\t\t<status>SUCCESS</status>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_TODO      = "\t\t\t<status>TODO</status>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_INDEV     = "\t\t\t<status>INDEV</status>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_SKIPED    = "\t\t\t<status>SKIPED</status>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_TEST_CASE = "\t<TestCase>\n\t\t<name>MyTest</name>\n";
-static const char * CST_STRING_FAILED_1  = "\t\t\t<status>FAILED</status>\n\
-\t\t\t<AssertInfo>\n\t\t\t\t<location>\n\t\t\t\t\t<file>file.cpp</file>\n\
-\t\t\t\t\t<methode>methode</methode>\n\t\t\t\t\t<line>33</line>\n\t\t\t\t</location>\n\
-\t\t\t\t<message>message for failed status</message>\n\t\t\t\t<entries>\n\
-\t\t\t\t\t<entry name='actual'>duck</entry>\n\t\t\t\t\t<entry name='expected'>toto</entry>\n\
-\t\t\t\t</entries>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
+static const char * CST_STRING_SUMMARY_0 = "";
+static const char * CST_STRING_UNKNOWN_1 = "\t\t<Incident type='fail' file='unknown' line='0'>\n\
+\t\t\t<Description><![CDATA[]]></Description>\n\
+\t\t</Incident>\n\
+\t</TestFunction>\n";
+static const char * CST_STRING_UNKNOWN_3 = "\t\t<Incident type='fail' file='file.cpp' line='33'>\n\
+\t\t\t<Description><![CDATA[message for unknown status]]></Description>\n\
+\t\t</Incident>\n\
+\t</TestFunction>\n";
+static const char * CST_STRING_SUCCESS_1 = "\t\t<Incident type='pass' file='unknown' line='0'></Incident>\n\t</TestFunction>\n";
+static const char * CST_STRING_TODO      = "\t\t<Incident type='warn' file='unknown' line='0'></Incident>\n\t</TestFunction>\n";
+static const char * CST_STRING_INDEV     = "\t\t<Incident type='warn' file='unknown' line='0'></Incident>\n\t</TestFunction>\n";
+static const char * CST_STRING_SKIPED    = "\t\t<Incident type='warn' file='unknown' line='0'></Incident>\n\t</TestFunction>\n";
+static const char * CST_STRING_TEST_CASE = "";
+static const char * CST_STRING_FAILED_1  = "\t\t<Incident type='fail' file='file.cpp' line='33'>\n\
+\t\t\t<Description><![CDATA[message for failed status\n\
+   - actual : duck\n\
+   - expected : toto\n\
+]]></Description>\n\
+\t\t</Incident>\n\
+\t</TestFunction>\n";
 static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?>\n\
-<!DOCTYPE UnitTest SYSTEM 'svUnitTest_html/svUnitTest.dtd'>\n\
-<?xml-stylesheet type='text/xsl' href='svUnitTest_html/svUnitTest.xsl'?>\n\
-<UnitTest>\n\
-	<TestCase>\n\
-		<name>MyTest</name>\n\
-		<TestFunction>\n\
-			<name>testMethod</name>\n\
-			<status>SUCCESS</status>\n\
-		</TestFunction>\n\
-		<TestFunction>\n\
-			<name>testMethod</name>\n\
-			<status>TODO</status>\n\
-		</TestFunction>\n\
-		<TestFunction>\n\
-			<name>testMethod</name>\n\
-			<status>SUCCESS</status>\n\
-		</TestFunction>\n\
-		<TestFunction>\n\
-			<name>testMethod</name>\n\
-			<status>INDEV</status>\n\
-		</TestFunction>\n\
-	</TestCase>\n\
-	<TestCase>\n\
-		<name>MyTest</name>\n\
-		<TestFunction>\n\
-			<name>testMethod</name>\n\
-			<status>SKIPED</status>\n\
-		</TestFunction>\n\
-		<TestFunction>\n\
-			<name>testMethod</name>\n\
-			<status>SUCCESS</status>\n\
-		</TestFunction>\n\
-		<TestFunction>\n\
-			<name>testMethod</name>\n\
-			<status>FAILED</status>\n\
-			<AssertInfo>\n\
-				<location>\n\
-					<file>file.cpp</file>\n\
-					<methode>methode</methode>\n\
-					<line>33</line>\n\
-				</location>\n\
-				<message>message for unknown status</message>\n\
-				<entries>\n\
-					<entry name='actual'>duck</entry>\n\
-					<entry name='expected'>toto</entry>\n\
-				</entries>\n\
-			</AssertInfo>\n\
-		</TestFunction>\n\
-	<TestCase>\n\
-		<name>MyTest</name>\n\
-			<status>UNKNOWN</status>\n\
-			<AssertInfo>\n\
-				<location>\n\
-					<file>file.cpp</file>\n\
-					<methode>methode</methode>\n\
-					<line>33</line>\n\
-				</location>\n\
-				<message>message for unknown status</message>\n\
-				<entries>\n\
-				</entries>\n\
-			</AssertInfo>\n\
-		</TestFunction>\n\
-	</TestCase>\n\
-	<GlobalResults>\n\
-		<result type='success'>0</result>\n\
-		<result type='indev'>0</result>\n\
-		<result type='todo'>0</result>\n\
-		<result type='failed'>0</result>\n\
-		<result type='unknown'>0</result>\n\
-		<total>0</total>\n\
-		<status>SUCCESS</status>\n\
-	</GlobalResults>\n\
-</UnitTest>\n";
+<TestCase name='svUnitTest'>\n\
+	<Environment>\n\
+		<svUnitTestVersion>0.0.2</svUnitTestVersion>\n\
+	</Environment>\n\
+	<TestFunction name='MyTest::testMethod'>\n\
+		<Incident type='pass' file='unknown' line='0'></Incident>\n\
+	</TestFunction>\n\
+	<TestFunction name='MyTest::testMethod'>\n\
+		<Incident type='warn' file='unknown' line='0'></Incident>\n\
+	</TestFunction>\n\
+	<TestFunction name='MyTest::testMethod'>\n\
+		<Incident type='pass' file='unknown' line='0'></Incident>\n\
+	</TestFunction>\n\
+	<TestFunction name='MyTest::testMethod'>\n\
+		<Incident type='warn' file='unknown' line='0'></Incident>\n\
+	</TestFunction>\n\
+	<TestFunction name='MyTest::testMethod'>\n\
+		<Incident type='warn' file='unknown' line='0'></Incident>\n\
+	</TestFunction>\n\
+	<TestFunction name='MyTest::testMethod'>\n\
+		<Incident type='pass' file='unknown' line='0'></Incident>\n\
+	</TestFunction>\n\
+	<TestFunction name='MyTest::testMethod'>\n\
+		<Incident type='fail' file='file.cpp' line='33'>\n\
+			<Description><![CDATA[message for unknown status\n\
+   - actual : duck\n\
+   - expected : toto\n\
+]]></Description>\n\
+		</Incident>\n\
+	</TestFunction>\n\
+		<Incident type='fail' file='file.cpp' line='33'>\n\
+			<Description><![CDATA[message for unknown status]]></Description>\n\
+		</Incident>\n\
+	</TestFunction>\n\
+</TestCase>\n";
 static const char * CST_STRING_OPEN = "<?xml version='1.0' encoding='UTF-8'?>\n\
-<!DOCTYPE UnitTest SYSTEM 'svUnitTest_html/svUnitTest.dtd'>\n\
-<?xml-stylesheet type='text/xsl' href='svUnitTest_html/svUnitTest.xsl'?>\n\
-<UnitTest>\n";
-static const char * CST_STRING_CLOSE = "</UnitTest>\n";
-static const char * CST_STRING_CLOSE_TC = "\t</TestCase>\n";
-static const char * CST_STRING_OPEN_METH = "\t\t<TestFunction>\n\t\t\t<name>testMethod</name>\n";
+<TestCase name='svUnitTest'>\n\
+	<Environment>\n\
+		<svUnitTestVersion>0.0.2</svUnitTestVersion>\n\
+	</Environment>\n";
+static const char * CST_STRING_CLOSE = "</TestCase>\n";
+static const char * CST_STRING_CLOSE_TC = "";
+static const char * CST_STRING_OPEN_METH = "\t<TestFunction name='MyTest::testMethod'>\n";
 
 /********************  CLASSE  **********************/
-class UnitTest_svutResultFormatterXml : public TestCase
+class UnitTest_svutResultFormatterQtXml : public TestCase
 {
-	CPPUNIT_TEST_SUITE(UnitTest_svutResultFormatterXml);
+	CPPUNIT_TEST_SUITE(UnitTest_svutResultFormatterQtXml);
 	CPPUNIT_TEST(testOpenOutput);
 	CPPUNIT_TEST(testCloseOutput);
 	CPPUNIT_TEST(testOpenTestCase);
@@ -182,33 +137,33 @@ class UnitTest_svutResultFormatterXml : public TestCase
 		void testGlobal_2(void);
 	protected:
 		void runTotalSequence(void);
-		svutResultFormatterXml * formatter;
+		svutResultFormatterQtXml * formatter;
 		stringstream * out;
 };
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::setUp(void)
+void UnitTest_svutResultFormatterQtXml::setUp(void)
 {
 	out = new stringstream;
-	formatter = new svutResultFormatterXml(*out);
+	formatter = new svutResultFormatterQtXml(*out);
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::tearDown(void)
+void UnitTest_svutResultFormatterQtXml::tearDown(void)
 {
 	delete formatter;
 	delete out;
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testCloseOutput(void )
+void UnitTest_svutResultFormatterQtXml::testCloseOutput(void )
 {
 	formatter->closeOutput();
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_CLOSE,out->str());
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testCloseTestCase(void )
+void UnitTest_svutResultFormatterQtXml::testCloseTestCase(void )
 {
 	UnitTestMockTestCase testCase;
 	formatter->closeTestCase(testCase);
@@ -216,7 +171,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestCase(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testCloseTestMethod_success_1(void )
+void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_success_1(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -225,7 +180,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_success_1(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testCloseTestMethod_success_2(void )
+void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_success_2(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -235,7 +190,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_success_2(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testCloseTestMethod_fullname(void )
+void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_fullname(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -246,7 +201,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_fullname(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testCloseTestMethod_todo(void )
+void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_todo(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -255,7 +210,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_todo(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testCloseTestMethod_indev(void )
+void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_indev(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -264,7 +219,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_indev(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testCloseTestMethod_skiped(void )
+void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_skiped(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -273,7 +228,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_skiped(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testCloseTestMethod_unknown_1(void )
+void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_unknown_1(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -282,7 +237,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_unknown_1(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testCloseTestMethod_unknown_2(void )
+void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_unknown_2(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -292,7 +247,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_unknown_2(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testCloseTestMethod_unknown_3(void )
+void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_unknown_3(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -303,7 +258,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_unknown_3(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testCloseTestMethod_failed_1(void )
+void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_failed_1(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -316,7 +271,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_failed_1(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testCloseTestMethod_failed_2(void )
+void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_failed_2(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
@@ -330,7 +285,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_failed_2(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::runTotalSequence(void )
+void UnitTest_svutResultFormatterQtXml::runTotalSequence(void )
 {
 	UnitTestMockTestCase testCase;
 	svutCodeLocation location("file.cpp","methode",33);
@@ -382,14 +337,14 @@ void UnitTest_svutResultFormatterXml::runTotalSequence(void )
 
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testGlobal_1(void )
+void UnitTest_svutResultFormatterQtXml::testGlobal_1(void )
 {
 	this->runTotalSequence();
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SEQ_1,out->str());
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testGlobal_2(void )
+void UnitTest_svutResultFormatterQtXml::testGlobal_2(void )
 {
 	formatter->setDisplaySuccess(true);
 	formatter->setDisplayDetails(false);
@@ -398,14 +353,14 @@ void UnitTest_svutResultFormatterXml::testGlobal_2(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testOpenOutput(void )
+void UnitTest_svutResultFormatterQtXml::testOpenOutput(void )
 {
 	formatter->openOutput();
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_OPEN,out->str());
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testOpenTestCase(void )
+void UnitTest_svutResultFormatterQtXml::testOpenTestCase(void )
 {
 	UnitTestMockTestCase testCase;
 	formatter->openTestCase(testCase);
@@ -413,7 +368,7 @@ void UnitTest_svutResultFormatterXml::testOpenTestCase(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testOpenTestMethod(void )
+void UnitTest_svutResultFormatterQtXml::testOpenTestMethod(void )
 {
 	UnitTestMockTestCase testCase;
 	svutTestMethod meth("testMethod",NULL,SVUT_CODE_LOCATION);
@@ -422,11 +377,11 @@ void UnitTest_svutResultFormatterXml::testOpenTestMethod(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutResultFormatterXml::testPrintSummary(void )
+void UnitTest_svutResultFormatterQtXml::testPrintSummary(void )
 {
 	svutResultSummary summary;
 	formatter->printSummary(summary);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SUMMARY_0,out->str());
 }
 
-CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutResultFormatterXml);
+CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutResultFormatterQtXml);
