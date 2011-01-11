@@ -51,20 +51,20 @@ void svutResultFormatterXml::openTestCase(const svUnitTest::svutTestCase& testCa
 }
 
 /********************  METHODE  *********************/
-void svutResultFormatterXml::closeTestCase(const svUnitTest::svutTestCase& testCase)
+void svutResultFormatterXml::closeTestCase(const svUnitTest::svutTestCase& /*testCase*/)
 {
 	*out << "\t</TestCase>" << endl;
 }
 
 /********************  METHODE  *********************/
-void svutResultFormatterXml::openTestMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth)
+void svutResultFormatterXml::openTestMethod(const svUnitTest::svutTestCase& /*testCase*/, const svUnitTest::svutTestMethod& meth)
 {
 	*out << "\t\t<TestFunction>" << endl;
 	*out << "\t\t\t<name>" << meth.getName() << "</name>" << endl;
 }
 
 /********************  METHODE  *********************/
-void svutResultFormatterXml::closeTestMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth, const svUnitTest::svutStatusInfo& status)
+void svutResultFormatterXml::closeTestMethod(const svUnitTest::svutTestCase& /*testCase*/, const svUnitTest::svutTestMethod& /*meth*/, const svUnitTest::svutStatusInfo& status)
 {
 	*out << "\t\t\t<status>" << status.getStatusName() << "</status>" << endl;
 	if (status.getStatus() == SVUT_STATUS_FAILED || status.getStatus() == SVUT_STATUS_UNKNOWN)

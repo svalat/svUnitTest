@@ -130,7 +130,7 @@ int svutResultFormatterStdColored::getStatusColor(svutStatus status) const
 std::string svutResultFormatterStdColored::setColor(int color) const
 {
 	stringstream res;
-	res << "\e[" << color << 'm';
+	res << "\027[" << color << 'm';
 	return res.str();
 }
 

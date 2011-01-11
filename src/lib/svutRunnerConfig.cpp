@@ -461,4 +461,4 @@ void svutRunnerConfig::freeClonedArgv(int argc, char * argv[]) const
 }
 
 
-};
+}

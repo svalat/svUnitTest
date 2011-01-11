@@ -59,6 +59,6 @@ class svutTestCaseBuilderGeneric : public svutTestCaseBuilder
 			{return new T();};
 };
 
-};
+}
 
 #endif // SVUT_TEST_CASE_BUILDER_HEADER

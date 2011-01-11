@@ -42,6 +42,6 @@ class svutTestFilter {
 		virtual bool accept(std::string caseName) const=0;
 };
 
-};
+}
 
 #endif // SVUT_TEST_FILTER_HEADER

@@ -84,4 +84,4 @@ void svutTestFilterBasic::clear(void )
 	filters.clear();
 }
 
-};
+}

@@ -19,7 +19,7 @@
 using namespace CppUnit;
 
 /********************  METHODE  *********************/
-int main(int argc, char* argv[])
+int main(int /*argc*/, char* /*argv*/[])
 {
 	// Get the top level suite from the registry
 	Test *suite = CppUnit::TestFactoryRegistry::getRegistry().makeTest();

@@ -32,7 +32,7 @@ int uniqueStandeloneMain(int argc,char * argv[],svutTestCaseBuilder & builder);
 	int main(int argc,char * argv[]) { \
 		svUnitTest::svutTestCaseBuilderGeneric<className> builder;\
 		return uniqueStandeloneMain(argc,argv,builder);\
-	};
-};
+	}
+}
 
 #endif

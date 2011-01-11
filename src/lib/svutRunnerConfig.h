@@ -30,7 +30,7 @@ enum svutOutputMode
 	/** Format the output in XML. **/
 	SVUT_OUT_XML,
 	/** Format the output in XML QT format to emulate their system. **/
-	SVUT_OUT_QT_XML,
+	SVUT_OUT_QT_XML
 };
 
 /*********************  ENUM  ************************/
@@ -45,7 +45,7 @@ enum svutRunnerAction
 	 * Only extract and display the test list. This option was used to emulate QT test suite
 	 * for integration in kdevelop which require to list the tests before running them.
 	**/
-	SVUT_ACTION_LIST_TESTS,
+	SVUT_ACTION_LIST_TESTS
 };
 
 /********************  CLASSE  **********************/
@@ -105,6 +105,6 @@ class svutRunnerConfig
 	friend std::ostream & operator <<(std::ostream & out,const svutRunnerConfig & config);
 };
 
-};
+}
 
 #endif

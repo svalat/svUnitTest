@@ -42,7 +42,7 @@ svutTestCase::svutTestCase(std::string name)
  * here.
  * @param testCase Define the original testCase to copy on current object.
 **/
-svutTestCase::svutTestCase(const svUnitTest::svutTestCase& testCase)
+svutTestCase::svutTestCase(const svUnitTest::svutTestCase& /*testCase*/)
 {
 	assert(false);
 	throw new svutExInternalError("Can't made a copy of svutTestCase, it was forbidden.");

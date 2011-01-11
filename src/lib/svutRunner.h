@@ -71,6 +71,6 @@ class svutRunner
 		svutTestFilter * testFilter;
 };
 
-};
+}
 
 #endif

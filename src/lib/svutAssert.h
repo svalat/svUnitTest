@@ -249,6 +249,6 @@ namespace svUnitTest
 		throw svUnitTest::svutExAssertFailThrow("NONE","...",SVUT_CODE_LOCATION);\
 	}
 
-};
+}
 
 #endif

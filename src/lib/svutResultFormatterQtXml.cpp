@@ -45,12 +45,12 @@ void svutResultFormatterQtXml::closeOutput(void )
 }
 
 /********************  METHODE  *********************/
-void svutResultFormatterQtXml::openTestCase(const svUnitTest::svutTestCase& testCase)
+void svutResultFormatterQtXml::openTestCase(const svUnitTest::svutTestCase& /*testCase*/)
 {
 }
 
 /********************  METHODE  *********************/
-void svutResultFormatterQtXml::closeTestCase(const svUnitTest::svutTestCase& testCase)
+void svutResultFormatterQtXml::closeTestCase(const svUnitTest::svutTestCase& /*testCase*/)
 {
 }
 
@@ -64,14 +64,14 @@ void svutResultFormatterQtXml::openTestMethod(const svUnitTest::svutTestCase& te
 }
 
 /********************  METHODE  *********************/
-void svutResultFormatterQtXml::closeTestMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth, const svUnitTest::svutStatusInfo& status)
+void svutResultFormatterQtXml::closeTestMethod(const svUnitTest::svutTestCase& /*testCase*/, const svUnitTest::svutTestMethod& /*meth*/, const svUnitTest::svutStatusInfo& status)
 {
 	this->printAssertInfo(status);
 	*out << "\t</TestFunction>" << endl;
 }
 
 /********************  METHODE  *********************/
-void svUnitTest::svutResultFormatterQtXml::printSummary(svutResultSummary summary)
+void svUnitTest::svutResultFormatterQtXml::printSummary(svutResultSummary /*summary*/)
 {
 }
 

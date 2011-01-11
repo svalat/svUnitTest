@@ -46,13 +46,13 @@ void svutResultFormatterStd::openTestCase(const svUnitTest::svutTestCase& testCa
 }
 
 /********************  METHOD  **********************/
-void svutResultFormatterStd::closeTestCase(const svUnitTest::svutTestCase& testCase)
+void svutResultFormatterStd::closeTestCase(const svUnitTest::svutTestCase& /*testCase*/)
 {
 	//nothing to do for std mode
 }
 
 /********************  METHOD  **********************/
-void svutResultFormatterStd::openTestMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth)
+void svutResultFormatterStd::openTestMethod(const svUnitTest::svutTestCase& /*testCase*/, const svUnitTest::svutTestMethod& /*meth*/)
 {
 	//nothing to do for std mode
 }
@@ -94,7 +94,7 @@ void svutResultFormatterStd::closeTestMethod(const svUnitTest::svutTestCase& tes
  * @param meth Define the method which failed.
  * @param status Define the status informations related to the failure.
 **/
-void svutResultFormatterStd::printFailedInfo(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth, const svUnitTest::svutStatusInfo& status)
+void svutResultFormatterStd::printFailedInfo(const svUnitTest::svutTestCase& /*testCase*/, const svUnitTest::svutTestMethod& /*meth*/, const svUnitTest::svutStatusInfo& status)
 {
 	if (this->displayDetails)
 	{
@@ -114,7 +114,7 @@ void svutResultFormatterStd::printFailedInfo(const svUnitTest::svutTestCase& tes
  * @param meth Define the method which failed.
  * @param status Define the status informations related to the unknown failure.
 **/
-void svutResultFormatterStd::printUnknownInfo(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth, const svUnitTest::svutStatusInfo& status)
+void svutResultFormatterStd::printUnknownInfo(const svUnitTest::svutTestCase& /*testCase*/, const svUnitTest::svutTestMethod& /*meth*/, const svUnitTest::svutStatusInfo& status)
 {
 	if (this->displayDetails && status.getMessage() != "UNKNOWN")
 	{

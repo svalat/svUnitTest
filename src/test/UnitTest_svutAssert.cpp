@@ -643,7 +643,7 @@ void UnitTest_svutAssert::testMacroAssertThrow_notthrow(void)
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
 	try {
-		SVUT_ASSERT_THROW(int,);
+		SVUT_ASSERT_THROW(int,{});
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailThrow exception.");
 	} catch (svutExAssertFailThrow e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
@@ -687,7 +687,7 @@ void UnitTest_svutAssert::testMacroAssertThrowSomething_bad(void)
 void UnitTest_svutAssert::testMacroAssertNotThrow_good(void)
 {
 	try {
-		SVUT_ASSERT_NOT_THROW(int,);
+		SVUT_ASSERT_NOT_THROW(int,{});
 	} catch (svutExAssertFailThrow) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailThrow exception.");
 	} catch (...) {
@@ -727,7 +727,7 @@ void UnitTest_svutAssert::testMacroAssertNotThrow_others(void)
 void UnitTest_svutAssert::testMacroAssertMayNotThrow_good(void)
 {
 	try {
-		SVUT_ASSERT_MAY_NOT_THROW();
+		SVUT_ASSERT_MAY_NOT_THROW({});
 	} catch (svutExAssertFailThrow) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailThrow exception.");
 	} catch (...) {

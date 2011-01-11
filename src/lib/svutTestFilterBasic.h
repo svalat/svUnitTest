@@ -56,6 +56,6 @@ class svutTestFilterBasic : public svutTestFilter
 		std::list<svutTestFilterBasicRule> filters;
 };
 
-};
+}
 
 #endif // SVUT_TEST_FILTER_BASIC_HEADER

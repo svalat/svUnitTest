@@ -61,4 +61,4 @@ void UnitTest_MyTestCaseBase::test2(void )
 }
 
 /********************  METHODE  *********************/
-SVUT_REGISTER_STANDELONE(UnitTest_MyTestCaseBase);
+SVUT_REGISTER_STANDELONE(UnitTest_MyTestCaseBase)

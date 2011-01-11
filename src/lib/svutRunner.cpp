@@ -332,4 +332,4 @@ void svutRunner::init(svutListener& listener)
 	this->listener.addListener(this->summary);
 }
 
-};
+}
