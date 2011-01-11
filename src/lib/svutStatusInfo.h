@@ -14,6 +14,7 @@
 #include <ostream>
 #include "svutCodeLocation.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
@@ -39,7 +40,7 @@ enum svutStatus
 	SVUT_STATUS_UNKNOWN
 };
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * This class store informations related to the exit status of a test. It provite a simple agregation
  * of data which is easy to format for output. It may bt typicaly returned via exception on

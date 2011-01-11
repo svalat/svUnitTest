@@ -9,14 +9,14 @@
 #ifndef SVUT_OBJECT_METHODE_GENERIC_IMPL_HEADER
 #define SVUT_OBJECT_METHODE_GENERIC_IMPL_HEADER
 
-
 /********************  HEADERS  *********************/
 #include "svutObjectMethod.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Default class constructor.
  * @param object Define the object on which to call the method.
@@ -30,7 +30,7 @@ svutObjectMethodGeneric<T>::svutObjectMethodGeneric(T * object,void (T::*methode
 	this->methode = methode;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 template<class T>
 void svutObjectMethodGeneric<T>::call(void)
 {

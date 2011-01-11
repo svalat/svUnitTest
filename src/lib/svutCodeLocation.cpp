@@ -13,7 +13,10 @@
 
 #include "svutCodeLocation.h"
 
+/**********************  USING  *********************/
 using namespace std;
+
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
@@ -23,7 +26,7 @@ namespace svUnitTest
  **/
 const svutCodeLocation SVUT_NO_LOCATION;
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Default class constructor. It produce a non located instance.
 **/
@@ -33,7 +36,7 @@ svutCodeLocation::svutCodeLocation()
 	this->located = false;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Copy constructor of the class.
  * @param location Define the original location to copy.
@@ -47,7 +50,7 @@ svutCodeLocation::svutCodeLocation(const svUnitTest::svutCodeLocation& location)
 }
 
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor wich permit to setup a location. Normaly the fields are setup via
  * the macro SVUT_CODE_LOCATION which use compiler macros to fetch the current line, file and
@@ -64,7 +67,7 @@ svutCodeLocation::svutCodeLocation(std::string file,std::string methode,int line
 	this->located = true;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the source filename or "unknown"
  */
@@ -76,7 +79,7 @@ std::string svutCodeLocation::getFilename(void) const
 		return "unknown";
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return  Return the method name or "unknown"
  */
@@ -88,7 +91,7 @@ std::string svutCodeLocation::getMethodeName(void) const
 		return "unknown";
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the line in source file or -1.
 **/
@@ -100,7 +103,7 @@ int svutCodeLocation::getLine(void) const
 		return -1;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return true if current instance define a location, of false if not
  * (equivalent to SVUT_NO_LOCATION).
@@ -110,7 +113,7 @@ bool svutCodeLocation::hasLocation(void) const
 	return located;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Output stream operator used to format the location in a string format.
  * @param out Define the output stream to use.
@@ -128,7 +131,7 @@ std::ostream & operator << (std::ostream & out,const svutCodeLocation & location
 	return out;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Operator used to compares two locations. Two locations are equals if they have the same
  * filename, function name and line ; or if the two are equivalent to SVUT_NO_LOCATION.

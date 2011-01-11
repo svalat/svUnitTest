@@ -13,10 +13,11 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutObjectMethod.h>
 
+/**********************  USING  *********************/
 using namespace CppUnit;
 using namespace svUnitTest;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class SimpleObject
 {
 	public:
@@ -27,7 +28,7 @@ class SimpleObject
 		int value;
 };
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutObjectMethod : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutObjectMethod);
@@ -46,24 +47,24 @@ class UnitTest_svutObjectMethod : public TestCase
 		SimpleObject obj;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutObjectMethod::setUp(void)
 {
 	caller = new svutObjectMethodGeneric<SimpleObject>(&obj,&SimpleObject::clear);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutObjectMethod::tearDown(void)
 {
 	delete caller;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutObjectMethod::testConstructor(void)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutObjectMethod::testCall(void)
 {
 	CPPUNIT_ASSERT_EQUAL(20,obj.getValue());

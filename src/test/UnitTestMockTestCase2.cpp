@@ -9,88 +9,89 @@
 /********************  HEADERS  *********************/
 #include "UnitTestMockTestCase2.h"
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 UnitTestMockTestCase2::UnitTestMockTestCase2(void ):
 	svutTestCase("UnitTestMockTestCase2")
 {
 
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::setUp(void)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::tearDown(void)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::testSuccess(void )
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::testIndev(void )
 {
 	SVUT_ASSERT_INDEV("for the test");
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::testTodo(void )
 {
 	SVUT_ASSERT_TODO("for the test");
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::testFailure(void )
 {
 	SVUT_ASSERT_EQUAL(2,3);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::testUnknown_1(void )
 {
 	throw std::bad_exception();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::testUnknown_2(void )
 {
 	throw 42;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::testFailIsTodo_1(void )
 {
 	MARK_AS_KNOWN_ERROR("this is a test");
 	SVUT_ASSERT_EQUAL(2,3);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::testFailIsTodo_2(void )
 {
 	MARK_AS_KNOWN_ERROR("this is a test");
 	throw std::bad_exception();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::testFailIsTodo_3(void )
 {
 	MARK_AS_KNOWN_ERROR("this is a test");
 	throw 42;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::testSuccessIsIndev(void )
 {
 	MARK_AS_KNOWN_ERROR("this is a test");
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::useTests(UnitTestMockTestCase2::UnitTestMockFlags flags)
 {
 	switch(flags)

@@ -14,6 +14,7 @@
 #include <list>
 #include "svutTestFilter.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
@@ -34,7 +35,7 @@ struct svutTestFilterBasicRule
 	std::string methode;
 };
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Implement a simple support for test case filtering. Here, we only execute tests which match
  * the rules. A rule, is simply a name of a test case and a name of a function. One can use wildcard

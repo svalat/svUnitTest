@@ -17,7 +17,7 @@
 namespace svUnitTest
 {
 
-/*******************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 int defaultMain(int argc,char * argv[]);
 int uniqueStandeloneMain(int argc,char * argv[],svutTestCaseBuilder & builder);
 

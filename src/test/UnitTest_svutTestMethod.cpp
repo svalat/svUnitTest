@@ -14,11 +14,12 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutTestMethod.h>
 
+/**********************  USING  *********************/
 using namespace std;
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutTestMethod : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutTestMethod);
@@ -43,13 +44,13 @@ class UnitTest_svutTestMethod : public TestCase
 		svutCodeLocation loc;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 UnitTest_svutTestMethod::UnitTest_svutTestMethod()
 	:loc("test.c","testMeth",33)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestMethod::setUp(void)
 {
 	called = false;
@@ -58,25 +59,25 @@ void UnitTest_svutTestMethod::setUp(void)
 		loc);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestMethod::tearDown(void)
 {
 	delete meth;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestMethod::testGetName(void )
 {
 	CPPUNIT_ASSERT_EQUAL("theTest",meth->getName());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestMethod::testGetLocation(void )
 {
 	CPPUNIT_ASSERT_EQUAL(loc,meth->getLocation());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestMethod::testCall(void )
 {
 	CPPUNIT_ASSERT_EQUAL(false,called);
@@ -84,7 +85,7 @@ void UnitTest_svutTestMethod::testCall(void )
 	CPPUNIT_ASSERT_EQUAL(true,called);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestMethod::methToCall(void )
 {
 	called = true;

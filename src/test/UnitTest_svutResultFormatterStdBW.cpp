@@ -16,6 +16,7 @@
 #include "UnitTestMockTestCase.h"
 #include <sys/stat.h>
 
+/**********************  USING  *********************/
 using namespace std;
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
@@ -114,7 +115,7 @@ static const char * CST_STRING_SEQ_2    = "=======  MyTest                      
 |  STATUS   : SUCCESS       |\n\
 +---------------------------+\n";
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutResultFormatterStdBW : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutResultFormatterStdBW);
@@ -168,28 +169,28 @@ class UnitTest_svutResultFormatterStdBW : public TestCase
 		stringstream * out;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::setUp(void)
 {
 	out = new stringstream;
 	formatter = new svutResultFormatterStdBW(*out);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::tearDown(void)
 {
 	delete formatter;
 	delete out;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testCloseOutput(void )
 {
 	formatter->closeOutput();
 	CPPUNIT_ASSERT_EQUAL("",out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testCloseTestCase(void )
 {
 	UnitTestMockTestCase testCase;
@@ -197,7 +198,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestCase(void )
 	CPPUNIT_ASSERT_EQUAL("",out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_success_1(void )
 {
 	UnitTestMockTestCase testCase;
@@ -206,7 +207,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_success_1(void )
 	CPPUNIT_ASSERT_EQUAL("",out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_success_2(void )
 {
 	UnitTestMockTestCase testCase;
@@ -216,7 +217,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_success_2(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SUCCESS_1,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_fullname(void )
 {
 	UnitTestMockTestCase testCase;
@@ -227,7 +228,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_fullname(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SUCCESS_2,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_todo(void )
 {
 	UnitTestMockTestCase testCase;
@@ -236,7 +237,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_todo(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_TODO,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_indev(void )
 {
 	UnitTestMockTestCase testCase;
@@ -245,7 +246,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_indev(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_INDEV,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_skiped(void )
 {
 	UnitTestMockTestCase testCase;
@@ -254,7 +255,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_skiped(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SKIPED,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_unknown_1(void )
 {
 	UnitTestMockTestCase testCase;
@@ -263,7 +264,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_unknown_1(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_UNKNOWN_1,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_unknown_2(void )
 {
 	UnitTestMockTestCase testCase;
@@ -273,7 +274,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_unknown_2(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_UNKNOWN_2,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_unknown_3(void )
 {
 	UnitTestMockTestCase testCase;
@@ -284,7 +285,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_unknown_3(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_UNKNOWN_3,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_failed_1(void )
 {
 	UnitTestMockTestCase testCase;
@@ -297,7 +298,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_failed_1(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_FAILED_1,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_failed_2(void )
 {
 	UnitTestMockTestCase testCase;
@@ -311,7 +312,7 @@ void UnitTest_svutResultFormatterStdBW::testCloseTestMethod_failed_2(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_FAILED_2,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::runTotalSequence(void )
 {
 	UnitTestMockTestCase testCase;
@@ -363,14 +364,14 @@ void UnitTest_svutResultFormatterStdBW::runTotalSequence(void )
 }
 
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testGlobal_1(void )
 {
 	this->runTotalSequence();
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SEQ_1,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testGlobal_2(void )
 {
 	formatter->setDisplaySuccess(true);
@@ -379,14 +380,14 @@ void UnitTest_svutResultFormatterStdBW::testGlobal_2(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SEQ_2,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testOpenOutput(void )
 {
 	formatter->openOutput();
 	CPPUNIT_ASSERT_EQUAL("",out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testOpenTestCase(void )
 {
 	UnitTestMockTestCase testCase;
@@ -394,7 +395,7 @@ void UnitTest_svutResultFormatterStdBW::testOpenTestCase(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_TEST_CASE,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testOpenTestMethod(void )
 {
 	UnitTestMockTestCase testCase;
@@ -403,7 +404,7 @@ void UnitTest_svutResultFormatterStdBW::testOpenTestMethod(void )
 	CPPUNIT_ASSERT_EQUAL("",out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterStdBW::testPrintSummary(void )
 {
 	svutResultSummary summary;

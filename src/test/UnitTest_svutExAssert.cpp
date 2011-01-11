@@ -14,11 +14,12 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutExAssert.h>
 
+/**********************  USING  *********************/
 using namespace std;
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutExAssert : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutExAssert);
@@ -57,7 +58,7 @@ class UnitTest_svutExAssert : public TestCase
 		svutStatusInfo info;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 UnitTest_svutExAssert::UnitTest_svutExAssert(void )
 	:location("test.cpp","test",42),
 	info(SVUT_STATUS_FAILED,"this is a test",location)
@@ -67,17 +68,17 @@ UnitTest_svutExAssert::UnitTest_svutExAssert(void )
 	info.addEntry("actual","v2");
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::setUp(void)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::tearDown(void)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::testExAssertFail_1(void )
 {
 	//same test than svutExTestStatus
@@ -94,7 +95,7 @@ void UnitTest_svutExAssert::testExAssertFail_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::testExAssertFail_2(void )
 {
 	//same test than svutExTestStatus
@@ -109,7 +110,7 @@ void UnitTest_svutExAssert::testExAssertFail_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::testExAssertFailBool_1(void )
 {
 	//same test than svutExTestStatus
@@ -126,7 +127,7 @@ void UnitTest_svutExAssert::testExAssertFailBool_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::testExAssertFailBool_2(void )
 {
 	//same test than svutExTestStatus
@@ -143,7 +144,7 @@ void UnitTest_svutExAssert::testExAssertFailBool_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::testExAssertFailNull_1(void )
 {
 	//same test than svutExTestStatus
@@ -160,7 +161,7 @@ void UnitTest_svutExAssert::testExAssertFailNull_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::testExAssertFailNull_2(void )
 {
 	//same test than svutExTestStatus
@@ -177,7 +178,7 @@ void UnitTest_svutExAssert::testExAssertFailNull_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::testExAssertFailEqual_1(void )
 {
 	//same test than svutExTestStatus
@@ -194,7 +195,7 @@ void UnitTest_svutExAssert::testExAssertFailEqual_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::testExAssertFailEqual_2(void )
 {
 	//same test than svutExTestStatus
@@ -211,7 +212,7 @@ void UnitTest_svutExAssert::testExAssertFailEqual_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::testExAssertFailCustom(void )
 {
 	//same test than svutExTestStatus
@@ -226,7 +227,7 @@ void UnitTest_svutExAssert::testExAssertFailCustom(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::testExAssertFailNotExec(void )
 {
 	//same test than svutExTestStatus
@@ -241,7 +242,7 @@ void UnitTest_svutExAssert::testExAssertFailNotExec(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::testExAssertFailThrow(void )
 {
 	//same test than svutExTestStatus

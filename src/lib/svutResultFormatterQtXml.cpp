@@ -9,20 +9,24 @@
 /********************  HEADERS  *********************/
 #include "svutResultFormatterQtXml.h"
 
+/**********************  USING  *********************/
 using namespace std;
-using namespace svUnitTest;
 
-/********************  METHODE  *********************/
+/********************  NAMESPACE  *******************/
+namespace svUnitTest
+{
+
+/*******************  FUNCTION  *********************/
 /**
  * Default constructor of the class.
  * @param out Define the output system into which to send the results.
 **/
-svUnitTest::svutResultFormatterQtXml::svutResultFormatterQtXml(ostream& out)
+svUnitTest::svutResultFormatterQtXml::svutResultFormatterQtXml(std::ostream& out)
 {
 	this->out = & out;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Display the header of the XML output file.
 **/
@@ -35,7 +39,7 @@ void svUnitTest::svutResultFormatterQtXml::openOutput(void )
 	*out << "\t</Environment>" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Close the XML root elements to end the XML output file.
 **/
@@ -44,17 +48,17 @@ void svutResultFormatterQtXml::closeOutput(void )
 	*out << "</TestCase>" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterQtXml::openTestCase(const svUnitTest::svutTestCase& /*testCase*/)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterQtXml::closeTestCase(const svUnitTest::svutTestCase& /*testCase*/)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterQtXml::openTestMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth)
 {
 	if (displayFullName)
@@ -63,19 +67,24 @@ void svutResultFormatterQtXml::openTestMethod(const svUnitTest::svutTestCase& te
 		*out << "\t<TestFunction name='" << meth.getName() << "'>" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterQtXml::closeTestMethod(const svUnitTest::svutTestCase& /*testCase*/, const svUnitTest::svutTestMethod& /*meth*/, const svUnitTest::svutStatusInfo& status)
 {
 	this->printAssertInfo(status);
 	*out << "\t</TestFunction>" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svUnitTest::svutResultFormatterQtXml::printSummary(svutResultSummary /*summary*/)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
+/**
+ * Helper function to format the status assert informations into QT XML format.
+ * The final reste will be added to the output stream.
+ * @param status Define the current status into which take the assert informations.
+**/
 void svUnitTest::svutResultFormatterQtXml::printAssertInfo(const svUnitTest::svutStatusInfo& status)
 {
 	int line = status.getLocation().getLine();
@@ -99,7 +108,12 @@ void svUnitTest::svutResultFormatterQtXml::printAssertInfo(const svUnitTest::svu
 	*out << "</Incident>" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
+/**
+ * Return the QT status string related to the given status.
+ * @param status Define the status to convert into QT unit test status.
+ * @return Return the QT status name as a string.
+**/
 string svUnitTest::svutResultFormatterQtXml::getQtStatusName(svutStatus status)
 {
 	switch(status)
@@ -119,4 +133,6 @@ string svUnitTest::svutResultFormatterQtXml::getQtStatusName(svutStatus status)
 		default:
 			throw svutExInternalError("Unknown status value in svutResultFormatterQtXml::getQtStatusName()");
 	}
+}
+
 }

@@ -12,6 +12,7 @@
 #include <svutDefaultMain.h>
 #include <iostream>
 
+/**********************  USING  *********************/
 using namespace std;
 using namespace svUnitTest;
 
@@ -52,7 +53,7 @@ class UnitTest_MyTestCase3 : public UnitTest_MyTestCaseBase
 };
 SVUT_REGISTER_TEST_CASE(UnitTest_MyTestCase3);
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 UnitTest_MyTestCaseBase::UnitTest_MyTestCaseBase(string name)
 	:svutTestCase(name)
 {
@@ -60,31 +61,31 @@ UnitTest_MyTestCaseBase::UnitTest_MyTestCaseBase(string name)
 	SVUT_REG_TEST_METHOD(UnitTest_MyTestCaseBase,test2);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_MyTestCaseBase::setUp(void )
 {
 	this->hasCallTest = false;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_MyTestCaseBase::tearDown(void )
 {
 	SVUT_ASSERT_TRUE(this->hasCallTest);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_MyTestCaseBase::test1(void )
 {
 	this->hasCallTest = true;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_MyTestCaseBase::test2(void )
 {
 	this->hasCallTest = true;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 int main(int argc, char * argv[])
 {
 	return svUnitTest::defaultMain(argc,argv);

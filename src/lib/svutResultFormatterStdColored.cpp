@@ -11,8 +11,10 @@
 #include <iomanip>
 #include <sstream>
 
+/**********************  USING  *********************/
 using namespace std;
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
@@ -35,7 +37,7 @@ enum svutStdColor
 	SVUT_STD_COLOR_WHITE=0
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Constructor of the class.
  * @param out Define the output stream to use.
@@ -45,7 +47,7 @@ svutResultFormatterStdColored::svutResultFormatterStdColored(std::ostream& out)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterStdColored::printMethodAndStatus(std::ostream& out, std::string name, svutStatus status)
 {
 	//sprintf(buffer," * %-40s     [ %s ]\n",testName.c_str(),statusName.c_str());
@@ -56,7 +58,7 @@ void svutResultFormatterStdColored::printMethodAndStatus(std::ostream& out, std:
 		<< " ]" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterStdColored::printSummaryStat(std::ostream& out, svutStatus status, unsigned int nb, unsigned int tot)
 {
 	 //sprintf(buffer,"|  %-9s: %4d (%3d %%)  |\n",name,nb,100*nb/tot);
@@ -76,7 +78,7 @@ void svutResultFormatterStdColored::printSummaryStat(std::ostream& out, svutStat
 		<< "  |" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterStdColored::printSummaryFinalStatus(std::ostream& out, svutStatus status)
 {
 	//sprintf(buffer,"|  STATUS   : %-12s  |\n",name);
@@ -85,7 +87,7 @@ void svutResultFormatterStdColored::printSummaryFinalStatus(std::ostream& out, s
 		<< svutStatusInfo::getStatusName(status) << unsetColor() << "  |" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Return the color associated to the given status.
  * @param status Define the status for which we want the color.
@@ -121,7 +123,7 @@ int svutResultFormatterStdColored::getStatusColor(svutStatus status) const
 	return res;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Build the coloring chain for the terminal.
  * @param color Define the terminal color to use.
@@ -134,7 +136,7 @@ std::string svutResultFormatterStdColored::setColor(int color) const
 	return res.str();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Build the coloring chain for the terminal.
  * @param status Define the status used to select the color.
@@ -145,9 +147,10 @@ string svutResultFormatterStdColored::setStatusColor(svutStatus status) const
 	return setColor(getStatusColor(status));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Simply return the command to set color to default.
+ * @return return the command to set color to default.
 **/
 string svutResultFormatterStdColored::unsetColor(void ) const
 {

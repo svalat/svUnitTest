@@ -12,10 +12,11 @@
 /********************  HEADERS  *********************/
 #include "svutExTestStatus.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Base class for exception used to notify assertion failure. This is used to unit tests.
  * @brief Base class for assertion failure notification.
@@ -31,7 +32,7 @@ class svutExAssertFail : public svutExTestStatus
 		virtual ~svutExAssertFail(void) throw() {};
 };
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Class used to throw exception on boolean value; We may prefer to use the SVUT_ASSERT_TRUE
  * or SVUT_ASSERT_FALSE macro to call this exception, it will construct the object for you
@@ -45,7 +46,7 @@ class svutExAssertFailBool : public svutExAssertFail
 };
 
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Class used to throw exception on NULL or non NULL pointer. We may prefer to use the
  * SVUT_ASSERT_NULL or SVUT_ASSERT_NOT_NULL macro to call this exception. It will construct
@@ -58,7 +59,7 @@ class svutExAssertFailNullPointer : public svutExAssertFail
 		svutExAssertFailNullPointer(bool expectNull, svutCodeLocation  location) throw();
 };
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Class used to throw exception on equality test. We may prefer to use the
  * SVUT_ASSERT_EQUAL or SVUT_ASSERT_NOT_EQUAL macro to call this exception. It will construct
@@ -73,7 +74,7 @@ class svutExAssertFailEqual : public svutExAssertFail
 			svutCodeLocation  location) throw();
 };
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Class used to throw exception on custum assertion, you just choose a message to describe
  * the problem. We may prefer to use the SVUT_ASSERT_FAIL macro to call this exception. It will
@@ -86,7 +87,7 @@ class svutExAssertFailCustom : public svutExAssertFail
 		svutExAssertFailCustom(std::string message, svUnitTest::svutCodeLocation location) throw();
 };
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Class used to throw exception when a non reachable portion of code is reached.
  * We may prefer to use the SVUT_ASSERT_NOT_EXEC_THIS macro to call this exception. It will
@@ -99,7 +100,7 @@ class svutExAssertFailNotExec : public svutExAssertFail
 		svutExAssertFailNotExec(svutCodeLocation  location) throw();
 };
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Class used to throw exception on exception asserting. We may prefer to use the SVUT_ASSERT_THROW
  * or SVUT_ASSERT_NOT_THROW macro to call this exception. It will construct the object for you and

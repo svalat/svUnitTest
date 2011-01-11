@@ -16,10 +16,11 @@
 #include "UnitTestMockResultFormatter.h"
 #include "UnitTestMockTestCase.h"
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutListenerDirectOutputter : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutListenerDirectOutputter);
@@ -50,7 +51,7 @@ class UnitTest_svutListenerDirectOutputter : public TestCase
 		UnitTestMockResultFormater * ref;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerDirectOutputter::setUp(void)
 {
 	this->formatter = new UnitTestMockResultFormater();
@@ -58,7 +59,7 @@ void UnitTest_svutListenerDirectOutputter::setUp(void)
 	this->ref = new UnitTestMockResultFormater();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerDirectOutputter::tearDown(void)
 {
 	delete listener;
@@ -66,7 +67,7 @@ void UnitTest_svutListenerDirectOutputter::tearDown(void)
 	delete formatter;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerDirectOutputter::testOnGlobalStart(void )
 {
 	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
@@ -78,7 +79,7 @@ void UnitTest_svutListenerDirectOutputter::testOnGlobalStart(void )
 	CPPUNIT_ASSERT_EQUAL(*ref,*formatter);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerDirectOutputter::testOnGlobalEnd_1(void )
 {
 	svutResultSummary summary;
@@ -94,7 +95,7 @@ void UnitTest_svutListenerDirectOutputter::testOnGlobalEnd_1(void )
 	CPPUNIT_ASSERT_EQUAL(*ref,*formatter);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerDirectOutputter::testOnGlobalEnd_2(void )
 {
 	svutResultSummary summary;
@@ -120,7 +121,7 @@ void UnitTest_svutListenerDirectOutputter::testOnGlobalEnd_2(void )
 	CPPUNIT_ASSERT_EQUAL(*ref,*formatter);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerDirectOutputter::testOnTestCaseStart(void )
 {
 	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
@@ -133,7 +134,7 @@ void UnitTest_svutListenerDirectOutputter::testOnTestCaseStart(void )
 	CPPUNIT_ASSERT_EQUAL(*ref,*formatter);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerDirectOutputter::testOnTestCaseEnd(void )
 {
 	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
@@ -146,7 +147,7 @@ void UnitTest_svutListenerDirectOutputter::testOnTestCaseEnd(void )
 	CPPUNIT_ASSERT_EQUAL(*ref,*formatter);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerDirectOutputter::testOnTestMethodStart()
 {
 	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
@@ -160,7 +161,7 @@ void UnitTest_svutListenerDirectOutputter::testOnTestMethodStart()
 	CPPUNIT_ASSERT_EQUAL(*ref,*formatter);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerDirectOutputter::testOnTestMethodEnd(void )
 {
 	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());

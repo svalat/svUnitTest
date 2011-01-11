@@ -12,6 +12,7 @@
 /********************  HEADERS  *********************/
 #include "svutResultFormatterStd.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 

@@ -11,22 +11,23 @@
 #include <cstdio>
 #include <sstream>
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 using namespace std;
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockResultFormater::openOutput(void )
 {
 	event.push_back("openOutput()");
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockResultFormater::closeOutput(void )
 {
 	event.push_back("closeOutput()");
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockResultFormater::closeTestCase(const svUnitTest::svutTestCase& testCase)
 {
 	char buffer[1024];
@@ -34,7 +35,7 @@ void UnitTestMockResultFormater::closeTestCase(const svUnitTest::svutTestCase& t
 	event.push_back(buffer);
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockResultFormater::closeTestMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth, const svUnitTest::svutStatusInfo& status)
 {
 	char buffer[1024];
@@ -42,13 +43,13 @@ void UnitTestMockResultFormater::closeTestMethod(const svUnitTest::svutTestCase&
 	event.push_back(buffer);
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 bool UnitTestMockResultFormater::isEmpty(void ) const
 {
 	return event.empty();
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockResultFormater::openTestCase(const svUnitTest::svutTestCase& testCase)
 {
 	char buffer[1024];
@@ -56,7 +57,7 @@ void UnitTestMockResultFormater::openTestCase(const svUnitTest::svutTestCase& te
 	event.push_back(buffer);
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockResultFormater::openTestMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth)
 {
 	char buffer[1024];
@@ -64,7 +65,7 @@ void UnitTestMockResultFormater::openTestMethod(const svUnitTest::svutTestCase& 
 	event.push_back(buffer);
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 bool operator!=(const UnitTestMockResultFormater& formater1, const UnitTestMockResultFormater& formater2)
 {
 	if (formater1.event.size() != formater2.event.size())
@@ -83,7 +84,7 @@ bool operator!=(const UnitTestMockResultFormater& formater1, const UnitTestMockR
 	return false;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 bool operator==(const UnitTestMockResultFormater& formater1, const UnitTestMockResultFormater& formater2)
 {
 	if (formater1.event.size() != formater2.event.size())
@@ -102,7 +103,7 @@ bool operator==(const UnitTestMockResultFormater& formater1, const UnitTestMockR
 	return true;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 std::ostream& operator<<(std::ostream& out, const UnitTestMockResultFormater& formater)
 {
 	for (std::list<std::string>::const_iterator it = formater.event.begin() ; it != formater.event.end() ; ++it)
@@ -110,13 +111,13 @@ std::ostream& operator<<(std::ostream& out, const UnitTestMockResultFormater& fo
 	return out;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockResultFormater::reset(void )
 {
 	event.clear();
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockResultFormater::printSummary(svUnitTest::svutResultSummary summary)
 {
 	char buffer[4096];
@@ -127,7 +128,7 @@ void UnitTestMockResultFormater::printSummary(svUnitTest::svutResultSummary summ
 	event.push_back(buffer);
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 bool operator == (const std::string & str,const UnitTestMockResultFormater & formater)
 {
 	stringstream stream;
@@ -135,7 +136,7 @@ bool operator == (const std::string & str,const UnitTestMockResultFormater & for
 	return str == stream.str();
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 bool operator != (const std::string & str,const UnitTestMockResultFormater & formater)
 {
 	stringstream stream;

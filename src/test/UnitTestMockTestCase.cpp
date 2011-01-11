@@ -10,7 +10,7 @@
 #include "UnitTestMockTestCase.h"
 
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 UnitTestMockTestCase::UnitTestMockTestCase(void ):
 	svutTestCase("MyTest")
 {
@@ -24,43 +24,43 @@ UnitTestMockTestCase::UnitTestMockTestCase(void ):
 	SVUT_REG_TEST_METHOD(UnitTestMockTestCase,test3);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase::setUp(void)
 {
 	setup = calls++;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase::tearDown(void)
 {
 	teardown = calls++;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase::test1(void )
 {
 	t1 = calls ++;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase::test2(void )
 {
 	t2 = calls ++;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase::test3(void)
 {
 	t3 = calls ++;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase::testRegister(void)
 {
 	SVUT_REG_TEST_METHOD(UnitTestMockTestCase,test2);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase::testRunMeth(void)
 {
 	this->runTestMethod(*(tests.begin()));

@@ -7,16 +7,14 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
 #include "svutRunner.h"
 #include "svutDefaultMain.h"
+
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * A simple default implementation of the main methode required to execute the tests. By default
  * the tests are searched as auto-registrer tests.
@@ -36,7 +34,7 @@ int defaultMain(int argc,char * argv[])
 	return res;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Basic main function used to build a standalone executable for a uniq test. Please, use the
  * macro SVUT_REGISTER_STANDELONE instead of directly call this method.

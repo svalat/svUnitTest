@@ -9,10 +9,11 @@
 /********************  HEADERS  *********************/
 #include "UnitTestExtra.h"
 
+/********************  NAMESPACE  *******************/
 namespace CppUnit
 {
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void assertEquals( const char * expected,const std::string & actual,CppUnit::SourceLine sourceLine,const std::string &message )
 {
 	if ( actual!=expected) // lazy toString conversion...
@@ -22,7 +23,7 @@ void assertEquals( const char * expected,const std::string & actual,CppUnit::Sou
 	}
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void assertEquals( const std::string & expected,const char * actual,CppUnit::SourceLine sourceLine,const std::string &message )
 {
 	if ( actual!=expected) // lazy toString conversion...
@@ -32,7 +33,7 @@ void assertEquals( const std::string & expected,const char * actual,CppUnit::Sou
 	}
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void assertEquals( int expected,unsigned int actual,SourceLine sourceLine,const std::string &message )
 {
 	if ( (unsigned int)expected!=actual) // lazy toString conversion...

@@ -14,10 +14,11 @@
 #include <svutTestFilterBasic.h>
 #include "UnitTestExtra.h"
 
+/**********************  USING  *********************/
 using namespace CPPUNIT_NS;
 using namespace svUnitTest;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutTestFilterBasic : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutTestFilterBasic);
@@ -40,7 +41,7 @@ class UnitTest_svutTestFilterBasic : public TestCase
 		svutTestFilterBasic * obj;
 };
 
-/*********************  METHODE  ********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestFilterBasic::setUp(void)
 {
 	this->obj = new svUnitTest::svutTestFilterBasic();
@@ -49,13 +50,13 @@ void UnitTest_svutTestFilterBasic::setUp(void)
 	this->obj->addAccepted("","function3");
 }
 
-/*********************  METHODE  ********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestFilterBasic::tearDown(void)
 {
 	delete this->obj;
 }
 
-/*********************  METHODE  ********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestFilterBasic::testAccept_StringString(void)
 {
 	CPPUNIT_ASSERT(obj->accept("case1","function1"));
@@ -65,7 +66,7 @@ void UnitTest_svutTestFilterBasic::testAccept_StringString(void)
 	CPPUNIT_ASSERT(obj->accept("case1","function3"));
 }
 
-/*********************  METHODE  ********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestFilterBasic::testAccept_String(void)
 {
 	svutTestFilterBasic filter;
@@ -76,7 +77,7 @@ void UnitTest_svutTestFilterBasic::testAccept_String(void)
 	CPPUNIT_ASSERT(!filter.accept("case3"));
 }
 
-/*********************  METHODE  ********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestFilterBasic::testAddAccepted(void)
 {
 	CPPUNIT_ASSERT(!obj->accept("case4","function4"));
@@ -84,7 +85,7 @@ void UnitTest_svutTestFilterBasic::testAddAccepted(void)
 	CPPUNIT_ASSERT(obj->accept("case4","function4"));
 }
 
-/*********************  METHODE  ********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestFilterBasic::testClear(void )
 {
 	CPPUNIT_ASSERT(!obj->accept("case4","function4"));

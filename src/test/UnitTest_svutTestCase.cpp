@@ -15,11 +15,12 @@
 #include <svutTestCase.h>
 #include "UnitTestMockTestCase.h"
 
+/**********************  USING  *********************/
 using namespace std;
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutTestCase : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutTestCase);
@@ -54,7 +55,7 @@ class UnitTest_svutTestCase : public TestCase
 		UnitTestMockTestCase * obj;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 static std::ostream & operator << (std::ostream & out,const std::list<std::string> & lst)
 {
 	for (std::list<std::string>::const_iterator it = lst.begin() ; it != lst.end() ; ++it)
@@ -66,19 +67,19 @@ static std::ostream & operator << (std::ostream & out,const std::list<std::strin
 	return out;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::setUp(void)
 {
 	obj = new UnitTestMockTestCase;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::tearDown(void)
 {
 	delete obj;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::testSetUp(void)
 {
 	CPPUNIT_ASSERT_EQUAL(0,obj->calls);
@@ -88,7 +89,7 @@ void UnitTest_svutTestCase::testSetUp(void)
 	CPPUNIT_ASSERT_EQUAL(0,obj->setup);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::testTearDown(void)
 {
 	CPPUNIT_ASSERT_EQUAL(0,obj->calls);
@@ -98,7 +99,7 @@ void UnitTest_svutTestCase::testTearDown(void)
 	CPPUNIT_ASSERT_EQUAL(0,obj->teardown);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::testRegisterTestMethod(void)
 {
 	CPPUNIT_ASSERT_EQUAL(2,obj->getNbTests());
@@ -115,13 +116,13 @@ void UnitTest_svutTestCase::testRegisterTestMethod(void)
 	CPPUNIT_ASSERT_EQUAL(lst2,obj->getTestMethods(false));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::testGetName(void)
 {
 	CPPUNIT_ASSERT_EQUAL("MyTest",obj->getName());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::testGetMethods_false(void)
 {
 	std::list<std::string> lst;
@@ -130,7 +131,7 @@ void UnitTest_svutTestCase::testGetMethods_false(void)
 	CPPUNIT_ASSERT_EQUAL(lst,obj->getTestMethods(false));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::testGetMethods_true(void)
 {
 	std::list<std::string> lst;
@@ -139,13 +140,13 @@ void UnitTest_svutTestCase::testGetMethods_true(void)
 	CPPUNIT_ASSERT_EQUAL(lst,obj->getTestMethods(true));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::testGetNbTests(void)
 {
 	CPPUNIT_ASSERT_EQUAL(2,obj->getNbTests());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::testSetAutodetected(void)
 {
 	CPPUNIT_ASSERT_EQUAL(false,obj->isAutodetected());
@@ -153,13 +154,13 @@ void UnitTest_svutTestCase::testSetAutodetected(void)
 	CPPUNIT_ASSERT_EQUAL(true,obj->isAutodetected());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::testIsAutodetected(void)
 {
 	CPPUNIT_ASSERT_EQUAL(false,obj->isAutodetected());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::testRunMethod(void)
 {
 	CPPUNIT_ASSERT_EQUAL(0,obj->calls);

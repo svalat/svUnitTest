@@ -10,6 +10,8 @@
 #define SVUT_TEST_CASE_BUILDER_HEADER
 
 /********************  HEADERS  *********************/
+
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
@@ -18,7 +20,7 @@ namespace svUnitTest
 class svutTestCase;
 #endif
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Base class which permit to describe the requirement for a test case builder. By this way,
  * we can inherit from this base class to build a generic allocation mechanisms base on templates.
@@ -38,11 +40,12 @@ class svutTestCaseBuilder
 		/**
 		 * Methode used to build the test case. Caution, this is your own responsability to free
 		 * the builded test case at the end.
+		 * @return Renturn the new test case.
 		**/
 		virtual svutTestCase * build(void) const = 0;
 };
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Generic version of svutTestCaseBuilder base on template. It will be called at load time to
  * and registred into svutAutoRegister.

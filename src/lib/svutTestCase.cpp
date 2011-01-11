@@ -11,7 +11,10 @@
 #include "svutListenerMultiplexer.h"
 #include <cassert>
 
+/**********************  USING  *********************/
 using namespace std;
+
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
@@ -23,7 +26,7 @@ namespace svUnitTest
 // list<svutTestCaseBuilder *> __SVUT_autoFoundTests__;
 */
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor of the test case.
  * @param name Define the name of the test case. Generaly we may use the name of the class or module
@@ -35,7 +38,7 @@ svutTestCase::svutTestCase(std::string name)
 	this->caseName = name;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Copy constructor of the class, it was required as we create interal dynamic object in constructor.
  * Here for moment copying svutTestCase objects is not allowed, so we just throw an internal exception
@@ -48,7 +51,7 @@ svutTestCase::svutTestCase(const svUnitTest::svutTestCase& /*testCase*/)
 	throw new svutExInternalError("Can't made a copy of svutTestCase, it was forbidden.");
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class detroyer, it free the test methode register.
 **/
@@ -58,7 +61,7 @@ svutTestCase::~svutTestCase(void)
 		delete *it;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Start the test execution. It will run all the tests registerd in the test case in registration
  * order for moment.
@@ -97,7 +100,7 @@ void svutTestCase::runTestCase(svutListener * listener,svutTestFilter * filter)
 		listener->onTestCaseEnd(*this);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Run the given test method.
  * @param test Define the test method to run.
@@ -151,7 +154,7 @@ svutStatusInfo svutTestCase::runTestMethod(svutTestMethod * test)
 	return res;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the name of the test case.
 **/
@@ -160,7 +163,7 @@ std::string svutTestCase::getName(void) const
 	return this->caseName;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Add a test method to the current test case. This method may be called in the class constructor of
  * each test case via the macro SVUT_REG_TEST_FUNCTION().
@@ -171,7 +174,7 @@ void svutTestCase::registerTestMethod(svutTestMethod * test)
 	this->tests.push_back(test);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * If this method is invoqued during a test method, and this method terminate with FAILED status,
  * so the finish status may be replace by TODO status. SUCCESS status will be replaced by INDEV
@@ -187,14 +190,14 @@ void svutTestCase::MARK_AS_KNOWN_ERROR(std::string message)
 	this->tmpFailMessage = message;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /** Tag the current test case as buil by automatic registration. **/
 void svutTestCase::setAutodetected(void)
 {
 	autodtected = true;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return true is the current test case was built by the automatic test case builder.
  * This is used to know if the clean method of svutRunner must free it's memory or not.
@@ -204,7 +207,7 @@ bool svutTestCase::isAutodetected(void) const
 	return autodtected;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Return the list of test methods registers in the test case as a string list.
  * @param prefix Define if the names are prefixed by the test case name or not (using :: as separator).
@@ -220,7 +223,7 @@ std::list<std::string> svutTestCase::getTestMethods(bool prefix) const
 	return res;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the number of test methods registered in the current test case. It may help to
  * calculate progression.
@@ -230,7 +233,7 @@ unsigned int svutTestCase::getNbTests(void) const
 	return tests.size();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /*
  * Méthode permettant d'enregistrer le cas de test dans la liste des tests auto-détectés.
  * Elle est utilisée par la macro SVUT_REGISTER_TEST_CASE().

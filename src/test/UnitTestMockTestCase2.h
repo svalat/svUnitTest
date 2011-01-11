@@ -13,7 +13,7 @@
 #include <svutTestCase.h>
 #include <svutAssert.h>
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTestMockTestCase2 : public svUnitTest::svutTestCase
 {
 	public:

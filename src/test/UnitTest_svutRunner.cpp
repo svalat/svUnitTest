@@ -18,6 +18,7 @@
 #include "UnitTestMockTestCase2.h"
 #include <svutResultFormatterStdBW.h>
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 using namespace std;
 using namespace CPPUNIT_NS;
@@ -116,7 +117,7 @@ testIndev()\n";
 static const char * CST_STRING_OUTPUT_8 = "openOutput(); openTestCase(UnitTestMockTestCase2); openTestMethod(UnitTestMockTestCase2, testSuccess); closeTestMethod(UnitTestMockTestCase2, testSuccess, SUCCESS); closeTestCase(UnitTestMockTestCase2); success=1, failed=0, todo=0, indev=0, unknown=0, skiped=0; closeOutput(); ";
 
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutRunner : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutRunner);
@@ -172,7 +173,7 @@ class UnitTest_svutRunner : public TestCase
 		UnitTestMockTestCase2 * mock;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::setUp(void)
 {
 	this->formatter = new UnitTestMockResultFormater();
@@ -180,7 +181,7 @@ void UnitTest_svutRunner::setUp(void)
 	this->mock = new UnitTestMockTestCase2();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::tearDown(void)
 {
 	delete this->runner;
@@ -188,19 +189,19 @@ void UnitTest_svutRunner::tearDown(void)
 	delete this->mock;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testConstructor_default(void)
 {
 	svutRunner localRunner;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testConstructor_mode(void)
 {
 	svutRunner localRunner(SVUT_OUT_STD_BW);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testConstructor_mode_output(void)
 {
 	stringstream ss;
@@ -211,7 +212,7 @@ void UnitTest_svutRunner::testConstructor_mode_output(void)
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_0,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testConstructor_formatter(void)
 {
 	stringstream ss;
@@ -223,7 +224,7 @@ void UnitTest_svutRunner::testConstructor_formatter(void)
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_1,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testConstructor_listener(void)
 {
 	stringstream ss;
@@ -236,7 +237,7 @@ void UnitTest_svutRunner::testConstructor_listener(void)
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_1,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testConstructor_config(void)
 {
 	stringstream ss;
@@ -251,7 +252,7 @@ void UnitTest_svutRunner::testConstructor_config(void)
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_0,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testRun_1(void)
 {
 	stringstream ss;
@@ -263,7 +264,7 @@ void UnitTest_svutRunner::testRun_1(void)
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_2,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testRun_2(void)
 {
 	stringstream ss;
@@ -275,7 +276,7 @@ void UnitTest_svutRunner::testRun_2(void)
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_3,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testSetDisplay_1(void)
 {
 	stringstream ss;
@@ -287,7 +288,7 @@ void UnitTest_svutRunner::testSetDisplay_1(void)
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_0,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testSetDisplay_2(void)
 {
 	stringstream ss;
@@ -299,7 +300,7 @@ void UnitTest_svutRunner::testSetDisplay_2(void)
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_4,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testSetDisplay_3(void)
 {
 	stringstream ss;
@@ -312,7 +313,7 @@ void UnitTest_svutRunner::testSetDisplay_3(void)
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_4,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testLoadAutoDetected(void)
 {
 	stringstream ss;
@@ -327,13 +328,13 @@ void UnitTest_svutRunner::testLoadAutoDetected(void)
 	clearTestCaseRegister();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testUnloadAutoDetected(void)
 {
 	CPPUNIT_FAIL("todo");
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testRegisterTestCase(void)
 {
 	stringstream ss;
@@ -350,7 +351,7 @@ void UnitTest_svutRunner::testRegisterTestCase(void)
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_3,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testListTests_1(void )
 {
 	//TODO change this test when use listener to export the list
@@ -367,7 +368,7 @@ void UnitTest_svutRunner::testListTests_1(void )
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_6,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testListTests_2(void )
 {
 	//TODO change this test when use listener to export the list
@@ -383,7 +384,7 @@ void UnitTest_svutRunner::testListTests_2(void )
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_6,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testSetFilter(void)
 {
 	svutTestFilterBasic filter;
@@ -406,7 +407,7 @@ void UnitTest_svutRunner::testSetFilter(void)
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_7,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testConfigFilter(void)
 {
 	//TODO change this test when use listener to export the list
@@ -425,7 +426,7 @@ void UnitTest_svutRunner::testConfigFilter(void)
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_7,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testSetFilterNull(void)
 {
 	//TODO change this test when use listener to export the list
@@ -445,7 +446,7 @@ void UnitTest_svutRunner::testSetFilterNull(void)
 	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_6,ss.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunner::testFilterTestExecution(void)
 {
 	svutTestFilterBasic filter;

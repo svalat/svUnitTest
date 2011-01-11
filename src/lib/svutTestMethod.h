@@ -14,10 +14,11 @@
 #include "svutCodeLocation.h"
 #include "svutObjectMethod.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Class which describe a function into test case. Each function represent a test. This class
  * is mainly use to attach the function, his unmangle name and the require to call it into the

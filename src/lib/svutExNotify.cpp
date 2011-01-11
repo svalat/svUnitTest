@@ -9,11 +9,14 @@
 /********************  HEADERS  *********************/
 #include "svutExNotify.h"
 
+/**********************  USING  *********************/
 using namespace std;
+
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * @copydoc svutExTestStatus::svutExTestStatus
 **/
@@ -22,7 +25,7 @@ svutExNotify::svutExNotify(std::string name, const svutStatusInfo & info) throw(
 {
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor with some manual information.
  * @param name Define the name of the current notification.
@@ -35,7 +38,7 @@ svutExNotify::svutExNotify(std::string name, svutStatus status, const svutCodeLo
 {
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * @copydoc svutExTestStatus::~svutExTestStatus
 **/
@@ -43,7 +46,7 @@ svutExNotify::~svutExNotify(void ) throw()
 {
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor.
  * @param message Define a message to describe what need to be done in the test.
@@ -54,7 +57,7 @@ svutExNotifyTodo::svutExNotifyTodo(std::string message, const svutCodeLocation &
 {
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor.
  * @param message Define a message to describe what we are doing in the test.

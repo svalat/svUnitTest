@@ -14,11 +14,12 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutExNotify.h>
 
+/**********************  USING  *********************/
 using namespace std;
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutExNotify : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutExNotify);
@@ -43,7 +44,7 @@ class UnitTest_svutExNotify : public TestCase
 		svutStatusInfo info;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 UnitTest_svutExNotify::UnitTest_svutExNotify(void )
 	:location("test.cpp","test",42),
 	info(SVUT_STATUS_INDEV,"this is a test",location)
@@ -53,17 +54,17 @@ UnitTest_svutExNotify::UnitTest_svutExNotify(void )
 	info.addEntry("actual","v2");
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExNotify::setUp(void)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExNotify::tearDown(void)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExNotify::testExNotify_1(void )
 {
 	//same test than svutExTestStatus
@@ -80,7 +81,7 @@ void UnitTest_svutExNotify::testExNotify_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExNotify::testExNotify_2(void )
 {
 	//same test than svutExTestStatus
@@ -95,7 +96,7 @@ void UnitTest_svutExNotify::testExNotify_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExNotify::testExNotifyTodo(void)
 {
 	svutExNotifyTodo obj("this is a todo",location);
@@ -109,7 +110,7 @@ void UnitTest_svutExNotify::testExNotifyTodo(void)
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_TODO,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExNotify::testExNotifyIndev(void )
 {
 	svutExNotifyIndev obj("this is indev",location);

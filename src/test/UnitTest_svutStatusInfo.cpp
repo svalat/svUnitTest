@@ -15,6 +15,7 @@
 #include <svutStatusInfo.h>
 #include <sstream>
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 using namespace std;
 using namespace CPPUNIT_NS;
@@ -25,7 +26,7 @@ using namespace CPPUNIT_NS;
 #define TEST_METHODE "void test(void)"
 #define TEST_MESSAGE "this is a test"
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutStatusInfo : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutStatusInfo);
@@ -75,20 +76,20 @@ class UnitTest_svutStatusInfo : public TestCase
 		svutStatusInfo * info;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::setUp(void)
 {
 	svutCodeLocation loc(TEST_FILENAME,TEST_METHODE,TEST_LINE);
 	this->info = new svutStatusInfo(SVUT_STATUS_FAILED, TEST_MESSAGE,loc);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::tearDown(void)
 {
 	delete this->info;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testConstructor_1(void )
 {
 	svutStatusInfo empty;
@@ -98,7 +99,7 @@ void UnitTest_svutStatusInfo::testConstructor_1(void )
 	CPPUNIT_ASSERT_EQUAL(0,empty.getNbEntries());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testConstructor_2(void )
 {
 	svutCodeLocation loc(TEST_FILENAME,TEST_METHODE,TEST_LINE);
@@ -109,7 +110,7 @@ void UnitTest_svutStatusInfo::testConstructor_2(void )
 	CPPUNIT_ASSERT_EQUAL(0,copy.getNbEntries());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testAddEntry ( void )
 {
 	CPPUNIT_ASSERT_EQUAL(0U,info->getEntries().size());
@@ -119,7 +120,7 @@ void UnitTest_svutStatusInfo::testAddEntry ( void )
 	CPPUNIT_ASSERT_EQUAL("value",info->getEntries().begin()->second);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testFormatEntries ( void )
 {
 	stringstream str;
@@ -130,26 +131,26 @@ void UnitTest_svutStatusInfo::testFormatEntries ( void )
 	CPPUNIT_ASSERT_EQUAL("<name_test,value_test><name_test2,value_test2>",str.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testGetLocation ( void )
 {
 	svutCodeLocation loc(TEST_FILENAME,TEST_METHODE,TEST_LINE);
 	CPPUNIT_ASSERT_EQUAL(loc,info->getLocation());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testGetMessage ( void )
 {
 	CPPUNIT_ASSERT_EQUAL(TEST_MESSAGE,info->getMessage());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testGetStatus ( void )
 {
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,info->getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testGetEntry(void )
 {
 	info->addEntry("name_test","value_test");
@@ -157,13 +158,13 @@ void UnitTest_svutStatusInfo::testGetEntry(void )
 	CPPUNIT_ASSERT_EQUAL("",info->getEntry("unknown"));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testGetNbEntries(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,info->getNbEntries());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testOperatorEqual(void )
 {
 	svutCodeLocation loc(TEST_FILENAME,TEST_METHODE,TEST_LINE);
@@ -174,49 +175,49 @@ void UnitTest_svutStatusInfo::testOperatorEqual(void )
 	CPPUNIT_ASSERT_EQUAL(0,copy.getNbEntries());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testGetStatusName_1(void )
 {
 	svutStatusInfo info(SVUT_STATUS_SUCCESS,"",SVUT_NO_LOCATION);
 	CPPUNIT_ASSERT_EQUAL("SUCCESS",info.getStatusName());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testGetStatusName_2(void )
 {
 	svutStatusInfo info(SVUT_STATUS_FAILED,"",SVUT_NO_LOCATION);
 	CPPUNIT_ASSERT_EQUAL("FAILED",info.getStatusName());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testGetStatusName_3(void )
 {
 	svutStatusInfo info(SVUT_STATUS_TODO,"",SVUT_NO_LOCATION);
 	CPPUNIT_ASSERT_EQUAL("TODO",info.getStatusName());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testGetStatusName_4(void )
 {
 	svutStatusInfo info(SVUT_STATUS_INDEV,"",SVUT_NO_LOCATION);
 	CPPUNIT_ASSERT_EQUAL("INDEV",info.getStatusName());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testGetStatusName_5(void )
 {
 	svutStatusInfo info(SVUT_STATUS_UNKNOWN,"",SVUT_NO_LOCATION);
 	CPPUNIT_ASSERT_EQUAL("UNKNOWN",info.getStatusName());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testGetStatusName_6(void )
 {
 	svutStatusInfo info(SVUT_STATUS_SKIPED,"",SVUT_NO_LOCATION);
 	CPPUNIT_ASSERT_EQUAL("SKIPED",info.getStatusName());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testGetStatusName_static(void )
 {
 	CPPUNIT_ASSERT_EQUAL("SUCCESS",svutStatusInfo::getStatusName(SVUT_STATUS_SUCCESS));

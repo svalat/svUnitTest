@@ -51,7 +51,7 @@ static struct argp_option RS_OPTIONS[] = {
 	{ 0,0,0,0,0,0 }
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Method used to parse arguements and setup related value. This Glibc will call this metho for
  * each parameter encoutered with the given values.
@@ -112,7 +112,7 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state)
 	return 0;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Default constructeur of the config class.
 **/
@@ -121,7 +121,7 @@ svutRunnerConfig::svutRunnerConfig(void)
 	this->init();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Close all the inner data of the class at destroy time. Mainly the output stream if
  * one is defined.
@@ -131,7 +131,7 @@ svutRunnerConfig::~svutRunnerConfig(void)
 	this->closeFile();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Close all the inner data of the class at destroy time. Mainly the output stream if
  * one is defined.
@@ -146,7 +146,7 @@ void svutRunnerConfig::closeFile(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Constructor accepting main arguments to autmatically setup the values from programe arguments.
  * @param argc Define the number of parameters passed to the program.
@@ -158,7 +158,7 @@ svutRunnerConfig::svutRunnerConfig(int argc,  const char * argv[])
 	this->loadParams(argc,argv);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Methode used to call the glibc parser to extract values from program calling arguments.
  * @param argc Define the number of parameters passed to the program.
@@ -178,7 +178,7 @@ void svutRunnerConfig::loadParams(int argc, const char * argv[])
 	freeClonedArgv(argc,localArgv);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  *  @return Return the display mode to use.
 **/
@@ -187,7 +187,7 @@ svutOutputMode svutRunnerConfig::getMode(void) const
 	return mode;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return true if need to display success tests or not.
 **/
@@ -196,7 +196,7 @@ bool svutRunnerConfig::hasDisplaySuccess(void) const
 	return displaySuccess;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return true if the details need to be displayed on test failure.
 **/
@@ -205,7 +205,7 @@ bool svutRunnerConfig::hasDisplayDetails(void) const
 	return displayDetails;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Initiate options with their default values.
 **/
@@ -220,7 +220,7 @@ void svutRunnerConfig::init(void)
 	externalOutputStream = NULL;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Enable or disable the display of details in case of test failure.
  * @param state True to display, false to not.
@@ -230,7 +230,7 @@ void svutRunnerConfig::setDisplayDetails(bool state)
 	displayDetails = state;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Enable or disable the display of success tests.
  * @param state True to display, false to hide.
@@ -240,7 +240,7 @@ void svutRunnerConfig::setDisplaySuccess(bool state)
 	displaySuccess = state;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Setup the display output mode to use.
  * @param mode Define the selected output mode.
@@ -250,7 +250,7 @@ void svutRunnerConfig::setMode(svutOutputMode mode)
 	this->mode = mode;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the action to execute.
 **/
@@ -259,7 +259,7 @@ svutRunnerAction svutRunnerConfig::getAction(void) const
 	return this->action;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Setup the action to execut when running the test suite.
  * @param action Define the action which may be done by the test runner.
@@ -269,7 +269,7 @@ void svutRunnerConfig::setAction(svutRunnerAction action)
 	this->action = action;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Change some values in arguement list to be fully compatible with QT unit tests (in order to
  * support simple integration in KDevelop test interface).
@@ -290,7 +290,7 @@ void svutRunnerConfig::qtCompat(int argc, char * argv[])
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Define the output file to use. If not defined, use the standard output (default value).
  * @param filename Define the output file to use.
@@ -302,12 +302,12 @@ void svutRunnerConfig::setOutput(std::string filename)
 	this->externalOutputStream = NULL;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Define an external output stream totaly managed by the use.
  * @param stream Define the output stream to use.
 **/
-void svutRunnerConfig::setOutput(ostream & stream)
+void svutRunnerConfig::setOutput(std::ostream & stream)
 {
 	this->closeFile();
 	this->filename = "";
@@ -315,7 +315,7 @@ void svutRunnerConfig::setOutput(ostream & stream)
 }
 
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Method used to get the output stream to use when running the tests. This permit to redirect
  * the output stream where we want, mainly to a file.
@@ -344,7 +344,7 @@ std::ostream & svutRunnerConfig::getOutput(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Add an entry to the basic test fileter.
  * @param caseName Define the test case to accept ; empty to say 'all'.
@@ -355,7 +355,7 @@ void svutRunnerConfig::addBasicAccept(std::string caseName,std::string function)
 	filter.addAccepted(caseName,function);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Add an entry to the basic test fileter.
  * @param value Define the name of the tests to accept following the format caseName::function.
@@ -385,7 +385,7 @@ bool svutRunnerConfig::addBasicAccept(std::string value)
 	return true;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the test filter to use.
 **/
@@ -394,7 +394,7 @@ svutTestFilter & svutRunnerConfig::getFilter(void)
 	return filter;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Send the configuration object to output stream. This is mainly to help for debugging.
  * @param out Define the output stream to use.
@@ -415,12 +415,13 @@ std::ostream & operator <<(std::ostream & out,const svutRunnerConfig & config)
 	return out;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Methode used to clone the given argument of program for internal use. This is to avoid issues
  * if apply changes int the argument list, so we done chanes only on our internal copy.
  * @param argc Define the number of arguements given to the program.
  * @param argv Define the list of arguments given to the program.
+ * @return Return the cloned array.
 **/
 char** svutRunnerConfig::cloneArgv(int argc, const char * argv[]) const
 {
@@ -441,7 +442,7 @@ char** svutRunnerConfig::cloneArgv(int argc, const char * argv[]) const
 	return res;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Methode used to free athe cloned arguments allocated by cloneArgv().
  * @param argc Define the number of arguements given to the program.

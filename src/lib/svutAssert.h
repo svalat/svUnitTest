@@ -15,6 +15,7 @@
 #include "svutExNotify.h"
 #include "svutAsserter.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
@@ -47,7 +48,8 @@ namespace svUnitTest
  * @param value Define the pointer value.
 **/
 #define SVUT_ASSERT_NULL(value) \
-	if (((void*)(value)) != NULL) throw svUnitTest::svutExAssertFailNullPointer(true,SVUT_CODE_LOCATION)
+	if (((void*)(value)) != NULL) \
+		throw svUnitTest::svutExAssertFailNullPointer(true,SVUT_CODE_LOCATION)
 
 
 /********************  MACRO  ***********************/
@@ -58,7 +60,8 @@ namespace svUnitTest
  * @param value Define the pointer value.
 **/
 #define SVUT_ASSERT_NOT_NULL(value) \
-	if (((void*)(value)) == NULL) throw svUnitTest::svutExAssertFailNullPointer(false,SVUT_CODE_LOCATION)
+	if (((void*)(value)) == NULL) \
+		throw svUnitTest::svutExAssertFailNullPointer(false,SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
 /**
@@ -137,8 +140,8 @@ namespace svUnitTest
 /**
  * Macro used to assert that two variables pointer to the same object, here it simply compare the
  * addresses of the pointer. This is more for readibility of the test than a requirement as
- * SVUT_ASSERT_NOT_EQUAL can made the job except for char * as it support a special override to use it
- * as c string and not simple pointers.
+ * SVUT_ASSERT_NOT_EQUAL can made the job except for char * as it support a special override to use
+ * it as c string and not simple pointers.
  *
  * In case of failure, an exception of type svutExAssertFailEqual was throwed. This macro was built
  * to be used in unit test cases.
@@ -239,7 +242,8 @@ namespace svUnitTest
 
 /********************  MACRO  ***********************/
 /**
- * Check the the given piece of code didn't thow exception. It catch all exception without filtering types.
+ * Check the the given piece of code didn't thow exception. It catch all exception without filtering
+ * types.
  * @param what Define the piece of code to run and on which to catch the exception.
  **/
 #define SVUT_ASSERT_MAY_NOT_THROW(what) \

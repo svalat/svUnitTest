@@ -13,6 +13,7 @@
 #include "svutListener.h"
 #include "svutResultSummary.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 

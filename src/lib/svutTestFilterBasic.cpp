@@ -14,11 +14,14 @@
 #include <iostream>
 #include "svutTestFilterBasic.h"
 
+/**********************  USING  *********************/
 using namespace std;
+
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Default constructor of the class.
 **/
@@ -26,7 +29,7 @@ svutTestFilterBasic::svutTestFilterBasic(void)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 bool svutTestFilterBasic::accept(std::string caseName,std::string methode) const
 {
 	//trivial
@@ -41,7 +44,7 @@ bool svutTestFilterBasic::accept(std::string caseName,std::string methode) const
 	return false;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 bool svutTestFilterBasic::accept(std::string caseName) const
 {
 	//trivial
@@ -56,13 +59,13 @@ bool svutTestFilterBasic::accept(std::string caseName) const
 	return false;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Add a rule to accept a specific method. Caution, you cant let the caseName AND methodName
  * empty. On such error, the method simply return.
  * @param caseName Define the name of the test case to accept. If empty, all test cases will
  * be accepted.
- * @param methode Define the name of the method to accept. If empty, all methods of the test case
+ * @param methodName Define the name of the method to accept. If empty, all methods of the test case
  * will be accepted.
 **/
 void svutTestFilterBasic::addAccepted(std::string caseName,std::string methodName)
@@ -75,7 +78,7 @@ void svutTestFilterBasic::addAccepted(std::string caseName,std::string methodNam
 	filters.push_back(entry);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Clear all the rules into the filter. So the filter will accept all requests.
 **/

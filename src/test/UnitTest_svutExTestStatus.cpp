@@ -14,11 +14,12 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutExTestStatus.h>
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 using namespace std;
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutExTestStatus : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutExTestStatus);
@@ -50,7 +51,7 @@ class UnitTest_svutExTestStatus : public TestCase
 		const svutExTestStatus * cstStatus;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExTestStatus::setUp(void)
 {
 	svutStatusInfo info(SVUT_STATUS_INDEV,"this is a test",svutCodeLocation::svutCodeLocation("file.cpp","test()",42));
@@ -60,13 +61,13 @@ void UnitTest_svutExTestStatus::setUp(void)
 	this->cstStatus = status;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExTestStatus::tearDown(void)
 {
 	delete this->status;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExTestStatus::testConstructor_1(void )
 {
 	svutStatusInfo info(SVUT_STATUS_INDEV,"this is a test",svutCodeLocation::svutCodeLocation("file.cpp","test()",42));
@@ -85,7 +86,7 @@ void UnitTest_svutExTestStatus::testConstructor_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExTestStatus::teesConsturctor_2(void )
 {
 	svutExTestStatus obj("TEST",SVUT_STATUS_INDEV,svutCodeLocation::svutCodeLocation("file.cpp","test()",42),"this is a test");
@@ -99,13 +100,13 @@ void UnitTest_svutExTestStatus::teesConsturctor_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExTestStatus::testGetExceptionName(void )
 {
 	CPPUNIT_ASSERT_EQUAL("TEST",status->getExceptionName());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExTestStatus::testGetInfos(void )
 {
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,status->getInfos().getStatus());
@@ -120,7 +121,7 @@ void UnitTest_svutExTestStatus::testGetInfos(void )
 	CPPUNIT_ASSERT_EQUAL("test",status->getInfos().getEntry("test"));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExTestStatus::testGetInfos_const(void )
 {
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,cstStatus->getInfos().getStatus());
@@ -131,19 +132,19 @@ void UnitTest_svutExTestStatus::testGetInfos_const(void )
 	CPPUNIT_ASSERT_EQUAL("v2",cstStatus->getInfos().getEntry("actual"));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExTestStatus::testGetMessage(void )
 {
 	CPPUNIT_ASSERT_EQUAL("this is a test",status->getMessage());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExTestStatus::testGetStatus(void )
 {
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,status->getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutExTestStatus::testWhat(void )
 {
 	string tmp = "TEST : this is a test : \n  - actual : v2\n  - expected : v1\n";

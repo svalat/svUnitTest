@@ -16,9 +16,10 @@
 // #include <cppunit/XmlOutputter.h>
 #include <cppunit/CompilerOutputter.h>
 
+/**********************  USING  *********************/
 using namespace CppUnit;
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 int main(int /*argc*/, char* /*argv*/[])
 {
 	// Get the top level suite from the registry

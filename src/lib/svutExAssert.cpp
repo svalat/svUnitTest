@@ -9,11 +9,14 @@
 /********************  HEADERS  *********************/
 #include "svutExAssert.h"
 
+/**********************  USING  *********************/
 using namespace std;
+
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * @copydoc svutExTestStatus::svutExTestStatus
 **/
@@ -22,7 +25,7 @@ svutExAssertFail::svutExAssertFail(std::string name, const svutStatusInfo & info
 {
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor with some manual information.
  * @param name Define the name of the current notification.
@@ -35,7 +38,7 @@ svutExAssertFail::svutExAssertFail(std::string name, svutStatus status, const sv
 {
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor for boolean failure.
  * @param expected Define the expected value.
@@ -54,7 +57,7 @@ svutExAssertFailBool::svutExAssertFailBool(bool expected, const svutCodeLocation
 	}
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor for boolean failure.
  * @param expectNull Define the expected value, true for wating NULL, otherwise, false.
@@ -73,7 +76,7 @@ svutExAssertFailNullPointer::svutExAssertFailNullPointer(bool expectNull, svutCo
 	}
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor for equality failure.
  * @param expectTestRes Define if it except equal (true) values or not (false).
@@ -93,7 +96,7 @@ svutExAssertFailEqual::svutExAssertFailEqual(bool expectTestRes, std::string exp
 	info.addEntry("Actual",actual);
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor for custom exception failure.
  * @param message Define a message to describe the reason of failure.
@@ -104,7 +107,7 @@ svutExAssertFailCustom::svutExAssertFailCustom(std::string message, svutCodeLoca
 {
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor for non reachable code.
  * @param location Define the location from which it was emitted and which may not be reached by
@@ -115,7 +118,7 @@ svutExAssertFailNotExec::svutExAssertFailNotExec(svutCodeLocation location) thro
 {
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor for exception assertion.
  * @param expected Define the name of the expected exception (use "NONE" if not except one).

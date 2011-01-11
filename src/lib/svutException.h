@@ -6,19 +6,18 @@
              LICENSE  : CeCILL-C
 *****************************************************/
 
-
 #ifndef SVUT_EXCEPTION_HEADER
 #define SVUT_EXCEPTION_HEADER
-
 
 /********************  HEADERS  *********************/
 #include <exception>
 #include <string>
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Base class for exception used by the unit test library.
  * This class is just an override of std::exception to base all library exception on the same
@@ -40,7 +39,7 @@ class svutException : public std::exception
 		std::string message;
 };
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Exception used for internal error in the library.
  * @brief Class used to throw exception on internal error.

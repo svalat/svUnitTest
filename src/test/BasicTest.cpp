@@ -12,9 +12,10 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 
+/**********************  USING  *********************/
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class BasicTest : public TestCase
 {
 	CPPUNIT_TEST_SUITE(BasicTest);
@@ -29,17 +30,17 @@ class BasicTest : public TestCase
 		void testHelloWorld(void);
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void BasicTest::setUp(void)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void BasicTest::tearDown(void)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void BasicTest::testHelloWorld(void)
 {
 }

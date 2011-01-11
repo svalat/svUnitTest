@@ -9,10 +9,11 @@
 /********************  HEADERS  *********************/
 #include "svutTestMethod.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor of the test.
  * @param name Define the name of the test (which the name of the function by convention).
@@ -27,7 +28,7 @@ svutTestMethod::svutTestMethod(std::string name,svutObjectMethod * methode,svutC
 	this->methode = methode;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class destroyer, clear the inner memory.
 **/
@@ -37,7 +38,7 @@ svutTestMethod::~svutTestMethod()
 		delete this->methode;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the name of the test in C++ string format.
 **/
@@ -46,7 +47,7 @@ std::string svutTestMethod::getName(void) const
 	return this->name;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Call the test to made it run.
 **/
@@ -55,7 +56,7 @@ void svutTestMethod::call(void)
 	this->methode->call();
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the source location of the test.
 **/

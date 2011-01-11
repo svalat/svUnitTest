@@ -14,6 +14,7 @@
 #include "svutListenerSummary.h"
 #include "svutResultFormatter.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 

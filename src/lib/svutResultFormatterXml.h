@@ -13,6 +13,7 @@
 #include <ostream>
 #include "svutResultFormatter.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
@@ -35,6 +36,7 @@ class svutResultFormatterXml : public svutResultFormatter
 		virtual void closeTestMethod(const svutTestCase & testCase,const svutTestMethod & meth,const svutStatusInfo & status);
 		virtual void printSummary(svutResultSummary summary);
 	protected:
+		/** Pointer to the output stream to use. **/
 		std::ostream * out;
 		void printAssertInfo(const svUnitTest::svutStatusInfo & status);
 		void printLocation(const svUnitTest::svutCodeLocation & location);

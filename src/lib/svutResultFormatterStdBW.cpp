@@ -10,12 +10,14 @@
 #include "svutResultFormatterStdBW.h"
 #include <iomanip>
 
+/**********************  USING  *********************/
 using namespace std;
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Constructor of the class.
  * @param out Define the output stream to use.
@@ -25,7 +27,7 @@ svutResultFormatterStdBW::svutResultFormatterStdBW(std::ostream& out)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterStdBW::printMethodAndStatus(std::ostream& out, std::string name, svutStatus status)
 {
 	//sprintf(buffer," * %-40s     [ %s ]\n",testName.c_str(),statusName.c_str());
@@ -34,7 +36,7 @@ void svutResultFormatterStdBW::printMethodAndStatus(std::ostream& out, std::stri
 		<< "     [ " << svutStatusInfo::getStatusName(status) << " ]" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterStdBW::printSummaryStat(std::ostream& out, svutStatus status, unsigned int nb, unsigned int tot)
 {
 	 //sprintf(buffer,"|  %-9s: %4d (%3d %%)  |\n",name,nb,100*nb/tot);
@@ -51,7 +53,7 @@ void svutResultFormatterStdBW::printSummaryStat(std::ostream& out, svutStatus st
 		<< setw(4) << right << nb << " (" << setw(3) << right << perc << " %)  |" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterStdBW::printSummaryFinalStatus(std::ostream& out, svutStatus status)
 {
 	//sprintf(buffer,"|  STATUS   : %-12s  |\n",name);

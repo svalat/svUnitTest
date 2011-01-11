@@ -9,10 +9,11 @@
 /********************  HEADERS  *********************/
 #include "svutListenerDirectOutputter.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Constructor of the class, it only init the formatter pointer inside the listener.
  * @param formatter Define the formatter to use for displaying.
@@ -24,14 +25,14 @@ svutListenerDirectOutputter::svutListenerDirectOutputter(svutResultFormatter& fo
 }
 
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutListenerDirectOutputter::onGlobalStart(void )
 {
 	svutListenerSummary::onGlobalStart();
 	formatter->openOutput();
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutListenerDirectOutputter::onGlobalEnd(void )
 {
 	svutListenerSummary::onGlobalEnd();
@@ -39,28 +40,28 @@ void svutListenerDirectOutputter::onGlobalEnd(void )
 	formatter->closeOutput();
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutListenerDirectOutputter::onTestCaseStart(const svUnitTest::svutTestCase& testCase)
 {
 	svutListenerSummary::onTestCaseStart(testCase);
 	formatter->openTestCase(testCase);
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutListenerDirectOutputter::onTestCaseEnd(const svUnitTest::svutTestCase& testCase)
 {
 	svutListenerSummary::onTestCaseEnd(testCase);
 	formatter->closeTestCase(testCase);
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutListenerDirectOutputter::onTestMethodStart(const svutTestCase & testCase,const svUnitTest::svutTestMethod& method)
 {
 	svutListenerSummary::onTestMethodStart(testCase,method);
 	formatter->openTestMethod(testCase,method);
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutListenerDirectOutputter::onTestMethodEnd(const svutTestCase & testCase,const svUnitTest::svutTestMethod& method, svutStatusInfo status)
 {
 	svutListenerSummary::onTestMethodEnd(testCase,method,status);

@@ -12,15 +12,13 @@
 /********************  HEADERS  *********************/
 #include <string>
 #include <list>
-//#include "svutTestFilter.h"
 #include "svutTestMethod.h"
 #include "svutExAssert.h"
 #include "svutExNotify.h"
-//#include "svutResultFormater.h"
-//#include "svutAutoRegister.h"
 #include "svutAutoRegister.h"
 #include "svutTestFilter.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
@@ -53,10 +51,10 @@ namespace svUnitTest
 /********************  GLOBALS  **********************/
 //extern list<class svutTestCaseBuilder *> __SVUT_autoFoundTests__;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class svutListener;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Define a test case. A test case is composed of multiple test methode which tests propoerties
  * and interactions of an object. Each test method is registered via svutTestFunction.

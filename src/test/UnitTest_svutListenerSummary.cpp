@@ -15,11 +15,12 @@
 #include <svutListenerSummary.h>
 #include "UnitTestMockTestCase2.h"
 
+/**********************  USING  *********************/
 using namespace std;
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutListenerSummary : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutListenerSummary);
@@ -40,7 +41,7 @@ class UnitTest_svutListenerSummary : public TestCase
 		UnitTestMockTestCase2 * testCase;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerSummary::setUp(void)
 {
 	listener = new svutListenerSummary();
@@ -48,14 +49,14 @@ void UnitTest_svutListenerSummary::setUp(void)
 	testCase->useTests(UnitTestMockTestCase2::REGISTER_ALL);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerSummary::tearDown(void)
 {
 	delete testCase;
 	delete listener;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerSummary::testGetSummary(void )
 {
 	svutResultSummary summary = listener->getSummary();
@@ -67,7 +68,7 @@ void UnitTest_svutListenerSummary::testGetSummary(void )
 	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_TODO));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerSummary::testEvents_1(void )
 {
 	svutResultSummary summary = listener->getSummary();
@@ -88,7 +89,7 @@ void UnitTest_svutListenerSummary::testEvents_1(void )
 	CPPUNIT_ASSERT_EQUAL(4,summary.getCount(SVUT_STATUS_TODO));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerSummary::testEvents_2(void )
 {
 	svutResultSummary summary = listener->getSummary();

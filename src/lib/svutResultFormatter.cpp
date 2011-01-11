@@ -9,10 +9,14 @@
 /********************  HEADERS  *********************/
 #include "svutResultFormatter.h"
 
+/**********************  USING  *********************/
 using namespace std;
-using namespace svUnitTest;
 
-/********************  METHOD  **********************/
+/********************  NAMESPACE  *******************/
+namespace svUnitTest
+{
+
+/*******************  FUNCTION  *********************/
 svutResultFormatter::svutResultFormatter(void )
 {
 	this->displayDetails = true;
@@ -21,7 +25,7 @@ svutResultFormatter::svutResultFormatter(void )
 }
 
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Activate of desactivate the display of error details.
  * @param state True to activate, false otherwise.
@@ -31,7 +35,7 @@ void svutResultFormatter::setDisplayDetails(bool state)
 	this->displayDetails = state;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Activate of desactivate the display of fulle name (testCaseName::methodName). Or display only
  * the method name.
@@ -42,7 +46,7 @@ void svutResultFormatter::setDisplayFullName(bool state)
 	this->displayFullName = state;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Activate of desactivate the display of success.
  * @param state True to activate, false otherwise.
@@ -50,4 +54,6 @@ void svutResultFormatter::setDisplayFullName(bool state)
 void svutResultFormatter::setDisplaySuccess(bool state)
 {
 	this->displaySuccess = state;
+}
+
 }

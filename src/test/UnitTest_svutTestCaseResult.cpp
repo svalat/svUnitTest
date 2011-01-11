@@ -16,10 +16,11 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutTestCase.h>
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTestsvutTestCaseResult : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTestsvutTestCaseResult);
@@ -55,21 +56,21 @@ class UnitTestsvutTestCaseResult : public TestCase
 		UnitTestMockTestCase2 * testCase;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutTestCaseResult::setUp(void)
 {
 	this->listener = new UnitTestMockListener();
 	this->testCase = new UnitTestMockTestCase2();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutTestCaseResult::tearDown(void)
 {
 	delete this->listener;
 	delete this->testCase;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutTestCaseResult::testSuccess(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -81,7 +82,7 @@ void UnitTestsvutTestCaseResult::testSuccess(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_SUCCESS,listener->finalResults["testSuccess"].getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutTestCaseResult::testFailure(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -93,7 +94,7 @@ void UnitTestsvutTestCaseResult::testFailure(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,listener->finalResults["testFailure"].getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutTestCaseResult::testIndev(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -105,7 +106,7 @@ void UnitTestsvutTestCaseResult::testIndev(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,listener->finalResults["testIndev"].getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutTestCaseResult::testTodo(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -117,7 +118,7 @@ void UnitTestsvutTestCaseResult::testTodo(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_TODO,listener->finalResults["testTodo"].getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutTestCaseResult::testUnknown_1(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -129,7 +130,7 @@ void UnitTestsvutTestCaseResult::testUnknown_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_UNKNOWN,listener->finalResults["testUnknown_1"].getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutTestCaseResult::testUnknown_2(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -141,7 +142,7 @@ void UnitTestsvutTestCaseResult::testUnknown_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_UNKNOWN,listener->finalResults["testUnknown_2"].getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutTestCaseResult::testFailIsTodo_1(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -153,7 +154,7 @@ void UnitTestsvutTestCaseResult::testFailIsTodo_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_TODO,listener->finalResults["testFailIsTodo_1"].getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutTestCaseResult::testFailIsTodo_2(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -165,7 +166,7 @@ void UnitTestsvutTestCaseResult::testFailIsTodo_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_TODO,listener->finalResults["testFailIsTodo_2"].getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutTestCaseResult::testFailIsTodo_3(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -177,7 +178,7 @@ void UnitTestsvutTestCaseResult::testFailIsTodo_3(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_TODO,listener->finalResults["testFailIsTodo_3"].getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutTestCaseResult::testSuccessIsIndev(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);

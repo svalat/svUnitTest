@@ -10,15 +10,16 @@
 #include <svutTestMethod.h>
 #include "UnitTestMockListener.h"
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 UnitTestMockListener::UnitTestMockListener(void )
 {
 	mockReset();
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockListener::mockReset(void )
 {
 	mockTime = 0;
@@ -30,37 +31,37 @@ void UnitTestMockListener::mockReset(void )
 	mockEvents.meth_start = -1;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockListener::onGlobalStart(void )
 {
 	mockEvents.global_start = mockTime++;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockListener::onGlobalEnd(void )
 {
 	mockEvents.global_end = mockTime++;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockListener::onTestCaseStart(const svUnitTest::svutTestCase& /*testCase*/)
 {
 	mockEvents.case_start = mockTime++;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockListener::onTestCaseEnd(const svUnitTest::svutTestCase& /*testCase*/)
 {
 	mockEvents.case_end = mockTime++;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockListener::onTestMethodStart(const svUnitTest::svutTestCase & /*testCase*/,const svUnitTest::svutTestMethod& /*method*/)
 {
 	mockEvents.meth_start = mockTime++;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void UnitTestMockListener::onTestMethodEnd(const svUnitTest::svutTestCase & /*testCase*/,const svUnitTest::svutTestMethod& method, svUnitTest::svutStatusInfo status)
 {
 	mockEvents.meth_end = mockTime++;

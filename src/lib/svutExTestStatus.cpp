@@ -11,12 +11,14 @@
 #include <cstring>
 #include "svutExTestStatus.h"
 
+/**********************  USING  *********************/
 using namespace std;
-using namespace std;
+
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor.
  * @param name Define the name of the current notification.
@@ -28,7 +30,7 @@ svutExTestStatus::svutExTestStatus(std::string name, const svUnitTest::svutStatu
 	this->name = name;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor.
  * @param name Define the name of the current notification.
@@ -43,7 +45,7 @@ svutExTestStatus::svutExTestStatus(std::string name, svutStatus status, svutCode
 }
 
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class destructor.
 **/
@@ -51,7 +53,7 @@ svutExTestStatus::~svutExTestStatus(void ) throw()
 {
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the name of the notification (eg : ASSERT:FAILED, NOTIFY:INDEV).
 **/
@@ -60,7 +62,7 @@ std::string svutExTestStatus::getExceptionName(void ) const
 	return this->name;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the global informations of the notification in a constant way.
 **/
@@ -69,7 +71,7 @@ const svUnitTest::svutStatusInfo& svutExTestStatus::getInfos(void ) const
 	return info;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the global informations of the notification in a modifiable way.
 **/
@@ -79,7 +81,7 @@ svutStatusInfo& svutExTestStatus::getInfos(void )
 }
 
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the status related to this notification.
 **/
@@ -88,7 +90,7 @@ svutStatus svutExTestStatus::getStatus(void ) const
 	return info.getStatus();
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return To be compatible with std::exception, return al the information as a string.
 **/
@@ -106,7 +108,7 @@ const char* svutExTestStatus::what() const throw()
 	return buffer;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the inner message which describe the exception.
 **/

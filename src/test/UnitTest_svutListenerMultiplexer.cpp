@@ -16,10 +16,11 @@
 #include "UnitTestMockListener.h"
 #include "UnitTestMockTestCase.h"
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutListenerMultiplexer : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutListenerMultiplexer);
@@ -57,7 +58,7 @@ class UnitTest_svutListenerMultiplexer : public TestCase
 		UnitTestMockListener * mock3;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::setUp(void)
 {
 	obj = new svutListenerMultiplexer();
@@ -68,7 +69,7 @@ void UnitTest_svutListenerMultiplexer::setUp(void)
 	obj->addListener(mock2);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::tearDown(void)
 {
 	delete obj;
@@ -77,7 +78,7 @@ void UnitTest_svutListenerMultiplexer::tearDown(void)
 	delete mock3;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testOnGlobalStart(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,mock1->mockTime);
@@ -91,7 +92,7 @@ void UnitTest_svutListenerMultiplexer::testOnGlobalStart(void )
 	CPPUNIT_ASSERT_EQUAL(0,mock2->mockEvents.global_start);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testOnGlobalEnd(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,mock1->mockTime);
@@ -105,7 +106,7 @@ void UnitTest_svutListenerMultiplexer::testOnGlobalEnd(void )
 	CPPUNIT_ASSERT_EQUAL(0,mock2->mockEvents.global_end);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testOnTestCaseStart(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,mock1->mockTime);
@@ -120,7 +121,7 @@ void UnitTest_svutListenerMultiplexer::testOnTestCaseStart(void )
 	CPPUNIT_ASSERT_EQUAL(0,mock2->mockEvents.case_start);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testOnTestCaseEnd(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,mock1->mockTime);
@@ -135,7 +136,7 @@ void UnitTest_svutListenerMultiplexer::testOnTestCaseEnd(void )
 	CPPUNIT_ASSERT_EQUAL(0,mock2->mockEvents.case_end);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testOnTestMethodStart(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,mock1->mockTime);
@@ -151,7 +152,7 @@ void UnitTest_svutListenerMultiplexer::testOnTestMethodStart(void )
 	CPPUNIT_ASSERT_EQUAL(0,mock2->mockEvents.meth_start);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testOnTestMethodEnd(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,mock1->mockTime);
@@ -168,13 +169,13 @@ void UnitTest_svutListenerMultiplexer::testOnTestMethodEnd(void )
 	CPPUNIT_ASSERT_EQUAL(0,mock2->mockEvents.meth_end);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testCountListener(void )
 {
 	CPPUNIT_ASSERT_EQUAL(2,obj->countListener());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testAddListener(void )
 {
 	CPPUNIT_ASSERT_EQUAL(2,obj->countListener()),
@@ -182,7 +183,7 @@ void UnitTest_svutListenerMultiplexer::testAddListener(void )
 	CPPUNIT_ASSERT_EQUAL(3,obj->countListener());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testRemoveListener_good(void )
 {
 	try {
@@ -194,7 +195,7 @@ void UnitTest_svutListenerMultiplexer::testRemoveListener_good(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testRemoveListener_bad(void )
 {
 	CPPUNIT_ASSERT_EQUAL(2,obj->countListener());

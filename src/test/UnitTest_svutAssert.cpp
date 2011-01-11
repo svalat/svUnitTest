@@ -15,11 +15,12 @@
 #include <svutAssert.h>
 #include <svutExNotify.h>
 
+/**********************  USING  *********************/
 using namespace std;
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutAssert : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutAssert);
@@ -123,19 +124,19 @@ struct UnitTestCustoType
 	int value2;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 static bool asserterOperatorEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
 {
 	return (v1.value1 == v2.value1 && v1.value2 == v2.value2);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 static bool asserterOperatorNotEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
 {
 	return (v1.value1 != v2.value1 || v1.value2 != v2.value2);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 static std::string asserterToString(const UnitTestCustoType & value)
 {
 	std::stringstream res;
@@ -143,17 +144,17 @@ static std::string asserterToString(const UnitTestCustoType & value)
 	return res.str();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::setUp(void)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::tearDown(void)
 {
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertTrue_good(void )
 {
 	try {
@@ -165,7 +166,7 @@ void UnitTest_svutAssert::testMacroAssertTrue_good(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertTrue_bad(void )
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -181,7 +182,7 @@ void UnitTest_svutAssert::testMacroAssertTrue_bad(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertFalse_good(void )
 {
 	try {
@@ -193,7 +194,7 @@ void UnitTest_svutAssert::testMacroAssertFalse_good(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertFalse_bad(void )
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -209,7 +210,7 @@ void UnitTest_svutAssert::testMacroAssertFalse_bad(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNull_good(void )
 {
 	try {
@@ -221,7 +222,7 @@ void UnitTest_svutAssert::testMacroAssertNull_good(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNull_bad(void )
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -237,7 +238,7 @@ void UnitTest_svutAssert::testMacroAssertNull_bad(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotNull_good(void )
 {
 	try {
@@ -249,7 +250,7 @@ void UnitTest_svutAssert::testMacroAssertNotNull_good(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotNull_bad(void )
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -265,7 +266,7 @@ void UnitTest_svutAssert::testMacroAssertNotNull_bad(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertEqual_int_good(void)
 {
 	try {
@@ -277,7 +278,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_int_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertEqual_int_bad(void)
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -293,7 +294,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_int_bad(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertEqual_cstr_good(void)
 {
 	try {
@@ -305,7 +306,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_cstr_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertEqual_cstr_bad(void)
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -321,7 +322,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_cstr_bad(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertEqual_custotype_good(void)
 {
 	try {
@@ -335,7 +336,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_custotype_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertEqual_custotype_bad(void)
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 4);
@@ -353,7 +354,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_custotype_bad(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotEqual_int_good(void)
 {
 	try {
@@ -365,7 +366,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_int_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotEqual_int_bad(void)
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -381,7 +382,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_int_bad(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotEqual_cstr_good(void)
 {
 	try {
@@ -393,7 +394,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_cstr_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotEqual_cstr_bad(void)
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -409,7 +410,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_cstr_bad(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotEqual_custotype_good(void)
 {
 	try {
@@ -423,7 +424,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_custotype_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotEqual_custotype_bad(void)
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 4);
@@ -441,7 +442,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_custotype_bad(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertEqualType_int_good(void)
 {
 	try {
@@ -453,7 +454,7 @@ void UnitTest_svutAssert::testMacroAssertEqualType_int_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotEqualType_int_good(void)
 {
 	try {
@@ -465,7 +466,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqualType_int_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertEqualType_cstr_good(void)
 {
 	try {
@@ -477,7 +478,7 @@ void UnitTest_svutAssert::testMacroAssertEqualType_cstr_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotEqualType_cstr_good(void)
 {
 	try {
@@ -489,7 +490,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqualType_cstr_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertSame_good(void)
 {
 	try {
@@ -502,7 +503,7 @@ void UnitTest_svutAssert::testMacroAssertSame_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertSame_bad(void)
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 4);
@@ -520,7 +521,7 @@ void UnitTest_svutAssert::testMacroAssertSame_bad(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotSame_good(void)
 {
 	try {
@@ -534,7 +535,7 @@ void UnitTest_svutAssert::testMacroAssertNotSame_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotSame_bad(void)
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 3);
@@ -551,7 +552,7 @@ void UnitTest_svutAssert::testMacroAssertNotSame_bad(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertFailCustom(void )
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -566,7 +567,7 @@ void UnitTest_svutAssert::testMacroAssertFailCustom(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertTodo(void )
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -581,7 +582,7 @@ void UnitTest_svutAssert::testMacroAssertTodo(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertIndev(void )
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -596,7 +597,7 @@ void UnitTest_svutAssert::testMacroAssertIndev(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotExec(void )
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -610,7 +611,7 @@ void UnitTest_svutAssert::testMacroAssertNotExec(void )
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertThrow_good(void)
 {
 	try {
@@ -622,7 +623,7 @@ void UnitTest_svutAssert::testMacroAssertThrow_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertThrow_another(void)
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -638,7 +639,7 @@ void UnitTest_svutAssert::testMacroAssertThrow_another(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertThrow_notthrow(void)
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -654,7 +655,7 @@ void UnitTest_svutAssert::testMacroAssertThrow_notthrow(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertThrowSomething_good(void)
 {
 	try {
@@ -666,7 +667,7 @@ void UnitTest_svutAssert::testMacroAssertThrowSomething_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertThrowSomething_bad(void)
 {
 	int a=10;
@@ -683,7 +684,7 @@ void UnitTest_svutAssert::testMacroAssertThrowSomething_bad(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotThrow_good(void)
 {
 	try {
@@ -695,7 +696,7 @@ void UnitTest_svutAssert::testMacroAssertNotThrow_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotThrow_bad(void)
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
@@ -711,7 +712,7 @@ void UnitTest_svutAssert::testMacroAssertNotThrow_bad(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertNotThrow_others(void)
 {
 	try {
@@ -723,7 +724,7 @@ void UnitTest_svutAssert::testMacroAssertNotThrow_others(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertMayNotThrow_good(void)
 {
 	try {
@@ -735,7 +736,7 @@ void UnitTest_svutAssert::testMacroAssertMayNotThrow_good(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutAssert::testMacroAssertMayNotThrow_bad(void)
 {
 	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);

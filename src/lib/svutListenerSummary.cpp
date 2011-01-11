@@ -9,15 +9,16 @@
 /********************  HEADERS  *********************/
 #include "svutListenerSummary.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 svutListenerSummary::svutListenerSummary(void )
 {
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the current global summary.
 **/
@@ -26,36 +27,36 @@ svutResultSummary svutListenerSummary::getSummary(void ) const
 	return this->summary;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutListenerSummary::onGlobalStart(void )
 {
 
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutListenerSummary::onGlobalEnd(void )
 {
 
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutListenerSummary::onTestCaseStart(const svUnitTest::svutTestCase& /*testCase*/)
 {
 
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutListenerSummary::onTestCaseEnd(const svUnitTest::svutTestCase& /*testCase*/)
 {
 
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutListenerSummary::onTestMethodStart(const svUnitTest::svutTestCase & /*testCase*/,const svUnitTest::svutTestMethod& /*method*/)
 {
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutListenerSummary::onTestMethodEnd(const svUnitTest::svutTestCase & /*testCase*/,const svUnitTest::svutTestMethod& /*method*/, svutStatusInfo status)
 {
 	summary.increment(status.getStatus());

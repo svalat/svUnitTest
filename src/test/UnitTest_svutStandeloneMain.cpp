@@ -12,6 +12,7 @@
 #include <svutDefaultMain.h>
 #include <iostream>
 
+/**********************  USING  *********************/
 using namespace std;
 using namespace svUnitTest;
 
@@ -28,7 +29,7 @@ class UnitTest_MyTestCaseBase : public svutTestCase
 		bool hasCallTest;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 UnitTest_MyTestCaseBase::UnitTest_MyTestCaseBase()
 	:svutTestCase("UnitTest_MyTestCaseBase")
 {
@@ -36,29 +37,29 @@ UnitTest_MyTestCaseBase::UnitTest_MyTestCaseBase()
 	SVUT_REG_TEST_METHOD(UnitTest_MyTestCaseBase,test2);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_MyTestCaseBase::setUp(void )
 {
 	this->hasCallTest = false;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_MyTestCaseBase::tearDown(void )
 {
 	SVUT_ASSERT_TRUE(this->hasCallTest);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_MyTestCaseBase::test1(void )
 {
 	this->hasCallTest = true;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_MyTestCaseBase::test2(void )
 {
 	this->hasCallTest = true;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 SVUT_REGISTER_STANDELONE(UnitTest_MyTestCaseBase)

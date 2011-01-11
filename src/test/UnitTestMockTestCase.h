@@ -12,7 +12,7 @@
 /********************  HEADERS  *********************/
 #include <svutTestCase.h>
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTestMockTestCase : public svUnitTest::svutTestCase
 {
 	public:

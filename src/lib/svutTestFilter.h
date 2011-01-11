@@ -15,7 +15,7 @@
 namespace svUnitTest
 {
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Class used as a bases for the definition of filter to execute only the wanted tests.
  * This provide an abstraction of test filtering to simply provide multiple way to select the tests.

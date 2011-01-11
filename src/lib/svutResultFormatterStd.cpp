@@ -10,12 +10,14 @@
 #include "svutResultFormatterStd.h"
 #include <stdlib.h>
 
+/**********************  USING  *********************/
 using namespace std;
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Constructor of the class.
  * @param out Define the output stream to use.
@@ -25,13 +27,13 @@ svutResultFormatterStd::svutResultFormatterStd(std::ostream& out)
 	this->out = & out;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterStd::openOutput(void)
 {
 	//nothing to do for std mode
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterStd::openTestCase(const svUnitTest::svutTestCase& testCase)
 {
 	//apply format :
@@ -42,19 +44,19 @@ void svutResultFormatterStd::openTestCase(const svUnitTest::svutTestCase& testCa
 	*out << " ========" << endl;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterStd::closeTestCase(const svUnitTest::svutTestCase& /*testCase*/)
 {
 	//nothing to do for std mode
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterStd::openTestMethod(const svUnitTest::svutTestCase& /*testCase*/, const svUnitTest::svutTestMethod& /*meth*/)
 {
 	//nothing to do for std mode
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterStd::closeTestMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth, const svUnitTest::svutStatusInfo& status)
 {
 	std::string name;
@@ -83,7 +85,7 @@ void svutResultFormatterStd::closeTestMethod(const svUnitTest::svutTestCase& tes
 	}
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Methode used to format failure status informations and to print them in ostream system. It done nothing
  * if displayDetails is set to false.
@@ -103,7 +105,7 @@ void svutResultFormatterStd::printFailedInfo(const svUnitTest::svutTestCase& /*t
 	}
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Methode used to format unknown status informations and to print them in ostream system. It done nothing
  * if displayDetails is set to false.
@@ -122,7 +124,7 @@ void svutResultFormatterStd::printUnknownInfo(const svUnitTest::svutTestCase& /*
 	}
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterStd::printSummary(svutResultSummary summary)
 {
 	*out << endl << "+---------------------------+" << endl;
@@ -142,7 +144,7 @@ void svutResultFormatterStd::printSummary(svutResultSummary summary)
 	*out         << "+---------------------------+" << endl;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterStd::closeOutput(void )
 {
 	//nothing to do for std mode

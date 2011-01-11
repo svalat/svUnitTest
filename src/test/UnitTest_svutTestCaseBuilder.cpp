@@ -15,10 +15,11 @@
 #include "UnitTestMockTestCase2.h"
 #include "UnitTestExtra.h"
 
+/**********************  USING  *********************/
 using namespace CPPUNIT_NS;
 using namespace svUnitTest;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutTestCaseBuilder : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutTestCaseBuilder);
@@ -34,19 +35,19 @@ class UnitTest_svutTestCaseBuilder : public TestCase
 		svutTestCaseBuilder * builder;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCaseBuilder::setUp(void)
 {
 	builder = new svutTestCaseBuilderGeneric<UnitTestMockTestCase2>();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCaseBuilder::tearDown(void)
 {
 	delete builder;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutTestCaseBuilder::testBuild(void )
 {
 	svutTestCase * test = builder->build();

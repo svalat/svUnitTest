@@ -16,11 +16,12 @@
 #include <string>
 #include <sstream>
 
+/**********************  USING  *********************/
 using namespace CPPUNIT_NS;
 using namespace svUnitTest;
 using namespace std;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutCodeLocation : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutCodeLocation);
@@ -57,19 +58,19 @@ class UnitTest_svutCodeLocation : public TestCase
 		const svutCodeLocation * location;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutCodeLocation::setUp(void)
 {
 	location = new svutCodeLocation("main.cpp","main",42);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutCodeLocation::tearDown(void)
 {
 	delete location;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutCodeLocation::testConstruct(void)
 {
 	const svutCodeLocation loc;
@@ -79,7 +80,7 @@ void UnitTest_svutCodeLocation::testConstruct(void)
 	CPPUNIT_ASSERT_EQUAL(false,loc.hasLocation());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutCodeLocation::testConstruct_str_str_int(void)
 {
 	const svutCodeLocation loc("main.cpp","main",42);
@@ -89,31 +90,31 @@ void UnitTest_svutCodeLocation::testConstruct_str_str_int(void)
 	CPPUNIT_ASSERT_EQUAL(true,loc.hasLocation());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutCodeLocation::testGetFilename(void)
 {
 	CPPUNIT_ASSERT_EQUAL("main.cpp",location->getFilename());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutCodeLocation::testGetMethodeName(void)
 {
 	CPPUNIT_ASSERT_EQUAL("main",location->getMethodeName());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutCodeLocation::testHasLocation(void)
 {
 	CPPUNIT_ASSERT_EQUAL(true,location->hasLocation());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutCodeLocation::testGetLine(void)
 {
 	CPPUNIT_ASSERT_EQUAL(42,location->getLine());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutCodeLocation::testMacroSVUT_CODE_LOCATION(void)
 {
 	svutCodeLocation loc = SVUT_CODE_LOCATION;int line = __LINE__;
@@ -123,7 +124,7 @@ void UnitTest_svutCodeLocation::testMacroSVUT_CODE_LOCATION(void)
 	CPPUNIT_ASSERT_EQUAL(true,loc.hasLocation());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutCodeLocation::testConstSVUT_NO_LOCATION(void)
 {
 	svutCodeLocation loc = SVUT_NO_LOCATION;
@@ -133,7 +134,7 @@ void UnitTest_svutCodeLocation::testConstSVUT_NO_LOCATION(void)
 	CPPUNIT_ASSERT_EQUAL(false,loc.hasLocation());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutCodeLocation::testOperatorOstream(void)
 {
 	stringstream str;
@@ -141,7 +142,7 @@ void UnitTest_svutCodeLocation::testOperatorOstream(void)
 	CPPUNIT_ASSERT_EQUAL("line 42 of file main.cpp on methode main()",str.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutCodeLocation::testOperatorOstream_nolocation(void)
 {
 	stringstream str;
@@ -149,7 +150,7 @@ void UnitTest_svutCodeLocation::testOperatorOstream_nolocation(void)
 	CPPUNIT_ASSERT_EQUAL("unknown location",str.str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutCodeLocation::testOperatorEqualEqual(void)
 {
 	const svutCodeLocation loc1("main.cpp","main",42);

@@ -11,10 +11,11 @@
 #include "svutResultSummary.h"
 #include "svutException.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Constructor of the class. It only reset all the counters.
 **/
@@ -23,10 +24,11 @@ svutResultSummary::svutResultSummary(void )
 	this->reset();
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Return the current number of occurences of requested status.
  * @param status Define the status for which to get the count.
+ * @return Return the number of event of the selected type.
 **/
 unsigned int svutResultSummary::getCount(svutStatus status) const
 {
@@ -49,7 +51,7 @@ unsigned int svutResultSummary::getCount(svutStatus status) const
 	}
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Return the current percentage of occurences of requested status.
  * @param status Define the status for which to get the count.
@@ -66,7 +68,7 @@ unsigned int svutResultSummary::getPercentage(svutStatus status) const
 	}
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the total number of tests passed.
 **/
@@ -75,7 +77,7 @@ unsigned int svutResultSummary::getTotal(void ) const
 	return success+failed+unknown+todo+indev+skiped;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Add some occurence count to selected status.
  * @param status Define the status for which to increment the counter.
@@ -103,7 +105,7 @@ unsigned int svutResultSummary::increment(svutStatus status, unsigned int nb)
 	}
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Set the selected counter to given value.
  * @param status Define the status to change.
@@ -131,7 +133,7 @@ unsigned int svutResultSummary::set(svutStatus status, unsigned int nb)
 	}
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Reset all counters to 0.
 **/
@@ -145,7 +147,7 @@ void svutResultSummary::reset(void )
 	this->skiped  = 0;
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Return the global status. It may in order :
  *      - UNKNOWN if there is at least one unknown,
@@ -153,6 +155,7 @@ void svutResultSummary::reset(void )
  *      - TODO if there is at least one todo,
  *      - INDEV if there is at least on indev,
  *      - SUCCESS is all are SKIPED or SUCCESS.
+ * @return Return the final status of the executed test suite.
 **/
 svutStatus svutResultSummary::getStatus(void ) const
 {

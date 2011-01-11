@@ -9,20 +9,24 @@
 /********************  HEADERS  *********************/
 #include "svutResultFormatterXml.h"
 
+/**********************  USING  *********************/
 using namespace std;
-using namespace svUnitTest;
 
-/********************  METHODE  *********************/
+/********************  NAMESPACE  *******************/
+namespace svUnitTest
+{
+
+/*******************  FUNCTION  *********************/
 /**
  * Default constructor of the class.
  * @param out Define the output system into which to send the results.
 **/
-svUnitTest::svutResultFormatterXml::svutResultFormatterXml(ostream& out)
+svUnitTest::svutResultFormatterXml::svutResultFormatterXml(std::ostream& out)
 {
 	this->out = & out;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Display the header of the XML output file.
 **/
@@ -34,7 +38,7 @@ void svUnitTest::svutResultFormatterXml::openOutput(void )
 	*out << "<UnitTest>" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Close the XML root elements to end the XML output file.
 **/
@@ -43,27 +47,27 @@ void svutResultFormatterXml::closeOutput(void )
 	*out << "</UnitTest>" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterXml::openTestCase(const svUnitTest::svutTestCase& testCase)
 {
 	*out << "\t<TestCase>" << endl;
 	*out << "\t\t<name>" << testCase.getName() << "</name>" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterXml::closeTestCase(const svUnitTest::svutTestCase& /*testCase*/)
 {
 	*out << "\t</TestCase>" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterXml::openTestMethod(const svUnitTest::svutTestCase& /*testCase*/, const svUnitTest::svutTestMethod& meth)
 {
 	*out << "\t\t<TestFunction>" << endl;
 	*out << "\t\t\t<name>" << meth.getName() << "</name>" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutResultFormatterXml::closeTestMethod(const svUnitTest::svutTestCase& /*testCase*/, const svUnitTest::svutTestMethod& /*meth*/, const svUnitTest::svutStatusInfo& status)
 {
 	*out << "\t\t\t<status>" << status.getStatusName() << "</status>" << endl;
@@ -72,7 +76,7 @@ void svutResultFormatterXml::closeTestMethod(const svUnitTest::svutTestCase& /*t
 	*out << "\t\t</TestFunction>" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svUnitTest::svutResultFormatterXml::printSummary(svutResultSummary summary)
 {
 	int tot = summary.getTotal();
@@ -87,7 +91,12 @@ void svUnitTest::svutResultFormatterXml::printSummary(svutResultSummary summary)
 	*out << "\t</GlobalResults>" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
+/**
+ * Helper function to format the status assert informations into svUnitTest native XML format.
+ * The final reste will be added to the output stream.
+ * @param status Define the current status into which take the assert informations.
+**/
 void svUnitTest::svutResultFormatterXml::printAssertInfo(const svUnitTest::svutStatusInfo& status)
 {
 	*out << "\t\t\t<AssertInfo>" << endl;
@@ -99,7 +108,12 @@ void svUnitTest::svutResultFormatterXml::printAssertInfo(const svUnitTest::svutS
 	*out << "\t\t\t</AssertInfo>" << endl;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
+/**
+ * Helper function to format the location into svUnitTest native XML format.
+ * The final reste will be added to the output stream.
+ * @param location Define the location to format.
+**/
 void svutResultFormatterXml::printLocation(const svUnitTest::svutCodeLocation& location)
 {
 	*out << "\t\t\t\t<location>" << endl;
@@ -112,4 +126,6 @@ void svutResultFormatterXml::printLocation(const svUnitTest::svutCodeLocation& l
 		*out << "\t\t\t\t\t<unknown></unknown>" << endl;
 	}
 	*out << "\t\t\t\t</location>" << endl;
+}
+
 }

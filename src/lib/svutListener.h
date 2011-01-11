@@ -12,6 +12,7 @@
 /********************  HEADERS  *********************/
 #include "svutTestCase.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 

@@ -9,13 +9,14 @@
 #ifndef SVUT_EX_TEST_STATUS_HEADER
 #define SVUT_EX_TEST_STATUS_HEADER
 
-/********************  HEADERS  *******svutExLocated(svutCodeLocation  location,std::string name) throw();
-		svutExLocated(std::string message,svutCodeLocation  location,std::string name) throw();**************/
+/********************  HEADERS  *********************/
 #include "svutException.h"
 #include "svutStatusInfo.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
+
 /********************* CLASS ************************/
 /**
  * Base class used to build assertions and notification on unit test library. It was used to

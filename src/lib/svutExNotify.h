@@ -12,6 +12,7 @@
 /********************  HEADERS  *********************/
 #include "svutExTestStatus.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
@@ -30,7 +31,7 @@ class svutExNotify : public svutExTestStatus
 		virtual ~svutExNotify(void) throw();
 };
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Class used to notify tests where there is some things to do. Mainly it may be used when declaring
  * the test to notice that it must be implemented. It may also be used to mark test waiting some
@@ -46,7 +47,7 @@ class svutExNotifyTodo : public svutExNotify
 		virtual ~svutExNotifyTodo(void) throw() {};
 };
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Class used to notify that the current test is in developement, the result may not be revelent.
  * It's also a mean to clearly identify what we are doing by quicly find the tests we are modifying

@@ -10,10 +10,11 @@
 #include <cstring>
 #include "svutAsserter.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Implementation of assert equal for c string. Without this implementation, the default
  * one will compare the adresse of the pointers, which is already done by SVUT_ASSERT_SAME.
@@ -21,7 +22,8 @@ namespace svUnitTest
  * @param actual Define the current value to compared to the expected one.
  * @param location Define the code location which call this test.
 **/
-void assertEqual(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+void assertEqual(const char * expected,const char * actual,svutCodeLocation location)
+	throw(svutExAssertFailEqual)
 {
 	if (strcmp(expected,actual) != 0)
 	{
@@ -29,7 +31,7 @@ void assertEqual(const char * expected,const char * actual,svutCodeLocation loca
 	}
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Implementation of assert equal for c string. Without this implementation, the default
  * one will compare the adresse of the pointers, which is already done by SVUT_ASSERT_NOT_SAME.
@@ -37,7 +39,8 @@ void assertEqual(const char * expected,const char * actual,svutCodeLocation loca
  * @param actual Define the current value to compared to the expected one.
  * @param location Define the code location which call this test.
 **/
-void assertNotEqual(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+void assertNotEqual(const char * expected,const char * actual,svutCodeLocation location)
+	throw(svutExAssertFailEqual)
 {
 	if (strcmp(expected,actual) == 0)
 	{
@@ -45,31 +48,33 @@ void assertNotEqual(const char * expected,const char * actual,svutCodeLocation l
 	}
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Specific implementation for c string.
  * @param expected Define the expected value.
  * @param actual Define the current value to compared to the expected one.
  * @param location Define the code location which call this test.
 **/
-void assertEqualType(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+void assertEqualType(const char * expected,const char * actual,svutCodeLocation location)
+	throw(svutExAssertFailEqual)
 {
 	assertEqual(expected, actual, location);
 }
 
-/********************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Specific implementation for c string.
  * @param expected Define the expected value.
  * @param actual Define the current value to compared to the expected one.
  * @param location Define the code location which call this test.
 **/
-void assertNotEqualType(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+void assertNotEqualType(const char * expected,const char * actual,svutCodeLocation location)
+	throw(svutExAssertFailEqual)
 {
 	assertNotEqual(expected, actual, location);
 }
 
-/*******************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Methode used to implement assertion macro SVUT_ASSERT_SAME. Here we simply compare the pointer
  * and throw svutExAssertFailEqual if not equal.
@@ -77,7 +82,8 @@ void assertNotEqualType(const char * expected,const char * actual,svutCodeLocati
  * @param actual Define the current value to compared to the expected one.
  * @param location Define the code location which call this test.
 **/
-void assertSame(const void * expected,const void * actual,svutCodeLocation  location) throw(svutExAssertFailEqual)
+void assertSame(const void * expected,const void * actual,svutCodeLocation  location)
+	throw(svutExAssertFailEqual)
 {
 	if ((expected == actual) == false)
 	{
@@ -87,7 +93,7 @@ void assertSame(const void * expected,const void * actual,svutCodeLocation  loca
 	}
 }
 
-/*******************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Methode used to implement assertion macro SVUT_ASSERT_NOT_SAME. Here we simply compare the pointer
  * and throw svutExAssertFailEqual if equal.
@@ -95,7 +101,8 @@ void assertSame(const void * expected,const void * actual,svutCodeLocation  loca
  * @param actual Define the current value to compared to the expected one.
  * @param location Define the code location which call this test.
 **/
-void assertNotSame(const void * expected,const void * actual,svutCodeLocation  location) throw(svutExAssertFailEqual)
+void assertNotSame(const void * expected,const void * actual,svutCodeLocation  location)
+	throw(svutExAssertFailEqual)
 {
 	if ((expected != actual) == false)
 	{

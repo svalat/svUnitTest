@@ -14,6 +14,7 @@
 #include <stdexcept>
 #include <string.h>
 
+/*******************  NAMESPACE  ********************/
 namespace CppUnit
 {
 

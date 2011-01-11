@@ -14,10 +14,11 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutException.h>
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutException : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutException);
@@ -42,46 +43,46 @@ class UnitTest_svutException : public TestCase
 		svutException * exc;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutException::setUp(void)
 {
 	exc = new svutException("message");
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutException::tearDown(void)
 {
 	delete exc;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutException::testConstructor(void)
 {
 	svutException obj;
 	CPPUNIT_ASSERT_EQUAL("",obj.getMessage());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutException::testConstructor_str(void)
 {
 	svutException obj("message");
 	CPPUNIT_ASSERT_EQUAL("message",obj.getMessage());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutException::testWhat(void)
 {
 	CPPUNIT_ASSERT(exc->what() != NULL);
 	CPPUNIT_ASSERT(strcmp("message",exc->what()) == 0);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutException::testGetMessage(void)
 {
 	CPPUNIT_ASSERT_EQUAL("message",exc->getMessage());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutException::testExInternalError(void )
 {
 	svutExInternalError error("test");

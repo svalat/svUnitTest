@@ -16,6 +16,7 @@
 #include "UnitTestMockTestCase.h"
 #include <sys/stat.h>
 
+/**********************  USING  *********************/
 using namespace std;
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
@@ -124,7 +125,7 @@ static const char * CST_STRING_CLOSE_TC = "";
 static const char * CST_STRING_OPEN_METH_1 = "\t<TestFunction name='testMethod'>\n";
 static const char * CST_STRING_OPEN_METH_2 = "\t<TestFunction name='MyTest::testMethod'>\n";
 
-/********************  CLASSE  **********************/
+/********************  CLASS  **********************/
 class UnitTest_svutResultFormatterQtXml : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutResultFormatterQtXml);
@@ -182,28 +183,28 @@ class UnitTest_svutResultFormatterQtXml : public TestCase
 		stringstream * out;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::setUp(void)
 {
 	out = new stringstream;
 	formatter = new svutResultFormatterQtXml(*out);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::tearDown(void)
 {
 	delete formatter;
 	delete out;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testCloseOutput(void )
 {
 	formatter->closeOutput();
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_CLOSE,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testCloseTestCase(void )
 {
 	UnitTestMockTestCase testCase;
@@ -211,7 +212,7 @@ void UnitTest_svutResultFormatterQtXml::testCloseTestCase(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_CLOSE_TC,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_success_1(void )
 {
 	UnitTestMockTestCase testCase;
@@ -220,7 +221,7 @@ void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_success_1(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SUCCESS_1,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_success_2(void )
 {
 	UnitTestMockTestCase testCase;
@@ -230,7 +231,7 @@ void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_success_2(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SUCCESS_1,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_fullname(void )
 {
 	UnitTestMockTestCase testCase;
@@ -241,7 +242,7 @@ void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_fullname(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SUCCESS_1,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_todo(void )
 {
 	UnitTestMockTestCase testCase;
@@ -250,7 +251,7 @@ void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_todo(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_TODO,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_indev(void )
 {
 	UnitTestMockTestCase testCase;
@@ -259,7 +260,7 @@ void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_indev(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_INDEV,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_skiped(void )
 {
 	UnitTestMockTestCase testCase;
@@ -268,7 +269,7 @@ void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_skiped(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SKIPED,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_unknown_1(void )
 {
 	UnitTestMockTestCase testCase;
@@ -277,7 +278,7 @@ void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_unknown_1(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_UNKNOWN_1,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_unknown_2(void )
 {
 	UnitTestMockTestCase testCase;
@@ -287,7 +288,7 @@ void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_unknown_2(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_UNKNOWN_1,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_unknown_3(void )
 {
 	UnitTestMockTestCase testCase;
@@ -298,7 +299,7 @@ void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_unknown_3(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_UNKNOWN_3,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_failed_1(void )
 {
 	UnitTestMockTestCase testCase;
@@ -311,7 +312,7 @@ void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_failed_1(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_FAILED_1,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_failed_2(void )
 {
 	UnitTestMockTestCase testCase;
@@ -325,7 +326,7 @@ void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_failed_2(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_FAILED_1,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::runTotalSequence(void )
 {
 	UnitTestMockTestCase testCase;
@@ -377,14 +378,14 @@ void UnitTest_svutResultFormatterQtXml::runTotalSequence(void )
 }
 
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testGlobal_1(void )
 {
 	this->runTotalSequence();
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SEQ_2,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testGlobal_2(void )
 {
 	formatter->setDisplaySuccess(true);
@@ -393,7 +394,7 @@ void UnitTest_svutResultFormatterQtXml::testGlobal_2(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SEQ_2,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testGlobal_3(void )
 {
 	formatter->setDisplayFullName(true);
@@ -401,14 +402,14 @@ void UnitTest_svutResultFormatterQtXml::testGlobal_3(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SEQ_1,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testOpenOutput(void )
 {
 	formatter->openOutput();
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_OPEN,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testOpenTestCase(void )
 {
 	UnitTestMockTestCase testCase;
@@ -416,7 +417,7 @@ void UnitTest_svutResultFormatterQtXml::testOpenTestCase(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_TEST_CASE,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testOpenTestMethod_1(void )
 {
 	UnitTestMockTestCase testCase;
@@ -425,7 +426,7 @@ void UnitTest_svutResultFormatterQtXml::testOpenTestMethod_1(void )
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_OPEN_METH_1,out->str());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testOpenTestMethod_2(void )
 {
 	UnitTestMockTestCase testCase;
@@ -436,7 +437,7 @@ void UnitTest_svutResultFormatterQtXml::testOpenTestMethod_2(void )
 }
 
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterQtXml::testPrintSummary(void )
 {
 	svutResultSummary summary;

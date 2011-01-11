@@ -13,6 +13,7 @@
 #include <string>
 #include <ostream>
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
@@ -24,7 +25,7 @@ namespace svUnitTest
 **/
 #define SVUT_CODE_LOCATION svUnitTest::svutCodeLocation(__FILE__,__FUNCTION__,__LINE__)
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Class used to manage locations in sources of the application. It permet to transport location
  * of an error in unit tests. Instances of this class are normaly create via the macro

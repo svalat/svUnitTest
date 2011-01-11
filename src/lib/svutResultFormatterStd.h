@@ -13,6 +13,7 @@
 #include "svutResultFormatter.h"
 #include <ostream>
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 

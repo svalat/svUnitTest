@@ -9,10 +9,11 @@
 #ifndef SVUT_OBJECT_METHODE_HEADER
 #define SVUT_OBJECT_METHODE_HEADER
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Base class used to build a C++ function pointer on class member.
  * This is an abstract class which must be override to form a geneic class to support each required
@@ -32,7 +33,7 @@ class svutObjectMethod
 		virtual void call(void) = 0;
 };
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Generic implementation of svutObjectMethode to manage all class types. Caution, this implementation
  * didn't work with virtual members.
@@ -55,7 +56,7 @@ class svutObjectMethodGeneric : public svutObjectMethod
 
 }
 
-/*****************  GENERIC IMPLE  ******************/
+/******************  GENERIC IMPL  ******************/
 #include "svutObjectMethodGenericImpl.h"
 
 #endif

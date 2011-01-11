@@ -14,11 +14,14 @@
 #include "svutStatusInfo.h"
 #include "svutException.h"
 
+/**********************  USING  *********************/
 using namespace std;
+
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Default constructor of the class.
  * @param message Define a message to describe the current status, mainly describe the source of error.
@@ -33,7 +36,7 @@ svutStatusInfo::svutStatusInfo(svUnitTest::svutStatus status, std::string messag
 	this->status = status;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the source location of the assertion which emit this status notification.
 **/
@@ -42,7 +45,7 @@ svutCodeLocation svutStatusInfo::getLocation(void) const
 	return this->location;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the message which describe more precisely the current status.
 **/
@@ -51,7 +54,7 @@ std::string svutStatusInfo::getMessage(void) const
 	return this->message;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the current status of the test.
 **/
@@ -60,7 +63,7 @@ svutStatus svutStatusInfo::getStatus ( void ) const
 	return this->status;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Add a new entry into the parameters list related to the assetion.
  * @param name Define the parameter name.
@@ -71,7 +74,7 @@ void svutStatusInfo::addEntry(const std::string & name,std::string const & value
 	this->entries.insert(pair<string,string>(name,value));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Add a new entry into the parameters list related to the assetion.
  * The main goal of this override is to remove remark #981 from icc when calling this method
@@ -86,7 +89,7 @@ void svutStatusInfo::addEntry ( const char* name, const char* value )
 	this->addEntry(n,v);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Add a new entry into the parameters list related to the assetion.
  * The main goal of this override is to remove remark #981 from icc when calling this method
@@ -101,7 +104,7 @@ void svutStatusInfo::addEntry ( const char* name, const std::string& value )
 }
 
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the list of parameters related to the current status.
 **/
@@ -110,7 +113,7 @@ std::map<std::string,std::string> svutStatusInfo::getEntries(void) const
 	return entries;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Format the current status information and place it in the given stream.
  * @param out Define the output stream to use.
@@ -128,7 +131,7 @@ void svutStatusInfo::formatEntries(std::ostream& out, const std::string& prefix,
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Format the current status information and place it in the given stream.
  * The main goal of this override is to avoir remark #981 of icc.
@@ -146,7 +149,7 @@ void svutStatusInfo::formatEntries ( std::ostream& out, const char* prefix, cons
 }
 
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the number of entries in the status informations.
 **/
@@ -155,7 +158,7 @@ unsigned int svutStatusInfo::getNbEntries(void ) const
 	return this->entries.size();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return a specific entry, empty if non existant.
  * @param name Define the name of the requested entry.
@@ -168,7 +171,7 @@ std::string svutStatusInfo::getEntry(std::string name) const
 	return "";
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the name of the current status as a C++ string. The returned names are :
  *      - SUCCESS
@@ -183,10 +186,11 @@ std::string svutStatusInfo::getStatusName(void ) const
 	return getStatusName(this->status);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Permit to use the equal operator on svutStatusInfo objects.
  * @param orig Define the original object to copy on the current one.
+ * @return Return a regrence to the destinatino object.
 **/
 svutStatusInfo& svUnitTest::svutStatusInfo::operator=(const svUnitTest::svutStatusInfo& orig)
 {
@@ -197,7 +201,7 @@ svutStatusInfo& svUnitTest::svutStatusInfo::operator=(const svUnitTest::svutStat
 	return *this;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @param status Define the status to convert to string.
  * @return Return the name of the given status as a C++ string. The returned names are :

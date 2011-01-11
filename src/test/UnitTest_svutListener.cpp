@@ -16,10 +16,11 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutTestCase.h>
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTestsvutListener : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTestsvutListener);
@@ -48,21 +49,21 @@ class UnitTestsvutListener : public TestCase
 		UnitTestMockTestCase * testCase;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutListener::setUp(void)
 {
 	this->listener = new UnitTestMockListener();
 	this->testCase = new UnitTestMockTestCase();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutListener::tearDown(void)
 {
 	delete this->listener;
 	delete this->testCase;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutListener::testOnGlobalStart(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -74,7 +75,7 @@ void UnitTestsvutListener::testOnGlobalStart(void )
 	CPPUNIT_ASSERT_EQUAL(-1,listener->mockEvents.global_start);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutListener::testOnGlobalEnd(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -86,7 +87,7 @@ void UnitTestsvutListener::testOnGlobalEnd(void )
 	CPPUNIT_ASSERT_EQUAL(-1,listener->mockEvents.global_end);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutListener::testOnTestCaseStart(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -98,7 +99,7 @@ void UnitTestsvutListener::testOnTestCaseStart(void )
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockEvents.case_start);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutListener::testOnTestCaseEnd(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -110,7 +111,7 @@ void UnitTestsvutListener::testOnTestCaseEnd(void )
 	CPPUNIT_ASSERT_EQUAL(5,listener->mockEvents.case_end);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutListener::testOnTestMethodStart(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -122,7 +123,7 @@ void UnitTestsvutListener::testOnTestMethodStart(void )
 	CPPUNIT_ASSERT_EQUAL(3,listener->mockEvents.meth_start);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutListener::testOnTestMethodEnd(void )
 {
 	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
@@ -134,7 +135,7 @@ void UnitTestsvutListener::testOnTestMethodEnd(void )
 	CPPUNIT_ASSERT_EQUAL(4,listener->mockEvents.meth_end);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTestsvutListener::testSetListener(void )
 {
 	UnitTestMockListener list;

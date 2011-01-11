@@ -13,6 +13,7 @@
 #include <list>
 #include "svutTestCaseBuilder.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 

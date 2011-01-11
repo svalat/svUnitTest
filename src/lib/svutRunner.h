@@ -20,10 +20,11 @@
 #include "svutTestFilter.h"
 #include "svutListenerMultiplexer.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 /**
  * Class used to run the tests. It must be instanciate in main function to run all registrerd unit
  * tests.

@@ -12,6 +12,7 @@
 /********************  HEADERS  *********************/
 #include "svutStatusInfo.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 

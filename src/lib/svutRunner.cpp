@@ -23,14 +23,18 @@
 #include "svutResultFormatterXml.h"
 #include "svutAutoRegister.h"
 
+/**********************  USING  *********************/
 using namespace std;
+
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor to initialize the output formatting classe.
  * @param mode Define the prefered output mode.
+ * @param out Define the output stream to use.
 **/
 svutRunner::svutRunner(svutOutputMode mode,std::ostream & out)
 {
@@ -38,7 +42,7 @@ svutRunner::svutRunner(svutOutputMode mode,std::ostream & out)
 	this->init(mode,out);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor used to init the output formatting object and activation or desactivation of
  * rendering options.
@@ -52,10 +56,10 @@ svutRunner::svutRunner(svutRunnerConfig & config)
 	this->setFilter(&config.getFilter());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor used to directly define our own formatter.
- * @param listener Reference the custom formatter to insert in the runner.
+ * @param formatter Reference the custom formatter to insert in the runner.
 **/
 svutRunner::svutRunner(svutResultFormatter& formatter)
 {
@@ -63,7 +67,7 @@ svutRunner::svutRunner(svutResultFormatter& formatter)
 	this->init(formatter);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor used to directly define our own event listener and outputter.
  * @param listener Reference the custom listener to insert in the runner.
@@ -74,7 +78,7 @@ svutRunner::svutRunner(svutListener & listener)
 	this->init(listener);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Class destructor. He must free the listener if it use his own one.
 **/
@@ -86,7 +90,7 @@ svutRunner::~svutRunner(void)
 		delete this->formatter;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Run the test suites. Run the test suites. The default action is SVUT_ACTION_RUN_TESTS or the one
  * defined into svutRunnerConfig if available.
@@ -100,10 +104,13 @@ bool svutRunner::run(void)
 		return this->run(config->getAction());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Run the test suites wihle using a specific action (default is SVUT_ACTION_RUN_TESTS or the one
  * defined into svutRunnerConfig if defined).
+ * @param action Define the related action to execute :
+ *     - SVUT_ACTION_RUN_TESTS to run the tests.
+ *     - SVUT_ACTION_LIST_TESTS to list the available tests.
  * @return Return the final status of the test. True if all tests are SUCCESS, false otherwise.
 **/
 bool svutRunner::run(svutRunnerAction action)
@@ -120,7 +127,7 @@ bool svutRunner::run(svutRunnerAction action)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Execute all the tests suites registerd  into the runner.
  * @return Return the final status of the test. True if all tests are SUCCESS, false otherwise.
@@ -139,12 +146,11 @@ bool svutRunner::run_tests(void)
 	return (summary->getSummary().getStatus() == SVUT_STATUS_SUCCESS);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Display the names of all the test methodes available in the programe.
  * This is mostly implemented for the compatibility of QT test suite.
  * @return Return true final state.
- * @TODO utiliser les listener pour emettre la liste.
 **/
 bool svutRunner::run_list_tests(void)
 {
@@ -173,7 +179,7 @@ bool svutRunner::run_list_tests(void)
 	return true;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Initialisation method of the class members.
 **/
@@ -185,7 +191,7 @@ void svutRunner::init(void)
 	this->testFilter = NULL;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Permit to change the verbosity of the output formatter. It's available only for the internal
  * formatter, if you provide your own one, this methode has no effect.
@@ -201,7 +207,7 @@ void svutRunner::setDisplay(bool success,bool details)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Import test cases registred with the macro SVUT_REGISTER_TEST_CASE().
 **/
@@ -215,7 +221,7 @@ void svutRunner::loadAutoDetected(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Free the memory allocated by the test cases registred via the macro SVUT_REGISTER_TEST_CASE() and
  * fetched by loadAutoDetected().
@@ -235,7 +241,7 @@ void svutRunner::unloadAutoDetected(void)
 	}
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Test if their is multiple test case accepted by the filter. This is used to adapt the output
  * if need. For exemple disable the display of testCase name if their is only one.
@@ -253,7 +259,7 @@ bool svutRunner::hasMultipleTestCase(void)
 	return cnt > 1;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Manually register a test case into the runner.
  * @param tcase Define the test case to register.
@@ -263,10 +269,11 @@ void  svutRunner::registerTestCase(svutTestCase & tcase)
 	this->suites.push_back(&tcase);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Methode used to init the class members.
  * @param mode Define the output mode to use.
+ * @param out Define the output stream to use.
 **/
 void svutRunner::init(svutOutputMode mode,std::ostream & out)
 {
@@ -294,10 +301,10 @@ void svutRunner::init(svutOutputMode mode,std::ostream & out)
 	this->listener.addListener(this->summary);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Methode used to init the class members.
- * @param mode Define the formatter to use.
+ * @param formatter Define the formatter to use.
 **/
 void svutRunner::init(svutResultFormatter& formatter)
 {
@@ -308,7 +315,7 @@ void svutRunner::init(svutResultFormatter& formatter)
 	this->listener.addListener(this->summary);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Define a test case filter to filter which test case and method to execute.
  * @param filter Define the filter to use. Set NULL a not filter and execute all defined tests.
@@ -318,10 +325,10 @@ void svutRunner::setFilter(svutTestFilter* filter)
 	this->testFilter = filter;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Methode used to init the class members.
- * @param mode Define the listener mode to use.
+ * @param listener Define the listener mode to use.
 **/
 void svutRunner::init(svutListener& listener)
 {

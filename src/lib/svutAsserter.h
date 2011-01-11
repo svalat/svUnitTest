@@ -13,10 +13,11 @@
 #include <sstream>
 #include "svutExAssert.h"
 
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/*******************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Template implementaion of a function which call the == operator between two values.
  * It permit to override this operator just for the unit test without affecting the original
@@ -32,7 +33,7 @@ static bool asserterOperatorEqual(const T1 & v1,const T2 & v2)
 	return (v1 == v2);
 }
 
-/*******************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Template implementaion of a function which call the != operator between two values.
  * It permit to override this operator just for the unit test without affecting the original
@@ -48,7 +49,7 @@ static bool asserterOperatorNotEqual(const T1 & v1,const T2 & v2)
 	return (v1 != v2);
 }
 
-/*******************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Template implementaion of a mean to convert types to string. By default this methode simply
  * based on ostream operator <<. But it can be override to provide more synthetic view just for
@@ -65,7 +66,7 @@ static std::string asserterToString(const T & value)
 	return res.str();
 }
 
-/*******************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Methode used to implement equality assertion in macro SVUT_ASSERT_EQUAL. It is declared as
  * template methode so it could be overritten to implement support of non compatible types.
@@ -87,7 +88,7 @@ static void assertEqual(const T1 & expected,const T2 & actual,svutCodeLocation l
 	}
 }
 
-/*******************  METHOD  **********************/
+/*******************  FUNCTION  *********************/
 /**
  * Methode used to implement equality assertion in macro SVUT_ASSERT_NOT_EQUAL. It is declared as
  * template methode so it could be overritten to implement support of non compatible types.
@@ -109,7 +110,7 @@ static void assertNotEqual(const T1 & expected,const T2 & actual,svutCodeLocatio
 	}
 }
 
-/*******************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Implementation used bu macro SVUT_ASSERT_EQUAL_TYPE. This methode only rely on assertEqual() by
  * pre-filtering the types. For type filtering it rely on compiler error by using a restrict
@@ -128,7 +129,7 @@ static void assertEqualType(const T & expected,const T & actual,svutCodeLocation
 	assertEqual(expected,actual,location);
 }
 
-/*******************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Implementation used bu macro SVUT_ASSERT_NOT_EQUAL_TYPE. This methode only rely on assertEqual() by
  * pre-filtering the types. For type filtering it rely on compiler error by using a restrict
@@ -147,7 +148,7 @@ static void assertNotEqualType(const T & expected,const T & actual,svutCodeLocat
 	assertNotEqual(expected,actual,location);
 }
 
-/*******************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void assertEqual(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 void assertNotEqual(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 void assertEqualType(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);

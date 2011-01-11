@@ -14,6 +14,7 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutRunnerConfig.h>
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 using namespace std;
 using namespace CPPUNIT_NS;
@@ -27,7 +28,7 @@ Display_Details =  1\n\
 Output_filename =  /dev/null\n\
 ==============================\n";
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutRunnerConfig : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutRunnerConfig);
@@ -108,19 +109,19 @@ class UnitTest_svutRunnerConfig : public TestCase
 		svutRunnerConfig * config;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::setUp(void)
 {
 	config = new svutRunnerConfig();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::tearDown(void)
 {
 	delete config;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testConstructor_1(void)
 {
 	CPPUNIT_ASSERT_EQUAL(SVUT_ACTION_RUN_TESTS,config->getAction());
@@ -130,7 +131,7 @@ void UnitTest_svutRunnerConfig::testConstructor_1(void)
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testConstructor_2(void)
 {
 	const char * args[] = {
@@ -149,7 +150,7 @@ void UnitTest_svutRunnerConfig::testConstructor_2(void)
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&cfg.getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_noargs(void)
 {
 	const char * args[] = {
@@ -172,7 +173,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_noargs(void)
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_mode_xml(void)
 {
 	const char * args[] = {
@@ -197,7 +198,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_mode_xml(void)
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_mode_std(void)
 {
 	const char * args[] = {
@@ -222,7 +223,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_mode_std(void)
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_mode_qtxml(void)
 {
 	const char * args[] = {
@@ -247,7 +248,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_mode_qtxml(void)
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_mode_color(void)
 {
 	const char * args[] = {
@@ -272,7 +273,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_mode_color(void)
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_verbose_short(void)
 {
 	const char * args[] = {
@@ -296,7 +297,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_verbose_short(void)
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_verbose_long(void)
 {
 	const char * args[] = {
@@ -320,7 +321,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_verbose_long(void)
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_silent_short(void)
 {
 	const char * args[] = {
@@ -344,7 +345,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_silent_short(void)
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_silent_long(void)
 {
 	const char * args[] = {
@@ -368,7 +369,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_silent_long(void)
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_function_short(void)
 {
 	const char * args[] = {
@@ -392,7 +393,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_function_short(void)
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_function_long(void)
 {
 	const char * args[] = {
@@ -417,7 +418,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_function_long(void)
 }
 
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_qtxml(void)
 {
 	const char * args[] = {
@@ -441,7 +442,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_qtxml(void)
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_output(void)
 {
 	const char * args[] = {
@@ -466,7 +467,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_output(void)
 	CPPUNIT_ASSERT(&std::cout != &config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testLoadParameters_accept(void)
 {
 	const char * args[] = {
@@ -485,13 +486,13 @@ void UnitTest_svutRunnerConfig::testLoadParameters_accept(void)
 	CPPUNIT_ASSERT(!cfg.getFilter().accept("testCase2","method11"));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testGetMode(void)
 {
 	CPPUNIT_ASSERT_EQUAL(SVUT_OUT_STD_COLOR,config->getMode());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testSetMode(void)
 {
 	CPPUNIT_ASSERT_EQUAL(SVUT_OUT_STD_COLOR,config->getMode());
@@ -500,13 +501,13 @@ void UnitTest_svutRunnerConfig::testSetMode(void)
 	
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testHasDisplaySuccess(void)
 {
 	CPPUNIT_ASSERT_EQUAL(false,config->hasDisplaySuccess());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testSetDisplaySuccess(void)
 {
 	CPPUNIT_ASSERT_EQUAL(false,config->hasDisplaySuccess());
@@ -514,13 +515,13 @@ void UnitTest_svutRunnerConfig::testSetDisplaySuccess(void)
 	CPPUNIT_ASSERT_EQUAL(true,config->hasDisplaySuccess());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testHaddisplayDetails(void)
 {
 	CPPUNIT_ASSERT_EQUAL(true,config->hasDisplayDetails());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testSetDisplayDetails(void)
 {
 	CPPUNIT_ASSERT_EQUAL(true,config->hasDisplayDetails());
@@ -528,13 +529,13 @@ void UnitTest_svutRunnerConfig::testSetDisplayDetails(void)
 	CPPUNIT_ASSERT_EQUAL(false,config->hasDisplayDetails());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testGetAction(void)
 {
 	CPPUNIT_ASSERT_EQUAL(SVUT_ACTION_RUN_TESTS,config->getAction());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testSetAction(void)
 {
 	CPPUNIT_ASSERT_EQUAL(SVUT_ACTION_RUN_TESTS,config->getAction());
@@ -542,7 +543,7 @@ void UnitTest_svutRunnerConfig::testSetAction(void)
 	CPPUNIT_ASSERT_EQUAL(SVUT_ACTION_LIST_TESTS,config->getAction());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testSetOutput(void)
 {
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
@@ -550,13 +551,13 @@ void UnitTest_svutRunnerConfig::testSetOutput(void)
 	CPPUNIT_ASSERT(&std::cout != &config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testGetOutput(void)
 {
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testSetOutput_stream_1(void )
 {
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
@@ -564,7 +565,7 @@ void UnitTest_svutRunnerConfig::testSetOutput_stream_1(void )
 	CPPUNIT_ASSERT(&std::cerr == &config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testSetOutput_stream_2(void )
 {
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
@@ -574,7 +575,7 @@ void UnitTest_svutRunnerConfig::testSetOutput_stream_2(void )
 	CPPUNIT_ASSERT(&std::cerr == &config->getOutput());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testAddBasicAccept_1(void)
 {
 	config->addBasicAccept("testCase1::method1");
@@ -586,7 +587,7 @@ void UnitTest_svutRunnerConfig::testAddBasicAccept_1(void)
 	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method11"));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testAddBasicAccept_2(void)
 {
 	config->addBasicAccept("testCase1::");
@@ -598,7 +599,7 @@ void UnitTest_svutRunnerConfig::testAddBasicAccept_2(void)
 	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method11"));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testAddBasicAccept_3(void)
 {
 	config->addBasicAccept("::method1");
@@ -610,7 +611,7 @@ void UnitTest_svutRunnerConfig::testAddBasicAccept_3(void)
 	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method11"));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testAddBasicAccept_4(void)
 {
 	config->addBasicAccept("testCase1","method1");
@@ -622,7 +623,7 @@ void UnitTest_svutRunnerConfig::testAddBasicAccept_4(void)
 	CPPUNIT_ASSERT(!config->getFilter().accept("testCase2","method11"));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::testOperator_ostream(void )
 {
 	stringstream str;

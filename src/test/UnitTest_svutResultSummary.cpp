@@ -14,10 +14,11 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutResultSummary.h>
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 using namespace CPPUNIT_NS;
 
-/********************  CLASSE  **********************/
+/*********************  CLASS  **********************/
 class UnitTest_svutResultSummary : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutResultSummary);
@@ -49,7 +50,7 @@ class UnitTest_svutResultSummary : public TestCase
 		const svutResultSummary * cstSummary;
 };
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultSummary::setUp(void)
 {
 	this->summary = new svutResultSummary;
@@ -62,14 +63,14 @@ void UnitTest_svutResultSummary::setUp(void)
 	this->cstSummary = this->summary;
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultSummary::tearDown(void)
 {
 	delete this->summary;
 }
 
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultSummary::testConstructor(void )
 {
 	const svutResultSummary obj;
@@ -81,13 +82,13 @@ void UnitTest_svutResultSummary::testConstructor(void )
 	CPPUNIT_ASSERT_EQUAL(0,obj.getCount(SVUT_STATUS_SKIPED));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultSummary::testGetTotal(void )
 {
 	CPPUNIT_ASSERT_EQUAL(15,cstSummary->getTotal());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultSummary::testGetCount(void )
 {
 	CPPUNIT_ASSERT_EQUAL(5,cstSummary->getCount(SVUT_STATUS_FAILED));
@@ -98,7 +99,7 @@ void UnitTest_svutResultSummary::testGetCount(void )
 	CPPUNIT_ASSERT_EQUAL(3,cstSummary->getCount(SVUT_STATUS_SKIPED));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultSummary::testGetPercentage(void )
 {
 	CPPUNIT_ASSERT_EQUAL(33,cstSummary->getPercentage(SVUT_STATUS_FAILED));
@@ -109,7 +110,7 @@ void UnitTest_svutResultSummary::testGetPercentage(void )
 	CPPUNIT_ASSERT_EQUAL(20,cstSummary->getPercentage(SVUT_STATUS_SKIPED));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultSummary::testGetStatus(void )
 {
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,cstSummary->getStatus());
@@ -121,7 +122,7 @@ void UnitTest_svutResultSummary::testGetStatus(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_SUCCESS,cstSummary->getStatus());
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultSummary::testIncrement(void )
 {
 	//success
@@ -155,7 +156,7 @@ void UnitTest_svutResultSummary::testIncrement(void )
 	CPPUNIT_ASSERT_EQUAL(7,cstSummary->getCount(SVUT_STATUS_SUCCESS));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultSummary::testReset(void )
 {
 	CPPUNIT_ASSERT_EQUAL(5,cstSummary->getCount(SVUT_STATUS_FAILED));
@@ -175,7 +176,7 @@ void UnitTest_svutResultSummary::testReset(void )
 	CPPUNIT_ASSERT_EQUAL(0,cstSummary->getCount(SVUT_STATUS_SKIPED));
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void UnitTest_svutResultSummary::testSet(void )
 {
 	CPPUNIT_ASSERT_EQUAL(5,cstSummary->getCount(SVUT_STATUS_FAILED));

@@ -10,53 +10,56 @@
 #include "svutListenerMultiplexer.h"
 #include "svutException.h"
 
+/**********************  USING  *********************/
 using namespace std;
+
+/********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutListenerMultiplexer::onGlobalStart(void )
 {
 	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
 		(*it)->onGlobalStart();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutListenerMultiplexer::onGlobalEnd(void )
 {
 	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
 		(*it)->onGlobalEnd();
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutListenerMultiplexer::onTestCaseEnd(const svUnitTest::svutTestCase& testCase)
 {
 	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
 		(*it)->onTestCaseEnd(testCase);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutListenerMultiplexer::onTestCaseStart(const svUnitTest::svutTestCase& testCase)
 {
 	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
 		(*it)->onTestCaseStart(testCase);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutListenerMultiplexer::onTestMethodEnd(const svUnitTest::svutTestCase & testCase,const svutTestMethod & method, svutStatusInfo status)
 {
 	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
 		(*it)->onTestMethodEnd(testCase,method,status);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 void svutListenerMultiplexer::onTestMethodStart(const svUnitTest::svutTestCase & testCase,const svutTestMethod & method)
 {
 	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
 		(*it)->onTestMethodStart(testCase,method);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Add a sub listener for event dispatching.
  * @param listener Define the listener to add. It's your own responsability to free this memory at
@@ -67,7 +70,7 @@ void svutListenerMultiplexer::addListener(svutListener* listener)
 	listeners.push_back(listener);
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * Remove a listener for event dispatching.
  * @param listener Define the listener to remove.
@@ -84,7 +87,7 @@ void svutListenerMultiplexer::removeListener(svutListener* listener)
 	
 }
 
-/********************  METHODE  *********************/
+/*******************  FUNCTION  *********************/
 /**
  * @return Return the number of sub listener contained in the multiplexer.
 **/
