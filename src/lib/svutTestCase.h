@@ -100,7 +100,7 @@ class svutTestCase
 	protected:
 		void registerTestMethod(svutTestMethod * test);
 		svutStatusInfo runTestMethod(svutTestMethod * test);
-		void failIsTodo(std::string message);
+		void MARK_AS_KNOWN_ERROR(std::string message);
 		/** Define the list of tests methods in the current test case. **/
 		std::list<svutTestMethod *> tests;
 		/** Define the name of the current test case, this may be the classe name. **/

@@ -66,28 +66,28 @@ void UnitTestMockTestCase2::testUnknown_2(void )
 /********************  METHODE  *********************/
 void UnitTestMockTestCase2::testFailIsTodo_1(void )
 {
-	this->failIsTodo("this is a test");
+	MARK_AS_KNOWN_ERROR("this is a test");
 	SVUT_ASSERT_EQUAL(2,3);
 }
 
 /********************  METHODE  *********************/
 void UnitTestMockTestCase2::testFailIsTodo_2(void )
 {
-	this->failIsTodo("this is a test");
+	MARK_AS_KNOWN_ERROR("this is a test");
 	throw std::bad_exception();
 }
 
 /********************  METHODE  *********************/
 void UnitTestMockTestCase2::testFailIsTodo_3(void )
 {
-	this->failIsTodo("this is a test");
+	MARK_AS_KNOWN_ERROR("this is a test");
 	throw 42;
 }
 
 /********************  METHODE  *********************/
 void UnitTestMockTestCase2::testSuccessIsIndev(void )
 {
-	this->failIsTodo("this is a test");
+	MARK_AS_KNOWN_ERROR("this is a test");
 }
 
 /********************  METHODE  *********************/

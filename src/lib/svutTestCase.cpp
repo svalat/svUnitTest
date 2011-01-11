@@ -181,7 +181,7 @@ void svutTestCase::registerTestMethod(svutTestMethod * test)
  * which my appear when you develop.
  * @param message Define a message to associate to the new status if append.
 **/
-void svutTestCase::failIsTodo(std::string message)
+void svutTestCase::MARK_AS_KNOWN_ERROR(std::string message)
 {
 	this->tmpFailIsTodo = true;
 	this->tmpFailMessage = message;
