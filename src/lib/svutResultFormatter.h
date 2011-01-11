@@ -29,7 +29,7 @@ class svutResultFormatter
 {
 	public:
 		/** Default constructor of the class, done nothing here. **/
-		svutResultFormatter(void) {};
+		svutResultFormatter(void);
 		/** Destructor of the class, defined for inheritance support. **/
 		virtual ~svutResultFormatter(void) {};
 		/**

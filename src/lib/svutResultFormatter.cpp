@@ -13,6 +13,15 @@ using namespace std;
 using namespace svUnitTest;
 
 /********************  METHOD  **********************/
+svutResultFormatter::svutResultFormatter(void )
+{
+	this->displayDetails = true;
+	this->displayFullName = false;
+	this->displaySuccess = false;
+}
+
+
+/********************  METHOD  **********************/
 /**
  * Activate of desactivate the display of error details.
  * @param state True to activate, false otherwise.

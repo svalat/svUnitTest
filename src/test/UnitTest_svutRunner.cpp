@@ -309,7 +309,7 @@ void UnitTest_svutRunner::testSetDisplay_3(void)
 	this->mock->useTests(UnitTestMockTestCase2::REGISTER_ALL);
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(false,localRunner.run());
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_0,ss.str());
+	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_4,ss.str());
 }
 
 /********************  METHODE  *********************/

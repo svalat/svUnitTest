@@ -23,9 +23,6 @@ namespace svUnitTest
 svutResultFormatterStd::svutResultFormatterStd(std::ostream& out)
 {
 	this->out = & out;
-	this->displayDetails = true;
-	this->displayFullName = false;
-	this->displaySuccess = false;
 }
 
 /********************  METHOD  **********************/
