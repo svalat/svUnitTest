@@ -1,0 +1,26 @@
+<!--**************************************************
+             PROJECT  : svmath
+             VERSION  : 0.0.1
+             DATE     : 08/2009
+             AUTHOR   : Valat Sébastien
+             LICENSE  : CeCILL-C
+**************************************************-->
+<!ELEMENT UnitTest (TestCase*,GlobalResults)>
+<!ELEMENT TestCase (name,TestFunction+)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT TestFunction (name,status,AssertInfo?)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT AssertInfo (location,message,entries)>
+<!ELEMENT message (#PCDATA)>
+<!ELEMENT location (file,methode,line)>
+<!ELEMENT file (#PCDATA)>
+<!ELEMENT methode (#PCDATA)>
+<!ELEMENT line (#PCDATA)>
+<!ELEMENT GlobalResults (result+,total,status)>
+<!ELEMENT total (#PCDATA)>
+<!ELEMENT result (#PCDATA)>
+<!ELEMENT entries (entry*)>
+<!ELEMENT entry (#PCDATA)>
+
+<!ATTLIST result type (success|failed|unknown|indev|todo) #REQUIRED>
+<!ATTLIST entry name CDATA #REQUIRED>
