@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 07/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -21,7 +21,6 @@ namespace svUnitTest
  * Base class for exception used to notify assertion failure. This is used to unit tests.
  * @brief Base class for assertion failure notification.
  * @author Valat Sébastien.
- * @version 0.0.2
 **/
 class svutExAssertFail : public svutExTestStatus
 {

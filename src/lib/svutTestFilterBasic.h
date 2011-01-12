@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 12/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -25,7 +25,6 @@ namespace svUnitTest
  * empry, all request are acceped, if not, the entries must valid a filter rule to be valid.
  * @brief Decribe a filter rule for the basic test filter.
  * @author Valat Sébastien
- * @version 0.0.2
 **/
 struct svutTestFilterBasicRule
 {
@@ -42,7 +41,6 @@ struct svutTestFilterBasicRule
  * to say "all the test cases", or "all the methods".
  * @brief Basic class for test filtering.
  * @author Valat Sébastien.
- * @version 0.0.2.
 **/
 class svutTestFilterBasic : public svutTestFilter
 {

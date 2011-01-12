@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<!--**************************************************
-             PROJECT  : svmath
-             VERSION  : 0.0.1
-             DATE     : 08/2009
+<!--***************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
-**************************************************-->
+***************************************************-->
 <xsl:stylesheet version="1.0"
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 

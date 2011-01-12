@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 07/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -23,7 +23,6 @@ namespace svUnitTest
  * return non success status to the test runner.
  * @brief Base class for notification and assertions in unit tests.
  * @author Sébastien Valat.
- * @version 0.0.2
 **/
 class svutExTestStatus : public svutException
 {

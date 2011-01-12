@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 07/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -23,7 +23,6 @@ namespace svUnitTest
  * the number of each status reached during the tests.
  * @brief Listener implementation do build a global summary of tests.
  * @author Valat Sébastien
- * @version 0.0.2
 **/
 class svutListenerSummary : public svutListener
 {

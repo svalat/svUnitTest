@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 06/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -44,7 +44,6 @@ class svutException : public std::exception
  * Exception used for internal error in the library.
  * @brief Class used to throw exception on internal error.
  * @author Valat Sébastien
- * @version 0.0.2
 **/
 class svutExInternalError : public svutException
 {

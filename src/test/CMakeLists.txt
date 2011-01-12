@@ -1,3 +1,11 @@
+######################################################
+#            PROJECT  : svUnitTest                   #
+#            VERSION  : 0.1.0                        #
+#            DATE     : 01/2011                      #
+#            AUTHOR   : Valat Sébastien              #
+#            LICENSE  : CeCILL-C                     #
+######################################################
+
 include_directories (${svUnitTest_SOURCE_DIR}/src/lib/)
 
 ############ LIB WITH MAIN AND EXTRA ###########

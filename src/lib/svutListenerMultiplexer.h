@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 07/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -23,7 +23,6 @@ namespace svUnitTest
  * svutEvent objets and tranmit event to each of them in the same order they'll be added.
  * @brief Dispatch event to multiple sub svutEvent instances.
  * @author Sébastien Valat
- * @version 0.0.2
 **/
 class svutListenerMultiplexer : public svutListener
 {

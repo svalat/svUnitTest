@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 07/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -22,7 +22,6 @@ namespace svUnitTest
  * implemented by subclass svutResultFormatterStd. Here we simply provide somme override to support
  * non colored output.
  * @brief Implement support of STD B&W output formatting.
- * @version 0.0.2
  * @author Valat Sébastien
 **/
 class svutResultFormatterStdBW : public svutResultFormatterStd

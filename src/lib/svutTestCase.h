@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 07/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -64,7 +64,6 @@ class svutListener;
  * of tests building.
  * @brief Base class for test cases implementation.
  * @author Valat Sébastien
- * @version 0.0.2
 **/
 class svutTestCase
 {

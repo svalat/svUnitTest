@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 07/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -24,7 +24,6 @@ namespace svUnitTest
  * quicly by this way to support new output format for compatbility as example.
  * @brief Abstract definition of result output formatting.
  * @author Sébastien Valat
- * @version 0.0.2
 **/
 class svutResultFormatter
 {

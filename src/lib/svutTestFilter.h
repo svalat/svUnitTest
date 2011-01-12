@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 12/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -21,7 +21,6 @@ namespace svUnitTest
  * This provide an abstraction of test filtering to simply provide multiple way to select the tests.
  * @brief Abstract class to define the bases of test filteing.
  * @author Valat Sébastien.
- * @version 0.0.2.
 **/
 class svutTestFilter {
 	public:

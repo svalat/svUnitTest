@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 07/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -21,7 +21,6 @@ namespace svUnitTest
  * Base class for exceptions used as special notification in unit tests.
  * @brief Base class for exceptions used as special notification in unit tests.
  * @author Valat Sébastien.
- * @version 0.0.2.
 **/
 class svutExNotify : public svutExTestStatus
 {
@@ -54,7 +53,6 @@ class svutExNotifyTodo : public svutExNotify
  * in the results.
  * @brief Class to notify tests that are in developements.
  * @author Valat Sébastien.
- * @version 0.0.2
  **/
 class svutExNotifyIndev : public svutExNotify
 {

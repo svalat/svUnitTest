@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 12/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -28,7 +28,6 @@ class svutTestCase;
  * at load time, and when needed, the builder will be call to create the requied test case object.
  * @brief Asbtract constructor of test cases.
  * @author Valat Sébastien
- * @version 0.0.2
 **/
 class svutTestCaseBuilder
 {
@@ -51,7 +50,6 @@ class svutTestCaseBuilder
  * and registred into svutAutoRegister.
  * @brief Generic version of svutTestCaseBuilder.
  * @author Valat Sébastien
- * @version 0.0.2
 **/
 template <class T>
 class svutTestCaseBuilderGeneric : public svutTestCaseBuilder

@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 07/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -23,7 +23,6 @@ namespace svUnitTest
  * white output and colored output. It provide all the common mechanisms.
  * @brief Abstract class to format results for std output.
  * @author Valat Sébastien
- * @version 0.0.2
 **/
 class svutResultFormatterStd : public svutResultFormatter
 {

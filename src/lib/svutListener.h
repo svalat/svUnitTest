@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.0.2
-             DATE     : 07/2010
+             VERSION  : 0.1.0
+             DATE     : 01/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -26,7 +26,6 @@ class svutTestCase;
  * definition, so it may be easier to extend and change the global comportement.
  * @brief Abstract definition of test events.
  * @author Sébastien Valat
- * @version 0.0.2
 **/
 class svutListener
 {
