@@ -52,10 +52,10 @@ line 135 of file " TEST_SRC_BASE_PATH "/UnitTestMockTestCase2.cpp on methode use
 |    SUMMARY                |\n\
 +---------------------------+\n\
 |  SUCCESS  :    1 ( 10 %)  |\n\
-|  INDEV    :    1 ( 10 %)  |\n\
-|  TODO     :    1 ( 10 %)  |\n\
+|  INDEV    :    2 ( 20 %)  |\n\
+|  TODO     :    4 ( 40 %)  |\n\
 |  FAILED   :    1 ( 10 %)  |\n\
-|  UNKNOWN  :    1 ( 10 %)  |\n\
+|  UNKNOWN  :    2 ( 20 %)  |\n\
 +---------------------------+\n\
 |  TOTAL    :   10          |\n\
 |  STATUS   : UNKNOWN       |\n\
@@ -92,10 +92,10 @@ static const char * CST_STRING_OUTPUT_4 = "=======  UnitTestMockTestCase2       
 |    SUMMARY                |\n\
 +---------------------------+\n\
 |  SUCCESS  :    1 ( 10 %)  |\n\
-|  INDEV    :    1 ( 10 %)  |\n\
-|  TODO     :    1 ( 10 %)  |\n\
+|  INDEV    :    2 ( 20 %)  |\n\
+|  TODO     :    4 ( 40 %)  |\n\
 |  FAILED   :    1 ( 10 %)  |\n\
-|  UNKNOWN  :    1 ( 10 %)  |\n\
+|  UNKNOWN  :    2 ( 20 %)  |\n\
 +---------------------------+\n\
 |  TOTAL    :   10          |\n\
 |  STATUS   : UNKNOWN       |\n\

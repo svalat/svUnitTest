@@ -131,10 +131,10 @@ void svutResultFormatterStd::printSummary(svutResultSummary summary)
 	*out         << "|    SUMMARY                |" << endl;
 	*out         << "+---------------------------+" << endl;
 	printSummaryStat(*out,SVUT_STATUS_SUCCESS,summary.getCount(SVUT_STATUS_SUCCESS),summary.getTotal());
-	printSummaryStat(*out,SVUT_STATUS_INDEV,summary.getCount(SVUT_STATUS_SUCCESS),summary.getTotal());
-	printSummaryStat(*out,SVUT_STATUS_TODO,summary.getCount(SVUT_STATUS_SUCCESS),summary.getTotal());
-	printSummaryStat(*out,SVUT_STATUS_FAILED,summary.getCount(SVUT_STATUS_SUCCESS),summary.getTotal());
-	printSummaryStat(*out,SVUT_STATUS_UNKNOWN,summary.getCount(SVUT_STATUS_SUCCESS),summary.getTotal());
+	printSummaryStat(*out,SVUT_STATUS_INDEV,summary.getCount(SVUT_STATUS_INDEV),summary.getTotal());
+	printSummaryStat(*out,SVUT_STATUS_TODO,summary.getCount(SVUT_STATUS_TODO),summary.getTotal());
+	printSummaryStat(*out,SVUT_STATUS_FAILED,summary.getCount(SVUT_STATUS_FAILED),summary.getTotal());
+	printSummaryStat(*out,SVUT_STATUS_UNKNOWN,summary.getCount(SVUT_STATUS_UNKNOWN),summary.getTotal());
 	*out         << "+---------------------------+" << endl;
 	//"|  TOTAL    : %4d          |\n"
 	*out         << "|  TOTAL    : ";
