@@ -17,6 +17,7 @@
 #include "svutExNotify.h"
 #include "svutAutoRegister.h"
 #include "svutTestFilter.h"
+#include "svutAssert.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
