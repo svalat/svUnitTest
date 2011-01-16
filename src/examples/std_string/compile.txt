@@ -1,0 +1,1 @@
+g++ -Iprefix/include/svUnitTest -Lprefix/lib testString.cpp -o testString -lsvunittest && ./testString
