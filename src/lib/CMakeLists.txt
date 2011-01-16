@@ -34,8 +34,9 @@ IF (TEST_COVERAGE)
 ENDIF (TEST_COVERAGE)
 
 #define targets
-add_library (svunittest SHARED ${svUnitTest_SRC})
+add_library (svunittest ${svUnitTest_SRC})
 #install
 INSTALL(TARGETS svunittest
+	ARCHIVE DESTINATION lib
 	LIBRARY DESTINATION lib)
 INSTALL(FILES ${svUnitTest_INC} DESTINATION include/svUnitTest)
