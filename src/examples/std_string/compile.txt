@@ -1,1 +1,7 @@
-g++ -Iprefix/include/svUnitTest -Lprefix/lib testString.cpp -o testString -lsvunittest && ./testString
+If installed into /usr or /usr/local :
+
+g++ -Iprefix/include -Lprefix/lib testString.cpp -o testString -lsvunittest && ./testString
+
+if installed info ${prefix} :
+
+g++ -I${prefix}/include -L${prefix}/lib testString.cpp -o testString -lsvunittest && ./testString
