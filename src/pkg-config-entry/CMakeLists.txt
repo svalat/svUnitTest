@@ -6,8 +6,6 @@
 #            LICENSE  : CeCILL-C                     #
 ######################################################
 
-#subdirs
-add_subdirectory (lib)
-add_subdirectory (test)
-add_subdirectory(pkg-config-entry)
-install(DIRECTORY xslt_html DESTINATION ${CMAKE_INSTALL_PREFIX}/share/svUnitTest)
+#Generate and install pkg-config file
+configure_file(svUnitTest.pc.in svUnitTest.pc ESCAPE_QUOTES @ONLY)
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/svUnitTest.pc DESTINATION share/pkgconfig)
