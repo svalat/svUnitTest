@@ -1,11 +1,22 @@
+/*****************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.1.0
+             DATE     : 01/2011
+             AUTHOR   : Valat Sébastien
+             LICENSE  : CeCILL-C
+*****************************************************/
+
+/********************  HEADERS  *********************/
 //needed to build a new test case.
 #include <svUnitTest/svutTestCase.h>
 #include <svUnitTest/svutDefaultMain.h>
 #include <string>
 
+/**********************  USING  *********************/
 using namespace svUnitTest;
 using namespace std;
 
+/*********************  CLASS  **********************/
 class testString : public svutTestCase
 {
 	public:
@@ -19,10 +30,11 @@ class testString : public svutTestCase
 		string * obj;
 };
 
+/*******************  FUNCTION  *********************/
 //Now register the test case and generate the default main function
 SVUT_REGISTER_STANDELONE(testString);
 
-
+/*******************  FUNCTION  *********************/
 testString::testString(void)
 	:svutTestCase("testString")
 {
@@ -31,23 +43,26 @@ testString::testString(void)
 	SVUT_REG_TEST_METHOD(testString,testOperatorPlus);
 };
 
+/*******************  FUNCTION  *********************/
 void testString::setUp(void)
 {
 	this->obj = new string("Hello World !!!");
 }
 
+/*******************  FUNCTION  *********************/
 void testString::tearDown(void)
 {
 	delete this->obj;
 }
 
-
+/*******************  FUNCTION  *********************/
 void testString::testSize(void)
 {
 	//assume "Hello World !!!" contain 15 characters
 	SVUT_ASSERT_EQUAL(15,obj->size());
 }
 
+/*******************  FUNCTION  *********************/
 void testString::testClear(void)
 {
 	//pre check
@@ -61,6 +76,7 @@ void testString::testClear(void)
 	SVUT_ASSERT_EQUAL("",*obj);
 }
 
+/*******************  FUNCTION  *********************/
 void testString::testOperatorPlus(void)
 {
 	//pre check
