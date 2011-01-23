@@ -44,10 +44,10 @@ class UnitTest_svutAssert : public TestCase
 	CPPUNIT_TEST(testMacroAssertNotEqual_cstr_bad);
 	CPPUNIT_TEST(testMacroAssertNotEqual_custotype_good);
 	CPPUNIT_TEST(testMacroAssertNotEqual_custotype_bad);
-	CPPUNIT_TEST(testMacroAssertEqualType_int_good);
-	CPPUNIT_TEST(testMacroAssertNotEqualType_int_good);
-	CPPUNIT_TEST(testMacroAssertEqualType_cstr_good);
-	CPPUNIT_TEST(testMacroAssertNotEqualType_cstr_good);
+	CPPUNIT_TEST(testMacroAssertEqualStrict_int_good);
+	CPPUNIT_TEST(testMacroAssertNotEqualStrict_int_good);
+	CPPUNIT_TEST(testMacroAssertEqualStrict_cstr_good);
+	CPPUNIT_TEST(testMacroAssertNotEqualStrict_cstr_good);
 	CPPUNIT_TEST(testMacroAssertSame_good);
 	CPPUNIT_TEST(testMacroAssertSame_bad);
 	CPPUNIT_TEST(testMacroAssertNotSame_good);
@@ -93,10 +93,10 @@ class UnitTest_svutAssert : public TestCase
 		void testMacroAssertNotEqual_cstr_bad(void);
 		void testMacroAssertNotEqual_custotype_good(void);
 		void testMacroAssertNotEqual_custotype_bad(void);
-		void testMacroAssertEqualType_int_good(void);
-		void testMacroAssertNotEqualType_int_good(void);
-		void testMacroAssertEqualType_cstr_good(void);
-		void testMacroAssertNotEqualType_cstr_good(void);
+		void testMacroAssertEqualStrict_int_good(void);
+		void testMacroAssertNotEqualStrict_int_good(void);
+		void testMacroAssertEqualStrict_cstr_good(void);
+		void testMacroAssertNotEqualStrict_cstr_good(void);
 		void testMacroAssertSame_good(void);
 		void testMacroAssertSame_bad(void);
 		void testMacroAssertNotSame_good(void);
@@ -443,10 +443,10 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_custotype_bad(void)
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutAssert::testMacroAssertEqualType_int_good(void)
+void UnitTest_svutAssert::testMacroAssertEqualStrict_int_good(void)
 {
 	try {
-		SVUT_ASSERT_EQUAL_TYPE(10,10);
+		SVUT_ASSERT_EQUAL_STRICT(10,10);
 	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
@@ -455,10 +455,10 @@ void UnitTest_svutAssert::testMacroAssertEqualType_int_good(void)
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutAssert::testMacroAssertNotEqualType_int_good(void)
+void UnitTest_svutAssert::testMacroAssertNotEqualStrict_int_good(void)
 {
 	try {
-		SVUT_ASSERT_NOT_EQUAL_TYPE(10,20);
+		SVUT_ASSERT_NOT_EQUAL_STRICT(10,20);
 	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
@@ -467,10 +467,10 @@ void UnitTest_svutAssert::testMacroAssertNotEqualType_int_good(void)
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutAssert::testMacroAssertEqualType_cstr_good(void)
+void UnitTest_svutAssert::testMacroAssertEqualStrict_cstr_good(void)
 {
 	try {
-		SVUT_ASSERT_EQUAL_TYPE("Hello World !!","Hello World !!");
+		SVUT_ASSERT_EQUAL_STRICT("Hello World !!","Hello World !!");
 	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
@@ -479,10 +479,10 @@ void UnitTest_svutAssert::testMacroAssertEqualType_cstr_good(void)
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutAssert::testMacroAssertNotEqualType_cstr_good(void)
+void UnitTest_svutAssert::testMacroAssertNotEqualStrict_cstr_good(void)
 {
 	try {
-		SVUT_ASSERT_NOT_EQUAL_TYPE("Hello World !!","Hello Bob !!");
+		SVUT_ASSERT_NOT_EQUAL_STRICT("Hello World !!","Hello Bob !!");
 	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {

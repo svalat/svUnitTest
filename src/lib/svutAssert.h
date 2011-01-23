@@ -103,8 +103,8 @@ namespace svUnitTest
  * @param expected Define the wanted value.
  * @param actual Define the current value to test.
 **/
-#define SVUT_ASSERT_EQUAL_TYPE(expected,actual) \
-	assertEqualType((expected),(actual),SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_EQUAL_STRICT(expected,actual) \
+	assertEqualStrict((expected),(actual),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
 /**
@@ -118,8 +118,8 @@ namespace svUnitTest
  * @param expected Define the wanted value.
  * @param actual Define the current value to test.
 **/
-#define SVUT_ASSERT_NOT_EQUAL_TYPE(expected,actual) \
-	assertNotEqualType((expected),(actual),SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_NOT_EQUAL_STRICT(expected,actual) \
+	assertNotEqualStrict((expected),(actual),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
 /**

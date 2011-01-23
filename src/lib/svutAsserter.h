@@ -112,7 +112,7 @@ static void assertNotEqual(const T1 & expected,const T2 & actual,svutCodeLocatio
 
 /*******************  FUNCTION  *********************/
 /**
- * Implementation used bu macro SVUT_ASSERT_EQUAL_TYPE. This methode only rely on assertEqual() by
+ * Implementation used bu macro SVUT_ASSERT_EQUAL_STRICT. This methode only rely on assertEqual() by
  * pre-filtering the types. For type filtering it rely on compiler error by using a restrict
  * prototype, this the main goal of this metho is to made crash the compiler when types are not
  * the same.
@@ -124,14 +124,14 @@ static void assertNotEqual(const T1 & expected,const T2 & actual,svutCodeLocatio
  * @param location Define the code location which call this test.
 **/
 template <class T>
-static void assertEqualType(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+static void assertEqualStrict(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
 {
 	assertEqual(expected,actual,location);
 }
 
 /*******************  FUNCTION  *********************/
 /**
- * Implementation used bu macro SVUT_ASSERT_NOT_EQUAL_TYPE. This methode only rely on assertEqual() by
+ * Implementation used bu macro SVUT_ASSERT_NOT_EQUAL_STRICT. This methode only rely on assertEqual() by
  * pre-filtering the types. For type filtering it rely on compiler error by using a restrict
  * prototype, this the main goal of this metho is to made crash the compiler when types are not
  * the same.
@@ -143,7 +143,7 @@ static void assertEqualType(const T & expected,const T & actual,svutCodeLocation
  * @param location Define the code location which call this test.
 **/
 template <class T>
-static void assertNotEqualType(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+static void assertNotEqualStrict(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
 {
 	assertNotEqual(expected,actual,location);
 }
@@ -151,8 +151,8 @@ static void assertNotEqualType(const T & expected,const T & actual,svutCodeLocat
 /*******************  FUNCTION  *********************/
 void assertEqual(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 void assertNotEqual(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
-void assertEqualType(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
-void assertNotEqualType(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
+void assertEqualStrict(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
+void assertNotEqualStrict(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 void assertSame(const void * expected,const void * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 void assertNotSame(const void * expected,const void * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 

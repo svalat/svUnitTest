@@ -55,7 +55,7 @@ void assertNotEqual(const char * expected,const char * actual,svutCodeLocation l
  * @param actual Define the current value to compared to the expected one.
  * @param location Define the code location which call this test.
 **/
-void assertEqualType(const char * expected,const char * actual,svutCodeLocation location)
+void assertEqualStrict(const char * expected,const char * actual,svutCodeLocation location)
 	throw(svutExAssertFailEqual)
 {
 	assertEqual(expected, actual, location);
@@ -68,7 +68,7 @@ void assertEqualType(const char * expected,const char * actual,svutCodeLocation 
  * @param actual Define the current value to compared to the expected one.
  * @param location Define the code location which call this test.
 **/
-void assertNotEqualType(const char * expected,const char * actual,svutCodeLocation location)
+void assertNotEqualStrict(const char * expected,const char * actual,svutCodeLocation location)
 	throw(svutExAssertFailEqual)
 {
 	assertNotEqual(expected, actual, location);
