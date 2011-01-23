@@ -6,8 +6,6 @@
 #            LICENSE  : CeCILL-C                     #
 ######################################################
 
-#subdirs
-add_subdirectory (lib)
-add_subdirectory (test)
-add_subdirectory (integration)
-install(DIRECTORY xslt_html DESTINATION ${CMAKE_INSTALL_PREFIX}/share/svUnitTest)
+#Generate and install cmake module file
+configure_file(FindsvUnitTest.cmake.in FindsvUnitTest.cmake ESCAPE_QUOTES @ONLY)
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/FindsvUnitTest.cmake DESTINATION share/cmake/Modules/)

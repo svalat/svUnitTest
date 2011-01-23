@@ -7,7 +7,5 @@
 ######################################################
 
 #subdirs
-add_subdirectory (lib)
-add_subdirectory (test)
-add_subdirectory (integration)
-install(DIRECTORY xslt_html DESTINATION ${CMAKE_INSTALL_PREFIX}/share/svUnitTest)
+add_subdirectory (pkg-config)
+add_subdirectory (cmake)
