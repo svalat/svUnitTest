@@ -37,21 +37,6 @@ namespace svUnitTest
 	this->registerTestMethod(__svut__testMeth__);\
 } while(0)
 
-/*
- * This macro must be used in the source file of all tests to register the test in the global
- * lists of test to run when svutRunner is called. We call this "automatic registration" as you
- * didn't need to build a list of the tests and give it to svutRunner. So it's simpler to add new
- * tests as all the needs can be filled in one file per test which can be move between projects
- * independently of the test runner.
- * You can register multiple test cas in the same file.
- * @param name Define the class name of the test case to register.
-#define SVUT_REGISTER_TEST_CASE(name) \
-	static svUnitTest::svutTestCaseBuilderGeneric<name> ___SVUT_case_##name##___;\
-	static int ___SVUT_res_case_registration_of##name##__ = registerTestCase(___SVUT_case_##name##___);*/
-
-/********************  GLOBALS  **********************/
-//extern list<class svutTestCaseBuilder *> __SVUT_autoFoundTests__;
-
 /*********************  CLASS  **********************/
 class svutListener;
 
