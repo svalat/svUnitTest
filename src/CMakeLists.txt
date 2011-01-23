@@ -10,4 +10,5 @@
 add_subdirectory (lib)
 add_subdirectory (test)
 add_subdirectory (integration)
+add_subdirectory (examples)
 install(DIRECTORY xslt_html DESTINATION ${CMAKE_INSTALL_PREFIX}/share/svUnitTest)
