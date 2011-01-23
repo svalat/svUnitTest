@@ -25,6 +25,7 @@ class UnitTest_svutAutoRegister : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutAutoRegister);
 	CPPUNIT_TEST(testRegister);
+	CPPUNIT_TEST(testRegister_multiple);
 	CPPUNIT_TEST(testGetList);
 	CPPUNIT_TEST(testClear);
 	CPPUNIT_TEST_SUITE_END();
@@ -35,6 +36,7 @@ class UnitTest_svutAutoRegister : public TestCase
 
 	protected:
 		void testRegister(void);
+		void testRegister_multiple(void);
 		void testGetList(void);
 		void testClear(void);
 };
@@ -67,6 +69,16 @@ void UnitTest_svutAutoRegister::testRegister(void )
 {
 	svutTestCaseBuilderGeneric<UnitTestMockTestCase2>  test;
 	CPPUNIT_ASSERT_EQUAL(0,getRegistredTestCase().size());
+	registerTestCase(test);
+	CPPUNIT_ASSERT_EQUAL(1,getRegistredTestCase().size());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutAutoRegister::testRegister_multiple(void )
+{
+	svutTestCaseBuilderGeneric<UnitTestMockTestCase2>  test;
+	CPPUNIT_ASSERT_EQUAL(0,getRegistredTestCase().size());
+	registerTestCase(test);
 	registerTestCase(test);
 	CPPUNIT_ASSERT_EQUAL(1,getRegistredTestCase().size());
 }
