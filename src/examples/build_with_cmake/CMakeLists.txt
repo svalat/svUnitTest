@@ -13,15 +13,20 @@ project(example_test_string CXX)
 #check the presence of svUnitTest
 find_package(svUnitTest REQUIRED)
 
+#done optional actions
+if ( SVUNITTEST_FOUND )
+	#Place here you optional code
+endif( SVUNITTEST_FOUND )
+
 #setup directories
-include_directories(${svUnitTest_INCLUDE_DIR})
+include_directories(${SVUNITTEST_INCLUDE_DIR})
 
 #If you need to setup the libdir
 #set(LIBS ${LIBS} ${svUnitTest_LIBRARIES})
 
 #Now you can build your tests
 add_executable(testString testString.cpp)
-target_link_libraries(testString ${svUnitTest_LIBRARY})
+target_link_libraries(testString ${SVUNITTEST_LIBRARY})
 
 ######################################################
 #To auto build multiple test cases with one file per test :
@@ -34,6 +39,6 @@ target_link_libraries(testString ${svUnitTest_LIBRARY})
 
 #foreach(i ${myProject_CASES})
 #	add_executable (${i} ${i}.cpp)
-#	target_link_libraries (${i} ${svUnitTest_LIBRARY})
+#	target_link_libraries (${i} ${SVUNITTEST_LIBRARY})
 #	add_test(${i} ${i})
 #endforeach(i)
