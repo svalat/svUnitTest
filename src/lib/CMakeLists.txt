@@ -24,7 +24,7 @@ set(svUnitTest_INC svutAsserter.h svutAssert.h svutAutoRegister.h svutCodeLocati
 	svutResultFormatterQtXml.h svutResultFormatterStdBW.h svutResultFormatterStdColored.h
 	svutResultFormatterStd.h svutResultFormatterXml.h svutResultSummary.h svutRunnerConfig.h
 	svutRunner.h svutStatusInfo.h svutTestCaseBuilder.h svutTestCase.h svutTestFilterBasic.h
-	svutTestFilter.h svutTestMethod.h)
+	svutTestFilter.h svutTestMethod.h svUnitTest.h)
 
 #enable coverage profiling
 IF (TEST_COVERAGE)
