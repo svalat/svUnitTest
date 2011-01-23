@@ -12,7 +12,6 @@ RM=rm -f
 PKGCONFIG=pkg-config
 ####################### FLAGS ########################
 SVUNITTEST_PREFIX=/usr
-SVUNITTEST_PREFIX=${HOME}/testsvunittest/
 CXXFLAGS=-I${SVUNITTEST_PREFIX}/include
 LDFLAGS=-L${SVUNITTEST_PREFIX}/lib -lsvunittest
 
