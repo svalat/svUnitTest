@@ -14,6 +14,7 @@
 #include <svutRunner.h>
 #include <svutListenerDirectOutputter.h>
 #include <svutRunnerConfig.h>
+#include "UnitTestExtra.h"
 #include "UnitTestMockResultFormatter.h"
 #include "UnitTestMockTestCase2.h"
 #include <svutResultFormatterStdBW.h>
@@ -143,7 +144,8 @@ class UnitTest_svutRunner : public TestCase
 	CPPUNIT_TEST(testSetDisplay_1);
 	CPPUNIT_TEST(testSetDisplay_2);
 	CPPUNIT_TEST(testSetDisplay_3);
-	CPPUNIT_TEST(testLoadAutoDetected);
+	CPPUNIT_TEST(testLoadAutoDetected_1);
+	CPPUNIT_TEST(testLoadAutoDetected_2);
 	CPPUNIT_TEST(testUnloadAutoDetected);
 	CPPUNIT_TEST(testRegisterTestCase);
 	CPPUNIT_TEST(testListTests_1);
@@ -169,7 +171,8 @@ class UnitTest_svutRunner : public TestCase
 		void testSetDisplay_1(void);
 		void testSetDisplay_2(void);
 		void testSetDisplay_3(void);
-		void testLoadAutoDetected(void);
+		void testLoadAutoDetected_1(void);
+		void testLoadAutoDetected_2(void);
 		void testUnloadAutoDetected(void);
 		void testRegisterTestCase(void);
 		void testListTests_1(void);
@@ -190,6 +193,7 @@ void UnitTest_svutRunner::setUp(void)
 	this->formatter = new UnitTestMockResultFormater();
 	this->runner = new svutRunner(*this->formatter);
 	this->mock = new UnitTestMockTestCase2();
+	clearTestCaseRegister();
 }
 
 /*******************  FUNCTION  *********************/
@@ -198,6 +202,7 @@ void UnitTest_svutRunner::tearDown(void)
 	delete this->runner;
 	delete this->formatter;
 	delete this->mock;
+	clearTestCaseRegister();
 }
 
 /*******************  FUNCTION  *********************/
@@ -220,7 +225,7 @@ void UnitTest_svutRunner::testConstructor_mode_output(void)
 	this->mock->useTests(UnitTestMockTestCase2::REGISTER_ALL);
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(false,localRunner.run());
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_0,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_0,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -232,7 +237,7 @@ void UnitTest_svutRunner::testConstructor_formatter(void)
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(false,localRunner.run());
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_1,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_1,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -245,7 +250,7 @@ void UnitTest_svutRunner::testConstructor_listener(void)
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(false,localRunner.run());
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_1,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_1,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -260,7 +265,7 @@ void UnitTest_svutRunner::testConstructor_config(void)
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(false,localRunner.run());
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_0,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_0,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -272,7 +277,7 @@ void UnitTest_svutRunner::testRun_1(void)
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(true,localRunner.run());
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_2,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_2,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -284,7 +289,7 @@ void UnitTest_svutRunner::testRun_2(void)
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(false,localRunner.run());
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_3,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_3,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -296,7 +301,7 @@ void UnitTest_svutRunner::testSetDisplay_1(void)
 	this->mock->useTests(UnitTestMockTestCase2::REGISTER_ALL);
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(false,localRunner.run());
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_0,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_0,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -308,7 +313,7 @@ void UnitTest_svutRunner::testSetDisplay_2(void)
 	this->mock->useTests(UnitTestMockTestCase2::REGISTER_ALL);
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(false,localRunner.run());
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_4,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_4,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -321,11 +326,11 @@ void UnitTest_svutRunner::testSetDisplay_3(void)
 	this->mock->useTests(UnitTestMockTestCase2::REGISTER_ALL);
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(false,localRunner.run());
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_4,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_4,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutRunner::testLoadAutoDetected(void)
+void UnitTest_svutRunner::testLoadAutoDetected_1(void)
 {
 	stringstream ss;
 	svutRunner localRunner(*formatter);
@@ -335,7 +340,24 @@ void UnitTest_svutRunner::testLoadAutoDetected(void)
 	localRunner.loadAutoDetected();
 	CPPUNIT_ASSERT_EQUAL(true,localRunner.run());
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_5,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_5,ss.str());
+	localRunner.unloadAutoDetected();
+	clearTestCaseRegister();
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutRunner::testLoadAutoDetected_2(void)
+{
+	stringstream ss;
+	svutRunner localRunner(*formatter);
+	this->mock->useTests(UnitTestMockTestCase2::REGISTER_SUCCESS);
+	svutTestCaseBuilderGeneric<UnitTestMockTestCase2> builder;
+	registerTestCase(builder);
+	registerTestCase(builder);
+	localRunner.loadAutoDetected();
+	CPPUNIT_ASSERT_EQUAL(true,localRunner.run());
+	ss << *formatter;
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_5,ss.str());
 	localRunner.unloadAutoDetected();
 	clearTestCaseRegister();
 }
@@ -365,7 +387,7 @@ void UnitTest_svutRunner::testUnloadAutoDetected(void)
 	CPPUNIT_ASSERT_EQUAL(true,UnitTest_svutRunner_MockStatus);
 	CPPUNIT_ASSERT_EQUAL(true,localRunner.run());
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_9,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_9,ss.str());
 	localRunner.unloadAutoDetected();
 	CPPUNIT_ASSERT_EQUAL(false,UnitTest_svutRunner_MockStatus);
 	clearTestCaseRegister();
@@ -378,14 +400,14 @@ void UnitTest_svutRunner::testRegisterTestCase(void)
 	svutRunner localRunner(*formatter);
 
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL("",ss.str());
+	CPPUNIT_ASSERT_EQUAL("",ss.str());
 	ss.clear();
 	
 	this->mock->useTests(UnitTestMockTestCase2::REGISTER_FAILURE);
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(false,localRunner.run());
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_3,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_3,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -402,7 +424,7 @@ void UnitTest_svutRunner::testListTests_1(void )
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(true,localRunner.run());
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_6,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_6,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -418,7 +440,7 @@ void UnitTest_svutRunner::testListTests_2(void )
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(true,localRunner.run(SVUT_ACTION_LIST_TESTS));
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_6,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_6,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -441,7 +463,7 @@ void UnitTest_svutRunner::testSetFilter(void)
 	localRunner.setFilter(&filter);
 	CPPUNIT_ASSERT_EQUAL(true,localRunner.run(SVUT_ACTION_LIST_TESTS));
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_7,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_7,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -460,7 +482,7 @@ void UnitTest_svutRunner::testConfigFilter(void)
 	localRunner.registerTestCase(*mock);
 	CPPUNIT_ASSERT_EQUAL(true,localRunner.run(SVUT_ACTION_LIST_TESTS));
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_7,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_7,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -480,7 +502,7 @@ void UnitTest_svutRunner::testSetFilterNull(void)
 	localRunner.setFilter(NULL);
 	CPPUNIT_ASSERT_EQUAL(true,localRunner.run(SVUT_ACTION_LIST_TESTS));
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_6,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_6,ss.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -495,7 +517,7 @@ void UnitTest_svutRunner::testFilterTestExecution(void)
 	localRunner.setFilter(&filter);
 	CPPUNIT_ASSERT_EQUAL(true,localRunner.run());
 	ss << *formatter;
-	SVUT_ASSERT_EQUAL(CST_STRING_OUTPUT_8,ss.str());
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_8,ss.str());
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutRunner);

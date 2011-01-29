@@ -61,7 +61,7 @@ void UnitTest_svutAutoRegister::testGetList(void )
 	CPPUNIT_ASSERT_EQUAL(1,getRegistredTestCase().size());
 
 	const std::list<svUnitTest::svutTestCaseBuilder *> lst = getRegistredTestCase();
-	SVUT_ASSERT_EQUAL(&test,*lst.begin());
+	CPPUNIT_ASSERT(&test == *lst.begin());
 }
 
 /********************  METHODE  *********************/
