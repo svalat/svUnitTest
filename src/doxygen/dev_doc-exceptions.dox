@@ -1,0 +1,23 @@
+/**
+\page dev_doc-exceptions Exceptions
+
+
+In the unit test library, exception are the bases of error notification for test validation (invalid assertion, errors....). To support that we build the next hierarchy  :
+
+ - <em>std::exception</em> : Bases of all C++ exceptions.
+ - <em>svutException</em> : Bases of all exception of our library.
+ - <em>svutExTestStatus</em> : Exceptions used to build test status related exceptions.
+ - <em>svutExNotify</em> : Bases for notification (not errors) (It may be removed to prefer a simple call method to change the final status without interrupting the test. 
+ - <em>svutExNotifyTodo</em> : TODO notification : the test need to be implemented or improved.
+ - <em>svutExNotifyIndev</em> : INDEV notification : the test is  in development, it may change. It's mainly to clearly see what we are currently doing.
+ - <em>svutExAssertFailed</em>
+ - <em>svutExAssertFailBool</em> : Error while testing boolean expression.
+ - <em>svutExAssertFailCustom</em> : Custom error with custom message.
+ - <em>svutExAssertFailCompare</em> : Error while comparing values (equals or not equals).
+ - <em>svutExAssertFailNotExec</em> : Error while calling a code which may not be reached.
+ - <em>svutExAssertFailNullPointer</em> : Error while testing NULL status of a pointer.
+ - <em>svutExAssertFailThrow</em> : Error while testing exceptions which may be throed or not by a peace of code.
+
+Starting from <em>svutExTestStatus</em>, exceptions are links to a status and parameters and a description. The content of this information are place in a sub-object <em>svutStatusInfo</em>.
+
+**/

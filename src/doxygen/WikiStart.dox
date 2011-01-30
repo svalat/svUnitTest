@@ -1,0 +1,107 @@
+/**
+\mainpage svUnitTest
+
+\section Objectives Objectives
+
+
+This is another unit test framework for C++. There are already many functional framework for this (cppunit.............), so, why done another one ?
+
+ - Because this is fun and it's a good way to learn.
+ - To try some extension compared to standard frameworks.
+ - To generate nice reports (color in console texte mode, nice XML+XSLT output...)
+ - Integrate it to KDevelop without using qttestlib.
+ - Light library.
+ - SIMPLE to use.
+ - OpenSource.
+ - CppUnit is not really friendly to use and seems to be really limited (without extended it), for exemple  :
+ - the default ASSERT macro are really limited,
+ - ASSERT_EQUAL force the type equality, so can't simply compare a string object to const C string, or other string classes.
+ - No ASSERT_TRUE/FALSE, we got 0 or 1 as display.
+ - No ASSERT to quicly check exceptions
+ - To complex main method to build the test
+\section ChangeLog ChangeLog
+
+\subsection Version0.1.0January122011 Version 0.1.0 (January 12, 2011)
+
+
+First complete version which contain :
+
+ - Base implementation
+ - Unit tests of the base implementation
+ - Output format : XML, Qt XML, Black &amp; white stdout, Colored stdout
+ - Provide most of the required assertions SVUT_ASSERT_EQUAL()...
+ - Provide the INDEV and TODO state in addition to others unit test libraries.
+ - Provide a basic XSLT file to manualy generate HTML from native XML output format.
+ - Provide standelon of test suite predefine main functions.
+
+Need some extra work to complete documentation, build script and examples for the 0.2.0.
+
+\section Dependencies Dependencies
+
+
+Related tools and libs required or optional to use and develop svUnitTest :
+
+ - Cmake      : http://www.cmake.org/
+ - CppUnit   : http://sourceforge.net/apps/mediawiki/cppunit/
+ - Doxygen    : http://www.doxygen.org/
+ - LCov       : http://ltp.sourceforge.net/coverage/lcov.php
+ - GCC        : http://gcc.gnu.org/
+ - ICC        : http://software.intel.com/en-us/intel-compilers/
+
+Extra development tools used :
+
+ - Trac       : http://trac.edgewall.org/
+ - Kdevelop 4 : http://www.kdevelop.org/
+ - GDB        : http://www.gnu.org/software/gdb/
+ - valgrind   : http://valgrind.org/
+
+As a user, you be interested by :
+
+ - Cmake      : http://www.cmake.org/
+ - Pkg-config : http://pkg-config.freedesktop.org/wiki/
+ - Autoconf   : http://www.gnu.org/software/autoconf/
+ - Automake   : http://www.gnu.org/software/automake/
+\section Testedenvironments Tested environments
+
+<table>
+<tr><th> OS </th><th> architecture </th><th> compiler </th><th> status
+</th></tr><tr><td> Gentoo Linux   </td><td style="text-align: center">       x86_64        </td><td style="text-align: center">  gcc-4.4.3     </td><td style="text-align: center">   SUCCESS
+</td></tr><tr><td> Gentoo Linux   </td><td style="text-align: center">       x86_64        </td><td style="text-align: center">  gcc-4.3.4     </td><td style="text-align: center">   SUCCESS
+</td></tr><tr><td> Gentoo Linux   </td><td style="text-align: center">       x86_64        </td><td style="text-align: center">  icc-11.1      </td><td style="text-align: center">
+</td></tr></table>
+\section Userdocumentation User documentation
+
+ - \subpage user_doc-install
+ - \subpage user_doc-write_first_test
+ - \subpage user_doc-build_makefile
+ - \subpage user_doc-build_pkg-config
+ - \subpage user_doc-build_cmake
+ - \subpage user_doc-build_autotools
+ - \subpage user_doc-build_your_first_suite
+ - \subpage user_doc-test_coverage
+ - \subpage user_doc-available_assertions
+ - \subpage user_doc-extend_type
+ - \subpage user_doc-extend_macro
+ - \subpage user_doc-status
+ - \subpage user_doc-html
+ - \subpage user_doc-inherit
+\section Developerdocumentation Developer documentation
+
+ - \subpage dev_doc-style
+ - \subpage dev_doc-defs
+ - \subpage dev_doc-directories
+ - \subpage dev_doc-obj_meth
+ - \subpage dev_doc-location
+ - \subpage dev_doc-exceptions
+ - \subpage dev_doc-status_and_asserts
+ - \subpage dev_doc-global_xml
+ - \subpage dev_doc-gcov
+ - \subpage dev_doc-asserts
+ - \subpage dev_dec-events
+ - \subpage dev_doc-formatter
+ - \subpage dev_doc-runner
+ - \subpage dev_doc-auto_register
+ - \subpage dev_doc-filtering
+ - \subpage dev_doc-defaultMain
+ - \subpage dev_doc-updateVersion
+**/

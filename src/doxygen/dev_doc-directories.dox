@@ -1,0 +1,21 @@
+/**
+\page dev_doc-directories Directory structure
+
+<dl class="wiki"><dt><strong>/</strong></dt><dd>
+Files which globally describe the project (readme, licence, root of cmake,doxyfile...)
+</dd><dt><strong>/cmake</strong></dt><dd>
+Contain exta modules for cmake.
+</dd><dt><strong>/src</strong></dt><dd>
+Directory which contain sources.
+</dd><dt><strong>/src/lib</strong></dt><dd>
+Sources of the library.
+</dd><dt><strong>/src/doc</strong></dt><dd>
+Sources of documentation.
+</dd><dt><strong>/src/test</strong></dt><dd>
+Sources of unit tests.
+</dd><dt><strong>/src/dev_doc</strong></dt><dd>
+Contain some extra development documents (UML diagram...)
+</dd><dt><strong>/doc</strong></dt><dd>
+Directory where goes the generated documentation (with doxygen).
+</dd></dl>
+**/

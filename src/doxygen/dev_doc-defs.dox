@@ -1,0 +1,16 @@
+/**
+\page dev_doc-defs Definitions
+
+
+To fix some words and concepts we may define some of them here :
+
+<dl class="wiki"><dt><strong>Test</strong></dt><dd>
+A test is a member function of an object which may be called to valid properties tested actions of objects. Properties are checked using specialized <em>assertions</em> to be explicit.
+</dd><dt><strong>Test case</strong></dt><dd>
+This is a group of <em>tests</em> around one case to validate. We group all those methods in one object which inherit from <em>svutTestCase</em> which may call all the tests and provide the link with reporting methods.
+</dd><dt><strong>Test suite</strong></dt><dd>
+This is an aggregation of many test cases. This is used to made subgroup around coherent objectives.
+</dd><dt><strong>Assertion</strong></dt><dd>
+This is a condition required to consider a test as valid. As example we can assert that a method return a certain value. If an assertion is not fulfill the test is considered as <em>failed</em>.
+</dd></dl>
+**/

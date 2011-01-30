@@ -1,0 +1,92 @@
+/**
+\page user_doc-extend_type Extend type support
+
+
+In some case, you may need to add some support for your types to use SVUT_ASSERT_* macros. To be supported, your type may require to implements :
+
+ - The std::ostream &lt;&lt; operator to be serialized into a string to give informations on failure.
+ - The operator == if used into SVUT_ASSERT_EQUAL
+ - The operator != if used into SVUT_ASSERT_NOT_EQUAL
+
+\section Implementtheoperators Implement the operators
+
+
+The cleaner way to be supported by the assertions is to natively support the required operator, for example by using <a class="missing wiki">MyType?</a> :
+
+@code
+#include <ostream>
+
+class MyType
+{
+    public:
+       //.... your public members
+
+       //const is not required but preferred if valid.
+       friend std::ostream operator << ( std::ostream & out, const MyType & obj );
+       friend bool operator == ( const MyType & a , const MyType & b );
+       friend bool operator != ( const MyType & a , const MyType & b );
+    protected:
+       int value1;
+       int value2;
+}
+
+std::ostream operator << ( std::ostream & out, const MyType & obj )
+{
+   out << value1 << " , " << value2;
+   return out;
+}
+
+bool operator == ( const MyType & a , const MyType & b )
+{
+   return ( a.value1 == b.value1 && a.value2 == b.value2 );
+}
+
+bool operator != ( const MyType & a , const MyType & b )
+{
+   return ( a.value1 != b.value1 || a.value2 != b.value2 );
+}
+@endcode
+
+If your type is too complex to be serialized to a string, you can simply display the address, this is not revelant but may be better than nothing :
+
+@code
+std::ostream operator << ( std::ostream & out, const MyType & obj )
+{
+   out << &obj;
+   return out;
+}
+@endcode
+
+\section IDontwanttoimplementtheoperators I Don't want to implement the operators ?
+
+
+Maybe those operators are not really relevant for your objects and you didn't want to implement them just for the tests, or may your want different properties of operator == for the tests (more strict ...).
+
+
+To solve such issue, the provided assertions don't call directly the related operator by pass throw a specific template function. To avoid implementation the operators, your can simply override those function for your tests. Just ensure that you defined them before calling the related assertions.
+
+@code
+bool asserterOperatorEqual(const MyType & v1,const MyType & v2)
+{
+	return (v1.value1 == v2.value1 && v1.value2 == v2.value2);
+}
+
+bool asserterOperatorNotEqual(const MyType & v1,const MyType & v2)
+{
+	return (v1.value1 != v2.value1 || v1.value2 != v2.value2);
+}
+
+std::string asserterToString(const MyType & value)
+{
+	std::stringstream res;
+	res << value.value1 << ", " << value.value2;
+	return res.str();
+}
+@endcode
+
+Those function may be build with the test only, not binded into the original application as it wasn't required to run it.
+
+
+<strong>Caution</strong>, you must ensure that you defined them before calling the related assertions.
+
+**/

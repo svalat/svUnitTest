@@ -1,0 +1,87 @@
+/**
+\page dev_doc-style Programming style
+
+
+This page describe the style to apply to each peace of code of this library to made it uniform.
+
+
+\section Namingfiles Naming files
+
+
+All files use the same name than their main class (case sensible). We may use names convention :
+
+ - For cpp sources : {nom}.cpp
+ - For cpp headers :{nom}.h
+ - For template implementation : {nom}_impl.h
+ - For doxygen extra files : {nom}.dox
+ - For unit test files : !UnitTest_{className}.cpp
+
+\section Namingtypes Naming types
+
+
+All types are prefixed by <em>svut</em> and use upper case to split words : <em>svutTestCase</em>.
+
+
+Macro and constants will be named in upper case : <em>SVUT_TEST_CONSTANT</em>, <em>SVUT_ASSERT_EQUAL(x)</em>.
+
+
+\section Sourcefiletemplate Source file template
+
+
+We may use this template for each source files of the library :
+
+@verbatim
+/*****************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.0.2
+             DATE     : 07/2010
+             AUTHOR   : Valat Sébastien
+             LICENSE  : CeCILL-C
+*****************************************************/
+
+#ifndef SVUT_CLASS_NAME_HEADER
+#define SVUT_CLASS_NAME_HEADER
+
+/********************  HEADERS  *********************/
+
+namespace svUnitTest
+{
+
+/*********************  TYPES  **********************/
+
+/********************  MACRO  ***********************/
+
+/********************  GLOBALS  *********************/
+
+/********************* CLASS ************************/
+/**
+ * Doc
+ * @brief
+ * @author
+ * @version 0.0.2
+**/
+class ClassName
+{
+};
+
+/********************  METHOD  **********************/
+/**
+ * Doc
+ * @param p1 ....
+ * @return ...
+**/
+void function(void)
+{
+}
+
+}
+
+#endif
+@endverbatim
+
+\section Codewidth Code width
+
+
+The code and documentation mustn't exceed 100 characters per lines considering 4 spaces tabulations.
+
+**/

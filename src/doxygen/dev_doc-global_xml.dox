@@ -1,0 +1,58 @@
+/**
+\page dev_doc-global_xml Global UML diagram
+
+
+This is the current diagram of the library : 
+
+@dot
+digraph G {
+        node [ shape="box" fontsize = 10.0 ]
+        rankdir = RL
+
+        subgraph cluster_0 {
+                label = "exceptions";
+                svutExInternalError -> svutException [ arrowhead="empty" ]
+                svutExTestStatus -> svutException [ arrowhead="empty" ]
+                svutExNotify -> svutExTestStatus  [ arrowhead="empty" ]
+                svutExNotifyToto -> svutExNotify [ arrowhead="empty" ]
+                svutExNotifyIndev -> svutExNotify [ arrowhead="empty" ]
+                svutExAssertFail -> svutExTestStatus [ arrowhead="empty" ]
+                svutExAssertFailBool -> svutExAssertFail [ arrowhead="empty" ]
+                svutExAssertFailNullPointer -> svutExAssertFail [ arrowhead="empty" ]
+                svutExAssertFailEqual -> svutExAssertFail [ arrowhead="empty" ]
+                svutExAssertFailCustom -> svutExAssertFail [ arrowhead="empty" ]
+                svutExAssertFailNotExec -> svutExAssertFail [ arrowhead="empty" ]
+                svutExAssertFailThrow -> svutExAssertFail [ arrowhead="empty" ]
+                color=gray
+        }
+
+        subgraph cluster_1 {
+                label = "status"
+                svutExTestStatus -> svutExStatusInfo [ dir="back", arrowtail="diamond" ]
+                svutExStatusInfo -> svutStatus [ dir="back", arrowtail="diamond" ]
+                svutExStatusInfo -> svutCodelocation [ dir="back", arrowtail="diamond" ]
+                color=gray
+        }
+
+        subgraph cluster_2 {
+                color = gray   
+                label = "events"
+                svutListenerMultiplexer -> svutListener  [ arrowhead="empty" ]
+        }
+
+        subgraph cluster_3 {
+                color = gray   
+                label = "tests"
+                svutObjectMethodGeneric -> svutObjectMethod [ arrowhead="empty" ]
+                svutTestCase -> svutTestMethod [ dir="back", arrowtail="diamond" ]
+                svutTestMethod -> svutObjectMethod [ dir="back", arrowtail="diamond" ]
+        }
+        
+        subgraph cluster_4{
+                color = gray  
+                label = "assert failure"
+                
+        }
+}
+@enddot
+**/

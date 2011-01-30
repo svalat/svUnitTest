@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+
+
+  <head>
+    <title>
+      Internal Error – svUnitTest
+    </title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><link rel="search" href="/trac/search" /><link rel="help" href="/trac/wiki/TracGuide" /><link rel="start" href="/trac/wiki" /><link rel="stylesheet" href="/trac/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/trac/chrome/common/css/wiki.css" type="text/css" /><link rel="stylesheet" href="/trac/chrome/theme/cmteknik.css" type="text/css" /><link rel="shortcut icon" href="/trac/chrome/common/trac.ico" type="image/x-icon" /><link rel="icon" href="/trac/chrome/common/trac.ico" type="image/x-icon" /><link type="application/opensearchdescription+xml" rel="search" href="/trac/search/opensearch" title="Search svUnitTest" /><script type="text/javascript" src="/trac/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/trac/chrome/common/js/babel.js"></script><script type="text/javascript" src="/trac/chrome/common/js/messages/en_US.js"></script><script type="text/javascript" src="/trac/chrome/common/js/trac.js"></script><script type="text/javascript" src="/trac/chrome/common/js/search.js"></script><script type="text/javascript" src="/trac/chrome/theme/jquery.jqDock.min.js"></script><script type="text/javascript" src="/trac/chrome/theme/animatedcollapse.js"></script><script type="text/javascript" src="/trac/chrome/theme/jquery.cookie.js"></script><script type="text/javascript" src="/trac/chrome/common/js/ie_pre7_hacks.js"></script><link rel="stylesheet" type="text/css" href="/trac/chrome/common/css/code.css" /><script type="text/javascript">/*<![CDATA[*/
+      jQuery(document).ready(function($) {
+        $("form.newticket textarea").each(function() {
+          $(this).text($(this).text()
+                         .replace(/#USER_AGENT#/m, navigator.userAgent)
+                         .replace(/#JQUERY#/m, $().jquery));
+        });
+      });
+    /*]]>*/</script>
+  </head>
+  <body>
+    <div id="PageHeader" class="noprint">
+      <ul>
+        <li>
+          <a href="/trac/login">Login</a>
+        </li><li>
+          <a href="/trac/prefs">Preferences</a>
+        </li><li>
+          <a href="/trac/wiki/TracGuide">Help/Guide</a>
+        </li><li>
+          <a href="/trac/about">About Trac</a>
+        </li>
+      </ul>
+      <a id="logo" href="">svUnitTest</a>
+    </div>
+    <div id="MenuBar" class="noprint">
+      <div id="MenuBarHighlight">
+      <ul>
+        <li class="first active">
+          <a href="/trac/wiki">Wiki</a>
+        </li><li>
+          <a href="/trac/timeline">Timeline</a>
+        </li><li>
+          <a href="/trac/roadmap">Roadmap</a>
+        </li><li>
+          <a href="/trac/browser">Browse Source</a>
+        </li><li>
+          <a href="/trac/report">View Tickets</a>
+        </li><li>
+          <a href="/trac/search">Search</a>
+        </li><li>
+          <a href="/trac/stats">Stats</a>
+        </li><li class="last">
+          <a href="/trac/downloads">Downloads</a>
+        </li>
+      </ul>
+      </div>
+    </div>
+    <div id="MenuBarShadow" class="noprint"></div>
+    <div id="Container">
+      <div id="content" class="error">
+          <h1>Oops…</h1>
+          <div class="message">
+            <strong>Trac detected an internal error:</strong>
+            <pre>NameError: global name 'Mimeview' is not defined</pre>
+          </div>
+              <p>There was an internal error in Trac.
+                It is recommended that you notify your local
+                    Trac administrator with the information needed to
+                reproduce the issue.</p>
+              <form class="newticket" method="get" action="/trac/newticket#">
+                <p>To that end, you could
+    <input type="hidden" name="reporter" value="anonymous" />
+    <input type="hidden" name="summary" value="NameError: global name 'Mimeview' is not defined" />
+    <textarea name="description" rows="3" cols="10">
+==== How to Reproduce ====
+
+While doing a GET operation on `/wiki/dev_doc-defaultMain`, Trac issued an internal error.
+
+''(please provide additional details here)''
+
+Request parameters:
+{{{
+{'format': u'doxygen', 'page': u'dev_doc-defaultMain'}
+}}}
+
+User agent: `#USER_AGENT#`
+
+==== System Information ====
+''System information not available''
+
+==== Enabled Plugins ====
+''Plugin information not available''
+
+==== Python Traceback ====
+{{{
+Traceback (most recent call last):
+  File "/usr/lib64/python2.6/site-packages/trac/web/main.py", line 511, in _dispatch_request
+    dispatcher.dispatch(req)
+  File "/usr/lib64/python2.6/site-packages/trac/web/main.py", line 237, in dispatch
+    resp = chosen_handler.process_request(req)
+  File "/usr/lib64/python2.6/site-packages/trac/wiki/web_ui.py", line 172, in process_request
+    format, versioned_page.name)
+  File "/usr/lib64/python2.6/site-packages/trac/mimeview/api.py", line 982, in send_converted
+    content, selector)
+  File "/usr/lib64/python2.6/site-packages/trac/mimeview/api.py", line 681, in convert_content
+    output = converter.convert_content(req, mimetype, content, ck)
+  File "build/bdist.linux-x86_64/egg/pagetodoxygen/pagetodoxygen.py", line 42, in convert_content
+    html = wiki_to_doxygen(source, self.env, req)
+  File "build/bdist.linux-x86_64/egg/pagetodoxygen/pagetodoxygen.py", line 64, in wiki_to_doxygen
+    DoxygenFormatter(env, context).format(wikitext, out, escape_newlines)
+  File "build/bdist.linux-x86_64/egg/pagetodoxygen/pagetodoxygen.py", line 545, in format
+    Formatter.format(self, text, out, escape_newlines)
+  File "/usr/lib64/python2.6/site-packages/trac/wiki/formatter.py", line 1201, in format
+    self.handle_code_block(line, block_start_match)
+  File "build/bdist.linux-x86_64/egg/pagetodoxygen/pagetodoxygen.py", line 617, in handle_code_block
+    processed = self.code_processor.process(code_text)
+  File "build/bdist.linux-x86_64/egg/pagetodoxygen/pagetodoxygen.py", line 297, in process
+    text = self.processor(text)
+  File "build/bdist.linux-x86_64/egg/pagetodoxygen/pagetodoxygen.py", line 287, in _mimeview_processor
+    return Mimeview(self.env).render(self.formatter.context,
+NameError: global name 'Mimeview' is not defined
+}}}</textarea>
+    <span class="inlinebuttons">
+      <input type="submit" name="create" value="Create" />
+    </span>
+   a ticket.</p>
+              </form>
+              <p>The action that triggered the error was:</p>
+              <pre>GET: /wiki/dev_doc-defaultMain</pre>
+      <p>
+        <a href="/trac/wiki/TracGuide">TracGuide</a> — The Trac User and Administration Guide
+      </p>
+    </div>
+    </div>
+    <div id="Footer" class="noprint">
+      © 2008 Cronholm &amp; Magnusson Teknik AB<br />
+    </div>
+  </body>
+</html>

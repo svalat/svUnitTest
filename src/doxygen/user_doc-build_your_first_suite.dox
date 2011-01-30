@@ -1,0 +1,91 @@
+/**
+\page user_doc-build_your_first_suite Write and build a test suite
+
+
+In the \subpage user_doc-write_first_test, we explain how to wrote standalone test cases by generating one executable for each test case. Here, we will explain how to wrote a test suite by merging multiple test cases into the same executable.
+
+
+You can ginf the source of this example into <a class="source" href="/trac/browser/src/examples/test_suite">src/examples/test_suite</a>.
+
+
+\section Buildyourmainmethod Build your main method
+
+
+The main method can be constructed on top the the predefined one from svUnitTest/svutDefaultMain.h, create a file  main.cpp and fill it with :
+
+@code
+//Load default main methods
+#include <svUnitTest/svutDefaultMain.h>
+
+int main(int argc, char * argv[])
+{
+	//Simply call the default main function
+	return svUnitTest::defaultMain(argc,argv);
+}
+@endcode
+
+\section Registeryourtests Register your tests
+
+
+As for CPPUnit, svUnitTest use a runtime automatic registration of the tests. You simply need to mark each test after declaring them :
+
+@code
+#include <svUnitTest/svutTestCase.h>
+
+class MyTest : public svutTestCase
+{
+   .....
+}
+SVUT_REGISTER_TEST_CASE(MyTest)
+@endcode
+
+Now, all test cases linked into the test program will be detected by the default main function and executed. To add a new test, you just need to link the new file to the test program.
+
+
+<strong>CAUTION</strong>, don't place the SVUT_REGISTER_TEST_CASE() macro into header files otherwise, it may duplicate the registration.
+
+
+\section Buildthetestsuite Build the test suite
+
+
+You can build your test suite by using :
+
+@code
+gcc main.cpp testCase1.cpp testCase2.cpp testCase3.cpp testCase4.cpp -o myTestSuite -lsvunittest
+@endcode
+
+Remark that it also work by linking all test cases dynamically.
+
+
+\section BuildwithMakefile Build with Makefile
+
+
+With a makefile it will give :
+
+@code
+##################### COMMANDS #######################
+CXX=g++
+RM=rm -f
+PKGCONFIG=pkg-config
+####################### FLAGS ########################
+SVUNITTEST_PREFIX=/usr
+CXXFLAGS=-I${SVUNITTEST_PREFIX}/include
+LDFLAGS=-L${SVUNITTEST_PREFIX}/lib -lsvunittest
+
+#################### VARIABLES #######################
+TARGETS=testSuite
+
+##################### RULES ##########################
+all: ${TARGETS}
+
+testSuite: main.o test1.o test2.o test3.o test4.o
+	${CXX} $^ -o $@ ${LDFLAGS}
+
+%.o: %.cpp
+	${CXX} -c $< -o $@ ${CXXFLAGS}
+
+clean:
+	${RM} *.o
+	${RM} ${TARGETS}
+@endcode
+**/

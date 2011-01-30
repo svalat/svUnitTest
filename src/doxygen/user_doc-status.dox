@@ -1,0 +1,117 @@
+/**
+\page user_doc-status About the new TODO and INDEV status
+
+
+This unit test library provide two exotic state compared to standard unit test libraries currently available. Those state are implemented to answer to cases :
+
+
+\section Thestatuslist The status list
+
+
+Each test can take one of the next status :
+
+ - <strong>SVUT_STATUS_TODO</strong> : The test is just declared, need to be rewrited or related function need known changes.
+ - <strong>SVUT_STATUS_INDEV</strong> : The test is in development, it may change.
+ - <strong>SVUT_STATUS_SKIPED</strong> : The test is not called.
+ - <strong>SVUT_STATUS_SUCCESS</strong> : The test finished with success.
+ - <strong>SVUT_STATUS_FAILED</strong> :  An error occur while running the test.
+ - <strong>SVUT_STATUS_UNKNOWN</strong> : An unknown error occur while running the test.
+
+In practice, we can propose the reach those status by using the next order :
+
+ -# <strong>TODO</strong> when <em>declaring the test</em>
+ - <strong>INDEV</strong> when <em>implementing</em> the test.
+ - <strong>SUCCESS</strong> or <strong>FAILED</strong> when running the final version of the test.
+@dot
+digraph G
+{
+	TODO [style=filled, fillcolor=orange]
+	INDEV [style=filled, fillcolor=blue]
+	SUCCESS [style=filled, fillcolor=green]
+	FAILED [style=filled, fillcolor=red]
+	TODO -> INDEV
+	INDEV -> SUCCESS
+	INDEV -> FAILED
+	SUCCESS -> FAILED
+	FAILED -> SUCCESS
+        FAILED -> INDEV
+        SUCCESS -> INDEV
+        FAILED -> TODO
+	{ rank = same; SUCCESS; FAILED; }
+}
+@enddot
+
+\section Case1:testimplementationprogressionTODO Case 1 : test implementation progression (TODO)
+
+
+While writing test for an existing class, I prefer to declare all the tests I intend to implement and then work on them one by one. But with standard library, such approach let the non implemented function marked as PASS. 
+
+
+I can solve the issue by calling a fail assertion, but now it was marked as FAIL, which wasn't the real state as I didn't implement it for now.
+
+
+So I add the TODO state to mark such function. By this way, I can clearly view my progression by reading the test status as I see the difference between non implemented tests and real PASS or FAIL. In addition I can evaluate the number of tests I had to implement.
+
+
+This is marked by 
+
+@code
+SVUT_ASSERT_TODO( "message" );
+@endcode
+
+Caution, it stop the test function execution while padding on this call.
+
+
+\section Case2:testnotstabilizedINDEV Case 2 : test not stabilized (INDEV)
+
+
+When my tests are implemented, first, they may not pass. As they never pass. When it pass for the first time, I prefer to see an INDEV status to appear saying "ok it pass, but this want stabilized and may fail soon". 
+
+
+This also permit to quickly find the impacted test in the list while working. This is more a trick, but it's FUN :D.
+
+
+This is marked by 
+
+@code
+SVUT_ASSERT_INDEV( "message" );
+@endcode
+
+Caution, it stop the test function execution while padding on this call.
+
+
+\section Case3:breakmanytestforamanlongtimeTODOINDEV Case 3 : break many test for a man long time (TODO/INDEV)
+
+
+While doing some refactoring of changes into the original implementation, we may break a long list of test and those for a "long" time. While doing this, how can I see if a change break a new test or solve another one ? 
+
+
+If the test failure list is too long, their is large chances that we didn't see a new failure appeared. So I want to made the difference between a test which is known to be broken, or a new one I just broke.
+
+
+To do so, I added the macro MARK_AS_KNOWN_ERROR() which can be called into a test function. It say to the runner to replace the test status FAILED by TODO. It say that I must done something sooner to sole the issue, but I know that it failed. And replace SUCCESS by INDEV. Saying that a new test pass, I can see it quickly and it say "caution, it may be broken again sooner" and remind that I need to remove the MARK_AS_KNOWN_ERROR macro in the test implementation.
+
+
+This is marked by 
+
+@code
+MARK_AS_KNOWN_ERROR( "message" );
+@endcode
+
+This will not interrupt the test execution, just impact the final status.
+
+
+\section Finalstatus Final status
+
+
+When displaying the summary we may display a global status, it may be <em>SUCCESS</em> is all tests are SUCCESS. If not, we choose the lower success level obtained. We can use status priority like that :
+
+<table>
+<tr><td> <strong>Status</strong>  </td><td> <strong>Success level</strong> 
+</td></tr><tr><td> SUCCESS       </td><td> 5                   
+</td></tr><tr><td> INDEV         </td><td> 4                   
+</td></tr><tr><td> TODO          </td><td> 3                   
+</td></tr><tr><td> FAILED        </td><td> 2                   
+</td></tr><tr><td> UNKNOWN       </td><td> 1                   
+</td></tr></table>
+**/

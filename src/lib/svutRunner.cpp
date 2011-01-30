@@ -232,7 +232,7 @@ void svutRunner::loadAutoDetected(void)
  * @param name Define the test case name to search.
  * @return True if such a test case exist, false otherwise.
 **/
-bool svutRunner::hasTestNamed(string name)
+bool svutRunner::hasTestNamed(std::string name)
 {
 	for( list<svutTestCase *>::iterator it=suites.begin(); it != suites.end() ; ++it)
 	{

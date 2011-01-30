@@ -1,0 +1,42 @@
+/**
+\page dev_doc-status_and_asserts Status and assertions
+
+
+\section Thestatus The status
+
+
+Each test can take one of the next status :
+
+ - <strong>SVUT_STATUS_TODO</strong> : The test is just declared or need to be rewrited.
+ - <strong>SVUT_STATUS_INDEV</strong> : The test is in development, he may change.
+ - <strong>SVUT_STATUS_SKIPED</strong> : The test is not called.
+ - <strong>SVUT_STATUS_SUCCESS</strong> : The test finished with success.
+ - <strong>SVUT_STATUS_FAILED</strong> :  An error occur while running the test.
+ - <strong>SVUT_STATUS_UNKNOWN</strong> : An unknown error occur while running the test.
+
+In practice, we can propose the reach those status by using the next order :
+
+ -# <strong>TODO</strong> when <em>declaring the test</em>
+ - <strong>INDEV</strong> when <em>implementing</em> the test.
+ - <strong>SUCCESS</strong> or <strong>FAILED</strong> when running the final version of the test.
+@dot
+digraph G
+{
+	TODO [style=filled, fillcolor=orange]
+	INDEV [style=filled, fillcolor=blue]
+	SUCCESS [style=filled, fillcolor=green]
+	FAILED [style=filled, fillcolor=red]
+	TODO -> INDEV
+	INDEV -> SUCCESS
+	INDEV -> FAILED
+	SUCCESS -> FAILED
+	FAILED -> SUCCESS
+        FAILED -> INDEV
+        SUCCESS -> INDEV
+	{ rank = same; SUCCESS; FAILED; }
+}
+@enddot
+
+\section Assertions Assertions
+
+**/
