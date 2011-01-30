@@ -25,7 +25,8 @@ class UnitTest_svutAutoRegister : public TestCase
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutAutoRegister);
 	CPPUNIT_TEST(testRegister);
-	CPPUNIT_TEST(testRegister_multiple);
+	CPPUNIT_TEST(testRegister_multiple_1);
+	CPPUNIT_TEST(testRegister_multiple_2);
 	CPPUNIT_TEST(testGetList);
 	CPPUNIT_TEST(testClear);
 	CPPUNIT_TEST_SUITE_END();
@@ -36,7 +37,8 @@ class UnitTest_svutAutoRegister : public TestCase
 
 	protected:
 		void testRegister(void);
-		void testRegister_multiple(void);
+		void testRegister_multiple_1(void);
+		void testRegister_multiple_2(void);
 		void testGetList(void);
 		void testClear(void);
 };
@@ -60,7 +62,7 @@ void UnitTest_svutAutoRegister::testGetList(void )
 	registerTestCase(test);
 	CPPUNIT_ASSERT_EQUAL(1,getRegistredTestCase().size());
 
-	const std::list<svUnitTest::svutTestCaseBuilder *> lst = getRegistredTestCase();
+	const std::set<svUnitTest::svutTestCaseBuilder *> lst = getRegistredTestCase();
 	CPPUNIT_ASSERT(&test == *lst.begin());
 }
 
@@ -74,13 +76,24 @@ void UnitTest_svutAutoRegister::testRegister(void )
 }
 
 /********************  METHODE  *********************/
-void UnitTest_svutAutoRegister::testRegister_multiple(void )
+void UnitTest_svutAutoRegister::testRegister_multiple_1(void )
 {
 	svutTestCaseBuilderGeneric<UnitTestMockTestCase2>  test;
 	CPPUNIT_ASSERT_EQUAL(0,getRegistredTestCase().size());
 	registerTestCase(test);
 	registerTestCase(test);
 	CPPUNIT_ASSERT_EQUAL(1,getRegistredTestCase().size());
+}
+
+/********************  METHODE  *********************/
+void UnitTest_svutAutoRegister::testRegister_multiple_2(void )
+{
+	svutTestCaseBuilderGeneric<UnitTestMockTestCase2>  test;
+	svutTestCaseBuilderGeneric<UnitTestMockTestCase2>  test2;
+	CPPUNIT_ASSERT_EQUAL(0,getRegistredTestCase().size());
+	registerTestCase(test);
+	registerTestCase(test2);
+	CPPUNIT_ASSERT_EQUAL(2,getRegistredTestCase().size());
 }
 
 /********************  METHODE  *********************/

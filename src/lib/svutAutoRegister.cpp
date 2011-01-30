@@ -18,7 +18,7 @@ namespace svUnitTest
  * List used to store the test case builder for the usage of auto registration. It was used to
  * be fetched from svutRunner.
 **/
-std::list<class svutTestCaseBuilder *> __SVUT_autoFoundTests__;
+std::set<class svutTestCaseBuilder *> __SVUT_autoFoundTests__;
 
 /*******************  FUNCTION  *********************/
 /**
@@ -27,13 +27,16 @@ std::list<class svutTestCaseBuilder *> __SVUT_autoFoundTests__;
  * This macro create an instance of the test case builder associated to the requested test and
  * register it into the list. As it was declared as global object, they will be called at load time
  * before entring into the main function and be ready while svutRunner start to work.
+ * If the builder is registred more than one time, it will generate more than one instance of the
+ * test case. But the svutRunner::loadAutoDetected() method will detect if by checking test case
+ * names and remove the copies.
  * @param builder Define the test case builder to register. As it simply require the build of a test
  * case builder which done nothing, we may not fall in trouble if the tested library require
  * pré-initialisation at load time.
  **/
 int registerTestCase(svutTestCaseBuilder & builder)
 {
-	__SVUT_autoFoundTests__.push_back(&builder);
+	__SVUT_autoFoundTests__.insert(&builder);
 	return 0;
 }
 
@@ -42,7 +45,7 @@ int registerTestCase(svutTestCaseBuilder & builder)
  * Return the list of registred test cases. This function may be use in svutRunner to fetch the list
  * of runner insteed of directly touch __SVUT_autoFoundTests__.
 **/
-const std::list<class svutTestCaseBuilder *> & getRegistredTestCase(void)
+const std::set<class svutTestCaseBuilder *> & getRegistredTestCase(void)
 {
 	return __SVUT_autoFoundTests__;
 }

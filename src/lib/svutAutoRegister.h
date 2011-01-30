@@ -10,7 +10,7 @@
 #define SVUT_AUTO_REGISTER_HEADER
 
 /********************  HEADERS  *********************/
-#include <list>
+#include <set>
 #include "svutTestCaseBuilder.h"
 
 /********************  NAMESPACE  *******************/
@@ -29,7 +29,7 @@ namespace svUnitTest
 
 /********************  GLOBALS  **********************/
 int registerTestCase(svutTestCaseBuilder & builder);
-const std::list<class svutTestCaseBuilder *> & getRegistredTestCase(void);
+const std::set<class svutTestCaseBuilder *> & getRegistredTestCase(void);
 void clearTestCaseRegister(void);
 
 }

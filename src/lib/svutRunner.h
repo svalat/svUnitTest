@@ -56,6 +56,7 @@ class svutRunner
 		void init(svutResultFormatter & formatter);
 		void init(svutListener & listener);
 		bool hasMultipleTestCase(void);
+		bool hasTestNamed(std::string name);
 		/** Pointer to the listener object to use to reports the results.**/
 		svutListenerMultiplexer listener;
 		/** Pointer to the summary listener (require to get the final state). **/

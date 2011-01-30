@@ -213,12 +213,33 @@ void svutRunner::setDisplay(bool success,bool details)
 **/
 void svutRunner::loadAutoDetected(void)
 {
-	for(list<svutTestCaseBuilder *>::const_iterator it=getRegistredTestCase().begin();it!=getRegistredTestCase().end();it++)
+	for(set<svutTestCaseBuilder *>::const_iterator it=getRegistredTestCase().begin();it!=getRegistredTestCase().end();it++)
 	{
 		svutTestCase * tmp = (*it)->build();
-		tmp->setAutodetected();
-		this->suites.push_back(tmp);
+		if ( hasTestNamed(tmp->getName()))
+		{
+			delete tmp;
+		} else {
+			tmp->setAutodetected();
+			this->suites.push_back(tmp);
+		}
 	}
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Check if the test suite already contain a test case of the given name.
+ * @param name Define the test case name to search.
+ * @return True if such a test case exist, false otherwise.
+**/
+bool svutRunner::hasTestNamed(string name)
+{
+	for( list<svutTestCase *>::iterator it=suites.begin(); it != suites.end() ; ++it)
+	{
+		if ((*it)->getName() == name)
+			return true;
+	}
+	return false;
 }
 
 /*******************  FUNCTION  *********************/

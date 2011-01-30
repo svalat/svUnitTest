@@ -30,7 +30,7 @@ namespace svUnitTest
 /**
  * Class constructor of the test case.
  * @param name Define the name of the test case. Generaly we may use the name of the class or module
- * to test.
+ * to test. Caution, it must be unique in the test suite.
 **/
 svutTestCase::svutTestCase(std::string name)
 {

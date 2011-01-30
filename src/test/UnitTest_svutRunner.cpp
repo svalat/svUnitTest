@@ -146,6 +146,7 @@ class UnitTest_svutRunner : public TestCase
 	CPPUNIT_TEST(testSetDisplay_3);
 	CPPUNIT_TEST(testLoadAutoDetected_1);
 	CPPUNIT_TEST(testLoadAutoDetected_2);
+	CPPUNIT_TEST(testLoadAutoDetected_3);
 	CPPUNIT_TEST(testUnloadAutoDetected);
 	CPPUNIT_TEST(testRegisterTestCase);
 	CPPUNIT_TEST(testListTests_1);
@@ -173,6 +174,7 @@ class UnitTest_svutRunner : public TestCase
 		void testSetDisplay_3(void);
 		void testLoadAutoDetected_1(void);
 		void testLoadAutoDetected_2(void);
+		void testLoadAutoDetected_3(void);
 		void testUnloadAutoDetected(void);
 		void testRegisterTestCase(void);
 		void testListTests_1(void);
@@ -354,6 +356,24 @@ void UnitTest_svutRunner::testLoadAutoDetected_2(void)
 	svutTestCaseBuilderGeneric<UnitTestMockTestCase2> builder;
 	registerTestCase(builder);
 	registerTestCase(builder);
+	localRunner.loadAutoDetected();
+	CPPUNIT_ASSERT_EQUAL(true,localRunner.run());
+	ss << *formatter;
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_OUTPUT_5,ss.str());
+	localRunner.unloadAutoDetected();
+	clearTestCaseRegister();
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutRunner::testLoadAutoDetected_3(void)
+{
+	stringstream ss;
+	svutRunner localRunner(*formatter);
+	this->mock->useTests(UnitTestMockTestCase2::REGISTER_SUCCESS);
+	svutTestCaseBuilderGeneric<UnitTestMockTestCase2> builder;
+	svutTestCaseBuilderGeneric<UnitTestMockTestCase2> builder2;
+	registerTestCase(builder);
+	registerTestCase(builder2);
 	localRunner.loadAutoDetected();
 	CPPUNIT_ASSERT_EQUAL(true,localRunner.run());
 	ss << *formatter;
