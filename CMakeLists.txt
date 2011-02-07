@@ -25,9 +25,9 @@ add_definitions(-DVERSION="${svUnitTest_VERSION}")
 CHECK_INCLUDE_FILE_CXX(argp.h HAVE_ARGP_H)
 
 #message
-# if (NOT HAVE_ARGP_H)
-#   message(FATAL_ERROR "Can't find file 'argp.h' required for svUnitTest, please look at you glibc paths...")
-# endif (NOT HAVE_ARGP_H)
+if (NOT HAVE_ARGP_H)
+  message(FATAL_ERROR "Can't find file 'argp.h' required for svUnitTest, please look at you glibc paths...")
+endif (NOT HAVE_ARGP_H)
 
 #subdirs
 add_subdirectory (src)

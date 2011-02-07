@@ -22,6 +22,13 @@ $> cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local/myprefix
 
                     -----------------------
 
+By default the test suite will be build if CPPunit is present on your system, to disable it, you
+may use :
+
+$> cmake .. -DDISABLE_UNIT_TESTS=yes
+
+                    -----------------------
+
 You can run the internal unit test before installing  :
 
 $> make test
