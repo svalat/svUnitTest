@@ -1,141 +1,279 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  
-  
-
-  
+/**
+\page dev_doc-formatter The output system
 
 
-  <head>
-    <title>
-      Internal Error – svUnitTest
-    </title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><link rel="search" href="/trac/search" /><link rel="help" href="/trac/wiki/TracGuide" /><link rel="start" href="/trac/wiki" /><link rel="stylesheet" href="/trac/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/trac/chrome/common/css/wiki.css" type="text/css" /><link rel="stylesheet" href="/trac/chrome/theme/cmteknik.css" type="text/css" /><link rel="shortcut icon" href="/trac/chrome/common/trac.ico" type="image/x-icon" /><link rel="icon" href="/trac/chrome/common/trac.ico" type="image/x-icon" /><link type="application/opensearchdescription+xml" rel="search" href="/trac/search/opensearch" title="Search svUnitTest" /><script type="text/javascript" src="/trac/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/trac/chrome/common/js/babel.js"></script><script type="text/javascript" src="/trac/chrome/common/js/messages/en_US.js"></script><script type="text/javascript" src="/trac/chrome/common/js/trac.js"></script><script type="text/javascript" src="/trac/chrome/common/js/search.js"></script><script type="text/javascript" src="/trac/chrome/theme/jquery.jqDock.min.js"></script><script type="text/javascript" src="/trac/chrome/theme/animatedcollapse.js"></script><script type="text/javascript" src="/trac/chrome/theme/jquery.cookie.js"></script><script type="text/javascript" src="/trac/chrome/common/js/ie_pre7_hacks.js"></script><link rel="stylesheet" type="text/css" href="/trac/chrome/common/css/code.css" /><script type="text/javascript">/*<![CDATA[*/
-      jQuery(document).ready(function($) {
-        $("form.newticket textarea").each(function() {
-          $(this).text($(this).text()
-                         .replace(/#USER_AGENT#/m, navigator.userAgent)
-                         .replace(/#JQUERY#/m, $().jquery));
-        });
-      });
-    /*]]>*/</script>
-  </head>
-  <body>
-    <div id="PageHeader" class="noprint">
-      <ul>
-        <li>
-          <a href="/trac/login">Login</a>
-        </li><li>
-          <a href="/trac/prefs">Preferences</a>
-        </li><li>
-          <a href="/trac/wiki/TracGuide">Help/Guide</a>
-        </li><li>
-          <a href="/trac/about">About Trac</a>
-        </li>
-      </ul>
-      <a id="logo" href="">svUnitTest</a>
-    </div>
-    <div id="MenuBar" class="noprint">
-      <div id="MenuBarHighlight">
-      <ul>
-        <li class="first active">
-          <a href="/trac/wiki">Wiki</a>
-        </li><li>
-          <a href="/trac/timeline">Timeline</a>
-        </li><li>
-          <a href="/trac/roadmap">Roadmap</a>
-        </li><li>
-          <a href="/trac/browser">Browse Source</a>
-        </li><li>
-          <a href="/trac/report">View Tickets</a>
-        </li><li>
-          <a href="/trac/search">Search</a>
-        </li><li>
-          <a href="/trac/stats">Stats</a>
-        </li><li class="last">
-          <a href="/trac/downloads">Downloads</a>
-        </li>
-      </ul>
-      </div>
-    </div>
-    <div id="MenuBarShadow" class="noprint"></div>
-    <div id="Container">
-      <div id="content" class="error">
-          <h1>Oops…</h1>
-          <div class="message">
-            <strong>Trac detected an internal error:</strong>
-            <pre>NameError: global name 'Mimeview' is not defined</pre>
-          </div>
-              <p>There was an internal error in Trac.
-                It is recommended that you notify your local
-                    Trac administrator with the information needed to
-                reproduce the issue.</p>
-              <form class="newticket" method="get" action="/trac/newticket#">
-                <p>To that end, you could
-    <input type="hidden" name="reporter" value="anonymous" />
-    <input type="hidden" name="summary" value="NameError: global name 'Mimeview' is not defined" />
-    <textarea name="description" rows="3" cols="10">
-==== How to Reproduce ====
+\section Description Description
 
-While doing a GET operation on `/wiki/dev_doc-formatter`, Trac issued an internal error.
 
-''(please provide additional details here)''
+As we want to support multiple output format :
 
-Request parameters:
-{{{
-{'format': u'doxygen', 'page': u'dev_doc-formatter'}
-}}}
+ - Black and white text for standard output
+ - Colored text for standard output
+ - XML output for external usage
+ - Qt UnitTest XML output for QT compatility and integration in KDevelop 4
 
-User agent: `#USER_AGENT#`
+So we use an abstract definition of outputer defined by class svutResultFormatter. At this level we define some <em>events</em> to display. The basic mechanisms is defined from XML requirement with open/close events :
 
-==== System Information ====
-''System information not available''
+<table>
+<tr><th> Name </th><th> Parameters </th><th> Description 
+</th></tr><tr><td> openOutput </td><td style="text-align: center">                  </td><td> Called before starting the first test. It's equivalent to onGlobalStart event in <em>svutListener</em>. 
+</td></tr><tr><td> closeOutput </td><td style="text-align: center">                  </td><td> Called after all the tests be runned. It's equivalent to onGlocalEnd event in <em>svutListener</em>. 
+</td></tr><tr><td> openTestCase </td><td> testCase       </td><td> Called when starting a test case. It's equivalent to onTestCaseStart event in <em>svutListener</em>. 
+</td></tr><tr><td> closeTestCase </td><td> testCase       </td><td> Called when endding a test case. It's equivalent to onTestCaseEnd event in <em>svutListener</em>. 
+</td></tr><tr><td> openTestMethod </td><td> testCase,meth </td><td> Called when starting a test method. It's equivalent to onMethodStart event in <em>svutListener</em>. 
+</td></tr><tr><td> closeTestMethod </td><td> testCase,meth,status </td><td> Called when endding a test method. It's equivalent to onMethodEnd event in <em>svutListener</em>. 
+</td></tr><tr><td> printSummary   </td><td> summary  </td><td> Called to print the global summary of the test. It may by called from onGlobalEnd event at the end of the test. 
+</td></tr></table>
 
-==== Enabled Plugins ====
-''Plugin information not available''
+\section Thesummary The summary
 
-==== Python Traceback ====
-{{{
-Traceback (most recent call last):
-  File "/usr/lib64/python2.6/site-packages/trac/web/main.py", line 511, in _dispatch_request
-    dispatcher.dispatch(req)
-  File "/usr/lib64/python2.6/site-packages/trac/web/main.py", line 237, in dispatch
-    resp = chosen_handler.process_request(req)
-  File "/usr/lib64/python2.6/site-packages/trac/wiki/web_ui.py", line 172, in process_request
-    format, versioned_page.name)
-  File "/usr/lib64/python2.6/site-packages/trac/mimeview/api.py", line 982, in send_converted
-    content, selector)
-  File "/usr/lib64/python2.6/site-packages/trac/mimeview/api.py", line 681, in convert_content
-    output = converter.convert_content(req, mimetype, content, ck)
-  File "build/bdist.linux-x86_64/egg/pagetodoxygen/pagetodoxygen.py", line 42, in convert_content
-    html = wiki_to_doxygen(source, self.env, req)
-  File "build/bdist.linux-x86_64/egg/pagetodoxygen/pagetodoxygen.py", line 64, in wiki_to_doxygen
-    DoxygenFormatter(env, context).format(wikitext, out, escape_newlines)
-  File "build/bdist.linux-x86_64/egg/pagetodoxygen/pagetodoxygen.py", line 545, in format
-    Formatter.format(self, text, out, escape_newlines)
-  File "/usr/lib64/python2.6/site-packages/trac/wiki/formatter.py", line 1201, in format
-    self.handle_code_block(line, block_start_match)
-  File "build/bdist.linux-x86_64/egg/pagetodoxygen/pagetodoxygen.py", line 617, in handle_code_block
-    processed = self.code_processor.process(code_text)
-  File "build/bdist.linux-x86_64/egg/pagetodoxygen/pagetodoxygen.py", line 297, in process
-    text = self.processor(text)
-  File "build/bdist.linux-x86_64/egg/pagetodoxygen/pagetodoxygen.py", line 287, in _mimeview_processor
-    return Mimeview(self.env).render(self.formatter.context,
-NameError: global name 'Mimeview' is not defined
-}}}</textarea>
-    <span class="inlinebuttons">
-      <input type="submit" name="create" value="Create" />
-    </span>
-   a ticket.</p>
-              </form>
-              <p>The action that triggered the error was:</p>
-              <pre>GET: /wiki/dev_doc-formatter</pre>
-      <p>
-        <a href="/trac/wiki/TracGuide">TracGuide</a> — The Trac User and Administration Guide
-      </p>
-    </div>
-    </div>
-    <div id="Footer" class="noprint">
-      © 2008 Cronholm &amp; Magnusson Teknik AB<br />
-    </div>
-  </body>
-</html>
+
+When displaying the summary we may display a global status, it may be <em>SUCCESS</em> is all tests are SUCCESS. If not, we choose the lower success level obtained. We can use status priority like that :
+
+<table>
+<tr><th> Status </th><th> Success level 
+</th></tr><tr><td> SUCCESS       </td><td> 5                   
+</td></tr><tr><td> INDEV         </td><td> 4                   
+</td></tr><tr><td> TODO          </td><td> 3                   
+</td></tr><tr><td> FAILED        </td><td> 2                   
+</td></tr><tr><td> UNKNOWN       </td><td> 1                   
+</td></tr></table>
+
+This rule is supported by class <em>svutResultSummary</em>.
+
+
+\section Thebwtextformat The b&amp;w text format
+
+
+This is the standard output for terminals which didn't support colors. We may generate output similar to :
+
+
+Without verbose mode we may mask SUCCESS so obtain :
+
+@verbatim
+=======  svMockObject                              ========
+=======  svMockPointer                             ========
+ * testConstructor_NULL                         [ UNKNOWN ]
+ * testConstructor_TPtr                         [ TODO ]
+=======  svMockEventChecker                        ========
+ * getEventMatcher_Void                         [ INDEV ]
+ * canBeRun                                     [ FAILED ]
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Failed on BOOLEAN test.
+line 82 of file /home/.../projects/........./file.cpp on methode getLine()
+   - Actual : FALSE
+   - Expected : TRUE
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
++---------------------------+
+|    SUMMARY                |
++---------------------------+
+|  SUCCESS  :  208 (100 %)  |
+|  INDEV    :    0 (  0 %)  |
+|  TODO     :    0 (  0 %)  |
+|  FAILED   :    0 (  0 %)  |
+|  UNKNOWN  :    0 (  0 %)  |
++---------------------------+
+@endverbatim
+
+In verbose mode we may use :
+
+@verbatim
+=======  svMockObject                              ========
+ * testConstructor_default                      [ SUCCESS ]
+ * testConstructor_BoolPtr                      [ SUCCESS ]
+ * testClearRules                               [ SUCCESS ]
+=======  svMockPointer                             ========
+ * testConstructor_NULL                         [ UNKNOWN ]
+ * testConstructor_TPtr                         [ TODO ]
+ * testConstructor_TPtrBool                     [ SUCCESS ]
+=======  svMockEventChecker                        ========
+ * getEventMatcher_Void                         [ INDEV ]
+ * getEventMatcher_Void_const                   [ SUCCESS ]
+ * canBeRun                                     [ FAILED ]
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Failed on BOOLEAN test.
+line 82 of file /home/.../projects/........./file.cpp on methode getLine()
+   - Actual : FALSE
+   - Expected : TRUE
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
++---------------------------+
+|    SUMMARY                |
++---------------------------+
+|  SUCCESS  :    5 (100 %)  |
+|  INDEV    :    1 (  0 %)  |
+|  TODO     :    1 (  0 %)  |
+|  FAILED   :    1 (  0 %)  |
+|  UNKNOWN  :    1 (  0 %)  |
++---------------------------+
+|  TOTAL    :    9          |
+|  STATUS   : UNKNWON       |
++---------------------------+
+@endverbatim
+
+\section Thecoloredtextformat The colored text format
+
+
+If the terminal support coloring, we simply use the same output format than B&amp;W, and wrote the status name with colors. In the summary we may color the whole line, the status plus the value and percentage.
+
+
+The stars behind the test method name will use green color.
+
+
+We use colors :
+
+<table>
+<tr><td> <strong>Status</strong> </td><td> <strong>Color name</strong> </td><td> <strong>Color ID</strong> 
+</td></tr><tr><td> SUCCESS      </td><td> green            </td><td> 32             
+</td></tr><tr><td> TODO         </td><td> orange           </td><td> 33             
+</td></tr><tr><td> INDEV        </td><td> blue             </td><td> 34             
+</td></tr><tr><td> SKIPED       </td><td> orange           </td><td> 33             
+</td></tr><tr><td> FAILED       </td><td> red              </td><td> 31             
+</td></tr><tr><td> UNKNOWN      </td><td> red              </td><td> 31             
+</td></tr></table>
+
+Your can get more informations about terminal coloring on :
+
+ - http://www.frexx.de/xterm-256-notes/
+ - http://www.pixelbeat.org/docs/terminal_colours/
+
+\section ThenativXMLformat The nativ XML format
+
+
+The native XML format directly correspond to the event system : 
+
+@code
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE UnitTest SYSTEM 'svUnitTest_html/svUnitTest.dtd'>
+<?xml-stylesheet type='text/xsl' href='svUnitTest_html/svUnitTest.xsl'?>
+<UnitTest>
+	<TestCase>
+		<name>svMockPointer</name>
+		<TestFunction>
+			<name>testConstructor_NULL</name>
+			<status>success</status>
+		</TestFunction>
+		<TestFunction>
+			<name>testConstructor_TPtr</name>
+			<status>success</status>
+		</TestFunction>
+	</TestCase>
+	<TestCase>
+		<name>svMockEventChecker</name>
+		<TestFunction>
+			<name>getFilename</name>
+			<status>indev</status>
+			<AssertInfo>
+				<location>
+					<file>/home/......../svututCodeLocation.cpp</file>
+					<methode>getFilename</methode>
+					<line>68</line>
+				</location>
+				<message>indev</message>
+				<entries>
+				</entries>
+			</AssertInfo>
+		</TestFunction>
+		<TestFunction>
+			<name>getMethodeName</name>
+			<status>todo</status>
+			<AssertInfo>
+				<location>
+					<file>/home/......../svututCodeLocation.cpp</file>
+					<methode>getMethodeName</methode>
+					<line>75</line>
+				</location>
+				<message>toto</message>
+				<entries>
+				</entries>
+			</AssertInfo>
+		</TestFunction>
+		<TestFunction>
+			<name>getLine</name>
+			<status>failed</status>
+			<AssertInfo>
+				<location>
+					<file>/home/......../svututCodeLocation.cpp</file>
+					<methode>getLine</methode>
+					<line>82</line>
+				</location>
+				<message>Failed on BOOLEAN test.</message>
+				<entries>
+					<entry name='Actual'>FALSE</entry>
+					<entry name='Expected'>TRUE</entry>
+				</entries>
+			</AssertInfo>
+		</TestFunction>
+	</TestCase>
+	<GlobalResults>
+		<result type='success'>208</result>
+		<result type='indev'>1</result>
+		<result type='todo'>1</result>
+		<result type='failed'>1</result>
+		<result type='unknown'>0</result>
+		<total>208</total>
+		<status>success</status>
+	</GlobalResults>
+</UnitTest>
+@endcode
+
+\section TheQtXMLformat The Qt XML format
+
+
+The Qt XML format directly correspond to :
+
+@code
+<?xml version='1.0' encoding='UTF-8'?>
+<TestCase name='svUnitTest'>
+	<Environment>
+		<svUnitTestVersion>0.0.1</svUnitTestVersion>
+	</Environment>
+	<TestFunction name='testConstructor_NULL'>
+		<Incident type='pass' file='' line='0' />
+	</TestFunction>
+	<TestFunction name='testConstructor_TPtr'>
+		<Incident type='pass' file='' line='0' />
+	</TestFunction>
+
+</TestCase>
+@endcode
+
+QT restrain à un cas test par fichier XML. Pour les erreurs :
+
+@code
+<?xml version='1.0' encoding='UTF-8'?>
+<TestCase name='svUnitTest'>
+<Environment>
+	<svUnitTestVersion>0.0.1</svUnitTestVersion>
+</Environment>
+	<TestFunction name='constructor_Void'>
+		<Incident type='pass' file='' line='0' />
+	</TestFunction>
+	<TestFunction name='constructor_StringStringInt'>
+		<Incident type='pass' file='' line='0' />
+	</TestFunction>
+	<TestFunction name='getFilename'>
+		<Incident type='warn' file='/home/sebv/projects/INACTIFS/cpp/svMath/svMath/src/test/svutUnitTest/svututCodeLocation.cpp' line='68'><Description><![CDATA[In dev : indev]]></Description></Incident>
+	</TestFunction>
+	<TestFunction name='getMethodeName'>
+		<Incident type='fail' file='/home/sebv/projects/INACTIFS/cpp/svMath/svMath/src/test/svutUnitTest/svututCodeLocation.cpp' line='75'><Description><![CDATA[Todo : toto]]></Description></Incident>
+	</TestFunction>
+	<TestFunction name='getLine'>
+		<Incident type='fail' file='/home/sebv/projects/INACTIFS/cpp/svMath/svMath/src/test/svutUnitTest/svututCodeLocation.cpp' line='82'><Description><![CDATA[Failed on BOOLEAN test.
+   - Actual : FALSE
+   - Expected : TRUE
+]]></Description></Incident>
+	</TestFunction>
+	<TestFunction name='hasLocation'>
+		<Incident type='pass' file='' line='0' />
+	</TestFunction>
+</TestCase>
+@endcode
+
+\section UMLdiagram UML diagram
+
+
+<em>TODO</em>
+
+**/

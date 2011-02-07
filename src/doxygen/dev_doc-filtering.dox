@@ -16,10 +16,10 @@ By default, we provide a simple implementation svutTestFilterBasic which work wi
 The rules can restrict the name by 3 ways :
 
 <table>
-<tr><td> <strong>Value</strong>  </td><td> <strong>Interpretation</strong> 
-</td></tr><tr><td> <em>testCaseName::methodName</em> </td><td> Accept only a particular method of a particular test case. 
-</td></tr><tr><td> <em>testCaseName::</em> </td><td> Accept all methods of a particular test case. 
-</td></tr><tr><td> <em>::methodName</em> </td><td> Only check the method name independently of the test case name.
+<tr><th> Value </th><th> Interpretation 
+</th></tr><tr><td style="text-align: left">testCaseName::methodName </td><td> Accept only a particular method of a particular test case. 
+</td></tr><tr><td style="text-align: left">testCaseName:: </td><td> Accept all methods of a particular test case. 
+</td></tr><tr><td style="text-align: left">::methodName </td><td> Only check the method name independently of the test case name.
 </td></tr></table>
 
 \section ThecurrentUMLdiagram The current UML diagram

@@ -5,7 +5,7 @@
 While writing your tests, you may be interested by adding some specific assertions to facilitate your life. With svUnitTest as for CPPUnit, you can extend the assertion set.
 
 
-\section Step1:implementtherelatedexceptionclass Step 1 : implement the related exception class
+\section Step1implementtherelatedexceptionclass Step 1 : implement the related exception class
 
 
 First we need to define a new exception class based on svutExAssertFail and implement its constructor :
@@ -29,7 +29,7 @@ MyExAssertMyTestFail::MyExAssertMyTestFail(std::string expected,std::string actu
 }
 @endcode
 
-\section Step2:implementthetestfunction Step 2 : implement the test function
+\section Step2implementthetestfunction Step 2 : implement the test function
 
 
 Now we can implement the function to call with the assertion macro :
@@ -48,7 +48,7 @@ void assertMyTest(std::string expected, std::string actual,svutCodeLocation loca
 }
 @endcode
 
-\section Step3:definethemacro Step 3 : define the macro
+\section Step3definethemacro Step 3 : define the macro
 
 
 Now, we can define the final macro which will me used in our tests :

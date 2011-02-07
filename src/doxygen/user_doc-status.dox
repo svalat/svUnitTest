@@ -41,7 +41,7 @@ digraph G
 }
 @enddot
 
-\section Case1:testimplementationprogressionTODO Case 1 : test implementation progression (TODO)
+\section Case1testimplementationprogressionTODO Case 1 : test implementation progression (TODO)
 
 
 While writing test for an existing class, I prefer to declare all the tests I intend to implement and then work on them one by one. But with standard library, such approach let the non implemented function marked as PASS. 
@@ -62,7 +62,7 @@ SVUT_ASSERT_TODO( "message" );
 Caution, it stop the test function execution while padding on this call.
 
 
-\section Case2:testnotstabilizedINDEV Case 2 : test not stabilized (INDEV)
+\section Case2testnotstabilizedINDEV Case 2 : test not stabilized (INDEV)
 
 
 When my tests are implemented, first, they may not pass. As they never pass. When it pass for the first time, I prefer to see an INDEV status to appear saying "ok it pass, but this want stabilized and may fail soon". 
@@ -80,7 +80,7 @@ SVUT_ASSERT_INDEV( "message" );
 Caution, it stop the test function execution while padding on this call.
 
 
-\section Case3:breakmanytestforamanlongtimeTODOINDEV Case 3 : break many test for a man long time (TODO/INDEV)
+\section Case3breakmanytestforamanlongtimeTODOINDEV Case 3 : break many test for a man long time (TODO/INDEV)
 
 
 While doing some refactoring of changes into the original implementation, we may break a long list of test and those for a "long" time. While doing this, how can I see if a change break a new test or solve another one ? 
@@ -107,8 +107,8 @@ This will not interrupt the test execution, just impact the final status.
 When displaying the summary we may display a global status, it may be <em>SUCCESS</em> is all tests are SUCCESS. If not, we choose the lower success level obtained. We can use status priority like that :
 
 <table>
-<tr><td> <strong>Status</strong>  </td><td> <strong>Success level</strong> 
-</td></tr><tr><td> SUCCESS       </td><td> 5                   
+<tr><th> Status </th><th> Success level 
+</th></tr><tr><td> SUCCESS       </td><td> 5                   
 </td></tr><tr><td> INDEV         </td><td> 4                   
 </td></tr><tr><td> TODO          </td><td> 3                   
 </td></tr><tr><td> FAILED        </td><td> 2                   

@@ -14,8 +14,8 @@ Unit test results, progression and summary are construct by intercepting unit te
 For moment we support events :
 
 <table>
-<tr><td> <strong>Event name</strong>  </td><td> <strong>parameters</strong> </td><td> <strong>Description</strong>   
-</td></tr><tr><td> onGlobalStart     </td><td style="text-align: center">                  </td><td> First event called when starting the test. 
+<tr><th> Event name </th><th> parameters </th><th> Description 
+</th></tr><tr><td> onGlobalStart     </td><td style="text-align: center">                  </td><td> First event called when starting the test. 
 </td></tr><tr><td> onGlobalEnd       </td><td style="text-align: center">                  </td><td> Last event call at the end of the global run. 
 </td></tr><tr><td> onTestCaseStart   </td><td> testCase         </td><td> Called before each test case. 
 </td></tr><tr><td> onTestCaseEnd     </td><td> testCase         </td><td> Called after each test case. 
