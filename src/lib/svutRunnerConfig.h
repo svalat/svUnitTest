@@ -100,6 +100,7 @@ class svutRunnerConfig
 		void qtCompat(int argc, char * argv[]);
 		char ** cloneArgv(int argc, const char * argv[]) const;
 		void freeClonedArgv(int argc,char * argv[]) const;
+		bool checkColorUsability(void) const;
 
 	friend std::ostream & operator <<(std::ostream & out,const svutRunnerConfig & config);
 };

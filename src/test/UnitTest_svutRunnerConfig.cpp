@@ -21,12 +21,17 @@ using namespace CPPUNIT_NS;
 
 /********************  CONSTS  *********************/
 const char * CONFIG_STREAM_OUTPUT = "==============================\n\
-Mode            =  STD_COLOR\n\
+Mode            =  STD_BW\n\
 Action          =  RUN_TESTS\n\
 Display_Success =  0\n\
 Display_Details =  1\n\
 Output_filename =  /dev/null\n\
 ==============================\n";
+
+/*******************  GLOBALS  ********************/
+namespace svUnitTest {
+	extern bool __svut_bypass_color_mode__;
+}
 
 /*********************  CLASS  **********************/
 class UnitTest_svutRunnerConfig : public TestCase
@@ -112,6 +117,7 @@ class UnitTest_svutRunnerConfig : public TestCase
 /*******************  FUNCTION  *********************/
 void UnitTest_svutRunnerConfig::setUp(void)
 {
+	__svut_bypass_color_mode__ = true;
 	config = new svutRunnerConfig();
 }
 
@@ -119,6 +125,7 @@ void UnitTest_svutRunnerConfig::setUp(void)
 void UnitTest_svutRunnerConfig::tearDown(void)
 {
 	delete config;
+	__svut_bypass_color_mode__ = false;
 }
 
 /*******************  FUNCTION  *********************/
@@ -461,7 +468,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_output(void)
 	config->loadParams(3,args);
 
 	CPPUNIT_ASSERT_EQUAL(SVUT_ACTION_RUN_TESTS,config->getAction());
-	CPPUNIT_ASSERT_EQUAL(SVUT_OUT_STD_COLOR,config->getMode());
+	CPPUNIT_ASSERT_EQUAL(SVUT_OUT_STD_BW,config->getMode());
 	CPPUNIT_ASSERT_EQUAL(true,config->hasDisplayDetails());
 	CPPUNIT_ASSERT_EQUAL(false,config->hasDisplaySuccess());
 	CPPUNIT_ASSERT(&std::cout != &config->getOutput());
@@ -631,6 +638,5 @@ void UnitTest_svutRunnerConfig::testOperator_ostream(void )
 	str << *config;
 	CPPUNIT_ASSERT_EQUAL(CONFIG_STREAM_OUTPUT,str.str());
 }
-
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutRunnerConfig);

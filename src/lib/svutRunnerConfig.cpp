@@ -18,6 +18,11 @@
 #include <fstream>
 #include "svutRunnerConfig.h"
 
+//optional include
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
 /**********************  USING  *********************/
 using namespace std;
 
@@ -36,6 +41,8 @@ const char *argp_program_bug_address = "<sebastien.valat.dev@orange.fr>";
 const char SVUT_ARGP_DOC[] ="svUnitTest -- Unit test library for C/C++ language.";
 /** Command line argument format. **/
 static const char SVUT_ARGS_DOC[] = "[-m MODE] [-v] [-s] [-?]";
+/** Used to averpass terminal detection to force output color mode in unit tests. **/
+bool __svut_bypass_color_mode__ = false;
 
 /** Définit l'aide des arguments proposé par le programme. **/
 static struct argp_option RS_OPTIONS[] = {
@@ -211,7 +218,10 @@ bool svutRunnerConfig::hasDisplayDetails(void) const
 **/
 void svutRunnerConfig::init(void)
 {
-	mode = SVUT_OUT_STD_COLOR;
+	if (this->checkColorUsability())
+		mode = SVUT_OUT_STD_COLOR;
+	else
+		mode = SVUT_OUT_STD_BW;
 	displaySuccess = false;
 	displayDetails = true;
 	action = SVUT_ACTION_RUN_TESTS;
@@ -300,6 +310,8 @@ void svutRunnerConfig::setOutput(std::string filename)
 	this->closeFile();
 	this->filename = filename;
 	this->externalOutputStream = NULL;
+	if (this->mode == SVUT_OUT_STD_COLOR)
+		this->mode = SVUT_OUT_STD_BW;
 }
 
 /*******************  FUNCTION  *********************/
@@ -312,6 +324,8 @@ void svutRunnerConfig::setOutput(std::ostream & stream)
 	this->closeFile();
 	this->filename = "";
 	this->externalOutputStream = &stream;
+	if (this->mode == SVUT_OUT_STD_COLOR)
+		this->mode = SVUT_OUT_STD_BW;
 }
 
 
@@ -459,6 +473,26 @@ void svutRunnerConfig::freeClonedArgv(int argc, char * argv[]) const
 			delete argv[i];
 	}
 	delete argv;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Check if the current terminal support color mode.
+ * @return true If color may be supported, false otherwise.
+**/
+bool svutRunnerConfig::checkColorUsability(void ) const
+{
+	//by pass only for unit test mode.
+	if (__svut_bypass_color_mode__)
+	{
+		return true;
+	} else {
+		#ifdef HAVE_UNISTD_H
+		return isatty(STDOUT_FILENO) == 1;
+		#else
+		return false;
+		#endif
+	}
 }
 
 
