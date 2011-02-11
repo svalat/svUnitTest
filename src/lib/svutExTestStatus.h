@@ -28,7 +28,7 @@ class svutExTestStatus : public svutException
 {
 	public:
 		svutExTestStatus(std::string name, const svUnitTest::svutStatusInfo& info) throw();
-		svutExTestStatus(std::string name,svutStatus status,svutCodeLocation  location=SVUT_CODE_LOCATION,std::string message="") throw();
+		svutExTestStatus(std::string name,svutStatus status,svutCodeLocation  location,std::string message="") throw();
 		virtual ~svutExTestStatus(void) throw();
 		std::string getExceptionName(void) const;
 		const svutStatusInfo & getInfos(void) const;
