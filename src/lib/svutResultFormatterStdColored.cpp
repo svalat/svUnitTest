@@ -51,7 +51,7 @@ svutResultFormatterStdColored::svutResultFormatterStdColored(std::ostream& out)
 void svutResultFormatterStdColored::printMethodAndStatus(std::ostream& out, std::string name, svutStatus status)
 {
 	//sprintf(buffer," * %-40s     [ %s ]\n",testName.c_str(),statusName.c_str());
-	//               " \e[32m*\e[0m %-40s     [ \e[%dm%s\e[0m ]\n"
+	//               " \033[32m*\033[0m %-40s     [ \033[%dm%s\033[0m ]\n"
 	out << setColor(SVUT_STD_COLOR_GREEN) <<  " * " << unsetColor()
 		<< setw(40) << left << name << "     [ "
 		<< setStatusColor(status) << svutStatusInfo::getStatusName(status) << unsetColor()
@@ -62,7 +62,7 @@ void svutResultFormatterStdColored::printMethodAndStatus(std::ostream& out, std:
 void svutResultFormatterStdColored::printSummaryStat(std::ostream& out, svutStatus status, unsigned int nb, unsigned int tot)
 {
 	 //sprintf(buffer,"|  %-9s: %4d (%3d %%)  |\n",name,nb,100*nb/tot);
-	 //               "|  \e[%dm%-9s: %4d (%3d %%)\e[0m  |\n"
+	 //               "|  \033[%dm%-9s: %4d (%3d %%)\033[0m  |\n"
 	 unsigned int perc;
 
 	 //calc percentage
@@ -82,7 +82,7 @@ void svutResultFormatterStdColored::printSummaryStat(std::ostream& out, svutStat
 void svutResultFormatterStdColored::printSummaryFinalStatus(std::ostream& out, svutStatus status)
 {
 	//sprintf(buffer,"|  STATUS   : %-12s  |\n",name);
-	//               "|  STATUS   : \e[%dm%-12s\e[0m  |\n"
+	//               "|  STATUS   : \033[%dm%-12s\033[0m  |\n"
 	out << "|  STATUS   : " << setStatusColor(status) << setw(12) << left
 		<< svutStatusInfo::getStatusName(status) << unsetColor() << "  |" << endl;
 }
