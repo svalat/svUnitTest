@@ -127,9 +127,9 @@ svutStatusInfo svutTestCase::runTestMethod(svutTestMethod * test)
 		res = e.getInfos();
 	} catch (std::exception & e) {
 		string tmp = "Unexpected std exception : ";
-		res = svutStatusInfo::svutStatusInfo(SVUT_STATUS_UNKNOWN,tmp+e.what(),test->getLocation());
+		res = svutStatusInfo(SVUT_STATUS_UNKNOWN,tmp+e.what(),test->getLocation());
 	} catch (...) {
-		res = svutStatusInfo::svutStatusInfo(SVUT_STATUS_UNKNOWN,"Unexpected exception.",test->getLocation());
+		res = svutStatusInfo(SVUT_STATUS_UNKNOWN,"Unexpected exception.",test->getLocation());
 	}
 
 	//status replacement

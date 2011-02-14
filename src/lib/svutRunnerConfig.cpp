@@ -47,14 +47,14 @@ bool __svut_bypass_color_mode__ = false;
 /** Définit l'aide des arguments proposé par le programme. **/
 static struct argp_option RS_OPTIONS[] = {
 	{"mode",       'm',    "MODE",      0,  "Define the render mode to use : xml, qt_xml, std,"
-	                                        "color (color is defaut).",NULL },
+	                                        "color (color is defaut).",0},
 	{"verbose",    'v',      NULL,      0,  "Display all the test results, event the success."
-	                                        ,NULL},
-	{"silent",     's',      NULL,      0,  "Don't display extra information on test failure",NULL },
-	{"functions",  'f',      NULL,      0,  "List all the accessible tests methods.",NULL},
-	{"qtxml",      'q',      NULL,      0,  "Equivalent to -m qt_xml.",NULL},
-	{"output",     'o',    "FILE",      0,  "Define the output file to use. Use - for stdout.",NULL},
-	{"accept",     'a',    "NAME",      0,  "Accept only methods add with -a. in format 'testCase::method'. 'testCase::' will accept all all methods of testCase. '::method' will accept all methods named method without checking the test case name.",NULL},
+	                                        ,0},
+	{"silent",     's',      NULL,      0,  "Don't display extra information on test failure",0},
+	{"functions",  'f',      NULL,      0,  "List all the accessible tests methods.",0},
+	{"qtxml",      'q',      NULL,      0,  "Equivalent to -m qt_xml.",0},
+	{"output",     'o',    "FILE",      0,  "Define the output file to use. Use - for stdout.",0},
+	{"accept",     'a',    "NAME",      0,  "Accept only methods add with -a. in format 'testCase::method'. 'testCase::' will accept all all methods of testCase. '::method' will accept all methods named method without checking the test case name.",0},
 	{ 0,0,0,0,0,0 }
 };
 

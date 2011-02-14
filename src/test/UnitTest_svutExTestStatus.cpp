@@ -54,7 +54,7 @@ class UnitTest_svutExTestStatus : public TestCase
 /*******************  FUNCTION  *********************/
 void UnitTest_svutExTestStatus::setUp(void)
 {
-	svutStatusInfo info(SVUT_STATUS_INDEV,"this is a test",svutCodeLocation::svutCodeLocation("file.cpp","test()",42));
+	svutStatusInfo info(SVUT_STATUS_INDEV,"this is a test",svutCodeLocation("file.cpp","test()",42));
 	info.addEntry("expected","v1");
 	info.addEntry("actual","v2");
 	this->status = new svutExTestStatus("TEST",info);
@@ -70,7 +70,7 @@ void UnitTest_svutExTestStatus::tearDown(void)
 /*******************  FUNCTION  *********************/
 void UnitTest_svutExTestStatus::testConstructor_1(void )
 {
-	svutStatusInfo info(SVUT_STATUS_INDEV,"this is a test",svutCodeLocation::svutCodeLocation("file.cpp","test()",42));
+	svutStatusInfo info(SVUT_STATUS_INDEV,"this is a test",svutCodeLocation("file.cpp","test()",42));
 	info.addEntry("expected","v1");
 	info.addEntry("actual","v2");
 	svutExTestStatus obj("TEST",info);
@@ -78,7 +78,7 @@ void UnitTest_svutExTestStatus::testConstructor_1(void )
 	CPPUNIT_ASSERT_EQUAL("TEST",obj.getExceptionName());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getInfos().getMessage());
-	CPPUNIT_ASSERT_EQUAL(svutCodeLocation::svutCodeLocation("file.cpp","test()",42),obj.getInfos().getLocation());
+	CPPUNIT_ASSERT_EQUAL(svutCodeLocation("file.cpp","test()",42),obj.getInfos().getLocation());
 	CPPUNIT_ASSERT_EQUAL(2,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("v1",obj.getInfos().getEntry("expected"));
 	CPPUNIT_ASSERT_EQUAL("v2",obj.getInfos().getEntry("actual"));
@@ -89,12 +89,12 @@ void UnitTest_svutExTestStatus::testConstructor_1(void )
 /*******************  FUNCTION  *********************/
 void UnitTest_svutExTestStatus::teesConsturctor_2(void )
 {
-	svutExTestStatus obj("TEST",SVUT_STATUS_INDEV,svutCodeLocation::svutCodeLocation("file.cpp","test()",42),"this is a test");
+	svutExTestStatus obj("TEST",SVUT_STATUS_INDEV,svutCodeLocation("file.cpp","test()",42),"this is a test");
 
 	CPPUNIT_ASSERT_EQUAL("TEST",obj.getExceptionName());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getInfos().getMessage());
-	CPPUNIT_ASSERT_EQUAL(svutCodeLocation::svutCodeLocation("file.cpp","test()",42),obj.getInfos().getLocation());
+	CPPUNIT_ASSERT_EQUAL(svutCodeLocation("file.cpp","test()",42),obj.getInfos().getLocation());
 	CPPUNIT_ASSERT_EQUAL(0,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getStatus());
@@ -111,7 +111,7 @@ void UnitTest_svutExTestStatus::testGetInfos(void )
 {
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,status->getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is a test",status->getInfos().getMessage());
-	CPPUNIT_ASSERT_EQUAL(svutCodeLocation::svutCodeLocation("file.cpp","test()",42),status->getInfos().getLocation());
+	CPPUNIT_ASSERT_EQUAL(svutCodeLocation("file.cpp","test()",42),status->getInfos().getLocation());
 	CPPUNIT_ASSERT_EQUAL(2,status->getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("v1",status->getInfos().getEntry("expected"));
 	CPPUNIT_ASSERT_EQUAL("v2",status->getInfos().getEntry("actual"));
@@ -126,7 +126,7 @@ void UnitTest_svutExTestStatus::testGetInfos_const(void )
 {
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,cstStatus->getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is a test",cstStatus->getInfos().getMessage());
-	CPPUNIT_ASSERT_EQUAL(svutCodeLocation::svutCodeLocation("file.cpp","test()",42),cstStatus->getInfos().getLocation());
+	CPPUNIT_ASSERT_EQUAL(svutCodeLocation("file.cpp","test()",42),cstStatus->getInfos().getLocation());
 	CPPUNIT_ASSERT_EQUAL(2,cstStatus->getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("v1",cstStatus->getInfos().getEntry("expected"));
 	CPPUNIT_ASSERT_EQUAL("v2",cstStatus->getInfos().getEntry("actual"));
