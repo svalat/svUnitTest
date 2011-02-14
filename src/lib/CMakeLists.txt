@@ -9,7 +9,7 @@
 #setup svUnitTest library
 
 #group files
-set(svUnitTest_SRC svutResultFormatterQtXml.cpp svutResultFormatter.cpp svutResultFormatterXml.cpp
+set(svUnitTest_SRC svutArgp.cpp svutResultFormatterQtXml.cpp svutResultFormatter.cpp svutResultFormatterXml.cpp
 	svutDefaultMain.cpp svutTestFilterBasic.cpp svutAutoRegister.cpp svutRunner.cpp
 	svutRunnerConfig.cpp svutResultFormatterStdColored.cpp svutResultSummary.cpp svutAsserter.cpp
 	svutResultFormatterStd.cpp svutResultFormatterStdBW.cpp svutListenerDirectOutputter.cpp
