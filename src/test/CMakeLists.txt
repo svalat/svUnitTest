@@ -21,7 +21,8 @@ set(svutUnitTest_CASES svutCodeLocation svutException svutObjectMethod svutStatu
 		svutListenerMultiplexer svutListener svutTestCaseResult svutListenerSummary
 		svutListenerDirectOutputter svutResultSummary svutResultFormatterStdBW
 		svutResultFormatterStdColored svutRunnerConfig svutRunner svutTestCaseBuilder
-		svutAutoRegister svutTestFilterBasic svutResultFormatterXml svutResultFormatterQtXml)
+		svutAutoRegister svutTestFilterBasic svutResultFormatterXml svutResultFormatterQtXml
+		svutArgp)
 add_definitions(-DTEST_SRC_BASE_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
 IF (TEST_COVERAGE) ############ HERE THE CASE FOR COVERAGE
 	set(svutUnitTest_ALLSRC)

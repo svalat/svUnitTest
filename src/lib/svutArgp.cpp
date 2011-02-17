@@ -7,6 +7,10 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
+#include <ios>
+#include <sstream>
+#include <cstring>
+#include <cassert>
 #include "svutArgp.h"
 
 /**********************  USING  *********************/
@@ -15,6 +19,23 @@ using namespace std;
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
+
+/********************  CONSTS  ***********************/
+/** Define the string used to pad base help line. **/
+static const char * SVUT_HELP_BASE_PADDING = "  ";
+/** Define the string used to pad help breaked lines. **/
+static const char * SVUT_HELP_PADDING = "                            ";
+/** Define the key for --usage **/
+static const char SVUT_USAGE_KEY = 255;
+/** Define the default term size. **/
+static const int SVUT_DEFAULT_COLUMNS = 80;
+
+/*******************  FUNCTION  *********************/
+/** Default constructor, it defines the default arguements (help and usage). **/
+svutArgp::svutArgp(void )
+{
+	this->setupDefaultOptions();
+}
 
 /*******************  FUNCTION  *********************/
 /** Default virtual destructor. **/
@@ -29,7 +50,7 @@ svutArgp::~svutArgp(void )
 **/
 void svutArgp::setProjectName(string projectName)
 {
-
+	this->projectName = projectName;
 }
 
 /*******************  FUNCTION  *********************/
@@ -39,7 +60,7 @@ void svutArgp::setProjectName(string projectName)
 **/
 void svutArgp::setProjectVersion(string projectVersion)
 {
-
+	this->projectVersion = projectVersion;
 }
 
 /*******************  FUNCTION  *********************/
@@ -49,7 +70,7 @@ void svutArgp::setProjectVersion(string projectVersion)
 **/
 void svutArgp::setProjectDescr(string projectDescr)
 {
-
+	this->projectDescr = projectDescr;
 }
 
 /*******************  FUNCTION  *********************/
@@ -59,38 +80,53 @@ void svutArgp::setProjectDescr(string projectDescr)
 **/
 void svutArgp::setProjectBugAddress(string projectBugAddress)
 {
-
+	this->projectBugAddress = projectBugAddress;
 }
 
 /*******************  FUNCTION  *********************/
 /**
  * Decalre a new option to accept in the parsor.
- * @param key Define the short trigger for the option (eg. -a).
+ * @param key Define the short trigger for the option (eg. -a). Non alphanumerique keys will not
+ *             be used, you can use such keys to declare long name only options.
  * @param name Define the long name for the option (eg. --help). Caution, the -- will be added
- *             automatically.
+ *             automatically. It can be empty for non long name.
  * @param valueType Define the type of the value, use NONE for simple triggers. Otherwise, you can
  *             use FILE, STRING ...., please use upper caption.
  * @param descr Define a short description for the new option.
+ * @throw 
 **/
-void svutArgp::decalareOption(char key, string name, string valueType, string descr)
+void svutArgp::decalareOption(char key, string name, string valueType, string descr) throw (svutExArgpDuplicateKey)
 {
+	svutArgDef arg;
+	arg.key = key;
+	arg.name = name;
+	arg.descr = descr;
+	arg.valueType = valueType;
 
+	if (options.find(key) != options.end())
+		throw svutExArgpDuplicateKey(key);
+	if (hasLongName(name))
+		throw svutExArgpDuplicateKey(name);
+	options[arg.key] = arg;
 }
 
 /*******************  FUNCTION  *********************/
 /**
- * Try to obtain the size of the xterm to known where to cut lines. Default will be 80 columns.
+ * Try to obtain the size of the xterm to known where to cut lines. Default will be SVUT_DEFAULT_COLUMNS columns.
 **/
 int svutArgp::getTermColumns(void) const
 {
-
+	return SVUT_DEFAULT_COLUMNS;
 }
 
 /*******************  FUNCTION  *********************/
-/** Function used to generate the help string and print it onto the standard output. **/
-void svutArgp::showHelp(void)
+/**
+ * Function used to generate the help string and print it onto the standard output.
+ * @param out Define the output stream to use.
+**/
+void svutArgp::showHelp(std::ostream & out)
 {
-
+	out << getHelp();
 }
 
 /*******************  FUNCTION  *********************/
@@ -101,7 +137,123 @@ void svutArgp::showHelp(void)
 **/
 string svutArgp::getHelp(int columns)
 {
+	stringstream str;
+	int cols = this->getTermColumns();
 
+	str << "Usage: " << this->projectName << " " << this->argUsage << endl;
+	str << this->projectName << " -- " << this->projectDescr << endl << endl;
+
+	//standard helps
+	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+		if (it->first != '?' && it->first != SVUT_USAGE_KEY)
+			str << formatArgumentHelp(it->second,cols) << endl;
+
+	//special helps
+	str << formatArgumentHelp(options.find('?')->second,cols) << endl;
+	str << formatArgumentHelp(options.find(SVUT_USAGE_KEY)->second,cols) << endl;
+
+	str << endl;
+	str << "Mandatory or optional arguments to long options are also mandatory or optional" << endl;
+	str << "for any corresponding short options." << endl;
+
+	return str.str();
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Check is the given long option name is defined.
+ * @param name Define the name to search.
+ * @return Return true if defined, false otherwise.
+**/
+bool svutArgp::hasLongName(string name) const
+{
+	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+		if (it->second.name == name)
+			return true;
+	return false;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Check if the given key was valid or not for a display into --help.
+ * @param key Define the key to test.
+ * @return True if it was valid, false otherwise.
+**/
+bool svutArgp::isValidKey(char key) const
+{
+	return (  (key >= 'a' && key <= 'z')
+	       || (key >= 'A' && key <= 'Z')
+	       || (key >= '0' && key <= '9')
+	       || (key == '?' ));
+}
+
+
+/*******************  FUNCTION  *********************/
+/**
+ * Generate and return the help string for the given arguement.
+ * @param arg Define the arguement for wich to generate the help line.
+ * @param columns Define the term width to consider for line splitting.
+ * @return Return the generated string.
+**/
+string svutArgp::formatArgumentHelp(svutArgDef arg,int columns) const
+{
+	stringstream res;
+	stringstream tmp;
+	int pos = 0;
+	bool firstLine = true;
+
+	//check collums
+	assert(columns > 0);
+	columns -= strlen(SVUT_HELP_PADDING);
+
+	//setup keys mode
+	bool hasShort = isValidKey(arg.key);
+	bool hasLong = ! arg.name.empty();
+
+	//base padding
+	res << SVUT_HELP_BASE_PADDING;
+
+	//short arg
+	if (hasShort)
+		res << '-' << arg.key;
+	else
+		res << "  ";
+
+	//separator
+	if (hasShort && hasLong)
+		res << ", --";
+	else
+		res << "  --";
+
+	//long name
+	res.width(21);
+	res.fill(' ');
+	res.setf(ios::left);
+	tmp << arg.name;
+	if (arg.valueType != "NONE")
+		tmp << '=' << arg.valueType;
+	res << tmp.str();
+
+	//description
+	while (arg.descr.size() > 0)
+	{
+		//pad
+		if (!firstLine)
+			res << endl << SVUT_HELP_PADDING;
+		if (arg.descr.size() < columns)
+		{
+			res << arg.descr;
+			arg.descr.clear();
+		} else {
+			//cut the line on spaces
+			pos = arg.descr.find_last_of(" ",columns);
+			res << arg.descr.substr(0,pos);
+			arg.descr = arg.descr.substr(pos,arg.descr.size());
+		}
+		firstLine = false;
+	}
+
+	return res.str();
 }
 
 /*******************  FUNCTION  *********************/
@@ -110,7 +262,8 @@ string svutArgp::getHelp(int columns)
 **/
 void svutArgp::clearOptions(void )
 {
-
+	this->options.clear();
+	this->setupDefaultOptions();
 }
 
 /*******************  FUNCTION  *********************/
@@ -123,6 +276,57 @@ void svutArgp::clearOptions(void )
 bool svutArgp::parse(int argc, char* argv[])
 {
 
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Give a simple example of arguement usage to display into the help, prefered fit into ne line.
+ * As example : "[OPTION...] [-m MODE] [-v] [-s] [-?]"
+ * @param argUsage Define the argument usage string.
+**/
+void svutArgp::setProjectArgUsage(string argUsage)
+{
+	this->argUsage = argUsage;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Constructor of exception class for duplicated key error.
+**/
+svutExArgpDuplicateKey::svutExArgpDuplicateKey(char key)
+{
+	this->key = key;
+}
+
+/*******************  FUNCTION  *********************/
+svutExArgpDuplicateKey::svutExArgpDuplicateKey(string name)
+{
+	this->name = name;
+	this->key = '\0';
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Return the message related to the exception.
+**/
+string svutExArgpDuplicateKey::getMessage(void ) const
+{
+	stringstream message;
+	if ( key == '\0' )
+		message << "Option '" << name << "' already defined, please use another one.";
+	else
+		message << "Key '" << key << "' already defined, please use another one.";
+	return message.str();
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Initialized the default options into the parseur.
+**/
+void svutArgp::setupDefaultOptions(void )
+{
+	this->decalareOption('?',"help","NONE","Give this help list");
+	this->decalareOption(SVUT_USAGE_KEY,"usage","NONE","Give a short usage message");
 }
 
 }

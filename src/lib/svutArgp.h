@@ -10,8 +10,10 @@
 #define SVUTARGP_H
 
 /********************  HEADERS  *********************/
-#include <vector>
+#include <map>
 #include <string>
+#include <iostream>
+#include "svutException.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
@@ -53,6 +55,25 @@ struct svutArgDef
 
 /*********************  CLASS  **********************/
 /**
+ * Exception class for duplicated key error while defining available arguements.
+ * @brief Exception class for arguement definition error.
+**/
+class svutExArgpDuplicateKey : public svutException
+{
+	public:
+		svutExArgpDuplicateKey(char key);
+		svutExArgpDuplicateKey(std::string name);
+		virtual ~svutExArgpDuplicateKey() throw() {};
+		virtual std::string getMessage(void) const;
+	private:
+		/** Define the conflicting key. **/
+		char key;
+		/** Define the conflicting name. **/
+		std::string name;
+};
+
+/*********************  CLASS  **********************/
+/**
  * Provide our own implementation of argument parsing as argp.h wasn't multiplatforme.
  * Our arguemnt pattern is quite simple so we choosed to reimplement our own parser
  * avoiding bringing external dependencies.
@@ -62,16 +83,18 @@ struct svutArgDef
 class svutArgp
 {
 	public:
+		svutArgp(void);
 		virtual ~svutArgp(void);
 		bool parse(int argc, char * argv[]);
-		void decalareOption(char key,std::string name,std::string valueType,std::string descr);
+		void decalareOption(char key,std::string name,std::string valueType,std::string descr) throw (svutExArgpDuplicateKey);
 		void clearOptions(void);
-		void showHelp(void);
+		void showHelp(std::ostream & out = std::cout);
 		std::string getHelp(int columns = 80);
 		void setProjectName(std::string projectName);
 		void setProjectVersion(std::string projectVersion);
 		void setProjectBugAddress(std::string projectBugAddress);
 		void setProjectDescr(std::string projectDescr);
+		void setProjectArgUsage(std::string argUsage);
 	protected:
 		/** Methode called while starting to parse arguements. **/
 		virtual void parseInit(void) = 0;
@@ -84,9 +107,13 @@ class svutArgp
 		virtual void parseTerminate(void) = 0;
 	private:
 		int getTermColumns(void) const;
+		std::string formatArgumentHelp(svutArgDef arg,int columns) const;
+		bool isValidKey(char key) const;
+		void setupDefaultOptions(void);
+		bool hasLongName(std::string name) const;
 		
 		/** Store the list of available options. **/
-		std::vector<svutArgDef> options;
+		std::map<char,svutArgDef> options;
 		/** Name of the project. **/
 		std::string projectName;
 		/** Version of the project. **/
@@ -95,6 +122,8 @@ class svutArgp
 		std::string projectBugAddress;
 		/** Project short description. **/
 		std::string projectDescr;
+		/** Short pattern of argument usage. **/
+		std::string argUsage;
 };
 
 }
