@@ -97,9 +97,9 @@ class UnitTest_MyArgp : public svutArgp
 	public:
 		UnitTest_MyArgp(void);
 		void resetMock(void);
-		virtual void parseInit(void);
-		virtual void parseOption(char key,std::string value);
-		virtual void parseTerminate(void);
+		virtual void parseInit(void) throw (svutExArgpError);
+		virtual void parseOption(char key,std::string value) throw (svutExArgpError);
+		virtual void parseTerminate(void) throw (svutExArgpError);
 		bool hasDoneParseInit;
 		bool hasDoneParseTerminate;
 		std::string parsedOptions;
@@ -114,7 +114,9 @@ class UnitTest_svutArgp : public TestCase
 	CPPUNIT_TEST(testSetProjectBugAddress);
 	CPPUNIT_TEST(testSetProjectDescr);
 	CPPUNIT_TEST(testSetProjectArgumentUsage);
-	CPPUNIT_TEST(testParse);
+	CPPUNIT_TEST(testParse_1);
+	CPPUNIT_TEST(testParse_2);
+	CPPUNIT_TEST(testParse_3);
 	CPPUNIT_TEST(testDeclareOption_ok);
 	CPPUNIT_TEST(testDeclareOption_dupKey);
 	CPPUNIT_TEST(testDeclareOption_dupName);
@@ -133,7 +135,9 @@ class UnitTest_svutArgp : public TestCase
 		void testSetProjectBugAddress(void);
 		void testSetProjectDescr(void);
 		void testSetProjectArgumentUsage(void);
-		void testParse(void);
+		void testParse_1(void);
+		void testParse_2(void);
+		void testParse_3(void);
 		void testDeclareOption_ok(void);
 		void testDeclareOption_dupKey(void);
 		void testDeclareOption_dupName(void);
@@ -215,7 +219,19 @@ void UnitTest_svutArgp::testGetHelp(void )
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutArgp::testParse(void )
+void UnitTest_svutArgp::testParse_1(void )
+{
+	CPPUNIT_FAIL("todo");
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutArgp::testParse_2(void )
+{
+	CPPUNIT_FAIL("todo");
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutArgp::testParse_3(void )
 {
 	CPPUNIT_FAIL("todo");
 }
@@ -263,13 +279,13 @@ UnitTest_MyArgp::UnitTest_MyArgp(void ): svutArgp()
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_MyArgp::parseInit(void )
+void UnitTest_MyArgp::parseInit(void )  throw (svutExArgpError)
 {
 	this->hasDoneParseInit = true;
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_MyArgp::parseOption(char key, string value)
+void UnitTest_MyArgp::parseOption(char key, string value) throw (svutExArgpError)
 {
 	if ( ! this->parsedOptions.empty() )
 		this->parsedOptions += " ; ";
@@ -277,10 +293,13 @@ void UnitTest_MyArgp::parseOption(char key, string value)
 	this->parsedOptions += key;
 	this->parsedOptions += ':';
 	this->parsedOptions += value;
+
+	if (key == 'e')
+		throw svutExArgpError("This is an error in parsing of arguement -e.");
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_MyArgp::parseTerminate(void )
+void UnitTest_MyArgp::parseTerminate(void )  throw (svutExArgpError)
 {
 	this->hasDoneParseTerminate = true;
 }
