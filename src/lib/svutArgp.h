@@ -122,7 +122,7 @@ class svutArgp
 		int scanCheckedOption(const svutArgDef & option,int shortKey,int argc, const char * argv[]) throw (svutExArgpError);
 		void callParseOption(char key,std::string arg,std::string value) throw (svutExArgpError);
 		std::string genUsageParam(const svutArgDef & arg,bool useShort) const;
-		std::string breakLines(std::string value,int columns, std::string pad) const;
+		std::string breakLines( std::string pad, unsigned int columns, std::string value) const;
 		
 		/** Store the list of available options. **/
 		std::map<char,svutArgDef> options;

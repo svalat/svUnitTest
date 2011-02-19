@@ -353,7 +353,7 @@ void UnitTest_svutArgp::testParse_argcZero(void )
 		"-e",
 	};
 
-	CPPUNIT_ASSERT(obj->parse(argc,NULL,err) == false);
+	CPPUNIT_ASSERT(obj->parse(argc,argv,err) == false);
 	CPPUNIT_ASSERT(obj->hasDoneParseInit == false);
 	CPPUNIT_ASSERT(obj->hasDoneParseTerminate == false);
 	CPPUNIT_ASSERT_EQUAL("",obj->parsedOptions);

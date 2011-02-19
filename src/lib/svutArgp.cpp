@@ -28,7 +28,7 @@ static const char * SVUT_HELP_BASE_PADDING = "  ";
 /** Define the string used to pad help breaked lines. **/
 static const char * SVUT_HELP_PADDING = "                            ";
 /** Define the key for --usage **/
-static const char SVUT_USAGE_KEY = 255;
+static const char SVUT_USAGE_KEY = (char)(255);
 /** Define the default term size. **/
 static const int SVUT_DEFAULT_COLUMNS = 80;
 
@@ -217,8 +217,6 @@ string svutArgp::formatArgumentHelp(svutArgDef arg,int columns) const
 {
 	stringstream res;
 	stringstream tmp;
-	int pos = 0;
-	bool firstLine = true;
 
 	//setup keys mode
 	bool hasShort = isValidKey(arg.key);
@@ -262,7 +260,7 @@ string svutArgp::formatArgumentHelp(svutArgDef arg,int columns) const
  * @param columns Define the number of columns to consider.
  * @param pad Define the string used to pad new lines.
 **/
-string svutArgp::breakLines ( string value, int columns , string pad) const
+string svutArgp::breakLines ( string value, unsigned int columns , string pad) const
 {
 	bool firstLine = true;
 	stringstream res;
@@ -488,7 +486,7 @@ bool svutArgp::parse(int argc, const char* argv[],ostream & err)
 **/
 int svutArgp::scanLongOption(string name, int argc, const char* argv[]) throw (svutExArgpError)
 {
-	int cut = name.find_first_of("=");
+	size_t cut = name.find_first_of("=");
 	std::map<char,svutArgDef>::const_iterator it = options.begin();
 	string tmp = name.substr(0,cut);
 	
@@ -536,11 +534,10 @@ int svutArgp::scanLongOption(string name, int argc, const char* argv[]) throw (s
 int svutArgp::scanShortOptions(string list, int argc, const char* argv[]) throw (svutExArgpError)
 {
 	int res = 1;
-	int tmp = 0;
 	std::map<char,svutArgDef>::const_iterator it;
 
 	//scan all options
-	for ( int i = 0 ; i < list.size() ; ++i )
+	for ( size_t i = 0 ; i < list.size() ; ++i )
 	{
 		it = options.find(list[i]);
 		if (it == options.end())
