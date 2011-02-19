@@ -35,6 +35,10 @@ namespace svUnitTest
 bool __svut_bypass_color_mode__ = false;
 
 /*******************  FUNCTION  *********************/
+/**
+ * Constructor of svutRunnerConfigArgp, it setup svutArgp to be ready to parse svUnitTest arguements.
+ * @param config Define the configuration object into which to store values fetched from arguements.
+**/
 svutRunnerConfigArgp::svutRunnerConfigArgp ( svutRunnerConfig& config )
                      : svutArgp(true)
 {
@@ -78,7 +82,7 @@ void svutRunnerConfigArgp::parseInit ( void ) throw (svutExArgpError)
  * @throw svutExArgpError On error, throw such exception to notify the arguement paror.
  * It will redirecte the related message to error output, please don't use cerr direclty here.
 **/
-void svutRunnerConfigArgp::parseOption ( char key, string arg, string value ) throw (svutExArgpError)
+void svutRunnerConfigArgp::parseOption ( char key, std::string arg, std::string value ) throw (svutExArgpError)
 {
 	stringstream err;
 	switch (key)

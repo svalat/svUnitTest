@@ -66,7 +66,7 @@ void svutArgp::setAutoExit ( bool autoExit )
  * Define the project name to use while generating the help string.
  * @param projectName Define the project name to use.
 **/
-void svutArgp::setProjectName(string projectName)
+void svutArgp::setProjectName(std::string projectName)
 {
 	this->projectName = projectName;
 }
@@ -76,7 +76,7 @@ void svutArgp::setProjectName(string projectName)
  * Define the project version to use while generating the help string.
  * @param projectVersion Define the project version to use.
 **/
-void svutArgp::setProjectVersion(string projectVersion)
+void svutArgp::setProjectVersion(std::string projectVersion)
 {
 	this->projectVersion = projectVersion;
 }
@@ -86,7 +86,7 @@ void svutArgp::setProjectVersion(string projectVersion)
  * Define a short description of the project to use while generating the help string.
  * @param projectDescr Short description of the project.
 **/
-void svutArgp::setProjectDescr(string projectDescr)
+void svutArgp::setProjectDescr(std::string projectDescr)
 {
 	this->projectDescr = projectDescr;
 }
@@ -96,7 +96,7 @@ void svutArgp::setProjectDescr(string projectDescr)
  * Define the email address to which report bugs.
  * @param projectBugAddress Define the selected mail address.
 **/
-void svutArgp::setProjectBugAddress(string projectBugAddress)
+void svutArgp::setProjectBugAddress(std::string projectBugAddress)
 {
 	this->projectBugAddress = projectBugAddress;
 }
@@ -111,9 +111,9 @@ void svutArgp::setProjectBugAddress(string projectBugAddress)
  * @param valueType Define the type of the value, use NONE for simple triggers. Otherwise, you can
  *             use FILE, STRING ...., please use upper caption.
  * @param descr Define a short description for the new option.
- * @throw 
+ * @throw svutExArgpDuplicateKey The given key already exist and can't be added.
 **/
-void svutArgp::decalareOption(char key, string name, string valueType, string descr) throw (svutExArgpDuplicateKey)
+void svutArgp::decalareOption(char key, std::string name, std::string valueType, std::string descr) throw (svutExArgpDuplicateKey)
 {
 	svutArgDef arg;
 	arg.key = key;
@@ -131,6 +131,7 @@ void svutArgp::decalareOption(char key, string name, string valueType, string de
 /*******************  FUNCTION  *********************/
 /**
  * Try to obtain the size of the xterm to known where to cut lines. Default will be SVUT_DEFAULT_COLUMNS columns.
+ * @return Return the number of columns available in current terminal.
 **/
 int svutArgp::getTermColumns(void) const
 {
@@ -183,7 +184,7 @@ string svutArgp::getHelp(int columns)
  * @param name Define the name to search.
  * @return Return true if defined, false otherwise.
 **/
-bool svutArgp::hasLongName(string name) const
+bool svutArgp::hasLongName(std::string name) const
 {
 	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
 		if (it->second.name == name)
@@ -259,8 +260,9 @@ string svutArgp::formatArgumentHelp(svutArgDef arg,int columns) const
  * @param value Define the string line to cut.
  * @param columns Define the number of columns to consider.
  * @param pad Define the string used to pad new lines.
+ * @return Return the string formatted to fit with given number of column.
 **/
-string svutArgp::breakLines ( string value, unsigned int columns , string pad) const
+string svutArgp::breakLines ( std::string value, unsigned int columns , std::string pad) const
 {
 	bool firstLine = true;
 	stringstream res;
@@ -300,7 +302,7 @@ string svutArgp::breakLines ( string value, unsigned int columns , string pad) c
  * @param value Define the value given with the arguement if available.
  * @throw svutExArgpError Exception used to notify arguement error.
 **/
-void svutArgp::callParseOption ( char key, string arg, string value )  throw (svutExArgpError)
+void svutArgp::callParseOption ( char key, std::string arg, std::string value )  throw (svutExArgpError)
 {
 	switch (key)
 	{
@@ -323,6 +325,7 @@ void svutArgp::callParseOption ( char key, string arg, string value )  throw (sv
  * The string will be preceded by a space.
  * @param arg Define the arguement to convert.
  * @param useShort Define if consider short arguement or long.
+ * @return Return the usage string formatted as requested.
 **/
 std::string svutArgp::genUsageParam(const svutArgDef & arg,bool useShort) const
 {
@@ -394,7 +397,7 @@ string svutArgp::getUsage ( int columns ) const
  * Generate the usage string and print it into the given output stream (cout by default).
  * @param out Define the output stream to use.
 **/
-void svutArgp::showUsage ( ostream& out ) const
+void svutArgp::showUsage ( std::ostream& out ) const
 {
 	out << getUsage(this->getTermColumns()) << endl;
 }
@@ -420,8 +423,10 @@ void svutArgp::clearOptions(void )
  * @param argv List of arguement given to the program (the ones from main)
  * @param err Define the error stream to use to notify the user, std::cerr by default. This is mode
  *            for unit testing svutArgp.
+ * @return True in case of success, false otherwise. This is not revelant when activating autoExit
+ *            as the program will automatically exit on error.
 **/
-bool svutArgp::parse(int argc, const char* argv[],ostream & err)
+bool svutArgp::parse(int argc, const char* argv[],std::ostream & err)
 {
 	//vars
 	bool status = false;
@@ -484,7 +489,7 @@ bool svutArgp::parse(int argc, const char* argv[],ostream & err)
  *         the arguement use a value.
  * @throw svutExArgpError Transmet error caming from parseOption.
 **/
-int svutArgp::scanLongOption(string name, int argc, const char* argv[]) throw (svutExArgpError)
+int svutArgp::scanLongOption(std::string name, int argc, const char* argv[]) throw (svutExArgpError)
 {
 	size_t cut = name.find_first_of("=");
 	std::map<char,svutArgDef>::const_iterator it = options.begin();
@@ -524,14 +529,14 @@ int svutArgp::scanLongOption(string name, int argc, const char* argv[]) throw (s
  * exist. Check related values and send it to parseOption is valid. Short options can be agregated
  * on the form -XYZ which is equivalent to -X -Y -Z. It can manage only one arguement requiering a
  * value per groupe otherwise it will report an error.
- * @param name Define the option name (without -)
+ * @param list Define the short option (without -), optionnaly grouped (-XYZ equivalent to -X -Y -Z).
  * @param argc Define the number of remaining arguments (starting ont the -k one)
  * @param argv Define the remaining arguments (starting ont the -k one)
  * @return Return number of steps to increment for moving into arguments. One for trigger, two if
  *         the arguement use a value.
  * @throw svutExArgpError Transmet error caming from parseOption or multiple arguments with values.
 **/
-int svutArgp::scanShortOptions(string list, int argc, const char* argv[]) throw (svutExArgpError)
+int svutArgp::scanShortOptions(std::string list, int argc, const char* argv[]) throw (svutExArgpError)
 {
 	int res = 1;
 	std::map<char,svutArgDef>::const_iterator it;
@@ -565,6 +570,7 @@ int svutArgp::scanShortOptions(string list, int argc, const char* argv[]) throw 
  * @param argc Define the number of remaining arguments (starting ont the -k or --name one)
  * @param argv Define the remaining arguments (starting ont the -k or --name one)
  * @throw svutExArgpError Transmet error caming from parseOption
+ * @return Return 2 if use the next arguement to read related value, 1 otherwise.
 **/
 int svutArgp::scanCheckedOption(const svutArgDef& option, int shortKey, int argc, const char* argv[])  throw (svutExArgpError)
 {
@@ -591,7 +597,7 @@ int svutArgp::scanCheckedOption(const svutArgDef& option, int shortKey, int argc
  * As example : "[OPTION...] [-m MODE] [-v] [-s] [-?]"
  * @param argUsage Define the argument usage string.
 **/
-void svutArgp::setProjectArgUsage(string argUsage)
+void svutArgp::setProjectArgUsage(std::string argUsage)
 {
 	this->argUsage = argUsage;
 }
@@ -599,6 +605,7 @@ void svutArgp::setProjectArgUsage(string argUsage)
 /*******************  FUNCTION  *********************/
 /**
  * Constructor of exception class for duplicated key error.
+ * @param key Define the key responsible of the error.
 **/
 svutExArgpDuplicateKey::svutExArgpDuplicateKey(char key)
 {
@@ -606,7 +613,11 @@ svutExArgpDuplicateKey::svutExArgpDuplicateKey(char key)
 }
 
 /*******************  FUNCTION  *********************/
-svutExArgpDuplicateKey::svutExArgpDuplicateKey(string name)
+/**
+ * Constructor of exception class for duplicated arguement error.
+ * @param name Define the arguement long name responsible of the error.
+**/
+svutExArgpDuplicateKey::svutExArgpDuplicateKey(std::string name)
 {
 	this->name = name;
 	this->key = '\0';
@@ -614,9 +625,9 @@ svutExArgpDuplicateKey::svutExArgpDuplicateKey(string name)
 
 /*******************  FUNCTION  *********************/
 /**
- * Return the message related to the exception.
+ * @return Return the message related to the exception.
 **/
-string svutExArgpDuplicateKey::getMessage(void ) const
+std::string svutExArgpDuplicateKey::getMessage(void ) const
 {
 	stringstream message;
 	if ( key == '\0' )

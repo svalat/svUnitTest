@@ -76,7 +76,6 @@ As a user, you be interested by :
  - \subpage user_doc-build_makefile
  - \subpage user_doc-build_pkg-config
  - \subpage user_doc-build_cmake
- - \subpage user_doc-build_autotools
  - \subpage user_doc-build_your_first_suite
  - \subpage user_doc-test_coverage
  - \subpage user_doc-available_assertions
@@ -84,7 +83,7 @@ As a user, you be interested by :
  - \subpage user_doc-extend_macro
  - \subpage user_doc-status
  - \subpage user_doc-html
- - \subpage user_doc-inherit
+
 \section Developerdocumentation Developer documentation
 
  - \subpage dev_doc-style

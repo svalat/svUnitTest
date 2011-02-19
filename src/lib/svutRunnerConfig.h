@@ -50,6 +50,12 @@ enum svutRunnerAction
 };
 
 /********************  CLASSE  **********************/
+/**
+ * Class used to parse svutRunnerConfig arguements. It provide the parseOption() methode to manage
+ * arguements.
+ * @brief Argument parsor for svutRunnerConfig.
+ * @author Sébastien Valat
+**/
 class svutRunnerConfigArgp : public svutArgp
 {
 	public:
@@ -58,6 +64,7 @@ class svutRunnerConfigArgp : public svutArgp
 		virtual void parseInit(void)  throw (svutExArgpError);
 		virtual void parseOption(char key,std::string arg,std::string value) throw (svutExArgpError);
 		virtual void parseTerminate(void)  throw (svutExArgpError);
+		/** Keep reference to svutRunnerConfig object to set parameters from parsed arguement. **/
 		svutRunnerConfig * config;
 };
 
