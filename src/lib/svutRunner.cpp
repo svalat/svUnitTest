@@ -14,6 +14,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <list>
+#include <vector>
 #include <string>
 #include <cstdio>
 #include "svutRunner.h"
@@ -249,16 +250,18 @@ bool svutRunner::hasTestNamed(std::string name)
 **/
 void svutRunner::unloadAutoDetected(void)
 {
-	list<svutTestCase *>::iterator it=suites.begin();
-	while (it!=suites.end())
-	{
+	std::vector<list<svutTestCase *>::iterator> toRemove;
+	
+	//search members to remove
+	for (list<svutTestCase *>::iterator it=suites.begin() ; it != suites.end() ; ++it)
 		if ((*it)->isAutodetected())
-		{
-			delete *it;
-			suites.erase(it);
-			--it;
-		}
-		++it;
+			toRemove.push_back(it);
+
+	//apply remove actions
+	for (std::vector<list<svutTestCase *>::iterator>::iterator it = toRemove.begin() ; it != toRemove.end() ; ++it)
+	{
+		delete **it;
+		suites.erase(*it);
 	}
 }
 

@@ -18,7 +18,20 @@ namespace svUnitTest
  * List used to store the test case builder for the usage of auto registration. It was used to
  * be fetched from svutRunner.
 **/
-std::set<class svutTestCaseBuilder *> __SVUT_autoFoundTests__;
+static std::set<class svutTestCaseBuilder *> * __SVUT_autoFoundTests__ = NULL;
+
+/*******************  FUNCTION  *********************/
+/**
+ * Methode used on first access on __SVUT_autoFoundTests__ to create it if required.
+ * This dynmaique creation instead of static is required to fix buggy behavior on
+ * Windows with VCC.
+**/
+static void firstTouchRegister(void)
+{
+	//if first access, we need to create it.
+	if (__SVUT_autoFoundTests__ == NULL)
+		__SVUT_autoFoundTests__ = new std::set<class svutTestCaseBuilder *>();
+}
 
 /*******************  FUNCTION  *********************/
 /**
@@ -36,7 +49,8 @@ std::set<class svutTestCaseBuilder *> __SVUT_autoFoundTests__;
  **/
 int registerTestCase(svutTestCaseBuilder & builder)
 {
-	__SVUT_autoFoundTests__.insert(&builder);
+	firstTouchRegister();
+	__SVUT_autoFoundTests__->insert(&builder);
 	return 0;
 }
 
@@ -47,14 +61,16 @@ int registerTestCase(svutTestCaseBuilder & builder)
 **/
 const std::set<class svutTestCaseBuilder *> & getRegistredTestCase(void)
 {
-	return __SVUT_autoFoundTests__;
+	firstTouchRegister();
+	return *__SVUT_autoFoundTests__;
 }
 
 /*******************  FUNCTION  *********************/
 /** Clearn the test case list. **/
 void clearTestCaseRegister(void)
 {
-	__SVUT_autoFoundTests__.clear();
+	if (__SVUT_autoFoundTests__ != NULL)
+		__SVUT_autoFoundTests__->clear();
 }
 
 }
