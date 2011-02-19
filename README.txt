@@ -28,6 +28,16 @@ may use :
 $> cmake .. -DDISABLE_UNIT_TESTS=yes
 
                     -----------------------
+                    
+If you encouter some issues with the test suite and cppunit, you can replace cppunit by a light
+implementation with :
+
+$> cmake .. -DDISABLE_CPPUNIT=yes
+
+This is more to pass the test suite on non unix platform like Windows as CPPunit installation is not
+friendly.
+
+                    -----------------------
 
 You can run the internal unit test before installing  :
 

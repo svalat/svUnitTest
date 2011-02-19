@@ -15,7 +15,9 @@ set(svUnitTest_VERSION "0.1.0")
 include(CheckIncludeFileCXX)
 
 #deps
+if (NOT DISABLE_CPPUNIT)
 include(cmake/FindCppUnit.cmake)
+endif (NOT DISABLE_CPPUNIT)
 
 #global setup
 enable_testing()

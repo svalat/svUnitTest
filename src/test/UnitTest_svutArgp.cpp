@@ -14,6 +14,7 @@
 #include "UnitTestExtra.h"
 #include <svutArgp.h>
 #include <string>
+#include <sstream>
 
 /********************  CONSTS  ***********************/
 static const char * CST_STRING_HELP_0 = "Usage: myApp [OPTION...] [-m MODE] [-v] [-s] [-?]\n\

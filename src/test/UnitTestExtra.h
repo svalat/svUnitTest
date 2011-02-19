@@ -15,12 +15,14 @@
 #include <string.h>
 
 /*******************  NAMESPACE  ********************/
-namespace CppUnit
+namespace CPPUNIT_NS
 {
 
+#ifndef FAKE_CPP_UNIT
 void assertEquals( const char * expected,const std::string & actual,CppUnit::SourceLine sourceLine,const std::string &message );
 void assertEquals( const std::string & expected,const char * actual,CppUnit::SourceLine sourceLine,const std::string &message );
 void assertEquals( int expected,unsigned int actual,SourceLine sourceLine,const std::string &message );
+#endif
 
 }
 

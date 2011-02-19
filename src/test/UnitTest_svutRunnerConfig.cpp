@@ -13,6 +13,7 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutRunnerConfig.h>
+#include <sstream>
 
 /**********************  USING  *********************/
 using namespace svUnitTest;

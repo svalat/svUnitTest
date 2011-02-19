@@ -25,7 +25,7 @@ namespace svUnitTest
 **/
 #define SVUT_REGISTER_TEST_CASE(name) \
 	static svUnitTest::svutTestCaseBuilderGeneric<name> ___SVUT_case_##name##___;\
-	static int ___SVUT_res_case_registration_of##name##__ = registerTestCase(___SVUT_case_##name##___)
+	static int ___SVUT_res_case_registration_of##name##__ = svUnitTest::registerTestCase(___SVUT_case_##name##___)
 
 /********************  GLOBALS  **********************/
 int registerTestCase(svutTestCaseBuilder & builder);

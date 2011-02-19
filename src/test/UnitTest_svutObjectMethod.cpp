@@ -14,7 +14,7 @@
 #include <svutObjectMethod.h>
 
 /**********************  USING  *********************/
-using namespace CppUnit;
+using namespace CPPUNIT_NS;
 using namespace svUnitTest;
 
 /*********************  CLASS  **********************/
