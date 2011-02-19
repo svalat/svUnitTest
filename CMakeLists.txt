@@ -22,13 +22,7 @@ enable_testing()
 add_definitions(-DVERSION="${svUnitTest_VERSION}")
 
 #checks
-CHECK_INCLUDE_FILE_CXX(argp.h HAVE_ARGP_H)
 CHECK_INCLUDE_FILE_CXX(unistd.h HAVE_UNISTD_H)
-
-#message
-if (NOT HAVE_ARGP_H)
-  message(FATAL_ERROR "Can't find file 'argp.h' required for svUnitTest, please look at you glibc paths...")
-endif (NOT HAVE_ARGP_H)
 
 #setup definitions for unitstd.h
 if (HAVE_UNISTD_H)
