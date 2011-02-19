@@ -32,7 +32,7 @@ static const char SVUT_USAGE_KEY = 255;
 static const int SVUT_DEFAULT_COLUMNS = 80;
 
 /*******************  FUNCTION  *********************/
-/** Default constructor, it defines the default arguements (help and usage). **/
+/** Default constructor, it defines the default arguments (help and usage). **/
 svutArgp::svutArgp(void )
 {
 	this->setupDefaultOptions();
@@ -269,24 +269,26 @@ void svutArgp::clearOptions(void )
 
 /*******************  FUNCTION  *********************/
 /**
- * Function to call to parse the program arguements. It will :
+ * Function to call to parse the program arguments. It will :
  *  - call parseInit
  *  - call parseOption for each arguement after small checkings.
  *  - call parseTerminate
- * The parsor will not keep references to those arguements.
- * @param argc Number of arguements given to the program (the ones from main)
+ * The parsor will not keep references to those arguments.
+ * @param argc Number of arguments given to the program (the ones from main)
  * @param argv List of arguement given to the program (the ones from main)
+ * @param err Define the error stream to use to notify the user, std::cerr by default. This is mode
+ *            for unit testing svutArgp.
 **/
-bool svutArgp::parse(int argc, char* argv[])
+bool svutArgp::parse(int argc, const char* argv[],ostream & err)
 {
 	//vars
 	bool status = false;
 	int i = 1;
 
 	//errors
-	if (argc < 1 || argv != NULL)
+	if (argc < 1 || argv == NULL)
 	{
-		cerr << "Invalid parameter, argc must be >= 1 and argv != NULL" << endl;
+		err << "Invalid parameter, argc must be >= 1 and argv != NULL" << endl;
 		return false;
 	}
 
@@ -314,6 +316,7 @@ bool svutArgp::parse(int argc, char* argv[])
 
 		status = true;
 	} catch (svutExArgpError & e) {
+		err << e.getMessage() << endl;
 		status = false;
 	}
 
@@ -328,26 +331,42 @@ bool svutArgp::parse(int argc, char* argv[])
  * @param name Define the option name (without --)
  * @param argc Define the number of remaining arguments (starting ont the --name one)
  * @param argv Define the remaining arguments (starting ont the --name one)
- * @return Return number of steps to increment for moving into arguements. One for trigger, two if
+ * @return Return number of steps to increment for moving into arguments. One for trigger, two if
  *         the arguement use a value.
  * @throw svutExArgpError Transmet error caming from parseOption.
 **/
-int svutArgp::scanLongOption(string name, int argc, char* argv[]) throw (svutExArgpError)
+int svutArgp::scanLongOption(string name, int argc, const char* argv[]) throw (svutExArgpError)
 {
+	int cut = name.find_first_of("=");
 	std::map<char,svutArgDef>::const_iterator it = options.begin();
+	string tmp = name.substr(0,cut);
 	
 	//search option
- 	while( it != options.end() && it->second.name != name)
+ 	while( it != options.end() && it->second.name != tmp)
  		++it;
 
 	if (it == options.end())
 	{
 		stringstream message;
-		message << "Uknown option --" << name;
+		message << "Uknown option --" << tmp;
 		throw svutExArgpError(message.str());
 	} else {
-		return this->scanCheckedOption(it->second,false,argc,argv);
+		if (cut == string::npos && it->second.valueType == "NONE")
+		{
+			this->parseOption(it->second.key,"");
+		} else if (cut != string::npos && it->second.valueType == "NONE") {
+			stringstream message;
+			message << "Argument error, --" << tmp << " may not to be followed by a value '" << it->second.valueType << "'";
+			throw svutExArgpError(message.str());
+		} else if (cut == string::npos && it->second.valueType != "NONE") {
+			stringstream message;
+			message << "Argument error, --" << tmp << " had to be followed by a value '" << it->second.valueType << "'";
+			throw svutExArgpError(message.str());
+		} else {
+			this->parseOption(it->second.key,name.substr(cut+1,name.size()));
+		}
 	}
+	return 1;
 }
 
 /*******************  FUNCTION  *********************/
@@ -359,11 +378,11 @@ int svutArgp::scanLongOption(string name, int argc, char* argv[]) throw (svutExA
  * @param name Define the option name (without -)
  * @param argc Define the number of remaining arguments (starting ont the -k one)
  * @param argv Define the remaining arguments (starting ont the -k one)
- * @return Return number of steps to increment for moving into arguements. One for trigger, two if
+ * @return Return number of steps to increment for moving into arguments. One for trigger, two if
  *         the arguement use a value.
- * @throw svutExArgpError Transmet error caming from parseOption or multiple arguements with values.
+ * @throw svutExArgpError Transmet error caming from parseOption or multiple arguments with values.
 **/
-int svutArgp::scanShortOptions(string list, int argc, char* argv[]) throw (svutExArgpError)
+int svutArgp::scanShortOptions(string list, int argc, const char* argv[]) throw (svutExArgpError)
 {
 	int res = 1;
 	int tmp = 0;
@@ -376,11 +395,11 @@ int svutArgp::scanShortOptions(string list, int argc, char* argv[]) throw (svutE
 		if (it == options.end())
 		{
 			stringstream message;
-			message << "Uknown option -" << list[i];
+			message << "Unknown option -" << list[i];
 			throw svutExArgpError(message.str());
 		} else if (res == 2 && it->second.valueType != "NONE" ) {
 			stringstream message;
-			message << "You can't group multiple short arguements waiting values : -" << list;
+			message << "You can't group multiple short arguments waiting values : -" << list;
 			throw svutExArgpError(message.str());
 		} else {
 			res = this->scanCheckedOption(it->second,true,argc,argv);
@@ -399,7 +418,7 @@ int svutArgp::scanShortOptions(string list, int argc, char* argv[]) throw (svutE
  * @param argv Define the remaining arguments (starting ont the -k or --name one)
  * @throw svutExArgpError Transmet error caming from parseOption
 **/
-int svutArgp::scanCheckedOption(const svutArgDef& option, int shortKey, int argc, char* argv[])  throw (svutExArgpError)
+int svutArgp::scanCheckedOption(const svutArgDef& option, int shortKey, int argc, const char* argv[])  throw (svutExArgpError)
 {
 	if (option.valueType == "NONE") {
 		this->parseOption(option.key,"");
@@ -407,9 +426,9 @@ int svutArgp::scanCheckedOption(const svutArgDef& option, int shortKey, int argc
 	} else if (argc <= 1) {
 		stringstream message;
 		if (shortKey)
-			message << "Arguement error, -" << option.key << " had to be followed by a value '" << option.valueType << "'";
+			message << "Argument error, -" << option.key << " had to be followed by a value '" << option.valueType << "'";
 		else
-			message << "Arguement error, --" << option.name << " had to be followed by a value '" << option.valueType << "'";
+			message << "Argument error, --" << option.name << " had to be followed by a value '" << option.valueType << "'";
 		throw svutExArgpError(message.str());
 	} else {
 		this->parseOption(option.key,argv[1]);

@@ -78,7 +78,7 @@ class svutArgp
 	public:
 		svutArgp(void);
 		virtual ~svutArgp(void);
-		bool parse(int argc, char * argv[]);
+		bool parse(int argc, const char * argv[],std::ostream & err = std::cerr);
 		void decalareOption(char key,std::string name,std::string valueType,std::string descr) throw (svutExArgpDuplicateKey);
 		void clearOptions(void);
 		void showHelp(std::ostream & out = std::cout);
@@ -111,9 +111,9 @@ class svutArgp
 		bool isValidKey(char key) const;
 		void setupDefaultOptions(void);
 		bool hasLongName(std::string name) const;
-		int scanLongOption(std::string name,int argc, char * argv[]) throw (svutExArgpError);
-		int scanShortOptions(std::string list,int argc, char * argv[]) throw (svutExArgpError);
-		int scanCheckedOption(const svutArgDef & option,int shortKey,int argc, char * argv[]) throw (svutExArgpError);
+		int scanLongOption(std::string name,int argc, const char * argv[]) throw (svutExArgpError);
+		int scanShortOptions(std::string list,int argc, const char * argv[]) throw (svutExArgpError);
+		int scanCheckedOption(const svutArgDef & option,int shortKey,int argc, const char * argv[]) throw (svutExArgpError);
 		
 		/** Store the list of available options. **/
 		std::map<char,svutArgDef> options;

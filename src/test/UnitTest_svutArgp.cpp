@@ -114,9 +114,15 @@ class UnitTest_svutArgp : public TestCase
 	CPPUNIT_TEST(testSetProjectBugAddress);
 	CPPUNIT_TEST(testSetProjectDescr);
 	CPPUNIT_TEST(testSetProjectArgumentUsage);
-	CPPUNIT_TEST(testParse_1);
-	CPPUNIT_TEST(testParse_2);
-	CPPUNIT_TEST(testParse_3);
+	CPPUNIT_TEST(testParse_ok);
+	CPPUNIT_TEST(testParse_groupShort);
+	CPPUNIT_TEST(testParse_groupShortError);
+	CPPUNIT_TEST(testParse_unknownArgument);
+	CPPUNIT_TEST(testParse_parsingError);
+	CPPUNIT_TEST(testParse_argvNULL);
+	CPPUNIT_TEST(testParse_argcZero);
+	CPPUNIT_TEST(testParse_argNoValueShort);
+	CPPUNIT_TEST(testParse_argNoValueLong);
 	CPPUNIT_TEST(testDeclareOption_ok);
 	CPPUNIT_TEST(testDeclareOption_dupKey);
 	CPPUNIT_TEST(testDeclareOption_dupName);
@@ -135,9 +141,15 @@ class UnitTest_svutArgp : public TestCase
 		void testSetProjectBugAddress(void);
 		void testSetProjectDescr(void);
 		void testSetProjectArgumentUsage(void);
-		void testParse_1(void);
-		void testParse_2(void);
-		void testParse_3(void);
+		void testParse_ok(void);
+		void testParse_groupShort(void);
+		void testParse_groupShortError(void);
+		void testParse_unknownArgument(void);
+		void testParse_parsingError(void);
+		void testParse_argvNULL(void);
+		void testParse_argcZero(void);
+		void testParse_argNoValueShort(void);
+		void testParse_argNoValueLong(void);
 		void testDeclareOption_ok(void);
 		void testDeclareOption_dupKey(void);
 		void testDeclareOption_dupName(void);
@@ -219,21 +231,159 @@ void UnitTest_svutArgp::testGetHelp(void )
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutArgp::testParse_1(void )
+void UnitTest_svutArgp::testParse_ok(void )
 {
-	CPPUNIT_FAIL("todo");
+	stringstream err;
+	int argc = 5;
+	const char * argv[] = {
+		"program",
+		"-a",
+		"-m","test",
+		"--output=testout"
+	};
+
+	CPPUNIT_ASSERT(obj->parse(argc,argv,err));
+	CPPUNIT_ASSERT(obj->hasDoneParseInit);
+	CPPUNIT_ASSERT(obj->hasDoneParseTerminate);
+	CPPUNIT_ASSERT_EQUAL("a ; m:test ; o:testout",obj->parsedOptions);
+	CPPUNIT_ASSERT(err.str().empty());
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutArgp::testParse_2(void )
+void UnitTest_svutArgp::testParse_groupShort(void )
 {
-	CPPUNIT_FAIL("todo");
+	stringstream err;
+	int argc = 3;
+	const char * argv[] = {
+		"program",
+		"-am",
+		"test",
+	};
+
+	CPPUNIT_ASSERT(obj->parse(argc,argv,err));
+	CPPUNIT_ASSERT(obj->hasDoneParseInit);
+	CPPUNIT_ASSERT(obj->hasDoneParseTerminate);
+	CPPUNIT_ASSERT_EQUAL("a ; m:test",obj->parsedOptions);
+	CPPUNIT_ASSERT(err.str().empty());
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutArgp::testParse_3(void )
+void UnitTest_svutArgp::testParse_groupShortError(void )
 {
-	CPPUNIT_FAIL("todo");
+	stringstream err;
+	int argc = 4;
+	const char * argv[] = {
+		"program",
+		"-amo",
+		"test",
+		"testoutput",
+	};
+
+	CPPUNIT_ASSERT(obj->parse(argc,argv,err) == false);
+	CPPUNIT_ASSERT(obj->hasDoneParseInit);
+	CPPUNIT_ASSERT(obj->hasDoneParseTerminate == false);
+	CPPUNIT_ASSERT_EQUAL("a ; m:test",obj->parsedOptions);
+	CPPUNIT_ASSERT_EQUAL("You can't group multiple short arguments waiting values : -amo\n",err.str());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutArgp::testParse_unknownArgument(void )
+{
+	stringstream err;
+	int argc = 3;
+	const char * argv[] = {
+		"program",
+		"-f",
+		"test",
+	};
+
+	CPPUNIT_ASSERT(obj->parse(argc,argv,err) == false);
+	CPPUNIT_ASSERT(obj->hasDoneParseInit);
+	CPPUNIT_ASSERT(obj->hasDoneParseTerminate == false);
+	CPPUNIT_ASSERT_EQUAL("",obj->parsedOptions);
+	CPPUNIT_ASSERT_EQUAL("Unknown option -f\n",err.str());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutArgp::testParse_parsingError(void )
+{
+	stringstream err;
+	int argc = 3;
+	const char * argv[] = {
+		"program",
+		"-e",
+	};
+
+	obj->decalareOption('e',"--expert","NONE","This is a stange option which crash.");
+	CPPUNIT_ASSERT(obj->parse(argc,argv,err) == false);
+	CPPUNIT_ASSERT(obj->hasDoneParseInit);
+	CPPUNIT_ASSERT(obj->hasDoneParseTerminate == false);
+	CPPUNIT_ASSERT_EQUAL("e",obj->parsedOptions);
+	CPPUNIT_ASSERT_EQUAL("This is an error in parsing of argument -e.\n",err.str());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutArgp::testParse_argvNULL(void )
+{
+	stringstream err;
+	int argc = 3;
+
+	CPPUNIT_ASSERT(obj->parse(argc,NULL,err) == false);
+	CPPUNIT_ASSERT(obj->hasDoneParseInit == false);
+	CPPUNIT_ASSERT(obj->hasDoneParseTerminate == false);
+	CPPUNIT_ASSERT_EQUAL("",obj->parsedOptions);
+	CPPUNIT_ASSERT_EQUAL("Invalid parameter, argc must be >= 1 and argv != NULL\n",err.str());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutArgp::testParse_argcZero(void )
+{
+	stringstream err;
+	int argc = 0;
+	const char * argv[] = {
+		"program",
+		"-e",
+	};
+
+	CPPUNIT_ASSERT(obj->parse(argc,NULL,err) == false);
+	CPPUNIT_ASSERT(obj->hasDoneParseInit == false);
+	CPPUNIT_ASSERT(obj->hasDoneParseTerminate == false);
+	CPPUNIT_ASSERT_EQUAL("",obj->parsedOptions);
+	CPPUNIT_ASSERT_EQUAL("Invalid parameter, argc must be >= 1 and argv != NULL\n",err.str());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutArgp::testParse_argNoValueLong(void )
+{
+	stringstream err;
+	int argc = 2;
+	const char * argv[] = {
+		"program",
+		"-m",
+	};
+
+	CPPUNIT_ASSERT(obj->parse(argc,argv,err) == false);
+	CPPUNIT_ASSERT(obj->hasDoneParseInit == true);
+	CPPUNIT_ASSERT(obj->hasDoneParseTerminate == false);
+	CPPUNIT_ASSERT_EQUAL("",obj->parsedOptions);
+	CPPUNIT_ASSERT_EQUAL("Argument error, -m had to be followed by a value 'MODE'\n",err.str());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutArgp::testParse_argNoValueShort(void )
+{
+	stringstream err;
+	int argc = 2;
+	const char * argv[] = {
+		"program",
+		"--mode",
+	};
+
+	CPPUNIT_ASSERT(obj->parse(argc,argv,err) == false);
+	CPPUNIT_ASSERT(obj->hasDoneParseInit == true);
+	CPPUNIT_ASSERT(obj->hasDoneParseTerminate == false);
+	CPPUNIT_ASSERT_EQUAL("",obj->parsedOptions);
+	CPPUNIT_ASSERT_EQUAL("Argument error, --mode had to be followed by a value 'MODE'\n",err.str());
 }
 
 /*******************  FUNCTION  *********************/
@@ -291,11 +441,14 @@ void UnitTest_MyArgp::parseOption(char key, string value) throw (svutExArgpError
 		this->parsedOptions += " ; ";
 	
 	this->parsedOptions += key;
-	this->parsedOptions += ':';
-	this->parsedOptions += value;
+	if (!value.empty())
+	{
+		this->parsedOptions += ':';
+		this->parsedOptions += value;
+	}
 
 	if (key == 'e')
-		throw svutExArgpError("This is an error in parsing of arguement -e.");
+		throw svutExArgpError("This is an error in parsing of argument -e.");
 }
 
 /*******************  FUNCTION  *********************/
