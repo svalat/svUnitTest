@@ -38,7 +38,7 @@ class TestCase
 		void run() {this->runTests();};
 	protected:
 		void markAsPassed(void) const;
-		void markStartTest(std::string name) const;
+		void markStartTest(const char * name) const;
 		virtual void runTests(void) = 0;
 		virtual void setUp(void) = 0;
 		virtual void tearDown(void) = 0;

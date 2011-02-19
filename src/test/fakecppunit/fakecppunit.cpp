@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <vector>
 #include <ios>
+#include <string>
 #include "fakecppunit.h"
 
 /********************  NAMESPACE  *******************/
@@ -38,7 +39,7 @@ void TestCase::markAsPassed(void ) const
 }
 
 /*******************  FUNCTION  *********************/
-void TestCase::markStartTest(std::string name) const
+void TestCase::markStartTest(const char * name) const
 {
 	std::cout << "Test ";
 	std::cout.width(40);
