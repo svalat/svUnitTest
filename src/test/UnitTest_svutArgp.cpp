@@ -85,6 +85,10 @@ myApp -- This is a test application\n\
 \n\
 Mandatory or optional arguments to long options are also mandatory or optional\n\
 for any corresponding short options.\n";
+static const char * CST_STRING_USAGE_1 = "Usage: myApp [-?a] [-m MODE] [-o FILE] \
+[--usage] [--help] [--accept] [--m=MODE]\n            [--o=FILE] [-?] [-a]";
+static const char * CST_STRING_USAGE_2 = "Usage: myApp [-?a] [-m MODE] [-o FILE] \
+[--usage] [--help] [--accept] [--m=MODE]\n            [--o=FILE] [-?] [-a]\n";
 
 /**********************  USING  *********************/
 using namespace svUnitTest;
@@ -98,7 +102,7 @@ class UnitTest_MyArgp : public svutArgp
 		UnitTest_MyArgp(void);
 		void resetMock(void);
 		virtual void parseInit(void) throw (svutExArgpError);
-		virtual void parseOption(char key,std::string value) throw (svutExArgpError);
+		virtual void parseOption(char key,std::string arg,std::string value) throw (svutExArgpError);
 		virtual void parseTerminate(void) throw (svutExArgpError);
 		bool hasDoneParseInit;
 		bool hasDoneParseTerminate;
@@ -129,6 +133,8 @@ class UnitTest_svutArgp : public TestCase
 	CPPUNIT_TEST(testClearOptions);
 	CPPUNIT_TEST(testGetHelp);
 	CPPUNIT_TEST(testShowHelp);
+	CPPUNIT_TEST(testGetUsage);
+	CPPUNIT_TEST(testShowUsage);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -156,6 +162,8 @@ class UnitTest_svutArgp : public TestCase
 		void testClearOptions(void);
 		void testGetHelp(void);
 		void testShowHelp(void);
+		void testGetUsage(void);
+		void testShowUsage(void);
 
 		UnitTest_MyArgp * obj;
 };
@@ -245,7 +253,7 @@ void UnitTest_svutArgp::testParse_ok(void )
 	CPPUNIT_ASSERT(obj->parse(argc,argv,err));
 	CPPUNIT_ASSERT(obj->hasDoneParseInit);
 	CPPUNIT_ASSERT(obj->hasDoneParseTerminate);
-	CPPUNIT_ASSERT_EQUAL("a ; m:test ; o:testout",obj->parsedOptions);
+	CPPUNIT_ASSERT_EQUAL("a:-a ; m:-m:test ; o:--output=testout:testout",obj->parsedOptions);
 	CPPUNIT_ASSERT(err.str().empty());
 }
 
@@ -263,7 +271,7 @@ void UnitTest_svutArgp::testParse_groupShort(void )
 	CPPUNIT_ASSERT(obj->parse(argc,argv,err));
 	CPPUNIT_ASSERT(obj->hasDoneParseInit);
 	CPPUNIT_ASSERT(obj->hasDoneParseTerminate);
-	CPPUNIT_ASSERT_EQUAL("a ; m:test",obj->parsedOptions);
+	CPPUNIT_ASSERT_EQUAL("a:-a ; m:-m:test",obj->parsedOptions);
 	CPPUNIT_ASSERT(err.str().empty());
 }
 
@@ -282,7 +290,7 @@ void UnitTest_svutArgp::testParse_groupShortError(void )
 	CPPUNIT_ASSERT(obj->parse(argc,argv,err) == false);
 	CPPUNIT_ASSERT(obj->hasDoneParseInit);
 	CPPUNIT_ASSERT(obj->hasDoneParseTerminate == false);
-	CPPUNIT_ASSERT_EQUAL("a ; m:test",obj->parsedOptions);
+	CPPUNIT_ASSERT_EQUAL("a:-a ; m:-m:test",obj->parsedOptions);
 	CPPUNIT_ASSERT_EQUAL("You can't group multiple short arguments waiting values : -amo\n",err.str());
 }
 
@@ -318,7 +326,7 @@ void UnitTest_svutArgp::testParse_parsingError(void )
 	CPPUNIT_ASSERT(obj->parse(argc,argv,err) == false);
 	CPPUNIT_ASSERT(obj->hasDoneParseInit);
 	CPPUNIT_ASSERT(obj->hasDoneParseTerminate == false);
-	CPPUNIT_ASSERT_EQUAL("e",obj->parsedOptions);
+	CPPUNIT_ASSERT_EQUAL("e:-e",obj->parsedOptions);
 	CPPUNIT_ASSERT_EQUAL("This is an error in parsing of argument -e.\n",err.str());
 }
 
@@ -423,6 +431,20 @@ void UnitTest_svutArgp::testShowHelp(void )
 }
 
 /*******************  FUNCTION  *********************/
+void UnitTest_svutArgp::testGetUsage ( void )
+{
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_USAGE_1,obj->getUsage());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutArgp::testShowUsage ( void )
+{
+	stringstream out;
+	obj->showUsage(out);
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_USAGE_2,out.str());
+}
+
+/*******************  FUNCTION  *********************/
 UnitTest_MyArgp::UnitTest_MyArgp(void ): svutArgp()
 {
 	this->resetMock();
@@ -435,12 +457,14 @@ void UnitTest_MyArgp::parseInit(void )  throw (svutExArgpError)
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_MyArgp::parseOption(char key, string value) throw (svutExArgpError)
+void UnitTest_MyArgp::parseOption( char key, string arg, string value) throw (svutExArgpError)
 {
 	if ( ! this->parsedOptions.empty() )
 		this->parsedOptions += " ; ";
 	
 	this->parsedOptions += key;
+	this->parsedOptions += ':';
+	this->parsedOptions += arg;
 	if (!value.empty())
 	{
 		this->parsedOptions += ':';

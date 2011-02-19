@@ -76,7 +76,7 @@ typedef svutException svutExArgpError;
 class svutArgp
 {
 	public:
-		svutArgp(void);
+		svutArgp(bool autoExit = false);
 		virtual ~svutArgp(void);
 		bool parse(int argc, const char * argv[],std::ostream & err = std::cerr);
 		void decalareOption(char key,std::string name,std::string valueType,std::string descr) throw (svutExArgpDuplicateKey);
@@ -88,6 +88,9 @@ class svutArgp
 		void setProjectBugAddress(std::string projectBugAddress);
 		void setProjectDescr(std::string projectDescr);
 		void setProjectArgUsage(std::string argUsage);
+		void setAutoExit(bool autoExit);
+		std::string getUsage(int columns = 80) const;
+		void showUsage(std::ostream & out = std::cout) const;
 	protected:
 		/**
 		 * Methode called while starting to parse arguements.
@@ -97,9 +100,12 @@ class svutArgp
 		/**
 		 * Methode called while reading each arguement.
 		 * @param key Define the key of arguement (the short name, eg. -v)
+		 * @param arg Define the given arguement in string format (-a or --all). For default value,
+		 *            it will be equal to value.
+		 * @param value Define the value given with the arguement if available.
 		 * @throw svutExArgpError Exception used to notify arguement error.
 		**/
-		virtual void parseOption(char key,std::string value) throw (svutExArgpError) = 0;
+		virtual void parseOption(char key,std::string arg,std::string value) throw (svutExArgpError) = 0;
 		/**
 		 * Method called while ending to parse arguements.
 		 * @throw svutExArgpError Use exception to repot error in termination.
@@ -114,6 +120,9 @@ class svutArgp
 		int scanLongOption(std::string name,int argc, const char * argv[]) throw (svutExArgpError);
 		int scanShortOptions(std::string list,int argc, const char * argv[]) throw (svutExArgpError);
 		int scanCheckedOption(const svutArgDef & option,int shortKey,int argc, const char * argv[]) throw (svutExArgpError);
+		void callParseOption(char key,std::string arg,std::string value) throw (svutExArgpError);
+		std::string genUsageParam(const svutArgDef & arg,bool useShort) const;
+		std::string breakLines(std::string value,int columns, std::string pad) const;
 		
 		/** Store the list of available options. **/
 		std::map<char,svutArgDef> options;
@@ -127,6 +136,8 @@ class svutArgp
 		std::string projectDescr;
 		/** Short pattern of argument usage. **/
 		std::string argUsage;
+		/** Automatically exit on arguement error. **/
+		bool autoExit;
 };
 
 }

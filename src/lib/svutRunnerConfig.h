@@ -12,6 +12,7 @@
 /********************  HEADERS  *********************/
 #include <iostream>
 #include "svutTestFilterBasic.h"
+#include "svutArgp.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
@@ -46,6 +47,18 @@ enum svutRunnerAction
 	 * for integration in kdevelop which require to list the tests before running them.
 	**/
 	SVUT_ACTION_LIST_TESTS
+};
+
+/********************  CLASSE  **********************/
+class svutRunnerConfigArgp : public svutArgp
+{
+	public:
+		svutRunnerConfigArgp(class svutRunnerConfig & config);
+	protected:
+		virtual void parseInit(void)  throw (svutExArgpError);
+		virtual void parseOption(char key,std::string arg,std::string value) throw (svutExArgpError);
+		virtual void parseTerminate(void)  throw (svutExArgpError);
+		svutRunnerConfig * config;
 };
 
 /********************  CLASSE  **********************/
@@ -95,6 +108,8 @@ class svutRunnerConfig
 		std::ostream * externalOutputStream;
 		/** Define a filter used to select which test we want to run if not want all. **/
 		svutTestFilterBasic filter;
+		/** Arguement parsor **/
+		svutRunnerConfigArgp argParsor;
 	private:
 		void init(void);
 		void qtCompat(int argc, char * argv[]);

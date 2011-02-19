@@ -12,10 +12,10 @@
 #endif
 
 #include <cstdlib>
-#include <argp.h>
 #include <cstring>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include "svutRunnerConfig.h"
 
 //optional include
@@ -31,92 +31,104 @@ namespace svUnitTest
 {
 
 /*********************  GLOBALS  ********************/
-/** Define the program version. **/
-static char program_version[128];
-/** Pointer to the chain containing the version of library. **/
-const char *argp_program_version = NULL;
-/** Define address of developper to join in case of bug. **/
-const char *argp_program_bug_address = "<sebastien.valat.dev@orange.fr>";
-/** Descrive the program. **/
-const char SVUT_ARGP_DOC[] ="svUnitTest -- Unit test library for C/C++ language.";
-/** Command line argument format. **/
-static const char SVUT_ARGS_DOC[] = "[-m MODE] [-v] [-s] [-?]";
 /** Used to averpass terminal detection to force output color mode in unit tests. **/
 bool __svut_bypass_color_mode__ = false;
 
-/** Définit l'aide des arguments proposé par le programme. **/
-static struct argp_option RS_OPTIONS[] = {
-	{"mode",       'm',    "MODE",      0,  "Define the render mode to use : xml, qt_xml, std,"
-	                                        "color (color is defaut).",0},
-	{"verbose",    'v',      NULL,      0,  "Display all the test results, event the success."
-	                                        ,0},
-	{"silent",     's',      NULL,      0,  "Don't display extra information on test failure",0},
-	{"functions",  'f',      NULL,      0,  "List all the accessible tests methods.",0},
-	{"qtxml",      'q',      NULL,      0,  "Equivalent to -m qt_xml.",0},
-	{"output",     'o',    "FILE",      0,  "Define the output file to use. Use - for stdout.",0},
-	{"accept",     'a',    "NAME",      0,  "Accept only methods add with -a. in format 'testCase::method'. 'testCase::' will accept all all methods of testCase. '::method' will accept all methods named method without checking the test case name.",0},
-	{ 0,0,0,0,0,0 }
-};
+/*******************  FUNCTION  *********************/
+svutRunnerConfigArgp::svutRunnerConfigArgp ( svutRunnerConfig& config )
+                     : svutArgp(true)
+{
+	this->config = &config;
+
+	//setup arg parsor
+	setProjectName      ( "svUnitTest"                            );
+	setProjectVersion   ( VERSION                                 );
+	setProjectBugAddress( "sebastien.valat.dev@orange.fr"             );
+	setProjectDescr     ( "Unit test library for C/C++ language." );
+	setProjectArgUsage  ( "[-m MODE] [-v] [-s] [-?]"              );
+
+	//declare options
+	decalareOption('m', "mode"    , "MODE",  "Define the render mode to use : xml, qt_xml, std, "
+	                                         "color (color is defaut)."                         );
+	decalareOption('v', "verbose" , "NONE",  "Display all the test results, event the success." );
+	decalareOption('s', "silent"  , "NONE",  "Don't display extra information on test failure." );
+	decalareOption('f', "function", "NONE",  "List all the accessible tests methods."           );
+	decalareOption('q', "qtxml"   , "NONE",  "Equivalent to -m qt_xml."                         );
+	decalareOption('o', "output"  , "FILE",  "Define the output file to use. Use - for stdout." );
+	decalareOption('a', "accept"  , "NAME",  "Accept only methods add with -a. in format "
+	                                         "'testCase::method'. 'testCase::' will accept all "
+	                                         "methods of testCase. '::method' will accept all "
+	                                         "methods named method without checking the test "
+	                                         "case name."                                       );
+}
+
+/*******************  FUNCTION  *********************/
+void svutRunnerConfigArgp::parseInit ( void ) throw (svutExArgpError)
+{
+}
 
 /*******************  FUNCTION  *********************/
 /**
  * Method used to parse arguements and setup related value. This Glibc will call this metho for
  * each parameter encoutered with the given values.
- 
- * @param key Define the key of current parsed arguement (the short name).
- * @param arg Define the chain passed with the arguement if available (-a {arg}).
- * @param state Define the status of parser. This structure mainly contain our svutRunnerConfig
- * object to know were to place the values.
-**/
-static error_t parse_opt(int key, char *arg, struct argp_state *state)
-{
-	/* Get the input argument from argp_parse, which we
-	know is a pointer to our arguments structure. */
-	svutRunnerConfig &config = *(svutRunnerConfig*)state->input;
 
+ * @param key Define the key of current parsed arguement (the short name).
+ * @param arg Define the chain passed as arguement if available (-a).
+ * @param value Define the related value if available (eg : --name={value} or -n {value}).
+ * @throw svutExArgpError On error, throw such exception to notify the arguement paror.
+ * It will redirecte the related message to error output, please don't use cerr direclty here.
+**/
+void svutRunnerConfigArgp::parseOption ( char key, string arg, string value ) throw (svutExArgpError)
+{
+	stringstream err;
 	switch (key)
 	{
 		case 'm'://progress bar
-			if (strncmp("xml",arg,3) == 0) {
-				config.setMode(SVUT_OUT_XML);
-			} else if (strncmp("qt_xml",arg,6) == 0) {
-				config.setMode(SVUT_OUT_QT_XML);
-			} else if (strncmp("std",arg,3) == 0) {
-				config.setMode(SVUT_OUT_STD_BW);
-			} else if (strncmp("color",arg,3) == 0) {
-				config.setMode(SVUT_OUT_STD_COLOR);
+			if ( value == "xml" ) {
+				config->setMode(SVUT_OUT_XML);
+			} else if ( value == "qt_xml") {
+				config->setMode(SVUT_OUT_QT_XML);
+			} else if (value == "std" ) {
+				config->setMode(SVUT_OUT_STD_BW);
+			} else if (value == "color" ) {
+				config->setMode(SVUT_OUT_STD_COLOR);
 			}else {
-				cerr << "Unknown render mode : " << arg << endl;
-				cerr << "Supported modes are xml, qt_xml, std and color." << endl;
-				return ARGP_ERR_UNKNOWN;
+				err << "Unknown render mode : " << value << endl;
+				err << "Supported modes are xml, qt_xml, std and color." << endl;
+				throw svutExArgpError(err.str());
 			}
 			break;
 		case 'a'://accept
-			if (config.addBasicAccept(arg) == false)
+			if (config->addBasicAccept(value) == false)
 			{
-				cerr << "Bad format for the filter : " << arg << endl;
-				return ARGP_ERR_UNKNOWN;
+				err << "Bad format for the filter : " << value << endl;
+				throw svutExArgpError(err.str());
 			}
 			break;
 		case 'q'://mode xml compatible QT
-			config.setMode(SVUT_OUT_QT_XML);
+			config->setMode(SVUT_OUT_QT_XML);
 			break;
 		case 'v'://verbose mode
-			config.setDisplaySuccess(true);
+			config->setDisplaySuccess(true);
 			break;
 		case 's'://silent error
-			config.setDisplayDetails(false);
+			config->setDisplayDetails(false);
 			break;
 		case 'f':
-			config.setAction(SVUT_ACTION_LIST_TESTS);
+			config->setAction(SVUT_ACTION_LIST_TESTS);
 			break;
 		case 'o':
-			config.setOutput(arg);
+			config->setOutput(arg);
 			break;
 		default://unknown arg
-			return ARGP_ERR_UNKNOWN;
+			err << "Unknown arguement : " << arg << endl;
+			throw svutExArgpError(err.str());
 	}
-	return 0;
+}
+
+/*******************  FUNCTION  *********************/
+void svutRunnerConfigArgp::parseTerminate ( void ) throw (svutExArgpError)
+{
 }
 
 /*******************  FUNCTION  *********************/
@@ -124,6 +136,7 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state)
  * Default constructeur of the config class.
 **/
 svutRunnerConfig::svutRunnerConfig(void)
+                 : argParsor(*this)
 {
 	this->init();
 }
@@ -160,6 +173,7 @@ void svutRunnerConfig::closeFile(void )
  * @param argv Define the parameter list passed to the program.
 **/
 svutRunnerConfig::svutRunnerConfig(int argc,  const char * argv[])
+                 : argParsor(*this)
 {
 	this->init();
 	this->loadParams(argc,argv);
@@ -173,15 +187,14 @@ svutRunnerConfig::svutRunnerConfig(int argc,  const char * argv[])
 **/
 void svutRunnerConfig::loadParams(int argc, const char * argv[])
 {
-	if (argp_program_version == NULL)
-	{
-		argp_program_version = svUnitTest::program_version;
-		sprintf(svUnitTest::program_version,"svUnitTest %s",VERSION);
-	}
-	const argp opts = { RS_OPTIONS, parse_opt, SVUT_ARGS_DOC, SVUT_ARGP_DOC ,NULL,NULL,NULL};
+	//apply QT compatilibty
 	char ** localArgv = cloneArgv(argc,argv);
 	qtCompat(argc,localArgv);
-	argp_parse (&opts, argc, localArgv, 0, 0, this);
+
+	//call the parsor
+	argParsor.parse(argc,(const char **)localArgv);
+
+	//free temporary arguement clone
 	freeClonedArgv(argc,localArgv);
 }
 

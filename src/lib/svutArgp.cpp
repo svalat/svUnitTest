@@ -12,6 +12,7 @@
 #include <cstring>
 #include <cassert>
 #include <iostream>
+#include <cstdlib>
 #include "svutArgp.h"
 
 /**********************  USING  *********************/
@@ -32,16 +33,32 @@ static const char SVUT_USAGE_KEY = 255;
 static const int SVUT_DEFAULT_COLUMNS = 80;
 
 /*******************  FUNCTION  *********************/
-/** Default constructor, it defines the default arguments (help and usage). **/
-svutArgp::svutArgp(void )
+/**
+ * Default constructor, it defines the default arguments (help and usage).
+ * @param autoExit If true, the parse() function will call abort() on arguement parsing error
+ * after displaying error message.
+**/
+svutArgp::svutArgp(bool autoExit)
 {
 	this->setupDefaultOptions();
+	this->autoExit = autoExit;
 }
 
 /*******************  FUNCTION  *********************/
 /** Default virtual destructor. **/
 svutArgp::~svutArgp(void )
 {
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Change the autoExit status.
+ * @param autoExit If true, the parse() function will call abort() on arguement parsing error
+ * after displaying error message.
+**/
+void svutArgp::setAutoExit ( bool autoExit )
+{
+	this->autoExit = autoExit;
 }
 
 /*******************  FUNCTION  *********************/
@@ -203,10 +220,6 @@ string svutArgp::formatArgumentHelp(svutArgDef arg,int columns) const
 	int pos = 0;
 	bool firstLine = true;
 
-	//check collums
-	assert(columns > 0);
-	columns -= strlen(SVUT_HELP_PADDING);
-
 	//setup keys mode
 	bool hasShort = isValidKey(arg.key);
 	bool hasLong = ! arg.name.empty();
@@ -236,25 +249,156 @@ string svutArgp::formatArgumentHelp(svutArgDef arg,int columns) const
 	res << tmp.str();
 
 	//description
-	while (arg.descr.size() > 0)
+	res << arg.descr;
+
+	//cut lines on columns and return
+	return breakLines(res.str(),columns,SVUT_HELP_PADDING);
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Function used to break lines at selected columns.
+ * @param value Define the string line to cut.
+ * @param columns Define the number of columns to consider.
+ * @param pad Define the string used to pad new lines.
+**/
+string svutArgp::breakLines ( string value, int columns , string pad) const
+{
+	bool firstLine = true;
+	stringstream res;
+	int pos;
+
+	//check collums
+	assert(columns > 0);
+	
+	//description
+	while (value.size() > 0)
 	{
 		//pad
 		if (!firstLine)
-			res << endl << SVUT_HELP_PADDING;
-		if (arg.descr.size() < columns)
+			res << endl << pad;
+		if (value.size() < columns)
 		{
-			res << arg.descr;
-			arg.descr.clear();
+			res << value;
+			value.clear();
 		} else {
 			//cut the line on spaces
-			pos = arg.descr.find_last_of(" ",columns);
-			res << arg.descr.substr(0,pos);
-			arg.descr = arg.descr.substr(pos,arg.descr.size());
+			pos = value.find_last_of(" ",columns);
+			res << value.substr(0,pos);
+			value = value.substr(pos,value.size());
 		}
 		firstLine = false;
 	}
 
 	return res.str();
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Call the parseOption function, but before, intercept local parameters (--help and --usage).
+ * @param key Define the key of arguement (the short name, eg. -v)
+ * @param arg Define the given arguement in string format (-a or --all). For default value,
+ *            it will be equal to value.
+ * @param value Define the value given with the arguement if available.
+ * @throw svutExArgpError Exception used to notify arguement error.
+**/
+void svutArgp::callParseOption ( char key, string arg, string value )  throw (svutExArgpError)
+{
+	switch (key)
+	{
+		case '?':
+			this->showHelp();
+			exit(0);
+			break;
+		case SVUT_USAGE_KEY:
+			this->showUsage();
+			exit(0);
+			break;
+		default:
+			parseOption(key,arg,value);
+	}
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Generate string [--mode=MODE] or [-m MODE] from the given arguements.
+ * The string will be preceded by a space.
+ * @param arg Define the arguement to convert.
+ * @param useShort Define if consider short arguement or long.
+**/
+std::string svutArgp::genUsageParam(const svutArgDef & arg,bool useShort) const
+{
+	stringstream res;
+
+	if (useShort ==true && isValidKey(arg.key))
+	{
+		if (arg.valueType == "NONE")
+			res << " [-" << arg.key << "]";
+		else
+			res << " [-" << arg.key << " " << arg.valueType << "]";
+	} else if (useShort == false) {
+		if (arg.valueType == "NONE")
+			res << " [--" << arg.name << "]";
+		else
+			res << " [--" << arg.key << "=" << arg.valueType << "]";
+	}
+
+	return res.str();
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Generate the help usage string, it will print all available options.
+ * @param columns Define the number of columns to consider to cut lines.
+ * @return Return the usage line as a string.
+**/
+string svutArgp::getUsage ( int columns ) const
+{
+	stringstream res;
+	string shortNotArgGrouped;
+	
+	//show program name.
+	res << "Usage: " << this->projectName;
+	
+
+	//usage for grouped short options
+	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+		if (this->isValidKey(it->second.key) && it->second.valueType == "NONE")
+			shortNotArgGrouped += it->second.key;
+	if ( ! shortNotArgGrouped.empty() )
+		res << " [-" << shortNotArgGrouped << "]";
+
+	//usage for short option with values
+	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+		if (this->isValidKey(it->second.key) && it->second.valueType != "NONE")
+			res << genUsageParam(it->second,true);
+
+	//usage for long option without values
+	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+		if (it->second.valueType == "NONE")
+			res << genUsageParam(it->second,false);
+
+	//usage for long option with values
+	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+		if (it->second.valueType != "NONE")
+			res << genUsageParam(it->second,false);
+
+	//usage for short option without values
+	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+		if (this->isValidKey(it->second.key) && it->second.valueType == "NONE")
+			res << genUsageParam(it->second,true);
+
+	return breakLines(res.str(),columns,"           ");
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Generate the usage string and print it into the given output stream (cout by default).
+ * @param out Define the output stream to use.
+**/
+void svutArgp::showUsage ( ostream& out ) const
+{
+	out << getUsage(this->getTermColumns()) << endl;
 }
 
 /*******************  FUNCTION  *********************/
@@ -302,7 +446,7 @@ bool svutArgp::parse(int argc, const char* argv[],ostream & err)
 			if (argv[i][0] != '-')
 			{
 				//this is not a -X or --XLong
-				this->parseOption(SVUT_ARG_DEFAULT,argv[i]);
+				this->callParseOption(SVUT_ARG_DEFAULT,argv[i],argv[i]);
 				++i;
 			} else if (argv[i][1]=='-') {
 				i += this->scanLongOption(argv[i]+2,argc-i,argv+i);
@@ -318,6 +462,13 @@ bool svutArgp::parse(int argc, const char* argv[],ostream & err)
 	} catch (svutExArgpError & e) {
 		err << e.getMessage() << endl;
 		status = false;
+	}
+
+	//autoexit
+	if (status == false && autoExit)
+	{
+		this->showHelp(err);
+		exit(EXIT_FAILURE);
 	}
 
 	//return
@@ -353,7 +504,7 @@ int svutArgp::scanLongOption(string name, int argc, const char* argv[]) throw (s
 	} else {
 		if (cut == string::npos && it->second.valueType == "NONE")
 		{
-			this->parseOption(it->second.key,"");
+			this->callParseOption(it->second.key,"--"+name,"");
 		} else if (cut != string::npos && it->second.valueType == "NONE") {
 			stringstream message;
 			message << "Argument error, --" << tmp << " may not to be followed by a value '" << it->second.valueType << "'";
@@ -363,7 +514,7 @@ int svutArgp::scanLongOption(string name, int argc, const char* argv[]) throw (s
 			message << "Argument error, --" << tmp << " had to be followed by a value '" << it->second.valueType << "'";
 			throw svutExArgpError(message.str());
 		} else {
-			this->parseOption(it->second.key,name.substr(cut+1,name.size()));
+			this->callParseOption(it->second.key,"--"+name,name.substr(cut+1,name.size()));
 		}
 	}
 	return 1;
@@ -420,8 +571,9 @@ int svutArgp::scanShortOptions(string list, int argc, const char* argv[]) throw 
 **/
 int svutArgp::scanCheckedOption(const svutArgDef& option, int shortKey, int argc, const char* argv[])  throw (svutExArgpError)
 {
+	char arg[] = {'-',option.key,'\0'};
 	if (option.valueType == "NONE") {
-		this->parseOption(option.key,"");
+		this->callParseOption(option.key,arg,"");
 		return 1;
 	} else if (argc <= 1) {
 		stringstream message;
@@ -431,7 +583,7 @@ int svutArgp::scanCheckedOption(const svutArgDef& option, int shortKey, int argc
 			message << "Argument error, --" << option.name << " had to be followed by a value '" << option.valueType << "'";
 		throw svutExArgpError(message.str());
 	} else {
-		this->parseOption(option.key,argv[1]);
+		this->callParseOption(option.key,arg,argv[1]);
 		return 2;
 	}
 }
