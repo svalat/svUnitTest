@@ -13,18 +13,17 @@ Current dependcies for this project are :
          + g++             (tested version 4.3,4.4)
          + cmake           (tested version 2.6)
          + make            (tested version 3.81)
-         + glibc           (tested version 2.11.2)
-         + cppunit         (tested version 1.12.1)
+         + cppunit         (tested version 1.12.1) [Optional]
  - RUN svUnitTest unit tests \
-         + glibc           (tested version 2.11.2)
-         + cppunit         (tested version 1.12.1)
+         + cppunit         (tested version 1.12.1) [Optional]
  - RUN svUnitTest test coverage \
-         + glibc           (tested version 2.11.2)
-         + cppunit         (tested version 1.12.1)
+         + cppunit         (tested version 1.12.1) [Optional]
          + lcov            (tested version 1.7)
  - USE svUnitTest  \
-         + glibc           (tested version 2.11.2)
 
 Tested systèmes are :
 
  - Gentoo x86_64 (2009-2010)
+ - Fedora 14 x86
+ - FreeBSD 8.1 x86
+ - Windows XP x86 (Visual Studio 2010)
