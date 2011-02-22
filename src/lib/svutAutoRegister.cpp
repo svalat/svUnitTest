@@ -7,6 +7,7 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
+#include <cstdlib>
 #include "svutAutoRegister.h"
 
 /********************  NAMESPACE  *******************/
@@ -21,6 +22,14 @@ namespace svUnitTest
 static std::set<class svutTestCaseBuilder *> * __SVUT_autoFoundTests__ = NULL;
 
 /*******************  FUNCTION  *********************/
+/** Free register memory at exit. **/
+static void freeTestCaseRegisterMemoryAtExit(void)
+{
+	if (__SVUT_autoFoundTests__ != NULL)
+		delete __SVUT_autoFoundTests__;
+}
+
+/*******************  FUNCTION  *********************/
 /**
  * Methode used on first access on __SVUT_autoFoundTests__ to create it if required.
  * This dynmaique creation instead of static is required to fix buggy behavior on
@@ -30,7 +39,10 @@ static void firstTouchRegister(void)
 {
 	//if first access, we need to create it.
 	if (__SVUT_autoFoundTests__ == NULL)
+	{
 		__SVUT_autoFoundTests__ = new std::set<class svutTestCaseBuilder *>();
+		atexit(freeTestCaseRegisterMemoryAtExit);
+	}
 }
 
 /*******************  FUNCTION  *********************/

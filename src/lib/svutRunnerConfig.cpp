@@ -489,7 +489,7 @@ void svutRunnerConfig::freeClonedArgv(int argc, char * argv[]) const
 		if (argv[i] != NULL)
 			delete argv[i];
 	}
-	delete argv;
+	delete[] argv;
 }
 
 /*******************  FUNCTION  *********************/
