@@ -76,6 +76,10 @@ add_test(svutStandeloneMainXml svutStandeloneMain -m xml)
 add_test(svutStandeloneMainColor svutStandeloneMain -m color)
 add_test(svutStandeloneMainStd svutStandeloneMain -m std)
 
+############# BUILD MAIN TESTS ##################
+add_executable(svutDefaultMainAllMessages UnitTest_defaultMainAllMessages.cpp)
+target_link_libraries (svutDefaultMainAllMessages svutUnitTestBase svunittest)
+
 ################# SUBDIRS #######################
 if (NOT CPPUNIT_FOUND)
 	add_subdirectory(fakecppunit)

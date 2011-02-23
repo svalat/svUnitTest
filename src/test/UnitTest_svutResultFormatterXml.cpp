@@ -29,23 +29,23 @@ static const char * CST_STRING_SUMMARY_0 = "\t<GlobalResults>\n\
 \t\t<result type='failed'>0</result>\n\
 \t\t<result type='unknown'>0</result>\n\
 \t\t<total>0</total>\n\
-\t\t<status>SUCCESS</status>\n\
+\t\t<status>success</status>\n\
 \t</GlobalResults>\n";
-static const char * CST_STRING_UNKNOWN_1 = "\t\t\t<status>UNKNOWN</status>\n\
+static const char * CST_STRING_UNKNOWN_1 = "\t\t\t<status>unknown</status>\n\
 \t\t\t<AssertInfo>\n\t\t\t\t<location>\n\t\t\t\t\t<unknown></unknown>\n\
 \t\t\t\t</location>\n\t\t\t\t<message></message>\n\t\t\t\t<entries>\n\
 \t\t\t\t</entries>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_UNKNOWN_3 = "\t\t\t<status>UNKNOWN</status>\n\
+static const char * CST_STRING_UNKNOWN_3 = "\t\t\t<status>unknown</status>\n\
 \t\t\t<AssertInfo>\n\t\t\t\t<location>\n\t\t\t\t\t<file>file.cpp</file>\n\
 \t\t\t\t\t<methode>methode</methode>\n\t\t\t\t\t<line>33</line>\n\
 \t\t\t\t</location>\n\t\t\t\t<message>message for unknown status</message>\n\t\t\t\t<entries>\n\
 \t\t\t\t</entries>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_SUCCESS_1 = "\t\t\t<status>SUCCESS</status>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_TODO      = "\t\t\t<status>TODO</status>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_INDEV     = "\t\t\t<status>INDEV</status>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_SKIPED    = "\t\t\t<status>SKIPED</status>\n\t\t</TestFunction>\n";
+static const char * CST_STRING_SUCCESS_1 = "\t\t\t<status>success</status>\n\t\t</TestFunction>\n";
+static const char * CST_STRING_TODO      = "\t\t\t<status>todo</status>\n\t\t</TestFunction>\n";
+static const char * CST_STRING_INDEV     = "\t\t\t<status>indev</status>\n\t\t</TestFunction>\n";
+static const char * CST_STRING_SKIPED    = "\t\t\t<status>skiped</status>\n\t\t</TestFunction>\n";
 static const char * CST_STRING_TEST_CASE = "\t<TestCase>\n\t\t<name>MyTest</name>\n";
-static const char * CST_STRING_FAILED_1  = "\t\t\t<status>FAILED</status>\n\
+static const char * CST_STRING_FAILED_1  = "\t\t\t<status>failed</status>\n\
 \t\t\t<AssertInfo>\n\t\t\t\t<location>\n\t\t\t\t\t<file>file.cpp</file>\n\
 \t\t\t\t\t<methode>methode</methode>\n\t\t\t\t\t<line>33</line>\n\t\t\t\t</location>\n\
 \t\t\t\t<message>message for failed status</message>\n\t\t\t\t<entries>\n\
@@ -59,34 +59,34 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 		<name>MyTest</name>\n\
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
-			<status>SUCCESS</status>\n\
+			<status>success</status>\n\
 		</TestFunction>\n\
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
-			<status>TODO</status>\n\
+			<status>todo</status>\n\
 		</TestFunction>\n\
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
-			<status>SUCCESS</status>\n\
+			<status>success</status>\n\
 		</TestFunction>\n\
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
-			<status>INDEV</status>\n\
+			<status>indev</status>\n\
 		</TestFunction>\n\
 	</TestCase>\n\
 	<TestCase>\n\
 		<name>MyTest</name>\n\
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
-			<status>SKIPED</status>\n\
+			<status>skiped</status>\n\
 		</TestFunction>\n\
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
-			<status>SUCCESS</status>\n\
+			<status>success</status>\n\
 		</TestFunction>\n\
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
-			<status>FAILED</status>\n\
+			<status>failed</status>\n\
 			<AssertInfo>\n\
 				<location>\n\
 					<file>file.cpp</file>\n\
@@ -102,7 +102,7 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 		</TestFunction>\n\
 	<TestCase>\n\
 		<name>MyTest</name>\n\
-			<status>UNKNOWN</status>\n\
+			<status>unknown</status>\n\
 			<AssertInfo>\n\
 				<location>\n\
 					<file>file.cpp</file>\n\
@@ -122,7 +122,7 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 		<result type='failed'>0</result>\n\
 		<result type='unknown'>0</result>\n\
 		<total>0</total>\n\
-		<status>SUCCESS</status>\n\
+		<status>success</status>\n\
 	</GlobalResults>\n\
 </UnitTest>\n";
 static const char * CST_STRING_OPEN = "<?xml version='1.0' encoding='UTF-8'?>\n\
