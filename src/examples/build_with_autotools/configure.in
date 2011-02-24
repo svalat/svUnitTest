@@ -1,0 +1,47 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.65])
+AC_INIT(svUnitTestExampleAutotools, 0.1.0, sebastien.valat.dev@orange.fr)
+AC_CONFIG_SRCDIR([src/testString.cpp])
+
+#init automake
+AM_INIT_AUTOMAKE
+
+# Checks for programs.
+AC_PROG_CC
+AC_PROG_CXX
+
+############################# svUnitTest #############################
+#Check for optional svUnitTest
+#To force usage, keep only the line PKG_CHECK_MODULES(...).
+
+WANT_SVUNITTEST_VERSION=0.1.0
+
+AC_ARG_WITH([svUnitTest], AS_HELP_STRING([--with-svUnitTest], [Build with the svUnitTest support]))
+
+AS_IF([test "x$with_svUnitTest" = "xyes"], [
+		PKG_CHECK_MODULES([svUnitTest], [svUnitTest >= ${WANT_SVUNITTEST_VERSION}],[HAVE_SVUNITTEST=yes])
+	],[
+		if test "x$with_svUnitTest" != "xno"; then
+			AC_MSG_CHECKING([for optional svUnitTest])
+			PKG_CHECK_EXISTS([ svUnitTest >= ${WANT_SVUNITTEST_VERSION} ], [ with_svUnitTest=yes ], [ with_svUnitTest=no ])
+			AC_MSG_RESULT($SHAVE_SVUNITTEST)
+			if test "$HAVE_SVUNITTEST" = "xyes"; then
+				PKG_CHECK_MODULES([svUnitTest], [svUnitTest >= ${WANT_SVUNITTEST_VERSION}])
+			fi
+		fi
+	])
+
+
+
+AM_CONDITIONAL(HAVE_SVUNITTEST, test "$with_svUnitTest" = yes)
+#######################################################################
+
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.PKG_CONFIG_PATH
+
+# Checks for library functions.
+
+AC_OUTPUT([Makefile src/Makefile])

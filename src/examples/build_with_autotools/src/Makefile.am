@@ -1,0 +1,7 @@
+if HAVE_SVUNITTEST
+bin_PROGRAMS=testString
+testString_SOURCES=testString.cpp
+testString_LDADD=@svUnitTest_LIBS@
+testString_CXXFLAGS=@svUnitTest_CFLAGS@
+TESTS=testString
+endif

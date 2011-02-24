@@ -1,0 +1,6 @@
+To generate configure script, please call :
+
+aclocal && autoconf && automake --copy --add-missing --foreign
+
+
+Next you can use the project as standard autotools project.
