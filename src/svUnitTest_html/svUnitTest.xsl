@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!--***************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.1.0
-             DATE     : 01/2011
+             VERSION  : 0.2.0
+             DATE     : 02/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 ***************************************************-->

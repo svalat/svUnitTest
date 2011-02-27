@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.1.0
-             DATE     : 01/2011
+             VERSION  : 0.2.0
+             DATE     : 02/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -16,6 +16,6 @@
 
 /********************  MACRO  ***********************/
 /** Define the library version. **/
-#define SVUT_LIBARY_VERSION "0.1.0"
+#define SVUT_LIBARY_VERSION "0.2.0"
 
 #endif 

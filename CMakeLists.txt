@@ -1,7 +1,7 @@
 ######################################################
 #            PROJECT  : svUnitTest                   #
-#            VERSION  : 0.1.0                        #
-#            DATE     : 01/2011                      #
+#            VERSION  : 0.2.0                        #
+#            DATE     : 02/2011                      #
 #            AUTHOR   : Valat Sébastien              #
 #            LICENSE  : CeCILL-C                     #
 ######################################################
@@ -9,7 +9,7 @@
 #project definition
 cmake_minimum_required (VERSION 2.6)
 project(svUnitTest CXX)
-set(svUnitTest_VERSION "0.1.0")
+set(svUnitTest_VERSION "0.2.0")
 
 #load cmake modules
 include(CheckIncludeFileCXX)
