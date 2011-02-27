@@ -1,0 +1,32 @@
+/**
+@page user-doc-install svUnitTest installation
+
+@section Sourceinstallation Source installation
+
+@subsection Downloadthesources Download the sources
+
+To download the sources, you can get the file on <a href='https://github.com/svalat/svUnitTest' target='_blank'>the download page</a>.
+
+@subsection Buildandinstallthesources Build and install the sources
+
+Now you may extract, build and install the sources :
+
+@code
+tar -xvzf svUnitTest-X.Y.Z.tar.gz
+cd svUnitTest-X.Y.Z
+mkdir build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=/yourprefix/
+make
+make install
+@endcode
+
+@subsection Changethecompiler Change the compiler
+
+If you want to change the compiler, you can use :
+
+@code
+cmake .. -DCMAKE_INSTALL_PREFIX=/yourprefix/ -DCMAKE_CXX_COMPILER=icc
+@endcode
+
+**/

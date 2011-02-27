@@ -1,0 +1,23 @@
+/**
+@page dev-doc-filtering The filtering mechanisms
+
+The svutRunner class provide a simple way to filter which tests to execute of not. This is implemented on top of the abstract class svutTestFilter which provide a way to accept of reject some particular tests.
+
+@section Thebasicfiltering The basic filtering
+
+By default, we provide a simple implementation <em>svutTestFilterBasic</em> which work with a white list system :
+
+ - if the list is empty, all the tests are accepted
+ - if not, only the listed tests are accepted.
+
+The rules can restrict the name by 3 ways :
+
+<table><tr><th> Value </th><th> Interpretation 
+</th></tr><tr><td style="text-align: left;">testCaseName::methodName </td><td> Accept only a particular method of a particular test case. 
+</td></tr><tr><td style="text-align: left;">testCaseName:: </td><td> Accept all methods of a particular test case. 
+</td></tr><tr><td style="text-align: left;">::methodName </td><td> Only check the method name independently of the test case name.
+</td></tr></table>
+
+@section ThecurrentUMLdiagram The current UML diagram
+
+@dotfile images/filters.dot**/

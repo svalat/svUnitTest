@@ -1,0 +1,187 @@
+/**
+@mainpage svUnitTest
+
+@section Objectives Objectives
+
+This is another unit test framework for C++. There are already many functional framework for this (cppunit.............), so, why done another one ?
+
+ - Because this is fun and it's a good way to learn.
+ - To try some extension compared to standard frameworks.
+ - To generate nice reports (color in console texte mode, nice XML+XSLT output...)
+ - Integrate it to KDevelop without using qttestlib (It seams to be removed in newer Kdevelop version ???).
+ - Light library.
+ - SIMPLE to use.
+ - OpenSource.
+ - CppUnit is not really friendly (in my point of view, even if it a good library strictly speaking) to use and seems to be really limited (without extended it), for exemple  : 
+     - the default ASSERT macro are really limited, 
+     - ASSERT_EQUAL force the type equality, so can't simply compare a string object to const C string, or other string classes.
+     - No ASSERT_TRUE/FALSE, we got 0 or 1 as display.
+     - No ASSERT to quicly check exceptions
+     - To complex main method to build the test
+
+@section ChangeLog ChangeLog
+
+@subsection Version010January122011 Version 0.1.0 (January 12, 2011)
+
+First complete version which contain :
+
+ - Base implementation
+ - Unit tests of the base implementation
+ - Output format : XML, Qt XML, Black & white stdout, Colored stdout
+ - Provide most of the required assertions SVUT_ASSERT_EQUAL()...
+ - Provide the INDEV and TODO state in addition to others unit test libraries.
+ - Provide a basic XSLT file to manualy generate HTML from native XML output format.
+ - Provide standelon of test suite predefine main functions.
+
+Need some extra work to complete documentation, build script and examples for the 0.2.0.
+
+@section Dependencies Dependencies
+
+Related tools and libs required or optional to use and develop svUnitTest :
+
+ - Cmake      : http://www.cmake.org/
+ - CppUnit    : http://sourceforge.net/apps/mediawiki/cppunit/
+ - Doxygen    : http://www.doxygen.org/
+ - LCov       : http://ltp.sourceforge.net/coverage/lcov.php
+ - GCC        : http://gcc.gnu.org/
+ - ICC        : http://software.intel.com/en-us/intel-compilers/
+ - CLand      : http://clang.llvm.org/
+
+Extra development tools used :
+
+ - Trac       : http://trac.edgewall.org/
+ - Kdevelop 4 : http://www.kdevelop.org/
+ - GDB        : http://www.gnu.org/software/gdb/
+ - valgrind   : http://valgrind.org/
+
+As a user, you may be interested by :
+
+ - Cmake      : http://www.cmake.org/
+ - Pkg-config : http://pkg-config.freedesktop.org/wiki/
+ - Autoconf   : http://www.gnu.org/software/autoconf/
+ - Automake   : http://www.gnu.org/software/automake/
+
+@section Testedenvironmentscurrentmaster Tested environments (current master)
+
+<table>
+	<tr>
+		<th>OS</th>
+		<th>OS Version</th>
+		<th>Architecture</th>
+		<th>compiler</th>
+		<th>status</th>
+		<th>Last test date</th>
+		<th>Lib. version</th>
+	</tr><tr>
+		<td>Gentoo Linux</td>
+		<td>2010</td>
+		<td>x86_64</td>
+		<td>gcc-4.4.4</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0-dev (master)</td>
+	</tr><tr>
+		<td>Gentoo Linux</td>
+		<td>2010</td>
+		<td>x86_64</td>
+		<td>gcc-4.4.3</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0-dev (master)</td>
+	</tr><tr>
+		<td>Gentoo Linux</td>
+		<td>2010</td>
+		<td>x86_64</td>
+		<td>gcc-4.3.4</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0-dev (master)</td>
+	</tr><tr>
+		<td>Gentoo Linux</td>
+		<td>2010</td>
+		<td>x86_64</td>
+		<td>icc-11.1</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0-dev (master)</td>
+	</tr><tr>
+		<td>Gentoo Linux</td>
+		<td>2010</td>
+		<td>x86_64</td>
+		<td>clang-2.8</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011 </td>
+		<td>0.2.0-dev (master)</td>
+	</tr><tr>
+		<td>Fedora Linux</td>
+		<td>14</td>
+		<td>x86</td>
+		<td>gcc-4.5.1</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0-dev (master)</td>
+	</tr><tr>
+		<td>FreeBSD</td>
+		<td>8.1</td>
+		<td>x86</td>
+		<td>gcc-4.2.1</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0-dev (master)</td>
+	</tr><tr>
+		<td>Windows</td>
+		<td>XP</td>
+		<td>x86</td>
+		<td>VCC-10</td>
+		<td>SUCCESS <br> (one warning due to <br> throw() on functions)</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0-dev (master)</td>
+	</tr><tr>
+		<td>Windows</td>
+		<td>XP</td>
+		<td>x86</td>
+		<td>cygwin gcc-4.3.4</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0-dev (master)</td>
+	</tr>
+</table>
+
+@section Userdocumentation User documentation
+
+You can access to a doxygen at http://svunittest.pagesperso-orange.fr/index.html
+
+ - @subpage user-doc-install
+ - @subpage user-doc-write-first-test
+ - @subpage user-doc-build-makefile
+ - @subpage user-doc-build-pkg-config
+ - @subpage user-doc-build-cmake
+ - @subpage user-doc-build-autotools
+ - @subpage user-doc-build-your-first-suite
+ - @subpage user-doc-test-coverage
+ - @subpage user-doc-available-assertions
+ - @subpage user-doc-extend-type
+ - @subpage user-doc-extend-macro
+ - @subpage user-doc-status
+ - @subpage user-doc-html
+
+@section Developerdocumentation Developer documentation
+
+ - @subpage dev-doc-style
+ - @subpage dev-doc-defs
+ - @subpage dev-doc-directories
+ - @subpage dev-doc-obj-meth
+ - @subpage dev-doc-location
+ - @subpage dev-doc-exceptions
+ - @subpage dev-doc-status-and-asserts
+ - @subpage dev-doc-global-uml
+ - @subpage dev-doc-gcov
+ - @subpage dev-doc-asserts
+ - @subpage dev_doc-events
+ - @subpage dev-doc-formatter
+ - @subpage dev-doc-runner
+ - @subpage dev-doc-auto-register
+ - @subpage dev-doc-filtering
+ - @subpage dev-doc-defaultMain
+ - @subpage dev-doc-updateVersion
+**/

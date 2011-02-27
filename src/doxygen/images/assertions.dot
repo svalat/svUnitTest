@@ -1,0 +1,61 @@
+#!graphviz
+digraph G {
+	node [ shape="box", fontsize=12.0 ]
+        edge [ fontsize=12.0 ]
+	start [shape=point ]
+	end [ shape=point ]
+	start -> get_location
+
+	get_location [ label = "SVUT_CODE_LOCATION" ]	
+	has_specialized_opEqual [ shape=diamond, label = "asserterOperatorEqual ?", style=filled, fillcolor=gray ]
+	get_location -> has_specialized_opEqual
+
+
+	template_opEqual [ label = "asserterOperatorEqual(T,T)" ]
+	specialized_opEqual [ label = "asserterOperatorEqual(Custo,Custo)" ]
+	has_specialized_opEqual -> template_opEqual [ label = "default" ]
+	has_specialized_opEqual -> specialized_opEqual [ label = "specialized" ]
+
+	is_valid [ shape=diamond, label = "valid ?" ]
+	template_opEqual -> is_valid
+	specialized_opEqual -> is_valid
+
+	success [ style=filled, fillcolor=green ]
+	failed  [ style=filled, fillcolor=red ]
+
+	is_valid -> success [ label = "yes" ]
+	is_valid -> failed [ label = "no" ]
+
+	has_specialized_opToString [ style=filled, fillcolor=red ]
+	success [ shape = ellipse ]
+	failed [ shape = ellipse ]
+	success -> end
+	failed -> has_specialized_opToString
+	
+	template_opToString [ style=filled, fillcolor=red ]
+	specialized_opToString [ style=filled, fillcolor=red ]
+	has_specialized_opToString [ shape=diamond, label = "asserterOperatorToString ?", style=filled, fillcolor=gray ]
+	has_specialized_opToString -> template_opToString [ label = "default" ]
+	has_specialized_opToString -> specialized_opToString [ label = "specialized" ]
+
+	throw_exception [ style=filled, fillcolor=red, label="throw svutExAssertFailEqual" ]
+	template_opToString [ label = "asserterOperatorToString(T)" ]
+	specialized_opToString [ label = "asserterOperatorToString(Custo)" ]
+	template_opToString -> throw_exception
+	specialized_opToString -> throw_exception
+
+	throw_exception -> end
+
+	{rank=same; success failed}
+
+        subgraph cluster_0 {
+		color=lightgrey;
+		label="Legend"
+		compiler [ shape=diamond, label = "Compiler choice", style=filled, fillcolor=gray ]
+		function [ label = "function" ]	
+		status [ shape = ellipse,label="Fix status" ]
+	}
+	
+
+
+}

@@ -1,0 +1,17 @@
+/**
+@page user-doc-html Build HTML report
+
+svUnitTest provide an XML output which can be transform to HTML by using the XSLT file into src/xslt_html/svUnitTest.xsl or installed into ${prefix}/share/svUnitTest/svUnitTest_html/svUnitTest.xsl.
+
+You can generate the HTML report by using :
+
+@code
+./yourTest -m xml | xsltproc ${prefix}/share/svUnitTest_html/svUnitTest.xsl > testReport.html
+@endcode
+
+As it use some javascript and pictures, you must copy the ressource file into the same directory of your html file :
+
+@code
+cp -rv ${prefix}/share/svUnitTest_html ./svUnitTest_html
+@endcode
+**/

@@ -1,0 +1,38 @@
+/**
+@page dev-doc-defaultMain The default main functions
+
+To help the user, the library provide the basis of two main functions. by this way, the user hadn't to repeateadly redefine this non changing function.
+
+@section Thedefaultfunction The default function
+
+The default function is defined as defaultMain() which must be called directly into your own main  function :
+
+
+@code
+#include <svutDefaultMain.h>
+
+int main(int argc, char * argv[])
+{
+   return defaultMain(argc,argv);
+}
+@endcode
+
+It will use the automatic test registration to find all the tests cases linked into the program.
+
+@section Thestandeloneappraoch The standelone appraoch
+
+If you want to keep the QT Unit test methodology, you may want to create a standelone executable for each test case.
+To do so, we provided the macro <em>SVUT_REGISTER_STANDELONE()</em>.
+
+By this way, you can quicly implement the test case and the main function into a unique cpp file.
+
+@code
+#include <svutDefaultMain.h>
+#include <svutTestCase.h>
+
+class MyTest : public svutTestCase
+//.. implement you test ...
+
+SVUT_REGISTER_STANDELONE(MyTest);
+@endcode
+**/

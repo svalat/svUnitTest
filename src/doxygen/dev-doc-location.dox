@@ -1,0 +1,22 @@
+/**
+@page dev-doc-location Define source location
+
+On failed assertion we must inform the developer and give him all informations we can. So you may give a description of the assertions, values and the source location  of the failing assertion. To do this we store source location description in a specific class : <em>svutCodeLocation</em> which simply aggregate :
+
+ - source line,
+ - method name,
+ - source file.
+
+We define a macro to easily use the compiler informations to extract the line, method name and filename : 
+
+@code
+#define SVUT_CODE_LOCATION svUnitTest::svutCodeLocation(__FILE__,__FUNCTION__,__LINE__)
+@endcode
+
+When an assertion failed, we can fetch the location by using it :
+
+@code
+assertionFailed(......,SVUT_CODE_LOCATION);
+@endcode
+
+If no location is attached of if we can't clearly define one, we can use the constant symbol : <em>SVUT_NO_LOCATION</em>.**/

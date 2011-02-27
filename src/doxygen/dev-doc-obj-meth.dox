@@ -1,0 +1,24 @@
+/**
+@page dev-doc-obj-meth Dynamically call methods on objects
+
+svUnitTest is a unit test library for C++ ; so we will need to dynamically call methods on objects (the test cases). But, we can't simply use a function pointer as in C as we may consider the type of the object and keep a track of the pointer of this object. To do this we use a class to handle that and build a mechanisms on top of it.
+
+In the library, this work is delegate to class <em>svutObjectMethode</em>, which is spited in two part :
+
+ - <em>svutObjectMethode</em> which is an abstract class, playing a role of an ''interface'' which just declare the presence of a method : <em>call()</em>.
+ - <em>svutObjectMethodeGeneric</em> which is a generic implementation based on template. Thanks to templates we now can keep the method address as a pointer and keep a pointer to the object required to call the method.
+
+The targeted methods need to verify the next prototype :
+
+@code
+void ClassName::functionName(void);
+@endcode
+
+We can call a method using :
+
+@code
+SimpleObject obj;
+svutObjectMethode * caller = new svutObjectMethodeGeneric<SimpleObject>(&obj,&SimpleObject::clear);
+caller->call();
+@endcode
+**/

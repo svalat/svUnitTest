@@ -1,0 +1,38 @@
+/**
+@page dev_doc-events The event system
+
+@section Description Description
+
+Unit test results, progression and summary are construct by intercepting unit test event. This is a simple way to handle all information extraction on top of the same mechanisms based on class svutListener which define all supported event you can use.
+
+@section Listofevents List of events
+
+For moment we support events :
+
+<table><tr><th> Event name </th><th> parameters </th><th> Description 
+</th></tr><tr><td> onGlobalStart     </td><td style="text-align: center;">                  </td><td> First event called when starting the test. 
+</td></tr><tr><td> onGlobalEnd       </td><td style="text-align: center;">                  </td><td> Last event call at the end of the global run. 
+</td></tr><tr><td> onTestCaseStart   </td><td> testCase         </td><td> Called before each test case. 
+
+</td></tr><tr><td> onTestCaseEnd     </td><td> testCase         </td><td> Called after each test case. 
+</td></tr><tr><td> onTestMethodStart </td><td> method           </td><td> Called before each test method. 
+</td></tr><tr><td> onTestMethodEnd   </td><td> method, status   </td><td> Called after each test method. 
+
+</td></tr></table>
+
+We can draw the event graph :
+
+@dotfile images/event.dot
+
+@section Baseeventcollection Base event collection
+
+As a bases we defined two basic event usage :
+ - <em>svutListenerSummary</em> which is in charge of building a global summary of the whole run. We may use it in relation to formater to display de result at the end of the global run at <em>onGlobalEnd()</em> event.
+ - <em>svutListenerMultiplexer</em> which permit to dispatch events to multiple sub-events. This may be used in <em>svutRunner</em>.
+ - <em>svutListenerDirectOutputter</em> which is used to established the link between the event system and svutResultFormatter. This is used for direct outputing.
+
+@section UML UML
+
+We can build the inheritance graph of listeners :
+
+@dotfile images/listeners.dot**/

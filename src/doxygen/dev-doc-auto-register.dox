@@ -1,0 +1,19 @@
+/**
+@page dev-doc-auto-register Automatic test case registration
+
+By default, the default runner class provide a way to automatically register a test case without manually add the corresponding line into the main function. To do so, svUnitTest provide the files svutAutoRegister.<em> and svutTestCaseBuilder.</em>
+
+@section Theregistration The registration
+
+The registration is done into a global list at load time (<em>__SVUT_autoFoundTests__</em>). The registration is done by the macro <em>SVUT_REGISTER_TEST_CASE</em> which done :
+
+ - Declare a global symbol which is initialized at load time, so before entering into the main method.
+ - Register this symbol into the global list, before entering into the main method.
+
+To call the registration method before entering into main, we didn't rely on compiler specific tricks, we simply declare a global variable which is filled by the result of the registration method, so the method is automatically called without depending on compiler specific tags.
+
+@section Limitoperationsdoneatloadtime Limit operations done at load time
+
+In order to avoid building too complex object before entering into main(), we provide a builder class (svutTestCaseBuilder) which break the need to directly build the test case class.
+
+This is required if the test case class need some initialization done into main before entering into the test runner. When the runner fetch the class list, he get the builder and use them to really build the test case classes.**/

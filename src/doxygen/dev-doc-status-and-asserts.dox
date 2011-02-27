@@ -1,0 +1,23 @@
+/**
+@page dev-doc-status-and-asserts Status and assertions
+
+@section Thestatus The status
+
+Each test can take one of the next status :
+
+ - <b>SVUT_STATUS_TODO</b> : The test is just declared or need to be rewrited.
+ - <b>SVUT_STATUS_INDEV</b> : The test is in development, he may change.
+ - <b>SVUT_STATUS_SKIPED</b> : The test is not called.
+ - <b>SVUT_STATUS_SUCCESS</b> : The test finished with success.
+ - <b>SVUT_STATUS_FAILED</b> :  An error occur while running the test.
+ - <b>SVUT_STATUS_UNKNOWN</b> : An unknown error occur while running the test.
+
+In practice, we can propose the reach those status by using the next order :
+
+ -# <b>TODO</b> when <em>declaring the test</em>
+ -# <b>INDEV</b> when <em>implementing</em> the test.
+ -# <b>SUCCESS</b> or <b>FAILED</b> when running the final version of the test.
+
+@dotfile images/status.dot
+
+**/

@@ -1,0 +1,43 @@
+/**
+@page user-doc-build-makefile Build your test with a simple Makefile
+
+The source of the example can be found in src/examples/build_with_makefile/.
+
+To build the test with a simple Makefile, you can use :
+
+@code
+######################################################
+#            PROJECT  : svUnitTest                   #
+#            VERSION  : 0.1.0                        #
+#            DATE     : 01/2011                      #
+#            AUTHOR   : Valat Sébastien              #
+#            LICENCE  : CeCILL-C                     #
+######################################################
+
+##################### COMMANDS #######################
+CXX=g++
+RM=rm -f
+PKGCONFIG=pkg-config
+####################### FLAGS ########################
+SVUNITTEST_PREFIX=/usr
+CXXFLAGS=-I${SVUNITTEST_PREFIX}/include
+LDFLAGS=-L${SVUNITTEST_PREFIX}/lib -lsvunittest
+
+#################### VARIABLES #######################
+TARGETS=testString
+
+##################### RULES ##########################
+all: ${TARGETS}
+
+testString: testString.o
+	${CXX} $< -o $@ ${LDFLAGS}
+
+%.o: %.cpp
+	${CXX} -c $< -o $@ ${CXXFLAGS}
+
+clean:
+	${RM} *.o
+	${RM} ${TARGETS}
+@endcode
+
+To get CXXFLAGS and LDFLAGS from pkg-config, you can got on this page : @subpage user-doc-build-pkg-config.**/

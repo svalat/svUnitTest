@@ -1,0 +1,21 @@
+#!graphviz
+digraph G {
+        node [ shape="box" fontsize = 10.0 ]
+
+        svutRunner
+        svutTestFilter
+        svutListener
+        svutFormatter
+        svutTestCase
+        svutRunnerConfig
+
+svutRunner -> svutTestFilter [ dir="back", 
+arrowtail="odiamond" ]
+svutRunner -> svutListener [ dir="back", arrowtail="odiamond" ]
+svutListener -> svutFormatter [ dir="back", arrowtail="odiamond" ]
+svutRunner -> svutTestCase [ dir="back", arrowtail="odiamond" ]
+svutRunner -> svutRunnerConfig [ dir="back", arrowtail="odiamond" ]
+
+svutRunnerConfig -> svutFormatter [ dir="back", arrowtail="diamond" ]
+svutRunnerConfig -> svutTestFilter [ dir="back", arrowtail="diamond" ]
+}

@@ -1,0 +1,9 @@
+#!graphviz
+digraph G {
+        node [ shape="box" fontsize = 10.0 ]
+
+        svutTestFilter
+        svutTestFilterBasic
+
+        svutTestFilterBasic -> svutTestFilter [ arrowhead="empty" ]
+}

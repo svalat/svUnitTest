@@ -1,0 +1,78 @@
+/**
+@page user-doc-build-cmake Build you test with CMake
+
+This page explain how to build your tests with cmake. The source of the example can be found in src/examples/build_with_cmake/. 
+
+@section Checktheavailabilityofthelibrary Check the availability of the library
+
+To check the availability of svUnitTest, you just need to add those lines to your CMakeLists.txt :
+
+@code
+#check the presence of svUnitTest
+find_package(svUnitTest REQUIRED)
+@endcode
+
+@section Variablesdefinedbythecmakemodules Variables defined by the cmake modules
+
+The cmake module src/integration/cmake/FindsvUnitTest.cmake FindsvUnitTest.cmake defines the variables :
+
+<table><tr><th> Name </th><th> Description 
+</th></tr><tr><td> SVUNITTEST_FOUND       </td><td> True if SVUNITTEST_INCLUDE_DIR &amp; svUnitTest_LIBRARY are found 
+</td></tr><tr><td> SVUNITTEST_LIBRARIES   </td><td> Set when SVUNITTEST_LIBRARY is found 
+</td></tr><tr><td> SVUNITTEST_INCLUDE_DIRS </td><td> Set when SVUNITTEST_INCLUDE_DIR is found 
+
+</td></tr><tr><td> SVUNITTEST_INCLUDE_DIR </td><td> where to find svUnitTest/svutTestCase.h, etc. 
+</td></tr><tr><td> SVUNITTEST_LIBRARY     </td><td> the svUnitTest library 
+</td></tr></table>
+
+@section Buildyourtest Build your test
+
+To build the test, now, you just need to add :
+
+@code
+#setup directories
+include_directories(${SVUNITTEST_INCLUDE_DIR})
+
+#If you need to setup the libdir
+#set(LIBS ${LIBS} ${SVUNITTEST_LIBRARIES})
+
+#Now you can build your tests
+add_executable(testString testString.cpp)
+target_link_libraries(testString ${SVUNITTEST_LIBRARY})
+@endcode
+
+@section Optionalexecution Optional execution
+
+If you have some optional portion depending on the availability of svUnitTest, you can test them with :
+
+@code
+#done optional actions
+if ( SVUNITTEST_FOUND )
+	#Place here you optional code
+endif( SVUNITTEST_FOUND )
+@endcode
+
+@section Usingnonstandardprefix Using non standard prefix
+
+If you didn't install svUnitTest in the same prefix than cmake, you may require to inform cmake to find the modules :
+
+@code
+cmake .. -DCMAKE_MODULE_PATH=Your_svUnitTest_Prefix/share/cmake/Modules
+@endcode
+
+@section Manytests Many tests
+
+If you have multiple test, each into a unique C++ file, you can use some CMake scripting :
+
+@code
+#setup the test list
+set(myProject_CASES test1 test2 test3)
+
+#script to build the rules
+foreach(i ${myProject_CASES})
+	add_executable (${i} ${i}.cpp)
+	target_link_libraries (${i} ${SVUNITTEST_LIBRARY})
+	add_test(${i} ${i})
+endforeach(i)
+@endcode
+**/

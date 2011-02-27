@@ -1,0 +1,123 @@
+/**
+@page dev-doc-asserts Assertion mechanisms
+
+@section Introduction Introduction
+
+Unit tests are base on assertion, we may want to get a specific value of not get a value as some point. To provide those assertions, svUnitTest provide a long list of macro which call the test and if require, throw the associated exception to abort the test with failure status. Why to use a macro ? Because it fetch the code location of the assertion for you using the compiler macros (<em>LINE</em>, <em>FILE</em> and <em>FUNCTION</em> throw the macro SVUT_CODE_LOCATION).
+
+For example :
+
+@verbatim
+#define SVUT_ASSERT_TRUE(value) \
+	if (((bool)(value)) ==  false) throw svUnitTest::svutExAssertFailBool(true,SVUT_CODE_LOCATION)
+@endverbatim
+
+@section Currentsupportedassertions Current supported assertions
+
+Currently the library support the next assertions :
+
+<table><tr><th> Assertion name         </th><th> Assertion parameters </th><th> Tested condition </th><th> Final status on error 
+</th></tr><tr><td> <em>SVUT_ASSERT_TRUE</em>        </td><td> x                          </td><td> x == true               </td><td> FAILED                     
+
+</td></tr><tr><td> <em>SVUT_ASSERT_FALSE</em>       </td><td> x                          </td><td> x != false              </td><td> FAILED                     
+</td></tr><tr><td> <em>SVUT_ASSERT_NULL</em>        </td><td> x                          </td><td> x == NULL               </td><td> FAILED                     
+
+</td></tr><tr><td> <em>SVUT_ASSERT_NOT_NULL</em>    </td><td> x                          </td><td> x != NULL               </td><td> FAILED                     
+</td></tr><tr><td> <em>SVUT_ASSERT_EQUAL</em>       </td><td> expected, actual           </td><td> expected == actual      </td><td> FAILED                     
+
+</td></tr><tr><td> <em>SVUT_ASSERT_NOT_EQUAL</em>   </td><td> expected, actual           </td><td> expected != actual      </td><td> FAILED                     
+</td></tr><tr><td> <em>SVUT_ASSERT_EQUAL_STRICT</em>  </td><td> expected, actual           </td><td> expected == actual  &amp;&amp; sameTypeArgs(expected,actual) </td><td> FAILED                     
+
+</td></tr><tr><td> <em>SVUT_ASSERT_NOT_EQUAL_STRICT</em> </td><td> expected, actual        </td><td> expected != actual  &amp;&amp; sameTypeArgs(expected,actual) </td><td> FAILED                     
+</td></tr><tr><td> <em>SVUT_ASSERT_SAME</em>        </td><td> void * expected, void * actual           </td><td> expected == actual      </td><td> FAILED                     
+
+</td></tr><tr><td> <em>SVUT_ASSERT_NOT_NAME</em>    </td><td> void * expected, void * actual           </td><td> expected == actual      </td><td> FAILED                     
+</td></tr><tr><td> <em>SVUT_ASSERT_FAIL</em>        </td><td> message                    </td><td> false                   </td><td> FAILED                     
+
+</td></tr><tr><td> <em>SVUT_ASSERT_TODO</em>        </td><td> message                    </td><td> false                   </td><td> TODO                       
+</td></tr><tr><td> <em>SVUT_ASSERT_INDEV</em>       </td><td> message                    </td><td> false                   </td><td> INDEV                      
+
+</td></tr><tr><td> <em>SVUT_ASSERT_NOT_EXEC_THIS</em> </td><td> message                  </td><td> false                   </td><td> FAILED                     
+</td></tr><tr><td> <em>SVUT_ASSERT_THROW</em>       </td><td> exceptName, code           </td><td style="text-align: right;"> try {code; throw ERROR} catch (exceptName) {} catch (...) {throw ERROR}</td><td> FAILED                     
+
+</td></tr><tr><td> <em>SVUT_ASSERT_THROW_SOMETHING</em> </td><td> code                   </td><td> try {code; throw ERROR} catch (...} {} </td><td> FAILED                     
+</td></tr><tr><td> <em>SVUT_ASSERT_NOT_THROW</em>   </td><td> exceptName, code           </td><td> try {code} catch(exceptName) {throw ERROR} catch (...) {} </td><td> FAILED                     
+
+</td></tr><tr><td> <em>SVUT_ASSERT_MAY_NOT_THROW</em> </td><td> code                     </td><td> try {code} catch(...) {throw ERROR} </td><td> FAILED                     
+</td></tr></table>
+
+@section Operatormechanisms Operator mechanisms
+
+To made more easy the support of non basic types, assertions such as SVUT_ASSERT_EQUAL are based on template function which by default use the == operator. But if it wasn't available of if you want another one for the tests, you can provide your own by providing specialised implementation for :
+
+<table><tr><th> Returned type </th><th> name     </th><th> parameter </th><th> equivalent mechanisms to provide 
+
+</th></tr><tr><td> bool                 </td><td> asserterOperatorEqual    </td><td> value1, value2  </td><td> value1 == value2            
+</td></tr><tr><td> bool                 </td><td> asserterOperatorNotEqual </td><td> value1, value2  </td><td> value1 != value2            
+</td></tr><tr><td> std::string          </td><td> asserterToString         </td><td> value           </td><td> (string)value       
+
+</td></tr></table>
+
+So as example, the SVUT_ASSERT_EQUAL macro was coded as :
+
+@verbatim
+#define SVUT_ASSERT_EQUAL(expected,actual) \
+	svUnitTest::assertEqual((expected),(actual),SVUT_CODE_LOCATION)
+
+template <class T1,class T2>
+void assertNotEqual(const T1 & expected,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+{
+	if (asserterOperatorNotEqual(expected,actual) == false)
+		throw svutExAssertFailEqual(false,asserterToString(expected),asserterToString(actual),location);
+}
+@endverbatim
+
+@section Tostringconversion To string conversion
+
+When exception are throwed, the related parameters which conduct to the failure are placed into the exception as properties. To bu generic, at this point the value is stored in string format and not in the native one. So we use the function <em>asserterToString()</em> to convert the values. The default template implementation is based on ''ostream'' operator <<, but you can override it to provide your own string formatter.
+
+@section Schematicrepresentation Schematic representation
+
+This is a schematic representation of execution flow in <em>SVUT_ASSERT_EQUAL()</em>.
+
+@dotfile images/assertions.dot
+
+Thanks to this structure, we need to implement operator only when you call them, so no need to support more things than you need for your tests.
+
+@section Example Example
+
+For example, to give a full support for the type <em>UnitTestExample</em> if you didn't provide standard operators, you juste had to implement :
+
+
+@code
+#include <sstream>
+
+struct UnitTestExample
+{
+    int value1;
+    int value2;
+};
+
+/********************  METHODE  *********************/
+bool asserterOperatorEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+{
+	return (v1.value1 == v2.value1 && v1.value2 == v2.value2);
+}
+
+/********************  METHODE  *********************/
+bool asserterOperatorNotEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+{
+	return (v1.value1 != v2.value1 || v1.value2 != v2.value2);
+}
+
+/********************  METHODE  *********************/
+std::string asserterToString(const UnitTestCustoType & value)
+{
+	std::stringstream res;
+	res << value.value1 << ", " << value.value2;
+	return res.str();
+}
+@endcode
+
+In practice, juste put thoses specialized function in UnitTestMyExtra.h and UnitTestMyExtra.cpp and be sure to include it when you use your type in tests.
+**/

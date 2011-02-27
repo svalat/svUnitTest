@@ -1,0 +1,14 @@
+#!graphviz
+digraph G {
+        node [ shape="box" fontsize = 10.0 ]
+
+        svutListener
+        svutListenerMultiplexer
+        svutListenerSummary
+
+        svutListenerSummary -> svutListener [ arrowhead="empty" ]
+        svutListenerMultiplexer -> svutListener [ arrowhead="empty" ]
+        svutListenerMultiplexer -> svutListener [ dir="back", arrowtail="odiamond" ]
+        svutListenerDirectOutputter -> svutListenerSummary [ arrowhead="empty" ]
+        svutResultFormatter -> svutListenerDirectOutputter [ dir="back", arrowtail="odiamond" ]
+}

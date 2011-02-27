@@ -1,0 +1,48 @@
+/**
+@page user-doc-test-coverage Generate a coverage of your tests
+
+@section Introduction Introduction
+
+While testing your application, you may want to check which part of it was tested. This can be achieved with the couple gcc/gcov/lcov.
+
+@section Recompileyourapplication Recompile your application
+
+To done test coverage, you need to recompile your application by using the additional CFLAGS/CXXFLAGS/LDFLAGS for gcc :
+
+<table><tr><td><strong>CFLAGS</strong></td><td> -O0 -fprofile-arcs -ftest-coverage 
+</td></tr><tr><td><strong>CXXFLAGS</strong></td><td> -O0 -fprofile-arcs -ftest-coverage 
+</td></tr><tr><td><strong>LDFLAGS</strong></td><td> -fprofile-arcs -ftest-coverage 
+</td></tr></table>
+
+<b>Caution</b>, ensure to avoid the usage of ccache of the *.gcda, *.gcdo files will not be build into the build dir which made fail lcov.
+
+Now, execute you tests.
+
+@section GenerateanHTMLreport Generate an HTML report
+
+And extract the datas from profile with lcov :
+
+@code
+lcov -o out.info -c -d .
+@endcode
+
+Here -d must point to the directory which contain the *.gcda, *.gcno files which are generated in the same directory than *.o files.
+
+Now you can build the web output :
+
+@code
+genhtml -o html out.info
+@endcode
+
+You can aggregate multiple tests by calling lcov each time as it merge the results in the output file :
+
+@code
+./monTest_1
+lcov -o out.info -c -d .
+./monTest_2
+lcov -o out.info -c -d .
+./monTest_3
+lcov -o out.info -c -d .
+genhtml -o html out.info
+@endcode
+**/

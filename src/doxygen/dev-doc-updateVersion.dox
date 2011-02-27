@@ -1,0 +1,63 @@
+/**
+@page dev-doc-updateVersion Distribution procedure for new versions
+
+Here we will discuss the different steps to distribute a new version of revision. This process may be improved along the development process depending on the platform supported.
+
+@section Updatedesources Update de sources
+
+First we need to update the sources :
+
+@subsection Updatetheversionnumber Update the version number
+
+First we need to change all the version defined into the sources files (header, sources ...)
+
+@subsection Updatethechangelog Update the changelog
+
+We need to update the changelog file respecting the format :
+
+@verbatim
+Version X.Y.Z (January 12, 2011)
+
+Short description :
+ * New point 1
+ * Fixes
+ * ...
+
+@endverbatim
+
+@subsection Passthetests Pass the tests
+
+Before committing and continuing, checking if all the tests are valid.
+
+@subsection Updatethedependencies Update the dependencies
+
+Update de dependencies version corresponding to the tests. (Wiki + /DEPENDENCIES.txt)
+
+@subsection Committhechanges Commit the changes
+
+Now we can commit the version changes.
+
+@subsection Tagtheversion Tag the version
+
+The new version has to be tagged "vX.Y.Z" :
+
+@code
+git tag vX.Y.Z
+@endcode
+
+@section Buildthepackages Build the packages
+
+Now we can build the packages depending on the supported platform :
+
+@subsection Sourcepackage Source package
+
+To build the source package, we simply run :
+
+@verbatim
+VERSION=0.1.0;\
+git archive v${VERSION} --format=tar --prefix=svUnitTest-${VERSION}/ | bzip2 > svUnitTest-${VERSION}.tar.bz2
+@endverbatim
+
+@section Uploadthepackages Upload the packages
+
+When the packages are ready for distribution, we just need to upload them to their definitive location.**/

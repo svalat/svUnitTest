@@ -1,0 +1,103 @@
+/**
+@page dev-doc-runner The default runner
+
+@section Themainidea The main idea
+
+The svUnitTest library provide a simple and quick way to run the tests. It was materialised by the class svutRunner which permit to aggregate all available class the manage their execution.
+
+It also provide a quick way to change some execution parameter. You can simply change some functional components to manage the tests :
+
+ - The display by providing your own svutResultFormatter.
+ - The event management by providing your own svutListener.
+ - The test filtering to select the tests to execute by your own way with svutTestFilter.
+
+In the future, we may also provide a scheduler to change the ordering of test execution. This will not be present is the first officiel revision.
+
+@section Usageofthisclass Usage of this class
+
+Here, we will provide some example of usage of svutRunner to illustrate is implication into the library.
+
+@subsection Afirstexample A first example
+
+To build a main methode, one must build the required components and give them to the runner :
+
+@code
+int main(void)
+{
+   svutMyTestCase test1;
+   svutMyTestCase test2;
+   //...
+   UnitTestMockResultFormater * formatter = UnitTestMockResultFormater();
+   svutListenerDirectOutputter listener(*formatter);
+   svutRunner localRunner(listener);
+   localRunner.registerTestCase(test1);
+   localRunner.registerTestCase(test2);
+   //...
+   if (localRunner.run())
+      return 0;
+   else
+      return 1;
+}
+@endcode
+
+@subsection Ashortcut A shortcut
+
+By default, the svutRunner class provide a simple constructor to done most of the job automatically :
+
+@code
+int main(void)
+{
+   svutMyTestCase test1;
+   svutMyTestCase test2;
+   //...
+   svutRunner localRunner(SVUT_OUT_STD_BW);
+   localRunner.registerTestCase(test1);
+   localRunner.registerTestCase(test2);
+   //...
+   if (localRunner.run())
+      return 0;
+   else
+      return 1;
+}
+@endcode
+
+@subsection Useautoregistration Use autoregistration
+
+If your enable the auto-registration into your test implementation, you mustn't manually build the tests, so it let only :
+
+@code
+int main(void)
+{
+   svutRunner localRunner(SVUT_OUT_STD_BW);
+   localRunner.loadAutoDetected();
+   int res = localRunner.run() ? 0 : -1;
+   localRunner.unloadAutoDetected();
+   return res;
+}
+@endcode
+
+@subsection Usingprogramparameters Using program parameters
+
+By default, the library provide a simple way to interact with the user via the calling parameters, to do so, we simply need to instanciate a svutRunnerConfig class transmit the parameters :
+
+@code
+int main(int argc,const char * argv[])
+{
+   svutRunnerConfig config(argc,argv);
+   svutRunner localRunner(config);
+   localRunner.loadAutoDetected();
+   int res = localRunner.run() ? 0 : -1;
+   localRunner.unloadAutoDetected();
+   return res;
+}
+@endcode
+
+Here, we get the basis of the default main methods wich are provided via the specific macros of the library.
+
+@section Theinternals The internals
+
+The svutRunner class is buit as an aggregator to link all classes and manage their execution. All the work mainly rely on the svutRunnner::run() method which run overs the available test cases, choose them by applying the filter, execute them and send the results to the event system.
+
+@section TheUMLdiagram The UML diagram
+
+@dotfile images/runner.dot**/

@@ -1,0 +1,230 @@
+/**
+@page dev-doc-style Programming style
+
+This page describe the style to apply to each peace of code of this library to made it uniform.
+
+@section Namingfiles Naming files
+
+All files use the same name than their main class (case sensible). We may use names convention :
+
+ - For cpp sources : <em>{nom}.cpp</em>
+ - For cpp headers :<em>{nom}.h</em>
+ - For template implementation : <em>{nom}_impl.h</em>
+ - For doxygen extra files : <em>{nom}.dox</em>
+ - For unit test files : <em>UnitTest_{className}.cpp</em>
+
+@section Namingtypes Naming types
+
+All types are prefixed by <em>svut</em> and use upper case to split words : <em>svutTestCase</em>.
+
+Macro and constants will be named in upper case : <em>SVUT_TEST_CONSTANT</em>, <em>SVUT_ASSERT_EQUAL(x)</em>.
+
+@section Sourcefiletemplate Source file template
+
+We may use this template for each header files of the library :
+
+@code
+/*****************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.1.0
+             DATE     : {MONTH}/2011
+             AUTHOR   : {AUTHOR_NAME}
+             LICENSE  : CeCILL-C
+*****************************************************/
+
+#ifndef SVUT_CLASS_NAME_HEADER
+#define SVUT_CLASS_NAME_HEADER
+
+/********************  HEADERS  *********************/
+#include <sysheader.h>
+#include "svutMyHeader.h"
+
+/********************  NAMESPACE  *******************/
+namespace svUnitTest
+{
+
+/********************  MACRO  ***********************/
+/** Macro documentation. **/
+#define SVUT_MY_MACRO 10
+
+/*********************  TYPES  **********************/
+/** Struct documentation. **/
+struct svutMyStruct
+{
+};
+
+/*********************  CLASS  **********************/
+/**
+ * Doc
+ * @brief
+ * @author
+**/
+class ClassName
+{
+};
+
+}
+
+#endif
+@endcode
+
+In your cpp source file, you may found :
+
+@code
+/*****************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.1.0
+             DATE     : {MONTH}/2011
+             AUTHOR   : {AUTHOR_NAME}
+             LICENSE  : CeCILL-C
+*****************************************************/
+
+/********************  HEADERS  *********************/
+#include "svutMyHeader.h"
+
+/**********************  USING  *********************/
+using namespace std;
+
+/********************  NAMESPACE  *******************/
+namespace svUnitTest
+{
+
+/********************  GLOBALS  *********************/
+/** Avoid it at most as possible but if really required. Their is only one currently. **/
+svutMyStruct myGlobalVar;
+
+/*******************  FUNCTION  *********************/
+/**
+ * Doc
+ * @param p1 ....
+ * @return ...
+**/
+void svutMyClass::function(void)
+{
+}
+
+}
+@endcode
+
+@section Codewidth Code width
+
+The code and documentation mustn't exceed 100 characters per lines considering 4 spaces tabulations.
+
+@section Codingconvention Coding convention
+
+Here you will find some coding conventions used for C++ code in the library., mainly to define brace style which is similar to K&R but with a break line after if lines.
+
+@subsection Indentation Indentation
+
+For indentation we used tabulation, not spaces, except for long line splitting.
+
+@subsection Namespace Namespace
+
+@code
+namespace svUnitTest
+{
+
+//namespace content.
+
+}
+@endcode
+
+Braces on the same column, no unneeded semicolon after the namespace (produce warnings on some compilers with strict mode). The content may not be indented as stay on column 0.
+
+@subsection Classstyle Class style
+
+@code
+class svutTestCase
+{
+	public:
+		svutTestCase(void);
+		virtual ~svutTestCase(void);
+
+		friend operator << (std::ostream & out, const svutTestCase & test);
+
+	private:
+		std::string name;
+};
+@endcode
+
+Style :
+
+ - Braces on same column;
+ - public/protected/private must be indented
+ - Members must be indented.
+
+@subsection Function Function
+
+Using return types on the same line, but may put the template declaration on top :
+
+@code
+template <class T>
+void function(T a)
+{
+	format(a);
+}
+
+void function(int a)
+{
+	printf("%d\n",a);
+}
+@endcode
+
+@subsection ForslashWhileloops For/While loops
+
+@code
+for (int i = 0 ; i < end ; ++i)
+{
+	doAction(i);
+}
+@endcode
+
+@subsection Ifslashelse If/else
+
+@code
+if ( pointer != NULL )
+{
+	doAction();
+	doLastAction();
+} else {
+	doAnotherAction();
+}
+@endcode
+
+For one line if and else, no brace :
+
+@code
+if ( point != NULL )
+	doAction();
+else
+	doAnotherAction();
+@endcode
+
+@subsection switchslashcase switch/case
+
+@code
+switch( value )
+{
+	case 1:
+		doAction1();
+		break;
+	case 2:
+		doAction2();
+		break;
+	default:
+		unknownAction();
+}
+@endcode
+
+@subsection Tryslashcatch Try/catch
+
+@code
+try {
+	doAnotherAction();
+} catch (std::exeption & e) {
+	doAction();
+}
+@endcode
+
+This may be more consistent to down the try brace, but I intuitively found this more readable due to the short size of "try" word. I have no strict position on that.
+**/

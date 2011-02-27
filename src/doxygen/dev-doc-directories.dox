@@ -1,0 +1,43 @@
+/**
+@page dev-doc-directories Directory structure
+
+@section slash /
+
+Files which globally describe the project (readme, licence, root of cmake,doxyfile...)
+
+@section slashcmake /cmake'
+
+Contain exta modules for cmake.
+
+@section slashsrc /src
+
+Directory which contain sources.
+
+@section slashsrcslashlib /src/lib
+
+Sources of the library.
+
+@section slashsrcslashdoxygen /src/doxygen
+
+Sources of documentation. It contain all .dox files for custom pages. Mostly generated directly from this wiki via an export script. (Need to be rewritten as is was designed for trac support).
+
+@section slashsrcslashtest /src/test
+
+Sources of unit tests of the library.
+
+@section slashsrcslashsvUnitTest_html /src/svUnitTest_html
+
+Extra resources to transform svUnitTest XML output to HTML. Those files are installed info ${PREFIX}/share/svUnitTest by installation process.
+
+@section slashsrcslashintegration /src/integration
+
+Contain some files needed to provide svUnitTest integration into external tools, for now cmake and pkg-config.
+
+@section slashsrcslashexamples /src/examples
+
+Contain some source of svUnitTest usage examples. 
+
+@section slashdoc /doc
+
+Directory where goes the generated documentation (with doxygen).
+**/

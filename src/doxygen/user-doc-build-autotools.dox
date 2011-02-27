@@ -1,0 +1,70 @@
+/**
+@page user-doc-build-autotools Build you test with autotools
+
+This page explain how to build your tests with autotools. The source of the example can be found in src/examples/build_with_autotools/.
+
+@section Checktheavailabilityofthelibrary Check the availability of the library
+
+To check the library, the simpler way is to call pkg-config :
+
+@code
+#check the presence of svUnitTest
+PKG_CHECK_MODULES([svUnitTest], [svUnitTest >= 0.1.0])
+@endcode
+
+@section Checkoptionalavailabilityofthelibrary Check optional availability of the library
+
+If you want to be linked optionnaly to svUnitTest, it was a little tricky with autotools :
+
+@code
+############################# svUnitTest #############################
+#Check for optional svUnitTest
+#To force usage, keep only the line PKG_CHECK_MODULES(...).
+
+WANT_SVUNITTEST_VERSION=0.1.0
+
+AC_ARG_WITH([svUnitTest], AS_HELP_STRING([--with-svUnitTest], [Build with the svUnitTest support]))
+
+AS_IF([test "x$with_svUnitTest" = "xyes"], [
+		PKG_CHECK_MODULES([svUnitTest], [svUnitTest >= ${WANT_SVUNITTEST_VERSION}],[HAVE_SVUNITTEST=yes])
+	],[
+		if test "x$with_svUnitTest" != "xno"; then
+			AC_MSG_CHECKING([for optional svUnitTest])
+			PKG_CHECK_EXISTS([ svUnitTest >= ${WANT_SVUNITTEST_VERSION} ], [ with_svUnitTest=yes ], [ with_svUnitTest=no ])
+			AC_MSG_RESULT($SHAVE_SVUNITTEST)
+			if test "$HAVE_SVUNITTEST" = "xyes"; then
+				PKG_CHECK_MODULES([svUnitTest], [svUnitTest >= ${WANT_SVUNITTEST_VERSION}])
+			fi
+		fi
+	])
+
+
+
+AM_CONDITIONAL(HAVE_SVUNITTEST, test "$with_svUnitTest" = yes)
+#######################################################################
+@endcode
+
+In you Makefile.am, you can now filter with :
+
+@code
+if HAVE_SVUNITTEST
+#put your code here
+endif
+@endcode
+
+With such script, the svUnitTest was silently tested by default and enabled if found. The user can force things via --with/without-svUnitTest.
+
+@section SetupLDslashCFLAGS Setup LD/CFLAGS :
+
+If svUnitTest was not an option remove the if/endif statements.
+
+@code
+if HAVE_SVUNITTEST
+bin_PROGRAMS=testString
+testString_SOURCES=testString.cpp
+testString_LDADD=@svUnitTest_LIBS@
+testString_CXXFLAGS=@svUnitTest_CFLAGS@
+TESTS=testString
+endif
+@endcode
+**/

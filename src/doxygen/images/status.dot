@@ -1,0 +1,17 @@
+digraph G
+{
+	TODO [style=filled, fillcolor=orange]
+	INDEV [style=filled, fillcolor=blue]
+	SUCCESS [style=filled, fillcolor=green]
+	FAILED [style=filled, fillcolor=red]
+	TODO -> INDEV
+	INDEV -> SUCCESS
+	INDEV -> FAILED
+	SUCCESS -> FAILED
+	FAILED -> SUCCESS
+        FAILED -> INDEV
+        SUCCESS -> INDEV
+        FAILED -> TODO
+	{ rank = same; SUCCESS; FAILED; }
+}
+

@@ -1,0 +1,46 @@
+/**
+@page dev-doc-gcov Doing unit test coverage with gcov/lcov
+
+To do test coverage with gcc we must use gcov coupled to lcov to generate html results in which we can navigate. 
+
+First we need to setup some CFLAGS to compile the code you want to check : 
+
+<table>
+<tr><td><strong>CFLAGS</strong></td><td>-O0 -fprofile-arcs -ftest-coverage</td></tr>
+<tr><td><strong>CXXFLAGS</strong></td><td>-O0 -fprofile-arcs -ftest-coverage</td></tr>
+<tr><td><strong>LDFLAGS</strong></td><td>-fprofile-arcs -ftest-coverage</td></tr></table>
+
+Caution, don't forget the to use flags in LDFLAGS or you will get a failure.
+
+Now you just run your tests :
+
+@code
+./monTest_1
+@endcode
+
+And extract the datas from profile with lcov :
+
+@code
+lcov -o out.info -c -d .
+@endcode
+
+Here -d must point to the directory which contain the *.gcda, *.gcno files which are generated in the same directory than *.o files.
+
+Now you can build the web output :
+
+@code
+genhtml -o html out.info
+@endcode
+
+You can aggregate multiple tests by calling lcov each time as it merge the results in the output file :
+
+@code
+./monTest_1
+lcov -o out.info -c -d .
+./monTest_2
+lcov -o out.info -c -d .
+./monTest_3
+lcov -o out.info -c -d .
+genhtml -o html out.info
+@endcode
+**/

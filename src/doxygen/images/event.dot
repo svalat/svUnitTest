@@ -1,0 +1,19 @@
+#!graphviz
+digraph G
+{
+    onGlobalStart
+    onGlobalEnd
+    onTestCaseStart [style=filled, fillcolor=gray]
+    onTestCaseEnd [style=filled, fillcolor=gray]
+    onTestMethodStart [style=filled, fillcolor=yellow]
+    onTestMethodEnd [style=filled, fillcolor=yellow]
+
+    onGlobalStart -> onTestCaseStart
+    onTestCaseStart -> onTestMethodStart
+    onTestMethodStart -> onTestMethodEnd
+    onTestMethodEnd -> onTestMethodStart
+    onTestMethodEnd -> onTestCaseEnd
+    onTestCaseEnd -> onTestCaseStart
+    onTestCaseEnd -> onGlobalEnd
+
+}
