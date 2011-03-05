@@ -81,8 +81,8 @@ class svutArgp
 		bool parse(int argc, const char * argv[],std::ostream & err = std::cerr);
 		void decalareOption(char key,std::string name,std::string valueType,std::string descr) throw (svutExArgpDuplicateKey);
 		void clearOptions(void);
-		void showHelp(std::ostream & out = std::cout);
-		std::string getHelp(int columns = 80);
+		void showHelp(std::ostream & out = std::cout) const;
+		std::string getHelp(int columns = 80) const;
 		void setProjectName(std::string projectName);
 		void setProjectVersion(std::string projectVersion);
 		void setProjectBugAddress(std::string projectBugAddress);

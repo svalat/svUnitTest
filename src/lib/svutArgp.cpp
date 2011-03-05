@@ -143,7 +143,7 @@ int svutArgp::getTermColumns(void) const
  * Function used to generate the help string and print it onto the standard output.
  * @param out Define the output stream to use.
 **/
-void svutArgp::showHelp(std::ostream & out)
+void svutArgp::showHelp(std::ostream & out) const
 {
 	out << getHelp();
 }
@@ -154,7 +154,7 @@ void svutArgp::showHelp(std::ostream & out)
  * @param columns Define the limit to use to split lines. Use -1 to none.
  * @return Return the help string directly formatted for the output.
 **/
-string svutArgp::getHelp(int columns)
+string svutArgp::getHelp(int columns) const
 {
 	stringstream str;
 	int cols = this->getTermColumns();

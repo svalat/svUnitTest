@@ -233,9 +233,9 @@ void svutRunner::loadAutoDetected(void)
  * @param name Define the test case name to search.
  * @return True if such a test case exist, false otherwise.
 **/
-bool svutRunner::hasTestNamed(std::string name)
+bool svutRunner::hasTestNamed(std::string name) const
 {
-	for( list<svutTestCase *>::iterator it=suites.begin(); it != suites.end() ; ++it)
+	for( list<svutTestCase *>::const_iterator it=suites.begin(); it != suites.end() ; ++it)
 	{
 		if ((*it)->getName() == name)
 			return true;
@@ -271,10 +271,10 @@ void svutRunner::unloadAutoDetected(void)
  * if need. For exemple disable the display of testCase name if their is only one.
  * @return True s'il y a plus d'un cas de test.
 **/
-bool svutRunner::hasMultipleTestCase(void)
+bool svutRunner::hasMultipleTestCase(void) const
 {
 	int cnt = 0;
-	for(list<svutTestCase *>::iterator it=suites.begin();it!=suites.end();it++)
+	for(list<svutTestCase *>::const_iterator it=suites.begin();it!=suites.end();it++)
 	{
 		list<string> tmp = (*it)->getTestMethods(false);
 		if (testFilter == NULL || testFilter->accept((*it)->getName()))
