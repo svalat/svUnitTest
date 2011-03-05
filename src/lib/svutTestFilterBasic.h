@@ -34,6 +34,9 @@ struct svutTestFilterBasicRule
 	std::string methode;
 };
 
+/********************** TYPEDEF *********************/
+typedef std::list<svutTestFilterBasicRule> svutTestFilterBasicRuleList;
+
 /*********************  CLASS  **********************/
 /**
  * Implement a simple support for test case filtering. Here, we only execute tests which match
@@ -52,7 +55,7 @@ class svutTestFilterBasic : public svutTestFilter
 		void clear(void);
 	protected:
 		/** List of rules for accepted methods, if empty all are accepted. **/
-		std::list<svutTestFilterBasicRule> filters;
+		svutTestFilterBasicRuleList filters;
 };
 
 }

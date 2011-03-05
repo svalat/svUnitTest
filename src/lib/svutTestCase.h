@@ -37,6 +37,12 @@ namespace svUnitTest
 	this->registerTestMethod(__svut__testMeth__);\
 } while(0)
 
+/********************** TYPEDEF *********************/
+/** List of pointers to test methods. **/
+typedef std::list<svutTestMethod *> svutTestMethodPtrList;
+/** List of names of test methods. **/
+typedef std::list<std::string> svutTestMethodNameList;
+
 /*********************  CLASS  **********************/
 class svutListener;
 
@@ -76,7 +82,7 @@ class svutTestCase
 		//void runTestCase2(svutResultFormater & formater,const svutTestFilter & filter);
 		void runTestCase(svutListener * listener,svutTestFilter * filter = NULL);
 		std::string getName(void) const;
-		std::list<std::string> getTestMethods(bool prefix) const;
+		svutTestMethodNameList getTestMethods(bool prefix) const;
 		unsigned int getNbTests(void) const;
 		void setAutodetected(void);
 		bool isAutodetected(void) const;
@@ -85,7 +91,7 @@ class svutTestCase
 		svutStatusInfo runTestMethod(svutTestMethod * test);
 		void MARK_AS_KNOWN_ERROR(std::string message);
 		/** Define the list of tests methods in the current test case. **/
-		std::list<svutTestMethod *> tests;
+		svutTestMethodPtrList tests;
 		/** Define the name of the current test case, this may be the classe name. **/
 		std::string caseName;
 	private:

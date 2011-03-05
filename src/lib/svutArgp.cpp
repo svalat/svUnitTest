@@ -163,7 +163,7 @@ string svutArgp::getHelp(int columns) const
 	str << this->projectName << " -- " << this->projectDescr << endl << endl;
 
 	//standard helps
-	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+	for (svutArgpOptionMap::const_iterator it = options.begin() ; it != options.end() ; ++it)
 		if (it->first != '?' && it->first != SVUT_USAGE_KEY)
 			str << formatArgumentHelp(it->second,cols) << endl;
 
@@ -186,7 +186,7 @@ string svutArgp::getHelp(int columns) const
 **/
 bool svutArgp::hasLongName(std::string name) const
 {
-	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+	for (svutArgpOptionMap::const_iterator it = options.begin() ; it != options.end() ; ++it)
 		if (it->second.name == name)
 			return true;
 	return false;
@@ -363,29 +363,29 @@ string svutArgp::getUsage ( int columns ) const
 	
 
 	//usage for grouped short options
-	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+	for (svutArgpOptionMap::const_iterator it = options.begin() ; it != options.end() ; ++it)
 		if (this->isValidKey(it->second.key) && it->second.valueType == "NONE")
 			shortNotArgGrouped += it->second.key;
 	if ( ! shortNotArgGrouped.empty() )
 		res << " [-" << shortNotArgGrouped << "]";
 
 	//usage for short option with values
-	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+	for (svutArgpOptionMap::const_iterator it = options.begin() ; it != options.end() ; ++it)
 		if (this->isValidKey(it->second.key) && it->second.valueType != "NONE")
 			res << genUsageParam(it->second,true);
 
 	//usage for long option without values
-	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+	for (svutArgpOptionMap::const_iterator it = options.begin() ; it != options.end() ; ++it)
 		if (it->second.valueType == "NONE")
 			res << genUsageParam(it->second,false);
 
 	//usage for long option with values
-	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+	for (svutArgpOptionMap::const_iterator it = options.begin() ; it != options.end() ; ++it)
 		if (it->second.valueType != "NONE")
 			res << genUsageParam(it->second,false);
 
 	//usage for short option without values
-	for (map<char,svutArgDef>::const_iterator it = options.begin() ; it != options.end() ; ++it)
+	for (svutArgpOptionMap::const_iterator it = options.begin() ; it != options.end() ; ++it)
 		if (this->isValidKey(it->second.key) && it->second.valueType == "NONE")
 			res << genUsageParam(it->second,true);
 
@@ -492,7 +492,7 @@ bool svutArgp::parse(int argc, const char* argv[],std::ostream & err)
 int svutArgp::scanLongOption(std::string name, int argc, const char* argv[]) throw (svutExArgpError)
 {
 	size_t cut = name.find_first_of("=");
-	std::map<char,svutArgDef>::const_iterator it = options.begin();
+	svutArgpOptionMap::const_iterator it = options.begin();
 	string tmp = name.substr(0,cut);
 	
 	//search option
@@ -539,7 +539,7 @@ int svutArgp::scanLongOption(std::string name, int argc, const char* argv[]) thr
 int svutArgp::scanShortOptions(std::string list, int argc, const char* argv[]) throw (svutExArgpError)
 {
 	int res = 1;
-	std::map<char,svutArgDef>::const_iterator it;
+	svutArgpOptionMap::const_iterator it;
 
 	//scan all options
 	for ( size_t i = 0 ; i < list.size() ; ++i )

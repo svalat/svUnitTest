@@ -24,6 +24,10 @@
 namespace svUnitTest
 {
 
+/********************** TYPEDEF *********************/
+/** List of pointers to test cases. **/
+typedef std::list<svutTestCase *> svutTestCasePtrList;
+
 /*********************  CLASS  **********************/
 /**
  * Class used to run the tests. It must be instanciate in main function to run all registrerd unit
@@ -66,7 +70,7 @@ class svutRunner
 		/** Define if the formatter was created by the current class of not. **/
 		bool ownTheFormatter;
 		/** Define the list of tests to execute. **/
-		std::list<svutTestCase *> suites;
+		svutTestCasePtrList suites;
 		/** Keep an hant to the config object. **/
 		svutRunnerConfig * config;
 		/** Used to filter the list of tests to execute. **/

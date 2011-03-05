@@ -36,7 +36,7 @@ bool svutTestFilterBasic::accept(std::string caseName,std::string methode) const
 	if (filters.empty())
 		return true;
 	//filter
-	for (list<svutTestFilterBasicRule>::const_iterator it=filters.begin();it!=filters.end();++it)
+	for (svutTestFilterBasicRuleList::const_iterator it=filters.begin();it!=filters.end();++it)
 	{
 		if ((it->caseName.empty() || it->caseName == caseName) && (it->methode.empty() || it->methode == methode))
 			return true;
@@ -51,7 +51,7 @@ bool svutTestFilterBasic::accept(std::string caseName) const
 	if (filters.empty())
 		return true;
 	//filter
-	for (list<svutTestFilterBasicRule>::const_iterator it=filters.begin();it!=filters.end();++it)
+	for (svutTestFilterBasicRuleList::const_iterator it=filters.begin();it!=filters.end();++it)
 	{
 		if ((it->caseName.empty() || it->caseName == caseName))
 			return true;

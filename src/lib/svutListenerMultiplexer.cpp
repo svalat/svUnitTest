@@ -20,42 +20,42 @@ namespace svUnitTest
 /*******************  FUNCTION  *********************/
 void svutListenerMultiplexer::onGlobalStart(void )
 {
-	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
+	for (svutListenerPtrList::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
 		(*it)->onGlobalStart();
 }
 
 /*******************  FUNCTION  *********************/
 void svutListenerMultiplexer::onGlobalEnd(void )
 {
-	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
+	for (svutListenerPtrList::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
 		(*it)->onGlobalEnd();
 }
 
 /*******************  FUNCTION  *********************/
 void svutListenerMultiplexer::onTestCaseEnd(const svUnitTest::svutTestCase& testCase)
 {
-	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
+	for (svutListenerPtrList::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
 		(*it)->onTestCaseEnd(testCase);
 }
 
 /*******************  FUNCTION  *********************/
 void svutListenerMultiplexer::onTestCaseStart(const svUnitTest::svutTestCase& testCase)
 {
-	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
+	for (svutListenerPtrList::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
 		(*it)->onTestCaseStart(testCase);
 }
 
 /*******************  FUNCTION  *********************/
 void svutListenerMultiplexer::onTestMethodEnd(const svUnitTest::svutTestCase & testCase,const svutTestMethod & method, svutStatusInfo status)
 {
-	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
+	for (svutListenerPtrList::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
 		(*it)->onTestMethodEnd(testCase,method,status);
 }
 
 /*******************  FUNCTION  *********************/
 void svutListenerMultiplexer::onTestMethodStart(const svUnitTest::svutTestCase & testCase,const svutTestMethod & method)
 {
-	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
+	for (svutListenerPtrList::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
 		(*it)->onTestMethodStart(testCase,method);
 }
 
@@ -77,7 +77,7 @@ void svutListenerMultiplexer::addListener(svutListener* listener)
 **/
 void svutListenerMultiplexer::removeListener(svutListener* listener)
 {
-	for (list<svutListener*>::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
+	for (svutListenerPtrList::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
 		if (*it == listener)
 		{
 			listeners.remove(listener);

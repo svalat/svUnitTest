@@ -40,6 +40,10 @@ enum svutStatus
 	SVUT_STATUS_UNKNOWN
 };
 
+/********************** TYPEDEF *********************/
+/** Map of key,value pair to provide information on final status. **/
+typedef std::map<std::string,std::string> svutStatusInfoMap;
+
 /*********************  CLASS  **********************/
 /**
  * This class store informations related to the exit status of a test. It provite a simple agregation
@@ -61,7 +65,7 @@ class svutStatusInfo
 		void addEntry(const char * name,const std::string & value);
 		void formatEntries(std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix) const;
 		void formatEntries(std::ostream & out,const char * prefix,const char * separator,const char * postfix) const;
-		std::map<std::string,std::string> getEntries(void) const;
+		svutStatusInfoMap getEntries(void) const;
 		unsigned int getNbEntries(void) const;
 		std::string getEntry(std::string name) const;
 		svutStatusInfo & operator = (const svutStatusInfo & orig);
@@ -71,7 +75,7 @@ class svutStatusInfo
 		/** Define the message related to the status of the test. **/
 		std::string message;
 		/** Extra parameters to describe the current status, mainly for errors debugging. **/
-		std::map<std::string,std::string> entries;
+		svutStatusInfoMap entries;
 		/** Keep the postition of failing assertion in the source code. **/
 		svutCodeLocation location;
 		/** Define the current status of the test.**/

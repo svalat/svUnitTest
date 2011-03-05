@@ -108,7 +108,7 @@ void svutStatusInfo::addEntry ( const char* name, const std::string& value )
 /**
  * @return Return the list of parameters related to the current status.
 **/
-std::map<std::string,std::string> svutStatusInfo::getEntries(void) const
+svutStatusInfoMap svutStatusInfo::getEntries(void) const
 {
 	return entries;
 }

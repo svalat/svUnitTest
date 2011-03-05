@@ -59,11 +59,15 @@ class svutExArgpDuplicateKey : public svutException
 		std::string name;
 };
 
-/*********************  CLASS  **********************/
+/********************** TYPEDEF *********************/
 /**
  * Define an exception class for parsing errors
 **/
 typedef svutException svutExArgpError;
+/**
+ * Map of parsor options indexted by the shortname of the option.
+**/
+typedef std::map<char,svutArgDef> svutArgpOptionMap;
 
 /*********************  CLASS  **********************/
 /**
@@ -125,7 +129,7 @@ class svutArgp
 		std::string breakLines( std::string pad, unsigned int columns, std::string value) const;
 		
 		/** Store the list of available options. **/
-		std::map<char,svutArgDef> options;
+		svutArgpOptionMap options;
 		/** Name of the project. **/
 		std::string projectName;
 		/** Version of the project. **/

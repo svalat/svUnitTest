@@ -138,7 +138,7 @@ bool svutRunner::run_tests(void)
 	if (this->formatter != NULL)
 		formatter->setDisplayFullName(hasMultipleTestCase());
 	this->listener.onGlobalStart();
-	for(list<svutTestCase *>::iterator it=suites.begin();it!=suites.end();it++)
+	for(svutTestCasePtrList::iterator it=suites.begin();it!=suites.end();it++)
 	{
 		if (testFilter == NULL || testFilter->accept((*it)->getName()))
 			(*it)->runTestCase(&listener,this->testFilter);
@@ -162,7 +162,7 @@ bool svutRunner::run_list_tests(void)
 	else
 		out = & config->getOutput();
 	//search all
-	for(list<svutTestCase *>::iterator it=suites.begin();it!=suites.end();it++)
+	for(svutTestCasePtrList::iterator it=suites.begin();it!=suites.end();it++)
 	{
 		list<string> tmp = (*it)->getTestMethods(false);
 		for (list<string>::iterator it2=tmp.begin();it2!=tmp.end();++it2)
@@ -235,7 +235,7 @@ void svutRunner::loadAutoDetected(void)
 **/
 bool svutRunner::hasTestNamed(std::string name) const
 {
-	for( list<svutTestCase *>::const_iterator it=suites.begin(); it != suites.end() ; ++it)
+	for( svutTestCasePtrList::const_iterator it=suites.begin(); it != suites.end() ; ++it)
 	{
 		if ((*it)->getName() == name)
 			return true;
@@ -250,15 +250,15 @@ bool svutRunner::hasTestNamed(std::string name) const
 **/
 void svutRunner::unloadAutoDetected(void)
 {
-	std::vector<list<svutTestCase *>::iterator> toRemove;
+	std::vector<svutTestCasePtrList::iterator> toRemove;
 	
 	//search members to remove
-	for (list<svutTestCase *>::iterator it=suites.begin() ; it != suites.end() ; ++it)
+	for (svutTestCasePtrList::iterator it=suites.begin() ; it != suites.end() ; ++it)
 		if ((*it)->isAutodetected())
 			toRemove.push_back(it);
 
 	//apply remove actions
-	for (std::vector<list<svutTestCase *>::iterator>::iterator it = toRemove.begin() ; it != toRemove.end() ; ++it)
+	for (std::vector<svutTestCasePtrList::iterator>::iterator it = toRemove.begin() ; it != toRemove.end() ; ++it)
 	{
 		delete **it;
 		suites.erase(*it);
@@ -274,7 +274,7 @@ void svutRunner::unloadAutoDetected(void)
 bool svutRunner::hasMultipleTestCase(void) const
 {
 	int cnt = 0;
-	for(list<svutTestCase *>::const_iterator it=suites.begin();it!=suites.end();it++)
+	for(svutTestCasePtrList::const_iterator it=suites.begin();it!=suites.end();it++)
 	{
 		list<string> tmp = (*it)->getTestMethods(false);
 		if (testFilter == NULL || testFilter->accept((*it)->getName()))

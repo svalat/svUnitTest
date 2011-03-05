@@ -22,8 +22,6 @@ namespace svUnitTest
 /*
  * Liste contenant les cas de tests auto-enregistrés pour pouvoir les récupérer depuis
  * svutRunner.
- * @todo A déplacer.
-// list<svutTestCaseBuilder *> __SVUT_autoFoundTests__;
 */
 
 /*******************  FUNCTION  *********************/
@@ -57,7 +55,7 @@ svutTestCase::svutTestCase(const svUnitTest::svutTestCase& /*testCase*/)
 **/
 svutTestCase::~svutTestCase(void)
 {
-	for (std::list<svutTestMethod *>::iterator it = tests.begin();it!=tests.end();++it)
+	for (svutTestMethodPtrList::iterator it = tests.begin();it!=tests.end();++it)
 		delete *it;
 }
 
@@ -77,7 +75,7 @@ void svutTestCase::runTestCase(svutListener * listener,svutTestFilter * filter)
 		listener->onTestCaseStart(*this);
 
 	//done the job
-	for (std::list<svutTestMethod *>::iterator it = tests.begin();it!=tests.end();++it)
+	for (svutTestMethodPtrList::iterator it = tests.begin();it!=tests.end();++it)
 	{
 		//check if need to execute the methode
 		if (filter == NULL || filter->accept(this->getName(),(*it)->getName()))
@@ -213,12 +211,12 @@ bool svutTestCase::isAutodetected(void) const
  * @param prefix Define if the names are prefixed by the test case name or not (using :: as separator).
  * @return Return the list of names in string list format.
 **/
-std::list<std::string> svutTestCase::getTestMethods(bool prefix) const
+svutTestMethodNameList svutTestCase::getTestMethods(bool prefix) const
 {
 	list<string> res;
 	string pf;
 	if (prefix) pf = this->caseName + "::";
-	for (std::list<svutTestMethod *>::const_iterator it = tests.begin();it!=tests.end();++it)
+	for (svutTestMethodPtrList::const_iterator it = tests.begin();it!=tests.end();++it)
 		res.push_back(pf + (*it)->getName());
 	return res;
 }

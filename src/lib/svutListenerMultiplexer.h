@@ -17,6 +17,10 @@
 namespace svUnitTest
 {
 
+/********************** TYPEDEF *********************/
+/** List of pointer to svutListener class. **/
+typedef std::list<svutListener *> svutListenerPtrList;
+
 /********************* CLASS ************************/
 /**
  * This class base on svutEvent may be used to manage multi event dispatching. It handle multiple
@@ -38,7 +42,7 @@ class svutListenerMultiplexer : public svutListener
 		unsigned int countListener(void) const;
 	private:
 		/** Define the list of listener on which to dipatch events. **/
-		std::list<svutListener *> listeners;
+		svutListenerPtrList listeners;
 		
 };
 
