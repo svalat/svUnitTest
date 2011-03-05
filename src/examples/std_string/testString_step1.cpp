@@ -35,9 +35,9 @@ SVUT_REGISTER_STANDELONE(testString);
 testString::testString(void)
            :svutTestCase("testString")
 {
-	SVUT_REG_TEST_METHOD(testString,testSize);
-	SVUT_REG_TEST_METHOD(testString,testClear);
-	SVUT_REG_TEST_METHOD(testString,testOperatorPlus);
+	SVUT_REG_TEST_METHOD(testSize);
+	SVUT_REG_TEST_METHOD(testClear);
+	SVUT_REG_TEST_METHOD(testOperatorPlus);
 };
 
 /*******************  FUNCTION  *********************/

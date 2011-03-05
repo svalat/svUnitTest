@@ -31,8 +31,9 @@ namespace svUnitTest
  * the generic class svutObjectMethodeGeneric.
  * @param func Define the name of the test method to register.
 **/
-#define SVUT_REG_TEST_METHOD(type,func) do{\
-	svUnitTest::svutObjectMethod * __svut__meth__ = new svUnitTest::svutObjectMethodGeneric<type>(this,&type::func);\
+#define SVUT_REG_TEST_METHOD(func) do{\
+	typedef typeof(*this) __SVUT_CURRENT_CLASS__;\
+	svUnitTest::svutObjectMethod * __svut__meth__ = new svUnitTest::svutObjectMethodGeneric<__SVUT_CURRENT_CLASS__>(this,&__SVUT_CURRENT_CLASS__::func);\
 	svUnitTest::svutTestMethod * __svut__testMeth__ = new svUnitTest::svutTestMethod(#func,__svut__meth__,SVUT_CODE_LOCATION); \
 	this->registerTestMethod(__svut__testMeth__);\
 } while(0)

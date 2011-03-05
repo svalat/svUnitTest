@@ -38,10 +38,10 @@ SVUT_REGISTER_TEST_CASE(testNothing);
 testNothing::testNothing(void)
 	:svutTestCase("testNothing")
 {
-	SVUT_REG_TEST_METHOD(testNothing,testFunc1);
-	SVUT_REG_TEST_METHOD(testNothing,testFunc2);
-	SVUT_REG_TEST_METHOD(testNothing,testFunc3);
-	SVUT_REG_TEST_METHOD(testNothing,testFunc4);
+	SVUT_REG_TEST_METHOD(testFunc1);
+	SVUT_REG_TEST_METHOD(testFunc2);
+	SVUT_REG_TEST_METHOD(testFunc3);
+	SVUT_REG_TEST_METHOD(testFunc4);
 };
 
 /*******************  FUNCTION  *********************/

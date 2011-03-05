@@ -57,8 +57,8 @@ SVUT_REGISTER_TEST_CASE(UnitTest_MyTestCase3);
 UnitTest_MyTestCaseBase::UnitTest_MyTestCaseBase(string name)
 	:svutTestCase(name)
 {
-	SVUT_REG_TEST_METHOD(UnitTest_MyTestCaseBase,test1);
-	SVUT_REG_TEST_METHOD(UnitTest_MyTestCaseBase,test2);
+	SVUT_REG_TEST_METHOD(test1);
+	SVUT_REG_TEST_METHOD(test2);
 }
 
 /*******************  FUNCTION  *********************/

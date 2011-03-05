@@ -26,6 +26,7 @@ class UnitTest_svutTestMethod : public TestCase
 	CPPUNIT_TEST(testGetName);
 	CPPUNIT_TEST(testGetLocation);
 	CPPUNIT_TEST(testCall);
+	CPPUNIT_TEST(testUsageOfTypeof);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -37,6 +38,7 @@ class UnitTest_svutTestMethod : public TestCase
 		void testGetName(void);
 		void testGetLocation(void);
 		void testCall(void);
+		void testUsageOfTypeof(void);
 
 		void methToCall(void);
 		svutTestMethod * meth;
@@ -91,6 +93,18 @@ void UnitTest_svutTestMethod::methToCall(void )
 	called = true;
 }
 
-
+/*******************  FUNCTION  *********************/
+void UnitTest_svutTestMethod::testUsageOfTypeof(void )
+{
+	svutTestMethod * obj;
+	typedef typeof(*this) CURRENT_CLASS;
+	obj = new svutTestMethod("theTest",
+		new svutObjectMethodGeneric<UnitTest_svutTestMethod>(this,&CURRENT_CLASS::methToCall),
+		loc);
+	CPPUNIT_ASSERT_EQUAL(false,called);
+	obj->call();
+	CPPUNIT_ASSERT_EQUAL(true,called);
+	delete obj;
+}
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutTestMethod);

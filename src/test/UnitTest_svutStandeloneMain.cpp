@@ -33,8 +33,8 @@ class UnitTest_MyTestCaseBase : public svutTestCase
 UnitTest_MyTestCaseBase::UnitTest_MyTestCaseBase()
 	:svutTestCase("UnitTest_MyTestCaseBase")
 {
-	SVUT_REG_TEST_METHOD(UnitTest_MyTestCaseBase,test1);
-	SVUT_REG_TEST_METHOD(UnitTest_MyTestCaseBase,test2);
+	SVUT_REG_TEST_METHOD(test1);
+	SVUT_REG_TEST_METHOD(test2);
 }
 
 /*******************  FUNCTION  *********************/

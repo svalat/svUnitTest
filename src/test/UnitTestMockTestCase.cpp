@@ -20,8 +20,8 @@ UnitTestMockTestCase::UnitTestMockTestCase(void ):
 	t1 = -1;
 	t2 = -1;
 	t3 = -1;
-	SVUT_REG_TEST_METHOD(UnitTestMockTestCase,test1);
-	SVUT_REG_TEST_METHOD(UnitTestMockTestCase,test3);
+	SVUT_REG_TEST_METHOD(test1);
+	SVUT_REG_TEST_METHOD(test3);
 }
 
 /*******************  FUNCTION  *********************/
@@ -57,7 +57,7 @@ void UnitTestMockTestCase::test3(void)
 /*******************  FUNCTION  *********************/
 void UnitTestMockTestCase::testRegister(void)
 {
-	SVUT_REG_TEST_METHOD(UnitTestMockTestCase,test2);
+	SVUT_REG_TEST_METHOD(test2);
 }
 
 /*******************  FUNCTION  *********************/
