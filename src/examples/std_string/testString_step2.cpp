@@ -59,20 +59,20 @@ void testString::tearDown(void)
 void testString::testSize(void)
 {
 	//assume "Hello World !!!" contain 15 characters
-	SVUT_ASSERT_EQUAL(15,obj->size());
+	SVUT_ASSERT_EQUAL(15u,obj->size());
 }
 
 /*******************  FUNCTION  *********************/
 void testString::testClear(void)
 {
 	//pre check
-	SVUT_ASSERT_EQUAL(15,obj->size());
+	SVUT_ASSERT_EQUAL(15u,obj->size());
 	SVUT_ASSERT_EQUAL("Hello World !!!",*obj);
 
 	obj->clear();
 
 	//post check
-	SVUT_ASSERT_EQUAL(0,obj->size());
+	SVUT_ASSERT_EQUAL(0u,obj->size());
 	SVUT_ASSERT_EQUAL("",*obj);
 }
 
@@ -80,12 +80,12 @@ void testString::testClear(void)
 void testString::testOperatorPlus(void)
 {
 	//pre check
-	SVUT_ASSERT_EQUAL(15,obj->size());
+	SVUT_ASSERT_EQUAL(15u,obj->size());
 	SVUT_ASSERT_EQUAL("Hello World !!!",*obj);
 
 	*obj = (*obj) + " Tested.";
 
 	//post check
-	SVUT_ASSERT_EQUAL(23,obj->size());
+	SVUT_ASSERT_EQUAL(23u,obj->size());
 	SVUT_ASSERT_EQUAL("Hello World !!! Tested.",*obj);
 }

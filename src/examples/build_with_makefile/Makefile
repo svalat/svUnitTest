@@ -11,7 +11,9 @@ CXX=g++
 RM=rm -f
 PKGCONFIG=pkg-config
 ####################### FLAGS ########################
+ifeq "$SVUNITTEST_PREFIX" ""
 SVUNITTEST_PREFIX=/usr
+endif
 CXXFLAGS=-I${SVUNITTEST_PREFIX}/include
 LDFLAGS=-L${SVUNITTEST_PREFIX}/lib -lsvunittest
 
