@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.2.0
-             DATE     : 02/2011
+             VERSION  : 0.3.0-dev
+             DATE     : 03/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -35,7 +35,7 @@ void svUnitTest::svutResultFormatterQtXml::openOutput(void )
 	*out << "<?xml version='1.0' encoding='UTF-8'?>" << endl;
 	*out << "<TestCase name='svUnitTest'>" << endl;
 	*out << "\t<Environment>" << endl;
-	*out << "\t\t<svUnitTestVersion>0.2.0</svUnitTestVersion>" << endl;
+	*out << "\t\t<svUnitTestVersion>0.3.0-dev</svUnitTestVersion>" << endl;
 	*out << "\t</Environment>" << endl;
 }
 
