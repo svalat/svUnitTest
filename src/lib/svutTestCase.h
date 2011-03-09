@@ -84,6 +84,7 @@ class svutTestCase
 		void runTestCase(svutListener * listener,svutTestFilter * filter = NULL);
 		std::string getName(void) const;
 		svutTestMethodNameList getTestMethods(bool prefix) const;
+		void listTestMethods(svutListener & listener,svutTestFilter * filter = NULL) const;
 		unsigned int getNbTests(void) const;
 		void setAutodetected(void);
 		bool isAutodetected(void) const;

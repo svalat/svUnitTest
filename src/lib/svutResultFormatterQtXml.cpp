@@ -136,4 +136,25 @@ string svUnitTest::svutResultFormatterQtXml::getQtStatusName(svutStatus status)
 	}
 }
 
+/*******************  FUNCTION  *********************/
+void svutResultFormatterQtXml::onListingStart(void )
+{
+	//nothing to do for std mode
+}
+
+/*******************  FUNCTION  *********************/
+void svutResultFormatterQtXml::onListingEnd(void )
+{
+	//nohting to do for std mode
+}
+
+/*******************  FUNCTION  *********************/
+void svutResultFormatterQtXml::onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method)
+{
+	if (displayFullName)
+		*out << testCase.getName() << "::" << method.getName() << "()\n";
+	else
+		*out << method.getName() << "()\n";
+}
+
 }

@@ -31,6 +31,7 @@ class UnitTestsvutListener : public TestCase
 	CPPUNIT_TEST(testOnTestMethodStart);
 	CPPUNIT_TEST(testOnTestMethodEnd);
 	CPPUNIT_TEST(testSetListener);
+	CPPUNIT_TEST(testListMethod);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -44,6 +45,7 @@ class UnitTestsvutListener : public TestCase
 		void testOnTestMethodStart(void);
 		void testOnTestMethodEnd(void);
 		void testSetListener(void);
+		void testListMethod(void);
 	protected:
 		UnitTestMockListener * listener;
 		UnitTestMockTestCase * testCase;
@@ -149,5 +151,19 @@ void UnitTestsvutListener::testSetListener(void )
 	CPPUNIT_ASSERT_EQUAL(6,list.mockTime);
 }
 
+/*******************  FUNCTION  *********************/
+void UnitTestsvutListener::testListMethod(void )
+{
+	UnitTestMockListener list;
+	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
+	CPPUNIT_ASSERT_EQUAL(0,list.mockTime);
+	CPPUNIT_ASSERT_EQUAL(-1,list.mockEvents.list_method);
+	
+	testCase->listTestMethods(list);
+
+	CPPUNIT_ASSERT_EQUAL(0,listener->mockTime);
+	CPPUNIT_ASSERT_EQUAL(2,list.mockTime);
+	CPPUNIT_ASSERT_EQUAL(1,list.mockEvents.list_method);
+}
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTestsvutListener);

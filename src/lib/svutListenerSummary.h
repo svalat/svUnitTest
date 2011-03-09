@@ -36,6 +36,9 @@ class svutListenerSummary : public svutListener
 		virtual void onTestMethodStart(const svUnitTest::svutTestCase & testCase,const svUnitTest::svutTestMethod & method);
 		virtual void onTestMethodEnd(const svUnitTest::svutTestCase & testCase,const svUnitTest::svutTestMethod & method,svUnitTest::svutStatusInfo status);
 		virtual void onGlobalEnd(void);
+		virtual void onListingStart(void );
+		virtual void onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method);
+		virtual void onListingEnd(void );
 	protected:
 		/** Store the global summary to fill. **/
 		svutResultSummary summary;

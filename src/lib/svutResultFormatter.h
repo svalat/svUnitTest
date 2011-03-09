@@ -76,6 +76,20 @@ class svutResultFormatter
 		 * @param summary Define the global summary to print if needed.
 		**/
 		virtual void printSummary(svutResultSummary summary) = 0;
+		/**
+		 * Method called when starting to list available tests.
+		**/
+		virtual void onListingStart(void) = 0;
+		/**
+		 * Method called when listing a new available test method.
+		 * @param testCase Define the test case which contain the method.
+		 * @param method Define the methode which is ended.
+		**/
+		virtual void onListMethod(const svutTestCase & testCase,const svutTestMethod & method) = 0;
+		/**
+		 * Methode called when ending to list available tests.
+		**/
+		virtual void onListingEnd(void) = 0;
 
 		void setDisplaySuccess(bool state);
 		void setDisplayDetails(bool state);

@@ -29,6 +29,9 @@ void UnitTestMockListener::mockReset(void )
 	mockEvents.global_start = -1;
 	mockEvents.meth_end = -1;
 	mockEvents.meth_start = -1;
+	mockEvents.list_method = -1;
+	mockEvents.listing_end = -1;
+	mockEvents.listing_start = -1;
 }
 
 /*******************  FUNCTION  *********************/
@@ -67,4 +70,25 @@ void UnitTestMockListener::onTestMethodEnd(const svUnitTest::svutTestCase & /*te
 	mockEvents.meth_end = mockTime++;
 	finalResults[method.getName()] = status;
 }
+
+/*******************  FUNCTION  *********************/
+void UnitTestMockListener::onListingStart(void )
+{
+	mockEvents.listing_start = mockTime++;
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTestMockListener::onListingEnd(void )
+{
+	mockEvents.listing_end = mockTime++;
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTestMockListener::onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method)
+{
+	mockEvents.list_method = mockTime++;
+}
+
+
+
 

@@ -150,4 +150,25 @@ void svutResultFormatterStd::closeOutput(void )
 	//nothing to do for std mode
 }
 
+/*******************  FUNCTION  *********************/
+void svutResultFormatterStd::onListingStart(void )
+{
+	//nothing to do for std mode
+}
+
+/*******************  FUNCTION  *********************/
+void svutResultFormatterStd::onListingEnd(void )
+{
+	//nohting to do for std mode
+}
+
+/*******************  FUNCTION  *********************/
+void svutResultFormatterStd::onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method)
+{
+	if (displayFullName)
+		*out << testCase.getName() << "::" << method.getName() << "()\n";
+	else
+		*out << method.getName() << "()\n";
+}
+
 }

@@ -34,6 +34,9 @@ class svutResultFormatterXml : public svutResultFormatter
 		virtual void openTestMethod(const svutTestCase & testCase,const svutTestMethod & meth);
 		virtual void closeTestMethod(const svutTestCase & testCase,const svutTestMethod & meth,const svutStatusInfo & status);
 		virtual void printSummary(svutResultSummary summary);
+		virtual void onListingStart(void );
+		virtual void onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method);
+		virtual void onListingEnd(void );
 		void setDate(std::string date);
 	protected:
 		/** Pointer to the output stream to use. **/
@@ -42,6 +45,7 @@ class svutResultFormatterXml : public svutResultFormatter
 		void printLocation(const svUnitTest::svutCodeLocation & location);
 		void printEnv(void);
 		std::string date;
+		const svutTestCase * lastTestCase;
 };
 
 }

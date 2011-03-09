@@ -31,6 +31,9 @@ class UnitTest_svutListenerDirectOutputter : public TestCase
 	CPPUNIT_TEST(testOnTestMethodEnd);
 	CPPUNIT_TEST(testOnGlobalEnd_1);
 	CPPUNIT_TEST(testOnGlobalEnd_2);
+	CPPUNIT_TEST(testOnListingStart);
+	CPPUNIT_TEST(testOnListMethod);
+	CPPUNIT_TEST(testOnListingEnd);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -45,6 +48,9 @@ class UnitTest_svutListenerDirectOutputter : public TestCase
 		void testOnTestMethodEnd(void);
 		void testOnGlobalEnd_1(void);
 		void testOnGlobalEnd_2(void);
+		void testOnListingStart(void);
+		void testOnListMethod(void);
+		void testOnListingEnd(void);
 
 		svutListenerDirectOutputter * listener;
 		UnitTestMockResultFormater * formatter;
@@ -174,5 +180,44 @@ void UnitTest_svutListenerDirectOutputter::testOnTestMethodEnd(void )
 	CPPUNIT_ASSERT_EQUAL(false,formatter->isEmpty());
 	CPPUNIT_ASSERT_EQUAL(*ref,*formatter);
 }
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutListenerDirectOutputter::testOnListingStart(void )
+{
+	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
+
+	listener->onListingStart();
+	ref->onListingStart();
+
+	CPPUNIT_ASSERT_EQUAL(false,formatter->isEmpty());
+	CPPUNIT_ASSERT_EQUAL(*ref,*formatter);
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutListenerDirectOutputter::testOnListingEnd(void )
+{
+	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
+
+	listener->onListingEnd();
+	ref->onListingEnd();
+
+	CPPUNIT_ASSERT_EQUAL(false,formatter->isEmpty());
+	CPPUNIT_ASSERT_EQUAL(*ref,*formatter);
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutListenerDirectOutputter::testOnListMethod(void )
+{
+	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
+
+	UnitTestMockTestCase testCase;
+	svutTestMethod testMethod("test",NULL,SVUT_CODE_LOCATION);
+	listener->onListMethod(testCase,testMethod);
+	ref->onListMethod(testCase,testMethod);
+
+	CPPUNIT_ASSERT_EQUAL(false,formatter->isEmpty());
+	CPPUNIT_ASSERT_EQUAL(*ref,*formatter);
+}
+
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutListenerDirectOutputter);

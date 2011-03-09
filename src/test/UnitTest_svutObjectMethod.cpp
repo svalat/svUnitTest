@@ -22,10 +22,17 @@ class SimpleObject
 {
 	public:
 		SimpleObject(int value = 20) {this->value = value;};
-		void clear(void) {this->value = 0;};
+		virtual void clear(void) {this->value = 0;};
 		int getValue(void) {return this->value; };
-	private:
+	protected:
 		int value;
+};
+
+/*********************  CLASS  **********************/
+class SimpleObjectV2 : public SimpleObject
+{
+	public:
+		virtual void clear(void) {this->value = 1;};
 };
 
 /*********************  CLASS  **********************/
@@ -43,6 +50,7 @@ class UnitTest_svutObjectMethod : public TestCase
 	protected:
 		void testConstructor(void);
 		void testCall(void);
+		void testCallOverride(void);
 		svutObjectMethodGeneric<SimpleObject> * caller;
 		SimpleObject obj;
 };
@@ -70,6 +78,17 @@ void UnitTest_svutObjectMethod::testCall(void)
 	CPPUNIT_ASSERT_EQUAL(20,obj.getValue());
 	caller->call();
 	CPPUNIT_ASSERT_EQUAL(0,obj.getValue());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutObjectMethod::testCallOverride(void )
+{
+	SimpleObjectV2 obj2;
+	svutObjectMethodGeneric<SimpleObject> caller2(&obj2,&SimpleObject::clear);
+	
+	CPPUNIT_ASSERT_EQUAL(20,obj.getValue());
+	caller2.call();
+	CPPUNIT_ASSERT_EQUAL(1,obj.getValue());
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutObjectMethod);

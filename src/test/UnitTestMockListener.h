@@ -24,6 +24,9 @@ struct UnitTestMockListener_Events
 	int case_end;
 	int meth_start;
 	int meth_end;
+	int listing_start;
+	int list_method;
+	int listing_end;
 };
 
 /********************* CLASS ************************/
@@ -37,6 +40,9 @@ class UnitTestMockListener : public svUnitTest::svutListener
 		virtual void onTestMethodStart(const svUnitTest::svutTestCase & testCase,const svUnitTest::svutTestMethod & method);
 		virtual void onTestMethodEnd(const svUnitTest::svutTestCase & testCase,const svUnitTest::svutTestMethod & method,svUnitTest::svutStatusInfo status);
 		virtual void onGlobalEnd(void);
+		virtual void onListingStart(void );
+		virtual void onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method);
+		virtual void onListingEnd(void );
 		void mockReset(void);
 	
 		int mockTime;

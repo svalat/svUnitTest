@@ -60,6 +60,27 @@ void svutListenerMultiplexer::onTestMethodStart(const svUnitTest::svutTestCase &
 }
 
 /*******************  FUNCTION  *********************/
+void svutListenerMultiplexer::onListingStart(void )
+{
+	for (svutListenerPtrList::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
+		(*it)->onListingStart();
+}
+
+/*******************  FUNCTION  *********************/
+void svutListenerMultiplexer::onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method)
+{
+	for (svutListenerPtrList::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
+		(*it)->onListMethod(testCase,method);
+}
+
+/*******************  FUNCTION  *********************/
+void svutListenerMultiplexer::onListingEnd(void )
+{
+	for (svutListenerPtrList::iterator it = listeners.begin() ; it != listeners.end() ; ++it)
+		(*it)->onListingEnd();
+}
+
+/*******************  FUNCTION  *********************/
 /**
  * Add a sub listener for event dispatching.
  * @param listener Define the listener to add. It's your own responsability to free this memory at

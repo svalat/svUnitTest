@@ -68,4 +68,22 @@ void svutListenerDirectOutputter::onTestMethodEnd(const svutTestCase & testCase,
 	formatter->closeTestMethod(testCase,method,status);
 }
 
+/*******************  FUNCTION  *********************/
+void svutListenerDirectOutputter::onListingStart(void )
+{
+	formatter->onListingStart();
+}
+
+/*******************  FUNCTION  *********************/
+void svutListenerDirectOutputter::onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method)
+{
+	formatter->onListMethod(testCase,method);
+}
+
+/*******************  FUNCTION  *********************/
+void svutListenerDirectOutputter::onListingEnd(void )
+{
+	formatter->onListingEnd();
+}
+
 }

@@ -27,6 +27,7 @@ namespace svUnitTest
 svUnitTest::svutResultFormatterXml::svutResultFormatterXml(std::ostream& out)
 {
 	this->out = & out;
+	this->lastTestCase = NULL;
 }
 
 /*******************  FUNCTION  *********************/
@@ -167,6 +168,39 @@ void svutResultFormatterXml::printLocation(const svUnitTest::svutCodeLocation& l
 		*out << "\t\t\t\t\t<unknown></unknown>" << endl;
 	}
 	*out << "\t\t\t\t</location>" << endl;
+}
+
+/*******************  FUNCTION  *********************/
+void svutResultFormatterXml::onListingStart(void )
+{
+	*out << "<?xml version='1.0' encoding='UTF-8'?>" << endl;
+	*out << "<UnitTestList>" << endl;
+	lastTestCase = NULL;
+}
+
+/*******************  FUNCTION  *********************/
+void svutResultFormatterXml::onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method)
+{
+	bool changeTestCase = (lastTestCase != &testCase);
+	
+	if (changeTestCase && lastTestCase != NULL)
+		*out << "\t</TestCase>" << endl;
+	if (changeTestCase)
+		*out << "\t<TestCase name='"<< testCase.getName() << "'>" << endl;
+	
+	*out << "\t\t<TestMethod name='" << method.getName() << "'/>" << endl;
+	
+	if (changeTestCase)
+		lastTestCase = &testCase;
+}
+
+/*******************  FUNCTION  *********************/
+void svutResultFormatterXml::onListingEnd(void )
+{
+	if (lastTestCase != NULL)
+		*out << "\t</TestCase>" << endl;
+
+	*out << "</UnitTestList>" << endl;
 }
 
 }

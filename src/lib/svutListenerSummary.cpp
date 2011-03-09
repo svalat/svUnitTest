@@ -62,4 +62,23 @@ void svutListenerSummary::onTestMethodEnd(const svUnitTest::svutTestCase & /*tes
 	summary.increment(status.getStatus());
 }
 
+/*******************  FUNCTION  *********************/
+void svutListenerSummary::onListingStart(void )
+{
+
+}
+
+/*******************  FUNCTION  *********************/
+void svutListenerSummary::onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method)
+{
+
+}
+
+/*******************  FUNCTION  *********************/
+void svutListenerSummary::onListingEnd(void )
+{
+
+}
+
+
 }

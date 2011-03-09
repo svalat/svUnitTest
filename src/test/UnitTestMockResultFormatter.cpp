@@ -66,6 +66,26 @@ void UnitTestMockResultFormater::openTestMethod(const svUnitTest::svutTestCase& 
 }
 
 /*******************  FUNCTION  *********************/
+void UnitTestMockResultFormater::onListingStart(void )
+{
+	event.push_back("onListingStart()");
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTestMockResultFormater::onListingEnd(void )
+{
+	event.push_back("onListingEnd()");
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTestMockResultFormater::onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method)
+{
+	char buffer[1024];
+	sprintf(buffer,"onListMethod(%s, %s)",testCase.getName().c_str(),method.getName().c_str());
+	event.push_back(buffer);
+}
+
+/*******************  FUNCTION  *********************/
 bool operator!=(const UnitTestMockResultFormater& formater1, const UnitTestMockResultFormater& formater2)
 {
 	if (formater1.event.size() != formater2.event.size())

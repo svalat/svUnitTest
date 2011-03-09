@@ -34,6 +34,9 @@ class svutResultFormatterQtXml : public svutResultFormatter
 		virtual void openTestMethod(const svutTestCase & testCase,const svutTestMethod & meth);
 		virtual void closeTestMethod(const svutTestCase & testCase,const svutTestMethod & meth,const svutStatusInfo & status);
 		virtual void printSummary(svutResultSummary summary);
+		virtual void onListingStart(void );
+		virtual void onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method);
+		virtual void onListingEnd(void );
 	protected:
 		/** Pointer to the output stream to use. **/
 		std::ostream * out;

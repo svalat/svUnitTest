@@ -35,6 +35,9 @@ class svutResultFormatterStd : public svutResultFormatter
 		virtual void openTestMethod(const svutTestCase & testCase,const svutTestMethod & meth);
 		virtual void closeTestMethod(const svutTestCase & testCase,const svutTestMethod & meth,const svutStatusInfo & status);
 		virtual void printSummary(svutResultSummary summary);
+		virtual void onListingStart(void );
+		virtual void onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method);
+		virtual void onListingEnd(void );
 	protected:
 		/**
 		 * Print the global status of the test at the end of summary display.

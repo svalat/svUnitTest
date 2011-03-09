@@ -281,21 +281,17 @@ unsigned int svutTestCase::getNbTests(void) const
 }
 
 /*******************  FUNCTION  *********************/
-/*
- * Méthode permettant d'enregistrer le cas de test dans la liste des tests auto-détectés.
- * Elle est utilisée par la macro SVUT_REGISTER_TEST_CASE().
- * Ce mécanisme permet d'éviter de devoir instancier nous mêmes les cas de tests dans la
- * méthode main, pour ajouter un nouveau test il suffit donc juste de le compiler avec l'exécuteur
- * principal et la classe svutRunner se chargera de le trouver.
- * @param builder Définit l'instance d'un constructeur de la classe de test afin de différer
- * la construction au moment de chargement effectif dans svutRunner. Le constructeur lui est
- * instancié avant l'exécution du main mais comme il ne contient rien ce n'est pas un
- * problème. Nos tests peuvent ainsi utiliser des librairies nécessitant une pré-initialisation
- * en début de programme via main.
-int registerTestCase(svutTestCaseBuilder & builder)
+/**
+ * Run over the list of methods and send onListMethod() events for each one
+ * on the given listener.
+ * @param listener Define the listener on which to call onListMethod().
+ * @param filter Define the filter to use.
+**/
+void svutTestCase::listTestMethods(svutListener & listener,svutTestFilter * filter) const
 {
-	__SVUT_autoFoundTests__.push_back(&builder);
-	return 0;
-}*/
+	for (svutTestMethodPtrList::const_iterator it = tests.begin();it!=tests.end();++it)
+		if (filter == NULL || filter->accept(this->getName(),(*it)->getName()))
+			listener.onListMethod(*this,**it);
+}
 
 }

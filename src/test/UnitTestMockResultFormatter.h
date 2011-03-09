@@ -25,6 +25,9 @@ class UnitTestMockResultFormater : public svUnitTest::svutResultFormatter
 		virtual void closeTestCase(const svUnitTest::svutTestCase & testCase);
 		virtual void openTestMethod(const svUnitTest::svutTestCase & testCase,const svUnitTest::svutTestMethod & meth);
 		virtual void closeTestMethod(const svUnitTest::svutTestCase & testCase,const svUnitTest::svutTestMethod & meth,const svUnitTest::svutStatusInfo & status);
+		virtual void onListingStart(void );
+		virtual void onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method);
+		virtual void onListingEnd(void );
 		virtual void printSummary(svUnitTest::svutResultSummary summary);
 		friend bool operator == (const UnitTestMockResultFormater & formater1,const UnitTestMockResultFormater & formater2);
 		friend bool operator != (const UnitTestMockResultFormater & formater1,const UnitTestMockResultFormater & formater2);

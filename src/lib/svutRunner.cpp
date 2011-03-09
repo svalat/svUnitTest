@@ -156,28 +156,15 @@ bool svutRunner::run_tests(void)
 **/
 bool svutRunner::run_list_tests(void)
 {
-	bool fullName = hasMultipleTestCase();
-	std::ostream * out = NULL;
-	if (config == NULL)
-		out = & cout;
-	else
-		out = & config->getOutput();
-	//search all
+	if (this->formatter != NULL)
+		formatter->setDisplayFullName(hasMultipleTestCase());
+	this->listener.onListingStart();
 	for(svutTestCasePtrList::iterator it=suites.begin();it!=suites.end();it++)
 	{
-		list<string> tmp = (*it)->getTestMethods(false);
-		for (list<string>::iterator it2=tmp.begin();it2!=tmp.end();++it2)
-		{
-			if (testFilter == NULL || testFilter->accept((*it)->getName(),*it2))
-			{
-				if (fullName)
-					*out << (*it)->getName().c_str() << "::" << it2->c_str() << "()\n";
-				else
-					*out << it2->c_str() << "()\n";
-			}
-		}
+		if (testFilter == NULL || testFilter->accept((*it)->getName()))
+			(*it)->listTestMethods(listener,testFilter);
 	}
-	//end
+	this->listener.onListingEnd();
 	return true;
 }
 

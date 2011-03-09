@@ -37,6 +37,9 @@ class svutListenerMultiplexer : public svutListener
 		virtual void onTestMethodStart(const svUnitTest::svutTestCase & testCase,const svutTestMethod & method);
 		virtual void onTestMethodEnd(const svUnitTest::svutTestCase & testCase,const svutTestMethod & method,svutStatusInfo status);
 		virtual void onGlobalEnd(void);
+		virtual void onListingStart(void );
+		virtual void onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method);
+		virtual void onListingEnd(void );
 		void addListener(svutListener * listener);
 		void removeListener(svutListener * listener);
 		unsigned int countListener(void) const;

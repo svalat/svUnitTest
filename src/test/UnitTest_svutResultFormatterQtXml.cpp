@@ -16,6 +16,7 @@
 #include "UnitTestMockTestCase.h"
 #include <sys/stat.h>
 #include "svUnitTest.h"
+#include "IUnitTest_ResultFormatter.h"
 
 /**********************  USING  *********************/
 using namespace std;
@@ -127,7 +128,7 @@ static const char * CST_STRING_OPEN_METH_1 = "\t<TestFunction name='testMethod'>
 static const char * CST_STRING_OPEN_METH_2 = "\t<TestFunction name='MyTest::testMethod'>\n";
 
 /********************  CLASS  **********************/
-class UnitTest_svutResultFormatterQtXml : public TestCase
+class UnitTest_svutResultFormatterQtXml : public TestCase,IUnitTest_ResultFormatter
 {
 	CPPUNIT_TEST_SUITE(UnitTest_svutResultFormatterQtXml);
 	CPPUNIT_TEST(testOpenOutput);
@@ -151,6 +152,11 @@ class UnitTest_svutResultFormatterQtXml : public TestCase
 	CPPUNIT_TEST(testGlobal_1);
 	CPPUNIT_TEST(testGlobal_2);
 	CPPUNIT_TEST(testGlobal_3);
+	CPPUNIT_TEST(testListingStart);
+	CPPUNIT_TEST(testListingEnd);
+	CPPUNIT_TEST(testListMethod_1);
+	CPPUNIT_TEST(testListMethod_2);
+	CPPUNIT_TEST(testOpenTestMethod);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -161,6 +167,7 @@ class UnitTest_svutResultFormatterQtXml : public TestCase
 		void testCloseOutput(void);
 		void testOpenTestCase(void);
 		void testCloseTestCase(void);
+		void testOpenTestMethod(void);
 		void testOpenTestMethod_1(void);
 		void testOpenTestMethod_2(void);
 		void testCloseTestMethod_success_1(void);
@@ -174,6 +181,10 @@ class UnitTest_svutResultFormatterQtXml : public TestCase
 		void testCloseTestMethod_unknown_3(void);
 		void testCloseTestMethod_failed_1(void);
 		void testCloseTestMethod_failed_2(void);
+		void testListingStart(void);
+		void testListingEnd(void);
+		void testListMethod_1(void);
+		void testListMethod_2(void);
 		void testPrintSummary(void);
 		void testGlobal_1(void);
 		void testGlobal_2(void);
@@ -196,6 +207,12 @@ void UnitTest_svutResultFormatterQtXml::tearDown(void)
 {
 	delete formatter;
 	delete out;
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutResultFormatterQtXml::testOpenTestMethod(void )
+{
+	//only implemented to validate IUnitTest_ResultFormatter inheritance.
 }
 
 /*******************  FUNCTION  *********************/
@@ -444,6 +461,39 @@ void UnitTest_svutResultFormatterQtXml::testPrintSummary(void )
 	svutResultSummary summary;
 	formatter->printSummary(summary);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SUMMARY_0,out->str());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutResultFormatterQtXml::testListingEnd(void )
+{
+	formatter->onListingEnd();
+	CPPUNIT_ASSERT_EQUAL("",out->str());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutResultFormatterQtXml::testListingStart(void )
+{
+	formatter->onListingStart();
+	CPPUNIT_ASSERT_EQUAL("",out->str());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutResultFormatterQtXml::testListMethod_1(void )
+{
+	UnitTestMockTestCase testCase;
+	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	formatter->onListMethod(testCase,meth);
+	CPPUNIT_ASSERT_EQUAL("testMethod()\n",out->str());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutResultFormatterQtXml::testListMethod_2(void )
+{
+	UnitTestMockTestCase testCase;
+	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	formatter->setDisplayFullName(true);
+	formatter->onListMethod(testCase,meth);
+	CPPUNIT_ASSERT_EQUAL("MyTest::testMethod()\n",out->str());
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutResultFormatterQtXml);

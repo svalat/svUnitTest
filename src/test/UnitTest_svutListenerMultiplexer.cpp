@@ -34,6 +34,9 @@ class UnitTest_svutListenerMultiplexer : public TestCase
 	CPPUNIT_TEST(testRemoveListener_good);
 	CPPUNIT_TEST(testRemoveListener_bad);
 	CPPUNIT_TEST(testCountListener);
+	CPPUNIT_TEST(testOnListingStart);
+	CPPUNIT_TEST(testOnListMethod);
+	CPPUNIT_TEST(testOnListingEnd);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -51,6 +54,9 @@ class UnitTest_svutListenerMultiplexer : public TestCase
 		void testRemoveListener_good(void);
 		void testRemoveListener_bad(void);
 		void testCountListener(void);
+		void testOnListingStart(void);
+		void testOnListMethod(void);
+		void testOnListingEnd(void);
 
 		svutListenerMultiplexer * obj;
 		UnitTestMockListener * mock1;
@@ -205,6 +211,56 @@ void UnitTest_svutListenerMultiplexer::testRemoveListener_bad(void )
 	} catch (svutExInternalError) {
 	}
 	CPPUNIT_ASSERT_EQUAL(2,obj->countListener());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutListenerMultiplexer::testOnListingStart(void )
+{
+	CPPUNIT_ASSERT_EQUAL(0,mock1->mockTime);
+	CPPUNIT_ASSERT_EQUAL(0,mock2->mockTime);
+	CPPUNIT_ASSERT_EQUAL(-1,mock1->mockEvents.listing_start);
+	CPPUNIT_ASSERT_EQUAL(-1,mock2->mockEvents.listing_start);
+
+	obj->onListingStart();
+
+	CPPUNIT_ASSERT_EQUAL(1,mock1->mockTime);
+	CPPUNIT_ASSERT_EQUAL(0,mock1->mockEvents.listing_start);
+	CPPUNIT_ASSERT_EQUAL(1,mock2->mockTime);
+	CPPUNIT_ASSERT_EQUAL(0,mock2->mockEvents.listing_start);
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutListenerMultiplexer::testOnListMethod(void )
+{
+	CPPUNIT_ASSERT_EQUAL(0,mock1->mockTime);
+	CPPUNIT_ASSERT_EQUAL(0,mock2->mockTime);
+	CPPUNIT_ASSERT_EQUAL(-1,mock1->mockEvents.list_method);
+	CPPUNIT_ASSERT_EQUAL(-1,mock2->mockEvents.list_method);
+
+	UnitTestMockTestCase testCase;
+	svutTestMethod meth("test",NULL,SVUT_CODE_LOCATION);
+	obj->onListMethod(testCase,meth);
+
+	CPPUNIT_ASSERT_EQUAL(1,mock1->mockTime);
+	CPPUNIT_ASSERT_EQUAL(0,mock1->mockEvents.list_method);
+	CPPUNIT_ASSERT_EQUAL(1,mock2->mockTime);
+	CPPUNIT_ASSERT_EQUAL(0,mock2->mockEvents.list_method);
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutListenerMultiplexer::testOnListingEnd(void )
+{
+	CPPUNIT_ASSERT_EQUAL(0,mock1->mockTime);
+	CPPUNIT_ASSERT_EQUAL(0,mock2->mockTime);
+	CPPUNIT_ASSERT_EQUAL(-1,mock1->mockEvents.listing_end);
+	CPPUNIT_ASSERT_EQUAL(-1,mock2->mockEvents.listing_end);
+
+	obj->onListingEnd();
+
+	CPPUNIT_ASSERT_EQUAL(1,mock1->mockTime);
+	CPPUNIT_ASSERT_EQUAL(0,mock1->mockEvents.listing_end);
+	CPPUNIT_ASSERT_EQUAL(1,mock2->mockTime);
+	CPPUNIT_ASSERT_EQUAL(0,mock2->mockEvents.listing_end);
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutListenerMultiplexer);
