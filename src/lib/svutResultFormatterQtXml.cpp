@@ -8,6 +8,7 @@
 
 /********************  HEADERS  *********************/
 #include "svutResultFormatterQtXml.h"
+#include "svUnitTest.h"
 
 /**********************  USING  *********************/
 using namespace std;
@@ -35,7 +36,7 @@ void svUnitTest::svutResultFormatterQtXml::openOutput(void )
 	*out << "<?xml version='1.0' encoding='UTF-8'?>" << endl;
 	*out << "<TestCase name='svUnitTest'>" << endl;
 	*out << "\t<Environment>" << endl;
-	*out << "\t\t<svUnitTestVersion>0.3.0-dev</svUnitTestVersion>" << endl;
+	*out << "\t\t<svUnitTestVersion>" << SVUT_LIBARY_VERSION << "</svUnitTestVersion>" << endl;
 	*out << "\t</Environment>" << endl;
 }
 

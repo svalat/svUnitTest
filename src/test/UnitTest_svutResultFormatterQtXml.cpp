@@ -15,6 +15,7 @@
 #include <svutResultFormatterQtXml.h>
 #include "UnitTestMockTestCase.h"
 #include <sys/stat.h>
+#include "svUnitTest.h"
 
 /**********************  USING  *********************/
 using namespace std;
@@ -46,7 +47,7 @@ static const char * CST_STRING_FAILED_1  = "\t\t<Incident type='fail' file='file
 static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?>\n\
 <TestCase name='svUnitTest'>\n\
 	<Environment>\n\
-		<svUnitTestVersion>0.3.0-dev</svUnitTestVersion>\n\
+		<svUnitTestVersion>" SVUT_LIBARY_VERSION "</svUnitTestVersion>\n\
 	</Environment>\n\
 	<TestFunction name='MyTest::testMethod'>\n\
 		<Incident type='pass' file='unknown' line='0'></Incident>\n\
@@ -82,7 +83,7 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 static const char * CST_STRING_SEQ_2    = "<?xml version='1.0' encoding='UTF-8'?>\n\
 <TestCase name='svUnitTest'>\n\
 	<Environment>\n\
-		<svUnitTestVersion>0.3.0-dev</svUnitTestVersion>\n\
+		<svUnitTestVersion>" SVUT_LIBARY_VERSION "</svUnitTestVersion>\n\
 	</Environment>\n\
 	<TestFunction name='testMethod'>\n\
 		<Incident type='pass' file='unknown' line='0'></Incident>\n\
@@ -118,7 +119,7 @@ static const char * CST_STRING_SEQ_2    = "<?xml version='1.0' encoding='UTF-8'?
 static const char * CST_STRING_OPEN = "<?xml version='1.0' encoding='UTF-8'?>\n\
 <TestCase name='svUnitTest'>\n\
 	<Environment>\n\
-		<svUnitTestVersion>0.3.0-dev</svUnitTestVersion>\n\
+		<svUnitTestVersion>" SVUT_LIBARY_VERSION "</svUnitTestVersion>\n\
 	</Environment>\n";
 static const char * CST_STRING_CLOSE = "</TestCase>\n";
 static const char * CST_STRING_CLOSE_TC = "";

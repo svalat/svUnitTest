@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <ctime>
 #include "svutResultFormatterXml.h"
+#include "svUnitTest.h"
 
 /**********************  USING  *********************/
 using namespace std;
@@ -61,7 +62,7 @@ void svutResultFormatterXml::setDate(string date)
 void svutResultFormatterXml::printEnv(void)
 {
 	*out << "\t<TestEnv>" << endl;
-	*out << "\t\t<LibVersion>0.3.0-dev</LibVersion>" << endl;
+	*out << "\t\t<LibVersion>" << SVUT_LIBARY_VERSION << "</LibVersion>" << endl;
 	if (this->date.empty())
 	{
 		char buffer[64];

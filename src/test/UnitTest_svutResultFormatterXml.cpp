@@ -16,6 +16,7 @@
 #include <svutResultFormatterXml.h>
 #include "UnitTestMockTestCase.h"
 #include <sys/stat.h>
+#include "svUnitTest.h"
 
 /**********************  USING  *********************/
 using namespace std;
@@ -57,7 +58,7 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 <?xml-stylesheet type='text/xsl' href='svUnitTest_html/svUnitTest.xsl'?>\n\
 <UnitTest>\n\
 	<TestEnv>\n\
-		<LibVersion>0.3.0-dev</LibVersion>\n\
+		<LibVersion>" SVUT_LIBARY_VERSION "</LibVersion>\n\
 		<TestDate>__DATE__</TestDate>\n\
 	</TestEnv>\n\
 	<TestCase>\n\
@@ -135,7 +136,7 @@ static const char * CST_STRING_OPEN = "<?xml version='1.0' encoding='UTF-8'?>\n\
 <?xml-stylesheet type='text/xsl' href='svUnitTest_html/svUnitTest.xsl'?>\n\
 <UnitTest>\n\
 	<TestEnv>\n\
-		<LibVersion>0.3.0-dev</LibVersion>\n\
+		<LibVersion>" SVUT_LIBARY_VERSION "</LibVersion>\n\
 		<TestDate>__DATE__</TestDate>\n\
 	</TestEnv>\n";
 static const char * CST_STRING_CLOSE = "</UnitTest>\n";

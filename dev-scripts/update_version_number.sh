@@ -120,16 +120,6 @@ function update_version_exotic_files()
 	sed -i "s/Version: $1/Version: $2/g" src/integration/pkg-config/svUnitTest.pc.in
 	#define version in svUnitTest.h
 	sed -i "s/^#define SVUT_LIBARY_VERSION \"$1\"\$/#define SVUT_LIBARY_VERSION \"$2\"/g" src/lib/svUnitTest.h
-	#xml output definition
-	for file in src/lib/svutResultFormatterQtXml.cpp src/test/UnitTest_svutResultFormatterQtXml.cpp
-	do
-		sed -i "s#<svUnitTestVersion>$1</svUnitTestVersion>#<svUnitTestVersion>$2</svUnitTestVersion>#g" -i "$file"
-	done
-	#xml output definition
-	for file in src/lib/svutResultFormatterXml.cpp src/test/UnitTest_svutResultFormatterXml.cpp
-	do
-		sed -i "s#<LibVersion>$1</LibVersion>#<LibVersion>$2</LibVersion>#g" -i "$file"
-	done
 	#gollum update script
 	sed -i "s/echo \"             VERSION  : $1\"/echo \"             VERSION  : $2\"/g" src/doxygen/update_from_gollum.sh
 	#configure.in example
