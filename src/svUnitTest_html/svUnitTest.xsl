@@ -12,7 +12,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:template match="/">
 	<html>
 	<head>
-		<title>svUnitTest</title>
+		<title>svUnitTest <xsl:apply-templates select='UnitTest/TestEnv/TestDate'/></title>
 		<link rel="stylesheet" type="text/css" href="svUnitTest_html/svUnitTest.css" />
 		<script language='javascript' src='svUnitTest_html/svUnitTest.js'></script>
 	</head>

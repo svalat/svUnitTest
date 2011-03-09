@@ -8,6 +8,7 @@
 
 /********************  HEADERS  *********************/
 #include "UnitTestExtra.h"
+#include <ctime>
 #include <iostream>
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
@@ -55,6 +56,10 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 <!DOCTYPE UnitTest SYSTEM 'svUnitTest_html/svUnitTest.dtd'>\n\
 <?xml-stylesheet type='text/xsl' href='svUnitTest_html/svUnitTest.xsl'?>\n\
 <UnitTest>\n\
+	<TestEnv>\n\
+		<LibVersion>0.3.0-dev</LibVersion>\n\
+		<TestDate>__DATE__</TestDate>\n\
+	</TestEnv>\n\
 	<TestCase>\n\
 		<name>MyTest</name>\n\
 		<TestFunction>\n\
@@ -128,7 +133,11 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 static const char * CST_STRING_OPEN = "<?xml version='1.0' encoding='UTF-8'?>\n\
 <!DOCTYPE UnitTest SYSTEM 'svUnitTest_html/svUnitTest.dtd'>\n\
 <?xml-stylesheet type='text/xsl' href='svUnitTest_html/svUnitTest.xsl'?>\n\
-<UnitTest>\n";
+<UnitTest>\n\
+	<TestEnv>\n\
+		<LibVersion>0.3.0-dev</LibVersion>\n\
+		<TestDate>__DATE__</TestDate>\n\
+	</TestEnv>\n";
 static const char * CST_STRING_CLOSE = "</UnitTest>\n";
 static const char * CST_STRING_CLOSE_TC = "\t</TestCase>\n";
 static const char * CST_STRING_OPEN_METH = "\t\t<TestFunction>\n\t\t\t<name>testMethod</name>\n";
@@ -385,6 +394,8 @@ void UnitTest_svutResultFormatterXml::runTotalSequence(void )
 /*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterXml::testGlobal_1(void )
 {
+	//FUCK THE STL, std::string.replace sucks.
+	this->formatter->setDate("__DATE__");
 	this->runTotalSequence();
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SEQ_1,out->str());
 }
@@ -392,6 +403,8 @@ void UnitTest_svutResultFormatterXml::testGlobal_1(void )
 /*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterXml::testGlobal_2(void )
 {
+	//FUCK THE STL, std::string.replace sucks.
+	this->formatter->setDate("__DATE__");
 	formatter->setDisplaySuccess(true);
 	formatter->setDisplayDetails(false);
 	this->runTotalSequence();
@@ -401,6 +414,7 @@ void UnitTest_svutResultFormatterXml::testGlobal_2(void )
 /*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterXml::testOpenOutput(void )
 {
+	this->formatter->setDate("__DATE__");
 	formatter->openOutput();
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_OPEN,out->str());
 }

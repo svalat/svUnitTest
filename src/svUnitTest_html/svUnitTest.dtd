@@ -5,7 +5,10 @@
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 ***************************************************-->
-<!ELEMENT UnitTest (TestCase*,GlobalResults)>
+<!ELEMENT UnitTest (TestEnv,TestCase*,GlobalResults)>
+<!ELEMENT TestEnv (LibVersion,TestDate)>
+<!ELEMENT LibVersion (#PCDATA)>
+<!ELEMENT TestDate (#PCDATA)>
 <!ELEMENT TestCase (name,TestFunction+)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT TestFunction (name,status,AssertInfo?)>

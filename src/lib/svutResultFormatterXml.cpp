@@ -8,6 +8,7 @@
 
 /********************  HEADERS  *********************/
 #include <algorithm>
+#include <ctime>
 #include "svutResultFormatterXml.h"
 
 /**********************  USING  *********************/
@@ -37,6 +38,40 @@ void svUnitTest::svutResultFormatterXml::openOutput(void )
 	*out << "<!DOCTYPE UnitTest SYSTEM 'svUnitTest_html/svUnitTest.dtd'>" << endl;
 	*out << "<?xml-stylesheet type='text/xsl' href='svUnitTest_html/svUnitTest.xsl'?>" << endl;
 	*out << "<UnitTest>" << endl;
+	printEnv();
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * This is more for testing purpose to replace the real date by a fake one when testing.
+ * It force a static date which made simpler to write output correcness test in the test suite.
+ * @param date Define the date in string format to use instead of reading the current date.
+**/
+void svutResultFormatterXml::setDate(string date)
+{
+	this->date = date;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Generate the test environnement description, mostly :
+ *   - svUnitTest version.
+ *   - execution date.
+**/
+void svutResultFormatterXml::printEnv(void)
+{
+	*out << "\t<TestEnv>" << endl;
+	*out << "\t\t<LibVersion>0.3.0-dev</LibVersion>" << endl;
+	if (this->date.empty())
+	{
+		char buffer[64];
+		time_t t = time(NULL);
+		strftime(buffer, 64, "%F %T %Z",localtime(&t));
+		*out << "\t\t<TestDate>" << buffer << "</TestDate>" << endl;
+	} else {
+		*out << "\t\t<TestDate>" << this->date << "</TestDate>" << endl;
+	}
+	*out << "\t</TestEnv>" << endl;
 }
 
 /*******************  FUNCTION  *********************/

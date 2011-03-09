@@ -125,6 +125,11 @@ function update_version_exotic_files()
 	do
 		sed -i "s#<svUnitTestVersion>$1</svUnitTestVersion>#<svUnitTestVersion>$2</svUnitTestVersion>#g" -i "$file"
 	done
+	#xml output definition
+	for file in src/lib/svutResultFormatterXml.cpp src/test/UnitTest_svutResultFormatterXml.cpp
+	do
+		sed -i "s#<LibVersion>$1</LibVersion>#<LibVersion>$2</LibVersion>#g" -i "$file"
+	done
 	#gollum update script
 	sed -i "s/echo \"             VERSION  : $1\"/echo \"             VERSION  : $2\"/g" src/doxygen/update_from_gollum.sh
 	#configure.in example
