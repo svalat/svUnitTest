@@ -84,7 +84,8 @@ static void assertEqual(const T1 & expected,const T2 & actual,svutCodeLocation l
 {
 	if (asserterOperatorEqual(expected,actual) == false)
 	{
-		throw svutExAssertFailEqual(true,asserterToString(expected),asserterToString(actual),location);
+		throw svutExAssertFailEqual(true,asserterToString(expected),
+									asserterToString(actual),location);
 	}
 }
 

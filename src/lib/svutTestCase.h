@@ -61,7 +61,7 @@ class svutListener;
 class svutTestCase
 {
 	public:
-		svutTestCase(std::string name);
+		svutTestCase(std::string name=__FUNCTION__);
 		svutTestCase(const svutTestCase & testCase);
 		virtual ~svutTestCase(void);
 		/**
@@ -87,7 +87,10 @@ class svutTestCase
 		unsigned int getNbTests(void) const;
 		void setAutodetected(void);
 		bool isAutodetected(void) const;
+		void callTestMethodsRegistration(void);
 	protected:
+		virtual void testMethodsRegistration(void);
+		void setTestCaseName(std::string name) throw (svutExInternalError);
 		void registerTestMethod(svutTestMethod * test);
 		svutStatusInfo runTestMethod(svutTestMethod * test);
 		void MARK_AS_KNOWN_ERROR(std::string message);
@@ -110,6 +113,13 @@ class svutTestCase
 		std::string tmpFailMessage;
 		/** Permit to now if the class was built by autodetection chain or not. **/
 		bool autodtected;
+		/**
+		 * Permit to know if the test suite can be renamed of not. This is locked after first
+		 * call of getName();
+		**/
+		mutable bool nameLocked;
+		/** Permit to know if testMethodsRegistration() was already called. **/
+		bool registrationDone;
 };
 
 //int registerTestCase(svutTestCaseBuilder & builder);

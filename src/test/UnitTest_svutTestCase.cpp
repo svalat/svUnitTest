@@ -7,12 +7,12 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
-#include "UnitTestExtra.h"
 #include <iostream>
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutTestCase.h>
+#include "UnitTestExtra.h"
 #include "UnitTestMockTestCase.h"
 
 /**********************  USING  *********************/
@@ -56,7 +56,6 @@ class UnitTest_svutTestCase : public TestCase
 };
 
 /*******************  FUNCTION  *********************/
-#ifndef FAKE_CPP_UNIT
 static std::ostream & operator << (std::ostream & out,const std::list<std::string> & lst)
 {
 	for (std::list<std::string>::const_iterator it = lst.begin() ; it != lst.end() ; ++it)
@@ -67,7 +66,6 @@ static std::ostream & operator << (std::ostream & out,const std::list<std::strin
 	}
 	return out;
 }
-#endif
 
 /*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::setUp(void)

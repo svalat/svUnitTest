@@ -212,6 +212,7 @@ void svutRunner::setDisplay(bool success,bool details)
 /*******************  FUNCTION  *********************/
 /**
  * Import test cases registred with the macro SVUT_REGISTER_TEST_CASE().
+ * It will call svutTestCase::testMethodsRegistration() if not already done.
 **/
 void svutRunner::loadAutoDetected(void)
 {
@@ -222,6 +223,7 @@ void svutRunner::loadAutoDetected(void)
 		{
 			delete tmp;
 		} else {
+			tmp->callTestMethodsRegistration();
 			tmp->setAutodetected();
 			this->suites.push_back(tmp);
 		}
@@ -286,11 +288,13 @@ bool svutRunner::hasMultipleTestCase(void) const
 
 /*******************  FUNCTION  *********************/
 /**
- * Manually register a test case into the runner.
+ * Manually register a test case into the runner. It will call
+ * svutTestCase::testMethodsRegistration() if not already done.
  * @param tcase Define the test case to register.
 **/
 void  svutRunner::registerTestCase(svutTestCase & tcase)
 {
+	tcase.callTestMethodsRegistration();
 	this->suites.push_back(&tcase);
 }
 

@@ -62,3 +62,12 @@ $> lcov -o out.info -c -d .
 $> genhtml -o html out.info
 
                     -----------------------
+
+If you want to develop in the library with KDevelop, you may want to use the kdev-xtest plugin to
+get the svUnitTest suite results directly in kdevelop interface. This can be done by enable
+the self testing mode. So the svUnitTest test suite will be build with svUnitTest itself to with
+kdevelop integration support:
+
+$> cmake .. -DENABLE_SELF_TEST=yes
+
+                    -----------------------

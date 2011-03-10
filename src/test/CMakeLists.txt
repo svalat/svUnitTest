@@ -8,19 +8,27 @@
 
 include_directories (${svUnitTest_SOURCE_DIR}/src/lib/)
 
-if (CPPUNIT_FOUND)
-	############ LIB WITH MAIN AND EXTRA ###########
-	set(svutUnitTestBase_SRCS UnitTest_svutRunner.cpp UnitTestMockResultFormatter.cpp
-		UnitTestMockTestCase.cpp UnitTestMockListener.cpp UnitTestMain.cpp
-		UnitTestExtra.cpp UnitTestMockTestCase2.cpp)
-else (CPPUNIT_FOUND)
+if (ENABLE_SELF_TEST)
 	############ LIB WITH MAIN AND EXTRA ###########
 	set(svutUnitTestBase_SRCS UnitTest_svutRunner.cpp UnitTestMockResultFormatter.cpp
 		UnitTestMockTestCase.cpp UnitTestMockListener.cpp
 		UnitTestMockTestCase2.cpp)
-	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/fakecppunit)
-	set(CPPUNIT_LIBRARY fakecppunit)
-endif (CPPUNIT_FOUND)
+	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/selftest)
+else (ENABLE_SELF_TEST)
+	if (CPPUNIT_FOUND)
+		############ LIB WITH MAIN AND EXTRA ###########
+		set(svutUnitTestBase_SRCS UnitTest_svutRunner.cpp UnitTestMockResultFormatter.cpp
+			UnitTestMockTestCase.cpp UnitTestMockListener.cpp UnitTestMain.cpp
+			UnitTestExtra.cpp UnitTestMockTestCase2.cpp)
+	else (CPPUNIT_FOUND)
+		############ LIB WITH MAIN AND EXTRA ###########
+		set(svutUnitTestBase_SRCS UnitTest_svutRunner.cpp UnitTestMockResultFormatter.cpp
+			UnitTestMockTestCase.cpp UnitTestMockListener.cpp
+			UnitTestMockTestCase2.cpp)
+		include_directories(${CMAKE_CURRENT_SOURCE_DIR}/fakecppunit)
+		set(CPPUNIT_LIBRARY fakecppunit)
+	endif (CPPUNIT_FOUND)
+endif(ENABLE_SELF_TEST)
 add_library(svutUnitTestBase ${svutUnitTestBase_SRCS})
 
 ############# BUILD ALL TESTS ##################
@@ -81,6 +89,10 @@ add_executable(svutDefaultMainAllMessages UnitTest_defaultMainAllMessages.cpp)
 target_link_libraries (svutDefaultMainAllMessages svutUnitTestBase svunittest)
 
 ################# SUBDIRS #######################
-if (NOT CPPUNIT_FOUND)
-	add_subdirectory(fakecppunit)
-endif (NOT CPPUNIT_FOUND)
+if (ENABLE_SELF_TEST)
+	add_subdirectory(selftest)
+else(ENABLE_SELF_TEST)
+	if (NOT CPPUNIT_FOUND)
+		add_subdirectory(fakecppunit)
+	endif (NOT CPPUNIT_FOUND)
+endif(ENABLE_SELF_TEST)

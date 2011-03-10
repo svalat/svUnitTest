@@ -34,6 +34,8 @@ svutTestCase::svutTestCase(std::string name)
 {
 	this->autodtected = false;
 	this->caseName = name;
+	this->nameLocked = false;
+	this->registrationDone = false;
 }
 
 /*******************  FUNCTION  *********************/
@@ -154,10 +156,14 @@ svutStatusInfo svutTestCase::runTestMethod(svutTestMethod * test)
 
 /*******************  FUNCTION  *********************/
 /**
+ * After first call of getName(), the test case name was locked and cannot be changed by
+ * calling setTestCaseName().
  * @return Return the name of the test case.
 **/
 std::string svutTestCase::getName(void) const
 {
+	//we lock the name
+	this->nameLocked = true;
 	return this->caseName;
 }
 
@@ -219,6 +225,49 @@ svutTestMethodNameList svutTestCase::getTestMethods(bool prefix) const
 	for (svutTestMethodPtrList::const_iterator it = tests.begin();it!=tests.end();++it)
 		res.push_back(pf + (*it)->getName());
 	return res;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Methode which can be used to déclare your tests méthode. It was automatically called
+ * just aster the construction of the test.
+ * This is also possible to redefine the test case name here by returning a non empty string.
+**/
+void svutTestCase::testMethodsRegistration(void )
+{
+
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Permit to change the test case name if it wasn't in execution. This will lead to crash if
+ * change after test execution start point. This is only to be called in construtor of from
+ * testMethodsRegistration().
+ * @param name Define the name of the test suite.
+ * @throw svutExInternalError This exception is thrown when tying to change the test case name
+ * after test execution start point.
+**/
+void svutTestCase::setTestCaseName(string name) throw (svutExInternalError)
+{
+	if (this->nameLocked)
+	{
+		throw svutExInternalError("svutTestCase::setTestCaseName() mustn't be called ou of test constructor() and testMethodsRegistration()");
+	} else {
+		this->caseName = name;
+	}
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Ensuite that we called testMethodsRegistration one time. If already called, return immediately.
+**/
+void svutTestCase::callTestMethodsRegistration(void )
+{
+	if (registrationDone == false)
+	{
+		testMethodsRegistration();
+		registrationDone = true;
+	}
 }
 
 /*******************  FUNCTION  *********************/
