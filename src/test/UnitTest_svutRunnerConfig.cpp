@@ -111,6 +111,7 @@ class UnitTest_svutRunnerConfig : public TestCase
 		void testAddBasicAccept_3(void);
 		void testAddBasicAccept_4(void);
 		void testOperator_ostream(void);
+		void testGetOutputFilename(void);
 
 		svutRunnerConfig * config;
 };
@@ -456,7 +457,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_output(void)
 	const char * args[] = {
 		"progName",
 		"-o",
-		" /dev/null",
+		"/dev/null",
 		""
 	};
 
@@ -465,6 +466,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_output(void)
 	CPPUNIT_ASSERT_EQUAL(true,config->hasDisplayDetails());
 	CPPUNIT_ASSERT_EQUAL(false,config->hasDisplaySuccess());
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
+	CPPUNIT_ASSERT_EQUAL("",config->getOutputFilename());
 
 	config->loadParams(3,args);
 
@@ -472,6 +474,7 @@ void UnitTest_svutRunnerConfig::testLoadParameters_output(void)
 	CPPUNIT_ASSERT_EQUAL(SVUT_OUT_STD_BW,config->getMode());
 	CPPUNIT_ASSERT_EQUAL(true,config->hasDisplayDetails());
 	CPPUNIT_ASSERT_EQUAL(false,config->hasDisplaySuccess());
+	CPPUNIT_ASSERT_EQUAL("/dev/null",config->getOutputFilename());
 	CPPUNIT_ASSERT(&std::cout != &config->getOutput());
 }
 
@@ -555,7 +558,9 @@ void UnitTest_svutRunnerConfig::testSetAction(void)
 void UnitTest_svutRunnerConfig::testSetOutput(void)
 {
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
+	CPPUNIT_ASSERT_EQUAL("",config->getOutputFilename());
 	config->setOutput("/dev/null");
+	CPPUNIT_ASSERT_EQUAL("/dev/null",config->getOutputFilename());
 	CPPUNIT_ASSERT(&std::cout != &config->getOutput());
 }
 
@@ -569,7 +574,9 @@ void UnitTest_svutRunnerConfig::testGetOutput(void)
 void UnitTest_svutRunnerConfig::testSetOutput_stream_1(void )
 {
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
+	CPPUNIT_ASSERT_EQUAL("",config->getOutputFilename());
 	config->setOutput(std::cerr);
+	CPPUNIT_ASSERT_EQUAL("",config->getOutputFilename());
 	CPPUNIT_ASSERT(&std::cerr == &config->getOutput());
 }
 
@@ -577,9 +584,12 @@ void UnitTest_svutRunnerConfig::testSetOutput_stream_1(void )
 void UnitTest_svutRunnerConfig::testSetOutput_stream_2(void )
 {
 	CPPUNIT_ASSERT_EQUAL(&std::cout,&config->getOutput());
+	CPPUNIT_ASSERT_EQUAL("",config->getOutputFilename());
 	config->setOutput("/dev/null");
+	CPPUNIT_ASSERT_EQUAL("/dev/null",config->getOutputFilename());
 	CPPUNIT_ASSERT(&std::cout != &config->getOutput());
 	config->setOutput(std::cerr);
+	CPPUNIT_ASSERT_EQUAL("",config->getOutputFilename());
 	CPPUNIT_ASSERT(&std::cerr == &config->getOutput());
 }
 
@@ -639,5 +649,12 @@ void UnitTest_svutRunnerConfig::testOperator_ostream(void )
 	str << *config;
 	CPPUNIT_ASSERT_EQUAL(CONFIG_STREAM_OUTPUT,str.str());
 }
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutRunnerConfig::testGetOutputFilename(void )
+{
+	CPPUNIT_ASSERT_EQUAL("",config->getOutputFilename());
+}
+
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutRunnerConfig);

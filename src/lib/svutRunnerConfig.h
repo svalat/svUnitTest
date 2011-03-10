@@ -96,6 +96,7 @@ class svutRunnerConfig
 		void addBasicAccept(std::string caseName,std::string function);
 		bool addBasicAccept(std::string filter);
 		svutTestFilter & getFilter(void);
+		std::string getOutputFilename(void) const;
 	protected:
 		/** Close the file at the end, or while changing the output mode. **/
 		void closeFile(void);

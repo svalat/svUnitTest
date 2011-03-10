@@ -22,6 +22,7 @@
 #include "svutResultFormatterStdBW.h"
 #include "svutResultFormatterStdColored.h"
 #include "svutResultFormatterXml.h"
+#include "svutResultFormatterQtXml.h"
 #include "svutAutoRegister.h"
 
 /**********************  USING  *********************/
@@ -314,9 +315,9 @@ void svutRunner::init(svutOutputMode mode,std::ostream & out)
 		case SVUT_OUT_XML:
 			this->formatter = new svutResultFormatterXml(out);
 			break;
-		/*case SVUT_OUT_QT_XML:
-			this->formater = new svutResultFormaterQtXml(*out);
-			break;*/
+		case SVUT_OUT_QT_XML:
+			this->formatter = new svutResultFormatterQtXml(out);
+			break;
 		default:
 			cerr << "Unknown type of formater : " << mode << endl;
 			exit(1);

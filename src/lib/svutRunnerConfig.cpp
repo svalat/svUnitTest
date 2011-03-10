@@ -122,7 +122,7 @@ void svutRunnerConfigArgp::parseOption ( char key, std::string arg, std::string 
 			config->setAction(SVUT_ACTION_LIST_TESTS);
 			break;
 		case 'o':
-			config->setOutput(arg);
+			config->setOutput(value);
 			break;
 		default://unknown arg
 			err << "Unknown arguement : " << arg << endl;
@@ -510,6 +510,15 @@ bool svutRunnerConfig::checkColorUsability(void ) const
 		return false;
 		#endif
 	}
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * @return Return the name of output file if available. Stay empty for default stdout.
+**/
+string svutRunnerConfig::getOutputFilename(void ) const
+{
+	return filename;
 }
 
 
