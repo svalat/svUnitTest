@@ -88,6 +88,10 @@ add_test(svutStandeloneMainStd svutStandeloneMain -m std)
 add_executable(svutDefaultMainAllMessages UnitTest_defaultMainAllMessages.cpp)
 target_link_libraries (svutDefaultMainAllMessages svutUnitTestBase svunittest)
 
+################ SVUNITTESTFAKE #################
+add_executable(svUnitTestFake UnitTest_svUnitTestFake.cpp)
+target_link_libraries (svUnitTestFake svunittest_fake)
+
 ################# SUBDIRS #######################
 if (ENABLE_SELF_TEST)
 	add_subdirectory(selftest)

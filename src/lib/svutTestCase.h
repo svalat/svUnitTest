@@ -97,9 +97,9 @@ class svutTestCase
 		void MARK_AS_KNOWN_ERROR(std::string message);
 		/** Define the list of tests methods in the current test case. **/
 		svutTestMethodPtrList tests;
+	private:
 		/** Define the name of the current test case, this may be the classe name. **/
 		std::string caseName;
-	private:
 		/**
 		 * Boolean used to replace FAILED stats by TODO status when failIsTodo() was invoqued in a
 		 * test method. It permit to no display FAILURE on known break which poulte the output
