@@ -37,7 +37,7 @@ int defaultMain(int argc,char * argv[])
 		cout << test->getName();
 		cout << "-------------- " << endl;
 		if (test->runTestCase() == false)
-			final == false;
+			final = false;
 		delete test;
 	}
 

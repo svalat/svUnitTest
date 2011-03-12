@@ -91,6 +91,7 @@ target_link_libraries (svutDefaultMainAllMessages svutUnitTestBase svunittest)
 ################ SVUNITTESTFAKE #################
 add_executable(svUnitTestFake UnitTest_svUnitTestFake.cpp)
 target_link_libraries (svUnitTestFake svunittest_fake)
+add_test(svUnitTestFake svUnitTestFake)
 
 ################# SUBDIRS #######################
 if (ENABLE_SELF_TEST)
