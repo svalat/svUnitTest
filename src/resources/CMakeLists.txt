@@ -6,11 +6,5 @@
 #            LICENSE  : CeCILL-C                     #
 ######################################################
 
-#subdirs
-add_subdirectory (lib)
-add_subdirectory (integration)
-add_subdirectory (examples)
-add_subdirectory (resources)
-if (NOT DISABLE_UNIT_TESTS)
-	add_subdirectory (test)
-endif(NOT DISABLE_UNIT_TESTS)
+#install ressources in ${prefix}/share/svUnitTest
+install(DIRECTORY svUnitTest_html DESTINATION ${CMAKE_INSTALL_PREFIX}/share/svUnitTest)
