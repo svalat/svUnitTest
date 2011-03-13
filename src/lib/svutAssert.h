@@ -104,7 +104,7 @@ namespace svUnitTest
  * @param actual Define the current value to test.
 **/
 #define SVUT_ASSERT_EQUAL_STRICT(expected,actual) \
-	assertEqualStrict((expected),(actual),SVUT_CODE_LOCATION)
+	svUnitTest::assertEqualStrict((expected),(actual),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
 /**
@@ -119,7 +119,7 @@ namespace svUnitTest
  * @param actual Define the current value to test.
 **/
 #define SVUT_ASSERT_NOT_EQUAL_STRICT(expected,actual) \
-	assertNotEqualStrict((expected),(actual),SVUT_CODE_LOCATION)
+	svUnitTest::assertNotEqualStrict((expected),(actual),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
 /**
@@ -134,7 +134,7 @@ namespace svUnitTest
  * @param actual Définit un pointeut vers la valeur obtenue.
 **/
 #define SVUT_ASSERT_SAME(expected,actual) \
-	assertSame((expected),(actual),SVUT_CODE_LOCATION)
+	svUnitTest::assertSame((expected),(actual),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
 /**
@@ -149,7 +149,7 @@ namespace svUnitTest
  * @param actual Définit un pointeut vers la valeur obtenue.
 **/
 #define SVUT_ASSERT_NOT_SAME(expected,actual) \
-	assertNotSame((expected),(actual),SVUT_CODE_LOCATION)
+	svUnitTest::assertNotSame((expected),(actual),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
 /**

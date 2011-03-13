@@ -11,6 +11,7 @@
 
 /********************  HEADERS  *********************/
 #include <sstream>
+#include "svutExAssert.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest

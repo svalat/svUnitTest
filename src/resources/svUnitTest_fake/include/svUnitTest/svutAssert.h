@@ -18,21 +18,6 @@
 namespace svUnitTest
 {
 
-/********************  STRUCT  **********************/
-struct svutExAssertFake
-{
-	svutExAssertFake(const char * status,const char * message,std::string location)
-	{
-		this->status = status;
-		this->message = message;
-		this->location = location;
-	}
-	svutExAssertFake(void) {};
-	std::string status;
-	std::string message;
-	std::string location;
-};
-
 /*******************  FUNCTION  *********************/
 inline std::string getLocationString(int line,const char * filename,const char * function)
 {
