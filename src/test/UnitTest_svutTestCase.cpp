@@ -102,13 +102,13 @@ void UnitTest_svutTestCase::testTearDown(void)
 /*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::testRegisterTestMethod(void)
 {
-	CPPUNIT_ASSERT_EQUAL(2,obj->getNbTests());
+	CPPUNIT_ASSERT_EQUAL(2u,obj->getNbTests());
 	std::list<std::string> lst;
 	lst.push_back("test1");
 	lst.push_back("test3");
 	CPPUNIT_ASSERT_EQUAL(lst,obj->getTestMethods(false));
 	obj->testRegister();
-	CPPUNIT_ASSERT_EQUAL(3,obj->getNbTests());
+	CPPUNIT_ASSERT_EQUAL(3u,obj->getNbTests());
 	std::list<std::string> lst2;
 	lst2.push_back("test1");
 	lst2.push_back("test3");
@@ -143,7 +143,7 @@ void UnitTest_svutTestCase::testGetMethods_true(void)
 /*******************  FUNCTION  *********************/
 void UnitTest_svutTestCase::testGetNbTests(void)
 {
-	CPPUNIT_ASSERT_EQUAL(2,obj->getNbTests());
+	CPPUNIT_ASSERT_EQUAL(2u,obj->getNbTests());
 }
 
 /*******************  FUNCTION  *********************/

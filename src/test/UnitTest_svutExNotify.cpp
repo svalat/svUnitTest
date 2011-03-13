@@ -74,7 +74,7 @@ void UnitTest_svutExNotify::testExNotify_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(2,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(2u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("v1",obj.getInfos().getEntry("expected"));
 	CPPUNIT_ASSERT_EQUAL("v2",obj.getInfos().getEntry("actual"));
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getMessage());
@@ -91,7 +91,7 @@ void UnitTest_svutExNotify::testExNotify_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(0,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(0u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getStatus());
 }
@@ -105,7 +105,7 @@ void UnitTest_svutExNotify::testExNotifyTodo(void)
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_TODO,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is a todo",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(0,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(0u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("this is a todo",obj.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_TODO,obj.getStatus());
 }
@@ -119,7 +119,7 @@ void UnitTest_svutExNotify::testExNotifyIndev(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is indev",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(0,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(0u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("this is indev",obj.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getStatus());
 }

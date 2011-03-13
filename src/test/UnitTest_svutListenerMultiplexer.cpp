@@ -178,24 +178,24 @@ void UnitTest_svutListenerMultiplexer::testOnTestMethodEnd(void )
 /*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testCountListener(void )
 {
-	CPPUNIT_ASSERT_EQUAL(2,obj->countListener());
+	CPPUNIT_ASSERT_EQUAL(2u,obj->countListener());
 }
 
 /*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testAddListener(void )
 {
-	CPPUNIT_ASSERT_EQUAL(2,obj->countListener()),
+	CPPUNIT_ASSERT_EQUAL(2u,obj->countListener()),
 	obj->addListener(mock3);
-	CPPUNIT_ASSERT_EQUAL(3,obj->countListener());
+	CPPUNIT_ASSERT_EQUAL(3u,obj->countListener());
 }
 
 /*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testRemoveListener_good(void )
 {
 	try {
-		CPPUNIT_ASSERT_EQUAL(2,obj->countListener());
+		CPPUNIT_ASSERT_EQUAL(2u,obj->countListener());
 		obj->removeListener(mock1);
-		CPPUNIT_ASSERT_EQUAL(1,obj->countListener());
+		CPPUNIT_ASSERT_EQUAL(1u,obj->countListener());
 	} catch (svutExInternalError) {
 		CPPUNIT_FAIL("Throw not expected svutExInternalError.");
 	}
@@ -204,13 +204,13 @@ void UnitTest_svutListenerMultiplexer::testRemoveListener_good(void )
 /*******************  FUNCTION  *********************/
 void UnitTest_svutListenerMultiplexer::testRemoveListener_bad(void )
 {
-	CPPUNIT_ASSERT_EQUAL(2,obj->countListener());
+	CPPUNIT_ASSERT_EQUAL(2u,obj->countListener());
 	try {
 		obj->removeListener(mock3);
 		CPPUNIT_FAIL("Not throw svutExInternalError as expected.");
 	} catch (svutExInternalError) {
 	}
-	CPPUNIT_ASSERT_EQUAL(2,obj->countListener());
+	CPPUNIT_ASSERT_EQUAL(2u,obj->countListener());
 }
 
 /*******************  FUNCTION  *********************/

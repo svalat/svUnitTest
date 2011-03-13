@@ -60,55 +60,55 @@ void UnitTest_svutListenerSummary::tearDown(void)
 void UnitTest_svutListenerSummary::testGetSummary(void )
 {
 	svutResultSummary summary = listener->getSummary();
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_FAILED));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_INDEV));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_SUCCESS));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_SKIPED));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_UNKNOWN));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_TODO));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_FAILED));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_INDEV));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_SUCCESS));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_SKIPED));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_UNKNOWN));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_TODO));
 }
 
 /*******************  FUNCTION  *********************/
 void UnitTest_svutListenerSummary::testEvents_1(void )
 {
 	svutResultSummary summary = listener->getSummary();
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_FAILED));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_INDEV));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_SUCCESS));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_SKIPED));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_UNKNOWN));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_TODO));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_FAILED));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_INDEV));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_SUCCESS));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_SKIPED));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_UNKNOWN));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_TODO));
 
 	testCase->runTestCase(listener);
 	summary = listener->getSummary();
-	CPPUNIT_ASSERT_EQUAL(1,summary.getCount(SVUT_STATUS_FAILED));
-	CPPUNIT_ASSERT_EQUAL(2,summary.getCount(SVUT_STATUS_INDEV));
-	CPPUNIT_ASSERT_EQUAL(1,summary.getCount(SVUT_STATUS_SUCCESS));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_SKIPED));
-	CPPUNIT_ASSERT_EQUAL(2,summary.getCount(SVUT_STATUS_UNKNOWN));
-	CPPUNIT_ASSERT_EQUAL(4,summary.getCount(SVUT_STATUS_TODO));
+	CPPUNIT_ASSERT_EQUAL(1u,summary.getCount(SVUT_STATUS_FAILED));
+	CPPUNIT_ASSERT_EQUAL(2u,summary.getCount(SVUT_STATUS_INDEV));
+	CPPUNIT_ASSERT_EQUAL(1u,summary.getCount(SVUT_STATUS_SUCCESS));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_SKIPED));
+	CPPUNIT_ASSERT_EQUAL(2u,summary.getCount(SVUT_STATUS_UNKNOWN));
+	CPPUNIT_ASSERT_EQUAL(4u,summary.getCount(SVUT_STATUS_TODO));
 }
 
 /*******************  FUNCTION  *********************/
 void UnitTest_svutListenerSummary::testEvents_2(void )
 {
 	svutResultSummary summary = listener->getSummary();
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_FAILED));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_INDEV));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_SUCCESS));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_SKIPED));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_UNKNOWN));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_TODO));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_FAILED));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_INDEV));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_SUCCESS));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_SKIPED));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_UNKNOWN));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_TODO));
 
 	testCase->runTestCase(listener);
 	testCase->runTestCase(listener);
 	summary = listener->getSummary();
-	CPPUNIT_ASSERT_EQUAL(2,summary.getCount(SVUT_STATUS_FAILED));
-	CPPUNIT_ASSERT_EQUAL(4,summary.getCount(SVUT_STATUS_INDEV));
-	CPPUNIT_ASSERT_EQUAL(2,summary.getCount(SVUT_STATUS_SUCCESS));
-	CPPUNIT_ASSERT_EQUAL(0,summary.getCount(SVUT_STATUS_SKIPED));
-	CPPUNIT_ASSERT_EQUAL(4,summary.getCount(SVUT_STATUS_UNKNOWN));
-	CPPUNIT_ASSERT_EQUAL(8,summary.getCount(SVUT_STATUS_TODO));
+	CPPUNIT_ASSERT_EQUAL(2u,summary.getCount(SVUT_STATUS_FAILED));
+	CPPUNIT_ASSERT_EQUAL(4u,summary.getCount(SVUT_STATUS_INDEV));
+	CPPUNIT_ASSERT_EQUAL(2u,summary.getCount(SVUT_STATUS_SUCCESS));
+	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_SKIPED));
+	CPPUNIT_ASSERT_EQUAL(4u,summary.getCount(SVUT_STATUS_UNKNOWN));
+	CPPUNIT_ASSERT_EQUAL(8u,summary.getCount(SVUT_STATUS_TODO));
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutListenerSummary);

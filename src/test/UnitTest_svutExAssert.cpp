@@ -88,7 +88,7 @@ void UnitTest_svutExAssert::testExAssertFail_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(2,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(2u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("v1",obj.getInfos().getEntry("expected"));
 	CPPUNIT_ASSERT_EQUAL("v2",obj.getInfos().getEntry("actual"));
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getMessage());
@@ -105,7 +105,7 @@ void UnitTest_svutExAssert::testExAssertFail_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(0,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(0u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
@@ -120,7 +120,7 @@ void UnitTest_svutExAssert::testExAssertFailBool_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("Failed on BOOLEAN test.",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(2,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(2u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("TRUE",obj.getInfos().getEntry("Expected"));
 	CPPUNIT_ASSERT_EQUAL("FALSE",obj.getInfos().getEntry("Actual"));
 	CPPUNIT_ASSERT_EQUAL("Failed on BOOLEAN test.",obj.getMessage());
@@ -137,7 +137,7 @@ void UnitTest_svutExAssert::testExAssertFailBool_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("Failed on BOOLEAN test.",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(2,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(2u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("FALSE",obj.getInfos().getEntry("Expected"));
 	CPPUNIT_ASSERT_EQUAL("TRUE",obj.getInfos().getEntry("Actual"));
 	CPPUNIT_ASSERT_EQUAL("Failed on BOOLEAN test.",obj.getMessage());
@@ -154,7 +154,7 @@ void UnitTest_svutExAssert::testExAssertFailNull_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("Failed on NULL pointer test.",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(2,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(2u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("NULL",obj.getInfos().getEntry("Expected"));
 	CPPUNIT_ASSERT_EQUAL("NOT NULL",obj.getInfos().getEntry("Actual"));
 	CPPUNIT_ASSERT_EQUAL("Failed on NULL pointer test.",obj.getMessage());
@@ -171,7 +171,7 @@ void UnitTest_svutExAssert::testExAssertFailNull_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("Failed on NULL pointer test.",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(2,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(2u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("NOT NULL",obj.getInfos().getEntry("Expected"));
 	CPPUNIT_ASSERT_EQUAL("NULL",obj.getInfos().getEntry("Actual"));
 	CPPUNIT_ASSERT_EQUAL("Failed on NULL pointer test.",obj.getMessage());
@@ -188,7 +188,7 @@ void UnitTest_svutExAssert::testExAssertFailEqual_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("Failed on expected value.",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(2,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(2u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("test",obj.getInfos().getEntry("Expected"));
 	CPPUNIT_ASSERT_EQUAL("TEST",obj.getInfos().getEntry("Actual"));
 	CPPUNIT_ASSERT_EQUAL("Failed on expected value.",obj.getMessage());
@@ -205,7 +205,7 @@ void UnitTest_svutExAssert::testExAssertFailEqual_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("Failed on expected value.",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(2,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(2u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("test",obj.getInfos().getEntry("Not expected"));
 	CPPUNIT_ASSERT_EQUAL("TEST",obj.getInfos().getEntry("Actual"));
 	CPPUNIT_ASSERT_EQUAL("Failed on expected value.",obj.getMessage());
@@ -222,7 +222,7 @@ void UnitTest_svutExAssert::testExAssertFailCustom(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("Custom test message",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(0,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(0u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("Custom test message",obj.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
@@ -237,7 +237,7 @@ void UnitTest_svutExAssert::testExAssertFailNotExec(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("Failed on execution of forbidden bloc.",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(0,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(0u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("Failed on execution of forbidden bloc.",obj.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
@@ -252,7 +252,7 @@ void UnitTest_svutExAssert::testExAssertFailThrow(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("Failed on waiting exception.",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(2,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(2u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("wantThis",obj.getInfos().getEntry("Expected"));
 	CPPUNIT_ASSERT_EQUAL("getThis",obj.getInfos().getEntry("Actual"));
 	CPPUNIT_ASSERT_EQUAL("Failed on waiting exception.",obj.getMessage());

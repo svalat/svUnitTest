@@ -79,7 +79,7 @@ void UnitTest_svutExTestStatus::testConstructor_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(svutCodeLocation("file.cpp","test()",42),obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(2,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(2u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("v1",obj.getInfos().getEntry("expected"));
 	CPPUNIT_ASSERT_EQUAL("v2",obj.getInfos().getEntry("actual"));
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getMessage());
@@ -95,7 +95,7 @@ void UnitTest_svutExTestStatus::teesConsturctor_2(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(svutCodeLocation("file.cpp","test()",42),obj.getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(0,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(0u,obj.getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("this is a test",obj.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,obj.getStatus());
 }
@@ -112,12 +112,12 @@ void UnitTest_svutExTestStatus::testGetInfos(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,status->getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is a test",status->getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(svutCodeLocation("file.cpp","test()",42),status->getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(2,status->getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(2u,status->getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("v1",status->getInfos().getEntry("expected"));
 	CPPUNIT_ASSERT_EQUAL("v2",status->getInfos().getEntry("actual"));
 	
 	status->getInfos().addEntry("test","test");
-	CPPUNIT_ASSERT_EQUAL(3,status->getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(3u,status->getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("test",status->getInfos().getEntry("test"));
 }
 
@@ -127,7 +127,7 @@ void UnitTest_svutExTestStatus::testGetInfos_const(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_INDEV,cstStatus->getInfos().getStatus());
 	CPPUNIT_ASSERT_EQUAL("this is a test",cstStatus->getInfos().getMessage());
 	CPPUNIT_ASSERT_EQUAL(svutCodeLocation("file.cpp","test()",42),cstStatus->getInfos().getLocation());
-	CPPUNIT_ASSERT_EQUAL(2,cstStatus->getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(2u,cstStatus->getInfos().getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("v1",cstStatus->getInfos().getEntry("expected"));
 	CPPUNIT_ASSERT_EQUAL("v2",cstStatus->getInfos().getEntry("actual"));
 }

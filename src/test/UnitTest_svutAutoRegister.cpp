@@ -58,9 +58,9 @@ void UnitTest_svutAutoRegister::tearDown(void)
 void UnitTest_svutAutoRegister::testGetList(void )
 {
 	svutTestCaseBuilderGeneric<UnitTestMockTestCase2> test;
-	CPPUNIT_ASSERT_EQUAL(0,getRegistredTestCase().size());
+	CPPUNIT_ASSERT_EQUAL(0u,getRegistredTestCase().size());
 	registerTestCase(test);
-	CPPUNIT_ASSERT_EQUAL(1,getRegistredTestCase().size());
+	CPPUNIT_ASSERT_EQUAL(1u,getRegistredTestCase().size());
 
 	const std::set<svUnitTest::svutTestCaseBuilder *> lst = getRegistredTestCase();
 	CPPUNIT_ASSERT(&test == *lst.begin());
@@ -70,19 +70,19 @@ void UnitTest_svutAutoRegister::testGetList(void )
 void UnitTest_svutAutoRegister::testRegister(void )
 {
 	svutTestCaseBuilderGeneric<UnitTestMockTestCase2>  test;
-	CPPUNIT_ASSERT_EQUAL(0,getRegistredTestCase().size());
+	CPPUNIT_ASSERT_EQUAL(0u,getRegistredTestCase().size());
 	registerTestCase(test);
-	CPPUNIT_ASSERT_EQUAL(1,getRegistredTestCase().size());
+	CPPUNIT_ASSERT_EQUAL(1u,getRegistredTestCase().size());
 }
 
 /********************  METHODE  *********************/
 void UnitTest_svutAutoRegister::testRegister_multiple_1(void )
 {
 	svutTestCaseBuilderGeneric<UnitTestMockTestCase2>  test;
-	CPPUNIT_ASSERT_EQUAL(0,getRegistredTestCase().size());
+	CPPUNIT_ASSERT_EQUAL(0u,getRegistredTestCase().size());
 	registerTestCase(test);
 	registerTestCase(test);
-	CPPUNIT_ASSERT_EQUAL(1,getRegistredTestCase().size());
+	CPPUNIT_ASSERT_EQUAL(1u,getRegistredTestCase().size());
 }
 
 /********************  METHODE  *********************/
@@ -90,21 +90,21 @@ void UnitTest_svutAutoRegister::testRegister_multiple_2(void )
 {
 	svutTestCaseBuilderGeneric<UnitTestMockTestCase2>  test;
 	svutTestCaseBuilderGeneric<UnitTestMockTestCase2>  test2;
-	CPPUNIT_ASSERT_EQUAL(0,getRegistredTestCase().size());
+	CPPUNIT_ASSERT_EQUAL(0u,getRegistredTestCase().size());
 	registerTestCase(test);
 	registerTestCase(test2);
-	CPPUNIT_ASSERT_EQUAL(2,getRegistredTestCase().size());
+	CPPUNIT_ASSERT_EQUAL(2u,getRegistredTestCase().size());
 }
 
 /********************  METHODE  *********************/
 void UnitTest_svutAutoRegister::testClear(void )
 {
 	svutTestCaseBuilderGeneric<UnitTestMockTestCase2>  test;
-	CPPUNIT_ASSERT_EQUAL(0,getRegistredTestCase().size());
+	CPPUNIT_ASSERT_EQUAL(0u,getRegistredTestCase().size());
 	registerTestCase(test);
-	CPPUNIT_ASSERT_EQUAL(1,getRegistredTestCase().size());
+	CPPUNIT_ASSERT_EQUAL(1u,getRegistredTestCase().size());
 	clearTestCaseRegister();
-	CPPUNIT_ASSERT_EQUAL(0,getRegistredTestCase().size());
+	CPPUNIT_ASSERT_EQUAL(0u,getRegistredTestCase().size());
 }
 
 
