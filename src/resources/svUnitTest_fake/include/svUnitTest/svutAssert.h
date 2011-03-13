@@ -12,6 +12,7 @@
 /********************  HEADERS  *********************/
 #include <string>
 #include <sstream>
+#include "svutAsserter.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
@@ -66,94 +67,100 @@ inline std::string getLocationString(int line,const char * filename,const char *
 	if (((bool)(value)) ==  true) throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " == false"),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_NULL(value) SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_NULL)
-// 	if (((void*)(value)) != NULL) \
-// 		throw svUnitTest::svutExAssertFailNullPointer(true,SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_NULL(value)\
+	if (((void*)(value)) != NULL) \
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " == NULL"),SVUT_CODE_LOCATION)
 
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_NOT_NULL(value) SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_NOT_NULL)
-// 	if (((void*)(value)) == NULL) \
-// 		throw svUnitTest::svutExAssertFailNullPointer(false,SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_NOT_NULL(value)\
+	if (((void*)(value)) == NULL) \
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " != NULL"),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_EQUAL(expected,actual) SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_EQUAL)
-// 	svUnitTest::assertEqual((expected),(actual),SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_EQUAL(expected,actual) \
+	if (asserterOperatorEqual(expected,actual) == false)\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " == " #expected),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_NOT_EQUAL(expected,actual)  SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_NOT_EQUAL)
-// 	svUnitTest::assertNotEqual((expected),(actual),SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_NOT_EQUAL(expected,actual) \
+	if (asserterOperatorNotEqual(expected,actual) == false)\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " != " #expected),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_EQUAL_STRICT(expected,actual)  SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_EQUAL_STRICT)
-// 	assertEqualStrict((expected),(actual),SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_EQUAL_STRICT(expected,actual)\
+	if (asserterOperatorEqualStrict(expected,actual) == false)\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " == " #expected),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_NOT_EQUAL_STRICT(expected,actual)  SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_NOT_EQUAL_STRICT)
-// 	assertNotEqualStrict((expected),(actual),SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_NOT_EQUAL_STRICT(expected,actual)\
+	if (asserterOperatorNotEqualStrict(expected,actual) == false)\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " != " #expected),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_SAME(expected,actual)  SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_SAME)
-// 	assertSame((expected),(actual),SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_SAME(expected,actual)\
+	if ((void*)(expected) != (void*)(actual))\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " == " #expected),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_NOT_SAME(expected,actual)  SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_NOT_SAME)
-// 	assertNotSame((expected),(actual),SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_NOT_SAME(expected,actual)\
+	if ((void*)(expected) == (void*)(actual))\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " != " #expected),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_FAIL(message) \
 	throw svUnitTest::svutExAssertFake("FAILED",message,SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_TODO(message)  SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_TODO)
-// 	throw svUnitTest::svutExNotifyTodo((message),SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_TODO(message)\
+	throw svUnitTest::svutExAssertFake("TODO",("Todo : " message),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_INDEV(message)  SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_INDEV)
-// 	throw svUnitTest::svutExNotifyIndev((message),SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_INDEV(message)\
+	throw svUnitTest::svutExAssertFake("INDEV",("Indev : " message),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_NOT_EXEC_THIS()  SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_NOT_EXEC_THIS)
-// 	throw svUnitTest::svutExAssertFailNotExec(SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_NOT_EXEC_THIS()\
+	throw svUnitTest::svutExAssertFake("FAILED",("This line must be skiped"),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_THROW(name,what)  SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_THROW)
-// 	try {\
-// 		what;\
-// 		throw svUnitTest::svutExAssertFailThrow(#name,"NONE",SVUT_CODE_LOCATION);\
-// 	} catch(name) {\
-// 	}  catch(svUnitTest::svutExAssertFailThrow & e) { \
-// 		throw e; \
-// 	} catch(...) {\
-// 		throw svUnitTest::svutExAssertFailThrow(#name,"UNKNOWN",SVUT_CODE_LOCATION);\
-// 	}
+#define SVUT_ASSERT_THROW(name,what)\
+	try {\
+		what;\
+		throw svUnitTest::svutExAssertFake("FAILED",("Don't get expected " #name " exception"),SVUT_CODE_LOCATION);\
+	} catch(name) {\
+	}  catch(svUnitTest::svutExAssertFake & e) { \
+		throw e; \
+	} catch(...) {\
+		throw svUnitTest::svutExAssertFake("UNKNOWN",("Get unknown exception instead of expected " #name " exception"),SVUT_CODE_LOCATION);\
+	}
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_THROW_SOMETHING(what)  SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_THROW_SOMETHING)
-// 	try {\
-// 		what;\
-// 		throw svUnitTest::svutExAssertFailThrow("...","NONE",SVUT_CODE_LOCATION);\
-// 	}  catch(svUnitTest::svutExAssertFailThrow & e) { \
-// 		throw e; \
-// 	} catch(...) {\
-// 	}
+#define SVUT_ASSERT_THROW_SOMETHING(what) \
+	try {\
+		what;\
+		throw svUnitTest::svutExAssertFake("FAILED",("Don't get expected exception"),SVUT_CODE_LOCATION);\
+	}  catch(svUnitTest::svutExAssertFake & e) { \
+		throw e; \
+	} catch(...) {\
+	}
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_NOT_THROW(name,what)  SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_NOT_THROW)
-// 	try {\
-// 		what;\
-// 	} catch(name) {\
-// 		throw svUnitTest::svutExAssertFailThrow("NONE",#name,SVUT_CODE_LOCATION);\
-// 	} catch(...) {\
-// 	}
+#define SVUT_ASSERT_NOT_THROW(name,what)\
+	try {\
+		what;\
+	} catch(name) {\
+		throw svUnitTest::svutExAssertFake("FAILED",("Get unexpected " #name " exception"),SVUT_CODE_LOCATION);\
+	} catch(...) {\
+	}
 
 /********************  MACRO  ***********************/
-#define SVUT_ASSERT_MAY_NOT_THROW(what)  SVUT_NOT_SUPPORTED_MACRO(SVUT_ASSERT_MAY_NOT_THROW)
-// 	try {\
-// 		what;\
-// 	} catch(...) {\
-// 		throw svUnitTest::svutExAssertFailThrow("NONE","...",SVUT_CODE_LOCATION);\
-// 	}
+#define SVUT_ASSERT_MAY_NOT_THROW(what) \
+	try {\
+		what;\
+	} catch(...) {\
+		throw svUnitTest::svutExAssertFake("FAILED",("Get unexpected unknown exception"),SVUT_CODE_LOCATION);\
+	}
 
 }
 

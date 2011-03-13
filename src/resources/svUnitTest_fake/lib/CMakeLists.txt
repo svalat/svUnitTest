@@ -6,4 +6,4 @@
 #            LICENSE  : CeCILL-C                     #
 ######################################################
 
-add_library(svunittest_fake STATIC svutTestCase.cpp svutDefaultMain.cpp)
+add_library(svunittest_fake STATIC svutTestCase.cpp svutDefaultMain.cpp svutAsserter.cpp)

@@ -68,7 +68,7 @@ class svutTestCaseBuilderGeneric : public svutTestCaseBuilder
 };
 
 /*******************  FUNCTION **********************/
-int fakeRegisterTestCase(svUnitTest::svutTestCaseBuilder & builder);
+void fakeRegisterTestCase(svUnitTest::svutTestCaseBuilder & builder);
 
 }
 

@@ -96,7 +96,7 @@ void UnitTest_svutStatusInfo::testConstructor_1(void )
 	CPPUNIT_ASSERT_EQUAL(SVUT_NO_LOCATION,empty.getLocation());
 	CPPUNIT_ASSERT_EQUAL("",empty.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_SKIPED,empty.getStatus());
-	CPPUNIT_ASSERT_EQUAL(0,empty.getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(0u,empty.getNbEntries());
 }
 
 /*******************  FUNCTION  *********************/
@@ -107,7 +107,7 @@ void UnitTest_svutStatusInfo::testConstructor_2(void )
 	CPPUNIT_ASSERT_EQUAL(loc,copy.getLocation());
 	CPPUNIT_ASSERT_EQUAL(TEST_MESSAGE,copy.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_SUCCESS,copy.getStatus());
-	CPPUNIT_ASSERT_EQUAL(0,copy.getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(0u,copy.getNbEntries());
 }
 
 /*******************  FUNCTION  *********************/
@@ -161,7 +161,7 @@ void UnitTest_svutStatusInfo::testGetEntry(void )
 /*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testGetNbEntries(void )
 {
-	CPPUNIT_ASSERT_EQUAL(0,info->getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(0u,info->getNbEntries());
 }
 
 /*******************  FUNCTION  *********************/
@@ -172,7 +172,7 @@ void UnitTest_svutStatusInfo::testOperatorEqual(void )
 	CPPUNIT_ASSERT_EQUAL(loc,copy.getLocation());
 	CPPUNIT_ASSERT_EQUAL(TEST_MESSAGE,copy.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,copy.getStatus());
-	CPPUNIT_ASSERT_EQUAL(0,copy.getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(0u,copy.getNbEntries());
 }
 
 /*******************  FUNCTION  *********************/

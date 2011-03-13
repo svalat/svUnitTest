@@ -106,7 +106,7 @@ svutTestCaseBuilder::~svutTestCaseBuilder(void)
 }
 
 /*******************  FUNCTION  *********************/
-int fakeRegisterTestCase(svUnitTest::svutTestCaseBuilder & builder)
+void fakeRegisterTestCase(svUnitTest::svutTestCaseBuilder & builder)
 {
 	__fake_svut_test_cases_register__.push_back(&builder);
 }

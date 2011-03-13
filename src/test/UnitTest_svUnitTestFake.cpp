@@ -78,19 +78,19 @@ struct UnitTestCustoType
 };
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+bool asserterOperatorEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
 {
 	return (v1.value1 == v2.value1 && v1.value2 == v2.value2);
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorNotEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+bool asserterOperatorNotEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
 {
 	return (v1.value1 != v2.value1 || v1.value2 != v2.value2);
 }
 
 /*******************  FUNCTION  *********************/
-static std::string asserterToString(const UnitTestCustoType & value)
+std::string asserterToString(const UnitTestCustoType & value)
 {
 	std::stringstream res;
 	res << value.value1 << ", " << value.value2;
