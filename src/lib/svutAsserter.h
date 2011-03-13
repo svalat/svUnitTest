@@ -150,8 +150,8 @@ static void assertNotEqualStrict(const T & expected,const T & actual,svutCodeLoc
 }
 
 /*******************  FUNCTION  *********************/
-void assertEqual(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
-void assertNotEqual(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
+bool assertOperatoreEqual(const char * expected,const char * actual);
+bool assertOperatorNotEqual(const char * expected,const char * actual);
 void assertEqualStrict(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 void assertNotEqualStrict(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 void assertSame(const void * expected,const void * actual,svutCodeLocation location) throw(svutExAssertFailEqual);

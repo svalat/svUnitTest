@@ -20,15 +20,10 @@ namespace svUnitTest
  * one will compare the adresse of the pointers, which is already done by SVUT_ASSERT_SAME.
  * @param expected Define the expected value.
  * @param actual Define the current value to compared to the expected one.
- * @param location Define the code location which call this test.
 **/
-void assertEqual(const char * expected,const char * actual,svutCodeLocation location)
-	throw(svutExAssertFailEqual)
+bool assertOperatoreEqual(const char * expected,const char * actual)
 {
-	if (strcmp(expected,actual) != 0)
-	{
-		throw svutExAssertFailEqual(true,expected,actual,location);
-	}
+	return (strcmp(expected,actual) == 0);
 }
 
 /*******************  FUNCTION  *********************/
@@ -37,15 +32,10 @@ void assertEqual(const char * expected,const char * actual,svutCodeLocation loca
  * one will compare the adresse of the pointers, which is already done by SVUT_ASSERT_NOT_SAME.
  * @param expected Define the expected value.
  * @param actual Define the current value to compared to the expected one.
- * @param location Define the code location which call this test.
 **/
-void assertNotEqual(const char * expected,const char * actual,svutCodeLocation location)
-	throw(svutExAssertFailEqual)
+bool assertOperatorNotEqual(const char * expected,const char * actual)
 {
-	if (strcmp(expected,actual) == 0)
-	{
-		throw svutExAssertFailEqual(false,expected,actual,location);
-	}
+	return (strcmp(expected,actual) != 0);
 }
 
 /*******************  FUNCTION  *********************/
