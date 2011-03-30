@@ -1,0 +1,13 @@
+Source: svunittest
+Section: devel
+Priority: optional
+Maintainer: Sébastien Valat <sebastien.valat.dev@orange.fr>
+Build-Depends: debhelper (>= 7), cmake, cdbs
+Standards-Version: 3.9.1
+Homepage: https://github.com/svalat/svUnitTest
+
+Package: svunittest
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: C++ test suite library, similar to CPPunit.
+ C++ test suite library, similar to CPPunit.

@@ -1,0 +1,32 @@
+svunittest (0.3.0~git1) unstable; urgency=low
+
+  * CURRENT DEVEL VERSION FROM GIT REPOSITORY (branch master)
+
+ -- Sébastien Valat <sebastien.valat.dev@orange.fr>  Sun, 13 Mar 2011 14:04:34 +0100
+
+svunittest (0.2.0-1) unstable; urgency=low
+
+  * User documentation.
+  * Usage examples (usage and build with cmake/autotools)
+  * Portability fixes, test suite passed on windows + VCC/cygwin, Linux + gcc/clang/icc, FreeBSD + gcc.
+  * CPPUnit is now optional to pass the test suite of svUnitTest : replaced by short implementation fakecppunit.
+  * Add cmake/pkg_config integration files.
+  * Replace glibc argument parsor (argp.h) by our own implementon for non glibc-systems portability (windows....).
+  * Add terminal color support detection via isatty().
+  * Fix naming issue related to xslt_html.
+  * Fix valgrind memory leak reported in test suite.
+  * Fix compilers warnings (clang/gcc/icc/vcc)
+
+ -- Sébastien Valat <sebastien.valat.dev@orange.fr>  Sun, 27 Feb 2011 21:59:47 +0100
+
+svunittest (0.1.0-1) unstable; urgency=low
+
+  * Base implementation
+  * Unit tests of the base implementation
+  * Output format : XML, Qt XML, Black & white stdout, Colored stdout
+  * Provide most of the required assertions SVUT_ASSERT_EQUAL()...
+  * Provide the INDEV and TODO state in addition to others unit test libraries.
+  * Provide a basic XSLT file to manualy generate HTML from native XML output format.
+  * Provide standelon of test suite predefine main functions.
+
+ -- Sébastien Valat <sebastien.valat.dev@orange.fr>  Mon, 21 Feb 2011 18:42:19 +0100
