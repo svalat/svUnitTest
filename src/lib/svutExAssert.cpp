@@ -97,6 +97,15 @@ svutExAssertFailEqual::svutExAssertFailEqual(bool expectTestRes, std::string exp
 }
 
 /*******************  FUNCTION  *********************/
+svutExAssertFailLimit::svutExAssertFailLimit(string operatorName, string exptectedLimit, string actual, svutCodeLocation location) throw()
+	: svutExAssertFail("AssertLimit", SVUT_STATUS_FAILED, location, "Failed on expected limit on value.")
+{
+	info.addEntry("Expected limit",exptectedLimit);
+	info.addEntry("Actual",actual);
+	info.addEntry("Operator",operatorName);
+}
+
+/*******************  FUNCTION  *********************/
 /**
  * Class constructor for custom exception failure.
  * @param message Define a message to describe the reason of failure.

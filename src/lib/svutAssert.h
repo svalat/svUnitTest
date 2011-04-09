@@ -93,6 +93,34 @@ namespace svUnitTest
 
 /********************  MACRO  ***********************/
 /**
+ * Macro used to assert inferieor limit of members in term of values. By default it's based on operator
+ * >. If this operator wasn't supported by you type, you can redefine the template function
+ * asserterOperatorGreater() to override it with precise type. For string conversion to test failure
+ * information, you can override the function asserterToString().
+ * In case of failure, an exception of type svutExAssertFailEqual was throwed. This macro was built
+ * to be used in unit test cases.
+ * @param expectedLimit Define the wanted value.
+ * @param actual Define the current value to test.
+**/
+#define SVUT_ASSERT_GREATER(expectedLimit,actual)\
+	svUnitTest::assertGreater((expectedLimit),(actual),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+/**
+ * Macro used to assert inferieor limit of members in term of values. By default it's based on operator
+ * >=. If this operator wasn't supported by you type, you can redefine the template function
+ * asserterOperatorGreaterOrEqual() to override it with precise type. For string conversion to test failure
+ * information, you can override the function asserterToString().
+ * In case of failure, an exception of type svutExAssertFailEqual was throwed. This macro was built
+ * to be used in unit test cases.
+ * @param expectedLimit Define the wanted value.
+ * @param actual Define the current value to test.
+**/
+#define SVUT_ASSERT_GREATER_OR_EQUAL(expectedLimit,actual)\
+	svUnitTest::assertGreaterOrEqual((expectedLimit),(actual),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+/**
  * Macro used to assert equality of members in term of values. In addition to SVUT_ASSERT_EQUAL,
  * it force the  variables to use the same type by relying on compiler error if not just by playing
  * with template declaration. In backend it simple redirect the filtered call to

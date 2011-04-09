@@ -66,6 +66,12 @@ class UnitTest_svutAssert : public TestCase
 	CPPUNIT_TEST(testMacroAssertNotThrow_others);
 	CPPUNIT_TEST(testMacroAssertMayNotThrow_good);
 	CPPUNIT_TEST(testMacroAssertMayNotThrow_bad);
+	CPPUNIT_TEST(testMacroAssertGreater_good);
+	CPPUNIT_TEST(testMacroAssertGreater_bad);
+	CPPUNIT_TEST(testMacroAssertGreater_limit);
+	CPPUNIT_TEST(testMacroAssertGreaterOrEqual_good);
+	CPPUNIT_TEST(testMacroAssertGreaterOrEqual_bad);
+	CPPUNIT_TEST(testMacroAssertGreaterOrEqual_limit);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -115,6 +121,12 @@ class UnitTest_svutAssert : public TestCase
 		void testMacroAssertNotThrow_others(void);
 		void testMacroAssertMayNotThrow_good(void);
 		void testMacroAssertMayNotThrow_bad(void);
+		void testMacroAssertGreater_good(void);
+		void testMacroAssertGreater_bad(void);
+		void testMacroAssertGreater_limit(void);
+		void testMacroAssertGreaterOrEqual_good(void);
+		void testMacroAssertGreaterOrEqual_bad(void);
+		void testMacroAssertGreaterOrEqual_limit(void);
 };
 
 /********************  STRUCT  **********************/
@@ -750,6 +762,42 @@ void UnitTest_svutAssert::testMacroAssertMayNotThrow_bad(void)
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
 	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGreater_good(void )
+{
+	CPPUNIT_FAIL("todo");
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGreater_bad(void )
+{
+	CPPUNIT_FAIL("todo");
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGreater_limit(void )
+{
+	CPPUNIT_FAIL("todo");
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGreaterOrEqual_good(void )
+{
+	CPPUNIT_FAIL("todo");
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGreaterOrEqual_bad(void )
+{
+	CPPUNIT_FAIL("todo");
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGreaterOrEqual_limit(void )
+{
+	CPPUNIT_FAIL("todo");
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutAssert);

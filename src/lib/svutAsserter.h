@@ -25,7 +25,7 @@ namespace svUnitTest
  * but may help here to wrote tests quicly.
  * @param v1 Define the first value to compare.
  * @param v2 Define the second value to compare.
- * @return Return true is the values are equals.
+ * @return Return true if the values are equals.
 **/
 template <class T1,class T2>
 static bool asserterOperatorEqual(const T1 & v1,const T2 & v2)
@@ -41,12 +41,44 @@ static bool asserterOperatorEqual(const T1 & v1,const T2 & v2)
  * but may help here to wrote tests quicly.
  * @param v1 Define the first value to compare.
  * @param v2 Define the second value to compare.
- * @return Return false is the values are equals.
+ * @return Return false if the values are equals.
 **/
 template <class T1,class T2>
 static bool asserterOperatorNotEqual(const T1 & v1,const T2 & v2)
 {
 	return (v1 != v2);
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Template implementaion of a function which call the > operator between two values.
+ * It permit to override this operator just for the unit test without affecting the original
+ * objects. It may be impotant if this operator as no real sens for those objects in general case,
+ * but may help here to wrote tests quicly.
+ * @param v1 Define the first value to test.
+ * @param v2 Define the second value to test.
+ * @return Return true if v1 is stricly greater than v2.
+**/
+template <class T1,class T2>
+static bool asserterOperatorGreater(const T1 & v1,const T2 & v2)
+{
+	return (v1 > v2);
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Template implementaion of a function which call the >= operator between two values.
+ * It permit to override this operator just for the unit test without affecting the original
+ * objects. It may be impotant if this operator as no real sens for those objects in general case,
+ * but may help here to wrote tests quicly.
+ * @param v1 Define the first value to test.
+ * @param v2 Define the second value to test.
+ * @return Return true if v1 is greater or equal to v2.
+**/
+template <class T1,class T2>
+static bool asserterOperatorGreaterOrEqual(const T1 & v1,const T2 & v2)
+{
+	return (v1 > v2);
 }
 
 /*******************  FUNCTION  *********************/
@@ -147,6 +179,52 @@ template <class T>
 static void assertNotEqualStrict(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
 {
 	assertNotEqual(expected,actual,location);
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Methode used to implement equality assertion in macro SVUT_ASSERT_GREATER. It is declared as
+ * template methode so it could be overritten to implement support of non compatible types.
+ * The template version suppose the presence of properties between the two types :
+ *    - asserterOperatorGreater(), the template default version suppose operator >.
+ *    - asserterToString(), which is template and by default suppose stream operator <<.
+ * It may be better to override the two previous function are they are less specialized.
+ * It will throw svutExAssertFailGreater if the actual value isn't greater than the given limit.
+ * @param expectedLimit Define the expected limit.
+ * @param actual Define the current value to compared to the expected one.
+ * @param location Define the code location which call this test.
+**/
+template <class T1,class T2>
+static void assertGreater(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+{
+	if (asserterOperatorGreater(actual,expectedLimit) == false)
+	{
+		throw svutExAssertFailLimit("Greater",asserterToString(expectedLimit),
+									asserterToString(actual),location);
+	}
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Methode used to implement equality assertion in macro SVUT_ASSERT_GREATER_OR_EQUAL. It is declared as
+ * template methode so it could be overritten to implement support of non compatible types.
+ * The template version suppose the presence of properties between the two types :
+ *    - asserterOperatorGreaterOrEqual(), the template default version suppose operator >=.
+ *    - asserterToString(), which is template and by default suppose stream operator <<.
+ * It may be better to override the two previous function are they are less specialized.
+ * It will throw svutExAssertFailGreater if the actual value isn't greater than the given limit.
+ * @param expectedLimit Define the expected limit.
+ * @param actual Define the current value to compared to the expected one.
+ * @param location Define the code location which call this test.
+**/
+template <class T1,class T2>
+static void assertGreaterOrEqual(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+{
+	if (asserterOperatorGreaterOrEqual(actual,expectedLimit) == false)
+	{
+		throw svutExAssertFailLimit("Greater or equal",asserterToString(expectedLimit),
+									asserterToString(actual),location);
+	}
 }
 
 /*******************  FUNCTION  *********************/

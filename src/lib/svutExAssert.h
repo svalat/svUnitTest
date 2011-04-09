@@ -75,6 +75,22 @@ class svutExAssertFailEqual : public svutExAssertFail
 
 /*********************  CLASS  **********************/
 /**
+ * Class used to throw exception on equality test. We may prefer to use the
+ * SVUT_ASSERT_GREATER, SVUT_ASSERT_GREATER_OR_EQUAL, SVUT_ASSERT_LESS or SVUT_ASSERT_LESS_OR_EQUAL
+ * macro to call this exception. It will construct the object for you and setup svutCodeLocation.
+ * Here it also support automatic conversion of your values to string format when needed.
+ * @brief Exception class used on assertion failure on limit operator test.
+ **/
+class svutExAssertFailLimit : public svutExAssertFail
+{
+	public:
+		svutExAssertFailLimit(std::string operatorName,std::string exptectedLimit,std::string actual,
+			svutCodeLocation  location) throw();
+};
+
+
+/*********************  CLASS  **********************/
+/**
  * Class used to throw exception on custum assertion, you just choose a message to describe
  * the problem. We may prefer to use the SVUT_ASSERT_FAIL macro to call this exception. It will
  * construct the object for you and setup svutCodeLocation.

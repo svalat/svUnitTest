@@ -34,6 +34,7 @@ class UnitTest_svutExAssert : public TestCase
 	CPPUNIT_TEST(testExAssertFailCustom);
 	CPPUNIT_TEST(testExAssertFailNotExec);
 	CPPUNIT_TEST(testExAssertFailThrow);
+	CPPUNIT_TEST(testExAssertLimit);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -53,6 +54,7 @@ class UnitTest_svutExAssert : public TestCase
 		void testExAssertFailCustom(void);
 		void testExAssertFailNotExec(void);
 		void testExAssertFailThrow(void);
+		void testExAssertLimit(void);
 
 		svutCodeLocation location;
 		svutStatusInfo info;
@@ -257,6 +259,12 @@ void UnitTest_svutExAssert::testExAssertFailThrow(void )
 	CPPUNIT_ASSERT_EQUAL("getThis",obj.getInfos().getEntry("Actual"));
 	CPPUNIT_ASSERT_EQUAL("Failed on waiting exception.",obj.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutExAssert::testExAssertLimit(void )
+{
+	CPPUNIT_FAIL("todo");
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutExAssert);
