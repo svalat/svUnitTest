@@ -38,6 +38,16 @@ namespace svUnitTest
 	this->registerTestMethod(__svut__testMeth__);\
 } while(0)
 
+/********************  MACROS  **********************/
+/**
+ * Prefer to use this macro instead of directly call setContextEntry on the svutTestCase class.
+ * This permit to clearly identify test related section of your code.
+ * @param name Define the name of the entry.
+ * @param value Define the related value, it will be convertied in string format by asserterToString
+ * function.
+**/
+#define SVUT_SET_CONTEXT(name,value) this->setContextEntry((name),(value))
+
 /********************** TYPEDEF *********************/
 /** List of pointers to test methods. **/
 typedef std::list<svutTestMethod *> svutTestMethodPtrList;
@@ -93,6 +103,8 @@ class svutTestCase
 		virtual void testMethodsRegistration(void);
 		void setTestCaseName(std::string name) throw (svutExInternalError);
 		void registerTestMethod(svutTestMethod * test);
+		void setContextEntry(std::string name,std::string value);
+		template <class T> void setContextEntry(std::string name,const T & value);
 		svutStatusInfo runTestMethod(svutTestMethod * test);
 		void MARK_AS_KNOWN_ERROR(std::string message);
 		/** Define the list of tests methods in the current test case. **/
@@ -121,7 +133,23 @@ class svutTestCase
 		mutable bool nameLocked;
 		/** Permit to know if testMethodsRegistration() was already called. **/
 		bool registrationDone;
+		/** String map to store context entries. **/
+		svutStatusInfoMap context;
 };
+
+/*******************  FUNCTION  *********************/
+/**
+ * Insert an entry to the bug context description which will be added to assertion informations
+ * in case of failure.
+ * @param name Define the name of the entry
+ * @param value Define the related value, it will be convertied in string format by asserterToString
+ * function.
+**/
+template <class T>
+void svutTestCase::setContextEntry(std::string name, const T & value)
+{
+	setContextEntry(name,asserterToString(value));
+}
 
 //int registerTestCase(svutTestCaseBuilder & builder);
 }

@@ -104,6 +104,11 @@ void svUnitTest::svutResultFormatterQtXml::printAssertInfo(const svUnitTest::svu
 				*out << endl;
 		}
 		status.formatEntries(*out,"   - "," : ","\n");
+		if (status.getNbContextEntries() > 0)
+		{
+			*out << "Context :" << endl;
+			status.formatContext(*out,"   - "," : ","\n");
+		}
 		*out << "]]></Description>" << endl << "\t\t";
 	}
 	*out << "</Incident>" << endl;

@@ -81,7 +81,7 @@ void UnitTest_svutListenerSummary::testEvents_1(void )
 
 	testCase->runTestCase(listener);
 	summary = listener->getSummary();
-	CPPUNIT_ASSERT_EQUAL(1u,summary.getCount(SVUT_STATUS_FAILED));
+	CPPUNIT_ASSERT_EQUAL(2u,summary.getCount(SVUT_STATUS_FAILED));
 	CPPUNIT_ASSERT_EQUAL(2u,summary.getCount(SVUT_STATUS_INDEV));
 	CPPUNIT_ASSERT_EQUAL(1u,summary.getCount(SVUT_STATUS_SUCCESS));
 	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_SKIPED));
@@ -103,7 +103,7 @@ void UnitTest_svutListenerSummary::testEvents_2(void )
 	testCase->runTestCase(listener);
 	testCase->runTestCase(listener);
 	summary = listener->getSummary();
-	CPPUNIT_ASSERT_EQUAL(2u,summary.getCount(SVUT_STATUS_FAILED));
+	CPPUNIT_ASSERT_EQUAL(4u,summary.getCount(SVUT_STATUS_FAILED));
 	CPPUNIT_ASSERT_EQUAL(4u,summary.getCount(SVUT_STATUS_INDEV));
 	CPPUNIT_ASSERT_EQUAL(2u,summary.getCount(SVUT_STATUS_SUCCESS));
 	CPPUNIT_ASSERT_EQUAL(0u,summary.getCount(SVUT_STATUS_SKIPED));

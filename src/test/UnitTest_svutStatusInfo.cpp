@@ -47,6 +47,7 @@ class UnitTest_svutStatusInfo : public TestCase
 	CPPUNIT_TEST(testGetStatusName_5);
 	CPPUNIT_TEST(testGetStatusName_6);
 	CPPUNIT_TEST(testGetStatusName_static);
+	CPPUNIT_TEST(textSetDebugContext);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -71,6 +72,7 @@ class UnitTest_svutStatusInfo : public TestCase
 		void testGetStatusName_5(void);
 		void testGetStatusName_6(void);
 		void testGetStatusName_static(void);
+		void textSetDebugContext(void);
 		
 
 		svutStatusInfo * info;
@@ -154,8 +156,30 @@ void UnitTest_svutStatusInfo::testGetStatus ( void )
 void UnitTest_svutStatusInfo::testGetEntry(void )
 {
 	info->addEntry("name_test","value_test");
+	CPPUNIT_ASSERT_EQUAL(1u,info->getNbEntries());
 	CPPUNIT_ASSERT_EQUAL("value_test",info->getEntry("name_test"));
 	CPPUNIT_ASSERT_EQUAL("",info->getEntry("unknown"));
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutStatusInfo::textSetDebugContext(void )
+{
+	svutStatusInfoMap lst;
+	lst.insert(pair<string,string>("name1","value1"));
+	lst.insert(pair<string,string>("name2","value2"));
+	lst.insert(pair<string,string>("name3","value3"));
+
+	CPPUNIT_ASSERT_EQUAL(0u,info->getNbEntries());
+
+	info->setContext(lst);
+
+	CPPUNIT_ASSERT_EQUAL(0u,info->getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(3u,info->getNbContextEntries());
+	CPPUNIT_ASSERT_EQUAL("value1",info->getContextEntry("name1"));
+	CPPUNIT_ASSERT_EQUAL("value2",info->getContextEntry("name2"));
+	CPPUNIT_ASSERT_EQUAL("value3",info->getContextEntry("name3"));
+	CPPUNIT_ASSERT_EQUAL("",info->getContextEntry("unknown"));
+	CPPUNIT_ASSERT_EQUAL(3u,lst.size());
 }
 
 /*******************  FUNCTION  *********************/
@@ -167,12 +191,16 @@ void UnitTest_svutStatusInfo::testGetNbEntries(void )
 /*******************  FUNCTION  *********************/
 void UnitTest_svutStatusInfo::testOperatorEqual(void )
 {
+	svutStatusInfoMap context;
+	context.insert(pair<string,string>("test","value"));
 	svutCodeLocation loc(TEST_FILENAME,TEST_METHODE,TEST_LINE);
+	this->info->setContext(context);
 	svutStatusInfo copy = *this->info;
 	CPPUNIT_ASSERT_EQUAL(loc,copy.getLocation());
 	CPPUNIT_ASSERT_EQUAL(TEST_MESSAGE,copy.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,copy.getStatus());
 	CPPUNIT_ASSERT_EQUAL(0u,copy.getNbEntries());
+	CPPUNIT_ASSERT_EQUAL(1u,copy.getNbContextEntries());
 }
 
 /*******************  FUNCTION  *********************/

@@ -55,10 +55,17 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		<div class='location'><xsl:value-of select='location/file'/> : <xsl:value-of select='location/line'/></div>
 		<div class='message'><xsl:value-of select='message'/></div>
 		<xsl:apply-templates select='entries'/>
+		<xsl:apply-templates select='context'/>
 	</div>
 </xsl:template>
 
 <xsl:template match="entries">
+	<table class='assertEntries'>
+		<xsl:apply-templates select='entry'/>
+	</table>
+</xsl:template>
+
+<xsl:template match="context">
 	<table class='assertEntries'>
 		<xsl:apply-templates select='entry'/>
 	</table>

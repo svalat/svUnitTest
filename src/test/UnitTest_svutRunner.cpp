@@ -37,28 +37,37 @@ line 52 of file " TEST_SRC_BASE_PATH "/UnitTestMockTestCase2.cpp on methode test
  * testUnknown_1                                [ UNKNOWN ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 Unexpected std exception : std::bad_exception\n\
-line 134 of file " TEST_SRC_BASE_PATH "/UnitTestMockTestCase2.cpp on methode useTests()\n\
+line 144 of file " TEST_SRC_BASE_PATH "/UnitTestMockTestCase2.cpp on methode useTests()\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
  * testUnknown_2                                [ UNKNOWN ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 Unexpected exception.\n\
-line 135 of file " TEST_SRC_BASE_PATH "/UnitTestMockTestCase2.cpp on methode useTests()\n\
+line 145 of file " TEST_SRC_BASE_PATH "/UnitTestMockTestCase2.cpp on methode useTests()\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
  * testFailIsTodo_1                             [ TODO ]\n\
  * testFailIsTodo_2                             [ TODO ]\n\
  * testFailIsTodo_3                             [ TODO ]\n\
  * testSuccessIsIndev                           [ INDEV ]\n\
+ * testDebugContext                             [ FAILED ]\n\
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
+Failed on expected value.\n\
+line 98 of file /home/sebv/Projects/svUnitTest/svUnitTest/src/test/UnitTestMockTestCase2.cpp on methode testDebugContext()\n\
+   - Actual : 3\n\
+   - Expected : 2\n\
+Context :\n\
+   - test : value\n\
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 \n\
 +---------------------------+\n\
 |    SUMMARY                |\n\
 +---------------------------+\n\
-|  SUCCESS  :    1 ( 10 %)  |\n\
-|  INDEV    :    2 ( 20 %)  |\n\
-|  TODO     :    4 ( 40 %)  |\n\
-|  FAILED   :    1 ( 10 %)  |\n\
-|  UNKNOWN  :    2 ( 20 %)  |\n\
+|  SUCCESS  :    1 (  9 %)  |\n\
+|  INDEV    :    2 ( 18 %)  |\n\
+|  TODO     :    4 ( 36 %)  |\n\
+|  FAILED   :    2 ( 18 %)  |\n\
+|  UNKNOWN  :    2 ( 18 %)  |\n\
 +---------------------------+\n\
-|  TOTAL    :   10          |\n\
+|  TOTAL    :   11          |\n\
 |  STATUS   : UNKNOWN       |\n\
 +---------------------------+\n";
 static const char * CST_STRING_OUTPUT_1 = "openOutput(); openTestCase(UnitTestMockTestCase2); openT\
@@ -73,8 +82,10 @@ tMockTestCase2, testFailIsTodo_1); closeTestMethod(UnitTestMockTestCase2, testFa
 openTestMethod(UnitTestMockTestCase2, testFailIsTodo_2); closeTestMethod(UnitTestMockTestCase2, tes\
 tFailIsTodo_2, TODO); openTestMethod(UnitTestMockTestCase2, testFailIsTodo_3); closeTestMethod(Unit\
 TestMockTestCase2, testFailIsTodo_3, TODO); openTestMethod(UnitTestMockTestCase2, testSuccessIsInde\
-v); closeTestMethod(UnitTestMockTestCase2, testSuccessIsIndev, INDEV); closeTestCase(UnitTestMockTe\
-stCase2); success=1, failed=1, todo=4, indev=2, unknown=2, skiped=0; closeOutput(); ";
+v); closeTestMethod(UnitTestMockTestCase2, testSuccessIsIndev, INDEV); openTestMethod(UnitTestMockT\
+estCase2, testDebugContext); closeTestMethod(UnitTestMockTestCase2, testDebugContext, FAILED); clos\
+eTestCase(UnitTestMockTestCase2); success=1, failed=2, todo=4, indev=2, unknown=2, skiped=0; closeO\
+utput(); ";
 static const char * CST_STRING_OUTPUT_2 = "openOutput(); openTestCase(UnitTestMockTestCase2); openTestMethod(UnitTestMockTestCase2, testSuccess); closeTestMethod(UnitTestMockTestCase2, testSuccess, SUCCESS); closeTestCase(UnitTestMockTestCase2); success=1, failed=0, todo=0, indev=0, unknown=0, skiped=0; closeOutput(); ";
 static const char * CST_STRING_OUTPUT_3 = "openOutput(); openTestCase(UnitTestMockTestCase2); openTestMethod(UnitTestMockTestCase2, testFailure); closeTestMethod(UnitTestMockTestCase2, testFailure, FAILED); closeTestCase(UnitTestMockTestCase2); success=0, failed=1, todo=0, indev=0, unknown=0, skiped=0; closeOutput(); ";
 static const char * CST_STRING_OUTPUT_4 = "=======  UnitTestMockTestCase2                    ========\n\
@@ -88,17 +99,18 @@ static const char * CST_STRING_OUTPUT_4 = "=======  UnitTestMockTestCase2       
  * testFailIsTodo_2                             [ TODO ]\n\
  * testFailIsTodo_3                             [ TODO ]\n\
  * testSuccessIsIndev                           [ INDEV ]\n\
+ * testDebugContext                             [ FAILED ]\n\
 \n\
 +---------------------------+\n\
 |    SUMMARY                |\n\
 +---------------------------+\n\
-|  SUCCESS  :    1 ( 10 %)  |\n\
-|  INDEV    :    2 ( 20 %)  |\n\
-|  TODO     :    4 ( 40 %)  |\n\
-|  FAILED   :    1 ( 10 %)  |\n\
-|  UNKNOWN  :    2 ( 20 %)  |\n\
+|  SUCCESS  :    1 (  9 %)  |\n\
+|  INDEV    :    2 ( 18 %)  |\n\
+|  TODO     :    4 ( 36 %)  |\n\
+|  FAILED   :    2 ( 18 %)  |\n\
+|  UNKNOWN  :    2 ( 18 %)  |\n\
 +---------------------------+\n\
-|  TOTAL    :   10          |\n\
+|  TOTAL    :   11          |\n\
 |  STATUS   : UNKNOWN       |\n\
 +---------------------------+\n";
 static const char * CST_STRING_OUTPUT_5 = "openOutput(); openTestCase(UnitTestMockTestCase2); closeTestCase(UnitTestMockTestCase2); success=0, failed=0, todo=0, indev=0, unknown=0, skiped=0; closeOutput(); ";
@@ -111,7 +123,8 @@ testUnknown_2()\n\
 testFailIsTodo_1()\n\
 testFailIsTodo_2()\n\
 testFailIsTodo_3()\n\
-testSuccessIsIndev()\n";
+testSuccessIsIndev()\n\
+testDebugContext()\n";
 static const char * CST_STRING_OUTPUT_7 = "testSuccess()\n\
 testTodo()\n\
 testIndev()\n";

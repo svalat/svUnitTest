@@ -92,6 +92,13 @@ void UnitTestMockTestCase2::testSuccessIsIndev(void )
 }
 
 /*******************  FUNCTION  *********************/
+void UnitTestMockTestCase2::testDebugContext(void )
+{
+	SVUT_SET_CONTEXT("test","value");
+	SVUT_ASSERT_EQUAL(2,3);
+}
+
+/*******************  FUNCTION  *********************/
 void UnitTestMockTestCase2::useTests(UnitTestMockTestCase2::UnitTestMockFlags flags)
 {
 	switch(flags)
@@ -126,6 +133,9 @@ void UnitTestMockTestCase2::useTests(UnitTestMockTestCase2::UnitTestMockFlags fl
 		case REGISTER_SUCCESS_IS_INDEV:
 			SVUT_REG_TEST_METHOD(testSuccessIsIndev);
 			break;
+		case REGISTER_DEBUG_CONTEXT:
+			SVUT_REG_TEST_METHOD(testDebugContext);
+			break;
 		case REGISTER_ALL:
 			SVUT_REG_TEST_METHOD(testSuccess);
 			SVUT_REG_TEST_METHOD(testFailure);
@@ -137,6 +147,7 @@ void UnitTestMockTestCase2::useTests(UnitTestMockTestCase2::UnitTestMockFlags fl
 			SVUT_REG_TEST_METHOD(testFailIsTodo_2);
 			SVUT_REG_TEST_METHOD(testFailIsTodo_3);
 			SVUT_REG_TEST_METHOD(testSuccessIsIndev);
+			SVUT_REG_TEST_METHOD(testDebugContext);
 			break;
 		default:
 			throw svutExInternalError("Unknown flag");

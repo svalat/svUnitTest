@@ -115,7 +115,8 @@ svutStatusInfo svutTestCase::runTestMethod(svutTestMethod * test)
 	try {
 		//disable failIsTodo by default
 		this->tmpFailIsTodo = false;
-
+		this->context.clear();
+		
 		this->setUp();
 		needTearDown = true;
 		test->call();
@@ -150,7 +151,8 @@ svutStatusInfo svutTestCase::runTestMethod(svutTestMethod * test)
 			res = todo.getInfos();
 		}
 	}
-	
+
+	res.setContext(context);
 	return res;
 }
 
@@ -292,6 +294,18 @@ void svutTestCase::listTestMethods(svutListener & listener,svutTestFilter * filt
 	for (svutTestMethodPtrList::const_iterator it = tests.begin();it!=tests.end();++it)
 		if (filter == NULL || filter->accept(this->getName(),(*it)->getName()))
 			listener.onListMethod(*this,**it);
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Insert an entry to the bug context description which will be added to assertion informations
+ * in case of failure.
+ * @param name Define the name of the entry
+ * @param value Define the related value.
+**/
+void svutTestCase::setContextEntry(std::string name, std::string value)
+{
+	context.insert(pair<string,string>(name,value));
 }
 
 }

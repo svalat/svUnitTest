@@ -103,6 +103,17 @@ void svutStatusInfo::addEntry ( const char* name, const std::string& value )
 	this->addEntry(n,value);
 }
 
+/*******************  FUNCTION  *********************/
+/**
+ * Define the debugging context which add some informations to current assertions constraints.
+ * @param context Define the list of entries to merge into current list.
+**/
+void svutStatusInfo::setContext(svutStatusInfoMap & context)
+{
+	this->context.clear();
+	for (svutStatusInfoMap::const_iterator it = context.begin(); it != context.end() ; ++it)
+		this->context.insert(*it);
+}
 
 /*******************  FUNCTION  *********************/
 /**
@@ -115,6 +126,42 @@ svutStatusInfoMap svutStatusInfo::getEntries(void) const
 
 /*******************  FUNCTION  *********************/
 /**
+ * @return Return the debugging context as a list of map string list.
+**/
+svutStatusInfoMap svutStatusInfo::getContext(void ) const
+{
+	return context;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * @return Return number of entries in the debugging context.
+**/
+unsigned int svutStatusInfo::getNbContextEntries(void ) const
+{
+	return context.size();
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Format the current status information and place it in the given stream.
+ * @param out Define the output stream to use.
+ * @param prefix Define the string th place before each parameter name.
+ * @param separator Define the string to place between the parameter name and the value.
+ * @param postfix Define the string to place after the parameter value.
+ */
+void svutStatusInfo::formatList(const svutStatusInfoMap & list,ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix) const
+{
+	for (map<string,string>::const_iterator it=list.begin() ; it != list.end(); it++ )
+	{
+		out << prefix;
+		out << it->first << separator;
+		out << it->second << postfix;
+	}
+}
+
+/*******************  FUNCTION  *********************/
+/**
  * Format the current status information and place it in the given stream.
  * @param out Define the output stream to use.
  * @param prefix Define the string th place before each parameter name.
@@ -123,12 +170,7 @@ svutStatusInfoMap svutStatusInfo::getEntries(void) const
  */
 void svutStatusInfo::formatEntries(std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix) const
 {
-	for (map<string,string>::const_iterator it=entries.begin() ; it != entries.end(); it++ )
-	{
-		out << prefix;
-		out << it->first << separator;
-		out << it->second << postfix;
-	}
+	formatList(entries,out,prefix,separator,postfix);
 }
 
 /*******************  FUNCTION  *********************/
@@ -145,9 +187,30 @@ void svutStatusInfo::formatEntries ( std::ostream& out, const char* prefix, cons
 	std::string pre(prefix);
 	std::string  sep(separator);
 	std::string post(postfix);
-	formatEntries(out,pre,sep,post);
+	formatList(entries,out,pre,sep,post);
 }
 
+/*******************  FUNCTION  *********************/
+/**
+ * Format the current status information and place it in the given stream.
+ * @param out Define the output stream to use.
+ * @param prefix Define the string th place before each parameter name.
+ * @param separator Define the string to place between the parameter name and the value.
+ * @param postfix Define the string to place after the parameter value.
+ */
+void svutStatusInfo::formatContext(ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix) const
+{
+	formatList(context,out,prefix,separator,postfix);
+}
+
+/*******************  FUNCTION  *********************/
+void svutStatusInfo::formatContext(ostream& out, const char* prefix, const char* separator, const char* postfix) const
+{
+	std::string pre(prefix);
+	std::string  sep(separator);
+	std::string post(postfix);
+	formatList(context,out,pre,sep,post);
+}
 
 /*******************  FUNCTION  *********************/
 /**
@@ -166,6 +229,19 @@ unsigned int svutStatusInfo::getNbEntries(void ) const
 std::string svutStatusInfo::getEntry(std::string name) const
 {
 	for (map<string,string>::const_iterator it=entries.begin() ; it != entries.end(); it++ )
+		if (it->first == name)
+			return it->second;
+	return "";
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * @return Return a specific entry, empty if non existant.
+ * @param name Define the name of the requested entry.
+**/
+std::string svutStatusInfo::getContextEntry(std::string name) const
+{
+	for (map<string,string>::const_iterator it=context.begin() ; it != context.end(); it++ )
 		if (it->first == name)
 			return it->second;
 	return "";
@@ -198,6 +274,7 @@ svutStatusInfo& svUnitTest::svutStatusInfo::operator=(const svUnitTest::svutStat
 	this->entries = orig.entries;
 	this->location = orig.location;
 	this->status = orig.status;
+	this->context = orig.context;
 	return *this;
 }
 

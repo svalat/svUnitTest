@@ -45,6 +45,17 @@ static const char * CST_STRING_FAILED_1  = "\t\t<Incident type='fail' file='file
 ]]></Description>\n\
 \t\t</Incident>\n\
 \t</TestFunction>\n";
+
+static const char * CST_STRING_CONTEXT  = "\t\t<Incident type='fail' file='file.cpp' line='33'>\n\
+\t\t\t<Description><![CDATA[message for failed status\n\
+   - actual : duck\n\
+   - expected : toto\n\
+Context :\n\
+   - name : value\n\
+   - name2 : value2\n\
+]]></Description>\n\
+\t\t</Incident>\n\
+\t</TestFunction>\n";
 static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?>\n\
 <TestCase name='svUnitTest'>\n\
 	<Environment>\n\
@@ -157,6 +168,7 @@ class UnitTest_svutResultFormatterQtXml : public TestCase,IUnitTest_ResultFormat
 	CPPUNIT_TEST(testListMethod_1);
 	CPPUNIT_TEST(testListMethod_2);
 	CPPUNIT_TEST(testOpenTestMethod);
+	CPPUNIT_TEST(testCloseTestMethod_debugContext);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -189,6 +201,7 @@ class UnitTest_svutResultFormatterQtXml : public TestCase,IUnitTest_ResultFormat
 		void testGlobal_1(void);
 		void testGlobal_2(void);
 		void testGlobal_3(void);
+		void testCloseTestMethod_debugContext(void);
 	protected:
 		void runTotalSequence(void);
 		svutResultFormatterQtXml * formatter;
@@ -494,6 +507,24 @@ void UnitTest_svutResultFormatterQtXml::testListMethod_2(void )
 	formatter->setDisplayFullName(true);
 	formatter->onListMethod(testCase,meth);
 	CPPUNIT_ASSERT_EQUAL("MyTest::testMethod()\n",out->str());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutResultFormatterQtXml::testCloseTestMethod_debugContext(void )
+{
+	svutStatusInfoMap debug;
+	debug.insert(pair<string,string>("name","value"));
+	debug.insert(pair<string,string>("name2","value2"));
+
+	UnitTestMockTestCase testCase;
+	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutCodeLocation location("file.cpp","methode",33);
+	svutStatusInfo info(SVUT_STATUS_FAILED,"message for failed status",location);
+	info.addEntry("expected","toto");
+	info.addEntry("actual","duck");
+	info.setContext(debug);
+	formatter->closeTestMethod(testCase,meth,info);
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_CONTEXT,out->str());
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutResultFormatterQtXml);

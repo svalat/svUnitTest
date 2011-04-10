@@ -62,6 +62,16 @@ line 33 of file file.cpp on methode methode()\n\
    - actual : duck\n\
    - expected : toto\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
+static const char * CST_STRING_CONTEXT  = "\e[32m * \e[0mtestMethod                                   [ \e[31mFAILED\e[0m ]\n\
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
+message for failed status\n\
+line 33 of file file.cpp on methode methode()\n\
+   - actual : duck\n\
+   - expected : toto\n\
+Context :\n\
+   - name : value\n\
+   - name2 : value2\n\
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
 static const char * CST_STRING_SEQ_1    = "=======  MyTest                                   ========\n\
 \e[32m * \e[0mtestMethod                                   [ \e[33mTODO\e[0m ]\n\
 \e[32m * \e[0mtestMethod                                   [ \e[34mINDEV\e[0m ]\n\
@@ -143,6 +153,7 @@ class UnitTest_svutResultFormatterStdColored : public TestCase,IUnitTest_ResultF
 	CPPUNIT_TEST(testPrintSummary);
 	CPPUNIT_TEST(testGlobal_1);
 	CPPUNIT_TEST(testGlobal_2);
+	CPPUNIT_TEST(testCloseTestMethod_debugContext);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -172,6 +183,7 @@ class UnitTest_svutResultFormatterStdColored : public TestCase,IUnitTest_ResultF
 		void testPrintSummary(void);
 		void testGlobal_1(void);
 		void testGlobal_2(void);
+		void testCloseTestMethod_debugContext(void);
 	protected:
 		void runTotalSequence(void);
 		svutResultFormatterStdColored * formatter;
@@ -452,6 +464,24 @@ void UnitTest_svutResultFormatterStdColored::testListMethod_2(void )
 	formatter->setDisplayFullName(true);
 	formatter->onListMethod(testCase,meth);
 	CPPUNIT_ASSERT_EQUAL("MyTest::testMethod()\n",out->str());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutResultFormatterStdColored::testCloseTestMethod_debugContext(void )
+{
+	svutStatusInfoMap debug;
+	debug.insert(pair<string,string>("name","value"));
+	debug.insert(pair<string,string>("name2","value2"));
+
+	UnitTestMockTestCase testCase;
+	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutCodeLocation location("file.cpp","methode",33);
+	svutStatusInfo info(SVUT_STATUS_FAILED,"message for failed status",location);
+	info.addEntry("expected","toto");
+	info.addEntry("actual","duck");
+	info.setContext(debug);
+	formatter->closeTestMethod(testCase,meth,info);
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_CONTEXT,out->str());
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutResultFormatterStdColored);

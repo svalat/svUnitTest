@@ -29,6 +29,7 @@ class UnitTestMockTestCase2 : public svUnitTest::svutTestCase
 			REGISTER_FAIL_IS_TODO_2,
 			REGISTER_FAIL_IS_TODO_3,
 			REGISTER_SUCCESS_IS_INDEV,
+			REGISTER_DEBUG_CONTEXT,
 			REGISTER_ALL
 		};
 		
@@ -46,6 +47,7 @@ class UnitTestMockTestCase2 : public svUnitTest::svutTestCase
 		void testFailIsTodo_2(void);
 		void testFailIsTodo_3(void);
 		void testSuccessIsIndev(void);
+		void testDebugContext(void);
 
 		void useTests(UnitTestMockFlags flags);
 };

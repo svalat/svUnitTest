@@ -37,12 +37,12 @@ static const char * CST_STRING_SUMMARY_0 = "\t<GlobalResults>\n\
 static const char * CST_STRING_UNKNOWN_1 = "\t\t\t<status>unknown</status>\n\
 \t\t\t<AssertInfo>\n\t\t\t\t<location>\n\t\t\t\t\t<unknown></unknown>\n\
 \t\t\t\t</location>\n\t\t\t\t<message></message>\n\t\t\t\t<entries>\n\
-\t\t\t\t</entries>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
+\t\t\t\t</entries>\n\t\t\t\t<context>\n\t\t\t\t</context>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
 static const char * CST_STRING_UNKNOWN_3 = "\t\t\t<status>unknown</status>\n\
 \t\t\t<AssertInfo>\n\t\t\t\t<location>\n\t\t\t\t\t<file>file.cpp</file>\n\
 \t\t\t\t\t<methode>methode</methode>\n\t\t\t\t\t<line>33</line>\n\
 \t\t\t\t</location>\n\t\t\t\t<message>message for unknown status</message>\n\t\t\t\t<entries>\n\
-\t\t\t\t</entries>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
+\t\t\t\t</entries>\n\t\t\t\t<context>\n\t\t\t\t</context>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
 static const char * CST_STRING_SUCCESS_1 = "\t\t\t<status>success</status>\n\t\t</TestFunction>\n";
 static const char * CST_STRING_TODO      = "\t\t\t<status>todo</status>\n\t\t</TestFunction>\n";
 static const char * CST_STRING_INDEV     = "\t\t\t<status>indev</status>\n\t\t</TestFunction>\n";
@@ -53,7 +53,13 @@ static const char * CST_STRING_FAILED_1  = "\t\t\t<status>failed</status>\n\
 \t\t\t\t\t<methode>methode</methode>\n\t\t\t\t\t<line>33</line>\n\t\t\t\t</location>\n\
 \t\t\t\t<message>message for failed status</message>\n\t\t\t\t<entries>\n\
 \t\t\t\t\t<entry name='actual'>duck</entry>\n\t\t\t\t\t<entry name='expected'>toto</entry>\n\
-\t\t\t\t</entries>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
+\t\t\t\t</entries>\n\t\t\t\t<context>\n\t\t\t\t</context>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
+static const char * CST_STRING_CONTEXT  ="\t\t\t<status>failed</status>\n\
+\t\t\t<AssertInfo>\n\t\t\t\t<location>\n\t\t\t\t\t<file>file.cpp</file>\n\
+\t\t\t\t\t<methode>methode</methode>\n\t\t\t\t\t<line>33</line>\n\t\t\t\t</location>\n\
+\t\t\t\t<message>message for failed status</message>\n\t\t\t\t<entries>\n\
+\t\t\t\t\t<entry name='actual'>duck</entry>\n\t\t\t\t\t<entry name='expected'>toto</entry>\n\
+\t\t\t\t</entries>\n\t\t\t\t<context>\n\t\t\t\t\t<entry name='name'>value</entry>\n\t\t\t\t\t<entry name='name2'>value2</entry>\n\t\t\t\t</context>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
 static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?>\n\
 <!DOCTYPE UnitTest SYSTEM 'svUnitTest_html/svUnitTest.dtd'>\n\
 <?xml-stylesheet type='text/xsl' href='svUnitTest_html/svUnitTest.xsl'?>\n\
@@ -105,6 +111,8 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 					<entry name='actual'>duck</entry>\n\
 					<entry name='expected'>toto</entry>\n\
 				</entries>\n\
+				<context>\n\
+				</context>\n\
 			</AssertInfo>\n\
 		</TestFunction>\n\
 	<TestCase>\n\
@@ -119,6 +127,8 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 				<message>message for unknown status</message>\n\
 				<entries>\n\
 				</entries>\n\
+				<context>\n\
+				</context>\n\
 			</AssertInfo>\n\
 		</TestFunction>\n\
 	</TestCase>\n\
@@ -174,6 +184,7 @@ class UnitTest_svutResultFormatterXml : public TestCase, IUnitTest_ResultFormatt
 	CPPUNIT_TEST(testPrintSummary);
 	CPPUNIT_TEST(testGlobal_1);
 	CPPUNIT_TEST(testGlobal_2);
+	CPPUNIT_TEST(testCloseTestMethod_debugContext);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -203,6 +214,7 @@ class UnitTest_svutResultFormatterXml : public TestCase, IUnitTest_ResultFormatt
 		void testPrintSummary(void);
 		void testGlobal_1(void);
 		void testGlobal_2(void);
+		void testCloseTestMethod_debugContext(void);
 	protected:
 		void runTotalSequence(void);
 		svutResultFormatterXml * formatter;
@@ -488,6 +500,24 @@ void UnitTest_svutResultFormatterXml::testListMethod_2(void )
 	formatter->setDisplayFullName(true);
 	formatter->onListMethod(testCase,meth);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_LIST_METHOD,out->str());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutResultFormatterXml::testCloseTestMethod_debugContext(void )
+{
+	svutStatusInfoMap debug;
+	debug.insert(pair<string,string>("name","value"));
+	debug.insert(pair<string,string>("name2","value2"));
+
+	UnitTestMockTestCase testCase;
+	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutCodeLocation location("file.cpp","methode",33);
+	svutStatusInfo info(SVUT_STATUS_FAILED,"message for failed status",location);
+	info.addEntry("expected","toto");
+	info.addEntry("actual","duck");
+	info.setContext(debug);
+	formatter->closeTestMethod(testCase,meth,info);
+	CPPUNIT_ASSERT_EQUAL(CST_STRING_CONTEXT,out->str());
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutResultFormatterXml);

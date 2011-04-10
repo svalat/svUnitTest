@@ -63,15 +63,22 @@ class svutStatusInfo
 		void addEntry(const std::string & name,const std::string & value);
 		void addEntry(const char * name,const char * value);
 		void addEntry(const char * name,const std::string & value);
+		void setContext(svutStatusInfoMap & context);
 		void formatEntries(std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix) const;
 		void formatEntries(std::ostream & out,const char * prefix,const char * separator,const char * postfix) const;
+		void formatContext(std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix) const;
+		void formatContext(std::ostream & out,const char * prefix,const char * separator,const char * postfix) const;
 		svutStatusInfoMap getEntries(void) const;
 		unsigned int getNbEntries(void) const;
+		svutStatusInfoMap getContext(void) const;
+		unsigned int getNbContextEntries(void) const;
 		std::string getEntry(std::string name) const;
+		std::string getContextEntry(std::string name) const;
 		svutStatusInfo & operator = (const svutStatusInfo & orig);
 		std::string getStatusName(void) const;
 		static std::string getStatusName(svutStatus status);
 	protected:
+		void formatList(const svutStatusInfoMap & list,std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix) const;
 		/** Define the message related to the status of the test. **/
 		std::string message;
 		/** Extra parameters to describe the current status, mainly for errors debugging. **/
@@ -80,6 +87,8 @@ class svutStatusInfo
 		svutCodeLocation location;
 		/** Define the current status of the test.**/
 		svutStatus status;
+		/** Debugging context formed by an hash table of string. **/
+		svutStatusInfoMap context;
 };
 
 }
