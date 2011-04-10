@@ -166,6 +166,8 @@ std::string svutTestCase::getName(void) const
 {
 	//we lock the name
 	this->nameLocked = true;
+	if (this->caseName.empty())
+		throw svutExInternalError("Test case name can't be empty, please check your test constructors.");
 	return this->caseName;
 }
 
