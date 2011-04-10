@@ -8,8 +8,7 @@
 
 /********************  HEADERS  *********************/
 //needed to build a new test case.
-#include <svUnitTest/svutTestCase.h>
-#include <svUnitTest/svutDefaultMain.h>
+#include <svUnitTest/svUnitTest.h>
 
 /**********************  USING  *********************/
 using namespace svUnitTest;

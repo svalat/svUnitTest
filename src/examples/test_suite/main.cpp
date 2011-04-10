@@ -8,7 +8,7 @@
 
 /********************  HEADERS  *********************/
 //Load default main methods
-#include <svUnitTest/svutDefaultMain.h>
+#include <svUnitTest/svUnitTest.h>
 
 /*******************  FUNCTION  *********************/
 int main(int argc, char * argv[])
