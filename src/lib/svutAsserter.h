@@ -60,7 +60,7 @@ static bool asserterOperatorNotEqual(const T1 & v1,const T2 & v2)
  * @return Return true if v1 is stricly greater than v2.
 **/
 template <class T1,class T2>
-static bool asserterOperatorGreater(const T1 & v1,const T2 & v2)
+static bool asserterOperatorGT(const T1 & v1,const T2 & v2)
 {
 	return (v1 > v2);
 }
@@ -76,9 +76,41 @@ static bool asserterOperatorGreater(const T1 & v1,const T2 & v2)
  * @return Return true if v1 is greater or equal to v2.
 **/
 template <class T1,class T2>
-static bool asserterOperatorGreaterOrEqual(const T1 & v1,const T2 & v2)
+static bool asserterOperatorGE(const T1 & v1,const T2 & v2)
 {
-	return (v1 > v2);
+	return (v1 >= v2);
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Template implementaion of a function which call the < operator between two values.
+ * It permit to override this operator just for the unit test without affecting the original
+ * objects. It may be impotant if this operator as no real sens for those objects in general case,
+ * but may help here to wrote tests quicly.
+ * @param v1 Define the first value to test.
+ * @param v2 Define the second value to test.
+ * @return Return true if v1 is stricly greater than v2.
+**/
+template <class T1,class T2>
+static bool asserterOperatorLT(const T1 & v1,const T2 & v2)
+{
+	return (v1 < v2);
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Template implementaion of a function which call the <= operator between two values.
+ * It permit to override this operator just for the unit test without affecting the original
+ * objects. It may be impotant if this operator as no real sens for those objects in general case,
+ * but may help here to wrote tests quicly.
+ * @param v1 Define the first value to test.
+ * @param v2 Define the second value to test.
+ * @return Return true if v1 is greater or equal to v2.
+**/
+template <class T1,class T2>
+static bool asserterOperatorLE(const T1 & v1,const T2 & v2)
+{
+	return (v1 <= v2);
 }
 
 /*******************  FUNCTION  *********************/
@@ -183,10 +215,10 @@ static void assertNotEqualStrict(const T & expected,const T & actual,svutCodeLoc
 
 /*******************  FUNCTION  *********************/
 /**
- * Methode used to implement equality assertion in macro SVUT_ASSERT_GREATER. It is declared as
+ * Methode used to implement equality assertion in macro SVUT_ASSERT_GT. It is declared as
  * template methode so it could be overritten to implement support of non compatible types.
  * The template version suppose the presence of properties between the two types :
- *    - asserterOperatorGreater(), the template default version suppose operator >.
+ *    - asserterOperatorGT(), the template default version suppose operator >.
  *    - asserterToString(), which is template and by default suppose stream operator <<.
  * It may be better to override the two previous function are they are less specialized.
  * It will throw svutExAssertFailGreater if the actual value isn't greater than the given limit.
@@ -195,21 +227,21 @@ static void assertNotEqualStrict(const T & expected,const T & actual,svutCodeLoc
  * @param location Define the code location which call this test.
 **/
 template <class T1,class T2>
-static void assertGreater(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+static void assertGT(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailLimit)
 {
-	if (asserterOperatorGreater(actual,expectedLimit) == false)
+	if (asserterOperatorGT(actual,expectedLimit) == false)
 	{
-		throw svutExAssertFailLimit("Greater",asserterToString(expectedLimit),
+		throw svutExAssertFailLimit("Greater than",asserterToString(expectedLimit),
 									asserterToString(actual),location);
 	}
 }
 
 /*******************  FUNCTION  *********************/
 /**
- * Methode used to implement equality assertion in macro SVUT_ASSERT_GREATER_OR_EQUAL. It is declared as
+ * Methode used to implement equality assertion in macro SVUT_ASSERT_GE. It is declared as
  * template methode so it could be overritten to implement support of non compatible types.
  * The template version suppose the presence of properties between the two types :
- *    - asserterOperatorGreaterOrEqual(), the template default version suppose operator >=.
+ *    - asserterOperatorGE(), the template default version suppose operator >=.
  *    - asserterToString(), which is template and by default suppose stream operator <<.
  * It may be better to override the two previous function are they are less specialized.
  * It will throw svutExAssertFailGreater if the actual value isn't greater than the given limit.
@@ -218,9 +250,9 @@ static void assertGreater(const T1 & expectedLimit,const T2 & actual,svutCodeLoc
  * @param location Define the code location which call this test.
 **/
 template <class T1,class T2>
-static void assertGreaterOrEqual(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+static void assertGE(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailLimit)
 {
-	if (asserterOperatorGreaterOrEqual(actual,expectedLimit) == false)
+	if (asserterOperatorGE(actual,expectedLimit) == false)
 	{
 		throw svutExAssertFailLimit("Greater or equal",asserterToString(expectedLimit),
 									asserterToString(actual),location);
@@ -228,8 +260,62 @@ static void assertGreaterOrEqual(const T1 & expectedLimit,const T2 & actual,svut
 }
 
 /*******************  FUNCTION  *********************/
+/**
+ * Methode used to implement equality assertion in macro SVUT_ASSERT_LT. It is declared as
+ * template methode so it could be overritten to implement support of non compatible types.
+ * The template version suppose the presence of properties between the two types :
+ *    - asserterOperatorLT(), the template default version suppose operator <.
+ *    - asserterToString(), which is template and by default suppose stream operator <<.
+ * It may be better to override the two previous function are they are less specialized.
+ * It will throw svutExAssertFailGreater if the actual value isn't greater than the given limit.
+ * @param expectedLimit Define the expected limit.
+ * @param actual Define the current value to compared to the expected one.
+ * @param location Define the code location which call this test.
+**/
+template <class T1,class T2>
+static void assertLT(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+{
+	if (asserterOperatorLT(actual,expectedLimit) == false)
+	{
+		throw svutExAssertFailLimit("Less than",asserterToString(expectedLimit),
+									asserterToString(actual),location);
+	}
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Methode used to implement equality assertion in macro SVUT_ASSERT_LE. It is declared as
+ * template methode so it could be overritten to implement support of non compatible types.
+ * The template version suppose the presence of properties between the two types :
+ *    - asserterOperatorLE(), the template default version suppose operator <=.
+ *    - asserterToString(), which is template and by default suppose stream operator <<.
+ * It may be better to override the two previous function are they are less specialized.
+ * It will throw svutExAssertFailGreater if the actual value isn't greater than the given limit.
+ * @param expectedLimit Define the expected limit.
+ * @param actual Define the current value to compared to the expected one.
+ * @param location Define the code location which call this test.
+**/
+template <class T1,class T2>
+static void assertLE(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+{
+	if (asserterOperatorLE(actual,expectedLimit) == false)
+	{
+		throw svutExAssertFailLimit("Less or equal",asserterToString(expectedLimit),
+									asserterToString(actual),location);
+	}
+}
+
+/*******************  FUNCTION  *********************/
 bool assertOperatoreEqual(const char * expected,const char * actual);
 bool assertOperatorNotEqual(const char * expected,const char * actual);
+void assertGT(const char* expectedLimit,const char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
+void assertGE(const char* expectedLimit,const char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
+void assertLT(const char* expectedLimit,const char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
+void assertLE(const char* expectedLimit,const char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
+void assertGT(char* expectedLimit,char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
+void assertGE(char* expectedLimit,char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
+void assertLT(char* expectedLimit,char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
+void assertLE(char* expectedLimit,char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
 void assertEqualStrict(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 void assertNotEqualStrict(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
 void assertSame(const void * expected,const void * actual,svutCodeLocation location) throw(svutExAssertFailEqual);

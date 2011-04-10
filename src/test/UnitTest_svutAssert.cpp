@@ -66,12 +66,41 @@ class UnitTest_svutAssert : public TestCase
 	CPPUNIT_TEST(testMacroAssertNotThrow_others);
 	CPPUNIT_TEST(testMacroAssertMayNotThrow_good);
 	CPPUNIT_TEST(testMacroAssertMayNotThrow_bad);
-	CPPUNIT_TEST(testMacroAssertGreater_good);
-	CPPUNIT_TEST(testMacroAssertGreater_bad);
-	CPPUNIT_TEST(testMacroAssertGreater_limit);
-	CPPUNIT_TEST(testMacroAssertGreaterOrEqual_good);
-	CPPUNIT_TEST(testMacroAssertGreaterOrEqual_bad);
-	CPPUNIT_TEST(testMacroAssertGreaterOrEqual_limit);
+	CPPUNIT_TEST(testMacroAssertGT_int_good);
+	CPPUNIT_TEST(testMacroAssertGT_int_bad);
+	CPPUNIT_TEST(testMacroAssertGT_int_limit);
+	CPPUNIT_TEST(testMacroAssertGE_int_good);
+	CPPUNIT_TEST(testMacroAssertGE_int_bad);
+	CPPUNIT_TEST(testMacroAssertGE_int_limit);
+	CPPUNIT_TEST(testMacroAssertLT_int_good);
+	CPPUNIT_TEST(testMacroAssertLT_int_bad);
+	CPPUNIT_TEST(testMacroAssertLT_int_limit);
+	CPPUNIT_TEST(testMacroAssertLE_int_good);
+	CPPUNIT_TEST(testMacroAssertLE_int_bad);
+	CPPUNIT_TEST(testMacroAssertLE_int_limit);
+	CPPUNIT_TEST(testMacroAssertGT_cstr_good);
+	CPPUNIT_TEST(testMacroAssertGT_cstr_bad);
+	CPPUNIT_TEST(testMacroAssertGT_cstr_limit);
+	CPPUNIT_TEST(testMacroAssertGE_cstr_good);
+	CPPUNIT_TEST(testMacroAssertGE_cstr_bad);
+	CPPUNIT_TEST(testMacroAssertGE_cstr_limit);
+	CPPUNIT_TEST(testMacroAssertLT_cstr_good);
+	CPPUNIT_TEST(testMacroAssertLT_cstr_bad);
+	CPPUNIT_TEST(testMacroAssertLT_cstr_limit);
+	CPPUNIT_TEST(testMacroAssertLE_cstr_good);
+	CPPUNIT_TEST(testMacroAssertLE_cstr_bad);
+	CPPUNIT_TEST(testMacroAssertLE_cstr_limit);
+	CPPUNIT_TEST(testMacroAssertGT_custotype_bad);
+	CPPUNIT_TEST(testMacroAssertGT_custotype_limit);
+	CPPUNIT_TEST(testMacroAssertGE_custotype_good);
+	CPPUNIT_TEST(testMacroAssertGE_custotype_bad);
+	CPPUNIT_TEST(testMacroAssertGE_custotype_limit);
+	CPPUNIT_TEST(testMacroAssertLT_custotype_good);
+	CPPUNIT_TEST(testMacroAssertLT_custotype_bad);
+	CPPUNIT_TEST(testMacroAssertLT_custotype_limit);
+	CPPUNIT_TEST(testMacroAssertLE_custotype_good);
+	CPPUNIT_TEST(testMacroAssertLE_custotype_bad);
+	CPPUNIT_TEST(testMacroAssertLE_custotype_limit);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -121,12 +150,42 @@ class UnitTest_svutAssert : public TestCase
 		void testMacroAssertNotThrow_others(void);
 		void testMacroAssertMayNotThrow_good(void);
 		void testMacroAssertMayNotThrow_bad(void);
-		void testMacroAssertGreater_good(void);
-		void testMacroAssertGreater_bad(void);
-		void testMacroAssertGreater_limit(void);
-		void testMacroAssertGreaterOrEqual_good(void);
-		void testMacroAssertGreaterOrEqual_bad(void);
-		void testMacroAssertGreaterOrEqual_limit(void);
+		void testMacroAssertGT_int_good(void);
+		void testMacroAssertGT_int_bad(void);
+		void testMacroAssertGT_int_limit(void);
+		void testMacroAssertGE_int_good(void);
+		void testMacroAssertGE_int_bad(void);
+		void testMacroAssertGE_int_limit(void);
+		void testMacroAssertLT_int_good(void);
+		void testMacroAssertLT_int_bad(void);
+		void testMacroAssertLT_int_limit(void);
+		void testMacroAssertLE_int_good(void);
+		void testMacroAssertLE_int_bad(void);
+		void testMacroAssertLE_int_limit(void);
+		void testMacroAssertGT_cstr_good(void);
+		void testMacroAssertGT_cstr_bad(void);
+		void testMacroAssertGT_cstr_limit(void);
+		void testMacroAssertGE_cstr_good(void);
+		void testMacroAssertGE_cstr_bad(void);
+		void testMacroAssertGE_cstr_limit(void);
+		void testMacroAssertLT_cstr_good(void);
+		void testMacroAssertLT_cstr_bad(void);
+		void testMacroAssertLT_cstr_limit(void);
+		void testMacroAssertLE_cstr_good(void);
+		void testMacroAssertLE_cstr_bad(void);
+		void testMacroAssertLE_cstr_limit(void);
+		void testMacroAssertGT_custotype_good(void);
+		void testMacroAssertGT_custotype_bad(void);
+		void testMacroAssertGT_custotype_limit(void);
+		void testMacroAssertGE_custotype_good(void);
+		void testMacroAssertGE_custotype_bad(void);
+		void testMacroAssertGE_custotype_limit(void);
+		void testMacroAssertLT_custotype_good(void);
+		void testMacroAssertLT_custotype_bad(void);
+		void testMacroAssertLT_custotype_limit(void);
+		void testMacroAssertLE_custotype_good(void);
+		void testMacroAssertLE_custotype_bad(void);
+		void testMacroAssertLE_custotype_limit(void);
 };
 
 /********************  STRUCT  **********************/
@@ -147,6 +206,31 @@ static bool asserterOperatorNotEqual(const UnitTestCustoType & v1,const UnitTest
 {
 	return (v1.value1 != v2.value1 || v1.value2 != v2.value2);
 }
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorGE(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+{
+	return (v1.value1 >= v2.value1 && v1.value2 >= v2.value2);
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorGT(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+{
+	return (v1.value1 > v2.value1 && v1.value2 > v2.value2);
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorLE(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+{
+	return (v1.value1 <= v2.value1 && v1.value2 <= v2.value2);
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorLT(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+{
+	return (v1.value1 < v2.value1 && v1.value2 < v2.value2);
+}
+
 
 /*******************  FUNCTION  *********************/
 static std::string asserterToString(const UnitTestCustoType & value)
@@ -765,39 +849,549 @@ void UnitTest_svutAssert::testMacroAssertMayNotThrow_bad(void)
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutAssert::testMacroAssertGreater_good(void )
+void UnitTest_svutAssert::testMacroAssertGT_int_good(void )
 {
-	CPPUNIT_FAIL("todo");
+	try {
+		SVUT_ASSERT_GT(10,20);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutAssert::testMacroAssertGreater_bad(void )
+void UnitTest_svutAssert::testMacroAssertGT_int_bad(void )
 {
-	CPPUNIT_FAIL("todo");
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_GT(10,2);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("2",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Greater than",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutAssert::testMacroAssertGreater_limit(void )
+void UnitTest_svutAssert::testMacroAssertGT_int_limit(void )
 {
-	CPPUNIT_FAIL("todo");
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_GT(10,10);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Greater than",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutAssert::testMacroAssertGreaterOrEqual_good(void )
+void UnitTest_svutAssert::testMacroAssertGE_int_good(void )
 {
-	CPPUNIT_FAIL("todo");
+	try {
+		SVUT_ASSERT_GE(10,20);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutAssert::testMacroAssertGreaterOrEqual_bad(void )
+void UnitTest_svutAssert::testMacroAssertGE_int_bad(void )
 {
-	CPPUNIT_FAIL("todo");
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_GE(10,2);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("2",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Greater or equal",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_svutAssert::testMacroAssertGreaterOrEqual_limit(void )
+void UnitTest_svutAssert::testMacroAssertGE_int_limit(void )
 {
-	CPPUNIT_FAIL("todo");
+	try {
+		SVUT_ASSERT_GE(10,10);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLE_int_good(void )
+{
+	try {
+		SVUT_ASSERT_LE(10,2);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLE_int_bad(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_LE(10,20);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("20",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Less or equal",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLE_int_limit(void )
+{
+	try {
+		SVUT_ASSERT_LE(10,10);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLT_int_good(void )
+{
+	try {
+		SVUT_ASSERT_LT(10,2);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLT_int_bad(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_LT(10,20);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("20",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Less than",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLT_int_limit(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_LT(10,10);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Less than",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGE_custotype_good(void )
+{
+	try {
+		UnitTestCustoType v1 = {10,11};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_GE(v1,v2);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGE_custotype_bad(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 4);
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {10,11};
+		SVUT_ASSERT_GE(v1,v2);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("10, 11",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Greater or equal",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGE_custotype_limit(void )
+{
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_GE(v1,v2);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGT_custotype_good(void )
+{
+	try {
+		UnitTestCustoType v1 = {10,11};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_GT(v1,v2);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGT_custotype_bad(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 4);
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {10,11};
+		SVUT_ASSERT_GT(v1,v2);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("10, 11",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Greater than",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGT_custotype_limit(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 4);
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_GT(v1,v2);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Greater than",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLE_custotype_good(void )
+{
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {10,11};
+		SVUT_ASSERT_LE(v1,v2);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLE_custotype_bad(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 4);
+	try {
+		UnitTestCustoType v1 = {10,11};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_LE(v1,v2);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("10, 11",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Less or equal",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLE_custotype_limit(void )
+{
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_LE(v1,v2);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLT_custotype_good(void )
+{
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {10,11};
+		SVUT_ASSERT_LE(v1,v2);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLT_custotype_bad(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 4);
+	try {
+		UnitTestCustoType v1 = {10,11};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_LT(v1,v2);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("10, 11",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Less than",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLT_custotype_limit(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 4);
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_LT(v1,v2);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Less than",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGT_cstr_good(void )
+{
+	try {
+		SVUT_ASSERT_GT((char*)10,(char*)20);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGT_cstr_bad(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_GT((char*)10,(char*)2);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("0x2",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Greater than",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGT_cstr_limit(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_GT((char*)10,(char*)10);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Greater than",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGE_cstr_good(void )
+{
+ try {
+		SVUT_ASSERT_GE((char*)10,(char*)20);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGE_cstr_bad(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_GE((char*)10,(char*)2);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("0x2",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Greater or equal",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertGE_cstr_limit(void )
+{
+	try {
+		SVUT_ASSERT_GE((char*)10,(char*)10);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLE_cstr_good(void )
+{
+	try {
+		SVUT_ASSERT_LE((char*)10,(char*)2);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLE_cstr_bad(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_LE((char*)10,(char*)20);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("0x14",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Less or equal",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLE_cstr_limit(void )
+{
+	try {
+		SVUT_ASSERT_LE((char*)10,(char*)10);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLT_cstr_good(void )
+{
+	try {
+		SVUT_ASSERT_LT((char*)10,(char*)2);
+	} catch (svutExAssertFailLimit) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLT_cstr_bad(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_LT((char*)10,(char*)20);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("0x14",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Less than",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertLT_cstr_limit(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_LT((char*)10,(char*)10);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
+	} catch (svutExAssertFailLimit e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Expected limit"));
+		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Actual"));
+		CPPUNIT_ASSERT_EQUAL("Less than",e.getInfos().getEntry("Operator"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutAssert);

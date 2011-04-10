@@ -97,13 +97,13 @@ namespace svUnitTest
  * >. If this operator wasn't supported by you type, you can redefine the template function
  * asserterOperatorGreater() to override it with precise type. For string conversion to test failure
  * information, you can override the function asserterToString().
- * In case of failure, an exception of type svutExAssertFailEqual was throwed. This macro was built
+ * In case of failure, an exception of type svutExAssertFailLimit was throwed. This macro was built
  * to be used in unit test cases.
  * @param expectedLimit Define the wanted value.
  * @param actual Define the current value to test.
 **/
-#define SVUT_ASSERT_GREATER(expectedLimit,actual)\
-	svUnitTest::assertGreater((expectedLimit),(actual),SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_GT(expectedLimit,actual)\
+	svUnitTest::assertGT((expectedLimit),(actual),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
 /**
@@ -111,13 +111,42 @@ namespace svUnitTest
  * >=. If this operator wasn't supported by you type, you can redefine the template function
  * asserterOperatorGreaterOrEqual() to override it with precise type. For string conversion to test failure
  * information, you can override the function asserterToString().
+ * In case of failure, an exception of type svutExAssertFailLimit was throwed. This macro was built
+ * to be used in unit test cases.
+ * @param expectedLimit Define the wanted value.
+ * @param actual Define the current value to test.
+**/
+#define SVUT_ASSERT_GE(expectedLimit,actual)\
+	svUnitTest::assertGE((expectedLimit),(actual),SVUT_CODE_LOCATION)
+
+
+/********************  MACRO  ***********************/
+/**
+ * Macro used to assert superior limit of members in term of values. By default it's based on operator
+ * <. If this operator wasn't supported by you type, you can redefine the template function
+ * asserterOperatorLess() to override it with precise type. For string conversion to test failure
+ * information, you can override the function asserterToString().
+ * In case of failure, an exception of type svutExAssertFailLimit was throwed. This macro was built
+ * to be used in unit test cases.
+ * @param expectedLimit Define the wanted value.
+ * @param actual Define the current value to test.
+**/
+#define SVUT_ASSERT_LT(expectedLimit,actual)\
+	svUnitTest::assertLT((expectedLimit),(actual),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+/**
+ * Macro used to assert superior limit of members in term of values. By default it's based on operator
+ * <=. If this operator wasn't supported by you type, you can redefine the template function
+ * asserterOperatorGreaterOrEqual() to override it with precise type. For string conversion to test failure
+ * information, you can override the function asserterToString().
  * In case of failure, an exception of type svutExAssertFailEqual was throwed. This macro was built
  * to be used in unit test cases.
  * @param expectedLimit Define the wanted value.
  * @param actual Define the current value to test.
 **/
-#define SVUT_ASSERT_GREATER_OR_EQUAL(expectedLimit,actual)\
-	svUnitTest::assertGreaterOrEqual((expectedLimit),(actual),SVUT_CODE_LOCATION)
+#define SVUT_ASSERT_LE(expectedLimit,actual)\
+	svUnitTest::assertLE((expectedLimit),(actual),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
 /**

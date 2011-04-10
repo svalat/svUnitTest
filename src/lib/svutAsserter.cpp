@@ -102,4 +102,84 @@ void assertNotSame(const void * expected,const void * actual,svutCodeLocation  l
 	}
 }
 
+/*******************  FUNCTION  *********************/
+void assertGT(const char * expectedLimit,const char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+{
+	if (asserterOperatorGT(actual,expectedLimit) == false)
+	{
+		throw svutExAssertFailLimit("Greater than",asserterToString((void*)expectedLimit),
+									asserterToString((void*)actual),location);
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void assertGE(const char * expectedLimit,const char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+{
+	if (asserterOperatorGE(actual,expectedLimit) == false)
+	{
+		throw svutExAssertFailLimit("Greater or equal",asserterToString((void*)expectedLimit),
+									asserterToString((void*)actual),location);
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void assertLT(const char * expectedLimit,const char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+{
+	if (asserterOperatorLT(actual,expectedLimit) == false)
+	{
+		throw svutExAssertFailLimit("Less than",asserterToString((void*)expectedLimit),
+									asserterToString((void*)actual),location);
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void assertLE(const char * expectedLimit,const char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+{
+	if (asserterOperatorLE(actual,expectedLimit) == false)
+	{
+		throw svutExAssertFailLimit("Less or equal",asserterToString((void*)expectedLimit),
+									asserterToString((void*)actual),location);
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void assertGT(char * expectedLimit,char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+{
+	if (asserterOperatorGT(actual,expectedLimit) == false)
+	{
+		throw svutExAssertFailLimit("Greater than",asserterToString((void*)expectedLimit),
+									asserterToString((void*)actual),location);
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void assertGE(char * expectedLimit,char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+{
+	if (asserterOperatorGE(actual,expectedLimit) == false)
+	{
+		throw svutExAssertFailLimit("Greater or equal",asserterToString((void*)expectedLimit),
+									asserterToString((void*)actual),location);
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void assertLT(char * expectedLimit,char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+{
+	if (asserterOperatorLT(actual,expectedLimit) == false)
+	{
+		throw svutExAssertFailLimit("Less than",asserterToString((void*)expectedLimit),
+									asserterToString((void*)actual),location);
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void assertLE(char * expectedLimit,char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+{
+	if (asserterOperatorLE(actual,expectedLimit) == false)
+	{
+		throw svutExAssertFailLimit("Less or equal",asserterToString((void*)expectedLimit),
+									asserterToString((void*)actual),location);
+	}
+}
+
 }

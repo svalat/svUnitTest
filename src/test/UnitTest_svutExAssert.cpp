@@ -264,7 +264,19 @@ void UnitTest_svutExAssert::testExAssertFailThrow(void )
 /*******************  FUNCTION  *********************/
 void UnitTest_svutExAssert::testExAssertLimit(void )
 {
-	CPPUNIT_FAIL("todo");
+	//same test than svutExTestStatus
+	svutExAssertFailLimit obj("op","test","TEST",location);
+
+	CPPUNIT_ASSERT_EQUAL("AssertFail:AssertLimit",obj.getExceptionName());
+	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
+	CPPUNIT_ASSERT_EQUAL("Failed on expected limit on value.",obj.getInfos().getMessage());
+	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
+	CPPUNIT_ASSERT_EQUAL(3u,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL("test",obj.getInfos().getEntry("Expected limit"));
+	CPPUNIT_ASSERT_EQUAL("TEST",obj.getInfos().getEntry("Actual"));
+	CPPUNIT_ASSERT_EQUAL("op",obj.getInfos().getEntry("Operator"));
+	CPPUNIT_ASSERT_EQUAL("Failed on expected limit on value.",obj.getMessage());
+	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutExAssert);
