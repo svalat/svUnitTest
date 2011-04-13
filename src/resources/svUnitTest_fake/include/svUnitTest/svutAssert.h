@@ -83,6 +83,26 @@ inline std::string getLocationString(int line,const char * filename,const char *
 		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " != " #expected),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
+#define SVUT_ASSERT_GT(expectedLimit,actual)\
+	if (asserterOperatorGT((actual),(expectedLimit)) == false) \
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " >= " #expectedLimit),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+#define SVUT_ASSERT_GE(expectedLimit,actual)\
+	if (asserterOperatorGE((actual),(expectedLimit)) == false) \
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " >= " #expectedLimit),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+#define SVUT_ASSERT_LT(expectedLimit,actual)\
+	if (asserterOperatorLT((actual),(expectedLimit)) == false) \
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " >= " #expectedLimit),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+#define SVUT_ASSERT_LE(expectedLimit,actual)\
+	if (asserterOperatorLE((actual),(expectedLimit)) == false) \
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " >= " #expectedLimit),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
 #define SVUT_ASSERT_SAME(expected,actual)\
 	if ((void*)(expected) != (void*)(actual))\
 		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " == " #expected),SVUT_CODE_LOCATION)

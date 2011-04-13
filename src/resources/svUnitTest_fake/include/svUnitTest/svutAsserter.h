@@ -32,6 +32,34 @@ bool asserterOperatorNotEqual(const T1 & v1,const T2 & v2)
 }
 
 /*******************  FUNCTION  *********************/
+template <class T1,class T2>
+static bool asserterOperatorGT(const T1 & v1,const T2 & v2)
+{
+	return (v1 > v2);
+}
+
+/*******************  FUNCTION  *********************/
+template <class T1,class T2>
+static bool asserterOperatorGE(const T1 & v1,const T2 & v2)
+{
+	return (v1 >= v2);
+}
+
+/*******************  FUNCTION  *********************/
+template <class T1,class T2>
+static bool asserterOperatorLT(const T1 & v1,const T2 & v2)
+{
+	return (v1 < v2);
+}
+
+/*******************  FUNCTION  *********************/
+template <class T1,class T2>
+static bool asserterOperatorLE(const T1 & v1,const T2 & v2)
+{
+	return (v1 <= v2);
+}
+
+/*******************  FUNCTION  *********************/
 template <class T>
 std::string asserterToString(const T & value)
 {
@@ -66,6 +94,14 @@ bool asserterOperatorEqual(const char * expected,const char * actual);
 bool asserterOperatorNotEqual(const char * expected,const char * actual);
 bool asserterOperatorEqualStrict(const char * expected,const char * actual);
 bool asserterOperatorNotEqualStrict(const char * expected,const char * actual);
+bool asserterOperatorGE(const char * v1,const char * v2);
+bool asserterOperatorGT(const char * v1,const char * v2);
+bool asserterOperatorLE(const char * v1,const char * v2);
+bool asserterOperatorLT(const char * v1,const char * v2);
+bool asserterOperatorGE(char * v1,char * v2);
+bool asserterOperatorGT(char * v1,char * v2);
+bool asserterOperatorLE(char * v1,char * v2);
+bool asserterOperatorLT(char * v1,char * v2);
 }
 
 #endif

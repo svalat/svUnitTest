@@ -68,6 +68,42 @@ class UnitTest_svUnitTestFake : public svUnitTest::svutTestCase
 		void testMacroAssertNotThrow_others(void);
 		void testMacroAssertMayNotThrow_good(void);
 		void testMacroAssertMayNotThrow_bad(void);
+		void testMacroAssertGT_int_good(void);
+		void testMacroAssertGT_int_bad(void);
+		void testMacroAssertGT_int_limit(void);
+		void testMacroAssertGE_int_good(void);
+		void testMacroAssertGE_int_bad(void);
+		void testMacroAssertGE_int_limit(void);
+		void testMacroAssertLT_int_good(void);
+		void testMacroAssertLT_int_bad(void);
+		void testMacroAssertLT_int_limit(void);
+		void testMacroAssertLE_int_good(void);
+		void testMacroAssertLE_int_bad(void);
+		void testMacroAssertLE_int_limit(void);
+		void testMacroAssertGT_cstr_good(void);
+		void testMacroAssertGT_cstr_bad(void);
+		void testMacroAssertGT_cstr_limit(void);
+		void testMacroAssertGE_cstr_good(void);
+		void testMacroAssertGE_cstr_bad(void);
+		void testMacroAssertGE_cstr_limit(void);
+		void testMacroAssertLT_cstr_good(void);
+		void testMacroAssertLT_cstr_bad(void);
+		void testMacroAssertLT_cstr_limit(void);
+		void testMacroAssertLE_cstr_good(void);
+		void testMacroAssertLE_cstr_bad(void);
+		void testMacroAssertLE_cstr_limit(void);
+		void testMacroAssertGT_custotype_good(void);
+		void testMacroAssertGT_custotype_bad(void);
+		void testMacroAssertGT_custotype_limit(void);
+		void testMacroAssertGE_custotype_good(void);
+		void testMacroAssertGE_custotype_bad(void);
+		void testMacroAssertGE_custotype_limit(void);
+		void testMacroAssertLT_custotype_good(void);
+		void testMacroAssertLT_custotype_bad(void);
+		void testMacroAssertLT_custotype_limit(void);
+		void testMacroAssertLE_custotype_good(void);
+		void testMacroAssertLE_custotype_bad(void);
+		void testMacroAssertLE_custotype_limit(void);
 };
 
 /********************  STRUCT  **********************/
@@ -87,6 +123,30 @@ bool asserterOperatorEqual(const UnitTestCustoType & v1,const UnitTestCustoType 
 bool asserterOperatorNotEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
 {
 	return (v1.value1 != v2.value1 || v1.value2 != v2.value2);
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorGE(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+{
+	return (v1.value1 >= v2.value1 && v1.value2 >= v2.value2);
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorGT(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+{
+	return (v1.value1 > v2.value1 && v1.value2 > v2.value2);
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorLE(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+{
+	return (v1.value1 <= v2.value1 && v1.value2 <= v2.value2);
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorLT(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+{
+	return (v1.value1 < v2.value1 && v1.value2 < v2.value2);
 }
 
 /*******************  FUNCTION  *********************/
@@ -148,6 +208,41 @@ void UnitTest_svUnitTestFake::testMethodsRegistration(void )
 	SVUT_REG_TEST_METHOD(testMacroAssertNotThrow_others);
 	SVUT_REG_TEST_METHOD(testMacroAssertMayNotThrow_good);
 	SVUT_REG_TEST_METHOD(testMacroAssertMayNotThrow_bad);
+	SVUT_REG_TEST_METHOD(testMacroAssertGT_int_good);
+	SVUT_REG_TEST_METHOD(testMacroAssertGT_int_bad);
+	SVUT_REG_TEST_METHOD(testMacroAssertGT_int_limit);
+	SVUT_REG_TEST_METHOD(testMacroAssertGE_int_good);
+	SVUT_REG_TEST_METHOD(testMacroAssertGE_int_bad);
+	SVUT_REG_TEST_METHOD(testMacroAssertGE_int_limit);
+	SVUT_REG_TEST_METHOD(testMacroAssertLT_int_good);
+	SVUT_REG_TEST_METHOD(testMacroAssertLT_int_bad);
+	SVUT_REG_TEST_METHOD(testMacroAssertLT_int_limit);
+	SVUT_REG_TEST_METHOD(testMacroAssertLE_int_good);
+	SVUT_REG_TEST_METHOD(testMacroAssertLE_int_bad);
+	SVUT_REG_TEST_METHOD(testMacroAssertLE_int_limit);
+	SVUT_REG_TEST_METHOD(testMacroAssertGT_cstr_good);
+	SVUT_REG_TEST_METHOD(testMacroAssertGT_cstr_bad);
+	SVUT_REG_TEST_METHOD(testMacroAssertGT_cstr_limit);
+	SVUT_REG_TEST_METHOD(testMacroAssertGE_cstr_good);
+	SVUT_REG_TEST_METHOD(testMacroAssertGE_cstr_bad);
+	SVUT_REG_TEST_METHOD(testMacroAssertGE_cstr_limit);
+	SVUT_REG_TEST_METHOD(testMacroAssertLT_cstr_good);
+	SVUT_REG_TEST_METHOD(testMacroAssertLT_cstr_bad);
+	SVUT_REG_TEST_METHOD(testMacroAssertLT_cstr_limit);
+	SVUT_REG_TEST_METHOD(testMacroAssertLE_cstr_good);
+	SVUT_REG_TEST_METHOD(testMacroAssertLE_cstr_bad);
+	SVUT_REG_TEST_METHOD(testMacroAssertLE_cstr_limit);
+	SVUT_REG_TEST_METHOD(testMacroAssertGT_custotype_bad);
+	SVUT_REG_TEST_METHOD(testMacroAssertGT_custotype_limit);
+	SVUT_REG_TEST_METHOD(testMacroAssertGE_custotype_good);
+	SVUT_REG_TEST_METHOD(testMacroAssertGE_custotype_bad);
+	SVUT_REG_TEST_METHOD(testMacroAssertGE_custotype_limit);
+	SVUT_REG_TEST_METHOD(testMacroAssertLT_custotype_good);
+	SVUT_REG_TEST_METHOD(testMacroAssertLT_custotype_bad);
+	SVUT_REG_TEST_METHOD(testMacroAssertLT_custotype_limit);
+	SVUT_REG_TEST_METHOD(testMacroAssertLE_custotype_good);
+	SVUT_REG_TEST_METHOD(testMacroAssertLE_custotype_bad);
+	SVUT_REG_TEST_METHOD(testMacroAssertLE_custotype_limit);
 }
 
 /*******************  FUNCTION  *********************/
@@ -185,7 +280,7 @@ void UnitTest_svUnitTestFake::testMacroAssertTrue_bad(void )
 {
 	try {
 		SVUT_ASSERT_TRUE(false);
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -209,7 +304,7 @@ void UnitTest_svUnitTestFake::testMacroAssertFalse_bad(void )
 {
 	try {
 		SVUT_ASSERT_FALSE(true);
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -233,7 +328,7 @@ void UnitTest_svUnitTestFake::testMacroAssertNull_bad(void )
 {
 	try {
 		SVUT_ASSERT_NULL(0x55);
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -257,7 +352,7 @@ void UnitTest_svUnitTestFake::testMacroAssertNotNull_bad(void )
 {
 	try {
 		SVUT_ASSERT_NOT_NULL(NULL);
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -281,7 +376,7 @@ void UnitTest_svUnitTestFake::testMacroAssertEqual_int_bad(void)
 {
 	try {
 		SVUT_ASSERT_EQUAL(10,42);
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -305,7 +400,7 @@ void UnitTest_svUnitTestFake::testMacroAssertEqual_cstr_bad(void)
 {
 	try {
 		SVUT_ASSERT_EQUAL("Hello World!!","Hello Bob!!");
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -332,7 +427,7 @@ void UnitTest_svUnitTestFake::testMacroAssertEqual_custotype_bad(void)
 	try {
 		UnitTestCustoType v1 = {10,20};
 		UnitTestCustoType v2 = {10,40};
-		SVUT_ASSERT_EQUAL(v1,v2);		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_EQUAL(v1,v2);		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -356,7 +451,7 @@ void UnitTest_svUnitTestFake::testMacroAssertNotEqual_int_bad(void)
 {
 	try {
 		SVUT_ASSERT_NOT_EQUAL(10,10);
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -380,7 +475,7 @@ void UnitTest_svUnitTestFake::testMacroAssertNotEqual_cstr_bad(void)
 {
 	try {
 		SVUT_ASSERT_NOT_EQUAL("Hello World!!","Hello World!!");
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -408,7 +503,7 @@ void UnitTest_svUnitTestFake::testMacroAssertNotEqual_custotype_bad(void)
 		UnitTestCustoType v1 = {10,20};
 		UnitTestCustoType v2 = {10,20};
 		SVUT_ASSERT_NOT_EQUAL(v1,v2);
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -483,7 +578,7 @@ void UnitTest_svUnitTestFake::testMacroAssertSame_bad(void)
 	int b = 66;
 	try {
 		SVUT_ASSERT_SAME(&a,&b);
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -510,7 +605,7 @@ void UnitTest_svUnitTestFake::testMacroAssertNotSame_bad(void)
 	int a = 66;
 	try {
 		SVUT_ASSERT_NOT_SAME(&a,&a);
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -522,7 +617,7 @@ void UnitTest_svUnitTestFake::testMacroAssertFailCustom(void )
 {
 	try {
 		SVUT_ASSERT_FAIL("test fail");
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -534,7 +629,7 @@ void UnitTest_svUnitTestFake::testMacroAssertTodo(void )
 {
 	try {
 		SVUT_ASSERT_TODO("test todo");
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -546,7 +641,7 @@ void UnitTest_svUnitTestFake::testMacroAssertIndev(void )
 {
 	try {
 		SVUT_ASSERT_INDEV("test indev");
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -558,7 +653,7 @@ void UnitTest_svUnitTestFake::testMacroAssertNotExec(void )
 {
 	try {
 		SVUT_ASSERT_NOT_EXEC_THIS();
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -582,7 +677,7 @@ void UnitTest_svUnitTestFake::testMacroAssertThrow_another(void)
 {
 	try {
 		SVUT_ASSERT_THROW(int,throw 10.0);
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -594,7 +689,7 @@ void UnitTest_svUnitTestFake::testMacroAssertThrow_notthrow(void)
 {
 	try {
 		SVUT_ASSERT_THROW(int,{});
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -619,7 +714,7 @@ void UnitTest_svUnitTestFake::testMacroAssertThrowSomething_bad(void)
 	int a=10;
 	try {
 		SVUT_ASSERT_THROW_SOMETHING(a++);
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -643,7 +738,7 @@ void UnitTest_svUnitTestFake::testMacroAssertNotThrow_bad(void)
 {
 	try {
 		SVUT_ASSERT_NOT_THROW(int,throw 10);
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
@@ -679,7 +774,463 @@ void UnitTest_svUnitTestFake::testMacroAssertMayNotThrow_bad(void)
 {
 	try {
 		SVUT_ASSERT_MAY_NOT_THROW(throw 10);
-		SVUT_ASSERT_FAIL("Now Thow expected svutExAssertFake exception.");
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGT_int_good(void )
+{
+	try {
+		SVUT_ASSERT_GT(10,20);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGT_int_bad(void )
+{
+	try {
+		SVUT_ASSERT_GT(10,2);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGT_int_limit(void )
+{
+	try {
+		SVUT_ASSERT_GT(10,10);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGE_int_good(void )
+{
+	try {
+		SVUT_ASSERT_GE(10,20);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGE_int_bad(void )
+{
+	try {
+		SVUT_ASSERT_GE(10,2);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGE_int_limit(void )
+{
+	try {
+		SVUT_ASSERT_GE(10,10);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLE_int_good(void )
+{
+	try {
+		SVUT_ASSERT_LE(10,2);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLE_int_bad(void )
+{
+	try {
+		SVUT_ASSERT_LE(10,20);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLE_int_limit(void )
+{
+	try {
+		SVUT_ASSERT_LE(10,10);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLT_int_good(void )
+{
+	try {
+		SVUT_ASSERT_LT(10,2);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLT_int_bad(void )
+{
+	try {
+		SVUT_ASSERT_LT(10,20);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLT_int_limit(void )
+{
+	try {
+		SVUT_ASSERT_LT(10,10);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGE_custotype_good(void )
+{
+	try {
+		UnitTestCustoType v1 = {10,11};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_GE(v1,v2);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGE_custotype_bad(void )
+{
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {10,11};
+		SVUT_ASSERT_GE(v1,v2);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGE_custotype_limit(void )
+{
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_GE(v1,v2);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGT_custotype_good(void )
+{
+	try {
+		UnitTestCustoType v1 = {10,11};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_GT(v1,v2);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGT_custotype_bad(void )
+{
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {10,11};
+		SVUT_ASSERT_GT(v1,v2);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGT_custotype_limit(void )
+{
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_GT(v1,v2);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLE_custotype_good(void )
+{
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {10,11};
+		SVUT_ASSERT_LE(v1,v2);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLE_custotype_bad(void )
+{
+	try {
+		UnitTestCustoType v1 = {10,11};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_LE(v1,v2);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLE_custotype_limit(void )
+{
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_LE(v1,v2);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLT_custotype_good(void )
+{
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {10,11};
+		SVUT_ASSERT_LE(v1,v2);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLT_custotype_bad(void )
+{
+	try {
+		UnitTestCustoType v1 = {10,11};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_LT(v1,v2);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLT_custotype_limit(void )
+{
+	try {
+		UnitTestCustoType v1 = {20,21};
+		UnitTestCustoType v2 = {20,21};
+		SVUT_ASSERT_LT(v1,v2);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGT_cstr_good(void )
+{
+	try {
+		SVUT_ASSERT_GT((char*)10,(char*)20);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGT_cstr_bad(void )
+{
+	try {
+		SVUT_ASSERT_GT((char*)10,(char*)2);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGT_cstr_limit(void )
+{
+	try {
+		SVUT_ASSERT_GT((char*)10,(char*)10);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGE_cstr_good(void )
+{
+	try {
+		SVUT_ASSERT_GE((char*)10,(char*)20);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGE_cstr_bad(void )
+{
+	try {
+		SVUT_ASSERT_GE((char*)10,(char*)2);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertGE_cstr_limit(void )
+{
+	try {
+		SVUT_ASSERT_GE((char*)10,(char*)10);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLE_cstr_good(void )
+{
+	try {
+		SVUT_ASSERT_LE((char*)10,(char*)2);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLE_cstr_bad(void )
+{
+	try {
+		SVUT_ASSERT_LE((char*)10,(char*)20);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLE_cstr_limit(void )
+{
+	try {
+		SVUT_ASSERT_LE((char*)10,(char*)10);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLT_cstr_good(void )
+{
+	try {
+		SVUT_ASSERT_LT((char*)10,(char*)2);
+	} catch (svutExAssertFake) {
+		SVUT_ASSERT_FAIL("Thow unexpected svutExAssertFake exception.");
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLT_cstr_bad(void )
+{
+	try {
+		SVUT_ASSERT_LT((char*)10,(char*)20);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
+	} catch (svutExAssertFake e) {
+	} catch (...) {
+		SVUT_ASSERT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testMacroAssertLT_cstr_limit(void )
+{
+	try {
+		SVUT_ASSERT_LT((char*)10,(char*)10);
+		SVUT_ASSERT_FAIL("Not throw expected svutExAssertFake exception.");
 	} catch (svutExAssertFake e) {
 	} catch (...) {
 		SVUT_ASSERT_FAIL("Thow unexpected exception.");
