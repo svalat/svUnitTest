@@ -23,6 +23,9 @@ namespace svUnitTest
 	static svUnitTest::svutTestCaseBuilderGeneric<name> ___FAKE_SVUNITTEST_case_##name##___;\
 	static int ___FAKE_SVUNITTEST_res_case_registration_of##name##__ = svUnitTest::fakeRegisterTestCase(___FAKE_SVUNITTEST_case_##name##___)
 
+/********************  MACROS  **********************/
+#define SVUT_SET_CONTEXT(name,value) //this->setContextEntry((name),(value))
+
 /*********************  CLASS  **********************/
 /**
  * This is just a light implementation to fake the full library implementation. This may
