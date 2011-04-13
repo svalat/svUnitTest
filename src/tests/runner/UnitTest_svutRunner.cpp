@@ -51,7 +51,7 @@ line 145 of file " TEST_SRC_BASE_PATH "/UnitTestMockTestCase2.cpp on methode use
  * testDebugContext                             [ FAILED ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 Failed on expected value.\n\
-line 98 of file /home/sebv/Projects/svUnitTest/svUnitTest/src/test/UnitTestMockTestCase2.cpp on methode testDebugContext()\n\
+line 98 of file " TEST_SRC_BASE_PATH "/UnitTestMockTestCase2.cpp on methode testDebugContext()\n\
    - Actual : 3\n\
    - Expected : 2\n\
 Context :\n\

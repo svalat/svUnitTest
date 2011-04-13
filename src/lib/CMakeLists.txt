@@ -9,22 +9,76 @@
 #setup svUnitTest library
 
 #group files
-set(svUnitTest_SRC svutArgp.cpp svutResultFormatterQtXml.cpp svutResultFormatter.cpp svutResultFormatterXml.cpp
-	svutDefaultMain.cpp svutTestFilterBasic.cpp svutAutoRegister.cpp svutRunner.cpp
-	svutRunnerConfig.cpp svutResultFormatterStdColored.cpp svutResultSummary.cpp svutAsserter.cpp
-	svutResultFormatterStd.cpp svutResultFormatterStdBW.cpp svutListenerDirectOutputter.cpp
-	svutListenerSummary.cpp svutListenerMultiplexer.cpp svutException.cpp svutTestCase.cpp
-	svutTestMethod.cpp  svutExNotify.cpp svutExAssert.cpp svutExTestStatus.cpp svutStatusInfo.cpp
-	svutCodeLocation.cpp)
+set(svUnitTest_SRC
+	runner/svutArgp.cpp
+	runner/svutAutoRegister.cpp
+	runner/svutRunner.cpp
+	runner/svutTestFilterBasic.cpp
+	runner/svutDefaultMain.cpp
+	runner/svutRunnerConfig.cpp
+	
+	core/svutException.cpp
+	core/svutExAssert.cpp
+	core/svutExNotify.cpp
+	core/svutCodeLocation.cpp
+	core/svutTestMethod.cpp
+	core/svutTestCase.cpp
+	core/svutAsserter.cpp
+	core/svutStatusInfo.cpp
+	core/svutExTestStatus.cpp
+	
+	listeners/svutListenerSummary.cpp
+	listeners/svutListenerDirectOutputter.cpp
+	listeners/svutListenerMultiplexer.cpp
 
-set(svUnitTest_INC svutAsserter.h svutAssert.h svutAutoRegister.h svutCodeLocation.h
-	svutDefaultMain.h svutExAssert.h svutException.h svutExNotify.h svutExTestStatus.h
-	svutListenerDirectOutputter.h svutListener.h svutListenerMultiplexer.h svutListenerSummary.h
-	svutObjectMethodGenericImpl.h svutObjectMethod.h svutResultFormatter.h
-	svutResultFormatterQtXml.h svutResultFormatterStdBW.h svutResultFormatterStdColored.h
-	svutResultFormatterStd.h svutResultFormatterXml.h svutResultSummary.h svutRunnerConfig.h
-	svutRunner.h svutStatusInfo.h svutTestCaseBuilder.h svutTestCase.h svutTestFilterBasic.h
-	svutTestFilter.h svutTestMethod.h svUnitTest.h)
+	formatters/svutResultSummary.cpp
+	formatters/svutResultFormatterStdBW.cpp
+	formatters/svutResultFormatterStd.cpp
+	formatters/svutResultFormatterQtXml.cpp
+	formatters/svutResultFormatter.cpp
+	formatters/svutResultFormatterXml.cpp
+	formatters/svutResultFormatterStdColored.cpp)
+
+set(svUnitTest_INC
+	svUnitTest.h
+
+	runner/svutArgp.h
+	runner/svutAutoRegister.h
+	runner/svutRunner.h
+	runner/svutTestFilterBasic.h
+	runner/svutDefaultMain.h
+	runner/svutRunnerConfig.h
+	runner/svutTestCaseBuilder.h
+	runner/svutTestFilter.h
+
+	core/svutException.h
+	core/svutExAssert.h
+	core/svutExNotify.h
+	core/svutCodeLocation.h
+	core/svutTestMethod.h
+	core/svutObjectMethod.h
+	core/svutExTestStatus.h
+	core/svutAsserter.h
+	core/svutAssert.h
+	core/svutObjectMethodGenericImpl.h
+	core/svutStatusInfo.h
+	core/svutTestCase.h
+
+	listeners/svutListener.h
+	listeners/svutListenerMultiplexer.h
+	listeners/svutListenerSummary.h
+	listeners/svutListenerDirectOutputter.h
+
+	formatters/svutResultFormatter.h
+	formatters/svutResultSummary.h
+	formatters/svutResultFormatterQtXml.h
+	formatters/svutResultFormatterStdBW.h
+	formatters/svutResultFormatterStdColored.h
+	formatters/svutResultFormatterStd.h
+	formatters/svutResultFormatterXml.h)
+
+#include subdir headers
+include_directories(./ ./formatters ./listeners ./runner ./core)
 
 #enable coverage profiling
 IF (TEST_COVERAGE)

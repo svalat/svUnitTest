@@ -6,11 +6,12 @@
 #            LICENSE  : CeCILL-C                     #
 ######################################################
 
-#subdirs
-add_subdirectory (lib)
-add_subdirectory (integration)
-add_subdirectory (examples)
-add_subdirectory (resources)
-if (NOT DISABLE_UNIT_TESTS)
-	add_subdirectory (tests)
-endif(NOT DISABLE_UNIT_TESTS)
+############# BUILD ALL TESTS ##################
+build_svunittest_test(
+	svutTestFilterBasic
+	svutAutoRegister
+	svutArgp
+	svutTestCaseBuilder
+	svutRunnerConfig
+	svutRunner
+)
