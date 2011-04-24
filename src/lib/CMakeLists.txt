@@ -81,6 +81,7 @@ set(svUnitTest_INC
 include_directories(./ ./formatters ./listeners ./runner ./core)
 
 #enable coverage profiling
+set(TEST_COVERAGE no CACHE BOOL "Compile svUnitTest library with coverage CFLAGS.")
 IF (TEST_COVERAGE)
 	set(CMAKE_CXX_FLAGS "-O0 -fprofile-arcs -ftest-coverage")
 	set(CMAKE_C_FLAGS "-O0 -fprofile-arcs -ftest-coverage")

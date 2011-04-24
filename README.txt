@@ -52,7 +52,7 @@ To geneate test coverage, we need to setup CFLAGS for gcc+gcov :
 
 You can do it simply by using :
 
-$> cmake .. -DTEST_COVERAGE=1
+$> cmake .. -DTEST_COVERAGE=yes
 
 Now build, run the tests and call lcov and genhtml :
 

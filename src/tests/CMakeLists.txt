@@ -11,6 +11,7 @@ include_directories (../lib/ ../lib/formatters ../lib/listeners ../lib/core ../l
 add_definitions(-DTEST_SRC_BASE_PATH="${CMAKE_CURRENT_SOURCE_DIR}/helper")
 
 ########### SETUP HELPER MODE #################
+set(ENABLE_SELF_TEST no CACHE BOOL "Use the svUnitTest to compile its own test suite.")
 if (ENABLE_SELF_TEST)
 	############ LIB WITH MAIN AND EXTRA ###########
 	set(svutUnitTestBase_SRCS UnitTestMockResultFormatter.cpp
