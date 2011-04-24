@@ -1,0 +1,82 @@
+/*****************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.3.0-dev
+             DATE     : 03/2011
+             AUTHOR   : Valat Sébastien
+             LICENSE  : CeCILL-C
+*****************************************************/
+/**
+@page user-doc-kdevelop4 KDevelop 4 integration
+
+@section Introduction Introduction
+
+The beta and rc versions of kdevelop 4 provided a feature I greatly appreciate : plugin for test case execution. By this way we can execute the test cases directly in Kdevelop, get the results in a clean widget and click directly on error reports to go to the related file and line.
+
+On the beta/rc version, the plugin only support QTest library so I can't use my cppunit tests in kdevelop. As I was upset by some point of cppunit I decided to rewrite my own unit test library.
+
+But surprisingly, the plugin wasn't stabilized for the final release of kdevelop and was merge out of the main tree. Here I will give some point to install this plugin and use svUnitTest in it.
+
+@section ScreenshotofKDevelop4integration Screenshot of KDevelop 4 integration
+
+@image html kdevelop_integration.png
+
+
+@section Plugininstallation Plugin installation
+
+First, we need to download and install the plugin as it wan't provided by default in the stable version of Kdevelop4. We need to clone the master version of :
+ - Vertias library : https://projects.kde.org/projects/playground/devtools/veritas/repository
+ - kdev-xtest plugin : https://projects.kde.org/projects/playground/devtools/plugins/kdev-xtest/repository
+
+To clone and install you just need to do :
+
+@code
+git clone git://anongit.kde.org/veritas
+cd veritas
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=release -DCMAKE_INSTALL_PREFIX=/usr
+@endcode
+
+@code
+git clone git://anongit.kde.org/kdev-xtest
+cd kdev-xtest
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=release -DCMAKE_INSTALL_PREFIX=/usr
+@endcode
+
+@section svUnitTestusageinkdev-xtest svUnitTest usage in kdev-xtest
+
+Now if the plugin was correctly installed, you can activate the QTest panels in your interface. Right lick on the right tool bars to add the QTest panel in you kdevelop4 interface (alternatively, the plugin automatically add thos panels in the review workspace). It provide :
+
+ - QTest which display the list of available tests
+ - Test Result at the bottom which provide details on test failure (it will be added automatically when test are available).
+
+Considering a cmake project, you now just have to right click on your project in the project panel and go to "Open configuration" to go to your project configuration window.
+
+@image html kdevelop-qtest-config.png
+
+
+Go to the QTest part and select "qtest" in the list then press on the "+" button. Validate. Now you may get you test in the QTest panel. Their is nothing to do in your sources as svUnitTest provide a QTXml output emulation to be bind in this GUI as a QT unit test.
+
+Juste remember that the kdev-xtest plugin will search the test suite lit in the cmake project to your tests need to be registered in your cmake files via 
+
+@code
+add_test(myTestName myTestExecutable)
+@endcode
+
+@section Knowproblems Know problems
+
+@subsection Cantcompiletheplugin Can't compile the plugin
+
+If you are working on Ubuntu, you may have the 4.0 version of KDevelop, but the current version of kdev-xtest plugin was patched to support new 4.1 and 4.2 releases so you can't build the last revision on such kdevelop. To fix the issue, checkout an older release (61319e7ef512ce6ef18bd6138cc338608ffa5949 work for me).
+
+@subsection Ididntseetheplugin I didn't see the plugin
+
+By defaut the git version follow the newer version of kdevelop so you don't have the good kdevelop version in plugin desription file (/usr/share/kde4/services/kdevqtest.desktop) check you have the good version in entry :
+@verbatim
+X-KDevelop-Version=9
+@endverbatim
+
+You can get your value from other kdevelop plugin desktop files in the same directory (eg. kdevfilemanager.desktop).
+**/

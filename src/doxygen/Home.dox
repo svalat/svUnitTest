@@ -14,17 +14,30 @@ This is another unit test framework for C++. There are already many functional f
 
  - Because this is fun and it's a good way to learn.
  - To try some extension compared to standard frameworks.
- - To generate nice reports (color in console texte mode, nice XML+XSLT output...)
- - Integrate it to KDevelop without using qttestlib (It seams to be removed in newer Kdevelop version ???).
+ - To generate nice reports (color in console text mode, nice XML+XSLT output...)
+ - Integrate it to KDevelop without using qttestlib (It seems to be removed in newer Kdevelop version ???).
  - Light library.
  - SIMPLE to use.
  - OpenSource.
- - CppUnit is not really friendly (in my point of view, even if it a good library strictly speaking) to use and seems to be really limited (without extended it), for exemple  : 
+ - CppUnit is not really friendly (in my point of view, even if it a good library strictly speaking) to use and seems to be really limited (without extended it), for example  : 
      - the default ASSERT macro are really limited, 
      - ASSERT_EQUAL force the type equality, so can't simply compare a string object to const C string, or other string classes.
      - No ASSERT_TRUE/FALSE, we got 0 or 1 as display.
-     - No ASSERT to quicly check exceptions
+     - No ASSERT to quickly check exceptions
      - To complex main method to build the test
+
+@subpage user-doc-screenshots
+
+\htmlonly
+<img src='kdevelop_integration.png' height=250px/>
+\endhtmlonly
+\htmlonly
+<img src='color_term_view.png' height=250px/>
+\endhtmlonly
+\htmlonly
+<img src='html_view.png' height=250px/>
+\endhtmlonly
+
 
 @section ChangeLog ChangeLog
 
@@ -35,7 +48,7 @@ This is another unit test framework for C++. There are already many functional f
  - Portability fixes, test suite passed on windows + VCC/cygwin, Linux + gcc/clang/icc, FreeBSD + gcc.
  - CPPUnit is now optional to pass the test suite of svUnitTest : replaced by short implementation fakecppunit.
  - Add cmake/pkg_config integration files.
- - Replace glibc argument parsor (argp.h) by our own implementon for non glibc-systems portability (windows....).
+ - Replace glibc argument parser (argp.h) by our own implementation for non glibc-systems portability (windows....).
  - Add terminal color support detection via isatty().
  - Fix naming issue related to xslt_html.
  - Fix valgrind memory leak reported in test suite.
@@ -48,8 +61,8 @@ This is another unit test framework for C++. There are already many functional f
  - Output format : XML, Qt XML, Black & white stdout, Colored stdout
  - Provide most of the required assertions SVUT_ASSERT_EQUAL()...
  - Provide the INDEV and TODO state in addition to others unit test libraries.
- - Provide a basic XSLT file to manualy generate HTML from native XML output format.
- - Provide standelon of test suite predefine main functions.
+ - Provide a basic XSLT file to manually generate HTML from native XML output format.
+ - Provide standalone of test suite predefine main functions.
 
 @section Dependencies Dependencies
 
@@ -95,7 +108,7 @@ As a user, you may be interested by :
 		<td>gcc-4.4.4</td>
 		<td>SUCCESS</td>
 		<td>Feb. 2011</td>
-		<td>0.2.0-dev (master)</td>
+		<td>0.2.0</td>
 	</tr><tr>
 		<td>Gentoo Linux</td>
 		<td>2010</td>
@@ -103,7 +116,7 @@ As a user, you may be interested by :
 		<td>gcc-4.4.3</td>
 		<td>SUCCESS</td>
 		<td>Feb. 2011</td>
-		<td>0.2.0-dev (master)</td>
+		<td>0.2.0</td>
 	</tr><tr>
 		<td>Gentoo Linux</td>
 		<td>2010</td>
@@ -111,7 +124,7 @@ As a user, you may be interested by :
 		<td>gcc-4.3.4</td>
 		<td>SUCCESS</td>
 		<td>Feb. 2011</td>
-		<td>0.2.0-dev (master)</td>
+		<td>0.2.0</td>
 	</tr><tr>
 		<td>Gentoo Linux</td>
 		<td>2010</td>
@@ -119,7 +132,7 @@ As a user, you may be interested by :
 		<td>icc-11.1</td>
 		<td>SUCCESS</td>
 		<td>Feb. 2011</td>
-		<td>0.2.0-dev (master)</td>
+		<td>0.2.0</td>
 	</tr><tr>
 		<td>Gentoo Linux</td>
 		<td>2010</td>
@@ -127,7 +140,7 @@ As a user, you may be interested by :
 		<td>clang-2.8</td>
 		<td>SUCCESS</td>
 		<td>Feb. 2011 </td>
-		<td>0.2.0-dev (master)</td>
+		<td>0.2.0</td>
 	</tr><tr>
 		<td>Fedora Linux</td>
 		<td>14</td>
@@ -135,7 +148,7 @@ As a user, you may be interested by :
 		<td>gcc-4.5.1</td>
 		<td>SUCCESS</td>
 		<td>Feb. 2011</td>
-		<td>0.2.0-dev (master)</td>
+		<td>0.2.0</td>
 	</tr><tr>
 		<td>FreeBSD</td>
 		<td>8.1</td>
@@ -143,7 +156,7 @@ As a user, you may be interested by :
 		<td>gcc-4.2.1</td>
 		<td>SUCCESS</td>
 		<td>Feb. 2011</td>
-		<td>0.2.0-dev (master)</td>
+		<td>0.2.0</td>
 	</tr><tr>
 		<td>Windows</td>
 		<td>XP</td>
@@ -151,7 +164,7 @@ As a user, you may be interested by :
 		<td>VCC-10</td>
 		<td>SUCCESS <br> (one warning due to <br> throw() on functions)</td>
 		<td>Feb. 2011</td>
-		<td>0.2.0-dev (master)</td>
+		<td>0.2.0</td>
 	</tr><tr>
 		<td>Windows</td>
 		<td>XP</td>
@@ -159,7 +172,7 @@ As a user, you may be interested by :
 		<td>cygwin gcc-4.3.4</td>
 		<td>SUCCESS</td>
 		<td>Feb. 2011</td>
-		<td>0.2.0-dev (master)</td>
+		<td>0.2.0</td>
 	</tr>
 </table>
 
@@ -180,6 +193,8 @@ You can access to a doxygen at http://svunittest.pagesperso-orange.fr/index.html
  - @subpage user-doc-extend-macro
  - @subpage user-doc-status
  - @subpage user-doc-html
+ - @subpage user-doc-kdevelop4
+ - @subpage user-doc-debug-context
  - @subpage user-doc-inherit
 
 @section Developerdocumentation Developer documentation

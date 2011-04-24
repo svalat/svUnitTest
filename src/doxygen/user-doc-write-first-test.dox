@@ -26,12 +26,12 @@ For this example, we will place all the lines into the same <em>testString.cpp</
 
 @subsection Includesfilesandenablenamespaces Includes files and enable namespaces
 
-First, we need to include the svutTestCase.h file and enable the svUnitTest namespace.
+First, we need to include the svutTestCase.h file and enable the svUnitTest namespace. You may prefer to simply include svUnitTest.h which include all required files (svutTestCase.h and svutDefaultMain.h)
 
 
 @code
 //needed to build a new test case.
-#include <svUnitTest/svutTestCase.h>
+#include <svUnitTest/svUnitTest.h>
 
 using namespace svUnitTest;
 @endcode
@@ -72,16 +72,16 @@ class testString : public svutTestCase
 
 For moment, we will simply implement the strict minimum requirement to compile the testCase and check his declaration, so we will not implement the test content.
 
-First, we registered all tests into the constructor by calling the macro SVUT_REG_TEST_METHOD(class_name,method) and name the test by calling explicitly the svutTestCase(name) constructor.
+First, we registered all tests into the constructor by calling the macro SVUT_REG_TEST_METHOD(method) and name the test by calling explicitly the svutTestCase(name) constructor.
 
 
 @code
 testString::testString(void) 
            :svutTestCase(testString)
 {
-     SVUT_REG_TEST_METHOD(testString,testSize);
-     SVUT_REG_TEST_METHOD(testString,testClear);
-     SVUT_REG_TEST_METHOD(testString,testOperatorPlus);
+     SVUT_REG_TEST_METHOD(testSize);
+     SVUT_REG_TEST_METHOD(testClear);
+     SVUT_REG_TEST_METHOD(testOperatorPlus);
 };
 @endcode
 
@@ -108,7 +108,7 @@ If you consider a standelone test (one executable per test case), you can regist
 
 
 @code
-#include <svUnitTest/svutDefaultMain.h>
+#include <svUnitTest/svUnitTest.h>
 
 //Declare class testString before this line
 

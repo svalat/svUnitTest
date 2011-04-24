@@ -1,0 +1,50 @@
+/*****************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.3.0-dev
+             DATE     : 03/2011
+             AUTHOR   : Valat Sébastien
+             LICENSE  : CeCILL-C
+*****************************************************/
+/**
+@page user-doc-debug-context Debuging context
+
+@section Basicexample Basic example
+In some case you may wan't to get more information than provided by assertion failure. Consider the next example :
+@code
+void testBuffer::testElements(void)
+{
+     //assume buffer[BUFFER_SIZE] contain element such as buffer[i] = i
+    for (int i = 0 ; i < BUFFER_SIZE ; ++i)
+    {
+          SVUT_ASSERT_EQUAL(i,buffer[i]);
+    }
+}
+@endcode
+
+If the test report an error, you may be stuck as you didn't know at which iteration it failed. At first look you may be tempted to use the _printf_ method. But clearly this way didn't fit with unit test way as the output stream is not captured an stored with other assertion informations (up to now).
+
+@section Solution Solution
+
+With svUnitTest, this situation can be handled by using the SVUT_SET_CONTEXT(name,value) macro which will add some contextual information on assertion error. In the previous case, we can to :
+
+@code
+void testBuffer::testElements(void)
+{
+     //assume buffer[BUFFER_SIZE] contain element such as buffer[i] = i
+    for (int i = 0 ; i < BUFFER_SIZE ; ++i)
+    {
+          //Caution, be sure to declare this as soon as possible as assertion 
+          //only keep track of context informations defined before themselves
+          SVUT_SET_CONTEXT("iteration",i);
+          SVUT_ASSERT_EQUAL(i,buffer[i]);
+    }
+}
+@endcode
+
+@section Typesupport Type support
+
+The macro use a template function to support all types for parameter value by calling asserterToString() method which can rewrite for your types if needed. By default this method convert types using the ostream << operator.
+
+@section Limitation Limitation
+
+For now, the macro SVUT_SET_CONTEXT can only be called from the test case class. I didn't implement a call support from the inner part of your code to avoid making application dependent of unit test library, but if you think it can help you I can reconsider the question. For more intrusive debugging I may try to support a way to BUG_ON assertion failure to nofify the debugger directly no test failure. Which mail help for interactive inspection.**/

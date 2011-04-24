@@ -49,7 +49,7 @@ void svUnitTest::svutResultFormatterXml::openOutput(void )
  * It force a static date which made simpler to write output correcness test in the test suite.
  * @param date Define the date in string format to use instead of reading the current date.
 **/
-void svutResultFormatterXml::setDate(string date)
+void svutResultFormatterXml::setDate(std::string date)
 {
 	this->date = date;
 }

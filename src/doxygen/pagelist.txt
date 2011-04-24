@@ -12,6 +12,9 @@ user-doc-extend-type.md
 user-doc-extend-macro.md
 user-doc-status.md
 user-doc-html.md
+user-doc-debug-context.md
+user-doc-kdevelop4.md
+user-doc-screenshots.md
 
 dev-doc-style.md
 dev-doc-defs.md

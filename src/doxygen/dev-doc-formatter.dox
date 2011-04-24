@@ -147,6 +147,10 @@ The native XML format directly correspond to the event system :
 <!DOCTYPE UnitTest SYSTEM 'svUnitTest_html/svUnitTest.dtd'>
 <?xml-stylesheet type='text/xsl' href='svUnitTest_html/svUnitTest.xsl'?>
 <UnitTest>
+        <TestEnv>
+                <LibVersion>0.3.0-dev</LibVersion>
+                <TestDate>2011-03-09 20:30:36 CET</TestDate>
+        </TestEnv>
 	<TestCase>
 		<name>svMockPointer</name>
 		<TestFunction>

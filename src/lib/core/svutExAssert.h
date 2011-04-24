@@ -69,7 +69,7 @@ class svutExAssertFailNullPointer : public svutExAssertFail
 class svutExAssertFailEqual : public svutExAssertFail
 {
 	public:
-		svutExAssertFailEqual(bool expectTestRes,std::string exptected,std::string actual,
+		svutExAssertFailEqual(bool expectTestRes,std::string expected,std::string actual,
 			svutCodeLocation  location) throw();
 };
 
@@ -84,7 +84,7 @@ class svutExAssertFailEqual : public svutExAssertFail
 class svutExAssertFailLimit : public svutExAssertFail
 {
 	public:
-		svutExAssertFailLimit(std::string operatorName,std::string exptectedLimit,std::string actual,
+		svutExAssertFailLimit(std::string operatorName,std::string expectedLimit,std::string actual,
 			svutCodeLocation  location) throw();
 };
 

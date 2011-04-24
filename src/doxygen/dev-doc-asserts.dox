@@ -23,35 +23,31 @@ For example :
 
 Currently the library support the next assertions :
 
-<table><tr><th> Assertion name         </th><th> Assertion parameters </th><th> Tested condition </th><th> Final status on error 
-</th></tr><tr><td> <em>SVUT_ASSERT_TRUE</em>        </td><td> x                          </td><td> x == true               </td><td> FAILED                     
-
-</td></tr><tr><td> <em>SVUT_ASSERT_FALSE</em>       </td><td> x                          </td><td> x != false              </td><td> FAILED                     
-</td></tr><tr><td> <em>SVUT_ASSERT_NULL</em>        </td><td> x                          </td><td> x == NULL               </td><td> FAILED                     
-
-</td></tr><tr><td> <em>SVUT_ASSERT_NOT_NULL</em>    </td><td> x                          </td><td> x != NULL               </td><td> FAILED                     
-</td></tr><tr><td> <em>SVUT_ASSERT_EQUAL</em>       </td><td> expected, actual           </td><td> expected == actual      </td><td> FAILED                     
-
-</td></tr><tr><td> <em>SVUT_ASSERT_NOT_EQUAL</em>   </td><td> expected, actual           </td><td> expected != actual      </td><td> FAILED                     
-</td></tr><tr><td> <em>SVUT_ASSERT_EQUAL_STRICT</em>  </td><td> expected, actual           </td><td> expected == actual  &amp;&amp; sameTypeArgs(expected,actual) </td><td> FAILED                     
-
-</td></tr><tr><td> <em>SVUT_ASSERT_NOT_EQUAL_STRICT</em> </td><td> expected, actual        </td><td> expected != actual  &amp;&amp; sameTypeArgs(expected,actual) </td><td> FAILED                     
-</td></tr><tr><td> <em>SVUT_ASSERT_SAME</em>        </td><td> void * expected, void * actual           </td><td> expected == actual      </td><td> FAILED                     
-
-</td></tr><tr><td> <em>SVUT_ASSERT_NOT_NAME</em>    </td><td> void * expected, void * actual           </td><td> expected == actual      </td><td> FAILED                     
-</td></tr><tr><td> <em>SVUT_ASSERT_FAIL</em>        </td><td> message                    </td><td> false                   </td><td> FAILED                     
-
-</td></tr><tr><td> <em>SVUT_ASSERT_TODO</em>        </td><td> message                    </td><td> false                   </td><td> TODO                       
-</td></tr><tr><td> <em>SVUT_ASSERT_INDEV</em>       </td><td> message                    </td><td> false                   </td><td> INDEV                      
-
-</td></tr><tr><td> <em>SVUT_ASSERT_NOT_EXEC_THIS</em> </td><td> message                  </td><td> false                   </td><td> FAILED                     
-</td></tr><tr><td> <em>SVUT_ASSERT_THROW</em>       </td><td> exceptName, code           </td><td style="text-align: right;"> try {code; throw ERROR} catch (exceptName) {} catch (...) {throw ERROR}</td><td> FAILED                     
-
-</td></tr><tr><td> <em>SVUT_ASSERT_THROW_SOMETHING</em> </td><td> code                   </td><td> try {code; throw ERROR} catch (...} {} </td><td> FAILED                     
-</td></tr><tr><td> <em>SVUT_ASSERT_NOT_THROW</em>   </td><td> exceptName, code           </td><td> try {code} catch(exceptName) {throw ERROR} catch (...) {} </td><td> FAILED                     
-
-</td></tr><tr><td> <em>SVUT_ASSERT_MAY_NOT_THROW</em> </td><td> code                     </td><td> try {code} catch(...) {throw ERROR} </td><td> FAILED                     
-</td></tr></table>
+<table>
+    <tr><th> Assertion name </th><th> Assertion parameters </th><th> Tested condition </th><th> Final status on error</th></tr>
+   <tr><td><em>SVUT_ASSERT_TRUE</em></td><td>x</td><td>x == true</td><td> FAILED</td></tr>
+   <tr><td><em>SVUT_ASSERT_FALSE</em></td><td>x</td><td>x != false</td><td> FAILED</td></tr>
+   <tr><td><em>SVUT_ASSERT_NULL</em></td><td>x</td><td>x == NULL</td><td> FAILED</td></tr>
+  <tr><td><em>SVUT_ASSERT_NOT_NULL</em></td><td>x</td><td>x != NULL</td><td> FAILED</td></tr>
+  <tr><td><em>SVUT_ASSERT_EQUAL</em></td><td>expected, actual</td><td>expected == actual</td><td> FAILED</td></tr>
+  <tr><td><em>SVUT_ASSERT_NOT_EQUAL</em></td><td>expected, actual</td><td>expected != actual</td><td> FAILED</td></tr>
+  <tr><td><em>SVUT_ASSERT_EQUAL_TYPE</em></td><td>expected, actual</td><td> expected == actual  &amp;&amp; sameTypeArgs(expected,actual) </td><td> FAILED</td></tr>
+  <tr><td><em>SVUT_ASSERT_NOT_EQUAL_TYPE</em></td><td> expected, actual</td><td> expected != actual  &amp;&amp; sameTypeArgs(expected,actual) </td><td> FAILED</td></tr>
+ <tr><td> <em>SVUT_ASSERT_SAME</em></td><td> void * expected, void * actual</td><td> expected == actual</td><td> FAILED</td></tr>
+ <tr><td> <em>SVUT_ASSERT_NOT_NAME</em></td><td> void * expected, void * actual </td><td> expected == actual</td><td> FAILED</td></tr>
+  <tr><td><em>SVUT_ASSERT_GT</em></td><td>expectedLimit, actual</td><td>actual &gt; expectedLimit</td><td> FAILED</td></tr>
+  <tr><td><em>SVUT_ASSERT_GE</em></td><td>expectedLimit, actual</td><td>actual &gt;= expectedLimit</td><td> FAILED</td></tr>
+  <tr><td><em>SVUT_ASSERT_LE</em></td><td>expectedLimit, actual</td><td>actual &lt; expectedLimit</td><td> FAILED</td></tr>
+  <tr><td><em>SVUT_ASSERT_LT</em></td><td>expectedLimit, actual</td><td>actual &lt;= expectedLimit</td><td> FAILED</td></tr>
+  <tr><td> <em>SVUT_ASSERT_FAIL</em></td><td>message</td><td>false</td><td> FAILED</td></tr>
+  <tr><td> <em>SVUT_ASSERT_TODO</em></td><td> message</td><td> false</td><td> TODO</td></tr>
+  <tr><td> <em>SVUT_ASSERT_INDEV</em></td><td> message</td><td> false</td><td> INDEV</td></tr>
+  <tr><td> <em>SVUT_ASSERT_NOT_EXEC_THIS</em> </td><td> message</td><td> false</td><td> FAILED</td></tr>
+ <tr><td> <em>SVUT_ASSERT_THROW</em></td><td> exceptName, code</td><td style="text-align: right;"> try {code; throw ERROR} catch (exceptName) {} catch (...) {throw ERROR}</td><td> FAILED</td></tr>
+ <tr><td> <em>SVUT_ASSERT_THROW_SOMETHING</em> </td><td> code</td><td> try {code; throw ERROR} catch (...} {} </td><td> FAILED</td></tr>
+ <tr><td> <em>SVUT_ASSERT_NOT_THROW</em>   </td><td> exceptName, code</td><td> try {code} catch(exceptName) {throw ERROR} catch (...) {} </td><td> FAILED</td></tr>
+ <tr><td> <em>SVUT_ASSERT_MAY_NOT_THROW</em> </td><td> code  </td><td> try {code} catch(...) {throw ERROR} </td><td> FAILED</td></tr>
+</table>
 
 @section Operatormechanisms Operator mechanisms
 

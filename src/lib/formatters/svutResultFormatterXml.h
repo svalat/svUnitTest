@@ -44,7 +44,13 @@ class svutResultFormatterXml : public svutResultFormatter
 		void printAssertInfo(const svUnitTest::svutStatusInfo & status);
 		void printLocation(const svUnitTest::svutCodeLocation & location);
 		void printEnv(void);
+		/**
+		 * Store the current date for the XML output. This  storage is only
+		 * required to simplify the unit  tests of this class by forcing a
+		 * constant date to check output generation.
+		**/
 		std::string date;
+		/** Remember the last test case done to detect test case changing. **/
 		const svutTestCase * lastTestCase;
 };
 

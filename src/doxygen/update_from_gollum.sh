@@ -19,11 +19,21 @@ function print_header()
 }
 
 echo " * GOLLUM_DIR : ${GOLLUM_DIR}"
-echo " * Import images from gollum..."
+echo " * Cleanup"
+rm -f -v *.dox
+rm -rf -v images/*
+echo " * Import DOT images from gollum..."
 for tmp in ${GOLLUM_DIR}/images/*.dot
 do
 	echo " * Import `basename $tmp`..."
 	cp $tmp images/`basename $tmp`
+done
+
+echo " * Import PNG images from gollum..."
+for tmp in screenshots
+do
+	echo " * Import $tmp"
+	cp -r ${GOLLUM_DIR}/images/$tmp images/$tmp
 done
 
 echo

@@ -80,27 +80,35 @@ svutExAssertFailNullPointer::svutExAssertFailNullPointer(bool expectNull, svutCo
 /**
  * Class constructor for equality failure.
  * @param expectTestRes Define if it except equal (true) values or not (false).
- * @param exptected Define the expected value in string format.
+ * @param expected Define the expected value in string format.
  * @param actual Define the current value in string format.
  * @param location Define the location from which the exception is emitted. 
 **/
-svutExAssertFailEqual::svutExAssertFailEqual(bool expectTestRes, std::string exptected, std::string actual, svutCodeLocation location) throw()
+svutExAssertFailEqual::svutExAssertFailEqual(bool expectTestRes, std::string expected, std::string actual, svutCodeLocation location) throw()
 	: svutExAssertFail("AssertEqual",SVUT_STATUS_FAILED,location,"Failed on expected value.")
 {
 	if (expectTestRes)
 	{
-		info.addEntry("Expected",exptected);
+		info.addEntry("Expected",expected);
 	} else {
-		info.addEntry("Not expected",exptected);
+		info.addEntry("Not expected",expected);
 	}
 	info.addEntry("Actual",actual);
 }
 
 /*******************  FUNCTION  *********************/
-svutExAssertFailLimit::svutExAssertFailLimit(string operatorName, string exptectedLimit, string actual, svutCodeLocation location) throw()
+/**
+ * Class constructor for value limit failure.
+ * @param operatorName Define the operator name which has conduct to the erreur (>=, >, < or <=).
+ *        This is to provide information on the limit which was overpassed.
+ * @param expectedLimit Define the expected limit which was used and overpassed.
+ * @param actual Define the actual value which overpassed the expected limit.
+ * @param location Define the test location which produce the failure.
+**/
+svutExAssertFailLimit::svutExAssertFailLimit(std::string operatorName, std::string expectedLimit, std::string actual, svutCodeLocation location) throw()
 	: svutExAssertFail("AssertLimit", SVUT_STATUS_FAILED, location, "Failed on expected limit on value.")
 {
-	info.addEntry("Expected limit",exptectedLimit);
+	info.addEntry("Expected limit",expectedLimit);
 	info.addEntry("Actual",actual);
 	info.addEntry("Operator",operatorName);
 }

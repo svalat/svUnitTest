@@ -18,7 +18,7 @@ The main method can be constructed on top the the predefined one from svUnitTest
 
 @code
 //Load default main methods
-#include <svUnitTest/svutDefaultMain.h>
+#include <svUnitTest/svUnitTest.h>
 
 int main(int argc, char * argv[])
 {
@@ -32,7 +32,7 @@ int main(int argc, char * argv[])
 As for CPPUnit, svUnitTest use a runtime automatic registration of the tests. You simply need to mark each test after declaring them :
 
 @code
-#include <svUnitTest/svutTestCase.h>
+#include <svUnitTest/svUnitTest.h>
 
 class MyTest : public svutTestCase
 {
@@ -65,7 +65,9 @@ CXX=g++
 RM=rm -f
 PKGCONFIG=pkg-config
 ####################### FLAGS ########################
+ifeq "$SVUNITTEST_PREFIX" ""
 SVUNITTEST_PREFIX=/usr
+endif
 CXXFLAGS=-I${SVUNITTEST_PREFIX}/include
 LDFLAGS=-L${SVUNITTEST_PREFIX}/lib -lsvunittest
 

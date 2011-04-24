@@ -16,7 +16,13 @@ First we need to update the sources :
 
 @subsection Updatetheversionnumber Update the version number
 
-First we need to change all the version defined into the sources files (header, sources ...)
+First we need to change all the version defined into the sources files (header, sources ...). This can be done quicly by using the script :
+
+@code
+./dev-scripts/update_version_number.sh 0.3.0-dev 0.3.0
+@endcode
+
+It will also update the dates in file headers. Check for ignored new files.
 
 @subsection Updatethechangelog Update the changelog
 
@@ -25,7 +31,6 @@ We need to update the changelog file respecting the format :
 @verbatim
 Version X.Y.Z (January 12, 2011)
 
-Short description :
  * New point 1
  * Fixes
  * ...

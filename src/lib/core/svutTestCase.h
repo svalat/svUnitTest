@@ -27,8 +27,6 @@ namespace svUnitTest
 /**
  * This macro must be used when developping tests to declare all the functions related to the test
  * case. It must be called in the constructor of the test case.
- * @param type Define the name of the test case class to build the good objet method pointer using
- * the generic class svutObjectMethodeGeneric.
  * @param func Define the name of the test method to register.
 **/
 #define SVUT_REG_TEST_METHOD(func) do{\

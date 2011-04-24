@@ -149,8 +149,9 @@ unsigned int svutStatusInfo::getNbContextEntries(void ) const
  * @param prefix Define the string th place before each parameter name.
  * @param separator Define the string to place between the parameter name and the value.
  * @param postfix Define the string to place after the parameter value.
+ * @param list Define the input info list to format.
  */
-void svutStatusInfo::formatList(const svutStatusInfoMap & list,ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix) const
+void svutStatusInfo::formatList(const svutStatusInfoMap & list,std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix) const
 {
 	for (map<string,string>::const_iterator it=list.begin() ; it != list.end(); it++ )
 	{
@@ -198,13 +199,20 @@ void svutStatusInfo::formatEntries ( std::ostream& out, const char* prefix, cons
  * @param separator Define the string to place between the parameter name and the value.
  * @param postfix Define the string to place after the parameter value.
  */
-void svutStatusInfo::formatContext(ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix) const
+void svutStatusInfo::formatContext(std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix) const
 {
 	formatList(context,out,prefix,separator,postfix);
 }
 
 /*******************  FUNCTION  *********************/
-void svutStatusInfo::formatContext(ostream& out, const char* prefix, const char* separator, const char* postfix) const
+/**
+ * Format the current status information and place it in the given stream.
+ * @param out Define the output stream to use.
+ * @param prefix Define the string th place before each parameter name.
+ * @param separator Define the string to place between the parameter name and the value.
+ * @param postfix Define the string to place after the parameter value.
+ */
+void svutStatusInfo::formatContext(std::ostream& out, const char* prefix, const char* separator, const char* postfix) const
 {
 	std::string pre(prefix);
 	std::string  sep(separator);

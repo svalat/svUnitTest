@@ -13,6 +13,12 @@ In some case, you may need to add some support for your types to use SVUT_ASSERT
  - The std::ostream << operator to be serialized into a string to give informations on failure.
  - The operator == if used into SVUT_ASSERT_EQUAL
  - The operator != if used into SVUT_ASSERT_NOT_EQUAL
+ - The operator &lt; if used into SVUT_ASSERT_LT
+ - The operator &lt;= if used into SVUT_ASSERT_LE
+ - The operator &gt; if used into SVUT_ASSERT_GT
+ - The operator &gt;= if used into SVUT_ASSERT_GE
+
+Only provide operators your are using, you are not forced to defined all of them if not required.
 
 @section Implementtheoperators Implement the operators
 
@@ -50,6 +56,26 @@ bool operator != ( const MyType & a , const MyType & b )
 {
    return ( a.value1 != b.value1 || a.value2 != b.value2 );
 }
+
+bool operator < ( const MyType & a , const MyType & b )
+{
+    return ( a.value1 < b.value1 && a.value2 < b.value2 );
+}
+
+bool operator <= ( const MyType & a , const MyType & b )
+{
+    return ( a.value1 <= b.value1 && a.value2 <= b.value2 );
+}
+
+bool operator > ( const MyType & a , const MyType & b )
+{
+    return ( a.value1 > b.value1 && a.value2 > b.value2 );
+}
+
+bool operator >= ( const MyType & a , const MyType & b )
+{
+    return ( a.value1 >= b.value1 && a.value2 >= b.value2 );
+}
 @endcode
 
 If your type is too complex to be serialized to a string, you can simply display the address, this is not revelant but may be better than nothing :
@@ -78,6 +104,26 @@ bool asserterOperatorEqual(const MyType & v1,const MyType & v2)
 bool asserterOperatorNotEqual(const MyType & v1,const MyType & v2)
 {
 	return (v1.value1 != v2.value1 || v1.value2 != v2.value2);
+}
+
+bool operator asserterOperatorLT ( const MyType & a , const MyType & b )
+{
+    return ( a.value1 < b.value1 && a.value2 < b.value2 );
+}
+
+bool operator asserterOperatorLE ( const MyType & a , const MyType & b )
+{
+    return ( a.value1 <= b.value1 && a.value2 <= b.value2 );
+}
+
+bool operator asserterOperatorGT ( const MyType & a , const MyType & b )
+{
+    return ( a.value1 > b.value1 && a.value2 > b.value2 );
+}
+
+bool operator asserterOperatorGE ( const MyType & a , const MyType & b )
+{
+    return ( a.value1 >= b.value1 && a.value2 >= b.value2 );
 }
 
 std::string asserterToString(const MyType & value)

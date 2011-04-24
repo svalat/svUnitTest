@@ -1,0 +1,32 @@
+/*****************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.3.0-dev
+             DATE     : 03/2011
+             AUTHOR   : Valat Sébastien
+             LICENSE  : CeCILL-C
+*****************************************************/
+/**
+@page user-doc-screenshots Screenshot page
+
+
+This page will show you some screenshots on svUnitTest usage.
+
+@section Terminaloutputwhencolorissupported Terminal output when color is supported :
+
+@image html color_term_view.png
+
+
+@section Htmldefaultstyle Html default style :
+
+@image html html_view.png
+
+
+@section Testcasesourceexample Test case source example
+
+@image html test_case_source.png
+
+
+@section Kdevelopintegrationviakdev-xtestplugin Kdevelop integration via kdev-xtest plugin
+
+@image html kdevelop_integration.png
+**/

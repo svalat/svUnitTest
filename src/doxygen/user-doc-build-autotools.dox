@@ -28,24 +28,27 @@ If you want to be linked optionnaly to svUnitTest, it was a little tricky with a
 #Check for optional svUnitTest
 #To force usage, keep only the line PKG_CHECK_MODULES(...).
 
-WANT_SVUNITTEST_VERSION=0.1.0
+WANT_SVUNITTEST_VERSION=0.2.0
 
 AC_ARG_WITH([svUnitTest], AS_HELP_STRING([--with-svUnitTest], [Build with the svUnitTest support]))
 
 AS_IF([test "x$with_svUnitTest" = "xyes"], [
 		PKG_CHECK_MODULES([svUnitTest], [svUnitTest >= ${WANT_SVUNITTEST_VERSION}],[HAVE_SVUNITTEST=yes])
 	],[
-		if test "x$with_svUnitTest" != "xno"; then
-			AC_MSG_CHECKING([for optional svUnitTest])
+		AC_MSG_CHECKING([for optional svUnitTest])
+		if test "x$with_svUnitTest" = "xno" || test "x$with_svUnitTest" = "x"; then
 			PKG_CHECK_EXISTS([ svUnitTest >= ${WANT_SVUNITTEST_VERSION} ], [ with_svUnitTest=yes ], [ with_svUnitTest=no ])
-			AC_MSG_RESULT($SHAVE_SVUNITTEST)
-			if test "$HAVE_SVUNITTEST" = "xyes"; then
+			AC_MSG_RESULT($with_svUnitTest)
+			if test "x$with_svUnitTest" = "xyes"; then
 				PKG_CHECK_MODULES([svUnitTest], [svUnitTest >= ${WANT_SVUNITTEST_VERSION}])
 			fi
+		else
+			AC_SUBST(svUnitTest_LIBS,["-lsvunittest -L$with_svUnitTest/lib"])
+			AC_SUBST(svUnitTest_CFLAGS,["-lsvunittest -I$with_svUnitTest/include"])
+			with_svUnitTest=yes
+			AC_MSG_RESULT(forced)
 		fi
 	])
-
-
 
 AM_CONDITIONAL(HAVE_SVUNITTEST, test "$with_svUnitTest" = yes)
 #######################################################################

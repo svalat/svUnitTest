@@ -8,12 +8,14 @@
 /**
 @page user-doc-html Build HTML report
 
+@section Pre-transformXMLtoHTML Pre-transform XML to HTML
+
 svUnitTest provide an XML output which can be transform to HTML by using the XSLT file into src/xslt_html/svUnitTest.xsl or installed into ${prefix}/share/svUnitTest/svUnitTest_html/svUnitTest.xsl.
 
 You can generate the HTML report by using :
 
 @code
-./yourTest -m xml | xsltproc ${prefix}/share/svUnitTest_html/svUnitTest.xsl > testReport.html
+./yourTest -m xml | xsltproc ${prefix}/share/svUnitTest/svUnitTest_html/svUnitTest.xsl > testReport.html
 @endcode
 
 As it use some javascript and pictures, you must copy the ressource file into the same directory of your html file :
@@ -21,4 +23,7 @@ As it use some javascript and pictures, you must copy the ressource file into th
 @code
 cp -rv ${prefix}/share/svUnitTest_html ./svUnitTest_html
 @endcode
-**/
+
+@section Directlyinfirefox Directly in firefox
+
+If you want to view your file in firefox or IE, you can directly open the XML file in your browser. If the svUnitTest_html is in the same directory than your xml file, you will automatically get the HTML view instead of the XML content as firefox will convert the file on the fly for you.**/
