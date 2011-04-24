@@ -27,42 +27,42 @@ static const char * CST_STRING_SUMMARY_0 = "\n\
 +---------------------------+\n\
 |    SUMMARY                |\n\
 +---------------------------+\n\
-|  \e[32mSUCCESS  :    0 (  0 %)\e[0m  |\n\
-|  \e[34mINDEV    :    0 (  0 %)\e[0m  |\n\
-|  \e[33mTODO     :    0 (  0 %)\e[0m  |\n\
-|  \e[31mFAILED   :    0 (  0 %)\e[0m  |\n\
-|  \e[31mUNKNOWN  :    0 (  0 %)\e[0m  |\n\
+|  \033[32mSUCCESS  :    0 (  0 %)\033[0m  |\n\
+|  \033[34mINDEV    :    0 (  0 %)\033[0m  |\n\
+|  \033[33mTODO     :    0 (  0 %)\033[0m  |\n\
+|  \033[31mFAILED   :    0 (  0 %)\033[0m  |\n\
+|  \033[31mUNKNOWN  :    0 (  0 %)\033[0m  |\n\
 +---------------------------+\n\
 |  TOTAL    :    0          |\n\
-|  STATUS   : \e[32mSUCCESS     \e[0m  |\n\
+|  STATUS   : \033[32mSUCCESS     \033[0m  |\n\
 +---------------------------+\n";
 static const char * CST_STRING_UNKNOWN_1 =
-"\e[32m * \e[0mtestMethod                                   [ \e[31mUNKNOWN\e[0m ]\n\
+"\033[32m * \033[0mtestMethod                                   [ \033[31mUNKNOWN\033[0m ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 \n\
 unknown location\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
-static const char * CST_STRING_UNKNOWN_3 = "\e[32m * \e[0mtestMethod                                   [ \e[31mUNKNOWN\e[0m ]\n\
+static const char * CST_STRING_UNKNOWN_3 = "\033[32m * \033[0mtestMethod                                   [ \033[31mUNKNOWN\033[0m ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 message for unknown status\n\
 line 33 of file file.cpp on methode methode()\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
-static const char * CST_STRING_UNKNOWN_2 = "\e[32m * \e[0mtestMethod                                   [ \e[31mUNKNOWN\e[0m ]\n";
-static const char * CST_STRING_SUCCESS_1 = "\e[32m * \e[0mtestMethod                                   [ \e[32mSUCCESS\e[0m ]\n";
-static const char * CST_STRING_SUCCESS_2 = "\e[32m * \e[0mMyTest:testMethod                            [ \e[32mSUCCESS\e[0m ]\n";
-static const char * CST_STRING_TODO      = "\e[32m * \e[0mtestMethod                                   [ \e[33mTODO\e[0m ]\n";
-static const char * CST_STRING_INDEV     = "\e[32m * \e[0mtestMethod                                   [ \e[34mINDEV\e[0m ]\n";
-static const char * CST_STRING_SKIPED    = "\e[32m * \e[0mtestMethod                                   [ \e[33mSKIPED\e[0m ]\n";
+static const char * CST_STRING_UNKNOWN_2 = "\033[32m * \033[0mtestMethod                                   [ \033[31mUNKNOWN\033[0m ]\n";
+static const char * CST_STRING_SUCCESS_1 = "\033[32m * \033[0mtestMethod                                   [ \033[32mSUCCESS\033[0m ]\n";
+static const char * CST_STRING_SUCCESS_2 = "\033[32m * \033[0mMyTest:testMethod                            [ \033[32mSUCCESS\033[0m ]\n";
+static const char * CST_STRING_TODO      = "\033[32m * \033[0mtestMethod                                   [ \033[33mTODO\033[0m ]\n";
+static const char * CST_STRING_INDEV     = "\033[32m * \033[0mtestMethod                                   [ \033[34mINDEV\033[0m ]\n";
+static const char * CST_STRING_SKIPED    = "\033[32m * \033[0mtestMethod                                   [ \033[33mSKIPED\033[0m ]\n";
 static const char * CST_STRING_TEST_CASE = "=======  MyTest                                   ========\n";
-static const char * CST_STRING_FAILED_2  = "\e[32m * \e[0mtestMethod                                   [ \e[31mFAILED\e[0m ]\n";
-static const char * CST_STRING_FAILED_1  = "\e[32m * \e[0mtestMethod                                   [ \e[31mFAILED\e[0m ]\n\
+static const char * CST_STRING_FAILED_2  = "\033[32m * \033[0mtestMethod                                   [ \033[31mFAILED\033[0m ]\n";
+static const char * CST_STRING_FAILED_1  = "\033[32m * \033[0mtestMethod                                   [ \033[31mFAILED\033[0m ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 message for failed status\n\
 line 33 of file file.cpp on methode methode()\n\
    - actual : duck\n\
    - expected : toto\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
-static const char * CST_STRING_CONTEXT  = "\e[32m * \e[0mtestMethod                                   [ \e[31mFAILED\e[0m ]\n\
+static const char * CST_STRING_CONTEXT  = "\033[32m * \033[0mtestMethod                                   [ \033[31mFAILED\033[0m ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 message for failed status\n\
 line 33 of file file.cpp on methode methode()\n\
@@ -73,11 +73,11 @@ Context :\n\
    - name2 : value2\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
 static const char * CST_STRING_SEQ_1    = "=======  MyTest                                   ========\n\
-\e[32m * \e[0mtestMethod                                   [ \e[33mTODO\e[0m ]\n\
-\e[32m * \e[0mtestMethod                                   [ \e[34mINDEV\e[0m ]\n\
+\033[32m * \033[0mtestMethod                                   [ \033[33mTODO\033[0m ]\n\
+\033[32m * \033[0mtestMethod                                   [ \033[34mINDEV\033[0m ]\n\
 =======  MyTest                                   ========\n\
-\e[32m * \e[0mtestMethod                                   [ \e[33mSKIPED\e[0m ]\n\
-\e[32m * \e[0mtestMethod                                   [ \e[31mFAILED\e[0m ]\n\
+\033[32m * \033[0mtestMethod                                   [ \033[33mSKIPED\033[0m ]\n\
+\033[32m * \033[0mtestMethod                                   [ \033[31mFAILED\033[0m ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 message for unknown status\n\
 line 33 of file file.cpp on methode methode()\n\
@@ -85,7 +85,7 @@ line 33 of file file.cpp on methode methode()\n\
    - expected : toto\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 =======  MyTest                                   ========\n\
-\e[32m * \e[0mtestMethod                                   [ \e[31mUNKNOWN\e[0m ]\n\
+\033[32m * \033[0mtestMethod                                   [ \033[31mUNKNOWN\033[0m ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 message for unknown status\n\
 line 33 of file file.cpp on methode methode()\n\
@@ -93,37 +93,37 @@ line 33 of file file.cpp on methode methode()\n\
 +---------------------------+\n\
 |    SUMMARY                |\n\
 +---------------------------+\n\
-|  \e[32mSUCCESS  :    0 (  0 %)\e[0m  |\n\
-|  \e[34mINDEV    :    0 (  0 %)\e[0m  |\n\
-|  \e[33mTODO     :    0 (  0 %)\e[0m  |\n\
-|  \e[31mFAILED   :    0 (  0 %)\e[0m  |\n\
-|  \e[31mUNKNOWN  :    0 (  0 %)\e[0m  |\n\
+|  \033[32mSUCCESS  :    0 (  0 %)\033[0m  |\n\
+|  \033[34mINDEV    :    0 (  0 %)\033[0m  |\n\
+|  \033[33mTODO     :    0 (  0 %)\033[0m  |\n\
+|  \033[31mFAILED   :    0 (  0 %)\033[0m  |\n\
+|  \033[31mUNKNOWN  :    0 (  0 %)\033[0m  |\n\
 +---------------------------+\n\
 |  TOTAL    :    0          |\n\
-|  STATUS   : \e[32mSUCCESS     \e[0m  |\n\
+|  STATUS   : \033[32mSUCCESS     \033[0m  |\n\
 +---------------------------+\n";
 static const char * CST_STRING_SEQ_2    = "=======  MyTest                                   ========\n\
-\e[32m * \e[0mtestMethod                                   [ \e[32mSUCCESS\e[0m ]\n\
-\e[32m * \e[0mtestMethod                                   [ \e[33mTODO\e[0m ]\n\
-\e[32m * \e[0mtestMethod                                   [ \e[32mSUCCESS\e[0m ]\n\
-\e[32m * \e[0mtestMethod                                   [ \e[34mINDEV\e[0m ]\n\
+\033[32m * \033[0mtestMethod                                   [ \033[32mSUCCESS\033[0m ]\n\
+\033[32m * \033[0mtestMethod                                   [ \033[33mTODO\033[0m ]\n\
+\033[32m * \033[0mtestMethod                                   [ \033[32mSUCCESS\033[0m ]\n\
+\033[32m * \033[0mtestMethod                                   [ \033[34mINDEV\033[0m ]\n\
 =======  MyTest                                   ========\n\
-\e[32m * \e[0mtestMethod                                   [ \e[33mSKIPED\e[0m ]\n\
-\e[32m * \e[0mtestMethod                                   [ \e[32mSUCCESS\e[0m ]\n\
-\e[32m * \e[0mtestMethod                                   [ \e[31mFAILED\e[0m ]\n\
+\033[32m * \033[0mtestMethod                                   [ \033[33mSKIPED\033[0m ]\n\
+\033[32m * \033[0mtestMethod                                   [ \033[32mSUCCESS\033[0m ]\n\
+\033[32m * \033[0mtestMethod                                   [ \033[31mFAILED\033[0m ]\n\
 =======  MyTest                                   ========\n\
-\e[32m * \e[0mtestMethod                                   [ \e[31mUNKNOWN\e[0m ]\n\n\
+\033[32m * \033[0mtestMethod                                   [ \033[31mUNKNOWN\033[0m ]\n\n\
 +---------------------------+\n\
 |    SUMMARY                |\n\
 +---------------------------+\n\
-|  \e[32mSUCCESS  :    0 (  0 %)\e[0m  |\n\
-|  \e[34mINDEV    :    0 (  0 %)\e[0m  |\n\
-|  \e[33mTODO     :    0 (  0 %)\e[0m  |\n\
-|  \e[31mFAILED   :    0 (  0 %)\e[0m  |\n\
-|  \e[31mUNKNOWN  :    0 (  0 %)\e[0m  |\n\
+|  \033[32mSUCCESS  :    0 (  0 %)\033[0m  |\n\
+|  \033[34mINDEV    :    0 (  0 %)\033[0m  |\n\
+|  \033[33mTODO     :    0 (  0 %)\033[0m  |\n\
+|  \033[31mFAILED   :    0 (  0 %)\033[0m  |\n\
+|  \033[31mUNKNOWN  :    0 (  0 %)\033[0m  |\n\
 +---------------------------+\n\
 |  TOTAL    :    0          |\n\
-|  STATUS   : \e[32mSUCCESS     \e[0m  |\n\
+|  STATUS   : \033[32mSUCCESS     \033[0m  |\n\
 +---------------------------+\n";
 
 /********************  CLASS  **********************/

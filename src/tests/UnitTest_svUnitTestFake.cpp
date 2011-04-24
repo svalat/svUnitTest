@@ -1237,6 +1237,6 @@ void UnitTest_svUnitTestFake::testMacroAssertLT_cstr_limit(void )
 	}
 }
 
-SVUT_REGISTER_STANDELONE(UnitTest_svUnitTestFake);
+SVUT_REGISTER_STANDELONE(UnitTest_svUnitTestFake)
 
 #endif
