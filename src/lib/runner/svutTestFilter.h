@@ -24,8 +24,8 @@ namespace svUnitTest
 **/
 class svutTestFilter {
 	public:
-		svutTestFilter(void) {};
-		virtual ~svutTestFilter(void) {};
+		svutTestFilter(void) {}
+		virtual ~svutTestFilter(void) {}
 		/**
 		 * Method used to check if the given test must be executed of not.
 		 * @param caseName Define the name of the related test case.

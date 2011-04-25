@@ -33,8 +33,8 @@ class UnitTestMockResultFormater : public svUnitTest::svutResultFormatter
 		friend bool operator != (const UnitTestMockResultFormater & formater1,const UnitTestMockResultFormater & formater2);
 		friend bool operator == (const std::string & str,const UnitTestMockResultFormater & formater);
 		friend bool operator != (const std::string & str,const UnitTestMockResultFormater & formater);
-		friend bool operator == (const UnitTestMockResultFormater & formater,const std::string & str) { return str == formater; };
-		friend bool operator != (const UnitTestMockResultFormater & formater,const std::string & str) { return str != formater; };
+		friend bool operator == (const UnitTestMockResultFormater & formater,const std::string & str) { return str == formater; }
+		friend bool operator != (const UnitTestMockResultFormater & formater,const std::string & str) { return str != formater; }
 		friend std::ostream & operator << (std::ostream & out,const UnitTestMockResultFormater & formater);
 		bool isEmpty(void) const;
 		void reset(void);

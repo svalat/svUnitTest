@@ -36,7 +36,7 @@ namespace svUnitTest
 class svutTestCase
 {
 	public:
-		svutTestCase(std::string name=__FUNCTION__);
+		svutTestCase(std::string name="Undefined");
 		svutTestCase(const svutTestCase & testCase);
 		virtual ~svutTestCase(void);
 		bool runTestCase(void);
@@ -67,7 +67,7 @@ template <class T>
 class svutTestCaseBuilderGeneric : public svutTestCaseBuilder
 {
 	public:
-		virtual svutTestCase * build(void) { return new T();};
+		virtual svutTestCase * build(void) { return new T();}
 };
 
 /*******************  FUNCTION **********************/

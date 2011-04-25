@@ -18,4 +18,4 @@
 /** Define the library version. **/
 #define SVUT_LIBARY_VERSION "0.3.0-dev"
 
-#endif 
+#endif

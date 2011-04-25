@@ -21,9 +21,9 @@ using namespace svUnitTest;
 class SimpleObject
 {
 	public:
-		SimpleObject(int value = 20) {this->value = value;};
-		virtual void clear(void) {this->value = 0;};
-		int getValue(void) {return this->value; };
+		SimpleObject(int value = 20) {this->value = value;}
+		virtual void clear(void) {this->value = 0;}
+		int getValue(void) {return this->value; }
 	protected:
 		int value;
 };
@@ -32,7 +32,7 @@ class SimpleObject
 class SimpleObjectV2 : public SimpleObject
 {
 	public:
-		virtual void clear(void) {this->value = 1;};
+		virtual void clear(void) {this->value = 1;}
 };
 
 /*********************  CLASS  **********************/

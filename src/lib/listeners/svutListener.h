@@ -31,7 +31,7 @@ class svutListener
 {
 	public:
 		/** Class destructor. It was just define fot inheritance supporting. **/
-		virtual ~svutListener(void){};
+		virtual ~svutListener(void){}
 		/** This method is called when starting to run the tests. **/
 		virtual void onGlobalStart(void) = 0;
 		/**

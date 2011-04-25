@@ -25,12 +25,26 @@ namespace svUnitTest
 
 /********************  MACROS  **********************/
 /**
+ * Support type determination at compile time by using typeof C++ extention (not ISO).
+ * For C++0x we can use the replacement ISO keyword decltype. Currently due to definition embiguity
+ * we use a trick to remove the reference from the class type by using the svut_get_class_type()
+ * fake function.
+ * @param x Define a pointer of the class type we want to extract (typically we will use 'this').
+**/
+#ifdef __GXX_EXPERIMENTAL_CXX0X__
+#define SVUT_TYPEOF(x) decltype(svut_get_class_type(x))
+#else
+#define SVUT_TYPEOF(x) typeof(*x)
+#endif
+
+/********************  MACROS  **********************/
+/**
  * This macro must be used when developping tests to declare all the functions related to the test
  * case. It must be called in the constructor of the test case.
  * @param func Define the name of the test method to register.
 **/
 #define SVUT_REG_TEST_METHOD(func) do{\
-	typedef typeof(*this) __SVUT_CURRENT_CLASS__;\
+	typedef SVUT_TYPEOF(this) __SVUT_CURRENT_CLASS__;\
 	svUnitTest::svutObjectMethod * __svut__meth__ = new svUnitTest::svutObjectMethodGeneric<__SVUT_CURRENT_CLASS__>(this,&__SVUT_CURRENT_CLASS__::func);\
 	svUnitTest::svutTestMethod * __svut__testMeth__ = new svUnitTest::svutTestMethod(#func,__svut__meth__,SVUT_CODE_LOCATION); \
 	this->registerTestMethod(__svut__testMeth__);\
@@ -69,7 +83,7 @@ class svutListener;
 class svutTestCase
 {
 	public:
-		svutTestCase(std::string name=__FUNCTION__);
+		svutTestCase(std::string name="Undefined");
 		svutTestCase(const svutTestCase & testCase);
 		virtual ~svutTestCase(void);
 		/**
@@ -148,6 +162,25 @@ void svutTestCase::setContextEntry(std::string name, const T & value)
 {
 	setContextEntry(name,asserterToString(value));
 }
+
+/*******************  FUNCTION  *********************/
+#ifdef __GXX_EXPERIMENTAL_CXX0X__
+/**
+ * In C++0x we can use the ISO keyword decltype to get the type of an object at compile type and
+ * use it in delcarations. But buy default, decltyp(*this) return a reference type (MyClass&) and not
+ * strict class name (MyClass). This lead to failure while interacting with ORP operator ::.
+ * To bypass that issue, we simply use this method to convert the pointer type to simple class type
+ * which can be used in decltype to get what we want. This method isn't executed an only serve for
+ * type determination at compile time.
+ * @param obj Define a pointer to the class type to cast, typically we will use 'this'.
+**/
+template <class T>
+T svut_get_class_type(T * obj)
+{
+	abort();
+	return *obj;
+}
+#endif
 
 //int registerTestCase(svutTestCaseBuilder & builder);
 }

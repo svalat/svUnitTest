@@ -31,7 +31,7 @@ class svutResultFormatter
 		/** Default constructor of the class, done nothing here. **/
 		svutResultFormatter(void);
 		/** Destructor of the class, defined for inheritance support. **/
-		virtual ~svutResultFormatter(void) {};
+		virtual ~svutResultFormatter(void) {}
 		/**
 		 * Method called when starting to output things. It's called when starting to run the
 		 * test to build the output header if needed.

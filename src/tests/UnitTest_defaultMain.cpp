@@ -33,7 +33,7 @@ class UnitTest_MyTestCaseBase : public svutTestCase
 class UnitTest_MyTestCase1 : public UnitTest_MyTestCaseBase
 {
 	public:
-		UnitTest_MyTestCase1():UnitTest_MyTestCaseBase("UnitTest_MyTestCase1"){};
+		UnitTest_MyTestCase1():UnitTest_MyTestCaseBase("UnitTest_MyTestCase1"){}
 };
 SVUT_REGISTER_TEST_CASE(UnitTest_MyTestCase1);
 
@@ -41,7 +41,7 @@ SVUT_REGISTER_TEST_CASE(UnitTest_MyTestCase1);
 class UnitTest_MyTestCase2 : public UnitTest_MyTestCaseBase
 {
 	public:
-		UnitTest_MyTestCase2():UnitTest_MyTestCaseBase("UnitTest_MyTestCase2"){};
+		UnitTest_MyTestCase2():UnitTest_MyTestCaseBase("UnitTest_MyTestCase2"){}
 };
 SVUT_REGISTER_TEST_CASE(UnitTest_MyTestCase2);
 
@@ -49,7 +49,7 @@ SVUT_REGISTER_TEST_CASE(UnitTest_MyTestCase2);
 class UnitTest_MyTestCase3 : public UnitTest_MyTestCaseBase
 {
 	public:
-		UnitTest_MyTestCase3():UnitTest_MyTestCaseBase("UnitTest_MyTestCase3"){};
+		UnitTest_MyTestCase3():UnitTest_MyTestCaseBase("UnitTest_MyTestCase3"){}
 };
 SVUT_REGISTER_TEST_CASE(UnitTest_MyTestCase3);
 

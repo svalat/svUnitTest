@@ -34,8 +34,8 @@ namespace CPPUNIT_NS
 class TestCase
 {
 	public:
-		virtual ~TestCase(void) {};
-		void run() {this->runTests();};
+		virtual ~TestCase(void) {}
+		void run() {this->runTests();}
 	protected:
 		void markAsPassed(void) const;
 		void markStartTest(const char * name) const;
@@ -57,7 +57,7 @@ template <class T>
 class TestCaseBuilderGeneric : public TestCaseBuilder
 {
 	public:
-		virtual TestCase * build(void) { return new T();};
+		virtual TestCase * build(void) { return new T();}
 };
 
 /*******************  FUNCTION **********************/

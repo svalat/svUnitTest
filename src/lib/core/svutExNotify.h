@@ -43,7 +43,7 @@ class svutExNotifyTodo : public svutExNotify
 {
 	public:
 		svutExNotifyTodo(std::string message, const svutCodeLocation& location) throw();
-		virtual ~svutExNotifyTodo(void) throw() {};
+		virtual ~svutExNotifyTodo(void) throw() {}
 };
 
 /*********************  CLASS  **********************/
@@ -58,7 +58,7 @@ class svutExNotifyIndev : public svutExNotify
 {
 	public:
 		svutExNotifyIndev(std::string message,svutCodeLocation  location) throw();
-		virtual ~svutExNotifyIndev(void) throw() {};
+		virtual ~svutExNotifyIndev(void) throw() {}
 };
 
 }

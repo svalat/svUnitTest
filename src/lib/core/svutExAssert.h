@@ -28,7 +28,7 @@ class svutExAssertFail : public svutExTestStatus
 		svutExAssertFail(std::string name, const svutStatusInfo& info) throw();
 		svutExAssertFail(std::string name, svutStatus status, const svutCodeLocation& location,
 			std::string message = "") throw();
-		virtual ~svutExAssertFail(void) throw() {};
+		virtual ~svutExAssertFail(void) throw() {}
 };
 
 /*********************  CLASS  **********************/

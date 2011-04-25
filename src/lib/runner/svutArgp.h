@@ -50,7 +50,7 @@ class svutExArgpDuplicateKey : public svutException
 	public:
 		svutExArgpDuplicateKey(char key);
 		svutExArgpDuplicateKey(std::string name);
-		virtual ~svutExArgpDuplicateKey() throw() {};
+		virtual ~svutExArgpDuplicateKey() throw() {}
 		virtual std::string getMessage(void) const;
 	private:
 		/** Define the conflicting key. **/

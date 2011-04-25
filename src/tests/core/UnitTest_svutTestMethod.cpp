@@ -13,6 +13,7 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include <svutTestMethod.h>
+#include <svutTestCase.h>
 
 /**********************  USING  *********************/
 using namespace std;
@@ -97,7 +98,7 @@ void UnitTest_svutTestMethod::methToCall(void )
 void UnitTest_svutTestMethod::testUsageOfTypeof(void )
 {
 	svutTestMethod * obj;
-	typedef typeof(*this) CURRENT_CLASS;
+	typedef SVUT_TYPEOF(this) CURRENT_CLASS;
 	obj = new svutTestMethod("theTest",
 		new svutObjectMethodGeneric<UnitTest_svutTestMethod>(this,&CURRENT_CLASS::methToCall),
 		loc);

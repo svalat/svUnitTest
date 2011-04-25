@@ -35,7 +35,7 @@ class svutExAssertFake
 			this->message = message;
 			this->location = location;
 		}
-		svutExAssertFake(void) {};
+		svutExAssertFake(void) {}
 		svutStatus status;
 		std::string message;
 		svutCodeLocation location;
@@ -45,12 +45,12 @@ class svutExAssertFake
 class svutExTestStatus : public svutExAssertFake
 {
 	public:
-		svutExTestStatus(void) {};
+		svutExTestStatus(void) {}
 		svutExTestStatus(std::string name,svutStatus status,svutCodeLocation  location,std::string message="")  throw()
 		{
 			this->location = location;
 			this->message = message;
-		};
+		}
 };
 
 /*********************  CLASS  **********************/

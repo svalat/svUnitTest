@@ -25,8 +25,8 @@ namespace svUnitTest
 class svutObjectMethod
 {
 	public:
-		svutObjectMethod() {};
-		virtual ~svutObjectMethod() {};
+		svutObjectMethod() {}
+		virtual ~svutObjectMethod() {}
 		/**
 		 * Method used ta call the function.
 		**/

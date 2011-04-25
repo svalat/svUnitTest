@@ -138,8 +138,8 @@ class UnitTestMockTestUnload : public svutTestCase
 	public:
 		UnitTestMockTestUnload();
 		virtual ~UnitTestMockTestUnload();
-		virtual void setUp(void ){};
-		virtual void tearDown(void ){};
+		virtual void setUp(void ){}
+		virtual void tearDown(void ){}
 };
 
 /*********************  CLASS  **********************/
