@@ -68,11 +68,17 @@ void svutResultFormatterXml::printEnv(void)
 	{
 		char buffer[64];
 		time_t t;
-		struct tm timeinfo;
 
 		time(&t);
+		#ifdef _MSC_VER
+		struct tm timeinfo;
 		localtime_s ( &timeinfo,&t );
 		strftime(buffer, 64, "%Y-%m-%d %H:%M:%S %Z",&timeinfo);
+		#else
+		struct tm * timeinfo;
+		timeinfo = localtime(&t);
+		strftime(buffer, 64, "%Y-%m-%d %H:%M:%S %Z",timeinfo);
+		#endif
 		*out << "\t\t<TestDate>" << buffer << "</TestDate>" << endl;
 	} else {
 		*out << "\t\t<TestDate>" << this->date << "</TestDate>" << endl;
