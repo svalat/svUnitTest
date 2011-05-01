@@ -67,8 +67,12 @@ void svutResultFormatterXml::printEnv(void)
 	if (this->date.empty())
 	{
 		char buffer[64];
-		time_t t = time(NULL);
-		strftime(buffer, 64, "%F %T %Z",localtime(&t));
+		time_t t;
+		struct tm timeinfo;
+
+		time(&t);
+		localtime_s ( &timeinfo,&t );
+		strftime(buffer, 64, "%Y-%m-%d %H:%M:%S %Z",&timeinfo);
 		*out << "\t\t<TestDate>" << buffer << "</TestDate>" << endl;
 	} else {
 		*out << "\t\t<TestDate>" << this->date << "</TestDate>" << endl;

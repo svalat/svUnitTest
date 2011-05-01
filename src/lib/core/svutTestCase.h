@@ -33,6 +33,8 @@ namespace svUnitTest
 **/
 #ifdef __GXX_EXPERIMENTAL_CXX0X__
 #define SVUT_TYPEOF(x) decltype(svut_get_class_type(x))
+#elif defined(_MSC_VER)
+#define SVUT_TYPEOF(x) decltype(svut_get_class_type(x))
 #else
 #define SVUT_TYPEOF(x) typeof(*x)
 #endif
@@ -164,7 +166,7 @@ void svutTestCase::setContextEntry(std::string name, const T & value)
 }
 
 /*******************  FUNCTION  *********************/
-#ifdef __GXX_EXPERIMENTAL_CXX0X__
+#if defined(__GXX_EXPERIMENTAL_CXX0X__) || defined(_MSC_VER)
 /**
  * In C++0x we can use the ISO keyword decltype to get the type of an object at compile type and
  * use it in delcarations. But buy default, decltyp(*this) return a reference type (MyClass&) and not

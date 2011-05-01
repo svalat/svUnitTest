@@ -216,7 +216,7 @@ void UnitTest_svutArgp::testDeclareOption_dupKey(void )
 	try{
 		obj->decalareOption('v',"verbose","NONE","Display more messages");
 		CPPUNIT_FAIL("Expect to get svutExArgpDuplicateKey exception but nothing append.");
-	} catch (svutExArgpDuplicateKey & e) {
+	} catch (svutExArgpDuplicateKey & /*e*/) {
 		
 	}
 }
@@ -228,7 +228,7 @@ void UnitTest_svutArgp::testDeclareOption_dupName(void )
 	try{
 		obj->decalareOption('v',"verbose","NONE","Display more messages");
 		CPPUNIT_FAIL("Expect to get svutExArgpDuplicateKey exception but nothing append.");
-	} catch (svutExArgpDuplicateKey & e) {
+	} catch (svutExArgpDuplicateKey & /*e*/) {
 
 	}
 }

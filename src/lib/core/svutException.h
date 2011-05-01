@@ -13,6 +13,18 @@
 #include <exception>
 #include <string>
 
+/*********************  MACROS  *********************/
+#ifdef _MSC_VER
+	//VCC doesn't support throw() specification in function prototype
+	//we can safely disable the related warning to avoid spamming the
+	//building output
+	#pragma warning(disable: 4290)
+	//VCC sucks with it's OS dependant warning for strncpy_s
+	#pragma warning(disable: 4996)
+	//hummm this one may be solve but not really easily.
+	#pragma warning(disable: 4355)
+#endif
+
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
