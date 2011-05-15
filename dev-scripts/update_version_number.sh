@@ -1,8 +1,8 @@
 #!/bin/bash
 ######################################################
 #            PROJECT  : svUnitTest                   #
-#            VERSION  : 0.3.0-dev                    #
-#            DATE     : 02/2011                      #
+#            VERSION  : 0.3.0                        #
+#            DATE     : 05/2011                      #
 #            AUTHOR   : Valat Sébastien              #
 #            LICENSE  : CeCILL-C                     #
 ######################################################
@@ -114,6 +114,7 @@ function update_version_exotic_files()
 {
 	#root CMakeLists.txt (to define version of project)
 	sed -i "s/^set(svUnitTest_VERSION \"$1\")\$/set(svUnitTest_VERSION \"$2\")/g" CMakeLists.txt
+	sed -i "s/SET(CPACK_PACKAGE_VERSION \"$1\")/SET(CPACK_PACKAGE_VERSION \"$2\")/g" CMakeLists.txt
 	#Doxyfile
 	sed -i "s/^PROJECT_NUMBER         = $1\$/PROJECT_NUMBER         = $2/g" Doxyfile
 	#pkg-config template
@@ -124,6 +125,14 @@ function update_version_exotic_files()
 	sed -i "s/echo \"             VERSION  : $1\"/echo \"             VERSION  : $2\"/g" src/doxygen/update_from_gollum.sh
 	#configure.in example
 	sed -i "s/$1/$2/g" src/examples/build_with_autotools/configure.in
+	#examples in documentation from wiki
+	sed -i "s#<LibVersion>$1</LibVersion>#<LibVersion>$2</LibVersion>#g" src/doxygen/dev-doc-formatter.dox
+	#file into tests
+	sed -i "s/#define SVUT_LIBARY_VERSION \"$1\"/#define SVUT_LIBARY_VERSION \"$2\"/g" src/resources/svUnitTest_fake/include/svUnitTest/svUnitTest.h
+	#packaging README
+	sed -i "s/svUnitTest-$1/svUnitTest-$2/g" packaging/README.txt
+	sed -i "s/svUnitTest_$1/svUnitTest_$2/g" packaging/README.txt
+	sed -i "s/v$1/v$2/g" packaging/README.txt
 }
 
 ########################## FUNCTION ############################

@@ -1,17 +1,17 @@
 ######################################################
 #            PROJECT  : svUnitTest                   #
-#            VERSION  : 0.3.0-dev                    #
-#            DATE     : 03/2011                      #
+#            VERSION  : 0.3.0                        #
+#            DATE     : 05/2011                      #
 #            AUTHOR   : Valat Sébastien              #
 #            LICENSE  : CeCILL-C                     #
 ######################################################
 
-Current dependcies for this project are :
+Current dependencies for this project are :
 
  - BUILD \
-         + gcc             (tested version 4.3,4.4)
-         + g++             (tested version 4.3,4.4)
-         + cmake           (tested version 2.6)
+         + gcc             (tested version 4.3,4.4,4.5)
+         + g++             (tested version 4.3,4.4,4.5)
+         + cmake           (tested version 2.8)
          + make            (tested version 3.81)
          + cppunit         (tested version 1.12.1) [Optional]
  - RUN svUnitTest unit tests \
@@ -24,6 +24,14 @@ Current dependcies for this project are :
 Tested systèmes are :
 
  - Gentoo x86_64 (2009-2010)
+ - Ubuntu 10.04 x86_64
  - Fedora 14 x86
- - FreeBSD 8.1 x86
- - Windows XP x86 (Visual Studio 2010)
+ - FreeBSD 8.2 x86_64
+ - Windows XP x86 (Visual Studio Express 2010)
+
+Tested compilers are :
+
+ - gcc/g++ 4.3,4.4,4.5
+ - icc 12.0.3
+ - clang 2.8
+ - vcc 10

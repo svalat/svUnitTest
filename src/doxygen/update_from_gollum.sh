@@ -11,8 +11,8 @@ function print_header()
 {
 	echo "/*****************************************************"
 	echo "             PROJECT  : svUnitTest"
-	echo "             VERSION  : 0.3.0-dev"
-	echo "             DATE     : 03/2011"
+	echo "             VERSION  : 0.3.0"
+	echo "             DATE     : 05/2011"
 	echo "             AUTHOR   : Valat Sébastien"
 	echo "             LICENSE  : CeCILL-C"
 	echo "*****************************************************/"

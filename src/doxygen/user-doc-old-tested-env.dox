@@ -1,0 +1,94 @@
+/*****************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.3.0
+             DATE     : 05/2011
+             AUTHOR   : Valat Sébastien
+             LICENSE  : CeCILL-C
+*****************************************************/
+/**
+@page user-doc-old-tested-env Tested environments when publishing version 0.2.0
+
+<table>
+	<tr>
+		<th>OS</th>
+		<th>OS Version</th>
+		<th>Architecture</th>
+		<th>compiler</th>
+		<th>status</th>
+		<th>Last test date</th>
+		<th>Lib. version</th>
+	</tr><tr>
+		<td>Gentoo Linux</td>
+		<td>2010</td>
+		<td>x86_64</td>
+		<td>gcc-4.4.4</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0</td>
+	</tr><tr>
+		<td>Gentoo Linux</td>
+		<td>2010</td>
+		<td>x86_64</td>
+		<td>gcc-4.4.3</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0</td>
+	</tr><tr>
+		<td>Gentoo Linux</td>
+		<td>2010</td>
+		<td>x86_64</td>
+		<td>gcc-4.3.4</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0</td>
+	</tr><tr>
+		<td>Gentoo Linux</td>
+		<td>2010</td>
+		<td>x86_64</td>
+		<td>icc-11.1</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0</td>
+	</tr><tr>
+		<td>Gentoo Linux</td>
+		<td>2010</td>
+		<td>x86_64</td>
+		<td>clang-2.8</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011 </td>
+		<td>0.2.0</td>
+	</tr><tr>
+		<td>Fedora Linux</td>
+		<td>14</td>
+		<td>x86</td>
+		<td>gcc-4.5.1</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0</td>
+	</tr><tr>
+		<td>FreeBSD</td>
+		<td>8.1</td>
+		<td>x86</td>
+		<td>gcc-4.2.1</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0</td>
+	</tr><tr>
+		<td>Windows</td>
+		<td>XP</td>
+		<td>x86</td>
+		<td>VCC-10</td>
+		<td>SUCCESS <br> (one warning due to <br> throw() on functions)</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0</td>
+	</tr><tr>
+		<td>Windows</td>
+		<td>XP</td>
+		<td>x86</td>
+		<td>cygwin gcc-4.3.4</td>
+		<td>SUCCESS</td>
+		<td>Feb. 2011</td>
+		<td>0.2.0</td>
+	</tr>
+</table>
+**/

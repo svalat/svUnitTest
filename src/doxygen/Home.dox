@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.3.0-dev
-             DATE     : 03/2011
+             VERSION  : 0.3.0
+             DATE     : 05/2011
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -39,30 +39,18 @@ This is another unit test framework for C++. There are already many functional f
 \endhtmlonly
 
 
-@section ChangeLog ChangeLog
+@section ChangeLogofversion030May152011 ChangeLog of version 0.3.0 (May 15, 2011)
 
-@subsection Version020February272011 Version 0.2.0 (February 27, 2011)
+ - Code cleanup to pass -pednatic on Linux gcc and icc.
+ - SVUT_REGISTER_TEST_METHOD() do not need class name now.
+ - Base files for ubuntu package.
+ - Add some assertions : SVUT_ASSERT_GE, GT, LE, LT ...
+ - Add macro SVUT_SET_CONTEXT() to help debugging failed tests.
+ - Split sources into multiple directory to be more readable.
+ - Bugfix problem with test case empty name.
+ - Check C++0x compatibility on gcc, icc and clang.
 
- - User documentation.
- - Usage examples (usage and build with cmake/autotools)
- - Portability fixes, test suite passed on windows + VCC/cygwin, Linux + gcc/clang/icc, FreeBSD + gcc.
- - CPPUnit is now optional to pass the test suite of svUnitTest : replaced by short implementation fakecppunit.
- - Add cmake/pkg_config integration files.
- - Replace glibc argument parser (argp.h) by our own implementation for non glibc-systems portability (windows....).
- - Add terminal color support detection via isatty().
- - Fix naming issue related to xslt_html.
- - Fix valgrind memory leak reported in test suite.
- - Fix compilers warnings (clang/gcc/icc/vcc)
-
-@subsection Version010January122011 Version 0.1.0 (January 12, 2011)
-
- - Base implementation
- - Unit tests of the base implementation
- - Output format : XML, Qt XML, Black & white stdout, Colored stdout
- - Provide most of the required assertions SVUT_ASSERT_EQUAL()...
- - Provide the INDEV and TODO state in addition to others unit test libraries.
- - Provide a basic XSLT file to manually generate HTML from native XML output format.
- - Provide standalone of test suite predefine main functions.
+You can get the full change log here : @subpage user-doc-changelog
 
 @section Dependencies Dependencies
 
@@ -90,7 +78,7 @@ As a user, you may be interested by :
  - Autoconf   : http://www.gnu.org/software/autoconf/
  - Automake   : http://www.gnu.org/software/automake/
 
-@section Testedenvironmentscurrentmaster Tested environments (current master)
+@section Testedenvironments Tested environments
 
 <table>
 	<tr>
@@ -101,80 +89,76 @@ As a user, you may be interested by :
 		<th>status</th>
 		<th>Last test date</th>
 		<th>Lib. version</th>
-	</tr><tr>
-		<td>Gentoo Linux</td>
-		<td>2010</td>
+        </tr><tr>
+		<td>Ubuntu Linux</td>
+		<td>10.04</td>
+		<td>x86_64</td>
+		<td>gcc-4.3.5</td>
+		<td>SUCCESS</td>
+		<td>May. 2011</td>
+		<td>0.2.0 - 0.3.0</td>
+        </tr><tr>
+		<td>Ubuntu Linux</td>
+		<td>10.04</td>
 		<td>x86_64</td>
 		<td>gcc-4.4.4</td>
 		<td>SUCCESS</td>
-		<td>Feb. 2011</td>
-		<td>0.2.0</td>
+		<td>May. 2011</td>
+		<td>0.2.0 - 0.3.0</td>
 	</tr><tr>
-		<td>Gentoo Linux</td>
-		<td>2010</td>
+		<td>Ubuntu Linux</td>
+		<td>10.04</td>
 		<td>x86_64</td>
-		<td>gcc-4.4.3</td>
+		<td>gcc-4.5.1</td>
 		<td>SUCCESS</td>
-		<td>Feb. 2011</td>
-		<td>0.2.0</td>
+		<td>May. 2011</td>
+		<td>0.2.0 - 0.3.0</td>
 	</tr><tr>
-		<td>Gentoo Linux</td>
-		<td>2010</td>
+		<td>Ubuntu Linux</td>
+		<td>10.04</td>
 		<td>x86_64</td>
-		<td>gcc-4.3.4</td>
+		<td>icc-12.0.3</td>
 		<td>SUCCESS</td>
-		<td>Feb. 2011</td>
-		<td>0.2.0</td>
+		<td>May. 2011</td>
+		<td>0.2.0 - 0.3.0</td>
 	</tr><tr>
-		<td>Gentoo Linux</td>
-		<td>2010</td>
-		<td>x86_64</td>
-		<td>icc-11.1</td>
-		<td>SUCCESS</td>
-		<td>Feb. 2011</td>
-		<td>0.2.0</td>
-	</tr><tr>
-		<td>Gentoo Linux</td>
-		<td>2010</td>
+		<td>Ubuntu Linux</td>
+		<td>10.04</td>
 		<td>x86_64</td>
 		<td>clang-2.8</td>
 		<td>SUCCESS</td>
-		<td>Feb. 2011 </td>
-		<td>0.2.0</td>
-	</tr><tr>
-		<td>Fedora Linux</td>
-		<td>14</td>
-		<td>x86</td>
-		<td>gcc-4.5.1</td>
-		<td>SUCCESS</td>
-		<td>Feb. 2011</td>
-		<td>0.2.0</td>
+		<td>May. 2011</td>
+		<td>0.2.0 - 0.3.0</td>
 	</tr><tr>
 		<td>FreeBSD</td>
-		<td>8.1</td>
-		<td>x86</td>
+		<td>8.2</td>
+		<td>x86_64</td>
 		<td>gcc-4.2.1</td>
 		<td>SUCCESS</td>
-		<td>Feb. 2011</td>
-		<td>0.2.0</td>
+		<td>May. 2011</td>
+		<td>0.2.0 - 0.3.0</td>
 	</tr><tr>
 		<td>Windows</td>
 		<td>XP</td>
 		<td>x86</td>
 		<td>VCC-10</td>
-		<td>SUCCESS <br> (one warning due to <br> throw() on functions)</td>
-		<td>Feb. 2011</td>
-		<td>0.2.0</td>
+		<td>SUCCESS</td>
+		<td>May. 2011</td>
+		<td>0.2.0 - 0.3.0</td>
 	</tr><tr>
 		<td>Windows</td>
 		<td>XP</td>
 		<td>x86</td>
 		<td>cygwin gcc-4.3.4</td>
 		<td>SUCCESS</td>
-		<td>Feb. 2011</td>
-		<td>0.2.0</td>
+		<td>May. 2011</td>
+		<td>0.2.0 - 0.3.0</td>
 	</tr>
 </table>
+
+Notice that version 0.2.0 and 0.3.0 support compiling with <em>-std=c++0x</em> on Linux gcc, icc and clang. Since 0.3.0 it fully passed gcc and icc with <em>-pedantic</em> / <em>-Wcheck</em> and <em>-Werror</em>.
+
+You can get old test reports on : @subpage user-doc-old-tested-env.
 
 @section Userdocumentation User documentation
 

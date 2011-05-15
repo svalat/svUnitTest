@@ -1,10 +1,21 @@
 ######################################################
 #            PROJECT  : svUnitTest                   #
-#            VERSION  : 0.3.0-dev                    #
-#            DATE     : 03/2011                      #
+#            VERSION  : 0.3.0                        #
+#            DATE     : 05/2011                      #
 #            AUTHOR   : Valat Sébastien              #
 #            LICENSE  : CeCILL-C                     #
 ######################################################
+
+Version 0.3.0 (May 15, 2011)
+
+ * Code cleanup to pass -pednatic on Linux gcc and icc.
+ * SVUT_REGISTER_TEST_METHOD() do not need class name now.
+ * Base files for ubuntu package.
+ * Add some assertions : SVUT_ASSERT_GE, GT, LE, LT ...
+ * Add macro SVUT_SET_CONTEXT() to help debugging failed tests.
+ * Split sources into multiple directory to be more readable.
+ * Bugfix problem with test case empty name.
+ * Check C++0x compatibility on gcc, icc and clang.
 
 Version 0.2.0 (February 27, 2011)
 
