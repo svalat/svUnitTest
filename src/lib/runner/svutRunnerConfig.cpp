@@ -487,7 +487,7 @@ void svutRunnerConfig::freeClonedArgv(int argc, char * argv[]) const
 	for (int i = 0 ; i < argc + 1 ; ++i)
 	{
 		if (argv[i] != NULL)
-			delete argv[i];
+			delete[] argv[i];
 	}
 	delete[] argv;
 }

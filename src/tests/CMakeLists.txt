@@ -42,14 +42,15 @@ macro (build_svunittest_test)
 		foreach(i ${ARGV})
 			list(APPEND svutUnitTest_ALLSRC UnitTest_${i}.cpp)
 		endforeach(i)
-		add_executable(all_tests ${svutUnitTest_ALLSRC})
-		target_link_libraries (all_tests svutUnitTestBase svunittest)
+		get_filename_component(current_dirname ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+		add_executable(all_tests_${current_dirname} ${svutUnitTest_ALLSRC})
+		target_link_libraries (all_tests_${current_dirname} svutUnitTestBase svunittest)
 		if (CPPUNIT_FOUND)
-			target_link_libraries (all_tests ${CPPUNIT_LIBRARY})
+			target_link_libraries (all_tests_${current_dirname} ${CPPUNIT_LIBRARY})
 		else (CPPUNIT_FOUND)
-			target_link_libraries (all_tests fcppunit)
+			target_link_libraries (all_tests_${current_dirname} fcppunit)
 		endif (CPPUNIT_FOUND)
-		add_test(all_tests all_tests)
+		add_test(all_tests_${current_dirname} all_tests_${current_dirname})
 	ELSE (TEST_COVERAGE) ########### HERE THE NORMAL VERSION WITH MULTIPLE EXECUABLE
 		#defin test redirection for kdevelop
 		foreach(i ${ARGV})
@@ -64,6 +65,11 @@ macro (build_svunittest_test)
 		endforeach(i)
 	ENDIF (TEST_COVERAGE)
 endmacro(build_svunittest_test)
+
+################ BUILD TESTS ####################
+IF (TEST_COVERAGE)
+set(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
+ENDIF (TEST_COVERAGE)
 
 ################ BUILD TESTS ####################
 add_subdirectory(helper)
