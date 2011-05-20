@@ -24,7 +24,13 @@ namespace svUnitTest
 	static int ___FAKE_SVUNITTEST_res_case_registration_of##name##__ = svUnitTest::fakeRegisterTestCase(___FAKE_SVUNITTEST_case_##name##___)
 
 /********************  MACROS  **********************/
-#define SVUT_SET_CONTEXT(name,value) //this->setContextEntry((name),(value))
+#define SVUT_SET_CONTEXT(name,value) /*this->setContextEntry((name),(value))*/
+
+/********************  MACROS  **********************/
+#define SVUT_UNSET_CONTEXT(name) /*this->clearContexEntry((name))*/
+
+/********************  MACROS  **********************/
+#define SVUT_RESET_CONTEXT() /*this->resetContexEntries()*/
 
 /*********************  CLASS  **********************/
 /**

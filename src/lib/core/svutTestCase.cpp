@@ -307,7 +307,26 @@ void svutTestCase::listTestMethods(svutListener & listener,svutTestFilter * filt
 **/
 void svutTestCase::setContextEntry(std::string name, std::string value)
 {
-	context.insert(pair<string,string>(name,value));
+	context[name] = value;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Remove a specific entry from the current context.
+ * @param name Define the name of entry to remove.
+**/
+void svutTestCase::clearContexEntry(string name)
+{
+	context.erase(name);
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Remove all entries from the current context.
+**/
+void svutTestCase::resetContexEntries(void )
+{
+	context.clear();
 }
 
 }

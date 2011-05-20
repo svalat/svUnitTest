@@ -62,6 +62,21 @@ namespace svUnitTest
 **/
 #define SVUT_SET_CONTEXT(name,value) this->setContextEntry((name),(value))
 
+/********************  MACROS  **********************/
+/**
+ * Prefer to use this macro instead of directly call clearContexEntry on the svutTestCase class.
+ * This permit to remove some old context entries while exiting loops for exemple.
+ * @param name Define the name of the entry.
+**/
+#define SVUT_UNSET_CONTEXT(name) this->clearContexEntry((name))
+
+/********************  MACROS  **********************/
+/**
+ * Prefer to use this macro instead of directly call clearContexEntry on the svutTestCase class.
+ * This permit to remove all context entries for exemple while exiting loops for exemple.
+**/
+#define SVUT_RESET_CONTEXT() this->resetContexEntries()
+
 /********************** TYPEDEF *********************/
 /** List of pointers to test methods. **/
 typedef std::list<svutTestMethod *> svutTestMethodPtrList;
@@ -118,6 +133,8 @@ class svutTestCase
 		void setTestCaseName(std::string name) throw (svutExInternalError);
 		void registerTestMethod(svutTestMethod * test);
 		void setContextEntry(std::string name,std::string value);
+		void resetContexEntries(void);
+		void clearContexEntry(std::string name);
 		template <class T> void setContextEntry(std::string name,const T & value);
 		svutStatusInfo runTestMethod(svutTestMethod * test);
 		void MARK_AS_KNOWN_ERROR(std::string message);
