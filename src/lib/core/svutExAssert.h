@@ -51,7 +51,7 @@ class svutExAssertFailBool : public svutExAssertFail
  * SVUT_ASSERT_NULL or SVUT_ASSERT_NOT_NULL macro to call this exception. It will construct
  * the object for you and setup svutCodeLocation.
  * @brief Exception class used on assertion failure on NULL or non NULL pointer.
- **/
+**/
 class svutExAssertFailNullPointer : public svutExAssertFail
 {
 	public:
@@ -65,7 +65,7 @@ class svutExAssertFailNullPointer : public svutExAssertFail
  * the object for you and setup svutCodeLocation. Here it also support automatic conversion
  * of your values to string format when needed.
  * @brief Exception class used on assertion failure on equality test.
- **/
+**/
 class svutExAssertFailEqual : public svutExAssertFail
 {
 	public:
@@ -107,7 +107,7 @@ class svutExAssertFailCustom : public svutExAssertFail
  * Class used to throw exception when a non reachable portion of code is reached.
  * We may prefer to use the SVUT_ASSERT_NOT_EXEC_THIS macro to call this exception. It will
  * construct the object for you and setup svutCodeLocation.
-* @brief Exception class used to emit excption for non reachable code.
+ * @brief Exception class used to emit excption for non reachable code.
  **/
 class svutExAssertFailNotExec : public svutExAssertFail
 {
@@ -119,7 +119,7 @@ class svutExAssertFailNotExec : public svutExAssertFail
 /**
  * Class used to throw exception on exception asserting. We may prefer to use the SVUT_ASSERT_THROW
  * or SVUT_ASSERT_NOT_THROW macro to call this exception. It will construct the object for you and
-* setup svutCodeLocation.
+ * setup svutCodeLocation.
  * @brief Exception class used to emit on excpected or non expected exception.
  **/
 class svutExAssertFailThrow : public svutExAssertFail
@@ -129,6 +129,29 @@ class svutExAssertFailThrow : public svutExAssertFail
 			svutCodeLocation  location) throw();
 };
 
+/*********************  CLASS  **********************/
+/**
+ * Class used to throw exception on asserting zero value. We may prefer to use the SVUT_ASSERT_ZERO
+ * macro to call this exception. It will construct the object for you and setup svutCodeLocation.
+ * @brief Exception class used to emit on expected 0 value.
+**/
+class svutExAssertFailZero : public svutExAssertFail
+{
+	public:
+		svutExAssertFailZero(std::string value,svutCodeLocation location) throw();
+};
+
+/*********************  CLASS  **********************/
+/**
+ * Class used to throw exception on asserting zeroed array. We may prefer to use the SVUT_ASSERT_ZEROS
+ * macro to call this exception. It will construct the object for you and setup svutCodeLocation.
+ * @brief Exception class used to emit on expected arrary filled by 0 values.
+**/
+class svutExAssertFailZeros : public svutExAssertFail
+{
+	public:
+		svutExAssertFailZeros(svutCodeLocation location) throw();
+};
 
 }
 

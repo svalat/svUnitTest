@@ -83,6 +83,23 @@ bool asserterOperatorNotEqualStrict(const T & expected,const T & actual)
 }
 
 /*******************  FUNCTION  *********************/
+template <class T>
+static bool asserterOperatorEqualZero(const T & value)
+{
+	return (value == (T)0);
+}
+
+/*******************  FUNCTION  *********************/
+template <class T>
+static bool asserterOperatorEqualZeros(const T * value,size_t size)
+{
+	for (size_t i = 0 ; i < size ; ++i)
+		if (asserterOperatorEqualZero(value[i]) == false)
+			return false;
+	return true;
+}
+
+/*******************  FUNCTION  *********************/
 // template <class T>
 // static void assertNotEqualStrict(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
 // {

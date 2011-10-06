@@ -101,6 +101,11 @@ class UnitTest_svutAssert : public TestCase
 	CPPUNIT_TEST(testMacroAssertLE_custotype_good);
 	CPPUNIT_TEST(testMacroAssertLE_custotype_bad);
 	CPPUNIT_TEST(testMacroAssertLE_custotype_limit);
+	CPPUNIT_TEST(testMacroAssertZero_good);
+	CPPUNIT_TEST(testMacroAssertZero_bad);
+	CPPUNIT_TEST(testMacroAssertZeros_good);
+	CPPUNIT_TEST(testMacroAssertZeros_bad_1);
+	CPPUNIT_TEST(testMacroAssertZeros_bad_2);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -186,6 +191,11 @@ class UnitTest_svutAssert : public TestCase
 		void testMacroAssertLE_custotype_good(void);
 		void testMacroAssertLE_custotype_bad(void);
 		void testMacroAssertLE_custotype_limit(void);
+		void testMacroAssertZero_good(void);
+		void testMacroAssertZero_bad(void);
+		void testMacroAssertZeros_good(void);
+		void testMacroAssertZeros_bad_1(void);
+		void testMacroAssertZeros_bad_2(void);
 };
 
 /********************  STRUCT  **********************/
@@ -581,6 +591,81 @@ void UnitTest_svutAssert::testMacroAssertNotEqualStrict_cstr_good(void)
 		SVUT_ASSERT_NOT_EQUAL_STRICT("Hello World !!","Hello Bob !!");
 	} catch (svutExAssertFailEqual) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertZero_good(void )
+{
+	try {
+		SVUT_ASSERT_ZERO(0ul);
+	} catch (svutExAssertFailZero) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailZero exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertZero_bad(void )
+{
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_ZERO(10ul);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailZero exception.");
+	} catch (svutExAssertFailZero e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+		CPPUNIT_ASSERT_EQUAL(asserterToString("10"),e.getInfos().getEntry("Value"));
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertZeros_good(void )
+{
+	float values[100];
+	memset(values,0,sizeof(values));
+	try {
+		SVUT_ASSERT_ZEROS(values,100);
+	} catch (svutExAssertFailZeros) {
+		CPPUNIT_FAIL("Thow unexpected svutExAssertFailZeros exception.");
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertZeros_bad_1(void )
+{
+	float values[100];
+	memset(values,0,sizeof(values));
+	values[0] = 1.0;
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_ZEROS(values,100);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailZeros exception.");
+	} catch (svutExAssertFailZeros e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
+	} catch (...) {
+		CPPUNIT_FAIL("Thow unexpected exception.");
+	}
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutAssert::testMacroAssertZeros_bad_2(void )
+{
+	float values[100];
+	memset(values,0,sizeof(values));
+	values[99] = 1.0;
+	svutCodeLocation loc(__FILE__,__FUNCTION__,__LINE__ + 2);
+	try {
+		SVUT_ASSERT_ZEROS(values,100);
+		CPPUNIT_FAIL("Now Thow expected svutExAssertFailZeros exception.");
+	} catch (svutExAssertFailZeros e) {
+		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
 	}

@@ -149,4 +149,26 @@ svutExAssertFailThrow::svutExAssertFailThrow(std::string expected, std::string a
 	info.addEntry("Actual",actual);
 }
 
+/*******************  FUNCTION  *********************/
+/**
+ * Class constructor for exception assertion.
+ * @param value Define the value which was expected to be 0.
+ * @param location Define the location of the assertion. 
+**/
+svutExAssertFailZero::svutExAssertFailZero(string value, svutCodeLocation location) throw ()
+	: svutExAssertFail("AssertZero",SVUT_STATUS_FAILED,location,"Failed on waiting 0 value.")
+{
+	info.addEntry("Value",value);
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Class constructor for exception assertion.
+ * @param location Define the location of the assertion.
+**/
+svutExAssertFailZeros::svutExAssertFailZeros(svutCodeLocation location) throw()
+	: svutExAssertFail("AssertZeros",SVUT_STATUS_FAILED,location,"Failed on waiting 0 values in array.")
+{
+}
+
 }

@@ -51,6 +51,26 @@ namespace svUnitTest
 	if (((void*)(value)) != NULL) \
 		throw svUnitTest::svutExAssertFailNullPointer(true,SVUT_CODE_LOCATION)
 
+/********************  MACRO  ***********************/
+/**
+ * Macro used to assert ZERO values of every types (pointers, float, int, double, long...).
+ * In cas of failure, an exception of type svutExAssertFailZero was throwed. This macro was build
+ * to be used int unit test cases.
+ * @param value Define the value to test.
+**/
+#define SVUT_ASSERT_ZERO(value) \
+	svUnitTest::assertZero((value),SVUT_CODE_LOCATION);
+
+/********************  MACRO  ***********************/
+/**
+ * Macro used to assert if every entries of an array is setup to 0 depending on the array type.
+ * In cas of failure, an exception of type svutExAssertFailZeros was throwed. This macro was build
+ * to be used int unit test cases.
+ * @param value Define a pointer to the array to test.
+ * @param size Define the number of entries to test.
+**/
+#define SVUT_ASSERT_ZEROS(value,size)\
+	svUnitTest::assertZeros((value),(size),SVUT_CODE_LOCATION);
 
 /********************  MACRO  ***********************/
 /**

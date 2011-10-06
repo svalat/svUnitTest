@@ -35,6 +35,8 @@ class UnitTest_svutExAssert : public TestCase
 	CPPUNIT_TEST(testExAssertFailNotExec);
 	CPPUNIT_TEST(testExAssertFailThrow);
 	CPPUNIT_TEST(testExAssertLimit);
+	CPPUNIT_TEST(testExAssertZero);
+	CPPUNIT_TEST(testExAssertZeros);
 	CPPUNIT_TEST_SUITE_END();
 
 	public:
@@ -55,6 +57,8 @@ class UnitTest_svutExAssert : public TestCase
 		void testExAssertFailNotExec(void);
 		void testExAssertFailThrow(void);
 		void testExAssertLimit(void);
+		void testExAssertZero(void);
+		void testExAssertZeros(void);
 
 		svutCodeLocation location;
 		svutStatusInfo info;
@@ -276,6 +280,37 @@ void UnitTest_svutExAssert::testExAssertLimit(void )
 	CPPUNIT_ASSERT_EQUAL("TEST",obj.getInfos().getEntry("Actual"));
 	CPPUNIT_ASSERT_EQUAL("op",obj.getInfos().getEntry("Operator"));
 	CPPUNIT_ASSERT_EQUAL("Failed on expected limit on value.",obj.getMessage());
+	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutExAssert::testExAssertZero(void )
+{
+	//same test than svutExTestStatus
+	svutExAssertFailZero obj("10",location);
+
+	CPPUNIT_ASSERT_EQUAL("AssertFail:AssertZero",obj.getExceptionName());
+	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
+	CPPUNIT_ASSERT_EQUAL("Failed on waiting 0 value.",obj.getInfos().getMessage());
+	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
+	CPPUNIT_ASSERT_EQUAL(1u,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL("10",obj.getInfos().getEntry("Value"));
+	CPPUNIT_ASSERT_EQUAL("Failed on waiting 0 value.",obj.getMessage());
+	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_svutExAssert::testExAssertZeros(void )
+{
+	//same test than svutExTestStatus
+	svutExAssertFailZeros obj(location);
+
+	CPPUNIT_ASSERT_EQUAL("AssertFail:AssertZeros",obj.getExceptionName());
+	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getInfos().getStatus());
+	CPPUNIT_ASSERT_EQUAL("Failed on waiting 0 values in array.",obj.getInfos().getMessage());
+	CPPUNIT_ASSERT_EQUAL(location,obj.getInfos().getLocation());
+	CPPUNIT_ASSERT_EQUAL(0u,obj.getInfos().getNbEntries());
+	CPPUNIT_ASSERT_EQUAL("Failed on waiting 0 values in array.",obj.getMessage());
 	CPPUNIT_ASSERT_EQUAL(SVUT_STATUS_FAILED,obj.getStatus());
 }
 

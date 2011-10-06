@@ -73,6 +73,16 @@ inline std::string getLocationString(int line,const char * filename,const char *
 		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " != " #expected),SVUT_CODE_LOCATION)
 
 /********************  MACRO  ***********************/
+#define SVUT_ASSERT_ZERO(value) \
+	if (asserterOperatorEqualZero((value)) == false)\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " != 0"),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
+#define SVUT_ASSERT_ZEROS(value,size) \
+	if (asserterOperatorEqualZeros((value),(size)) == false)\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : each of " #value "[" #size "] != 0"),SVUT_CODE_LOCATION)
+
+/********************  MACRO  ***********************/
 #define SVUT_ASSERT_EQUAL_STRICT(expected,actual)\
 	if (asserterOperatorEqualStrict(expected,actual) == false)\
 		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " == " #expected),SVUT_CODE_LOCATION)

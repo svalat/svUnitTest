@@ -284,6 +284,70 @@ static void assertLT(const T1 & expectedLimit,const T2 & actual,svutCodeLocation
 
 /*******************  FUNCTION  *********************/
 /**
+ * Test if the given value is equal to 0. It's the base test for support assertZero and assertZeroes.
+ * @param value Define the value to test.
+ * @return Return true if equal to 0, false otherwise.
+**/
+template <class T>
+static bool asserterOperatorEqualZero(const T & value)
+{
+	return (value == (T)0);
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Method used to check that a given value is setup to 0. If not it will throw an exception of type
+ * svutExAssertFailZero. It will be used to construct the SVUT_ASSERT_ZERO macro. The value
+ * is tested vy using asserterOperatorEqualZero. To support your types, prefer to extend the asserterOperatorEqualZero
+ * function.
+ * @param value Define the value to test.
+ * @param location Define the code location which call this test.
+**/
+template <class T>
+static void assertZero(const T & value,svutCodeLocation location) throw (svutExAssertFailZero)
+{
+	if (asserterOperatorEqualZero(value) == false)
+		throw svutExAssertFailZero(asserterToString(value),location);
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Test if the given array contain only zeroes. It's the base test for support assertZeroes.
+ * It's base one asserterOperatorEqualZero to test each values.
+ * @param value Define the base pointer of array to test.
+ * @param size Define the size of the array.
+ * @return Return true if equal to 0, false otherwise.
+**/
+template <class T>
+static bool asserterOperatorEqualZeros(const T * value,size_t size)
+{
+	for (size_t i = 0 ; i < size ; ++i)
+		if (asserterOperatorEqualZero(value[i]) == false)
+			return false;
+	return true;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Method used to check that a given array is populated by zeroes. If not it will throw an exception of type
+ * svutExAssertFailZero. It will be used to construct the SVUT_ASSERT_ZEROS macro. The value
+ * is tested vy using asserterOperatorEqualZeros. To support your types, prefer to extend the asserterOperatorEqualZeros
+ * function.
+ * @param value Define the base pointer of array to.
+ * @param size Define the number of elements to test.
+ * @param location Define the code location which call this test.
+**/
+template <class T>
+static void assertZeros(const T & value,size_t size,svutCodeLocation location) throw (svutExAssertFailZeros)
+{
+	if (asserterOperatorEqualZeros(value,size) == false)
+	{
+		throw svutExAssertFailZeros(location);
+	}
+}
+
+/*******************  FUNCTION  *********************/
+/**
  * Methode used to implement equality assertion in macro SVUT_ASSERT_LE. It is declared as
  * template methode so it could be overritten to implement support of non compatible types.
  * The template version suppose the presence of properties between the two types :
