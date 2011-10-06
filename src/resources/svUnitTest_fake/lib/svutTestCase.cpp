@@ -59,7 +59,7 @@ void svutTestCase::markStatus(void)
 		cout << status.message << endl;
 		cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
 	}
-	if (status.status != "SUCCESS")
+	if (status.status != "SUCCESS" && status.status != "TODO")
 		finalRes = false;
 }
 

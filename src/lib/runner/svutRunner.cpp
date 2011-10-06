@@ -145,7 +145,7 @@ bool svutRunner::run_tests(void)
 			(*it)->runTestCase(&listener,this->testFilter);
 	}
 	this->listener.onGlobalEnd();
-	return (summary->getSummary().getStatus() == SVUT_STATUS_SUCCESS);
+	return (summary->getSummary().getStatus() == SVUT_STATUS_SUCCESS || summary->getSummary().getStatus() == SVUT_STATUS_TODO);
 }
 
 /*******************  FUNCTION  *********************/
