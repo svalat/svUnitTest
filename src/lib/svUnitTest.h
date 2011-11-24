@@ -11,6 +11,7 @@
 
 /********************  HEADERS  *********************/
 #include "svutTestCase.h"
+#include "svutFlatTestCase.h"
 #include "svutAssert.h"
 #include "svutDefaultMain.h"
 

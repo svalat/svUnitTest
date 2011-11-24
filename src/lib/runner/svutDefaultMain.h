@@ -35,4 +35,13 @@ int uniqueStandeloneMain(int argc,char * argv[],svutTestCaseBuilder & builder);
 	}
 }
 
+/**
+ * Simple macro to quicly define your main methode base on the default one from svUnitTest.
+ * It simply implement the main method by calling defaultMain() function of library.
+**/
+#define SVUT_USE_DEFAULT_MAIN \
+	int main(int argc,char * argv[]) { \
+		return defaultMain(argc,argv); \
+	}
+
 #endif

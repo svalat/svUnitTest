@@ -24,6 +24,7 @@
 #include "svutResultFormatterXml.h"
 #include "svutResultFormatterQtXml.h"
 #include "svutAutoRegister.h"
+#include "svutFlatTestCase.h"
 
 /**********************  USING  *********************/
 using namespace std;
@@ -203,7 +204,13 @@ void svutRunner::setDisplay(bool success,bool details)
 **/
 void svutRunner::loadAutoDetected(void)
 {
-	for(set<svutTestCaseBuilder *>::const_iterator it=getRegistredTestCase().begin();it!=getRegistredTestCase().end();it++)
+	set<svutTestCaseBuilder *> all;
+	//for flat test cases
+	all = getRegistredFlatTestCases();
+	//for normal test cases
+	all.insert(getRegistredTestCase().begin(),getRegistredTestCase().end());
+	//for normal test cases
+	for(set<svutTestCaseBuilder *>::const_iterator it=all.begin();it!=all.end();it++)
 	{
 		svutTestCase * tmp = (*it)->build();
 		if ( hasTestNamed(tmp->getName()))

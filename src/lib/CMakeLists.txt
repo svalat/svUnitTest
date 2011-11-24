@@ -16,7 +16,8 @@ set(svUnitTest_SRC
 	runner/svutTestFilterBasic.cpp
 	runner/svutDefaultMain.cpp
 	runner/svutRunnerConfig.cpp
-	
+
+	core/svutFlatTestCase.cpp
 	core/svutException.cpp
 	core/svutExAssert.cpp
 	core/svutExNotify.cpp

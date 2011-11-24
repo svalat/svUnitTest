@@ -98,6 +98,10 @@ add_test(svutStandeloneMainStd svutStandeloneMain -m std)
 add_executable(svutDefaultMainAllMessages UnitTest_defaultMainAllMessages.cpp)
 target_link_libraries (svutDefaultMainAllMessages svutUnitTestBase svunittest)
 
+############# BUILD MAIN TESTS ##################
+add_executable(flatMode UnitTest_flatMode.cpp)
+target_link_libraries (flatMode svutUnitTestBase svunittest)
+
 ################ SVUNITTESTFAKE #################
 add_executable(svUnitTestFake UnitTest_svUnitTestFake.cpp)
 target_link_libraries (svUnitTestFake svunittest_fake)

@@ -54,6 +54,31 @@ class svutObjectMethodGeneric : public svutObjectMethod
 		void (T::*methode)(void);
 };
 
+/********************  TYPEDEF  *********************/
+/**
+ * Define the prototype of methodes for flat test mode (simple C functions).
+ * @version 0.4.0
+**/
+typedef void (*svutTestMethodPtr)(void);
+
+/*********************  CLASS  **********************/
+/**
+ * Class used to store pointer to a simple C function. It will be used to implement
+ * the flat test way based on simple C functions.
+ * @brief Pointer to simple C function for flat test mode.
+ * @author Valat Sébastien
+ * @version 0.4.0
+**/
+class svutFlatObjectMethod : public svutObjectMethod
+{
+	public:
+		svutFlatObjectMethod(svutTestMethodPtr method);
+	    virtual void call(void );
+	protected:
+		/** Pointer to the C method to call. **/
+		svutTestMethodPtr method;
+};
+
 }
 
 /******************  GENERIC IMPL  ******************/

@@ -8,6 +8,7 @@
 
 /********************  HEADERS  *********************/
 #include "svutTestMethod.h"
+#include "svutException.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
@@ -63,6 +64,25 @@ void svutTestMethod::call(void)
 svutCodeLocation svutTestMethod::getLocation(void) const
 {
 	return location;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Default constructor of flat object method.
+ * @param method Define the address of "C" method to use.
+**/
+svutFlatObjectMethod::svutFlatObjectMethod(svutTestMethodPtr method)
+{
+	if (method == NULL)
+		throw svutExInternalError("Can't register a method at address NULL.");
+	else
+		this->method = method;
+}
+
+/*******************  FUNCTION  *********************/
+void svutFlatObjectMethod::call(void)
+{
+	method();
 }
 
 }
