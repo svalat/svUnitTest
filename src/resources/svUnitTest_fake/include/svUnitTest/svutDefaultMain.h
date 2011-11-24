@@ -6,6 +6,9 @@
              LICENSE  : CeCILL-C
 *****************************************************/
 
+#ifndef SVUT_DEFAULT_MAIN_HEADER
+#define SVUT_DEFAULT_MAIN_HEADER
+
 /********************  HEADERS  *********************/
 #include <vector>
 #include <cstdlib>
@@ -32,13 +35,15 @@ namespace svUnitTest
 	}
 	
 /********************  GLOBALS  **********************/
-extern std::vector<svutTestCaseBuilder *> __fake_svut_test_cases_register__;
+extern std::vector<svutTestCaseBuilder *> * __fake_svut_test_cases_register__;
 
 /*******************  FUNCTION  *********************/
 static int defaultMain(int argc,char * argv[])
 {
 	bool final = true;
-	for (std::vector<svutTestCaseBuilder *>::iterator it = __fake_svut_test_cases_register__.begin(); it != __fake_svut_test_cases_register__.end() ; ++it)
+	if (__fake_svut_test_cases_register__ == NULL)
+		__fake_svut_test_cases_register__ = new std::vector<svutTestCaseBuilder *>;
+	for (std::vector<svutTestCaseBuilder *>::iterator it = svUnitTest::__fake_svut_test_cases_register__->begin(); it != svUnitTest::__fake_svut_test_cases_register__->end() ; ++it)
 	{
 		svutTestCase * test = (*it)->build();
 		std::cout << "--------------";
@@ -52,6 +57,9 @@ static int defaultMain(int argc,char * argv[])
 		delete test;
 	}
 
+	if (__fake_svut_test_cases_register__ != NULL)
+		delete __fake_svut_test_cases_register__;
+
 	if (final)
 		return EXIT_SUCCESS;
 	else
@@ -61,8 +69,12 @@ static int defaultMain(int argc,char * argv[])
 /*******************  FUNCTION  *********************/
 static int uniqueStandeloneMain(int argc,char * argv[],svutTestCaseBuilder & builder)
 {
-	__fake_svut_test_cases_register__.push_back(&builder);
+	if (__fake_svut_test_cases_register__ == NULL)
+		__fake_svut_test_cases_register__ = new std::vector<svutTestCaseBuilder *>;
+	svUnitTest::__fake_svut_test_cases_register__->push_back(&builder);
 	return defaultMain(argc,argv);
 }
 
 }
+
+#endif //SVUT_DEFAULT_MAIN_HEADER

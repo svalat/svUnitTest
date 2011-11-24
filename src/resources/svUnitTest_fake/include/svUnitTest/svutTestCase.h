@@ -35,9 +35,6 @@ namespace svUnitTest
 /********************  MACROS  **********************/
 #define SVUT_RESET_CONTEXT() /*this->resetContexEntries()*/
 
-/********************  GLOBALS  **********************/
-extern std::vector<class svutTestCaseBuilder *> __fake_svut_test_cases_register__;
-
 /*********************  CLASS  **********************/
 /**
  * This is just a light implementation to fake the full library implementation. This may
@@ -73,6 +70,9 @@ class svutTestCaseBuilder
 		virtual ~svutTestCaseBuilder(void);
 		virtual svutTestCase * build(void) = 0;
 };
+
+/********************  GLOBALS  **********************/
+extern std::vector<svutTestCaseBuilder *> * __fake_svut_test_cases_register__;
 
 /*********************  CLASS  **********************/
 template <class T>
@@ -166,9 +166,12 @@ svutTestCaseBuilder::~svutTestCaseBuilder(void)
 }
 
 /*******************  FUNCTION  *********************/
-static void fakeRegisterTestCase(svUnitTest::svutTestCaseBuilder & builder)
+static int fakeRegisterTestCase(svUnitTest::svutTestCaseBuilder & builder)
 {
-	__fake_svut_test_cases_register__.push_back(&builder);
+	if (__fake_svut_test_cases_register__ == NULL)
+		__fake_svut_test_cases_register__ = new std::vector<svutTestCaseBuilder *>;
+	svUnitTest::__fake_svut_test_cases_register__->push_back(&builder);
+	return 0;
 }
 
 };

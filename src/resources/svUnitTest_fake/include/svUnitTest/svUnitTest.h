@@ -18,7 +18,7 @@
 /********************  MACRO  ***********************/
 /** Define all global variables (must be called one time only). **/
 #define SVUT_FAKE_DECLARE_GLOBAL_VARS\
-	std::vector<svutTestCaseBuilder *> svUnitTest::__fake_svut_test_cases_register__;
+	std::vector<svutTestCaseBuilder *> * svUnitTest::__fake_svut_test_cases_register__ = NULL;
 
 /********************  HEADERS  *********************/
 #include "svutTestCase.h"

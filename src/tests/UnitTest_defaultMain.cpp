@@ -7,9 +7,7 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
-#include <svutTestCase.h>
-#include <svutAssert.h>
-#include <svutDefaultMain.h>
+#include <svUnitTest.h>
 #include <iostream>
 
 /**********************  USING  *********************/
@@ -21,6 +19,7 @@ class UnitTest_MyTestCaseBase : public svutTestCase
 {
 	public:
 		UnitTest_MyTestCaseBase(std::string name);
+	    virtual void testMethodsRegistration(void );
 	protected:
 		virtual void setUp(void);
 		virtual void tearDown(void);
@@ -57,7 +56,12 @@ SVUT_REGISTER_TEST_CASE(UnitTest_MyTestCase3);
 UnitTest_MyTestCaseBase::UnitTest_MyTestCaseBase(string name)
 	:svutTestCase(name)
 {
-	SVUT_REG_TEST_METHOD(test1);
+}
+
+/*******************  FUNCTION  *********************/
+void UnitTest_MyTestCaseBase::testMethodsRegistration(void )
+{
+    SVUT_REG_TEST_METHOD(test1);
 	SVUT_REG_TEST_METHOD(test2);
 }
 
@@ -90,3 +94,5 @@ int main(int argc, char * argv[])
 {
 	return svUnitTest::defaultMain(argc,argv);
 }
+
+SVUT_FAKE_DECLARE_GLOBAL_VARS;

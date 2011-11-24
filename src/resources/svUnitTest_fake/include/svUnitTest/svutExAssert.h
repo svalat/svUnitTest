@@ -9,6 +9,9 @@
 #ifndef SVUT_EX_ASSERT_HEADER
 #define SVUT_EX_ASSERT_HEADER
 
+/********************  HEADERS  *********************/
+#include <string>
+
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
 {

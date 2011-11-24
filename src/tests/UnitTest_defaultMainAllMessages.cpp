@@ -7,9 +7,7 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
-#include <svutTestCase.h>
-#include <svutAssert.h>
-#include <svutDefaultMain.h>
+#include <svUnitTest.h>
 #include <iostream>
 #include "UnitTestMockTestCase2.h"
 
@@ -33,7 +31,4 @@ UnitTest_MyTestFull::UnitTest_MyTestFull(void )
 SVUT_REGISTER_TEST_CASE(UnitTest_MyTestFull);
 
 /*******************  FUNCTION  *********************/
-int main(int argc, char * argv[])
-{
-	return svUnitTest::defaultMain(argc,argv);
-}
+SVUT_USE_DEFAULT_MAIN
