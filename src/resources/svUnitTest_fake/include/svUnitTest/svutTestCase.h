@@ -11,6 +11,9 @@
 
 /********************  HEADERS  *********************/
 #include <string>
+#include <vector>
+#include <iostream>
+#include <cstdlib>
 #include "svutAssert.h"
 
 /********************  NAMESPACE  *******************/
@@ -31,6 +34,9 @@ namespace svUnitTest
 
 /********************  MACROS  **********************/
 #define SVUT_RESET_CONTEXT() /*this->resetContexEntries()*/
+
+/********************  GLOBALS  **********************/
+extern std::vector<class svutTestCaseBuilder *> __fake_svut_test_cases_register__;
 
 /*********************  CLASS  **********************/
 /**
@@ -76,10 +82,95 @@ class svutTestCaseBuilderGeneric : public svutTestCaseBuilder
 		virtual svutTestCase * build(void) { return new T();}
 };
 
-/*******************  FUNCTION **********************/
-void fakeRegisterTestCase(svUnitTest::svutTestCaseBuilder & builder);
-
+/*******************  FUNCTION  *********************/
+svutTestCase::svutTestCase(std::string name)
+{
+	this->caseName = name;
 }
 
+/*******************  FUNCTION  *********************/
+svutTestCase::svutTestCase(const svutTestCase & testCase)
+{
+	std::cerr << "Can't made a copy of svutTestCase, it was forbidden." << std::endl;
+	abort();
+}
+
+/*******************  FUNCTION  *********************/
+svutTestCase::~svutTestCase(void)
+{
+}
+
+/*******************  FUNCTION  *********************/
+bool svutTestCase::runTestCase(void)
+{
+	this->finalRes = true;
+	this->testMethodsRegistration();
+	return finalRes;
+}
+
+/*******************  FUNCTION  *********************/
+void svutTestCase::markStatus(void)
+{
+	std::cout << '[' << status.status << ']' << std::endl;
+	if (status.status != "SUCCESS" && status.message.empty() == false)
+	{
+		std::cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << std::endl;
+		std::cout << status.location << std::endl;
+		std::cout << status.message << std::endl;
+		std::cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << std::endl;
+	}
+	if (status.status != "SUCCESS" && status.status != "TODO")
+		finalRes = false;
+}
+
+/*******************  FUNCTION  *********************/
+void svutTestCase::markStartTest(std::string name)
+{
+	std::cout.fill('.');
+	std::cout.width(49);
+	std::cout << name;
+	status.status = "SUCCESS";
+}
+
+/*******************  FUNCTION  *********************/
+void svutTestCase::testMethodsRegistration(void)
+{
+}
+
+/*******************  FUNCTION  *********************/
+void svutTestCase::setTestCaseName(std::string name)
+{
+	this->caseName = name;
+}
+
+/*******************  FUNCTION  *********************/
+void svutTestCase::MARK_AS_KNOWN_ERROR(std::string message)
+{
+}
+
+/*******************  FUNCTION  *********************/
+void svutTestCase::setErrorMessage(svutExAssertFake & e)
+{
+	this->status = e;
+}
+
+/*******************  FUNCTION  *********************/
+std::string svutTestCase::getName(void) const
+{
+	return caseName;
+}
+
+/*******************  FUNCTION  *********************/
+svutTestCaseBuilder::~svutTestCaseBuilder(void)
+{
+}
+
+/*******************  FUNCTION  *********************/
+static void fakeRegisterTestCase(svUnitTest::svutTestCaseBuilder & builder)
+{
+	__fake_svut_test_cases_register__.push_back(&builder);
+}
+
+};
 
 #endif

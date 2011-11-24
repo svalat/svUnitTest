@@ -19,4 +19,7 @@
 /** Define the library version. **/
 #define SVUT_LIBARY_VERSION "0.3.0"
 
+/** For compatibility with fake mode. **/
+#define SVUT_FAKE_DECLARE_GLOBAL_VARS
+
 #endif

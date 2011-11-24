@@ -11,6 +11,7 @@
 
 /********************  HEADERS  *********************/
 #include <sstream>
+#include <cstring>
 #include "svutExAssert.h"
 
 /********************  NAMESPACE  *******************/
@@ -107,18 +108,77 @@ static bool asserterOperatorEqualZeros(const T * value,size_t size)
 // }
 
 /*******************  FUNCTION  *********************/
-bool asserterOperatorEqual(const char * expected,const char * actual);
-bool asserterOperatorNotEqual(const char * expected,const char * actual);
-bool asserterOperatorEqualStrict(const char * expected,const char * actual);
-bool asserterOperatorNotEqualStrict(const char * expected,const char * actual);
-bool asserterOperatorGE(const char * v1,const char * v2);
-bool asserterOperatorGT(const char * v1,const char * v2);
-bool asserterOperatorLE(const char * v1,const char * v2);
-bool asserterOperatorLT(const char * v1,const char * v2);
-bool asserterOperatorGE(char * v1,char * v2);
-bool asserterOperatorGT(char * v1,char * v2);
-bool asserterOperatorLE(char * v1,char * v2);
-bool asserterOperatorLT(char * v1,char * v2);
+static bool asserterOperatorEqual(const char * expected,const char * actual)
+{
+	return strcmp(expected,actual) == 0;
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorNotEqual(const char * expected,const char * actual)
+{
+	return strcmp(expected,actual) != 0;
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorEqualStrict(const char * expected,const char * actual)
+{
+	return asserterOperatorEqual(expected,actual);
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorNotEqualStrict(const char * expected,const char * actual)
+{
+	return asserterOperatorNotEqual(expected,actual);
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorGE(const char * v1,const char * v2)
+{
+	return v1 >= v2;
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorGT(const char * v1,const char * v2)
+{
+	return v1 > v2;
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorLE(const char * v1,const char * v2)
+{
+	return v1 <= v2;
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorLT(const char * v1,const char * v2)
+{
+	return v1 < v2;
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorGE(char * v1,char * v2)
+{
+	return v1 >= v2;
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorGT(char * v1,char * v2)
+{
+	return v1 > v2;
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorLE(char * v1,char * v2)
+{
+	return v1 <= v2;
+}
+
+/*******************  FUNCTION  *********************/
+static bool asserterOperatorLT(char * v1,char * v2)
+{
+	return v1 < v2;
+}
+
 }
 
 #endif
