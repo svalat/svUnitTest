@@ -151,13 +151,19 @@ unsigned int svutStatusInfo::getNbContextEntries(void ) const
  * @param postfix Define the string to place after the parameter value.
  * @param list Define the input info list to format.
  */
-void svutStatusInfo::formatList(const svutStatusInfoMap & list,std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix) const
+void svutStatusInfo::formatList(const svutStatusInfoMap & list,std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix,svutStringFilter filter) const
 {
 	for (map<string,string>::const_iterator it=list.begin() ; it != list.end(); it++ )
 	{
 		out << prefix;
-		out << it->first << separator;
-		out << it->second << postfix;
+		if (filter == NULL)
+		{
+			out << it->first << separator;
+			out << it->second << postfix;
+		} else {
+			out << filter(it->first) << separator;
+			out << filter(it->second) << postfix;
+		}
 	}
 }
 
@@ -169,9 +175,9 @@ void svutStatusInfo::formatList(const svutStatusInfoMap & list,std::ostream& out
  * @param separator Define the string to place between the parameter name and the value.
  * @param postfix Define the string to place after the parameter value.
  */
-void svutStatusInfo::formatEntries(std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix) const
+void svutStatusInfo::formatEntries(std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix,svutStringFilter filter) const
 {
-	formatList(entries,out,prefix,separator,postfix);
+	formatList(entries,out,prefix,separator,postfix,filter);
 }
 
 /*******************  FUNCTION  *********************/
@@ -183,12 +189,12 @@ void svutStatusInfo::formatEntries(std::ostream& out, const std::string& prefix,
  * @param separator Define the string to place between the parameter name and the value.
  * @param postfix Define the string to place after the parameter value.
  */
-void svutStatusInfo::formatEntries ( std::ostream& out, const char* prefix, const char* separator, const char* postfix ) const
+void svutStatusInfo::formatEntries ( std::ostream& out, const char* prefix, const char* separator, const char* postfix ,svutStringFilter filter) const
 {
 	std::string pre(prefix);
 	std::string  sep(separator);
 	std::string post(postfix);
-	formatList(entries,out,pre,sep,post);
+	formatList(entries,out,pre,sep,post,filter);
 }
 
 /*******************  FUNCTION  *********************/
@@ -199,9 +205,9 @@ void svutStatusInfo::formatEntries ( std::ostream& out, const char* prefix, cons
  * @param separator Define the string to place between the parameter name and the value.
  * @param postfix Define the string to place after the parameter value.
  */
-void svutStatusInfo::formatContext(std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix) const
+void svutStatusInfo::formatContext(std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix,svutStringFilter filter) const
 {
-	formatList(context,out,prefix,separator,postfix);
+	formatList(context,out,prefix,separator,postfix,filter);
 }
 
 /*******************  FUNCTION  *********************/
@@ -212,12 +218,12 @@ void svutStatusInfo::formatContext(std::ostream& out, const std::string& prefix,
  * @param separator Define the string to place between the parameter name and the value.
  * @param postfix Define the string to place after the parameter value.
  */
-void svutStatusInfo::formatContext(std::ostream& out, const char* prefix, const char* separator, const char* postfix) const
+void svutStatusInfo::formatContext(std::ostream& out, const char* prefix, const char* separator, const char* postfix,svutStringFilter filter) const
 {
 	std::string pre(prefix);
 	std::string  sep(separator);
 	std::string post(postfix);
-	formatList(context,out,pre,sep,post);
+	formatList(context,out,pre,sep,post,filter);
 }
 
 /*******************  FUNCTION  *********************/

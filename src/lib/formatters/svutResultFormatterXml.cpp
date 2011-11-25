@@ -11,6 +11,7 @@
 #include <ctime>
 #include "svutResultFormatterXml.h"
 #include "svUnitTest.h"
+#include "svutResultFormatterHelper.h"
 
 /**********************  USING  *********************/
 using namespace std;
@@ -99,7 +100,7 @@ void svutResultFormatterXml::closeOutput(void )
 void svutResultFormatterXml::openTestCase(const svUnitTest::svutTestCase& testCase)
 {
 	*out << "\t<TestCase>" << endl;
-	*out << "\t\t<name>" << testCase.getName() << "</name>" << endl;
+	*out << "\t\t<name>" << escapeXmlCharsInString(testCase.getName()) << "</name>" << endl;
 }
 
 /*******************  FUNCTION  *********************/
@@ -112,7 +113,7 @@ void svutResultFormatterXml::closeTestCase(const svUnitTest::svutTestCase& /*tes
 void svutResultFormatterXml::openTestMethod(const svUnitTest::svutTestCase& /*testCase*/, const svUnitTest::svutTestMethod& meth)
 {
 	*out << "\t\t<TestFunction>" << endl;
-	*out << "\t\t\t<name>" << meth.getName() << "</name>" << endl;
+	*out << "\t\t\t<name>" << escapeXmlCharsInString(meth.getName()) << "</name>" << endl;
 }
 
 /*******************  FUNCTION  *********************/
@@ -153,12 +154,12 @@ void svUnitTest::svutResultFormatterXml::printAssertInfo(const svUnitTest::svutS
 {
 	*out << "\t\t\t<AssertInfo>" << endl;
 	printLocation(status.getLocation());
-	*out << "\t\t\t\t<message>" << status.getMessage() << "</message>" << endl;
+	*out << "\t\t\t\t<message>" << escapeXmlCharsInString(status.getMessage()) << "</message>" << endl;
 	*out << "\t\t\t\t<entries>" << endl;
-	status.formatEntries(*out,"\t\t\t\t\t<entry name='","'>","</entry>\n");
+	status.formatEntries(*out,"\t\t\t\t\t<entry name='","'>","</entry>\n",escapeXmlCharsInString);
 	*out << "\t\t\t\t</entries>" << endl;
 	*out << "\t\t\t\t<context>" << endl;
-	status.formatContext(*out,"\t\t\t\t\t<entry name='","'>","</entry>\n");
+	status.formatContext(*out,"\t\t\t\t\t<entry name='","'>","</entry>\n",escapeXmlCharsInString);
 	*out << "\t\t\t\t</context>" << endl;
 	*out << "\t\t\t</AssertInfo>" << endl;
 }
@@ -174,8 +175,8 @@ void svutResultFormatterXml::printLocation(const svUnitTest::svutCodeLocation& l
 	*out << "\t\t\t\t<location>" << endl;
 	if (location.hasLocation())
 	{
-		*out << "\t\t\t\t\t<file>" << location.getFilename() <<  "</file>" << endl;
-		*out << "\t\t\t\t\t<methode>" << location.getMethodeName() <<  "</methode>" << endl;
+		*out << "\t\t\t\t\t<file>" << escapeXmlCharsInString(location.getFilename()) <<  "</file>" << endl;
+		*out << "\t\t\t\t\t<methode>" << escapeXmlCharsInString(location.getMethodeName()) <<  "</methode>" << endl;
 		*out << "\t\t\t\t\t<line>" << location.getLine() <<  "</line>" << endl;
 	} else {
 		*out << "\t\t\t\t\t<unknown></unknown>" << endl;
@@ -199,9 +200,9 @@ void svutResultFormatterXml::onListMethod(const svUnitTest::svutTestCase& testCa
 	if (changeTestCase && lastTestCase != NULL)
 		*out << "\t</TestCase>" << endl;
 	if (changeTestCase)
-		*out << "\t<TestCase name='"<< testCase.getName() << "'>" << endl;
+		*out << "\t<TestCase name='"<< escapeXmlCharsInString(testCase.getName()) << "'>" << endl;
 	
-	*out << "\t\t<TestMethod name='" << method.getName() << "'/>" << endl;
+	*out << "\t\t<TestMethod name='" << escapeXmlCharsInString(method.getName()) << "'/>" << endl;
 	
 	if (changeTestCase)
 		lastTestCase = &testCase;

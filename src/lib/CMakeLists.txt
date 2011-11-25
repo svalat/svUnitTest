@@ -32,6 +32,7 @@ set(svUnitTest_SRC
 	listeners/svutListenerDirectOutputter.cpp
 	listeners/svutListenerMultiplexer.cpp
 
+	formatters/svutResultFormatterHelper.cpp
 	formatters/svutResultSummary.cpp
 	formatters/svutResultFormatterStdBW.cpp
 	formatters/svutResultFormatterStd.cpp

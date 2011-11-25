@@ -43,6 +43,8 @@ enum svutStatus
 /********************** TYPEDEF *********************/
 /** Map of key,value pair to provide information on final status. **/
 typedef std::map<std::string,std::string> svutStatusInfoMap;
+/** A filter function for string conversion. **/
+typedef std::string (*svutStringFilter)(const std::string & value);
 
 /*********************  CLASS  **********************/
 /**
@@ -64,10 +66,10 @@ class svutStatusInfo
 		void addEntry(const char * name,const char * value);
 		void addEntry(const char * name,const std::string & value);
 		void setContext(svutStatusInfoMap & context);
-		void formatEntries(std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix) const;
-		void formatEntries(std::ostream & out,const char * prefix,const char * separator,const char * postfix) const;
-		void formatContext(std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix) const;
-		void formatContext(std::ostream & out,const char * prefix,const char * separator,const char * postfix) const;
+		void formatEntries(std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix,svutStringFilter filter = NULL) const;
+		void formatEntries(std::ostream & out,const char * prefix,const char * separator,const char * postfix,svutStringFilter filter = NULL) const;
+		void formatContext(std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix,svutStringFilter filter = NULL) const;
+		void formatContext(std::ostream & out,const char * prefix,const char * separator,const char * postfix,svutStringFilter filter = NULL) const;
 		svutStatusInfoMap getEntries(void) const;
 		unsigned int getNbEntries(void) const;
 		svutStatusInfoMap getContext(void) const;
@@ -78,7 +80,7 @@ class svutStatusInfo
 		std::string getStatusName(void) const;
 		static std::string getStatusName(svutStatus status);
 	protected:
-		void formatList(const svutStatusInfoMap & list,std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix) const;
+		void formatList(const svutStatusInfoMap & list,std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix,svutStringFilter filter=NULL) const;
 		/** Define the message related to the status of the test. **/
 		std::string message;
 		/** Extra parameters to describe the current status, mainly for errors debugging. **/

@@ -9,6 +9,8 @@
 /********************  HEADERS  *********************/
 #include "svutResultFormatterQtXml.h"
 #include "svUnitTest.h"
+#include "svutResultFormatterHelper.h"
+#include <sstream>
 
 /**********************  USING  *********************/
 using namespace std;
@@ -63,9 +65,9 @@ void svutResultFormatterQtXml::closeTestCase(const svUnitTest::svutTestCase& /*t
 void svutResultFormatterQtXml::openTestMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth)
 {
 	if (displayFullName)
-		*out << "\t<TestFunction name='" << testCase.getName() << "::" << meth.getName() << "'>" << endl;
+		*out << "\t<TestFunction name='" << escapeXmlCharsInString(testCase.getName()) << "::" << escapeXmlCharsInString(meth.getName()) << "'>" << endl;
 	else
-		*out << "\t<TestFunction name='" << meth.getName() << "'>" << endl;
+		*out << "\t<TestFunction name='" << escapeXmlCharsInString(meth.getName()) << "'>" << endl;
 }
 
 /*******************  FUNCTION  *********************/
@@ -91,7 +93,7 @@ void svUnitTest::svutResultFormatterQtXml::printAssertInfo(const svUnitTest::svu
 	int line = status.getLocation().getLine();
 	if (line == -1) line = 0;
 	*out << "\t\t<Incident type='"<< getQtStatusName(status.getStatus())
-		<< "' file='" << status.getLocation().getFilename()
+		<< "' file='" << escapeXmlCharsInString(status.getLocation().getFilename())
 		<< "' line='" << line
 		<< "'>";
 	if (status.getStatus() == SVUT_STATUS_FAILED || status.getStatus() == SVUT_STATUS_UNKNOWN)
@@ -99,15 +101,15 @@ void svUnitTest::svutResultFormatterQtXml::printAssertInfo(const svUnitTest::svu
 		*out << endl << "\t\t\t<Description><![CDATA[";
 		if (!status.getMessage().empty())
 		{
-			*out << status.getMessage();
+			*out << escapeXmlCharsInString(status.getMessage());
 			if (status.getNbEntries() > 0)
 				*out << endl;
 		}
-		status.formatEntries(*out,"   - "," : ","\n");
+		status.formatEntries(*out,"   - "," : ","\n",escapeXmlCharsInString);
 		if (status.getNbContextEntries() > 0)
 		{
 			*out << "Context :" << endl;
-			status.formatContext(*out,"   - "," : ","\n");
+			status.formatContext(*out,"   - "," : ","\n",escapeXmlCharsInString);
 		}
 		*out << "]]></Description>" << endl << "\t\t";
 	}
@@ -157,9 +159,9 @@ void svutResultFormatterQtXml::onListingEnd(void )
 void svutResultFormatterQtXml::onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method)
 {
 	if (displayFullName)
-		*out << testCase.getName() << "::" << method.getName() << "()\n";
+		*out << escapeXmlCharsInString(testCase.getName()) << "::" << escapeXmlCharsInString(method.getName()) << "()\n";
 	else
-		*out << method.getName() << "()\n";
+		*out << escapeXmlCharsInString(method.getName()) << "()\n";
 }
 
 }
