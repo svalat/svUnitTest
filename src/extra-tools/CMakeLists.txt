@@ -6,12 +6,7 @@
 #            LICENSE  : CeCILL-C                     #
 ######################################################
 
-#subdirs
-add_subdirectory (lib)
-add_subdirectory (integration)
-add_subdirectory (examples)
-add_subdirectory (resources)
-add_subdirectory(extra-tools)
-if (NOT DISABLE_UNIT_TESTS)
-	add_subdirectory (tests)
-endif(NOT DISABLE_UNIT_TESTS)
+#install in prefix/bin
+set(SVUNITTEST_XSTL_DIR ${CMAKE_INSTALL_PREFIX}/share/svUnitTest)
+configure_file(svutxmlrun.in svutxmlrun ESCAPE_QUOTES @ONLY)
+install(FILES svutxmlmerger ${CMAKE_CURRENT_BINARY_DIR}/svutxmlrun DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)

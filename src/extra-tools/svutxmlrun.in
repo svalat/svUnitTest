@@ -1,0 +1,60 @@
+#!/bin/bash
+######################################################
+#            PROJECT  : svUnitTest                   #
+#            VERSION  : 0.3.0                        #
+#            DATE     : 05/2011                      #
+#            AUTHOR   : Valat Sébastien              #
+#            LICENSE  : CeCILL-C                     #
+######################################################
+
+######################################################
+tests="$*"
+html='false'
+fullpath='true'
+xslt_dir="@SVUNITTEST_XSTL_DIR@"
+
+######################################################
+if [ -z "$tests" ]; then
+	echo "Usage : svutxmlrun [--html] [--no-full-path] {test_binary_1} [test_binary_2] ..." 1>&2
+	exit 1
+fi
+
+######################################################
+#try to add path in not already done
+export PATH="$(dirname $0):$PATH"
+
+######################################################
+#run all
+finalList=""
+for f in $tests
+do
+	if [ "$f" = "--html" ]; then
+		html=true
+	elif [ "$f" = "--no-full-path" ]; then
+		fullpath=false
+	else
+		fname="tmp-results-$(basename "$f").xml"
+		$f -m xml > "$fname"
+		finalList="$finalList $fname"
+	fi
+done
+
+######################################################
+#merge all
+if [ "$html" = "true" ]; then
+	svutxmlmerger $finalList > tmp-all.xml || exit 1
+	if [ -d "svUnitTest_html" ]; then dtd=""; else dtd="--novalid"; fi
+	if [ "$fullpath" = "true" ]; then
+		xsltproc $dtd "${xslt_dir}/svUnitTest_html/svUnitTest.xsl" "tmp-all.xml" | sed -e "s#svUnitTest_html/#file://${xslt_dir}/svUnitTest_html/#g" || exit 1
+	else
+		xsltproc $dtd "${xslt_dir}/svUnitTest_html/svUnitTest.xsl" "tmp-all.xml" || exit 1
+	fi
+	rm -f tmp-all.xml || exit 1
+else
+	svutxmlmerger $finalList || exit 1
+fi
+
+######################################################
+#remove temp files
+rm -f $finalList || exit 1
+

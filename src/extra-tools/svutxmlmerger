@@ -1,0 +1,164 @@
+#!/bin/bash
+######################################################
+#            PROJECT  : svUnitTest                   #
+#            VERSION  : 0.3.0                        #
+#            DATE     : 05/2011                      #
+#            AUTHOR   : Valat Sébastien              #
+#            LICENSE  : CeCILL-C                     #
+######################################################
+
+####################### PARAMS #######################
+fileList="$*"
+
+###################### FUNCTION ######################
+#Params:
+#  - $1 : File in which to search the version
+function getLibVersion()
+{
+	grep "<LibVersion>" "$1" | sed -e "s#</LibVersion>##g" -e "s#<LibVersion>##g" | xargs echo
+}
+
+###################### FUNCTION ######################
+#Params:
+#  - $1 : File in which to take the header part
+function extractHeader()
+{
+	cat "$1" | while read line
+	do
+		echo "$line"
+		if [ ! -z "$(echo $line | grep '</TestEnv>')" ]; then
+			break;
+		fi
+	done
+}
+
+###################### FUNCTION ######################
+#Params:
+# - $1 : File name
+function genComment()
+{
+	echo "	<!-- Extracted from sub file : $1 -->"
+}
+
+###################### FUNCTION ######################
+#Params:
+#  - $1 : File in which to take the tests
+function extractTests()
+{
+	genComment "$1"
+	#read until first <TestCase> balise then print until <GlobalResults>
+	firstLine=$(($(grep -n "</TestEnv>" "$1" | cut -f 1 -d ':')  +1 ))
+	lastLine=$(($(grep -n "<GlobalResults>" "$1" | cut -f 1 -d ':') -1 ))
+	#echo "<!-- firstLine = $firstLine ; lastLine = $lastLine -->"
+	head -n $lastLine "$1" | tail -n $(($lastLine - $firstLine + 1))
+}
+
+###################### FUNCTION ######################
+#Params:
+#Globals:
+#  - fileList : list of files to use to compute global results
+function regenGlobalResults()
+{
+	#setup counters
+	cntSuccess=0
+	cntIndev=0
+	cntTodo=0
+	cntFailed=0
+	cntUnknown=0
+	cntTotal=0
+
+	#loop on all to count
+	for f in $fileList
+	do
+		#get status list
+		cntStatus=$(grep "<status>" "$f" | wc -l)
+		cntStatus=$(($cntStatus - 1))
+		#keep all status except the last one
+		buffer="$(grep "<status>" "$f"   | head -n $cntStatus    )"
+		#count all numbers
+		tmpSuccess=$(echo "$buffer"      | grep -c "success")
+		tmpIndev=$(echo "$buffer"        | grep -c "indev")
+		tmpTodo=$(echo "$buffer"         | grep -c "todo")
+		tmpFailed=$(echo "$buffer"       | grep -c "failed")
+		tmpUnknown=$(echo "$buffer"      | grep -c "unknown")
+		#sum them
+		cntSuccess=$(($cntSuccess + $tmpSuccess))
+		cntIndev=$(($cntIndev + $tmpIndev))
+		cntTodo=$(($cntTodo + $tmpTodo))
+		cntFailed=$(($cntFailed + $tmpFailed))
+		cntUnknown=$(($cntUnknown + $tmpUnknown))
+		cntTotal=$(($cntTotal + $cntStatus))
+		#check errors
+		sum=$(($cntSuccess + $cntIndev + $cntTodo + $cntFailed + $cntUnknown))
+		if [ $sum -ne $cntTotal ]; then
+			echo "Error while parding $f, don't get same event sum : $sum != $cntTotal" 1>&2
+			echo "cntSuccess=$cntSuccess" 1>&2
+			echo "cntIndev=$cntIndev" 1>&2
+			echo "cntTodo=$cntTodo" 1>&2
+			echo "cntFailed=$cntFailed" 1>&2
+			echo "cntUnknown=$cntUnknown" 1>&2
+			echo "cntTotal=$cntTotal != sum=$sum" 1>&2
+			exit 1
+		fi
+	done
+
+	#gen final
+	echo "	<GlobalResults>"
+	echo "		<result type='success'>$cntSuccess</result>"
+	echo "		<result type='indev'>$cntIndev</result>"
+	echo "		<result type='todo'>$cntTodo</result>"
+	echo "		<result type='failed'>$cntFailed</result>"
+	echo "		<result type='unknown'>$cntUnknown</result>"
+	echo "		<total>$cntTotal</total>"
+	#final status
+	if   [ $cntUnknown -ne 0 ]; then echo "		<status>unknown</status>"
+	elif [ $cntFailed -ne 0 ]; then echo "		<status>failed</status>"
+	elif [ $cntTodo -ne 0 ]; then echo "		<status>todo</status>"
+	elif [ $cntIndev -ne 0 ]; then echo "		<status>indev</status>"
+	elif [ $cntSuccess -ne 0 ]; then echo "		<status>success</status>"
+	fi
+	#close it
+	echo "	</GlobalResults>"
+}
+
+###################### FUNCTION ######################
+#Parms:
+function closeXml()
+{
+	echo "</UnitTest>"
+}
+
+#################### CHECK PARAMS ####################
+if [ -z "$fileList" ]; then
+	echo "Usage : svutxmlmerger {file1.xml} [file2.xml] [file3.xml] ...." 1>&2
+	exit 1
+fi
+
+################# CHECK LIB VERSION ##################
+#check if same lib version in all files, otherwise, fail
+libVersion=$(getLibVersion "$1")
+for f in $fileList
+do
+	v=$(getLibVersion "$f")
+	if [ "$v" != "$libVersion" ]; then
+		echo "All your files must use the same lib version, otherwise its strange, you don't think ?"1>&2
+		echo " - $libVersion in $1"1>&2
+		echo " - $v in $f"1>&2
+		exit 1
+	fi
+	if [ -z "$(grep 'svUnitTest.dtd' "$f")" ]; then
+		echo "This file isn't a svUnitTest XML result file , can't find svUnitTest.dtd reference :"1>&2
+		echo "$f" 1>&2
+		exit 1
+	fi
+done
+
+################### PRINT HEADER #####################
+#we take the header in first file
+extractHeader "$1"
+for f in $fileList
+do
+	extractTests "$f"
+done
+regenGlobalResults
+closeXml
