@@ -15,9 +15,16 @@
 #include <iostream>
 #include <ios>
 #include "svutTestCase.h"
+#include "svutFlatTestCase.h"
 
 namespace svUnitTest
 {
+
+/********************  MACRO  ***********************/
+/** Define all global variables (must be called one time only). **/
+#define SVUT_FAKE_DECLARE_GLOBAL_VARS\
+	std::vector<svutTestCaseBuilder *> * svUnitTest::__fake_svut_test_cases_registry__ = NULL;\
+	std::vector<svutFlatRegistryEntry> * svUnitTest::__fake_svut_test_flat_test_registry__ = NULL;
 
 /********************  MACROS  **********************/
 #define SVUT_REGISTER_STANDELONE(className) \
@@ -35,15 +42,18 @@ namespace svUnitTest
 	}
 	
 /********************  GLOBALS  **********************/
-extern std::vector<svutTestCaseBuilder *> * __fake_svut_test_cases_register__;
+extern std::vector<svutTestCaseBuilder *> * __fake_svut_test_cases_registry__;
 
 /*******************  FUNCTION  *********************/
 static int defaultMain(int argc,char * argv[])
 {
 	bool final = true;
-	if (__fake_svut_test_cases_register__ == NULL)
-		__fake_svut_test_cases_register__ = new std::vector<svutTestCaseBuilder *>;
-	for (std::vector<svutTestCaseBuilder *>::iterator it = svUnitTest::__fake_svut_test_cases_register__->begin(); it != svUnitTest::__fake_svut_test_cases_register__->end() ; ++it)
+
+	std::set<svUnitTest::svutTestCaseBuilder *> lst = getRegistredFlatTestCases();
+	if (__fake_svut_test_cases_registry__ != NULL)
+		lst.insert(svUnitTest::__fake_svut_test_cases_registry__->begin(),svUnitTest::__fake_svut_test_cases_registry__->end());
+	
+	for (std::set<svutTestCaseBuilder *>::iterator it = lst.begin(); it != lst.end() ; ++it)
 	{
 		svutTestCase * test = (*it)->build();
 		std::cout << "--------------";
@@ -57,8 +67,11 @@ static int defaultMain(int argc,char * argv[])
 		delete test;
 	}
 
-	if (__fake_svut_test_cases_register__ != NULL)
-		delete __fake_svut_test_cases_register__;
+	if (__fake_svut_test_cases_registry__ != NULL)
+		delete __fake_svut_test_cases_registry__;
+
+	if (__fake_svut_test_flat_test_registry__ != NULL)
+		delete __fake_svut_test_flat_test_registry__;
 
 	if (final)
 		return EXIT_SUCCESS;
@@ -69,9 +82,9 @@ static int defaultMain(int argc,char * argv[])
 /*******************  FUNCTION  *********************/
 static int uniqueStandeloneMain(int argc,char * argv[],svutTestCaseBuilder & builder)
 {
-	if (__fake_svut_test_cases_register__ == NULL)
-		__fake_svut_test_cases_register__ = new std::vector<svutTestCaseBuilder *>;
-	svUnitTest::__fake_svut_test_cases_register__->push_back(&builder);
+	if (__fake_svut_test_cases_registry__ == NULL)
+		__fake_svut_test_cases_registry__ = new std::vector<svutTestCaseBuilder *>;
+	svUnitTest::__fake_svut_test_cases_registry__->push_back(&builder);
 	return defaultMain(argc,argv);
 }
 

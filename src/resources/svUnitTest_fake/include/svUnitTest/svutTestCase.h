@@ -21,7 +21,7 @@ namespace svUnitTest
 {
 	
 /********************  MACROS  **********************/
-#define SVUT_REG_TEST_METHOD(x) markStartTest(#x); setUp(); SVUT_CAPTURE_ASSERT_EXCEPTIONS(x()); tearDown(); markStatus()
+#define SVUT_REG_TEST_METHOD(x) markStartTest(#x); SVUT_CAPTURE_ASSERT_EXCEPTIONS(setUp();x();tearDown();); markStatus()
 #define SVUT_REGISTER_TEST_CASE(name)\
 	static svUnitTest::svutTestCaseBuilderGeneric<name> ___FAKE_SVUNITTEST_case_##name##___;\
 	static int ___FAKE_SVUNITTEST_res_case_registration_of##name##__ = svUnitTest::fakeRegisterTestCase(___FAKE_SVUNITTEST_case_##name##___)
@@ -72,7 +72,7 @@ class svutTestCaseBuilder
 };
 
 /********************  GLOBALS  **********************/
-extern std::vector<svutTestCaseBuilder *> * __fake_svut_test_cases_register__;
+extern std::vector<svutTestCaseBuilder *> * __fake_svut_test_cases_registry__;
 
 /*********************  CLASS  **********************/
 template <class T>
@@ -168,9 +168,9 @@ svutTestCaseBuilder::~svutTestCaseBuilder(void)
 /*******************  FUNCTION  *********************/
 static int fakeRegisterTestCase(svUnitTest::svutTestCaseBuilder & builder)
 {
-	if (__fake_svut_test_cases_register__ == NULL)
-		__fake_svut_test_cases_register__ = new std::vector<svutTestCaseBuilder *>;
-	svUnitTest::__fake_svut_test_cases_register__->push_back(&builder);
+	if (__fake_svut_test_cases_registry__ == NULL)
+		__fake_svut_test_cases_registry__ = new std::vector<svutTestCaseBuilder *>;
+	svUnitTest::__fake_svut_test_cases_registry__->push_back(&builder);
 	return 0;
 }
 

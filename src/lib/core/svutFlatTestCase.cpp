@@ -62,26 +62,34 @@ svutFlatTestCase::svutFlatTestCase(string name)
 
 /*******************  FUNCTION  *********************/
 /**
+ * Register a new test method to the current flat test case.
+ * @param name Define the name of the test.
+ * @param methodPtr Define the test function to use.
+ * @param location Define the location of the function in source code.
+**/
+void svutFlatTestCase::registerFlatTestMethod(string name, svutTestMethodPtr methodPtr, const svUnitTest::svutCodeLocation& location)
+{
+	if (name == "__SVUT_SPECIAL_TEST_CASE_SETUP__")
+	{
+		this->setUpPtr = methodPtr;
+	} else if (name == "__SVUT_SPECIAL_TEST_CASE_TEAR_DOWN__") {
+		this->tearDownPtr = methodPtr;
+	} else {
+		svutObjectMethod * meth = new svutFlatObjectMethod(methodPtr);
+		svutTestMethod * test = new svutTestMethod(name,meth,location);
+		this->registerTestMethod(test);
+	}
+}
+
+/*******************  FUNCTION  *********************/
+/**
  * Search all corresponding tests by checking testCaseName and create entries in current test case.
 **/
 void svutFlatTestCase::testMethodsRegistration(void )
 {
 	for (std::vector<svutFlatRegistryEntry>::const_iterator it = globalFlatTestRegistry.begin() ; it != globalFlatTestRegistry.end() ; ++it)
-	{
 		if (it->testCaseName == getName())
-		{
-			if (it->testName == "__SVUT_SPECIAL_TEST_CASE_SETUP__")
-			{
-				this->setUpPtr = it->methodPtr;
-			} else if (it->testName == "__SVUT_SPECIAL_TEST_CASE_TEAR_DOWN__") {
-				this->tearDownPtr = it->methodPtr;
-			} else {
-				svutObjectMethod * meth = new svutFlatObjectMethod(it->methodPtr);
-				svutTestMethod * test = new svutTestMethod(it->testName,meth,it->location);
-				this->registerTestMethod(test);
-			}
-		}
-	}
+			registerFlatTestMethod(it->testName,it->methodPtr,it->location);
 }
 
 /*******************  FUNCTION  *********************/
@@ -115,8 +123,13 @@ const std::set< svutTestCaseBuilder* > getRegistredFlatTestCases(void )
 	std::map<std::string,bool> filter;
 
 	for (std::vector<svutFlatRegistryEntry>::const_iterator it = globalFlatTestRegistry.begin() ; it != globalFlatTestRegistry.end() ; ++it)
+	{
 		if (filter.find(it->testCaseName) == filter.end())
+		{
+			filter[it->testCaseName] = true;
 			res.insert(new svutFlatTestCaseBuilder(it->testCaseName));
+		}
+	}
 
 	return res;
 }

@@ -9,7 +9,7 @@
 
 #print file by commenting internal includes
 #in order :
-MERGE_FILES="svUnitTest.h svutExAssert.h svutAsserter.h svutAssert.h svutTestCase.h svutDefaultMain.h"
+MERGE_FILES="svUnitTest.h svutExAssert.h svutAsserter.h svutAssert.h svutTestCase.h svutFlatTestCase.h svutDefaultMain.h"
 
 #check all before
 for f in $MERGE_FILES
