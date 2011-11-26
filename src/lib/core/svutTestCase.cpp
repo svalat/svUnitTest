@@ -10,6 +10,10 @@
 #include "svutTestCase.h"
 #include "svutListenerMultiplexer.h"
 #include <cassert>
+#include <iostream>
+#include <cstdarg>
+#include <cstring>
+#include <cstdio>
 
 /**********************  USING  *********************/
 using namespace std;
@@ -116,6 +120,7 @@ svutStatusInfo svutTestCase::runTestMethod(svutTestMethod * test)
 		//disable failIsTodo by default
 		this->tmpFailIsTodo = false;
 		this->context.clear();
+		this->cout.str("");
 		
 		this->setUp();
 		needTearDown = true;
@@ -152,6 +157,7 @@ svutStatusInfo svutTestCase::runTestMethod(svutTestMethod * test)
 		}
 	}
 
+	res.setOutput(this->cout.str());
 	res.setContext(context);
 	return res;
 }
@@ -327,6 +333,20 @@ void svutTestCase::clearContexEntry(string name)
 void svutTestCase::resetContexEntries(void )
 {
 	context.clear();
+}
+
+/*******************  FUNCTION  *********************/
+int svutTestCase::printf(const char* format, ... )
+{
+	size_t size = strlen(format) * 4;
+	char * buffer = new char[size];
+	va_list param;
+	va_start (param, format);
+	size = vsprintf (buffer, format, param);
+	va_end (param);
+	this->cout << buffer;
+	delete buffer;
+	return size;
 }
 
 }

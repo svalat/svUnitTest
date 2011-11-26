@@ -14,6 +14,7 @@
 #include <vector>
 #include <iostream>
 #include <cstdlib>
+#include <cstdio>
 #include "svutAssert.h"
 
 /********************  NAMESPACE  *******************/
@@ -34,6 +35,12 @@ namespace svUnitTest
 
 /********************  MACROS  **********************/
 #define SVUT_RESET_CONTEXT() /*this->resetContexEntries()*/
+
+/********************  MACROS  **********************/
+#define SVUT_PRINTF //printf
+
+/********************  MACROS  **********************/
+#define SVUT_COUT //std::cout
 
 /*********************  CLASS  **********************/
 /**

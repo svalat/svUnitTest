@@ -8,6 +8,7 @@
 
 /********************  HEADERS  *********************/
 #include "svutResultFormatterStd.h"
+#include "svutResultFormatterHelper.h"
 #include <stdlib.h>
 
 /**********************  USING  *********************/
@@ -105,6 +106,11 @@ void svutResultFormatterStd::printFailedInfo(const svUnitTest::svutTestCase& /*t
 		{
 			*out << "Context :" << endl;
 			status.formatContext(*out,"   - "," : ","\n");
+		}
+		if (status.getOutput().empty() == false)
+		{
+			*out << "Output :" << endl;
+			*out << paddOutput("   ",status.getOutput());
 		}
 		*out << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
 	}

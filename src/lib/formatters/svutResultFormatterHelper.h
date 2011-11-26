@@ -18,6 +18,7 @@ namespace svUnitTest
 
 /*******************  FUNCTION  *********************/
 std::string escapeXmlCharsInString(const std::string & value);
+std::string paddOutput(const std::string padding,const std::string & value);
 
 };
 

@@ -19,4 +19,5 @@ build_svunittest_test(
 	svutTestMethod
 	svutTestCase
 	svutTestCaseResult
+	svutTestCaseOutputCapture
 )

@@ -13,7 +13,7 @@
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT TestFunction (name,status,AssertInfo?)>
 <!ELEMENT status (#PCDATA)>
-<!ELEMENT AssertInfo (location,message,entries,context)>
+<!ELEMENT AssertInfo (location,message,entries,context,output?)>
 <!ELEMENT message (#PCDATA)>
 <!ELEMENT location (file,methode,line)>
 <!ELEMENT file (#PCDATA)>
@@ -25,6 +25,7 @@
 <!ELEMENT entries (entry*)>
 <!ELEMENT context (entry*)>
 <!ELEMENT entry (#PCDATA)>
+<!ELEMENT output (#PCDATA)>
 
 <!ATTLIST result type (success|failed|unknown|indev|todo) #REQUIRED>
 <!ATTLIST entry name CDATA #REQUIRED>

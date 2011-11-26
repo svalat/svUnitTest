@@ -12,6 +12,7 @@
 /********************  HEADERS  *********************/
 #include <string>
 #include <list>
+#include <sstream>
 #include "svutTestMethod.h"
 #include "svutExAssert.h"
 #include "svutExNotify.h"
@@ -77,6 +78,18 @@ namespace svUnitTest
 **/
 #define SVUT_RESET_CONTEXT() this->resetContexEntries()
 
+/********************  MACROS  **********************/
+/**
+ * A macro to access to unit test printf method.
+**/
+#define SVUT_PRINTF this->printf
+
+/********************  MACROS  **********************/
+/**
+ * A macro to access  to unit test cout object.
+**/
+#define SVUT_COUT this->cout
+
 /********************** TYPEDEF *********************/
 /** List of pointers to test methods. **/
 typedef std::list<svutTestMethod *> svutTestMethodPtrList;
@@ -128,6 +141,9 @@ class svutTestCase
 		void setAutodetected(void);
 		bool isAutodetected(void) const;
 		void callTestMethodsRegistration(void);
+		/** Used to capture output done in tests. **/
+		std::stringstream cout;
+		int printf(const char * format,...);
 	protected:
 		virtual void testMethodsRegistration(void);
 		void setTestCaseName(std::string name) throw (svutExInternalError);

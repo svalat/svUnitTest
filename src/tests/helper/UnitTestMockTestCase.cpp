@@ -52,6 +52,7 @@ void UnitTestMockTestCase::test2(void )
 void UnitTestMockTestCase::test3(void)
 {
 	t3 = calls ++;
+	cout << "message" << std::endl;
 }
 
 /*******************  FUNCTION  *********************/

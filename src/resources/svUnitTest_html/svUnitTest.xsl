@@ -57,6 +57,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		<xsl:apply-templates select='entries'/>
 		<xsl:apply-templates select='context'/>
 	</div>
+	<xsl:apply-templates select='output'/>
 </xsl:template>
 
 <xsl:template match="entries">
@@ -77,6 +78,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		<td>:</td>
 		<td><xsl:value-of select='.'/></td>
 	</tr>
+</xsl:template>
+
+<xsl:template match="output">
+	<pre class='testOutput'><xsl:value-of select='.'/></pre>
 </xsl:template>
 
 <xsl:template match="GlobalResults">

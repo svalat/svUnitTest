@@ -161,6 +161,8 @@ void svUnitTest::svutResultFormatterXml::printAssertInfo(const svUnitTest::svutS
 	*out << "\t\t\t\t<context>" << endl;
 	status.formatContext(*out,"\t\t\t\t\t<entry name='","'>","</entry>\n",escapeXmlCharsInString);
 	*out << "\t\t\t\t</context>" << endl;
+	if (!status.getOutput().empty())
+		*out << "\t\t\t\t<output>" << escapeXmlCharsInString(status.getOutput()) << "</output>" << endl;
 	*out << "\t\t\t</AssertInfo>" << endl;
 }
 

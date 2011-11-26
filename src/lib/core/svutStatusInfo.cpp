@@ -11,6 +11,7 @@
 #include "config.h"
 #endif
 
+#include <iostream>
 #include "svutStatusInfo.h"
 #include "svutException.h"
 
@@ -278,22 +279,6 @@ std::string svutStatusInfo::getStatusName(void ) const
 
 /*******************  FUNCTION  *********************/
 /**
- * Permit to use the equal operator on svutStatusInfo objects.
- * @param orig Define the original object to copy on the current one.
- * @return Return a regrence to the destinatino object.
-**/
-svutStatusInfo& svUnitTest::svutStatusInfo::operator=(const svUnitTest::svutStatusInfo& orig)
-{
-	this->message = orig.message;
-	this->entries = orig.entries;
-	this->location = orig.location;
-	this->status = orig.status;
-	this->context = orig.context;
-	return *this;
-}
-
-/*******************  FUNCTION  *********************/
-/**
  * @param status Define the status to convert to string.
  * @return Return the name of the given status as a C++ string. The returned names are :
  *      - SUCCESS
@@ -321,6 +306,28 @@ string svutStatusInfo::getStatusName(svutStatus status)
 			return "SKIPED";
 	}
 	throw svutExInternalError("Unknown status value in svutStatusInfo::getStatusName()");
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Return the string which store the output done during the test.
+ * For now it contain only fake output system, but in future it will store
+ * the capture of all stdout/stderr done during the test, even the internal
+ * ones from libraries.
+**/
+const string & svutStatusInfo::getOutput(void ) const
+{
+	return this->output;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Define the value of output.
+ * @param output The new value to setup.
+**/
+void svutStatusInfo::setOutput(const std::string& output)
+{
+	this->output = output.c_str();
 }
 
 }

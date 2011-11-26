@@ -70,15 +70,16 @@ class svutStatusInfo
 		void formatEntries(std::ostream & out,const char * prefix,const char * separator,const char * postfix,svutStringFilter filter = NULL) const;
 		void formatContext(std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix,svutStringFilter filter = NULL) const;
 		void formatContext(std::ostream & out,const char * prefix,const char * separator,const char * postfix,svutStringFilter filter = NULL) const;
+		void setOutput(const std::string & output);
 		svutStatusInfoMap getEntries(void) const;
 		unsigned int getNbEntries(void) const;
 		svutStatusInfoMap getContext(void) const;
 		unsigned int getNbContextEntries(void) const;
 		std::string getEntry(std::string name) const;
 		std::string getContextEntry(std::string name) const;
-		svutStatusInfo & operator = (const svutStatusInfo & orig);
 		std::string getStatusName(void) const;
 		static std::string getStatusName(svutStatus status);
+		const std::string& getOutput(void) const;
 	protected:
 		void formatList(const svutStatusInfoMap & list,std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix,svutStringFilter filter=NULL) const;
 		/** Define the message related to the status of the test. **/
@@ -91,6 +92,8 @@ class svutStatusInfo
 		svutStatus status;
 		/** Debugging context formed by an hash table of string. **/
 		svutStatusInfoMap context;
+		/** Store the debugging output, for now it's an emulation for capturing real stdout/stderr. **/
+		std::string output;
 };
 
 }

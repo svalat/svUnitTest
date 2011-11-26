@@ -234,3 +234,22 @@ a img
 {
 	margin-left: 50px;
 }
+
+pre.testOutput
+{
+	border:1px black solid;
+	background:#151515;
+	color:white;
+	padding:7px;
+	white-space:pre-wrap; /* CSS 3 */
+	white-space:-moz-pre-wrap; /* Mozilla depuis 1999 */
+	white-space:-pre-wrap; /* Opera 4 à 6 */
+	white-space:-o-pre-wrap; /* Opera 7 */
+	word-wrap:break-word; /* IE 5.5+ */
+	overflow:auto;/* IE 6 */
+}
+
+li pre.testOutput
+{
+	margin-right: 30px;
+}
