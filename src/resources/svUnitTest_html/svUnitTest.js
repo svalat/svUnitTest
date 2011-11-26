@@ -19,15 +19,18 @@ function filterTests(status,tests)
 	cnt=0;
 	for (k=0;k<tests.length;k++)
 	{
-		found = tests[k].className == status || status == '*';
-		if (invert)
-			found = !found;
-		if (found)
+		if (tests[k].tagName == 'LI')
 		{
-			tests[k].style.display="list-item";
-			cnt++;
-		} else {
-			tests[k].style.display="none";
+			found = tests[k].className == status || status == '*';
+			if (invert)
+				found = !found;
+			if (found)
+			{
+				tests[k].style.display="list-item";
+				cnt++;
+			} else {
+				tests[k].style.display="none";
+			}
 		}
 	}
 	return cnt;
