@@ -336,6 +336,13 @@ void svutTestCase::resetContexEntries(void )
 }
 
 /*******************  FUNCTION  *********************/
+int svutTestCase::puts(const char* value)
+{
+	this->cout << value << endl;
+	return 0;
+}
+
+/*******************  FUNCTION  *********************/
 int svutTestCase::printf(const char* format, ... )
 {
 	size_t size = strlen(format) * 4;

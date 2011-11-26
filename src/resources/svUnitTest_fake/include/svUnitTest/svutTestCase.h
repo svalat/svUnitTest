@@ -31,16 +31,21 @@ namespace svUnitTest
 #define SVUT_SET_CONTEXT(name,value) /*this->setContextEntry((name),(value))*/
 
 /********************  MACROS  **********************/
+
 #define SVUT_UNSET_CONTEXT(name) /*this->clearContexEntry((name))*/
 
 /********************  MACROS  **********************/
 #define SVUT_RESET_CONTEXT() /*this->resetContexEntries()*/
 
 /********************  MACROS  **********************/
-#define SVUT_PRINTF //printf
+//printf
+#define SVUT_PRINTF 
 
 /********************  MACROS  **********************/
-#define SVUT_COUT //std::cout
+#define SVUT_COUT std::cout
+
+/********************  MACROS  **********************/
+#define SVUT_PUTS(x) /* puts((x)) */
 
 /*********************  CLASS  **********************/
 /**

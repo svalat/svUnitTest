@@ -90,6 +90,12 @@ namespace svUnitTest
 **/
 #define SVUT_COUT this->cout
 
+/********************  MACROS  **********************/
+/**
+ * A macro to access to unit test puts method.
+**/
+#define SVUT_PUTS(x) this->puts((x))
+
 /********************** TYPEDEF *********************/
 /** List of pointers to test methods. **/
 typedef std::list<svutTestMethod *> svutTestMethodPtrList;
@@ -144,6 +150,7 @@ class svutTestCase
 		/** Used to capture output done in tests. **/
 		std::stringstream cout;
 		int printf(const char * format,...);
+		int puts(const char * value);
 	protected:
 		virtual void testMethodsRegistration(void);
 		void setTestCaseName(std::string name) throw (svutExInternalError);
