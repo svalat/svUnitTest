@@ -8,7 +8,7 @@
 
 /********************  HEADERS  *********************/
 #include <iostream>
-#include <cppunit/TestCase.h>
+#include "UnitTestExtra.h"
 #include <svutObjectMethod.h>
 
 /**********************  USING  *********************/

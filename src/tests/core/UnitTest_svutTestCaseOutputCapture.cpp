@@ -12,6 +12,7 @@
 #include <svutListenerDirectOutputter.h>
 #include <svUnitTest.h>
 #include <svutResultFormatterStdBW.h>
+#include <cassert>
 
 /**********************  USING  *********************/
 using namespace std;
