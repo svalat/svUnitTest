@@ -103,5 +103,30 @@ SVUT_DECLARE_FLAT_TEST(TestCase4,testMethod2)
 	SVUT_ASSERT_EQUAL(20,globalInt);
 }
 
+/*******************  FUNCTION  *********************/
+SVUT_DECLARE_FLAT_TEST(TestCase5,testPrintf)
+{
+	SVUT_PRINTF("Test printf %d\n",10);
+}
+
+/*******************  FUNCTION  *********************/
+SVUT_DECLARE_FLAT_TEST(TestCase6,testPuts)
+{
+	SVUT_PUTS("Test puts");
+}
+
+/*******************  FUNCTION  *********************/
+SVUT_DECLARE_FLAT_TEST(TestCase6,testCout)
+{
+	SVUT_COUT << "Test cout" << std::endl;
+}
+
+/*******************  FUNCTION  *********************/
+SVUT_DECLARE_FLAT_TEST(TestCase6,testContext)
+{
+	SVUT_SET_CONTEXT("value",10);
+	SVUT_UNSET_CONTEXT("value");
+	SVUT_RESET_CONTEXT();
+}
 
 SVUT_USE_DEFAULT_MAIN

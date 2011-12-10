@@ -11,6 +11,7 @@
 #include "svutAutoRegister.h"
 #include <set>
 #include <iostream>
+#include <cassert>
 
 /**********************  USING  *********************/
 using namespace std;
@@ -25,6 +26,12 @@ namespace svUnitTest
  * Only accessible localy. It must be used only by svutFlatTestCase class and registerFlatTestCaseMethod.
 **/
 static std::vector<svutFlatRegistryEntry> globalFlatTestRegistry;
+/**
+ * Global pointer to get current svutTestCase in execution. This is used by getCurrentSvutTestCase() which
+ * serve in SVUT_PRINTF/SVUT_COUT/SVUT_*CONTEXT functions to get the current svutTestCase.
+ * To support parallel execution of test cases, we must transform this into TLS variable (not done up to now).
+**/
+static svutTestCase * globalCurrentFlatTestCase = NULL;
 
 /*******************  FUNCTION  *********************/
 /**
@@ -98,6 +105,11 @@ void svutFlatTestCase::testMethodsRegistration(void )
 **/
 void svutFlatTestCase::tearDown(void )
 {
+	//unmark current
+	//assert(globalCurrentFlatTestCase == this);
+	globalCurrentFlatTestCase = NULL;
+
+	//call registred C function
 	if (tearDownPtr != NULL)
 		tearDownPtr();
 }
@@ -108,6 +120,11 @@ void svutFlatTestCase::tearDown(void )
 **/
 void svutFlatTestCase::setUp(void )
 {
+	//mark current
+	//assert(globalCurrentFlatTestCase == NULL);
+	globalCurrentFlatTestCase = this;
+
+	//call registred C function
 	if (setUpPtr != NULL)
 		setUpPtr();
 }
@@ -144,6 +161,13 @@ svutFlatTestCaseBuilder::svutFlatTestCaseBuilder(string testCaseName)
 svutTestCase* svutFlatTestCaseBuilder::build(void ) const
 {
 	return new svutFlatTestCase(testCaseName);
+}
+
+/*******************  FUNCTION  *********************/
+svutTestCase& getCurrentSvutTestCase(void )
+{
+	assert(globalCurrentFlatTestCase != NULL);
+	return *globalCurrentFlatTestCase;
 }
 
 };

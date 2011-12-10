@@ -146,6 +146,7 @@ class svutFlatTestCase : public svutTestCase
 /*******************  FUNCTION  *********************/
 bool registerFlatTestCaseMethod(const char* testCaseName, const char* functionName, svUnitTest::svutTestMethodPtr methodPtr, const svUnitTest::svutCodeLocation& location);
 const std::set<class svutTestCaseBuilder *> getRegistredFlatTestCases(void);
+svutTestCase & getCurrentSvutTestCase(void);
 
 };
 

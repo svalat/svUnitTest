@@ -356,4 +356,11 @@ int svutTestCase::printf(const char* format, ... )
 	return size;
 }
 
+/*******************  FUNCTION  *********************/
+svutTestCase& svutTestCase::getCurrentSvutTestCase(void )
+{
+	assert(this != NULL);
+	return *this;
+}
+
 }

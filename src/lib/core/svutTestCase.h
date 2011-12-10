@@ -61,7 +61,7 @@ namespace svUnitTest
  * @param value Define the related value, it will be convertied in string format by asserterToString
  * function.
 **/
-#define SVUT_SET_CONTEXT(name,value) this->setContextEntry((name),(value))
+#define SVUT_SET_CONTEXT(name,value) getCurrentSvutTestCase().setContextEntry((name),(value))
 
 /********************  MACROS  **********************/
 /**
@@ -69,32 +69,32 @@ namespace svUnitTest
  * This permit to remove some old context entries while exiting loops for exemple.
  * @param name Define the name of the entry.
 **/
-#define SVUT_UNSET_CONTEXT(name) this->clearContexEntry((name))
+#define SVUT_UNSET_CONTEXT(name) getCurrentSvutTestCase().clearContexEntry((name))
 
 /********************  MACROS  **********************/
 /**
  * Prefer to use this macro instead of directly call clearContexEntry on the svutTestCase class.
  * This permit to remove all context entries for exemple while exiting loops for exemple.
 **/
-#define SVUT_RESET_CONTEXT() this->resetContexEntries()
+#define SVUT_RESET_CONTEXT() getCurrentSvutTestCase().resetContexEntries()
 
 /********************  MACROS  **********************/
 /**
  * A macro to access to unit test printf method.
 **/
-#define SVUT_PRINTF this->printf
+#define SVUT_PRINTF getCurrentSvutTestCase().printf
 
 /********************  MACROS  **********************/
 /**
  * A macro to access  to unit test cout object.
 **/
-#define SVUT_COUT this->cout
+#define SVUT_COUT getCurrentSvutTestCase().cout
 
 /********************  MACROS  **********************/
 /**
  * A macro to access to unit test puts method.
 **/
-#define SVUT_PUTS(x) this->puts((x))
+#define SVUT_PUTS(x) getCurrentSvutTestCase().puts((x))
 
 /********************** TYPEDEF *********************/
 /** List of pointers to test methods. **/
@@ -151,16 +151,17 @@ class svutTestCase
 		std::stringstream cout;
 		int printf(const char * format,...);
 		int puts(const char * value);
-	protected:
-		virtual void testMethodsRegistration(void);
-		void setTestCaseName(std::string name) throw (svutExInternalError);
-		void registerTestMethod(svutTestMethod * test);
 		void setContextEntry(std::string name,std::string value);
 		void resetContexEntries(void);
 		void clearContexEntry(std::string name);
 		template <class T> void setContextEntry(std::string name,const T & value);
+	protected:
+		virtual void testMethodsRegistration(void);
+		void setTestCaseName(std::string name) throw (svutExInternalError);
+		void registerTestMethod(svutTestMethod * test);
 		svutStatusInfo runTestMethod(svutTestMethod * test);
 		void MARK_AS_KNOWN_ERROR(std::string message);
+		svutTestCase & getCurrentSvutTestCase(void);
 		/** Define the list of tests methods in the current test case. **/
 		svutTestMethodPtrList tests;
 	private:
