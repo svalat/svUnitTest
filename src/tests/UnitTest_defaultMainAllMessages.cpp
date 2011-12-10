@@ -8,7 +8,6 @@
 
 /********************  HEADERS  *********************/
 #include <svUnitTest.h>
-#include <iostream>
 #include "UnitTestMockTestCase2.h"
 
 /**********************  USING  *********************/

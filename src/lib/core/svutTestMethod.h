@@ -12,11 +12,13 @@
 /********************  HEADERS  *********************/
 #include <string>
 #include "svutCodeLocation.h"
-#include "svutObjectMethod.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
+
+/*********************  CLASS  **********************/
+class svutObjectMethod;
 
 /*********************  CLASS  **********************/
 /**

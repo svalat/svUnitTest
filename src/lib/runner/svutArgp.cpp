@@ -7,11 +7,8 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
-#include <ios>
 #include <sstream>
-#include <cstring>
 #include <cassert>
-#include <iostream>
 #include <cstdlib>
 #include "svutArgp.h"
 

@@ -10,6 +10,7 @@
 #include "svutResultFormatterQtXml.h"
 #include "svUnitTest.h"
 #include "svutResultFormatterHelper.h"
+#include "svutTestMethod.h"
 #include <sstream>
 
 /**********************  USING  *********************/

@@ -9,6 +9,7 @@
 /********************  HEADERS  *********************/
 #include "svutTestMethod.h"
 #include "svutException.h"
+#include "svutObjectMethod.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest

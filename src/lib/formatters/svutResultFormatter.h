@@ -10,12 +10,14 @@
 #define SVUT_RESULT_FORMATER_HEADER
 
 /********************  HEADERS  *********************/
-#include "svutTestCase.h"
 #include "svutListenerSummary.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
+
+/********************* CLASS ************************/
+class svutTestCase;
 
 /********************* CLASS ************************/
 /**

@@ -9,6 +9,7 @@
 /********************  HEADERS  *********************/
 #include "svutResultFormatterStd.h"
 #include "svutResultFormatterHelper.h"
+#include "svutTestCase.h"
 #include <stdlib.h>
 
 /**********************  USING  *********************/

@@ -9,9 +9,8 @@
 /********************  HEADERS  *********************/
 #include "svutFlatTestCase.h"
 #include "svutAutoRegister.h"
-#include <set>
-#include <iostream>
 #include <cassert>
+#include <vector>
 
 /**********************  USING  *********************/
 using namespace std;

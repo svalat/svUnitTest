@@ -10,7 +10,6 @@
 #define SVUT_RUNNER_CONFIG_HEADER
 
 /********************  HEADERS  *********************/
-#include <iostream>
 #include "svutTestFilterBasic.h"
 #include "svutArgp.h"
 

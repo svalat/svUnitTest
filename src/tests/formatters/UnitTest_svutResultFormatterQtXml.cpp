@@ -8,14 +8,10 @@
 
 /********************  HEADERS  *********************/
 #include "UnitTestExtra.h"
-#include <iostream>
-#include <cppunit/TestCase.h>
-#include <cppunit/extensions/TestFactoryRegistry.h>
-#include <cppunit/extensions/HelperMacros.h>
 #include <svutResultFormatterQtXml.h>
 #include "UnitTestMockTestCase.h"
 #include <sys/stat.h>
-#include "svUnitTest.h"
+#include <svUnitTest.h>
 #include "IUnitTest_ResultFormatter.h"
 
 /**********************  USING  *********************/

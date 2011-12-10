@@ -10,8 +10,6 @@
 #define UNIT_TEST_MOCK_LISTENER_HEADER
 
 /********************  HEADERS  *********************/
-#include <svutTestMethod.h>
-#include <svutStatusInfo.h>
 #include <svutListener.h>
 #include <map>
 

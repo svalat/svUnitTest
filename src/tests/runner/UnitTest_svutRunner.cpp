@@ -7,17 +7,14 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
-#include <iostream>
-#include <cppunit/TestCase.h>
-#include <cppunit/extensions/TestFactoryRegistry.h>
-#include <cppunit/extensions/HelperMacros.h>
 #include <svutRunner.h>
 #include <svutListenerDirectOutputter.h>
-#include <svutRunnerConfig.h>
 #include "UnitTestExtra.h"
 #include "UnitTestMockResultFormatter.h"
 #include "UnitTestMockTestCase2.h"
 #include <svutResultFormatterStdBW.h>
+#include <svutTestCaseBuilder.h>
+#include <svutAutoRegister.h>
 
 /**********************  USING  *********************/
 using namespace svUnitTest;

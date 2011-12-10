@@ -10,7 +10,7 @@
 #define SVUT_LISTENER_HEADER
 
 /********************  HEADERS  *********************/
-#include "svutTestCase.h"
+#include "svutStatusInfo.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
@@ -18,6 +18,7 @@ namespace svUnitTest
 
 /********************* CLASS ************************/
 class svutTestCase;
+class svutTestMethod;
 
 /********************* CLASS ************************/
 /**

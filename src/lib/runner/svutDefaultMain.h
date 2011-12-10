@@ -9,9 +9,8 @@
 #ifndef SVUT_DEFAULT_MAIN_HEADER
 #define SVUT_DEFAULT_MAIN_HEADER
 
-/********************  HEADERS  *********************/
-#include "svutTestCaseBuilder.h"
-#include "svutTestCaseBuilder.h"
+/*********************  CLASS  **********************/
+class svutTestCaseBuilder;
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest

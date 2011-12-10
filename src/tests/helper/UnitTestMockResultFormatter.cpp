@@ -8,8 +8,8 @@
 
 /********************  HEADERS  *********************/
 #include "UnitTestMockResultFormatter.h"
+#include <svutTestCase.h>
 #include <cstdio>
-#include <sstream>
 
 /**********************  USING  *********************/
 using namespace svUnitTest;

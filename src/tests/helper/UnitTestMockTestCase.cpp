@@ -9,7 +9,6 @@
 /********************  HEADERS  *********************/
 #include "UnitTestMockTestCase.h"
 
-
 /*******************  FUNCTION  *********************/
 UnitTestMockTestCase::UnitTestMockTestCase(void ):
 	svutTestCase("MyTest")

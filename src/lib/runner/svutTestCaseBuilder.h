@@ -16,9 +16,7 @@ namespace svUnitTest
 {
 
 /********************  CLASSE  **********************/
-#ifndef svutTestCase
 class svutTestCase;
-#endif
 
 /*********************  CLASS  **********************/
 /**

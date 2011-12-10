@@ -11,7 +11,8 @@
 
 /********************  HEADERS  *********************/
 #include "svutTestCase.h"
-#include <vector>
+#include "svutTestCaseBuilder.h"
+#include <set>
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest

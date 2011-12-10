@@ -11,11 +11,13 @@
 
 /********************  HEADERS  *********************/
 #include <set>
-#include "svutTestCaseBuilder.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
+
+/*********************  CLASS  **********************/
+class svutTestCaseBuilder;
 
 /********************  MACROS  **********************/
 /**

@@ -8,7 +8,6 @@
 
 /********************  HEADERS  *********************/
 #include <svUnitTest.h>
-#include <iostream>
 
 /**********************  USING  *********************/
 using namespace std;

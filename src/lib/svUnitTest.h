@@ -14,6 +14,7 @@
 #include "svutFlatTestCase.h"
 #include "svutAssert.h"
 #include "svutDefaultMain.h"
+#include "svutAutoRegister.h"
 
 /********************  MACRO  ***********************/
 /** Define the library version. **/

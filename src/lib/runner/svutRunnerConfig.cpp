@@ -7,21 +7,11 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
 #include <cstdlib>
 #include <cstring>
-#include <iostream>
 #include <fstream>
 #include <sstream>
 #include "svutRunnerConfig.h"
-
-//optional include
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
 
 /**********************  USING  *********************/
 using namespace std;

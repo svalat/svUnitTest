@@ -10,13 +10,14 @@
 #define SVUT_LISTENER_DIRECT_OUTPUTTER_H
 
 /********************  HEADERS  *********************/
-#include "svutListener.h"
 #include "svutListenerSummary.h"
-#include "svutResultFormatter.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
+
+/********************* CLASS ************************/
+class svutResultFormatter;
 
 /********************* CLASS ************************/
 /**

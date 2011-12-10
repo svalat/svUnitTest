@@ -7,10 +7,6 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
-#include <iostream>
-#include <cppunit/TestCase.h>
-#include <cppunit/extensions/TestFactoryRegistry.h>
-#include <cppunit/extensions/HelperMacros.h>
 #include <svutTestFilterBasic.h>
 #include "UnitTestExtra.h"
 

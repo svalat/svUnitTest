@@ -11,9 +11,7 @@
 
 /********************  HEADERS  *********************/
 #include <svutResultFormatter.h>
-#include <ostream>
 #include <list>
-#include <string>
 
 /********************* CLASS ************************/
 class UnitTestMockResultFormater : public svUnitTest::svutResultFormatter

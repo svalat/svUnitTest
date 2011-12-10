@@ -8,6 +8,7 @@
 
 /********************  HEADERS  *********************/
 #include "svutResultFormatterStdColored.h"
+#include "svutException.h"
 #include <iomanip>
 #include <sstream>
 

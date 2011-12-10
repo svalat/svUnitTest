@@ -10,10 +10,6 @@
 #include "UnitTestExtra.h"
 #include "UnitTestMockListener.h"
 #include "UnitTestMockTestCase.h"
-#include <iostream>
-#include <cppunit/TestCase.h>
-#include <cppunit/extensions/TestFactoryRegistry.h>
-#include <cppunit/extensions/HelperMacros.h>
 #include <svutTestCase.h>
 
 /**********************  USING  *********************/

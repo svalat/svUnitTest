@@ -8,7 +8,9 @@
 
 /********************  HEADERS  *********************/
 #include "svutRunner.h"
+#include "svutTestCase.h"
 #include "svutDefaultMain.h"
+#include "svutTestCaseBuilder.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest

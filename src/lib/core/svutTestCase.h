@@ -10,15 +10,12 @@
 #define SVUT_TEST_CASE_HEADER
 
 /********************  HEADERS  *********************/
-#include <string>
 #include <list>
 #include <sstream>
 #include "svutTestMethod.h"
 #include "svutExAssert.h"
-#include "svutExNotify.h"
-#include "svutAutoRegister.h"
-#include "svutTestFilter.h"
-#include "svutAssert.h"
+#include "svutStatusInfo.h"
+#include "svutObjectMethod.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
@@ -96,14 +93,16 @@ namespace svUnitTest
 **/
 #define SVUT_PUTS(x) getCurrentSvutTestCase().puts((x))
 
+/*********************  CLASS  **********************/
+class svutListener;
+class svutTestFilter;
+class svutTestMethod;
+
 /********************** TYPEDEF *********************/
 /** List of pointers to test methods. **/
 typedef std::list<svutTestMethod *> svutTestMethodPtrList;
 /** List of names of test methods. **/
 typedef std::list<std::string> svutTestMethodNameList;
-
-/*********************  CLASS  **********************/
-class svutListener;
 
 /*********************  CLASS  **********************/
 /**

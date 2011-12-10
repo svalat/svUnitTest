@@ -12,17 +12,18 @@
 /********************  HEADERS  *********************/
 #include <list>
 #include <iostream>
-#include "svutTestCase.h"
-#include "svutListener.h"
 #include "svutRunnerConfig.h"
-#include "svutResultFormatter.h"
-#include "svutListenerSummary.h"
-#include "svutTestFilter.h"
-#include "svutListenerMultiplexer.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
+
+/*********************  CLASS  **********************/
+class svutTestCase;
+class svutListener;
+class svutResultFormatter;
+class svutListenerSummary;
+class svutListenerMultiplexer;
 
 /********************** TYPEDEF *********************/
 /** List of pointers to test cases. **/
@@ -62,7 +63,7 @@ class svutRunner
 		bool hasMultipleTestCase(void) const;
 		bool hasTestNamed(std::string name) const;
 		/** Pointer to the listener object to use to reports the results.**/
-		svutListenerMultiplexer listener;
+		svutListenerMultiplexer * listener;
 		/** Pointer to the summary listener (require to get the final state). **/
 		svutListenerSummary * summary;
 		/** Pointer the formatter. **/

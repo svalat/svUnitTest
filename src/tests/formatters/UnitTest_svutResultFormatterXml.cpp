@@ -9,14 +9,10 @@
 /********************  HEADERS  *********************/
 #include "UnitTestExtra.h"
 #include <ctime>
-#include <iostream>
-#include <cppunit/TestCase.h>
-#include <cppunit/extensions/TestFactoryRegistry.h>
-#include <cppunit/extensions/HelperMacros.h>
 #include <svutResultFormatterXml.h>
 #include "UnitTestMockTestCase.h"
 #include <sys/stat.h>
-#include "svUnitTest.h"
+#include <svUnitTest.h>
 #include "IUnitTest_ResultFormatter.h"
 
 /**********************  USING  *********************/

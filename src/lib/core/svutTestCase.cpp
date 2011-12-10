@@ -8,9 +8,10 @@
 
 /********************  HEADERS  *********************/
 #include "svutTestCase.h"
+#include "svutTestFilter.h"
 #include "svutListenerMultiplexer.h"
+#include "svutExNotify.h"
 #include <cassert>
-#include <iostream>
 #include <cstdarg>
 #include <cstring>
 #include <cstdio>

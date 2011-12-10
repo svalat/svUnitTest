@@ -8,9 +8,6 @@
 
 /********************  HEADERS  *********************/
 #include <iostream>
-#include <cppunit/TestCase.h>
-#include <cppunit/extensions/TestFactoryRegistry.h>
-#include <cppunit/extensions/HelperMacros.h>
 #include <svutTestCase.h>
 #include "UnitTestExtra.h"
 #include "UnitTestMockTestCase.h"

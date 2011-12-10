@@ -7,24 +7,17 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
-#include <iostream>
 #include <cstdlib>
-#include <list>
 #include <vector>
-#include <string>
-#include <cstdio>
 #include "svutRunner.h"
 #include "svutListenerDirectOutputter.h"
 #include "svutResultFormatterStdBW.h"
 #include "svutResultFormatterStdColored.h"
 #include "svutResultFormatterXml.h"
 #include "svutResultFormatterQtXml.h"
-#include "svutAutoRegister.h"
 #include "svutFlatTestCase.h"
+#include "svutListenerMultiplexer.h"
+#include "svutAutoRegister.h"
 
 /**********************  USING  *********************/
 using namespace std;
@@ -91,6 +84,8 @@ svutRunner::~svutRunner(void)
 		delete this->summary;
 	if (this->ownTheFormatter && this->formatter!=NULL)
 		delete this->formatter;
+	if (this->listener != NULL)
+		delete this->listener;
 }
 
 /*******************  FUNCTION  *********************/
@@ -139,13 +134,13 @@ bool svutRunner::run_tests(void)
 {
 	if (this->formatter != NULL)
 		formatter->setDisplayFullName(hasMultipleTestCase());
-	this->listener.onGlobalStart();
+	this->listener->onGlobalStart();
 	for(svutTestCasePtrList::iterator it=suites.begin();it!=suites.end();it++)
 	{
 		if (testFilter == NULL || testFilter->accept((*it)->getName()))
-			(*it)->runTestCase(&listener,this->testFilter);
+			(*it)->runTestCase(listener,this->testFilter);
 	}
-	this->listener.onGlobalEnd();
+	this->listener->onGlobalEnd();
 	return (summary->getSummary().getStatus() == SVUT_STATUS_SUCCESS || summary->getSummary().getStatus() == SVUT_STATUS_TODO);
 }
 
@@ -159,13 +154,13 @@ bool svutRunner::run_list_tests(void)
 {
 	if (this->formatter != NULL)
 		formatter->setDisplayFullName(hasMultipleTestCase());
-	this->listener.onListingStart();
+	this->listener->onListingStart();
 	for(svutTestCasePtrList::iterator it=suites.begin();it!=suites.end();it++)
 	{
 		if (testFilter == NULL || testFilter->accept((*it)->getName()))
-			(*it)->listTestMethods(listener,testFilter);
+			(*it)->listTestMethods(*listener,testFilter);
 	}
-	this->listener.onListingEnd();
+	this->listener->onListingEnd();
 	return true;
 }
 
@@ -179,6 +174,7 @@ void svutRunner::init(void)
 	this->formatter = NULL;
 	this->summary = NULL;
 	this->testFilter = NULL;
+	this->listener = new svutListenerMultiplexer;
 }
 
 /*******************  FUNCTION  *********************/
@@ -321,7 +317,7 @@ void svutRunner::init(svutOutputMode mode,std::ostream & out)
 			exit(1);
 	}
 	this->summary = new svutListenerDirectOutputter(*(this->formatter));
-	this->listener.addListener(this->summary);
+	this->listener->addListener(this->summary);
 }
 
 /*******************  FUNCTION  *********************/
@@ -335,7 +331,7 @@ void svutRunner::init(svutResultFormatter& formatter)
 	this->ownTheFormatter = false;
 	this->formatter = &formatter;
 	this->summary = new svutListenerDirectOutputter(formatter);
-	this->listener.addListener(this->summary);
+	this->listener->addListener(this->summary);
 }
 
 /*******************  FUNCTION  *********************/
@@ -358,8 +354,8 @@ void svutRunner::init(svutListener& listener)
 	this->init();
 	this->ownTheFormatter = false;
 	this->summary = new svutListenerSummary();
-	this->listener.addListener(&listener);
-	this->listener.addListener(this->summary);
+	this->listener->addListener(&listener);
+	this->listener->addListener(this->summary);
 }
 
 }

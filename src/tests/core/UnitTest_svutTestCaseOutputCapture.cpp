@@ -9,11 +9,9 @@
 /********************  HEADERS  *********************/
 #include "UnitTestExtra.h"
 #include <iostream>
-#include <cppunit/TestCase.h>
-#include <cppunit/extensions/TestFactoryRegistry.h>
-#include <cppunit/extensions/HelperMacros.h>
-#include <svutResultFormatterStdBW.h>
 #include <svutListenerDirectOutputter.h>
+#include <svUnitTest.h>
+#include <svutResultFormatterStdBW.h>
 
 /**********************  USING  *********************/
 using namespace std;

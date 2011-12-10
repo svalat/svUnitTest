@@ -8,6 +8,7 @@
 
 /********************  HEADERS  *********************/
 #include "svutListenerDirectOutputter.h"
+#include "svutResultFormatter.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest

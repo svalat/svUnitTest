@@ -7,8 +7,7 @@
 *****************************************************/
 
 /********************  HEADERS  *********************/
-#include <svutDefaultMain.h>
-#include <svutFlatTestCase.h>
+#include <svUnitTest.h>
 
 /**********************  USING  *********************/
 using namespace svUnitTest;
