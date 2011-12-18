@@ -11,6 +11,7 @@
 #include "svutAutoRegister.h"
 #include <cassert>
 #include <vector>
+#include <cstdlib>
 
 /**********************  USING  *********************/
 using namespace std;
@@ -24,13 +25,30 @@ namespace svUnitTest
  * Glocal registry used to remember all function defined via SVUT_DECLARE_FLAT_TEST macro
  * Only accessible localy. It must be used only by svutFlatTestCase class and registerFlatTestCaseMethod.
 **/
-static std::vector<svutFlatRegistryEntry> globalFlatTestRegistry;
+static std::vector<svutFlatRegistryEntry> * globalFlatTestRegistry = NULL;
 /**
  * Global pointer to get current svutTestCase in execution. This is used by getCurrentSvutTestCase() which
  * serve in SVUT_PRINTF/SVUT_COUT/SVUT_*CONTEXT functions to get the current svutTestCase.
  * To support parallel execution of test cases, we must transform this into TLS variable (not done up to now).
 **/
 static svutTestCase * globalCurrentFlatTestCase = NULL;
+
+/*******************  FUNCTION  *********************/
+void finiGlobalFlatTestRegistry(void)
+{
+	if (globalFlatTestRegistry != NULL)
+		delete globalFlatTestRegistry;
+}
+
+/*******************  FUNCTION  *********************/
+void initGlobalFlatTestRegistry(void)
+{
+	if (globalFlatTestRegistry == NULL)
+	{
+		globalFlatTestRegistry = new std::vector<svutFlatRegistryEntry>;
+		atexit(finiGlobalFlatTestRegistry);
+	}
+}
 
 /*******************  FUNCTION  *********************/
 /**
@@ -42,14 +60,16 @@ static svutTestCase * globalCurrentFlatTestCase = NULL;
  * @return Return always true, this is the trick to call the method at init time without depending
  * on compilers/linker keywords, see SVUT_REGISTER_FLAT_TEST macro.
 **/
-bool registerFlatTestCaseMethod(const char* testCaseName, const char* functionName, svutTestMethodPtr methodPtr,const svutCodeLocation & location)
+bool registerFlatTestCaseMethod(const char* testCaseName, const char* functionName, svUnitTest::svutTestMethodPtr methodPtr,const svUnitTest::svutCodeLocation & location)
 {
+	if (globalFlatTestRegistry == NULL)
+		initGlobalFlatTestRegistry();
 	svutFlatRegistryEntry entry;
 	entry.testCaseName = testCaseName;
 	entry.testName = functionName;
 	entry.methodPtr = methodPtr;
 	entry.location = location;
-	globalFlatTestRegistry.push_back(entry);
+	globalFlatTestRegistry->push_back(entry);
 	return true;
 }
 
@@ -93,7 +113,8 @@ void svutFlatTestCase::registerFlatTestMethod(string name, svutTestMethodPtr met
 **/
 void svutFlatTestCase::testMethodsRegistration(void )
 {
-	for (std::vector<svutFlatRegistryEntry>::const_iterator it = globalFlatTestRegistry.begin() ; it != globalFlatTestRegistry.end() ; ++it)
+	if (globalFlatTestRegistry != NULL)
+	for (std::vector<svutFlatRegistryEntry>::const_iterator it = globalFlatTestRegistry->begin() ; it != globalFlatTestRegistry->end() ; ++it)
 		if (it->testCaseName == getName())
 			registerFlatTestMethod(it->testName,it->methodPtr,it->location);
 }
@@ -138,14 +159,15 @@ const std::set< svutTestCaseBuilder* > getRegistredFlatTestCases(void )
 	std::set< svutTestCaseBuilder* > res;
 	std::map<std::string,bool> filter;
 
-	for (std::vector<svutFlatRegistryEntry>::const_iterator it = globalFlatTestRegistry.begin() ; it != globalFlatTestRegistry.end() ; ++it)
-	{
-		if (filter.find(it->testCaseName) == filter.end())
+	if (globalFlatTestRegistry != NULL)
+		for (std::vector<svutFlatRegistryEntry>::const_iterator it = globalFlatTestRegistry->begin() ; it != globalFlatTestRegistry->end() ; ++it)
 		{
-			filter[it->testCaseName] = true;
-			res.insert(new svutFlatTestCaseBuilder(it->testCaseName));
+			if (filter.find(it->testCaseName) == filter.end())
+			{
+				filter[it->testCaseName] = true;
+				res.insert(new svutFlatTestCaseBuilder(it->testCaseName));
+			}
 		}
-	}
 
 	return res;
 }

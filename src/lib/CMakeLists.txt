@@ -65,6 +65,7 @@ set(svUnitTest_INC
 	core/svutObjectMethodGenericImpl.h
 	core/svutStatusInfo.h
 	core/svutTestCase.h
+	core/svutFlatTestCase.h
 
 	listeners/svutListener.h
 	listeners/svutListenerMultiplexer.h
