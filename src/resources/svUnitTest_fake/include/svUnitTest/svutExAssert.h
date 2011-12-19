@@ -32,7 +32,7 @@ typedef std::string svutStatus;
 class svutExAssertFake
 {
 	public:
-		svutExAssertFake(svutStatus status,const char * message,svutCodeLocation location)  throw()
+		svutExAssertFake(svutStatus status,std::string message,svutCodeLocation location)  throw()
 		{
 			this->status = status;
 			this->message = message;
