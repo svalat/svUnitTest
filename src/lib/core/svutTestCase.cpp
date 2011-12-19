@@ -353,7 +353,7 @@ int svutTestCase::printf(const char* format, ... )
 	size = vsprintf (buffer, format, param);
 	va_end (param);
 	this->cout << buffer;
-	delete buffer;
+	delete [] buffer;
 	return size;
 }
 

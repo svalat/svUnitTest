@@ -26,6 +26,8 @@ namespace svUnitTest
  * Only accessible localy. It must be used only by svutFlatTestCase class and registerFlatTestCaseMethod.
 **/
 static std::vector<svutFlatRegistryEntry> * globalFlatTestRegistry = NULL;
+/** Store the temp builder to delete them at exit. They will be allocated by getRegistredFlatTestCase(). **/
+static std::vector<svutFlatTestCaseBuilder*> * globalFlatTestBuilderRegistry = NULL;
 /**
  * Global pointer to get current svutTestCase in execution. This is used by getCurrentSvutTestCase() which
  * serve in SVUT_PRINTF/SVUT_COUT/SVUT_*CONTEXT functions to get the current svutTestCase.
@@ -38,6 +40,12 @@ void finiGlobalFlatTestRegistry(void)
 {
 	if (globalFlatTestRegistry != NULL)
 		delete globalFlatTestRegistry;
+	if (globalFlatTestBuilderRegistry != NULL)
+	{
+		for (std::vector<svutFlatTestCaseBuilder*>::iterator it = globalFlatTestBuilderRegistry->begin() ; it != globalFlatTestBuilderRegistry->end() ; ++it)
+			delete *it;
+		delete globalFlatTestBuilderRegistry;
+	}
 }
 
 /*******************  FUNCTION  *********************/
@@ -46,6 +54,7 @@ void initGlobalFlatTestRegistry(void)
 	if (globalFlatTestRegistry == NULL)
 	{
 		globalFlatTestRegistry = new std::vector<svutFlatRegistryEntry>;
+		globalFlatTestBuilderRegistry = new std::vector<svutFlatTestCaseBuilder*>;
 		atexit(finiGlobalFlatTestRegistry);
 	}
 }
@@ -158,6 +167,7 @@ const std::set< svutTestCaseBuilder* > getRegistredFlatTestCases(void )
 {
 	std::set< svutTestCaseBuilder* > res;
 	std::map<std::string,bool> filter;
+	svutFlatTestCaseBuilder * tmp = NULL;
 
 	if (globalFlatTestRegistry != NULL)
 		for (std::vector<svutFlatRegistryEntry>::const_iterator it = globalFlatTestRegistry->begin() ; it != globalFlatTestRegistry->end() ; ++it)
@@ -165,7 +175,9 @@ const std::set< svutTestCaseBuilder* > getRegistredFlatTestCases(void )
 			if (filter.find(it->testCaseName) == filter.end())
 			{
 				filter[it->testCaseName] = true;
-				res.insert(new svutFlatTestCaseBuilder(it->testCaseName));
+				tmp = new svutFlatTestCaseBuilder(it->testCaseName);
+				res.insert(tmp);
+				globalFlatTestBuilderRegistry->push_back(tmp);
 			}
 		}
 
