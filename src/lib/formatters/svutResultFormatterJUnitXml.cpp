@@ -128,7 +128,7 @@ void svutResultFormatterJUnitXml::closeTestCase(const svUnitTest::svutTestCase& 
 	     << "' failures='" << this->suite->failures
 	     << "' errors='" << this->suite->errors
 	     << "' time='" << tmp
-	     << "' name='" << testCase.getName() << "'>" << endl;
+	     << "' name='" << escapeXmlCharsInString(testCase.getName()) << "'>" << endl;
 	this->all->buffer << "\t\t<properties>" << endl;
 	this->all->buffer << "\t\t\t<property name='runtime.name'>svUnitTest</property>" << endl;
 	this->all->buffer << "\t\t\t<property name='runtime.version'>" << SVUT_LIBARY_VERSION << "</property>" << endl;
@@ -172,9 +172,9 @@ void svutResultFormatterJUnitXml::closeTestMethod(const svUnitTest::svutTestCase
 
 	//open balis
 	sprintf(tmp,"%0.2f",t);
-	this->suite->buffer << "\t\t<testcase name='" << meth.getName()
+	this->suite->buffer << "\t\t<testcase name='" << escapeXmlCharsInString(meth.getName())
 		<< "' status='run' time='" << tmp
-		<< "' classname='" << testCase.getName() << "'>" << endl;
+		<< "' classname='" << escapeXmlCharsInString(testCase.getName()) << "'>" << endl;
 	this->printAssertInfo(status);
 	this->suite->buffer << "\t\t</testcase>" << endl;
 
