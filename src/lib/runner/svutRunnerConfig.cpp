@@ -43,7 +43,7 @@ svutRunnerConfigArgp::svutRunnerConfigArgp ( svutRunnerConfig& config )
 
 	//declare options
 	decalareOption('m', "mode"    , "MODE",  "Define the render mode to use : xml, qt_xml, std, "
-	                                         "color (color is defaut)."                         );
+	                                         "junit_xml ,color (color is defaut)."              );
 	decalareOption('v', "verbose" , "NONE",  "Display all the test results, event the success." );
 	decalareOption('s', "silent"  , "NONE",  "Don't display extra information on test failure." );
 	decalareOption('f', "function", "NONE",  "List all the accessible tests methods."           );
@@ -86,6 +86,8 @@ void svutRunnerConfigArgp::parseOption ( char key, std::string arg, std::string 
 				config->setMode(SVUT_OUT_STD_BW);
 			} else if (value == "color" ) {
 				config->setMode(SVUT_OUT_STD_COLOR);
+			} else if (value == "junit_xml") {
+				config->setMode(SVUT_OUT_JUNIT_XML);
 			}else {
 				err << "Unknown render mode : " << value << endl;
 				err << "Supported modes are xml, qt_xml, std and color." << endl;

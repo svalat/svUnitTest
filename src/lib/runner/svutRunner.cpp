@@ -15,6 +15,7 @@
 #include "svutResultFormatterStdColored.h"
 #include "svutResultFormatterXml.h"
 #include "svutResultFormatterQtXml.h"
+#include "svutResultFormatterJUnitXml.h"
 #include "svutFlatTestCase.h"
 #include "svutListenerMultiplexer.h"
 #include "svutAutoRegister.h"
@@ -311,6 +312,9 @@ void svutRunner::init(svutOutputMode mode,std::ostream & out)
 			break;
 		case SVUT_OUT_QT_XML:
 			this->formatter = new svutResultFormatterQtXml(out);
+			break;
+		case SVUT_OUT_JUNIT_XML:
+			this->formatter = new svutResultFormatterJUnitXml(out);
 			break;
 		default:
 			cerr << "Unknown type of formater : " << mode << endl;

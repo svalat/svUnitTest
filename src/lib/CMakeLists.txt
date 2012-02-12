@@ -37,6 +37,7 @@ set(svUnitTest_SRC
 	formatters/svutResultFormatterStdBW.cpp
 	formatters/svutResultFormatterStd.cpp
 	formatters/svutResultFormatterQtXml.cpp
+	formatters/svutResultFormatterJUnitXml.cpp
 	formatters/svutResultFormatter.cpp
 	formatters/svutResultFormatterXml.cpp
 	formatters/svutResultFormatterStdColored.cpp)
