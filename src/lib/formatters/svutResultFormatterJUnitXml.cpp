@@ -84,7 +84,7 @@ void svutResultFormatterJUnitXml::closeOutput(void )
 	assert(this->suite == NULL);
 
 	//display
-	sprintf(tmp,"%0.2f",t);
+	sprintf(tmp,"%0.3f",t);
 	*out << "<testsuites tests='" << this->all->tests
 	     << "' failures='" << this->all->failures
 	     << "' errors='" << this->all->errors
@@ -123,25 +123,23 @@ void svutResultFormatterJUnitXml::closeTestCase(const svUnitTest::svutTestCase& 
 
 	//print
 	//display
-	sprintf(tmp,"%0.2f",t);
+	sprintf(tmp,"%0.3f",t);
 	this->all->buffer << "\t<testsuite tests='" << this->suite->tests
 	     << "' failures='" << this->suite->failures
 	     << "' errors='" << this->suite->errors
 	     << "' time='" << tmp
 	     << "' name='" << escapeXmlCharsInString(testCase.getName()) << "'>" << endl;
-	this->all->buffer << "\t\t<properties>" << endl;
-	this->all->buffer << "\t\t\t<property name='runtime.name'>svUnitTest</property>" << endl;
-	this->all->buffer << "\t\t\t<property name='runtime.version'>" << SVUT_LIBARY_VERSION << "</property>" << endl;
-	this->all->buffer << "\t\t</properties>" << endl;
+	//this->all->buffer << "\t\t<properties>" << endl;
+	//this->all->buffer << "\t\t\t<property name='runtime.name'>svUnitTest</property>" << endl;
+	//this->all->buffer << "\t\t\t<property name='runtime.version'>" << SVUT_LIBARY_VERSION << "</property>" << endl;
+	//this->all->buffer << "\t\t</properties>" << endl;
 	this->all->buffer << this->suite->buffer.str();
 	this->all->buffer << "\t</testsuite>" << endl;
 
 	//increment on all
-	this->all->tests++;
-	if (this->suite->errors > 0)
-		this->all->errors++;
-	else if (this->suite->failures > 0)
-		this->all->failures++;
+	this->all->tests += this->suite->tests;
+	this->all->errors += this->suite->errors;
+	this->all->failures += this->suite->failures;
 
 	//cleanup
 	delete this->suite;
@@ -171,7 +169,7 @@ void svutResultFormatterJUnitXml::closeTestMethod(const svUnitTest::svutTestCase
 	assert(this->suite != NULL);
 
 	//open balis
-	sprintf(tmp,"%0.2f",t);
+	sprintf(tmp,"%0.3f",t);
 	this->suite->buffer << "\t\t<testcase name='" << escapeXmlCharsInString(meth.getName())
 		<< "' status='run' time='" << tmp
 		<< "' classname='" << escapeXmlCharsInString(testCase.getName()) << "'>" << endl;
@@ -226,23 +224,22 @@ void svUnitTest::svutResultFormatterJUnitXml::printAssertInfo(const svUnitTest::
 	if (status.getStatus() == SVUT_STATUS_FAILED || status.getStatus() == SVUT_STATUS_UNKNOWN)
 	{
 		this->suite->buffer << "\t\t\t<" << statusName << " type='' "
-			<< "message=\""
-			<< "At file=" << escapeXmlCharsInString(status.getLocation().getFilename())
-			<< " line=" << line << "&#x0A; ";
+			<< "message=\"" << escapeXmlCharsInString(status.getMessage()) << "\"><![CDATA[";
 
 		if (!status.getMessage().empty())
 		{
-			this->suite->buffer << escapeXmlCharsInString(status.getMessage());
+			this->suite->buffer << "At file=" << escapeXmlCharsInString(status.getLocation().getFilename())
+			                    << " line=" << line;
 			if (status.getNbEntries() > 0)
-				this->suite->buffer << "&#x0A; ";
+				this->suite->buffer << endl;
 		}
-		status.formatEntries(this->suite->buffer,"   - "," : ","&#x0A; ",escapeXmlCharsInString);
+		status.formatEntries(this->suite->buffer,"   - "," : ","\n",escapeXmlCharsInString);
 		if (status.getNbContextEntries() > 0)
 		{
 			this->suite->buffer << "Context :" << endl;
-			status.formatContext(this->suite->buffer,"   - "," : ","&#x0A; ",escapeXmlCharsInString);
+			status.formatContext(this->suite->buffer,"   - "," : ","\n",escapeXmlCharsInString);
 		}
-		this->suite->buffer << "\">" << endl;
+		this->suite->buffer << "]]></" << statusName << ">" << endl;
 		if (!status.getOutput().empty())
 			this->suite->buffer << "\t\t\t<system-out>" << escapeXmlCharsInString(status.getOutput()) << "</system-out>" << endl;
 	}
