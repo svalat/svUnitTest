@@ -85,6 +85,8 @@ add_test(svutDefaultMain svutDefaultMain)
 add_test(svutDefaultMainXml svutDefaultMain -m xml)
 add_test(svutDefaultMainStd svutDefaultMain -m std)
 add_test(svutDefaultMainStdColor svutDefaultMain -m color)
+add_test(svutDefaultMainJUnitXML svutDefaultMain -m junit_xml)
+add_test(svutDefaultMainQtXML svutDefaultMain -m qt_xml)
 
 ############# BUILD MAIN TESTS ##################
 add_executable(svutStandeloneMain UnitTest_svutStandeloneMain.cpp)
