@@ -38,7 +38,7 @@ void testMethodAAAAAAA2(void)
 {
 	SVUT_ASSERT_EQUAL(0,globalInt);
 }
-SVUT_REGISTER_FLAT_TEST(TestCase2,testMethodAAAAAAA2)
+SVUT_REGISTER_FLAT_TEST(TestCase2,testMethodAAAAAAA2);
 
 /*******************  FUNCTION  *********************/
 SVUT_DECLARE_FLAT_SETUP(TestCase3)

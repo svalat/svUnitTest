@@ -108,73 +108,73 @@ static bool asserterOperatorEqualZeros(const T * value,size_t size)
 // }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorEqual(const char * expected,const char * actual)
+static inline bool asserterOperatorEqual(const char * expected,const char * actual)
 {
 	return strcmp(expected,actual) == 0;
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorNotEqual(const char * expected,const char * actual)
+static inline bool asserterOperatorNotEqual(const char * expected,const char * actual)
 {
 	return strcmp(expected,actual) != 0;
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorEqualStrict(const char * expected,const char * actual)
+static inline bool asserterOperatorEqualStrict(const char * expected,const char * actual)
 {
 	return asserterOperatorEqual(expected,actual);
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorNotEqualStrict(const char * expected,const char * actual)
+static inline bool asserterOperatorNotEqualStrict(const char * expected,const char * actual)
 {
 	return asserterOperatorNotEqual(expected,actual);
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorGE(const char * v1,const char * v2)
+static inline bool asserterOperatorGE(const char * v1,const char * v2)
 {
 	return v1 >= v2;
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorGT(const char * v1,const char * v2)
+static inline bool asserterOperatorGT(const char * v1,const char * v2)
 {
 	return v1 > v2;
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorLE(const char * v1,const char * v2)
+static inline bool asserterOperatorLE(const char * v1,const char * v2)
 {
 	return v1 <= v2;
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorLT(const char * v1,const char * v2)
+static inline bool asserterOperatorLT(const char * v1,const char * v2)
 {
 	return v1 < v2;
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorGE(char * v1,char * v2)
+static inline bool asserterOperatorGE(char * v1,char * v2)
 {
 	return v1 >= v2;
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorGT(char * v1,char * v2)
+static inline bool asserterOperatorGT(char * v1,char * v2)
 {
 	return v1 > v2;
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorLE(char * v1,char * v2)
+static inline bool asserterOperatorLE(char * v1,char * v2)
 {
 	return v1 <= v2;
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorLT(char * v1,char * v2)
+static inline bool asserterOperatorLT(char * v1,char * v2)
 {
 	return v1 < v2;
 }

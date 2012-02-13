@@ -94,4 +94,4 @@ int main(int argc, char * argv[])
 	return svUnitTest::defaultMain(argc,argv);
 }
 
-SVUT_FAKE_DECLARE_GLOBAL_VARS;
+SVUT_FAKE_DECLARE_GLOBAL_VARS

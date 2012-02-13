@@ -25,7 +25,7 @@ std::string escapeXmlCharsInString(const std::string& value)
 	res.reserve(value.size());
 
 	//loop on chars and convert in needed
-	for (int i = 0 ; i < value.size() ; ++i)
+	for (unsigned int i = 0 ; i < value.size() ; ++i)
 	{
 		switch(value[i])
 		{
@@ -48,7 +48,7 @@ string paddOutput(const std::string padding, const std::string& value)
 	res.reserve(value.size());
 	if (value.empty() == false);
 		res = padding;
-	for (int i = 0 ; i < value.size() - 1 ; ++i)
+	for (unsigned int i = 0 ; i < value.size() - 1 ; ++i)
 	{
 		res += value[i];
 		if (value[i] == '\n')
@@ -60,4 +60,4 @@ string paddOutput(const std::string padding, const std::string& value)
 	return res;
 }
 
-};
+}

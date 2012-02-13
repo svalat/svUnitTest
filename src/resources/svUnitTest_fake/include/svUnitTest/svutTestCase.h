@@ -178,7 +178,7 @@ inline svutTestCaseBuilder::~svutTestCaseBuilder(void)
 }
 
 /*******************  FUNCTION  *********************/
-static int fakeRegisterTestCase(svUnitTest::svutTestCaseBuilder & builder)
+static inline int fakeRegisterTestCase(svUnitTest::svutTestCaseBuilder & builder)
 {
 	if (__fake_svut_test_cases_registry__ == NULL)
 		__fake_svut_test_cases_registry__ = new std::vector<svutTestCaseBuilder *>;
@@ -186,6 +186,6 @@ static int fakeRegisterTestCase(svUnitTest::svutTestCaseBuilder & builder)
 	return 0;
 }
 
-};
+}
 
 #endif

@@ -203,4 +203,4 @@ svutTestCase& getCurrentSvutTestCase(void )
 	return *globalCurrentFlatTestCase;
 }
 
-};
+}

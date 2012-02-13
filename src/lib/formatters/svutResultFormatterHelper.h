@@ -20,6 +20,6 @@ namespace svUnitTest
 std::string escapeXmlCharsInString(const std::string & value);
 std::string paddOutput(const std::string padding,const std::string & value);
 
-};
+}
 
 #endif // SVUTRESULTFORMATTERHELPER_H

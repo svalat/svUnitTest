@@ -24,7 +24,7 @@ static const char * CST_STRING_OUTPUT_0 = "=======  MockTestCaseForCapture      
  * testCout                                     [ FAILED ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 Forced error\n\
-line 191 of file " __FILE__ " on methode testCout()\n\
+line 190 of file " __FILE__ " on methode testCout()\n\
 Output :\n\
    Call cout with 1 == 1\n\
    Call cout with 2 == 2\n\
@@ -34,7 +34,7 @@ static const char * CST_STRING_OUTPUT_2 = "=======  MockTestCaseForCapture      
  * testPrintf                                   [ FAILED ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 Forced error\n\
-line 207 of file " __FILE__ " on methode testPrintf()\n\
+line 206 of file " __FILE__ " on methode testPrintf()\n\
 Output :\n\
    Call printf with 1 == 1\n\
    Call printf with 1 == 2\n\
@@ -43,7 +43,7 @@ static const char * CST_STRING_OUTPUT_3 = "=======  MockTestCaseForCapture      
  * testSVUT_COUT                                [ FAILED ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 Forced error\n\
-line 167 of file " __FILE__ " on methode testSVUT_COUT()\n\
+line 166 of file " __FILE__ " on methode testSVUT_COUT()\n\
 Output :\n\
    Call SVUT_COUNT with 1 == 1\n\
    Call SVUT_COUNT with 2 == 2\n\
@@ -52,7 +52,7 @@ static const char * CST_STRING_OUTPUT_4 = "=======  MockTestCaseForCapture      
  * testSVUT_PRINTF                              [ FAILED ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 Forced error\n\
-line 175 of file " __FILE__ " on methode testSVUT_PRINTF()\n\
+line 174 of file " __FILE__ " on methode testSVUT_PRINTF()\n\
 Output :\n\
    Call SVUT_PRINTF with 1 == 1\n\
    Call SVUT_PRINTF with 1 == 2\n\
@@ -61,7 +61,7 @@ static const char * CST_STRING_OUTPUT_5 = "=======  MockTestCaseForCapture      
  * testPuts                                     [ FAILED ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 Forced error\n\
-line 199 of file " __FILE__ " on methode testPuts()\n\
+line 198 of file " __FILE__ " on methode testPuts()\n\
 Output :\n\
    Call puts 1\n\
    Call puts 2\n\
@@ -70,7 +70,7 @@ static const char * CST_STRING_OUTPUT_6 = "=======  MockTestCaseForCapture      
  * testSVUT_PUTS                                [ FAILED ]\n\
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\
 Forced error\n\
-line 183 of file " __FILE__ " on methode testSVUT_PUTS()\n\
+line 182 of file " __FILE__ " on methode testSVUT_PUTS()\n\
 Output :\n\
    Call SVUT_PUTS 1\n\
    Call SVUT_PUTS 2\n\

@@ -170,7 +170,7 @@ extern std::vector<svutFlatRegistryEntry> * __fake_svut_test_flat_test_registry_
  * @return Return always true, this is the trick to call the method at init time without depending
  * on compilers/linker keywords, see SVUT_REGISTER_FLAT_TEST macro.
 **/
-static bool registerFlatTestCaseMethod(const char* testCaseName, const char* functionName, svutTestMethodPtr methodPtr,const svutCodeLocation & location)
+static inline bool registerFlatTestCaseMethod(const char* testCaseName, const char* functionName, svutTestMethodPtr methodPtr,const svutCodeLocation & location)
 {
 	if (svUnitTest::__fake_svut_test_flat_test_registry__ == NULL)
 		svUnitTest::__fake_svut_test_flat_test_registry__ = new std::vector<svutFlatRegistryEntry>;
@@ -297,6 +297,6 @@ inline svutTestCase* svutFlatTestCaseBuilder::build(void )
 	return new svutFlatTestCase(testCaseName);
 }
 
-};
+}
 
 #endif // SVUTFLATTESTCASE_H

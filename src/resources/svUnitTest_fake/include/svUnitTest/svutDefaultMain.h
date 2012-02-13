@@ -80,7 +80,7 @@ static int defaultMain(int argc,char * argv[])
 }
 
 /*******************  FUNCTION  *********************/
-static int uniqueStandeloneMain(int argc,char * argv[],svutTestCaseBuilder & builder)
+static inline int uniqueStandeloneMain(int argc,char * argv[],svutTestCaseBuilder & builder)
 {
 	if (__fake_svut_test_cases_registry__ == NULL)
 		__fake_svut_test_cases_registry__ = new std::vector<svutTestCaseBuilder *>;
