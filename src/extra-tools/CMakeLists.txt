@@ -9,4 +9,4 @@
 #install in prefix/bin
 set(SVUNITTEST_XSTL_DIR ${CMAKE_INSTALL_PREFIX}/share/svUnitTest)
 configure_file(svutxmlrun.in svutxmlrun ESCAPE_QUOTES @ONLY)
-install(FILES svutxmlmerger ${CMAKE_CURRENT_BINARY_DIR}/svutxmlrun DESTINATION ${CMAKE_INSTALL_PREFIX}/bin PERMISSIONS WORLD_EXECUTE)
+install(PROGRAMS svutxmlmerger ${CMAKE_CURRENT_BINARY_DIR}/svutxmlrun DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
