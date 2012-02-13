@@ -124,8 +124,8 @@ struct svutFlatRegistryEntry
 class svutFlatTestCaseBuilder : public svutTestCaseBuilder
 {
 	public:
-	    svutFlatTestCaseBuilder(std::string testCaseName);
-	    virtual svUnitTest::svutTestCase* build(void );
+	    inline svutFlatTestCaseBuilder(std::string testCaseName);
+	    inline virtual svUnitTest::svutTestCase* build(void );
 	protected:
 		/** Name of flat test case to construct. **/
 		std::string testCaseName;
@@ -141,12 +141,12 @@ class svutFlatTestCaseBuilder : public svutTestCaseBuilder
 class svutFlatTestCase : public svutTestCase
 {
 	public:
-	    svutFlatTestCase(std::string name = "Undefined");
-	    virtual void testMethodsRegistration(void );
-		void registerFlatTestMethod(std::string name,svutTestMethodPtr methodPtr,const svutCodeLocation & location);
+	    inline svutFlatTestCase(std::string name = "Undefined");
+	    inline virtual void testMethodsRegistration(void );
+		inline void registerFlatTestMethod(std::string name,svutTestMethodPtr methodPtr,const svutCodeLocation & location);
 	protected:
-		virtual void setUp(void );
-		virtual void tearDown(void );
+		inline virtual void setUp(void );
+		inline virtual void tearDown(void );
 	private:
 		svutTestMethodPtr setUpPtr;
 		svutTestMethodPtr tearDownPtr;
@@ -189,7 +189,7 @@ static bool registerFlatTestCaseMethod(const char* testCaseName, const char* fun
  * @param name Simply define the name of the flat test case. This name will be used by
  * testMethodsRegistration() to find the related tests.
 **/
-svutFlatTestCase::svutFlatTestCase(std::string name)
+inline svutFlatTestCase::svutFlatTestCase(std::string name)
 	: svutTestCase(name)
 {
 	setUpPtr = NULL;
@@ -203,7 +203,7 @@ svutFlatTestCase::svutFlatTestCase(std::string name)
  * @param methodPtr Define the test function to use.
  * @param location Define the location of the function in source code.
 **/
-void svutFlatTestCase::registerFlatTestMethod(std::string name, svutTestMethodPtr methodPtr, const svUnitTest::svutCodeLocation& location)
+inline void svutFlatTestCase::registerFlatTestMethod(std::string name, svutTestMethodPtr methodPtr, const svUnitTest::svutCodeLocation& location)
 {
 	if (name == "__SVUT_SPECIAL_TEST_CASE_SETUP__")
 	{
@@ -224,7 +224,7 @@ void svutFlatTestCase::registerFlatTestMethod(std::string name, svutTestMethodPt
 /**
  * Search all corresponding tests by checking testCaseName and create entries in current test case.
 **/
-void svutFlatTestCase::testMethodsRegistration(void )
+inline void svutFlatTestCase::testMethodsRegistration(void )
 {
 	if (svUnitTest::__fake_svut_test_flat_test_registry__ != NULL)
 		for (std::vector<svutFlatRegistryEntry>::const_iterator it = svUnitTest::__fake_svut_test_flat_test_registry__->begin() ; it != svUnitTest::__fake_svut_test_flat_test_registry__->end() ; ++it)
@@ -244,7 +244,7 @@ void svutFlatTestCase::testMethodsRegistration(void )
 /**
  * Call related tearDown method.
 **/
-void svutFlatTestCase::tearDown(void )
+inline void svutFlatTestCase::tearDown(void )
 {
 	if (tearDownPtr != NULL)
 		tearDownPtr();
@@ -254,7 +254,7 @@ void svutFlatTestCase::tearDown(void )
 /**
  * Call related setup method.
 **/
-void svutFlatTestCase::setUp(void )
+inline void svutFlatTestCase::setUp(void )
 {
 	if (setUpPtr != NULL)
 		setUpPtr();
@@ -265,7 +265,7 @@ void svutFlatTestCase::setUp(void )
  * Return the list of test case builder corresponding to all flat test case registred by
  * SVUT_REGISTER_FLAT_TEST macro.
 **/
-static std::set< svutTestCaseBuilder* > getRegistredFlatTestCases(void )
+inline static std::set< svutTestCaseBuilder* > getRegistredFlatTestCases(void )
 {
 	std::set< svutTestCaseBuilder* > res;
 	std::map<std::string,bool> filter;
@@ -286,13 +286,13 @@ static std::set< svutTestCaseBuilder* > getRegistredFlatTestCases(void )
 }
 
 /*******************  FUNCTION  *********************/
-svutFlatTestCaseBuilder::svutFlatTestCaseBuilder(std::string testCaseName)
+inline svutFlatTestCaseBuilder::svutFlatTestCaseBuilder(std::string testCaseName)
 {
 	this->testCaseName = testCaseName;
 }
 
 /*******************  FUNCTION  *********************/
-svutTestCase* svutFlatTestCaseBuilder::build(void )
+inline svutTestCase* svutFlatTestCaseBuilder::build(void )
 {
 	return new svutFlatTestCase(testCaseName);
 }

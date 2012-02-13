@@ -108,6 +108,10 @@ target_link_libraries (flatMode svutUnitTestBase svunittest)
 add_executable(svUnitTestFake UnitTest_svUnitTestFake.cpp)
 add_test(svUnitTestFake svUnitTestFake)
 
+################ SVUNITTESTFAKE #################
+add_executable(svUnitTestFakeMulti UnitTest_svUnitTestFake.cpp UnitTest_svUnitTestFake2.cpp)
+add_test(svUnitTestFakeMulti svUnitTestFakeMulti)
+
 ################# SUBDIRS #######################
 if (ENABLE_SELF_TEST)
 	add_subdirectory(selftest)

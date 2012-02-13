@@ -57,18 +57,18 @@ namespace svUnitTest
 class svutTestCase
 {
 	public:
-		svutTestCase(std::string name="Undefined");
-		svutTestCase(const svutTestCase & testCase);
-		virtual ~svutTestCase(void);
-		bool runTestCase(void);
-		std::string getName(void) const;
-		void setErrorMessage(svutExAssertFake & e);
+		inline svutTestCase(std::string name="Undefined");
+		inline svutTestCase(const svutTestCase & testCase);
+		inline virtual ~svutTestCase(void);
+		inline bool runTestCase(void);
+		inline std::string getName(void) const;
+		inline void setErrorMessage(svutExAssertFake & e);
 	protected:
-		void markStatus(void);
-		void markStartTest(std::string name);
-		virtual void testMethodsRegistration(void);
-		void setTestCaseName(std::string name);
-		void MARK_AS_KNOWN_ERROR(std::string message);
+		inline void markStatus(void);
+		inline void markStartTest(std::string name);
+		inline virtual void testMethodsRegistration(void);
+		inline void setTestCaseName(std::string name);
+		inline void MARK_AS_KNOWN_ERROR(std::string message);
 	private:
 		std::string caseName;
 		svutExAssertFake status;
@@ -79,7 +79,7 @@ class svutTestCase
 class svutTestCaseBuilder
 {
 	public:
-		virtual ~svutTestCaseBuilder(void);
+		inline virtual ~svutTestCaseBuilder(void);
 		virtual svutTestCase * build(void) = 0;
 };
 
@@ -91,29 +91,29 @@ template <class T>
 class svutTestCaseBuilderGeneric : public svutTestCaseBuilder
 {
 	public:
-		virtual svutTestCase * build(void) { return new T();}
+		inline virtual svutTestCase * build(void) { return new T();}
 };
 
 /*******************  FUNCTION  *********************/
-svutTestCase::svutTestCase(std::string name)
+inline svutTestCase::svutTestCase(std::string name)
 {
 	this->caseName = name;
 }
 
 /*******************  FUNCTION  *********************/
-svutTestCase::svutTestCase(const svutTestCase & testCase)
+inline svutTestCase::svutTestCase(const svutTestCase & testCase)
 {
 	std::cerr << "Can't made a copy of svutTestCase, it was forbidden." << std::endl;
 	abort();
 }
 
 /*******************  FUNCTION  *********************/
-svutTestCase::~svutTestCase(void)
+inline svutTestCase::~svutTestCase(void)
 {
 }
 
 /*******************  FUNCTION  *********************/
-bool svutTestCase::runTestCase(void)
+inline bool svutTestCase::runTestCase(void)
 {
 	this->finalRes = true;
 	this->testMethodsRegistration();
@@ -121,7 +121,7 @@ bool svutTestCase::runTestCase(void)
 }
 
 /*******************  FUNCTION  *********************/
-void svutTestCase::markStatus(void)
+inline void svutTestCase::markStatus(void)
 {
 	std::cout << '[' << status.status << ']' << std::endl;
 	if (status.status != "SUCCESS" && status.message.empty() == false)
@@ -136,7 +136,7 @@ void svutTestCase::markStatus(void)
 }
 
 /*******************  FUNCTION  *********************/
-void svutTestCase::markStartTest(std::string name)
+inline void svutTestCase::markStartTest(std::string name)
 {
 	std::cout.fill('.');
 	std::cout.width(49);
@@ -145,35 +145,35 @@ void svutTestCase::markStartTest(std::string name)
 }
 
 /*******************  FUNCTION  *********************/
-void svutTestCase::testMethodsRegistration(void)
+inline void svutTestCase::testMethodsRegistration(void)
 {
 }
 
 /*******************  FUNCTION  *********************/
-void svutTestCase::setTestCaseName(std::string name)
+inline void svutTestCase::setTestCaseName(std::string name)
 {
 	this->caseName = name;
 }
 
 /*******************  FUNCTION  *********************/
-void svutTestCase::MARK_AS_KNOWN_ERROR(std::string message)
+inline void svutTestCase::MARK_AS_KNOWN_ERROR(std::string message)
 {
 }
 
 /*******************  FUNCTION  *********************/
-void svutTestCase::setErrorMessage(svutExAssertFake & e)
+inline void svutTestCase::setErrorMessage(svutExAssertFake & e)
 {
 	this->status = e;
 }
 
 /*******************  FUNCTION  *********************/
-std::string svutTestCase::getName(void) const
+inline std::string svutTestCase::getName(void) const
 {
 	return caseName;
 }
 
 /*******************  FUNCTION  *********************/
-svutTestCaseBuilder::~svutTestCaseBuilder(void)
+inline svutTestCaseBuilder::~svutTestCaseBuilder(void)
 {
 }
 
