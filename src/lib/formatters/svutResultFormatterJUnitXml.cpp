@@ -14,7 +14,6 @@
 #include <sstream>
 #include <cassert>
 #include <cstdio>
-#include <sys/time.h>
 
 /**********************  USING  *********************/
 using namespace std;
@@ -33,7 +32,7 @@ svutResultFormatterJUnitXmlBuffer::svutResultFormatterJUnitXmlBuffer(void )
 	this->tests = 0;
 	this->errors = 0;
 	this->failures = 0;
-	this->start = svutResultFormatterJUnitXml::getCurrentTime();
+	this->start = getCurrentTime();
 }
 
 /*******************  FUNCTION  *********************/
@@ -114,7 +113,6 @@ void svutResultFormatterJUnitXml::openTestCase(const svUnitTest::svutTestCase& /
 void svutResultFormatterJUnitXml::closeTestCase(const svUnitTest::svutTestCase& testCase)
 {
 	//vars
-	double t = getCurrentTime() - this->suite->start;
 	char tmp[128];
 
 	//errors
@@ -123,7 +121,7 @@ void svutResultFormatterJUnitXml::closeTestCase(const svUnitTest::svutTestCase& 
 
 	//print
 	//display
-	sprintf(tmp,"%0.3f",t);
+	sprintf(tmp,"%0.3f",testCase.getTestTotalCaseDuration());
 	this->all->buffer << "\t<testsuite tests='" << this->suite->tests
 	     << "' failures='" << this->suite->failures
 	     << "' errors='" << this->suite->errors
@@ -152,16 +150,12 @@ void svutResultFormatterJUnitXml::openTestMethod(const svUnitTest::svutTestCase&
 	//errors
 	assert(this->all != NULL);
 	assert(this->suite != NULL);
-
-	//start chrono
-	testMethodStartTime = getCurrentTime();
 }
 
 /*******************  FUNCTION  *********************/
 void svutResultFormatterJUnitXml::closeTestMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& meth, const svUnitTest::svutStatusInfo& status)
 {
 	//vars
-	double t = getCurrentTime() - this->all->start;
 	char tmp[128];
 
 	//errors
@@ -169,7 +163,7 @@ void svutResultFormatterJUnitXml::closeTestMethod(const svUnitTest::svutTestCase
 	assert(this->suite != NULL);
 
 	//open balis
-	sprintf(tmp,"%0.3f",t);
+	sprintf(tmp,"%0.3f",status.getDuration());
 	this->suite->buffer << "\t\t<testcase name='" << escapeXmlCharsInString(meth.getName())
 		<< "' status='run' time='" << tmp
 		<< "' classname='" << escapeXmlCharsInString(testCase.getName()) << "'>" << endl;
@@ -292,15 +286,6 @@ void svutResultFormatterJUnitXml::onListMethod(const svUnitTest::svutTestCase& t
 		*out << escapeXmlCharsInString(testCase.getName()) << "::" << escapeXmlCharsInString(method.getName()) << "()\n";
 	else
 		*out << escapeXmlCharsInString(method.getName()) << "()\n";
-}
-
-/*******************  FUNCTION  *********************/
-/** Get current time in second. **/
-double svutResultFormatterJUnitXml::getCurrentTime(void )
-{
-	struct timeval tv;
-	gettimeofday(&tv,NULL);
-	return (double)tv.tv_sec + (double)tv.tv_usec / 1000000.0;
 }
 
 }

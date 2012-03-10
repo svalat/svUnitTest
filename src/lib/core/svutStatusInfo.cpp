@@ -30,6 +30,7 @@ svutStatusInfo::svutStatusInfo(svUnitTest::svutStatus status, std::string messag
 {
 	this->message = message;
 	this->status = status;
+	this->duration = 0.0;
 }
 
 /*******************  FUNCTION  *********************/
@@ -323,6 +324,24 @@ const string & svutStatusInfo::getOutput(void ) const
 void svutStatusInfo::setOutput(const std::string& output)
 {
 	this->output = output.c_str();
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * @return Return the duration of the test.
+ */
+double svutStatusInfo::getDuration(void) const
+{
+	return this->duration;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Set the duration of the test.
+ */
+void svutStatusInfo::setDuration(double duration)
+{
+	this->duration = duration;
 }
 
 }

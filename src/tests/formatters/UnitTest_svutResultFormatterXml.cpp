@@ -30,27 +30,27 @@ static const char * CST_STRING_SUMMARY_0 = "\t<GlobalResults>\n\
 \t\t<total>0</total>\n\
 \t\t<status>success</status>\n\
 \t</GlobalResults>\n";
-static const char * CST_STRING_UNKNOWN_1 = "\t\t\t<status>unknown</status>\n\
+static const char * CST_STRING_UNKNOWN_1 = "\t\t\t<status>unknown</status>\n\t\t\t<time>0</time>\n\
 \t\t\t<AssertInfo>\n\t\t\t\t<location>\n\t\t\t\t\t<unknown></unknown>\n\
-\t\t\t\t</location>\n\t\t\t\t<message></message>\n\t\t\t\t<entries>\n\
-\t\t\t\t</entries>\n\t\t\t\t<context>\n\t\t\t\t</context>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_UNKNOWN_3 = "\t\t\t<status>unknown</status>\n\
+\t\t\t\t</location>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
+static const char * CST_STRING_UNKNOWN_3 = "\t\t\t<status>unknown</status>\n\t\t\t<time>0</time>\n\
 \t\t\t<AssertInfo>\n\t\t\t\t<location>\n\t\t\t\t\t<file>file.cpp</file>\n\
 \t\t\t\t\t<methode>methode</methode>\n\t\t\t\t\t<line>33</line>\n\
-\t\t\t\t</location>\n\t\t\t\t<message>message for unknown status</message>\n\t\t\t\t<entries>\n\
-\t\t\t\t</entries>\n\t\t\t\t<context>\n\t\t\t\t</context>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_SUCCESS_1 = "\t\t\t<status>success</status>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_TODO      = "\t\t\t<status>todo</status>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_INDEV     = "\t\t\t<status>indev</status>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_SKIPED    = "\t\t\t<status>skiped</status>\n\t\t</TestFunction>\n";
+\t\t\t\t</location>\n\t\t\t\t<message>message for unknown status</message>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
+static const char * CST_STRING_SUCCESS_1 = "\t\t\t<status>success</status>\n\t\t\t<time>0</time>\n\t\t</TestFunction>\n";
+static const char * CST_STRING_TODO      = "\t\t\t<status>todo</status>\n\t\t\t<time>0</time>\n\t\t\t<AssertInfo>\n\
+\t\t\t\t<location>\n\t\t\t\t\t<unknown></unknown>\n\t\t\t\t</location>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
+static const char * CST_STRING_INDEV     = "\t\t\t<status>indev</status>\n\t\t\t<time>0</time>\n\t\t\t<AssertInfo>\n\
+\t\t\t\t<location>\n\t\t\t\t\t<unknown></unknown>\n\t\t\t\t</location>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
+static const char * CST_STRING_SKIPED    = "\t\t\t<status>skiped</status>\n\t\t\t<time>0</time>\n\t\t</TestFunction>\n";
 static const char * CST_STRING_TEST_CASE = "\t<TestCase>\n\t\t<name>MyTest</name>\n";
-static const char * CST_STRING_FAILED_1  = "\t\t\t<status>failed</status>\n\
+static const char * CST_STRING_FAILED_1  = "\t\t\t<status>failed</status>\n\t\t\t<time>0</time>\n\
 \t\t\t<AssertInfo>\n\t\t\t\t<location>\n\t\t\t\t\t<file>file.cpp</file>\n\
 \t\t\t\t\t<methode>methode</methode>\n\t\t\t\t\t<line>33</line>\n\t\t\t\t</location>\n\
 \t\t\t\t<message>message for failed status</message>\n\t\t\t\t<entries>\n\
 \t\t\t\t\t<entry name='actual'>duck</entry>\n\t\t\t\t\t<entry name='expected'>toto</entry>\n\
-\t\t\t\t</entries>\n\t\t\t\t<context>\n\t\t\t\t</context>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
-static const char * CST_STRING_CONTEXT  ="\t\t\t<status>failed</status>\n\
+\t\t\t\t</entries>\n\t\t\t</AssertInfo>\n\t\t</TestFunction>\n";
+static const char * CST_STRING_CONTEXT  ="\t\t\t<status>failed</status>\n\t\t\t<time>0</time>\n\
 \t\t\t<AssertInfo>\n\t\t\t\t<location>\n\t\t\t\t\t<file>file.cpp</file>\n\
 \t\t\t\t\t<methode>methode</methode>\n\t\t\t\t\t<line>33</line>\n\t\t\t\t</location>\n\
 \t\t\t\t<message>message for failed status</message>\n\t\t\t\t<entries>\n\
@@ -69,18 +69,32 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
 			<status>success</status>\n\
+			<time>0</time>\n\
 		</TestFunction>\n\
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
 			<status>todo</status>\n\
+			<time>0</time>\n\
+			<AssertInfo>\n\
+				<location>\n\
+					<unknown></unknown>\n\
+				</location>\n\
+			</AssertInfo>\n\
 		</TestFunction>\n\
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
 			<status>success</status>\n\
+			<time>0</time>\n\
 		</TestFunction>\n\
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
 			<status>indev</status>\n\
+			<time>0</time>\n\
+			<AssertInfo>\n\
+				<location>\n\
+					<unknown></unknown>\n\
+				</location>\n\
+			</AssertInfo>\n\
 		</TestFunction>\n\
 	</TestCase>\n\
 	<TestCase>\n\
@@ -88,14 +102,17 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
 			<status>skiped</status>\n\
+			<time>0</time>\n\
 		</TestFunction>\n\
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
 			<status>success</status>\n\
+			<time>0</time>\n\
 		</TestFunction>\n\
 		<TestFunction>\n\
 			<name>testMethod</name>\n\
 			<status>failed</status>\n\
+			<time>0</time>\n\
 			<AssertInfo>\n\
 				<location>\n\
 					<file>file.cpp</file>\n\
@@ -107,13 +124,12 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 					<entry name='actual'>duck</entry>\n\
 					<entry name='expected'>toto</entry>\n\
 				</entries>\n\
-				<context>\n\
-				</context>\n\
 			</AssertInfo>\n\
 		</TestFunction>\n\
 	<TestCase>\n\
 		<name>MyTest</name>\n\
 			<status>unknown</status>\n\
+			<time>0</time>\n\
 			<AssertInfo>\n\
 				<location>\n\
 					<file>file.cpp</file>\n\
@@ -121,10 +137,6 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 					<line>33</line>\n\
 				</location>\n\
 				<message>message for unknown status</message>\n\
-				<entries>\n\
-				</entries>\n\
-				<context>\n\
-				</context>\n\
 			</AssertInfo>\n\
 		</TestFunction>\n\
 	</TestCase>\n\
@@ -216,6 +228,15 @@ class UnitTest_svutResultFormatterXml : public TestCase, IUnitTest_ResultFormatt
 		svutResultFormatterXml * formatter;
 		stringstream * out;
 };
+
+/*******************  FUNCTION  *********************/
+/**
+ * Override to avoid time changes
+**/
+double getCurrentTime(void )
+{
+	return 0.0;
+}
 
 /*******************  FUNCTION  *********************/
 void UnitTest_svutResultFormatterXml::setUp(void)

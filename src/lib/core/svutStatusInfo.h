@@ -80,6 +80,8 @@ class svutStatusInfo
 		std::string getStatusName(void) const;
 		static std::string getStatusName(svutStatus status);
 		const std::string& getOutput(void) const;
+		double getDuration(void) const;
+		void setDuration(double duration);
 	protected:
 		void formatList(const svutStatusInfoMap & list,std::ostream & out,const std::string & prefix,const std::string & separator,const std::string & postfix,svutStringFilter filter=NULL) const;
 		/** Define the message related to the status of the test. **/
@@ -94,6 +96,8 @@ class svutStatusInfo
 		svutStatusInfoMap context;
 		/** Store the debugging output, for now it's an emulation for capturing real stdout/stderr. **/
 		std::string output;
+		/** Measure the time it took to run, in seconds. **/
+		double duration;
 };
 
 }

@@ -52,7 +52,6 @@ class svutResultFormatterJUnitXml : public svutResultFormatter
 		virtual void onListingStart(void );
 		virtual void onListMethod(const svUnitTest::svutTestCase& testCase, const svUnitTest::svutTestMethod& method);
 		virtual void onListingEnd(void );
-		static double getCurrentTime(void);
 	protected:
 		/** Pointer to the output stream to use. **/
 		std::ostream * out;
@@ -63,8 +62,6 @@ class svutResultFormatterJUnitXml : public svutResultFormatter
 		svutResultFormatterJUnitXmlBuffer * all;
 		/** Aggregate all test cases of test suite for testsuite balise. **/
 		svutResultFormatterJUnitXmlBuffer * suite;
-		/** Remember the start time of current method. **/
-		double testMethodStartTime;
 };
 
 }

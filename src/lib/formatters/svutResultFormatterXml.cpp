@@ -8,6 +8,7 @@
 
 /********************  HEADERS  *********************/
 #include <algorithm>
+#include <iomanip>
 #include <ctime>
 #include "svutResultFormatterXml.h"
 #include "svUnitTest.h"
@@ -122,7 +123,8 @@ void svutResultFormatterXml::closeTestMethod(const svUnitTest::svutTestCase& /*t
 	string statusLower = status.getStatusName();
 	std::transform(statusLower.begin(), statusLower.end(), statusLower.begin(), ::tolower);
 	*out << "\t\t\t<status>" << statusLower << "</status>" << endl;
-	if (status.getStatus() == SVUT_STATUS_FAILED || status.getStatus() == SVUT_STATUS_UNKNOWN)
+	*out << "\t\t\t<time>" << setprecision(2) << status.getDuration() << "</time>" << endl;
+	if (status.getStatus() != SVUT_STATUS_SUCCESS && status.getStatus() != SVUT_STATUS_SKIPED)
 		this->printAssertInfo(status);
 	*out << "\t\t</TestFunction>" << endl;
 }
@@ -154,13 +156,20 @@ void svUnitTest::svutResultFormatterXml::printAssertInfo(const svUnitTest::svutS
 {
 	*out << "\t\t\t<AssertInfo>" << endl;
 	printLocation(status.getLocation());
-	*out << "\t\t\t\t<message>" << escapeXmlCharsInString(status.getMessage()) << "</message>" << endl;
-	*out << "\t\t\t\t<entries>" << endl;
-	status.formatEntries(*out,"\t\t\t\t\t<entry name='","'>","</entry>\n",escapeXmlCharsInString);
-	*out << "\t\t\t\t</entries>" << endl;
-	*out << "\t\t\t\t<context>" << endl;
-	status.formatContext(*out,"\t\t\t\t\t<entry name='","'>","</entry>\n",escapeXmlCharsInString);
-	*out << "\t\t\t\t</context>" << endl;
+	if (!status.getMessage().empty())
+		*out << "\t\t\t\t<message>" << escapeXmlCharsInString(status.getMessage()) << "</message>" << endl;
+	if (status.getNbEntries() > 0)
+	{
+		*out << "\t\t\t\t<entries>" << endl;
+		status.formatEntries(*out,"\t\t\t\t\t<entry name='","'>","</entry>\n",escapeXmlCharsInString);
+		*out << "\t\t\t\t</entries>" << endl;
+	}
+	if (status.getNbContextEntries() > 0)
+	{
+		*out << "\t\t\t\t<context>" << endl;
+		status.formatContext(*out,"\t\t\t\t\t<entry name='","'>","</entry>\n",escapeXmlCharsInString);
+		*out << "\t\t\t\t</context>" << endl;
+	}
 	if (!status.getOutput().empty())
 		*out << "\t\t\t\t<output>" << escapeXmlCharsInString(status.getOutput()) << "</output>" << endl;
 	*out << "\t\t\t</AssertInfo>" << endl;

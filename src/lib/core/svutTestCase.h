@@ -154,6 +154,7 @@ class svutTestCase
 		void resetContexEntries(void);
 		void clearContexEntry(std::string name);
 		template <class T> void setContextEntry(std::string name,const T & value);
+		double getTestTotalCaseDuration(void) const;
 	protected:
 		virtual void testMethodsRegistration(void);
 		void setTestCaseName(std::string name) throw (svutExInternalError);
@@ -189,7 +190,12 @@ class svutTestCase
 		bool registrationDone;
 		/** String map to store context entries. **/
 		svutStatusInfoMap context;
+		/** Time duration of the test case. **/
+		double duration;
 };
+
+/*******************  FUNCTION  *********************/
+double getCurrentTime(void);
 
 /*******************  FUNCTION  *********************/
 /**

@@ -15,6 +15,7 @@
 #include <cstdarg>
 #include <cstring>
 #include <cstdio>
+#include <sys/time.h>
 
 /**********************  USING  *********************/
 using namespace std;
@@ -41,6 +42,7 @@ svutTestCase::svutTestCase(std::string name)
 	this->caseName = name;
 	this->nameLocked = false;
 	this->registrationDone = false;
+	this->duration = 0.0;
 }
 
 /*******************  FUNCTION  *********************/
@@ -81,6 +83,10 @@ void svutTestCase::runTestCase(svutListener * listener,svutTestFilter * filter)
 	if (listener != NULL)
 		listener->onTestCaseStart(*this);
 
+	//start time measurement
+	this->duration = 0.0;
+	double testStartTime = getCurrentTime();
+
 	//done the job
 	for (svutTestMethodPtrList::iterator it = tests.begin();it!=tests.end();++it)
 	{
@@ -100,6 +106,12 @@ void svutTestCase::runTestCase(svutListener * listener,svutTestFilter * filter)
 		}
 	}
 
+	//end time measurement
+	double testEndTime = getCurrentTime();
+
+	//update some vars
+	this->duration = testEndTime - testStartTime;
+
 	//send notification
 	if (listener != NULL)
 		listener->onTestCaseEnd(*this);
@@ -115,6 +127,9 @@ svutStatusInfo svutTestCase::runTestMethod(svutTestMethod * test)
 {
 	bool needTearDown = false;
 	svutStatusInfo res(SVUT_STATUS_SUCCESS,"SUCCESS",test->getLocation());
+
+	//start time measurement
+	double testStartTime = getCurrentTime();
 
 	//notify start
 	try {
@@ -139,6 +154,9 @@ svutStatusInfo svutTestCase::runTestMethod(svutTestMethod * test)
 		res = svutStatusInfo(SVUT_STATUS_UNKNOWN,"Unexpected exception.",test->getLocation());
 	}
 
+	//end time measurement
+	double testEndTime = getCurrentTime();
+
 	//status replacement
 	if (tmpFailIsTodo)
 	{
@@ -158,6 +176,8 @@ svutStatusInfo svutTestCase::runTestMethod(svutTestMethod * test)
 		}
 	}
 
+	//set some vars
+	res.setDuration(testEndTime - testStartTime);
 	res.setOutput(this->cout.str());
 	res.setContext(context);
 	return res;
@@ -362,6 +382,27 @@ svutTestCase& svutTestCase::getCurrentSvutTestCase(void )
 {
 	assert(this != NULL);
 	return *this;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Return the total execution time of the test case (in seconds). It was only available at the
+ * end of total execution. Otherwise it return 0.0.
+ */
+double svutTestCase::getTestTotalCaseDuration(void) const
+{
+	return this->duration;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Get current time in second. It also provide the microseconds as double.
+**/
+double getCurrentTime(void )
+{
+	struct timeval tv;
+	gettimeofday(&tv,NULL);
+	return (double)tv.tv_sec + (double)tv.tv_usec / 1000000.0;
 }
 
 }
