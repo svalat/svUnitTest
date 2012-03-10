@@ -11,7 +11,8 @@
 <!ELEMENT TestDate (#PCDATA)>
 <!ELEMENT TestCase (name,TestFunction+)>
 <!ELEMENT name (#PCDATA)>
-<!ELEMENT TestFunction (name,status,AssertInfo?)>
+<!ELEMENT TestFunction (name,status,time,AssertInfo?)>
+<!ELEMENT time (#PCDATA)>
 <!ELEMENT status (#PCDATA)>
 <!ELEMENT AssertInfo (location,message,entries,context,output?)>
 <!ELEMENT message (#PCDATA)>
