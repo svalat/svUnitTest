@@ -20,6 +20,7 @@ class SimpleObject
 {
 	public:
 		SimpleObject(int value = 20) {this->value = value;}
+		virtual ~SimpleObject(void) {};
 		virtual void clear(void) {this->value = 0;}
 		int getValue(void) {return this->value; }
 	protected:

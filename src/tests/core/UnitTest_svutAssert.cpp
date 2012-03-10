@@ -201,44 +201,44 @@ struct UnitTestCustoType
 };
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+bool asserterOperatorEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
 {
 	return (v1.value1 == v2.value1 && v1.value2 == v2.value2);
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorNotEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+bool asserterOperatorNotEqual(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
 {
 	return (v1.value1 != v2.value1 || v1.value2 != v2.value2);
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorGE(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+bool asserterOperatorGE(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
 {
 	return (v1.value1 >= v2.value1 && v1.value2 >= v2.value2);
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorGT(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+bool asserterOperatorGT(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
 {
 	return (v1.value1 > v2.value1 && v1.value2 > v2.value2);
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorLE(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+bool asserterOperatorLE(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
 {
 	return (v1.value1 <= v2.value1 && v1.value2 <= v2.value2);
 }
 
 /*******************  FUNCTION  *********************/
-static bool asserterOperatorLT(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
+bool asserterOperatorLT(const UnitTestCustoType & v1,const UnitTestCustoType & v2)
 {
 	return (v1.value1 < v2.value1 && v1.value2 < v2.value2);
 }
 
 
 /*******************  FUNCTION  *********************/
-static std::string asserterToString(const UnitTestCustoType & value)
+std::string asserterToString(const UnitTestCustoType & value)
 {
 	std::stringstream res;
 	res << value.value1 << ", " << value.value2;
@@ -260,7 +260,7 @@ void UnitTest_svutAssert::testMacroAssertTrue_good(void )
 {
 	try {
 		SVUT_ASSERT_TRUE(true);
-	} catch (svutExAssertFailBool) {
+	} catch (svutExAssertFailBool &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailBool exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -274,7 +274,7 @@ void UnitTest_svutAssert::testMacroAssertTrue_bad(void )
 	try {
 		SVUT_ASSERT_TRUE(false);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailBool exception.");
-	} catch (svutExAssertFailBool e) {
+	} catch (svutExAssertFailBool & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("TRUE",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("FALSE",e.getInfos().getEntry("Actual"));
@@ -288,7 +288,7 @@ void UnitTest_svutAssert::testMacroAssertFalse_good(void )
 {
 	try {
 		SVUT_ASSERT_FALSE(false);
-	} catch (svutExAssertFailBool) {
+	} catch (svutExAssertFailBool &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailBool exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -302,7 +302,7 @@ void UnitTest_svutAssert::testMacroAssertFalse_bad(void )
 	try {
 		SVUT_ASSERT_FALSE(true);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailBool exception.");
-	} catch (svutExAssertFailBool e) {
+	} catch (svutExAssertFailBool & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("FALSE",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("TRUE",e.getInfos().getEntry("Actual"));
@@ -316,7 +316,7 @@ void UnitTest_svutAssert::testMacroAssertNull_good(void )
 {
 	try {
 		SVUT_ASSERT_NULL(NULL);
-	} catch (svutExAssertFailNullPointer) {
+	} catch (svutExAssertFailNullPointer &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailNullPointer exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -330,7 +330,7 @@ void UnitTest_svutAssert::testMacroAssertNull_bad(void )
 	try {
 		SVUT_ASSERT_NULL(0x55);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailNullPointer exception.");
-	} catch (svutExAssertFailNullPointer e) {
+	} catch (svutExAssertFailNullPointer & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("NULL",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("NOT NULL",e.getInfos().getEntry("Actual"));
@@ -344,7 +344,7 @@ void UnitTest_svutAssert::testMacroAssertNotNull_good(void )
 {
 	try {
 		SVUT_ASSERT_NOT_NULL(0x55);
-	} catch (svutExAssertFailNullPointer) {
+	} catch (svutExAssertFailNullPointer &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailNullPointer exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -358,7 +358,7 @@ void UnitTest_svutAssert::testMacroAssertNotNull_bad(void )
 	try {
 		SVUT_ASSERT_NOT_NULL(NULL);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailNullPointer exception.");
-	} catch (svutExAssertFailNullPointer e) {
+	} catch (svutExAssertFailNullPointer & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("NOT NULL",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("NULL",e.getInfos().getEntry("Actual"));
@@ -372,7 +372,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_int_good(void)
 {
 	try {
 		SVUT_ASSERT_EQUAL(10,10);
-	} catch (svutExAssertFailEqual) {
+	} catch (svutExAssertFailEqual &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -386,7 +386,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_int_bad(void)
 	try {
 		SVUT_ASSERT_EQUAL(10,42);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailEqual exception.");
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("42",e.getInfos().getEntry("Actual"));
@@ -400,7 +400,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_cstr_good(void)
 {
 	try {
 		SVUT_ASSERT_EQUAL("Hello World !!","Hello World !!");
-	} catch (svutExAssertFailEqual) {
+	} catch (svutExAssertFailEqual &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -414,7 +414,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_cstr_bad(void)
 	try {
 		SVUT_ASSERT_EQUAL("Hello World!!","Hello Bob!!");
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailEqual exception.");
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("Hello World!!",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("Hello Bob!!",e.getInfos().getEntry("Actual"));
@@ -430,7 +430,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_custotype_good(void)
 		UnitTestCustoType v1 = {10,20};
 		UnitTestCustoType v2 = {10,20};
 		SVUT_ASSERT_EQUAL(v1,v2);
-	} catch (svutExAssertFailEqual) {
+	} catch (svutExAssertFailEqual &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -446,7 +446,7 @@ void UnitTest_svutAssert::testMacroAssertEqual_custotype_bad(void)
 		UnitTestCustoType v2 = {10,40};
 		SVUT_ASSERT_EQUAL(v1,v2);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailEqual exception.");
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("10, 20",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("10, 40",e.getInfos().getEntry("Actual"));
@@ -460,7 +460,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_int_good(void)
 {
 	try {
 		SVUT_ASSERT_NOT_EQUAL(10,20);
-	} catch (svutExAssertFailEqual) {
+	} catch (svutExAssertFailEqual &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -474,7 +474,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_int_bad(void)
 	try {
 		SVUT_ASSERT_NOT_EQUAL(10,10);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailEqual exception.");
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Not expected"));
 		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Actual"));
@@ -488,7 +488,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_cstr_good(void)
 {
 	try {
 		SVUT_ASSERT_NOT_EQUAL("Hello World !!","Hello Bob !!");
-	} catch (svutExAssertFailEqual) {
+	} catch (svutExAssertFailEqual &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -502,7 +502,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_cstr_bad(void)
 	try {
 		SVUT_ASSERT_NOT_EQUAL("Hello World!!","Hello World!!");
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailEqual exception.");
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("Hello World!!",e.getInfos().getEntry("Not expected"));
 		CPPUNIT_ASSERT_EQUAL("Hello World!!",e.getInfos().getEntry("Actual"));
@@ -518,7 +518,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_custotype_good(void)
 		UnitTestCustoType v1 = {10,20};
 		UnitTestCustoType v2 = {10,30};
 		SVUT_ASSERT_NOT_EQUAL(v1,v2);
-	} catch (svutExAssertFailEqual) {
+	} catch (svutExAssertFailEqual &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -534,7 +534,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqual_custotype_bad(void)
 		UnitTestCustoType v2 = {10,20};
 		SVUT_ASSERT_NOT_EQUAL(v1,v2);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailEqual exception.");
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("10, 20",e.getInfos().getEntry("Not expected"));
 		CPPUNIT_ASSERT_EQUAL("10, 20",e.getInfos().getEntry("Actual"));
@@ -548,7 +548,7 @@ void UnitTest_svutAssert::testMacroAssertEqualStrict_int_good(void)
 {
 	try {
 		SVUT_ASSERT_EQUAL_STRICT(10,10);
-	} catch (svutExAssertFailEqual) {
+	} catch (svutExAssertFailEqual &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -560,7 +560,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqualStrict_int_good(void)
 {
 	try {
 		SVUT_ASSERT_NOT_EQUAL_STRICT(10,20);
-	} catch (svutExAssertFailEqual) {
+	} catch (svutExAssertFailEqual &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -572,7 +572,7 @@ void UnitTest_svutAssert::testMacroAssertEqualStrict_cstr_good(void)
 {
 	try {
 		SVUT_ASSERT_EQUAL_STRICT("Hello World !!","Hello World !!");
-	} catch (svutExAssertFailEqual) {
+	} catch (svutExAssertFailEqual &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -584,7 +584,7 @@ void UnitTest_svutAssert::testMacroAssertNotEqualStrict_cstr_good(void)
 {
 	try {
 		SVUT_ASSERT_NOT_EQUAL_STRICT("Hello World !!","Hello Bob !!");
-	} catch (svutExAssertFailEqual) {
+	} catch (svutExAssertFailEqual &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -596,7 +596,7 @@ void UnitTest_svutAssert::testMacroAssertZero_good(void )
 {
 	try {
 		SVUT_ASSERT_ZERO(0ul);
-	} catch (svutExAssertFailZero) {
+	} catch (svutExAssertFailZero &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailZero exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -610,7 +610,7 @@ void UnitTest_svutAssert::testMacroAssertZero_bad(void )
 	try {
 		SVUT_ASSERT_ZERO(10ul);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailZero exception.");
-	} catch (svutExAssertFailZero e) {
+	} catch (svutExAssertFailZero & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL(asserterToString("10"),e.getInfos().getEntry("Value"));
 	} catch (...) {
@@ -625,7 +625,7 @@ void UnitTest_svutAssert::testMacroAssertZeros_good(void )
 	memset(values,0,sizeof(values));
 	try {
 		SVUT_ASSERT_ZEROS(values,100);
-	} catch (svutExAssertFailZeros) {
+	} catch (svutExAssertFailZeros &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailZeros exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -642,7 +642,7 @@ void UnitTest_svutAssert::testMacroAssertZeros_bad_1(void )
 	try {
 		SVUT_ASSERT_ZEROS(values,100);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailZeros exception.");
-	} catch (svutExAssertFailZeros e) {
+	} catch (svutExAssertFailZeros & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -659,7 +659,7 @@ void UnitTest_svutAssert::testMacroAssertZeros_bad_2(void )
 	try {
 		SVUT_ASSERT_ZEROS(values,100);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailZeros exception.");
-	} catch (svutExAssertFailZeros e) {
+	} catch (svutExAssertFailZeros & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -672,7 +672,7 @@ void UnitTest_svutAssert::testMacroAssertSame_good(void)
 	try {
 		int a = 66;
 		SVUT_ASSERT_SAME(&a,&a);
-	} catch (svutExAssertFailEqual) {
+	} catch (svutExAssertFailEqual &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -688,7 +688,7 @@ void UnitTest_svutAssert::testMacroAssertSame_bad(void)
 	try {
 		SVUT_ASSERT_SAME(&a,&b);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailEqual exception.");
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL(asserterToString(&a),e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL(asserterToString(&b),e.getInfos().getEntry("Actual"));
@@ -704,7 +704,7 @@ void UnitTest_svutAssert::testMacroAssertNotSame_good(void)
 		int a = 66;
 		int b = 66;
 		SVUT_ASSERT_NOT_SAME(&a,&b);
-	} catch (svutExAssertFailEqual) {
+	} catch (svutExAssertFailEqual &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailEqual exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -719,7 +719,7 @@ void UnitTest_svutAssert::testMacroAssertNotSame_bad(void)
 	try {
 		SVUT_ASSERT_NOT_SAME(&a,&a);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailEqual exception.");
-	} catch (svutExAssertFailEqual e) {
+	} catch (svutExAssertFailEqual & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL(asserterToString(&a),e.getInfos().getEntry("Not expected"));
 		CPPUNIT_ASSERT_EQUAL(asserterToString(&a),e.getInfos().getEntry("Actual"));
@@ -735,7 +735,7 @@ void UnitTest_svutAssert::testMacroAssertFailCustom(void )
 	try {
 		SVUT_ASSERT_FAIL("test fail");
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailCustom exception.");
-	} catch (svutExAssertFailCustom e) {
+	} catch (svutExAssertFailCustom & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("test fail",e.getMessage());
 	} catch (...) {
@@ -750,7 +750,7 @@ void UnitTest_svutAssert::testMacroAssertTodo(void )
 	try {
 		SVUT_ASSERT_TODO("test todo");
 		CPPUNIT_FAIL("Now Thow expected svutExNotifyTodo exception.");
-	} catch (svutExNotifyTodo e) {
+	} catch (svutExNotifyTodo & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("test todo",e.getMessage());
 	} catch (...) {
@@ -765,7 +765,7 @@ void UnitTest_svutAssert::testMacroAssertIndev(void )
 	try {
 		SVUT_ASSERT_INDEV("test indev");
 		CPPUNIT_FAIL("Now Thow expected svutExNotifyIndev exception.");
-	} catch (svutExNotifyIndev e) {
+	} catch (svutExNotifyIndev & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("test indev",e.getMessage());
 	} catch (...) {
@@ -780,7 +780,7 @@ void UnitTest_svutAssert::testMacroAssertNotExec(void )
 	try {
 		SVUT_ASSERT_NOT_EXEC_THIS();
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailNotExec exception.");
-	} catch (svutExAssertFailNotExec e) {
+	} catch (svutExAssertFailNotExec & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -792,7 +792,7 @@ void UnitTest_svutAssert::testMacroAssertThrow_good(void)
 {
 	try {
 		SVUT_ASSERT_THROW(int,throw 10);
-	} catch (svutExAssertFailThrow) {
+	} catch (svutExAssertFailThrow &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailThrow exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -806,7 +806,7 @@ void UnitTest_svutAssert::testMacroAssertThrow_another(void)
 	try {
 		SVUT_ASSERT_THROW(int,throw 10.0);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailThrow exception.");
-	} catch (svutExAssertFailThrow e) {
+	} catch (svutExAssertFailThrow & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("int",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("UNKNOWN",e.getInfos().getEntry("Actual"));
@@ -822,7 +822,7 @@ void UnitTest_svutAssert::testMacroAssertThrow_notthrow(void)
 	try {
 		SVUT_ASSERT_THROW(int,{});
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailThrow exception.");
-	} catch (svutExAssertFailThrow e) {
+	} catch (svutExAssertFailThrow & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("int",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("NONE",e.getInfos().getEntry("Actual"));
@@ -836,7 +836,7 @@ void UnitTest_svutAssert::testMacroAssertThrowSomething_good(void)
 {
 	try {
 		SVUT_ASSERT_THROW_SOMETHING(throw 10);
-	} catch (svutExAssertFailThrow) {
+	} catch (svutExAssertFailThrow &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailThrow exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -851,7 +851,7 @@ void UnitTest_svutAssert::testMacroAssertThrowSomething_bad(void)
 	try {
 		SVUT_ASSERT_THROW_SOMETHING(a++);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailThrow exception.");
-	} catch (svutExAssertFailThrow e) {
+	} catch (svutExAssertFailThrow & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("...",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("NONE",e.getInfos().getEntry("Actual"));
@@ -865,7 +865,7 @@ void UnitTest_svutAssert::testMacroAssertNotThrow_good(void)
 {
 	try {
 		SVUT_ASSERT_NOT_THROW(int,{});
-	} catch (svutExAssertFailThrow) {
+	} catch (svutExAssertFailThrow &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailThrow exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -893,7 +893,7 @@ void UnitTest_svutAssert::testMacroAssertNotThrow_others(void)
 {
 	try {
 		SVUT_ASSERT_NOT_THROW(int,throw 1.0);
-	} catch (svutExAssertFailThrow) {
+	} catch (svutExAssertFailThrow &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailThrow exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -905,7 +905,7 @@ void UnitTest_svutAssert::testMacroAssertMayNotThrow_good(void)
 {
 	try {
 		SVUT_ASSERT_MAY_NOT_THROW({});
-	} catch (svutExAssertFailThrow) {
+	} catch (svutExAssertFailThrow &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailThrow exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -919,7 +919,7 @@ void UnitTest_svutAssert::testMacroAssertMayNotThrow_bad(void)
 	try {
 		SVUT_ASSERT_MAY_NOT_THROW(throw 10);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailThrow exception.");
-	} catch (svutExAssertFailThrow e) {
+	} catch (svutExAssertFailThrow & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("NONE",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("...",e.getInfos().getEntry("Actual"));
@@ -933,7 +933,7 @@ void UnitTest_svutAssert::testMacroAssertGT_int_good(void )
 {
 	try {
 		SVUT_ASSERT_GT(10,20);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -947,7 +947,7 @@ void UnitTest_svutAssert::testMacroAssertGT_int_bad(void )
 	try {
 		SVUT_ASSERT_GT(10,2);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("2",e.getInfos().getEntry("Actual"));
@@ -964,7 +964,7 @@ void UnitTest_svutAssert::testMacroAssertGT_int_limit(void )
 	try {
 		SVUT_ASSERT_GT(10,10);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Actual"));
@@ -979,7 +979,7 @@ void UnitTest_svutAssert::testMacroAssertGE_int_good(void )
 {
 	try {
 		SVUT_ASSERT_GE(10,20);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -993,7 +993,7 @@ void UnitTest_svutAssert::testMacroAssertGE_int_bad(void )
 	try {
 		SVUT_ASSERT_GE(10,2);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("2",e.getInfos().getEntry("Actual"));
@@ -1008,7 +1008,7 @@ void UnitTest_svutAssert::testMacroAssertGE_int_limit(void )
 {
 	try {
 		SVUT_ASSERT_GE(10,10);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1020,7 +1020,7 @@ void UnitTest_svutAssert::testMacroAssertLE_int_good(void )
 {
 	try {
 		SVUT_ASSERT_LE(10,2);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1034,7 +1034,7 @@ void UnitTest_svutAssert::testMacroAssertLE_int_bad(void )
 	try {
 		SVUT_ASSERT_LE(10,20);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("20",e.getInfos().getEntry("Actual"));
@@ -1049,7 +1049,7 @@ void UnitTest_svutAssert::testMacroAssertLE_int_limit(void )
 {
 	try {
 		SVUT_ASSERT_LE(10,10);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1061,7 +1061,7 @@ void UnitTest_svutAssert::testMacroAssertLT_int_good(void )
 {
 	try {
 		SVUT_ASSERT_LT(10,2);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1075,7 +1075,7 @@ void UnitTest_svutAssert::testMacroAssertLT_int_bad(void )
 	try {
 		SVUT_ASSERT_LT(10,20);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("20",e.getInfos().getEntry("Actual"));
@@ -1092,7 +1092,7 @@ void UnitTest_svutAssert::testMacroAssertLT_int_limit(void )
 	try {
 		SVUT_ASSERT_LT(10,10);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("10",e.getInfos().getEntry("Actual"));
@@ -1109,7 +1109,7 @@ void UnitTest_svutAssert::testMacroAssertGE_custotype_good(void )
 		UnitTestCustoType v1 = {10,11};
 		UnitTestCustoType v2 = {20,21};
 		SVUT_ASSERT_GE(v1,v2);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1125,7 +1125,7 @@ void UnitTest_svutAssert::testMacroAssertGE_custotype_bad(void )
 		UnitTestCustoType v2 = {10,11};
 		SVUT_ASSERT_GE(v1,v2);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("10, 11",e.getInfos().getEntry("Actual"));
@@ -1142,7 +1142,7 @@ void UnitTest_svutAssert::testMacroAssertGE_custotype_limit(void )
 		UnitTestCustoType v1 = {20,21};
 		UnitTestCustoType v2 = {20,21};
 		SVUT_ASSERT_GE(v1,v2);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1156,7 +1156,7 @@ void UnitTest_svutAssert::testMacroAssertGT_custotype_good(void )
 		UnitTestCustoType v1 = {10,11};
 		UnitTestCustoType v2 = {20,21};
 		SVUT_ASSERT_GT(v1,v2);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1172,7 +1172,7 @@ void UnitTest_svutAssert::testMacroAssertGT_custotype_bad(void )
 		UnitTestCustoType v2 = {10,11};
 		SVUT_ASSERT_GT(v1,v2);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("10, 11",e.getInfos().getEntry("Actual"));
@@ -1191,7 +1191,7 @@ void UnitTest_svutAssert::testMacroAssertGT_custotype_limit(void )
 		UnitTestCustoType v2 = {20,21};
 		SVUT_ASSERT_GT(v1,v2);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Actual"));
@@ -1208,7 +1208,7 @@ void UnitTest_svutAssert::testMacroAssertLE_custotype_good(void )
 		UnitTestCustoType v1 = {20,21};
 		UnitTestCustoType v2 = {10,11};
 		SVUT_ASSERT_LE(v1,v2);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1224,7 +1224,7 @@ void UnitTest_svutAssert::testMacroAssertLE_custotype_bad(void )
 		UnitTestCustoType v2 = {20,21};
 		SVUT_ASSERT_LE(v1,v2);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("10, 11",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Actual"));
@@ -1241,7 +1241,7 @@ void UnitTest_svutAssert::testMacroAssertLE_custotype_limit(void )
 		UnitTestCustoType v1 = {20,21};
 		UnitTestCustoType v2 = {20,21};
 		SVUT_ASSERT_LE(v1,v2);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1255,7 +1255,7 @@ void UnitTest_svutAssert::testMacroAssertLT_custotype_good(void )
 		UnitTestCustoType v1 = {20,21};
 		UnitTestCustoType v2 = {10,11};
 		SVUT_ASSERT_LE(v1,v2);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1271,7 +1271,7 @@ void UnitTest_svutAssert::testMacroAssertLT_custotype_bad(void )
 		UnitTestCustoType v2 = {20,21};
 		SVUT_ASSERT_LT(v1,v2);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("10, 11",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Actual"));
@@ -1290,7 +1290,7 @@ void UnitTest_svutAssert::testMacroAssertLT_custotype_limit(void )
 		UnitTestCustoType v2 = {20,21};
 		SVUT_ASSERT_LT(v1,v2);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("20, 21",e.getInfos().getEntry("Actual"));
@@ -1305,7 +1305,7 @@ void UnitTest_svutAssert::testMacroAssertGT_cstr_good(void )
 {
 	try {
 		SVUT_ASSERT_GT((char*)10,(char*)20);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1319,7 +1319,7 @@ void UnitTest_svutAssert::testMacroAssertGT_cstr_bad(void )
 	try {
 		SVUT_ASSERT_GT((char*)10,(char*)2);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("0x2",e.getInfos().getEntry("Actual"));
@@ -1336,7 +1336,7 @@ void UnitTest_svutAssert::testMacroAssertGT_cstr_limit(void )
 	try {
 		SVUT_ASSERT_GT((char*)10,(char*)10);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Actual"));
@@ -1351,7 +1351,7 @@ void UnitTest_svutAssert::testMacroAssertGE_cstr_good(void )
 {
  try {
 		SVUT_ASSERT_GE((char*)10,(char*)20);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1365,7 +1365,7 @@ void UnitTest_svutAssert::testMacroAssertGE_cstr_bad(void )
 	try {
 		SVUT_ASSERT_GE((char*)10,(char*)2);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("0x2",e.getInfos().getEntry("Actual"));
@@ -1380,7 +1380,7 @@ void UnitTest_svutAssert::testMacroAssertGE_cstr_limit(void )
 {
 	try {
 		SVUT_ASSERT_GE((char*)10,(char*)10);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1392,7 +1392,7 @@ void UnitTest_svutAssert::testMacroAssertLE_cstr_good(void )
 {
 	try {
 		SVUT_ASSERT_LE((char*)10,(char*)2);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1406,7 +1406,7 @@ void UnitTest_svutAssert::testMacroAssertLE_cstr_bad(void )
 	try {
 		SVUT_ASSERT_LE((char*)10,(char*)20);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("0x14",e.getInfos().getEntry("Actual"));
@@ -1421,7 +1421,7 @@ void UnitTest_svutAssert::testMacroAssertLE_cstr_limit(void )
 {
 	try {
 		SVUT_ASSERT_LE((char*)10,(char*)10);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1433,7 +1433,7 @@ void UnitTest_svutAssert::testMacroAssertLT_cstr_good(void )
 {
 	try {
 		SVUT_ASSERT_LT((char*)10,(char*)2);
-	} catch (svutExAssertFailLimit) {
+	} catch (svutExAssertFailLimit &) {
 		CPPUNIT_FAIL("Thow unexpected svutExAssertFailLimit exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
@@ -1447,7 +1447,7 @@ void UnitTest_svutAssert::testMacroAssertLT_cstr_bad(void )
 	try {
 		SVUT_ASSERT_LT((char*)10,(char*)20);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("0x14",e.getInfos().getEntry("Actual"));
@@ -1464,7 +1464,7 @@ void UnitTest_svutAssert::testMacroAssertLT_cstr_limit(void )
 	try {
 		SVUT_ASSERT_LT((char*)10,(char*)10);
 		CPPUNIT_FAIL("Now Thow expected svutExAssertFailLimit exception.");
-	} catch (svutExAssertFailLimit e) {
+	} catch (svutExAssertFailLimit & e) {
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Expected limit"));
 		CPPUNIT_ASSERT_EQUAL("0xa",e.getInfos().getEntry("Actual"));
