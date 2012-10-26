@@ -13,6 +13,11 @@
 #include <sstream>
 #include "svutRunnerConfig.h"
 
+//Optional header
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif //HAVE_UNISTD_H
+
 /**********************  USING  *********************/
 using namespace std;
 
