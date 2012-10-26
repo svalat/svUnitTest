@@ -22,20 +22,20 @@ $> cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local/myprefix
 
                     -----------------------
 
-By default the test suite will be build if CPPunit is present on your system, to disable it, you
-may use :
+By default the test suite will be build if CPPunit is present on your system, to
+disable it, you may use :
 
 $> cmake .. -DDISABLE_UNIT_TESTS=yes
 
                     -----------------------
-                    
-If you encouter some issues with the test suite and cppunit, you can replace cppunit by a light
-implementation with :
+
+If you encouter some issues with the test suite and cppunit, you can replace
+cppunit by a light implementation with :
 
 $> cmake .. -DDISABLE_CPPUNIT=yes
 
-This is more to pass the test suite on non unix platform like Windows as CPPunit installation is not
-friendly.
+This is more to pass the test suite on non unix platform like Windows as CPPunit
+installation is not friendly.
 
                     -----------------------
 
@@ -63,10 +63,11 @@ $> genhtml -o html out.info
 
                     -----------------------
 
-If you want to develop in the library with KDevelop, you may want to use the kdev-xtest plugin to
-get the svUnitTest suite results directly in kdevelop interface. This can be done by enable
-the self testing mode. So the svUnitTest test suite will be build with svUnitTest itself to with
-kdevelop integration support:
+If you want to develop in the library with KDevelop, you may want to use the
+kdev-xtest plugin to get the svUnitTest suite results directly in kdevelop
+interface. This can be done by enable the self testing mode. So the svUnitTest
+test suite will be build with svUnitTest itself with kdevelop integration
+support :
 
 $> cmake .. -DENABLE_SELF_TEST=yes
 
