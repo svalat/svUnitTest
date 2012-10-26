@@ -28,7 +28,7 @@ class testString : public svutTestCase
 
 /*******************  FUNCTION  *********************/
 //Now register the test case and generate the default main function
-SVUT_REGISTER_STANDELONE(testString);
+SVUT_REGISTER_STANDALONE(testString);
 
 /*******************  FUNCTION  *********************/
 testString::testString(void)

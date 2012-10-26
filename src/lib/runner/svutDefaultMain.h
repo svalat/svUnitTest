@@ -27,12 +27,18 @@ int uniqueStandeloneMain(int argc,char * argv[],svutTestCaseBuilder & builder);
  * function. It was deseigned to produce an executable for a unique test case.
  * @param className Define the name of the test case to bind into the executable.
 **/
-#define SVUT_REGISTER_STANDELONE(className) \
+#define SVUT_REGISTER_STANDALONE(className) \
 	int main(int argc,char * argv[]) { \
 		svUnitTest::svutTestCaseBuilderGeneric<className> builder;\
 		return uniqueStandeloneMain(argc,argv,builder);\
 	}
 }
+
+/**
+ * Remove in future version (> 0.4.0)
+ * @deprecated
+**/
+#define SVUT_REGISTER_STANDELONE(className) SVUT_REGISTER_STANDALONE(className)
 
 /**
  * Simple macro to quicly define your main methode base on the default one from svUnitTest.

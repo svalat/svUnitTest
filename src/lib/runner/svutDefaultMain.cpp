@@ -39,7 +39,7 @@ int defaultMain(int argc,char * argv[])
 /*******************  FUNCTION  *********************/
 /**
  * Basic main function used to build a standalone executable for a uniq test. Please, use the
- * macro SVUT_REGISTER_STANDELONE instead of directly call this method.
+ * macro SVUT_REGISTER_STANDALONE instead of directly call this method.
  * It permit to build a standelone test directly in a unique cpp file without implementing manually
  * a main method.
  * This was mainly implemented for a compatibility with the QT Unit appraoch which use an executable

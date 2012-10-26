@@ -25,7 +25,7 @@ namespace CPPUNIT_NS
 #define CPPUNIT_TEST_SUITE(x) virtual void testMethodsRegistration(void) { setTestCaseName(__STR__(x));
 #define CPPUNIT_TEST_SUITE_END() }
 #define CPPUNIT_TEST(x) SVUT_REG_TEST_METHOD(x)
-#define CPPUNIT_TEST_SUITE_REGISTRATION(name) SVUT_REGISTER_STANDELONE(name)
+#define CPPUNIT_TEST_SUITE_REGISTRATION(name) SVUT_REGISTER_STANDALONE(name)
 #define FAKE_CPP_UNIT
 #define SVUT_SELF_TEST
 

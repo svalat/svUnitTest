@@ -27,12 +27,19 @@ namespace svUnitTest
 	std::vector<svutFlatRegistryEntry> * svUnitTest::__fake_svut_test_flat_test_registry__ = NULL;
 
 /********************  MACROS  **********************/
-#define SVUT_REGISTER_STANDELONE(className) \
+#define SVUT_REGISTER_STANDALONE(className) \
 	SVUT_FAKE_DECLARE_GLOBAL_VARS\
 	int main(int argc,char * argv[]) { \
 		svUnitTest::svutTestCaseBuilderGeneric<className> builder;\
 		return uniqueStandeloneMain(argc,argv,builder);\
 	}
+
+/********************  MACROS  **********************/
+/** 
+ * Remove this in nexte version (> 0.4.0)
+ * @deprecated
+**/
+#define SVUT_REGISTER_STANDELONE(className) SVUT_REGISTER_STANDALONE(className)
 
 /********************  MACROS  **********************/
 #define SVUT_USE_DEFAULT_MAIN \

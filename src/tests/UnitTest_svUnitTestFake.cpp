@@ -1316,6 +1316,6 @@ void UnitTest_svUnitTestFake::testMacroAssertZeros_bad_2(void )
 	}
 }
 
-SVUT_REGISTER_STANDELONE(UnitTest_svUnitTestFake)
+SVUT_REGISTER_STANDALONE(UnitTest_svUnitTestFake)
 
 #endif
