@@ -22,13 +22,13 @@
 
 find_path(SVUNITTEST_INCLUDE_DIR
 	NAMES svUnitTest/svutTestCase.h
-	PATHS ${SVUNITTEST_PREFIX}/include
+	PATHS ${SVUNITTEST_PREFIX}/include /usr/local/include
 	DOC "The svUnitTest include directory"
 )
 
 find_library(SVUNITTEST_LIBRARY
 	NAMES svunittest
-	PATHS ${SVUNITTEST_PREFIX}/lib
+	PATHS ${SVUNITTEST_PREFIX}/lib /usr/local/lib
 	DOC "The svUnitTest library"
 )
 
