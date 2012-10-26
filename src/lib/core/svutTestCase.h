@@ -16,6 +16,7 @@
 #include "svutExAssert.h"
 #include "svutStatusInfo.h"
 #include "svutObjectMethod.h"
+#include "svutAsserter.h"
 
 /********************  NAMESPACE  *******************/
 namespace svUnitTest

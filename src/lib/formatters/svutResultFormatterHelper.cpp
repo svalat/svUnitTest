@@ -46,7 +46,7 @@ string paddOutput(const std::string padding, const std::string& value)
 {
 	string res;
 	res.reserve(value.size());
-	if (value.empty() == false);
+	if (value.empty() == false)
 		res = padding;
 	for (unsigned int i = 0 ; i < value.size() - 1 ; ++i)
 	{

@@ -9,12 +9,12 @@
 #ifndef SVUT_DEFAULT_MAIN_HEADER
 #define SVUT_DEFAULT_MAIN_HEADER
 
-/*********************  CLASS  **********************/
-class svutTestCaseBuilder;
-
 /********************  NAMESPACE  *******************/
 namespace svUnitTest
 {
+
+/*********************  CLASS  **********************/
+class svutTestCaseBuilder;
 
 /*******************  FUNCTION  *********************/
 int defaultMain(int argc,char * argv[]);
