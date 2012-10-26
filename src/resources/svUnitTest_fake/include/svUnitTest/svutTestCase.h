@@ -60,6 +60,8 @@ class svutTestCase
 		inline svutTestCase(std::string name="Undefined");
 		inline svutTestCase(const svutTestCase & testCase);
 		inline virtual ~svutTestCase(void);
+		inline virtual void setUp(void);
+		inline virtual void tearDown(void);
 		inline bool runTestCase(void);
 		inline std::string getName(void) const;
 		inline void setErrorMessage(svutExAssertFake & e);
@@ -110,6 +112,18 @@ inline svutTestCase::svutTestCase(const svutTestCase & testCase)
 /*******************  FUNCTION  *********************/
 inline svutTestCase::~svutTestCase(void)
 {
+}
+
+/*******************  FUNCTION  *********************/
+inline void svutTestCase::setUp(void)
+{
+	//nothing to do
+}
+
+/*******************  FUNCTION  *********************/
+inline void svutTestCase::tearDown(void)
+{
+	//nothing to do
 }
 
 /*******************  FUNCTION  *********************/

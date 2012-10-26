@@ -27,6 +27,7 @@ class UnitTest_svUnitTestFake : public svUnitTest::svutTestCase
 		
 		void testSimpleCall(void);
 
+		void testSetupIsCalled(void);
 		void testMacroAssertTrue_good(void);
 		void testMacroAssertTrue_bad(void);
 		void testMacroAssertFalse_good(void);
@@ -110,6 +111,8 @@ class UnitTest_svUnitTestFake : public svUnitTest::svutTestCase
 		void testMacroAssertZeros_good(void);
 		void testMacroAssertZeros_bad_1(void);
 		void testMacroAssertZeros_bad_2(void);
+
+		bool checkSetup;
 };
 
 /********************  STRUCT  **********************/
@@ -166,11 +169,13 @@ std::string asserterToString(const UnitTestCustoType & value)
 /*******************  FUNCTION  *********************/
 UnitTest_svUnitTestFake::UnitTest_svUnitTestFake(void ): svutTestCase("svUnitTestFake")
 {
+	checkSetup = false;
 }
 
 /*******************  FUNCTION  *********************/
 void UnitTest_svUnitTestFake::testMethodsRegistration(void )
 {
+	SVUT_REG_TEST_METHOD(testSetupIsCalled);
 	SVUT_REG_TEST_METHOD(testSimpleCall);
 	SVUT_REG_TEST_METHOD(testMacroAssertTrue_good);
 	SVUT_REG_TEST_METHOD(testMacroAssertTrue_bad);
@@ -259,13 +264,21 @@ void UnitTest_svUnitTestFake::testMethodsRegistration(void )
 /*******************  FUNCTION  *********************/
 void UnitTest_svUnitTestFake::setUp(void )
 {
-
+	SVUT_ASSERT_FALSE(checkSetup);
+	checkSetup = true;
 }
 
 /*******************  FUNCTION  *********************/
 void UnitTest_svUnitTestFake::tearDown(void )
 {
+	SVUT_ASSERT_TRUE(checkSetup);
+	checkSetup = false;
+}
 
+/*******************  FUNCTION  *********************/
+void UnitTest_svUnitTestFake::testSetupIsCalled(void )
+{
+	SVUT_ASSERT_TRUE(checkSetup);
 }
 
 /*******************  FUNCTION  *********************/
