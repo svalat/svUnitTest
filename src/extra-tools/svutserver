@@ -12,7 +12,7 @@ STATUS='run'
 
 ######################################################
 if [ -z "$*" ]; then
-	echo "Usage : svutserver [--html] {test_binary_1} [test_binary_2] ..." 1>&2
+	echo "Usage : svutserver {test_binary_1} [test_binary_2] ..." 1>&2
 	exit 1
 fi
 
@@ -52,6 +52,6 @@ trap destroy_fifo_on_exit SIGINT
 ######################################################
 echo "Test commands are : $*"
 while [ "$STATUS" = 'run' ]; do
-	svutxmlrun "$@" > "$fifo"
+	svutxmlrun --html "$@" > "$fifo"
 	echo "Work done."
 done
