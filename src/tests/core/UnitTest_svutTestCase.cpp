@@ -53,15 +53,17 @@ class UnitTest_svutTestCase : public TestCase
 };
 
 /*******************  FUNCTION  *********************/
-std::ostream & operator << (std::ostream & out,const std::list<std::string> & lst)
-{
-	for (std::list<std::string>::const_iterator it = lst.begin() ; it != lst.end() ; ++it)
+namespace std {//put it in std otherwise it fail on clang++ 3.1
+	std::ostream & operator << (std::ostream & out,const std::list<std::string> & lst)
 	{
-		if (it != lst.begin())
-			out << " ; ";
-		out << *it;
+		for (std::list<std::string>::const_iterator it = lst.begin() ; it != lst.end() ; ++it)
+		{
+			if (it != lst.begin())
+				out << " ; ";
+			out << *it;
+		}
+		return out;
 	}
-	return out;
 }
 
 /*******************  FUNCTION  *********************/

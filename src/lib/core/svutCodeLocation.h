@@ -25,6 +25,13 @@ namespace svUnitTest
 **/
 #define SVUT_CODE_LOCATION svUnitTest::svutCodeLocation(__FILE__,__FUNCTION__,__LINE__)
 
+/********************  MACROS  **********************/
+/**
+ * Same than SVUT_CODE_LOCATION, but for static location out of functions, otherwise we got a
+ * a warning from clang.
+**/
+#define SVUT_CODE_LOCATION_STATIC svUnitTest::svutCodeLocation(__FILE__,"[none]",__LINE__)
+
 /*********************  CLASS  **********************/
 /**
  * Class used to manage locations in sources of the application. It permet to transport location

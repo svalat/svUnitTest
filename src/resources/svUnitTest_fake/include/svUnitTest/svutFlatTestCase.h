@@ -37,7 +37,7 @@ namespace svUnitTest
 #define SVUT_REGISTER_FLAT_TEST_INTERNAL(testCaseName,testName,method) \
 	static bool ___SVUT_res_flat_case_method_registration_of_##testCaseName##_##testName##__ = \
 		svUnitTest::registerFlatTestCaseMethod(SVUT_DECLARE_FLAT_TEST_STR(testCaseName),\
-			SVUT_DECLARE_FLAT_TEST_STR(testName),method,SVUT_CODE_LOCATION); \
+			SVUT_DECLARE_FLAT_TEST_STR(testName),method,SVUT_CODE_LOCATION_STATIC); \
 
 /********************  MACROS  **********************/
 /**
