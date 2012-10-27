@@ -21,7 +21,7 @@ namespace svUnitTest
  * @param expected Define the expected value.
  * @param actual Define the current value to compared to the expected one.
 **/
-bool assertOperatoreEqual(const char * expected,const char * actual)
+bool assertOperatorEqual(const char * expected,const char * actual)
 {
 	return (strcmp(expected,actual) == 0);
 }

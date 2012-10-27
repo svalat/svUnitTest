@@ -370,7 +370,7 @@ static void assertLE(const T1 & expectedLimit,const T2 & actual,svutCodeLocation
 }
 
 /*******************  FUNCTION  *********************/
-bool assertOperatoreEqual(const char * expected,const char * actual);
+bool assertOperatorEqual(const char * expected,const char * actual);
 bool assertOperatorNotEqual(const char * expected,const char * actual);
 void assertGT(const char* expectedLimit,const char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
 void assertGE(const char* expectedLimit,const char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
