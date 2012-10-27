@@ -34,6 +34,19 @@ else (ENABLE_SELF_TEST)
 	endif (CPPUNIT_FOUND)
 endif(ENABLE_SELF_TEST)
 
+########## ENABLE JUNIT OUTPUT FILES ###########
+#For integration of tests in jenkins, but only in self-test mode
+macro (run_svunittest_test test_name)
+	if (ENABLE_JUNIT_OUTPUT)
+		if (ENABLE_SELF_TEST)
+			set(tmp_test_run_option -m junit_xml -o ${CMAKE_CURRENT_BINARY_DIR}/${test_name}.junit.xml)
+		else (ENABLE_SELF_TEST)
+			set(tmp_test_run_option "")
+		endif (ENABLE_SELF_TEST)
+	endif (ENABLE_JUNIT_OUTPUT)
+	add_test(${i} ${CMAKE_CURRENT_BINARY_DIR}/${i} ${tmp_test_run_option})
+endmacro (run_svunittest_test)
+
 ############# BUILD ALL TESTS ##################
 macro (build_svunittest_test)
 	IF (TEST_COVERAGE) ############ HERE THE CASE FOR COVERAGE
@@ -65,7 +78,7 @@ macro (build_svunittest_test)
 					target_link_libraries (${i} fcppunit)
 				endif (CPPUNIT_FOUND)
 			endif (NOT ENABLE_SELF_TEST)
-			add_test(${i} ${CMAKE_CURRENT_BINARY_DIR}/${i})
+			run_svunittest_test(${i})
 		endforeach(i)
 	ENDIF (TEST_COVERAGE)
 endmacro(build_svunittest_test)
