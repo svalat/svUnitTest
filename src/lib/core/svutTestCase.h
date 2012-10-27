@@ -12,6 +12,7 @@
 /********************  HEADERS  *********************/
 #include <list>
 #include <sstream>
+#include <cstdlib>
 #include "svutTestMethod.h"
 #include "svutExAssert.h"
 #include "svutStatusInfo.h"
@@ -23,6 +24,20 @@ namespace svUnitTest
 {
 
 /********************  MACROS  **********************/
+/** Check usability of decltype from C++0x / C++11 **/
+#ifndef HAS_CXX11_FEATURE_DECLTYPE
+	#ifdef __GXX_EXPERIMENTAL_CXX0X__ //gcc with c++0x / c++11
+		#define HAS_CXX11_FEATURE_DECLTYPE
+	#elif defined(_MSC_VER) //VCC support c++0x / c++11
+		#define HAS_CXX11_FEATURE_DECLTYPE
+	#elif defined(__has_feature) //for clang depeding on c++11 activation
+		#if __has_feature(cxx_decltype)
+			#define HAS_CXX11_FEATURE_DECLTYPE
+		#endif
+	#endif
+#endif //HAS_CXX11_FEATURE_DECLTYPE
+
+/********************  MACROS  **********************/
 /**
  * Support type determination at compile time by using typeof C++ extention (not ISO).
  * For C++0x we can use the replacement ISO keyword decltype. Currently due to definition embiguity
@@ -30,12 +45,10 @@ namespace svUnitTest
  * fake function.
  * @param x Define a pointer of the class type we want to extract (typically we will use 'this').
 **/
-#ifdef __GXX_EXPERIMENTAL_CXX0X__
-#define SVUT_TYPEOF(x) decltype(svut_get_class_type(x))
-#elif defined(_MSC_VER)
-#define SVUT_TYPEOF(x) decltype(svut_get_class_type(x))
-#else
-#define SVUT_TYPEOF(x) typeof(*x)
+#ifdef HAS_CXX11_FEATURE_DECLTYPE //mode for c++0x / c++11
+	#define SVUT_TYPEOF(x) decltype(svut_get_class_type(x))
+#else //standard mode for c++03
+	#define SVUT_TYPEOF(x) typeof(*x)
 #endif
 
 /********************  MACROS  **********************/
@@ -213,7 +226,7 @@ void svutTestCase::setContextEntry(std::string name, const T & value)
 }
 
 /*******************  FUNCTION  *********************/
-#if defined(__GXX_EXPERIMENTAL_CXX0X__) || defined(_MSC_VER)
+#ifdef HAS_CXX11_FEATURE_DECLTYPE
 /**
  * In C++0x we can use the ISO keyword decltype to get the type of an object at compile type and
  * use it in delcarations. But buy default, decltyp(*this) return a reference type (MyClass&) and not
@@ -226,6 +239,7 @@ void svutTestCase::setContextEntry(std::string name, const T & value)
 template <class T>
 T svut_get_class_type(T * obj)
 {
+	//it must never be executed
 	abort();
 	return *obj;
 }
