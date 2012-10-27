@@ -103,5 +103,4 @@ void UnitTest_svutAutoRegister::testClear(void )
 	CPPUNIT_ASSERT_EQUAL(0u,getRegistredTestCase().size());
 }
 
-
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutAutoRegister);

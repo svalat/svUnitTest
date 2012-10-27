@@ -9,7 +9,7 @@
 Current dependencies for this project are :
 
  - BUILD \
-         + gcc             (tested version 4.3,4.4,4.5)
+         + gcc             (tested version 4.4,4.5,4.6)
          + g++             (tested version 4.3,4.4,4.5)
          + cmake           (tested version 2.8)
          + make            (tested version 3.81)
@@ -20,6 +20,8 @@ Current dependencies for this project are :
          + cppunit         (tested version 1.12.1) [Optional]
          + lcov            (tested version 1.7)
  - USE svUnitTest  \
+ - USE svUnitTest html output \
+		 + xsltproc        (1.1.27) [Optional]
 
 Tested systèmes are :
 

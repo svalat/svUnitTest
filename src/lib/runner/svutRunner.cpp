@@ -210,14 +210,14 @@ void svutRunner::loadAutoDetected(void)
 	for(set<svutTestCaseBuilder *>::const_iterator it=all.begin();it!=all.end();it++)
 	{
 		svutTestCase * tmp = (*it)->build();
+		//setup
+		tmp->callTestMethodsRegistration();
+		tmp->setAutodetected();
+		//add it or remove if no name
 		if ( hasTestNamed(tmp->getName()))
-		{
 			delete tmp;
-		} else {
-			tmp->callTestMethodsRegistration();
-			tmp->setAutodetected();
+		else
 			this->suites.push_back(tmp);
-		}
 	}
 }
 
