@@ -52,7 +52,7 @@ macro (build_svunittest_test)
 				target_link_libraries (all_tests_${current_dirname} fcppunit)
 			endif (CPPUNIT_FOUND)
 		endif(NOT ENABLE_SELF_TEST)
-		add_test(all_tests_${current_dirname} all_tests_${current_dirname})
+		add_test(all_tests_${current_dirname} ${CMAKE_CURRENT_BINARY_DIR}/all_tests_${current_dirname})
 	ELSE (TEST_COVERAGE) ########### HERE THE NORMAL VERSION WITH MULTIPLE EXECUABLE
 		#defin test redirection for kdevelop
 		foreach(i ${ARGV})
@@ -65,7 +65,7 @@ macro (build_svunittest_test)
 					target_link_libraries (${i} fcppunit)
 				endif (CPPUNIT_FOUND)
 			endif (NOT ENABLE_SELF_TEST)
-			add_test(${i} ${i})
+			add_test(${i} ${CMAKE_CURRENT_BINARY_DIR}/${i})
 		endforeach(i)
 	ENDIF (TEST_COVERAGE)
 endmacro(build_svunittest_test)
@@ -85,20 +85,20 @@ add_subdirectory(runner)
 ############# BUILD MAIN TESTS ##################
 add_executable(svutDefaultMain UnitTest_defaultMain.cpp)
 target_link_libraries (svutDefaultMain svunittest)
-add_test(svutDefaultMain svutDefaultMain)
-add_test(svutDefaultMainXml svutDefaultMain -m xml)
-add_test(svutDefaultMainStd svutDefaultMain -m std)
-add_test(svutDefaultMainStdColor svutDefaultMain -m color)
-add_test(svutDefaultMainJUnitXML svutDefaultMain -m junit_xml)
-add_test(svutDefaultMainQtXML svutDefaultMain -m qt_xml)
+add_test(svutDefaultMain ${CMAKE_CURRENT_BINARY_DIR}/svutDefaultMain)
+add_test(svutDefaultMainXml ${CMAKE_CURRENT_BINARY_DIR}/svutDefaultMain -m xml)
+add_test(svutDefaultMainStd ${CMAKE_CURRENT_BINARY_DIR}/svutDefaultMain -m std)
+add_test(svutDefaultMainStdColor ${CMAKE_CURRENT_BINARY_DIR}/svutDefaultMain -m color)
+add_test(svutDefaultMainJUnitXML ${CMAKE_CURRENT_BINARY_DIR}/svutDefaultMain -m junit_xml)
+add_test(svutDefaultMainQtXML ${CMAKE_CURRENT_BINARY_DIR}/svutDefaultMain -m qt_xml)
 
 ############# BUILD MAIN TESTS ##################
 add_executable(svutStandeloneMain UnitTest_svutStandeloneMain.cpp)
 target_link_libraries (svutStandeloneMain svunittest)
-add_test(svutStandeloneMain svutStandeloneMain)
-add_test(svutStandeloneMainXml svutStandeloneMain -m xml)
-add_test(svutStandeloneMainColor svutStandeloneMain -m color)
-add_test(svutStandeloneMainStd svutStandeloneMain -m std)
+add_test(svutStandeloneMain ${CMAKE_CURRENT_BINARY_DIR}/svutStandeloneMain)
+add_test(svutStandeloneMainXml ${CMAKE_CURRENT_BINARY_DIR}/svutStandeloneMain -m xml)
+add_test(svutStandeloneMainColor ${CMAKE_CURRENT_BINARY_DIR}/svutStandeloneMain -m color)
+add_test(svutStandeloneMainStd ${CMAKE_CURRENT_BINARY_DIR}/svutStandeloneMain -m std)
 
 ############# BUILD MAIN TESTS ##################
 add_executable(svutDefaultMainAllMessages UnitTest_defaultMainAllMessages.cpp)
@@ -110,11 +110,11 @@ target_link_libraries (flatMode svutUnitTestBase svunittest)
 
 ################ SVUNITTESTFAKE #################
 add_executable(svUnitTestFake UnitTest_svUnitTestFake.cpp)
-add_test(svUnitTestFake svUnitTestFake)
+add_test(svUnitTestFake ${CMAKE_CURRENT_BINARY_DIR}/svUnitTestFake)
 
 ################ SVUNITTESTFAKE #################
 add_executable(svUnitTestFakeMulti UnitTest_svUnitTestFake.cpp UnitTest_svUnitTestFake2.cpp)
-add_test(svUnitTestFakeMulti svUnitTestFakeMulti)
+add_test(svUnitTestFakeMulti ${CMAKE_CURRENT_BINARY_DIR}/svUnitTestFakeMulti)
 
 ################# SUBDIRS #######################
 if (ENABLE_SELF_TEST)
