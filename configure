@@ -26,6 +26,7 @@ ENABLE_DISPLAY_COMMAND='false'
 ENABLE_GCC_COVERAGE=''
 ENABLE_SELF_TEST=''
 ENABLE_JUNIT_OUT=''
+ENABLE_VALGRIND=''
 DISABLE_TESTS=''
 DISABLE_CPPUNIT=''
 
@@ -62,6 +63,7 @@ Optional Features:
    --enable-gcc-coverage   Enable GCC option to generate test coverage of the lib.
    --enable-self-test      Use svUnitTest to validate itself (-DENABLE_SELF_TEST=yes).
    --enable-junit-output   Save test output in JUnit format (only in self-test mode).
+   --enable-valgrind       Generate valgrind report while running the test suite.
    --disable-tests         Disable unit tests of the lib (-DDISABLE_UNIT_TESTS=yes).
    --disable-cppunit       Disable usage of cppunit to validate svUnitTest
                            (-DDISABLE_CPPUNIT=yes).
@@ -129,6 +131,9 @@ do
 		--enable-junit-output)
 			ENABLE_JUNIT_OUT='-DENABLE_JUNIT_OUTPUT=yes'
 			;;
+		--enable-valgrind)
+			ENABLE_VALGRIND='-DENABLE_VALGRIND=yes'
+			;;
 		--disable-tests)
 			DISABLE_TESTS='-DDISABLE_UNIT_TESTS=yes';
 			;;
@@ -169,7 +174,7 @@ if [ ! -z "$EXTRA_LDFLAGS" ];  then EXTRA_LDFLAGS="-DCMAKE_EXE_LINKER_FLAGS=\"${
 
 ######################################################
 #Gen final command
-COMMAND="\"${CMAKE}\" -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=\"${PREFIX}\" ${EXTRA_CXX} ${EXTRA_CXXFLAGS} ${EXTRA_LDFLAGS} ${ENABLE_SELF_TEST} ${ENABLE_JUNIT_OUT} ${DISABLE_TESTS} ${DISABLE_CPPUNIT} ${SOURCE_DIR}"
+COMMAND="\"${CMAKE}\" -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=\"${PREFIX}\" ${EXTRA_CXX} ${EXTRA_CXXFLAGS} ${EXTRA_LDFLAGS} ${ENABLE_SELF_TEST} ${ENABLE_JUNIT_OUT} ${ENABLE_VALGRIND} ${DISABLE_TESTS} ${DISABLE_CPPUNIT} ${SOURCE_DIR}"
 
 #execute or display
 if [ "${ENABLE_DISPLAY_COMMAND}" = 'true' ]; then

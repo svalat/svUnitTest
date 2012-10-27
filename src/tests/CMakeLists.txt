@@ -37,6 +37,14 @@ endif(ENABLE_SELF_TEST)
 ########## ENABLE JUNIT OUTPUT FILES ###########
 #For integration of tests in jenkins, but only in self-test mode
 macro (run_svunittest_test test_name)
+	#steup wrapper
+	if (ENABLE_VALGRIND)
+		set(tmp_test_wrapper valgrind --xml=yes --xml-file=${CMAKE_CURRENT_BINARY_DIR}/${test_name}.memcheck.xml --tool=memcheck --leak-check=full --show-reachable=yes)
+	else(ENABLE_VALGRIND)
+		set(tmp_test_wrapper "")
+	endif(ENABLE_VALGRIND)
+
+	#setup output options
 	if (ENABLE_JUNIT_OUTPUT)
 		if (ENABLE_SELF_TEST)
 			set(tmp_test_run_option -m junit_xml -o ${CMAKE_CURRENT_BINARY_DIR}/${test_name}.junit.xml)
@@ -44,7 +52,9 @@ macro (run_svunittest_test test_name)
 			set(tmp_test_run_option "")
 		endif (ENABLE_SELF_TEST)
 	endif (ENABLE_JUNIT_OUTPUT)
-	add_test(${i} ${CMAKE_CURRENT_BINARY_DIR}/${i} ${tmp_test_run_option})
+
+	#gen text command and register
+	add_test(${i} ${tmp_test_wrapper} ${CMAKE_CURRENT_BINARY_DIR}/${i} ${tmp_test_run_option})
 endmacro (run_svunittest_test)
 
 ############# BUILD ALL TESTS ##################
