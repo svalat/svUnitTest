@@ -136,7 +136,7 @@ bool svutRunner::run_tests(void)
 	if (this->formatter != NULL)
 		formatter->setDisplayFullName(hasMultipleTestCase());
 	this->listener->onGlobalStart();
-	for(svutTestCasePtrList::iterator it=suites.begin();it!=suites.end();it++)
+	for(svutTestCasePtrList::iterator it=suites.begin();it!=suites.end();++it)
 	{
 		if (testFilter == NULL || testFilter->accept((*it)->getName()))
 			(*it)->runTestCase(listener,this->testFilter);
@@ -156,7 +156,7 @@ bool svutRunner::run_list_tests(void)
 	if (this->formatter != NULL)
 		formatter->setDisplayFullName(hasMultipleTestCase());
 	this->listener->onListingStart();
-	for(svutTestCasePtrList::iterator it=suites.begin();it!=suites.end();it++)
+	for(svutTestCasePtrList::iterator it=suites.begin();it!=suites.end();++it)
 	{
 		if (testFilter == NULL || testFilter->accept((*it)->getName()))
 			(*it)->listTestMethods(*listener,testFilter);
@@ -207,7 +207,7 @@ void svutRunner::loadAutoDetected(void)
 	//for normal test cases
 	all.insert(getRegistredTestCase().begin(),getRegistredTestCase().end());
 	//for normal test cases
-	for(set<svutTestCaseBuilder *>::const_iterator it=all.begin();it!=all.end();it++)
+	for(set<svutTestCaseBuilder *>::const_iterator it=all.begin();it!=all.end();++it)
 	{
 		svutTestCase * tmp = (*it)->build();
 		//setup
@@ -261,16 +261,16 @@ void svutRunner::unloadAutoDetected(void)
 
 /*******************  FUNCTION  *********************/
 /**
- * Test if their is multiple test case accepted by the filter. This is used to adapt the output
+ * Test if there is multiple test case accepted by the filter. This is used to adapt the output
  * if need. For exemple disable the display of testCase name if their is only one.
  * @return True s'il y a plus d'un cas de test.
 **/
 bool svutRunner::hasMultipleTestCase(void) const
 {
 	int cnt = 0;
-	for(svutTestCasePtrList::const_iterator it=suites.begin();it!=suites.end();it++)
+	for(svutTestCasePtrList::const_iterator it=suites.begin();it!=suites.end();++it)
 	{
-		list<string> tmp = (*it)->getTestMethods(false);
+		//list<string> tmp = (*it)->getTestMethods(false);
 		if (testFilter == NULL || testFilter->accept((*it)->getName()))
 			cnt++;
 	}

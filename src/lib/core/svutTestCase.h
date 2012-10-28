@@ -133,7 +133,6 @@ class svutTestCase
 {
 	public:
 		svutTestCase(std::string name="Undefined");
-		svutTestCase(const svutTestCase & testCase);
 		virtual ~svutTestCase(void);
 		/**
 		 * The developer need to re-implement this method to initialized the tested objects.
@@ -178,6 +177,9 @@ class svutTestCase
 		svutTestCase & getCurrentSvutTestCase(void);
 		/** Define the list of tests methods in the current test case. **/
 		svutTestMethodPtrList tests;
+	private:
+		/** Copy is forbidden. **/
+		svutTestCase(const svutTestCase & testCase);
 	private:
 		/** Define the name of the current test case, this may be the classe name. **/
 		std::string caseName;

@@ -167,7 +167,6 @@ const std::set< svutTestCaseBuilder* > getRegistredFlatTestCases(void )
 {
 	std::set< svutTestCaseBuilder* > res;
 	std::map<std::string,bool> filter;
-	svutFlatTestCaseBuilder * tmp = NULL;
 
 	if (globalFlatTestRegistry != NULL)
 		for (std::vector<svutFlatRegistryEntry>::const_iterator it = globalFlatTestRegistry->begin() ; it != globalFlatTestRegistry->end() ; ++it)
@@ -175,7 +174,7 @@ const std::set< svutTestCaseBuilder* > getRegistredFlatTestCases(void )
 			if (filter.find(it->testCaseName) == filter.end())
 			{
 				filter[it->testCaseName] = true;
-				tmp = new svutFlatTestCaseBuilder(it->testCaseName);
+				svutFlatTestCaseBuilder * tmp = new svutFlatTestCaseBuilder(it->testCaseName);
 				res.insert(tmp);
 				globalFlatTestBuilderRegistry->push_back(tmp);
 			}

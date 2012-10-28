@@ -58,7 +58,6 @@ class svutTestCase
 {
 	public:
 		inline svutTestCase(std::string name="Undefined");
-		inline svutTestCase(const svutTestCase & testCase);
 		inline virtual ~svutTestCase(void);
 		inline virtual void setUp(void);
 		inline virtual void tearDown(void);
@@ -71,6 +70,9 @@ class svutTestCase
 		inline virtual void testMethodsRegistration(void);
 		inline void setTestCaseName(std::string name);
 		inline void MARK_AS_KNOWN_ERROR(std::string message);
+	private:
+		//copy is forbidden
+		svutTestCase(const svutTestCase & testCase);
 	private:
 		std::string caseName;
 		svutExAssertFake status;
@@ -100,13 +102,7 @@ class svutTestCaseBuilderGeneric : public svutTestCaseBuilder
 inline svutTestCase::svutTestCase(std::string name)
 {
 	this->caseName = name;
-}
-
-/*******************  FUNCTION  *********************/
-inline svutTestCase::svutTestCase(const svutTestCase & testCase)
-{
-	std::cerr << "Can't made a copy of svutTestCase, it was forbidden." << std::endl;
-	abort();
+	this->finalRes = false;
 }
 
 /*******************  FUNCTION  *********************/

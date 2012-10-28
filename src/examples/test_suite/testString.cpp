@@ -22,6 +22,7 @@ class testString : public svutTestCase
 		testString(void);
 		virtual void setUp(void);
 		virtual void tearDown(void);
+		virtual void testMethodsRegistration(void );
 	protected:
 		void testSize(void);
 		void testClear(void);
@@ -37,10 +38,16 @@ SVUT_REGISTER_TEST_CASE(testString);
 testString::testString(void)
 	:svutTestCase("testString")
 {
+	obj = NULL;
+};
+
+/*******************  FUNCTION  *********************/
+void testString::testMethodsRegistration(void)
+{
 	SVUT_REG_TEST_METHOD(testSize);
 	SVUT_REG_TEST_METHOD(testClear);
 	SVUT_REG_TEST_METHOD(testOperatorPlus);
-};
+}
 
 /*******************  FUNCTION  *********************/
 void testString::setUp(void)

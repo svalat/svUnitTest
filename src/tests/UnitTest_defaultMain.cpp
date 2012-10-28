@@ -55,6 +55,7 @@ SVUT_REGISTER_TEST_CASE(UnitTest_MyTestCase3);
 UnitTest_MyTestCaseBase::UnitTest_MyTestCaseBase(string name)
 	:svutTestCase(name)
 {
+	hasCallTest = false;
 }
 
 /*******************  FUNCTION  *********************/

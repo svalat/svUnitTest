@@ -31,6 +31,7 @@ class UnitTest_MyTestCaseBase : public svutTestCase
 UnitTest_MyTestCaseBase::UnitTest_MyTestCaseBase()
 	:svutTestCase("UnitTest_MyTestCaseBase")
 {
+	hasCallTest = false;
 }
 
 /*******************  FUNCTION  *********************/

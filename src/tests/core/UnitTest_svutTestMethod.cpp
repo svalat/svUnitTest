@@ -47,6 +47,8 @@ class UnitTest_svutTestMethod : public TestCase
 UnitTest_svutTestMethod::UnitTest_svutTestMethod()
 	:loc("test.c","testMeth",33)
 {
+	called = false;
+	meth = NULL;
 }
 
 /*******************  FUNCTION  *********************/

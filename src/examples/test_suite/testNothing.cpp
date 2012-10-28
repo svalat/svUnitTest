@@ -22,6 +22,7 @@ class testNothing : public svutTestCase
 		testNothing(void);
 		virtual void setUp(void);
 		virtual void tearDown(void);
+		virtual void testMethodsRegistration(void );
 	protected:
 		void testFunc1(void);
 		void testFunc2(void);
@@ -38,11 +39,17 @@ SVUT_REGISTER_TEST_CASE(testNothing);
 testNothing::testNothing(void)
 	:svutTestCase("testNothing")
 {
-	SVUT_REG_TEST_METHOD(testFunc1);
+	obj = NULL;
+};
+
+/*******************  FUNCTION  *********************/
+void testNothing::testMethodsRegistration(void )
+{
+    SVUT_REG_TEST_METHOD(testFunc1);
 	SVUT_REG_TEST_METHOD(testFunc2);
 	SVUT_REG_TEST_METHOD(testFunc3);
 	SVUT_REG_TEST_METHOD(testFunc4);
-};
+}
 
 /*******************  FUNCTION  *********************/
 void testNothing::setUp(void)

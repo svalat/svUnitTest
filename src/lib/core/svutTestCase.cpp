@@ -43,19 +43,7 @@ svutTestCase::svutTestCase(std::string name)
 	this->nameLocked = false;
 	this->registrationDone = false;
 	this->duration = 0.0;
-}
-
-/*******************  FUNCTION  *********************/
-/**
- * Copy constructor of the class, it was required as we create interal dynamic object in constructor.
- * Here for moment copying svutTestCase objects is not allowed, so we just throw an internal exception
- * here.
- * @param testCase Define the original testCase to copy on current object.
-**/
-svutTestCase::svutTestCase(const svUnitTest::svutTestCase& /*testCase*/)
-{
-	assert(false);
-	throw new svutExInternalError("Can't made a copy of svutTestCase, it was forbidden.");
+	this->tmpFailIsTodo = false;
 }
 
 /*******************  FUNCTION  *********************/

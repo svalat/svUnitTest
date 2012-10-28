@@ -42,7 +42,7 @@ std::string escapeXmlCharsInString(const std::string& value)
 }
 
 /*******************  FUNCTION  *********************/
-string paddOutput(const std::string padding, const std::string& value)
+string paddOutput(const std::string & padding, const std::string& value)
 {
 	string res;
 	res.reserve(value.size());

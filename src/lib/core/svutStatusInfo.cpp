@@ -150,7 +150,7 @@ unsigned int svutStatusInfo::getNbContextEntries(void ) const
  */
 void svutStatusInfo::formatList(const svutStatusInfoMap & list,std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix,svutStringFilter filter) const
 {
-	for (map<string,string>::const_iterator it=list.begin() ; it != list.end(); it++ )
+	for (map<string,string>::const_iterator it=list.begin() ; it != list.end(); ++it )
 	{
 		out << prefix;
 		if (filter == NULL)
@@ -239,7 +239,7 @@ unsigned int svutStatusInfo::getNbEntries(void ) const
 **/
 std::string svutStatusInfo::getEntry(std::string name) const
 {
-	for (map<string,string>::const_iterator it=entries.begin() ; it != entries.end(); it++ )
+	for (map<string,string>::const_iterator it=entries.begin() ; it != entries.end(); ++it )
 		if (it->first == name)
 			return it->second;
 	return "";
@@ -252,7 +252,7 @@ std::string svutStatusInfo::getEntry(std::string name) const
 **/
 std::string svutStatusInfo::getContextEntry(std::string name) const
 {
-	for (map<string,string>::const_iterator it=context.begin() ; it != context.end(); it++ )
+	for (map<string,string>::const_iterator it=context.begin() ; it != context.end(); ++it )
 		if (it->first == name)
 			return it->second;
 	return "";
