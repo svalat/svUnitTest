@@ -72,3 +72,11 @@ support :
 $> cmake .. -DENABLE_SELF_TEST=yes
 
                     -----------------------
+
+To validate svUnitTest project in Jenkins, you may be interested by using :
+
+$> cmake .. -DENABLE_DEBUG -DENABLE_SELF_TEST=yes -DENABLE_VALGRIND=yes -DENABLE_JUNIT_OUTPUT=yes
+
+It will generates report files while doing "make test" or using ctest :
+	- **/*.junit.xml for detailed unit test reports.
+	- **/*.memcheck.xml for valgrind reports.
