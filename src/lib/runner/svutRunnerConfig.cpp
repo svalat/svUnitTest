@@ -397,7 +397,7 @@ bool svutRunnerConfig::addBasicAccept(std::string value)
 	string caseName,function;
 	int sep = 0;
 	//read
-	for (unsigned int i=0;i<value.size();++i)
+	for (size_t i=0;i<value.size();++i)
 	{
 		if (value[i] == ':')
 			sep++;

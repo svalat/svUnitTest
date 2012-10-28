@@ -136,7 +136,7 @@ svutStatusInfoMap svutStatusInfo::getContext(void ) const
 **/
 unsigned int svutStatusInfo::getNbContextEntries(void ) const
 {
-	return context.size();
+	return (unsigned int)context.size();
 }
 
 /*******************  FUNCTION  *********************/
@@ -229,7 +229,7 @@ void svutStatusInfo::formatContext(std::ostream& out, const char* prefix, const 
 **/
 unsigned int svutStatusInfo::getNbEntries(void ) const
 {
-	return this->entries.size();
+	return (unsigned int)this->entries.size();
 }
 
 /*******************  FUNCTION  *********************/

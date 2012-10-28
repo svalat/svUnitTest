@@ -20,6 +20,7 @@ class svutTestCaseBuilder;
 int defaultMain(int argc,char * argv[]);
 int uniqueStandeloneMain(int argc,char * argv[],svutTestCaseBuilder & builder);
 
+/*******************  FUNCTION  *********************/
 /**
  * Call this macro to declare a standelone executable tests. This is used to call the corresponding
  * main function with the required arguments.
@@ -34,12 +35,14 @@ int uniqueStandeloneMain(int argc,char * argv[],svutTestCaseBuilder & builder);
 	}
 }
 
+/*******************  FUNCTION  *********************/
 /**
  * Remove in future version (> 0.4.0)
  * @deprecated
 **/
 #define SVUT_REGISTER_STANDELONE(className) SVUT_REGISTER_STANDALONE(className)
 
+/*******************  FUNCTION  *********************/
 /**
  * Simple macro to quicly define your main methode base on the default one from svUnitTest.
  * It simply implement the main method by calling defaultMain() function of library.

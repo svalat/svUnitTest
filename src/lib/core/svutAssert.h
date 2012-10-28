@@ -282,7 +282,7 @@ namespace svUnitTest
 		what;\
 		throw svUnitTest::svutExAssertFailThrow(#name,"NONE",SVUT_CODE_LOCATION);\
 	} catch(name) {\
-	}  catch(svUnitTest::svutExAssertFailThrow & e) { \
+	}  catch(svUnitTest::svutExAssertFailThrow &) { \
 		throw; \
 	} catch(...) {\
 		throw svUnitTest::svutExAssertFailThrow(#name,"UNKNOWN",SVUT_CODE_LOCATION);\
@@ -297,7 +297,7 @@ namespace svUnitTest
 	try {\
 		what;\
 		throw svUnitTest::svutExAssertFailThrow("...","NONE",SVUT_CODE_LOCATION);\
-	}  catch(svUnitTest::svutExAssertFailThrow & e) { \
+	}  catch(svUnitTest::svutExAssertFailThrow &) { \
 		throw; \
 	} catch(...) {\
 	}

@@ -147,7 +147,7 @@ inline std::string getLocationString(int line,const char * filename,const char *
 		what;\
 		throw svUnitTest::svutExAssertFake("FAILED",("Don't get expected " #name " exception"),SVUT_CODE_LOCATION);\
 	} catch(name) {\
-	}  catch(svUnitTest::svutExAssertFake & e) { \
+	}  catch(svUnitTest::svutExAssertFake &) { \
 		throw; \
 	} catch(...) {\
 		throw svUnitTest::svutExAssertFake("UNKNOWN",("Get unknown exception instead of expected " #name " exception"),SVUT_CODE_LOCATION);\
@@ -158,7 +158,7 @@ inline std::string getLocationString(int line,const char * filename,const char *
 	try {\
 		what;\
 		throw svUnitTest::svutExAssertFake("FAILED",("Don't get expected exception"),SVUT_CODE_LOCATION);\
-	}  catch(svUnitTest::svutExAssertFake & e) { \
+	}  catch(svUnitTest::svutExAssertFake &) { \
 		throw; \
 	} catch(...) {\
 	}

@@ -114,7 +114,7 @@ void svutListenerMultiplexer::removeListener(svutListener* listener)
 **/
 unsigned int svutListenerMultiplexer::countListener(void ) const
 {
-	return listeners.size();
+	return (unsigned int)listeners.size();
 }
 
 }

@@ -15,7 +15,13 @@
 #include <cstdarg>
 #include <cstring>
 #include <cstdio>
-#include <sys/time.h>
+
+//OS specific headers
+#if defined(_MSC_VER) || defined(__MINGW32__)
+	#include <Windows.h>
+#else
+	#include <sys/time.h>
+#endif
 
 /**********************  USING  *********************/
 using namespace std;
@@ -296,7 +302,7 @@ void svutTestCase::callTestMethodsRegistration(void )
 **/
 unsigned int svutTestCase::getNbTests(void) const
 {
-	return tests.size();
+	return (unsigned int)tests.size();
 }
 
 /*******************  FUNCTION  *********************/
@@ -388,9 +394,13 @@ double svutTestCase::getTestTotalCaseDuration(void) const
 **/
 double getCurrentTime(void )
 {
-	struct timeval tv;
-	gettimeofday(&tv,NULL);
-	return (double)tv.tv_sec + (double)tv.tv_usec / 1000000.0;
+	#if defined(_MSC_VER) || defined(__MINGW32__)
+		return ((double)GetTickCount64()) / 1000.0;
+	#else
+		struct timeval tv;
+		gettimeofday(&tv,NULL);
+		return (double)tv.tv_sec + (double)tv.tv_usec / 1000000.0;
+	#endif
 }
 
 }

@@ -102,7 +102,7 @@ const char* svutExTestStatus::what() const throw()
 	info.formatEntries(str,"  - "," : ","\n");
 	string tmp = str.str();
 	char * buffer = new char[tmp.size()+1];
-	int size = tmp.size();
+	size_t size = tmp.size();
 	const char * source = tmp.c_str();
 	memcpy(buffer,source,size+1);
 	return buffer;
