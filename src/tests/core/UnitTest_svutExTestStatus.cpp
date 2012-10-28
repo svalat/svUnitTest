@@ -144,7 +144,9 @@ void UnitTest_svutExTestStatus::testGetStatus(void )
 void UnitTest_svutExTestStatus::testWhat(void )
 {
 	string tmp = "TEST : this is a test : \n  - actual : v2\n  - expected : v1\n";
-	CPPUNIT_ASSERT_EQUAL(tmp,status->what());
+	const char * what = status->what();
+	CPPUNIT_ASSERT_EQUAL(tmp,what);
+	delete [] what;
 }
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnitTest_svutExTestStatus);
