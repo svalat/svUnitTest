@@ -101,6 +101,26 @@ get_arg_value()
 }
 
 ######################################################
+#Convert enable/disable options into yes/no status
+#  $1 : user arguement (--enable-.... or --disable-....)
+#  $2 : Optional argument. Use value INVERT to permut yes/no mapping.
+enabl_disabl_to_yes_no()
+{
+	case "$1" in
+		--enable-*)
+			if [ "$2" = 'INVERT' ]; then echo 'no'; else echo 'yes'; fi
+			;;
+		--disable-*)
+			if [ "$2" = 'INVERT' ]; then echo 'yes'; else echo 'no'; fi
+			;;
+		*)
+			echo "Invalid value in enabl_disabl_to_yes_no(), require --disable-* or --enable-*." 1>&2
+			echo 'unknown'
+			;;
+	esac
+}
+
+######################################################
 #parse arguments
 for arg in "$@"
 do
@@ -125,20 +145,20 @@ do
 			ENABLE_GCC_COVERAGE='-O0 -fprofile-arcs -ftest-coverage';
 			BUILD_TYPE='Debug'
 			;;
-		--enable-self-test)
-			ENABLE_SELF_TEST='-DENABLE_SELF_TEST=yes';
+		--enable-self-test | --disable-self-test)
+			ENABLE_SELF_TEST="-DENABLE_SELF_TEST=`enabl_disabl_to_yes_no $arg`";
 			;;
-		--enable-junit-output)
-			ENABLE_JUNIT_OUT='-DENABLE_JUNIT_OUTPUT=yes'
+		--enable-junit-output | --disable-junit-output)
+			ENABLE_JUNIT_OUT="-DENABLE_JUNIT_OUTPUT=`enabl_disabl_to_yes_no $arg`"
 			;;
-		--enable-valgrind)
-			ENABLE_VALGRIND='-DENABLE_VALGRIND=yes'
+		--enable-valgrind | --disable-valgrind)
+			ENABLE_VALGRIND="-DENABLE_VALGRIND=`enabl_disabl_to_yes_no $arg`"
 			;;
-		--disable-tests)
-			DISABLE_TESTS='-DDISABLE_UNIT_TESTS=yes';
+		--disable-tests | --enable-tests)
+			DISABLE_TESTS="-DDISABLE_UNIT_TESTS=`enabl_disabl_to_yes_no $arg 'INVERT'`";
 			;;
-		--disable-cppunit)
-			DISABLE_CPPUNIT='-DDISABLE_CPPUNIT=yes';
+		--disable-cppunit | --enable-cppunit)
+			DISABLE_CPPUNIT="-DDISABLE_CPPUNIT=`enabl_disabl_to_yes_no $arg 'INVERT'`";
 			;;
 		--show)
 			ENABLE_DISPLAY_COMMAND='true'
