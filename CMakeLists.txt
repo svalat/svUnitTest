@@ -24,7 +24,7 @@ add_definitions(-DVERSION="${svUnitTest_VERSION}")
 ######################################################
 #declare user options
 set(ENABLE_SELF_TEST no CACHE BOOL "Permit to use svUnitTest to run its own tests in place of cppunit.")
-set(ENABLE_JUNIT_OUT no CACHE BOOL "Generate a JUnit XML file for each test while running svUnitTest test suite.")
+set(ENABLE_JUNIT_OUTPUT no CACHE BOOL "Generate a JUnit XML file for each test while running svUnitTest test suite.")
 set(ENABLE_VALGRIND no CACHE BOOL "Wrap all test execution with valgrind memcheck to generate XML report for each one.")
 set(DISABLE_TESTS no CACHE BOOL "Disable compilation of svUnitTest tests.")
 set(DISABLE_CPPUNIT no CACHE BOOL "Permit to disable compilation of unit tests on top of cppunit framework, use a fake remplacement.")
@@ -56,7 +56,7 @@ endmacro (print_variable_status)
 #Display info on current configuration
 print_variable_status("HAVE_UNISTD_H")
 print_variable_status("ENABLE_SELF_TEST")
-print_variable_status("ENABLE_JUNIT_OUT")
+print_variable_status("ENABLE_JUNIT_OUTPUT")
 print_variable_status("ENABLE_VALGRIND")
 print_variable_status("DISABLE_TESTS")
 print_variable_status("DISABLE_CPPUNIT")

@@ -52,8 +52,14 @@
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
-  <concurrentBuild>false</concurrentBuild>
+  <concurrentBuild>true</concurrentBuild>
   <axes>
+    <hudson.matrix.LabelAxis>
+      <name>label</name>
+      <values>
+        <string>ubuntu-12.04.1-server-amd64</string>
+      </values>
+    </hudson.matrix.LabelAxis>
     <hudson.matrix.TextAxis>
       <name>BUILD_MODE</name>
       <values>
@@ -65,10 +71,9 @@
     <hudson.matrix.TextAxis>
       <name>COMPILER</name>
       <values>
-        <string>g++-4.4.6</string>
-        <string>g++-4.5.3</string>
-        <string>g++-4.6.2</string>
-        <string>g++-4.7.2</string>
+        <string>g++-4.4</string>
+        <string>g++-4.5</string>
+        <string>g++-4.6</string>
         <string>clang++</string>
       </values>
     </hudson.matrix.TextAxis>
@@ -80,17 +85,12 @@
         <string>c++11</string>
       </values>
     </hudson.matrix.TextAxis>
-    <hudson.matrix.LabelAxis>
-      <name>label</name>
-      <values>
-        <string>master</string>
-      </values>
-    </hudson.matrix.LabelAxis>
   </axes>
   <combinationFilter>!(STANDARD==&quot;c++11&quot; &amp;&amp; COMPILER!=&quot;clang++&quot; &amp;&amp; COMPILER!=&quot;g++-4.7.2&quot;)</combinationFilter>
   <builders>
     <hudson.tasks.Shell>
-      <command>./dev-scripts/jenkins/validate-compilers.sh --cxx=${COMPILER} --std=${STANDARD} --mode=${BUILD_MODE}</command>
+      <command>./dev-scripts/jenkins/validate-compilers.sh --cxx=${COMPILER} --std=${STANDARD} --mode=${BUILD_MODE}
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

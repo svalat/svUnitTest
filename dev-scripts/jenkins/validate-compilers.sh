@@ -85,9 +85,11 @@ if [ "${STANDARD}" = 'default' ] && [ "${COMPILER}" = 'clang++' ] && [ "${BUILD_
 fi
 
 #Configure for build
-cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${COMPILER} -DCMAKE_CXX_FLAGS="${cflags}" -DENABLE_SELF_TEST='yes' -DCMAKE_INSTALL_PREFIX=$PWD/../install
+cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${COMPILER} -DCMAKE_CXX_FLAGS="${cflags}" -DENABLE_SELF_TEST='yes' -DCMAKE_INSTALL_PREFIX=$PWD/../install -DENABLE_JUNIT_OUTPUT='yes'
 
 #build / test / install
 make
-make test
+#make test
+ctest -D ExperimentalTest --no-compress-output
+cp Testing/`head -n 1 Testing/TAG`/Test.xml ./CTestResults.xml
 make install
