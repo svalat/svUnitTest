@@ -263,7 +263,7 @@ string svutArgp::breakLines ( std::string value, unsigned int columns , std::str
 {
 	bool firstLine = true;
 	stringstream res;
-	int pos;
+	size_t pos;
 
 	//check collums
 	assert(columns > 0);

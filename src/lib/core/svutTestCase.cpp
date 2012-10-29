@@ -368,7 +368,7 @@ int svutTestCase::printf(const char* format, ... )
 	va_end (param);
 	this->cout << buffer;
 	delete [] buffer;
-	return size;
+	return (int)size;
 }
 
 /*******************  FUNCTION  *********************/

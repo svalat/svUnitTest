@@ -454,7 +454,7 @@ std::ostream & operator <<(std::ostream & out,const svutRunnerConfig & config)
 char** svutRunnerConfig::cloneArgv(int argc, const char * argv[]) const
 {
 	char ** res = new char*[argc+1];
-	int size;
+	size_t size;
 
 	//nothing to do
 	if (argv == NULL) return NULL;
