@@ -8,5 +8,5 @@
 
 #install in prefix/bin
 set(SVUNITTEST_XSTL_DIR ${CMAKE_INSTALL_PREFIX}/share/svUnitTest)
-configure_file(svutxmlrun.in svutxmlrun ESCAPE_QUOTES @ONLY)
+configure_file(svutxmlrun.in ${CMAKE_CURRENT_BINARY_DIR}/svutxmlrun ESCAPE_QUOTES @ONLY)
 install(PROGRAMS svutxmlmerger svutserver ${CMAKE_CURRENT_BINARY_DIR}/svutxmlrun DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)

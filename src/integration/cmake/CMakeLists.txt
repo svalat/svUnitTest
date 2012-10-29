@@ -7,5 +7,5 @@
 ######################################################
 
 #Generate and install cmake module file
-configure_file(FindsvUnitTest.cmake.in FindsvUnitTest.cmake ESCAPE_QUOTES @ONLY)
+configure_file(FindsvUnitTest.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/FindsvUnitTest.cmake ESCAPE_QUOTES @ONLY)
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/FindsvUnitTest.cmake DESTINATION share/cmake/Modules/)

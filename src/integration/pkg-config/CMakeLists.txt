@@ -7,5 +7,5 @@
 ######################################################
 
 #Generate and install pkg-config file
-configure_file(svUnitTest.pc.in svUnitTest.pc ESCAPE_QUOTES @ONLY)
+configure_file(svUnitTest.pc.in ${CMAKE_CURRENT_BINARY_DIR}/svUnitTest.pc ESCAPE_QUOTES @ONLY)
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/svUnitTest.pc DESTINATION share/pkgconfig)
