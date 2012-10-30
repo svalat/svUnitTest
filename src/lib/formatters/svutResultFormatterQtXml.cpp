@@ -39,7 +39,9 @@ void svUnitTest::svutResultFormatterQtXml::openOutput(void )
 	*out << "<?xml version='1.0' encoding='UTF-8'?>" << endl;
 	*out << "<TestCase name='svUnitTest'>" << endl;
 	*out << "\t<Environment>" << endl;
-	*out << "\t\t<svUnitTestVersion>" << SVUT_LIBARY_VERSION << "</svUnitTestVersion>" << endl;
+	*out << "\t\t<QtVersion>4.8.2</QtVersion>" << endl;
+	*out << "\t\t<QTestVersion>4.8.2</QTestVersion>" << endl;
+	*out << "\t\t<!--<svUnitTestVersion>0.3.0</svUnitTestVersion>-->" << endl;
 	*out << "\t</Environment>" << endl;
 }
 

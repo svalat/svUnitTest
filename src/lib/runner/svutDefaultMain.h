@@ -49,7 +49,7 @@ int uniqueStandeloneMain(int argc,char * argv[],svutTestCaseBuilder & builder);
 **/
 #define SVUT_USE_DEFAULT_MAIN \
 	int main(int argc,char * argv[]) { \
-		return defaultMain(argc,argv); \
+		return svUnitTest::defaultMain(argc,argv); \
 	}
 
 #endif
