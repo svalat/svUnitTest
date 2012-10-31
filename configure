@@ -29,6 +29,7 @@ ENABLE_JUNIT_OUT=''
 ENABLE_VALGRIND=''
 DISABLE_TESTS=''
 DISABLE_CPPUNIT=''
+LIB_SUFFIX=''
 
 ######################################################
 #Find default source dir
@@ -52,6 +53,7 @@ Configuration:
 
 Installation directories:
    --prefix=PREFIX         install files in PREFIX [${PREFIX}]
+   --lib-suffix=SUFFIX     used to force suffix for lib directory. [empty].
 
 By default, 'make install' will install all the files in
 '/usr/local/bin', '/usr/local/lib' etc.  You can specify
@@ -135,6 +137,10 @@ do
 		--srcdir=*)
 			SOURCE_DIR="`get_arg_value \"$arg\" --srcdir`"
 			;;
+		--lib-suffix=*)
+			LIB_SUFFIX="`get_arg_value \"$arg\" --lib-suffix`"
+			if [ ! -z "${LIB_SUFFIX}" ]; then LIB_SUFFIX="-DLIB_SUFFIX=${LIB_SUFFIX}"; fi
+			;;
 		--with-cmake=*)
 			CMAKE="`get_arg_value \"$arg\" --with-cmake`"
 			;;
@@ -194,7 +200,7 @@ if [ ! -z "$EXTRA_LDFLAGS" ];  then EXTRA_LDFLAGS="-DCMAKE_EXE_LINKER_FLAGS=\"${
 
 ######################################################
 #Gen final command
-COMMAND="\"${CMAKE}\" -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=\"${PREFIX}\" ${EXTRA_CXX} ${EXTRA_CXXFLAGS} ${EXTRA_LDFLAGS} ${ENABLE_SELF_TEST} ${ENABLE_JUNIT_OUT} ${ENABLE_VALGRIND} ${DISABLE_TESTS} ${DISABLE_CPPUNIT} ${SOURCE_DIR}"
+COMMAND="\"${CMAKE}\" -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=\"${PREFIX}\" ${EXTRA_CXX} ${EXTRA_CXXFLAGS} ${EXTRA_LDFLAGS} ${ENABLE_SELF_TEST} ${ENABLE_JUNIT_OUT} ${ENABLE_VALGRIND} ${DISABLE_TESTS} ${DISABLE_CPPUNIT} ${LIB_SUFFIX} ${SOURCE_DIR}"
 
 #execute or display
 if [ "${ENABLE_DISPLAY_COMMAND}" = 'true' ]; then

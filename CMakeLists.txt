@@ -28,6 +28,14 @@ set(ENABLE_JUNIT_OUTPUT no CACHE BOOL "Generate a JUnit XML file for each test w
 set(ENABLE_VALGRIND no CACHE BOOL "Wrap all test execution with valgrind memcheck to generate XML report for each one.")
 set(DISABLE_TESTS no CACHE BOOL "Disable compilation of svUnitTest tests.")
 set(DISABLE_CPPUNIT no CACHE BOOL "Permit to disable compilation of unit tests on top of cppunit framework, use a fake remplacement.")
+set(LIB_SUFFIX no CACHE STRING "Define the suffix to append to lib directory name to support lib64 exotic name on some distributions.")
+
+######################################################
+#Take care of lib suffix for lib64 directory on some distributions
+if (NOT LIB_SUFFIX)
+	set(LIB_SUFFIX "")
+endif (NOT LIB_SUFFIX)
+message(STATUS "LIB_SUFFIX : ${LIB_SUFFIX}")
 
 ######################################################
 #deps

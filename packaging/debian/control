@@ -8,6 +8,6 @@ Homepage: https://github.com/svalat/svUnitTest
 
 Package: svunittest
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, libxslt1.1
 Description: C++ test suite library, similar to CPPunit.
  C++ test suite library, similar to CPPunit.

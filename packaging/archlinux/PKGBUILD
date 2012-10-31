@@ -1,4 +1,4 @@
-# Maintainer: Your Name <sebastien.valat-dev@orange.fr>
+# Maintainer: Sebastien Valat <sebastien.valat-dev@orange.fr>
 pkgname=svUnitTest
 pkgver=0.3.0
 pkgrel=1
@@ -6,8 +6,8 @@ pkgdesc="C++ test suite library, similar to CPPunit."
 arch=('i686' 'x86_64')
 url="https://github.com/svalat/svUnitTest"
 license=('CeCILL-C')
-depends=()
-makedepends=('cmake' 'gcc' 'cmake')
+depends=('libxslt')
+makedepends=('cmake' 'gcc' 'cmake' 'libxslt')
 options=()
 source=(https://github.com/downloads/svalat/svUnitTest/$pkgname-$pkgver.tar.bz2)
 md5sums=('296e506b380a3a1483821b6e32c11102') #generate with 'makepkg -g'
@@ -17,7 +17,7 @@ build() {
 
  	mkdir build
 	cd build
-	cmake ..
+	cmake .. -DDISABLE_CPPUNIT=yes
 	make
 	make test
 }

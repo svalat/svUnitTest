@@ -1,6 +1,6 @@
 prefix=@CMAKE_INSTALL_PREFIX@
 includedir=${prefix}/include
-libdir=${prefix}/lib
+libdir=${prefix}/lib@LIB_SUFFIX@
 
 Name: svUnitTest
 Description: The svUnitTest library for C++ unit tests.
