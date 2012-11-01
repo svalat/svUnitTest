@@ -147,6 +147,8 @@ unsigned int svutStatusInfo::getNbContextEntries(void ) const
  * @param separator Define the string to place between the parameter name and the value.
  * @param postfix Define the string to place after the parameter value.
  * @param list Define the input info list to format.
+ * @param filter Provide a function to filter the string before printing it.
+ *        It's usefull for XML escaping for example.
  */
 void svutStatusInfo::formatList(const svutStatusInfoMap & list,std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix,svutStringFilter filter) const
 {
@@ -171,6 +173,8 @@ void svutStatusInfo::formatList(const svutStatusInfoMap & list,std::ostream& out
  * @param prefix Define the string th place before each parameter name.
  * @param separator Define the string to place between the parameter name and the value.
  * @param postfix Define the string to place after the parameter value.
+ * @param filter Provide a function to filter the string before printing it.
+ *        It's usefull for XML escaping for example.
  */
 void svutStatusInfo::formatEntries(std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix,svutStringFilter filter) const
 {
@@ -185,6 +189,8 @@ void svutStatusInfo::formatEntries(std::ostream& out, const std::string& prefix,
  * @param prefix Define the string th place before each parameter name.
  * @param separator Define the string to place between the parameter name and the value.
  * @param postfix Define the string to place after the parameter value.
+ * @param filter Provide a function to filter the string before printing it.
+ *        It's usefull for XML escaping for example.
  */
 void svutStatusInfo::formatEntries ( std::ostream& out, const char* prefix, const char* separator, const char* postfix ,svutStringFilter filter) const
 {
@@ -201,6 +207,8 @@ void svutStatusInfo::formatEntries ( std::ostream& out, const char* prefix, cons
  * @param prefix Define the string th place before each parameter name.
  * @param separator Define the string to place between the parameter name and the value.
  * @param postfix Define the string to place after the parameter value.
+ * @param filter Provide a function to filter the string before printing it.
+ *        It's usefull for XML escaping for example.
  */
 void svutStatusInfo::formatContext(std::ostream& out, const std::string& prefix, const std::string& separator, const std::string& postfix,svutStringFilter filter) const
 {
@@ -214,6 +222,8 @@ void svutStatusInfo::formatContext(std::ostream& out, const std::string& prefix,
  * @param prefix Define the string th place before each parameter name.
  * @param separator Define the string to place between the parameter name and the value.
  * @param postfix Define the string to place after the parameter value.
+ * @param filter Provide a function to filter the string before printing it.
+ *        It's usefull for XML escaping for example.
  */
 void svutStatusInfo::formatContext(std::ostream& out, const char* prefix, const char* separator, const char* postfix,svutStringFilter filter) const
 {
@@ -306,7 +316,7 @@ string svutStatusInfo::getStatusName(svutStatus status)
 
 /*******************  FUNCTION  *********************/
 /**
- * Return the string which store the output done during the test.
+ * @return Return the string which store the output done during the test.
  * For now it contain only fake output system, but in future it will store
  * the capture of all stdout/stderr done during the test, even the internal
  * ones from libraries.
@@ -338,6 +348,7 @@ double svutStatusInfo::getDuration(void) const
 /*******************  FUNCTION  *********************/
 /**
  * Set the duration of the test.
+ * @param duration The new duration value.
  */
 void svutStatusInfo::setDuration(double duration)
 {

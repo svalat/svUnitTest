@@ -1,0 +1,23 @@
+/*****************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.3.0
+             DATE     : 05/2011
+             AUTHOR   : Valat Sébastien
+             LICENSE  : CeCILL-C
+*****************************************************/
+/**
+@page user-doc-jenkins Integration with Jenkins
+
+If you want to integrate your tests with <a href='http://jenkins-ci.org/' target='_blank'>jenkins</a>, juste ensure to execute your tests by using JUnit compatible output format.
+
+@code
+./mytest -m junit_xml -o mytext.junt.xml
+@endcode
+
+If you are using cmake you can register your test like this :
+
+@code
+add_test(mytest ${CMAKE_CURRENT_BINARY_DIR}/mytest -m junit_xml -o ${CMAKE_CURRENT_BINARY_DIR}/${test_name}.junit.xml)
+@endcode
+
+Then you can use the <a href='https://wiki.jenkins-ci.org/display/JENKINS/xUnit+Plugin' target='_blank'>xUnit plugin</a> to import the results in Jenkins by searching all .junit.xml files in your project.**/

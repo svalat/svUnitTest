@@ -1,0 +1,40 @@
+/*****************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.3.0
+             DATE     : 05/2011
+             AUTHOR   : Valat Sébastien
+             LICENSE  : CeCILL-C
+*****************************************************/
+/**
+@page user-doc-eclipse Integration with Eclipse
+
+As it's a common IDE, maybe you want to use svUnitTest in <a href='http://www.eclipse.org/' target='_blank'>Eclipse</a>.
+
+@section Basicworktodo Basic work to do
+
+A current solution is to use the plugin : https://github.com/xgsa/cdt-tests-runner/wiki which provide support for gtest, boostunit and qtest. As svUnitTest provide a formatter to fake QTest output you can use it without many work in eclipse.
+
+The only work is to modify the default main method to skip arguments which are specific to QTest and replace by the one for svUnitTest (eclipse call with -xml -flush, we need to use -m qt_xml).
+
+@code
+//wrap default main to remove specific args
+int main(int argc,char ** argv)
+{
+	int newargc = 0;
+	//loop on all args and remove the -xml and -flush used by eclipse plugin
+	for (int i = 0 ; i < argc ; i++)
+		if (strcmp(argv[i],"-xml") != 0 && strcmp(argv[i],"-flush") != 0)
+			argv[newargc++] = argv[i];
+	return svUnitTest::defaultMain(newargc,argv);
+}
+@endcode
+
+Maybe I can provide a macro to pre-define this to help you. If you want to support multiple modes, you can use ifdef/ifndef to select the main method at compile time.
+
+@section Aboutmulti-executablemode About multi-executable mode
+
+The major issue here is the support of multi-exe mode as eclipse didn't provide a simple way to execute all tests in one clic. So maybe if you work with eclipse, think about build all your tests in one big exe to run all in one step.
+
+@section Aboutoutputformat About output format
+
+Maybe I may need to provide an emulation of BoostUnit output as qtest XML format didn't support test suite mode and consider only one test case per executable.**/

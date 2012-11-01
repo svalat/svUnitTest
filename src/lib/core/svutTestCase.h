@@ -179,7 +179,7 @@ class svutTestCase
 		svutTestMethodPtrList tests;
 	private:
 		/** Copy is forbidden. **/
-		svutTestCase(const svutTestCase & testCase);
+		svutTestCase(const svutTestCase & /*testCase*/);
 	private:
 		/** Define the name of the current test case, this may be the classe name. **/
 		std::string caseName;

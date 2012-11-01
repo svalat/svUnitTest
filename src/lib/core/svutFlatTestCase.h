@@ -31,6 +31,7 @@ namespace svUnitTest
  * Register a flat test function.
  * @param testCaseName Define the name of virtual test case on which to link the flat test.
  * @param testName Define the name of your test (the name of function to declare).
+ * @param method Name of the method which implement the test.
  * @version 0.4.0
 **/
 #define SVUT_REGISTER_FLAT_TEST_INTERNAL(testCaseName,testName,method) \
@@ -100,9 +101,13 @@ namespace svUnitTest
 **/
 struct svutFlatRegistryEntry
 {
+	/** Name of the test case. **/
 	std::string testCaseName;
+	/** Name of the test in the given test case. **/
 	std::string testName;
+	/** Location of the test in the source code. **/
 	svutCodeLocation location;
+	/** Pointer to the method which implement the test. **/
 	svutTestMethodPtr methodPtr;
 };
 
@@ -140,7 +145,9 @@ class svutFlatTestCase : public svutTestCase
 		virtual void setUp(void );
 		virtual void tearDown(void );
 	private:
+		/** Pointer to the method to call before each test execution. **/
 		svutTestMethodPtr setUpPtr;
+		/** Pointer to the method to call after each test execution. **/
 		svutTestMethodPtr tearDownPtr;
 };
 

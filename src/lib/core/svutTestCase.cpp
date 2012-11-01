@@ -351,6 +351,11 @@ void svutTestCase::resetContexEntries(void )
 }
 
 /*******************  FUNCTION  *********************/
+/**
+ * Redefine the puts method to capture its value and register it in debug context.
+ * @param value Define the value to capture. See manpage of original function for more defaults.
+ * @return See manpage of original function for more defaults.
+**/
 int svutTestCase::puts(const char* value)
 {
 	this->cout << value << endl;
@@ -358,6 +363,11 @@ int svutTestCase::puts(const char* value)
 }
 
 /*******************  FUNCTION  *********************/
+/**
+ * Redefine the printf method to capture its value and register it in debug context.
+ * @param format Capture the print format.
+ * @return See manpage of original function for more defaults.
+**/
 int svutTestCase::printf(const char* format, ... )
 {
 	size_t size = strlen(format) * 4;
@@ -372,6 +382,9 @@ int svutTestCase::printf(const char* format, ... )
 }
 
 /*******************  FUNCTION  *********************/
+/**
+ * @return Return a ref. to the current unit test object, this is for flat test case implementation.
+**/
 svutTestCase& svutTestCase::getCurrentSvutTestCase(void )
 {
 	assert(this != NULL);
@@ -380,7 +393,7 @@ svutTestCase& svutTestCase::getCurrentSvutTestCase(void )
 
 /*******************  FUNCTION  *********************/
 /**
- * Return the total execution time of the test case (in seconds). It was only available at the
+ * @return Return the total execution time of the test case (in seconds). It was only available at the
  * end of total execution. Otherwise it return 0.0.
  */
 double svutTestCase::getTestTotalCaseDuration(void) const
@@ -390,7 +403,8 @@ double svutTestCase::getTestTotalCaseDuration(void) const
 
 /*******************  FUNCTION  *********************/
 /**
- * Get current time in second. It also provide the microseconds as double.
+ * Wrap the OS specific methods.
+ * @return Return the current time in second. It also provide the microseconds as double.
 **/
 double getCurrentTime(void )
 {

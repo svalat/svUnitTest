@@ -1,0 +1,150 @@
+/*****************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.3.0
+             DATE     : 05/2011
+             AUTHOR   : Valat Sébastien
+             LICENSE  : CeCILL-C
+*****************************************************/
+/**
+@page user-doc-no-class Test with simple functions, no classes
+
+@section Idea Idea
+
+Maybe some time you don't want to take time to declare a test class to implement your tests. It could be true for small project or depending on developer coding style. svUnitTest now support a way to quickly implement your tests with simple "C" functions.
+
+Caution, you must use C++ as assertions are implemented with exceptions.
+
+There is an equivalent mode in google unit test framework : http://code.google.com/p/googletest/.
+
+@section Exemple1 Exemple 1
+
+The simpler way to use this approch is shown here :
+
+@code
+#include <svUnitTest.h>
+
+//a global var to test
+static int globalInt = 0;
+
+//enable svUnitTest namespace
+using namespace svUnitTest;
+
+//declar a first test method (testMethod1) in flat test case TestCase1.
+//the method will be named TestCase1_testMethod1 to avoid collisions.
+SVUT_DECLARE_FLAT_TEST(TestCase1,testMethod1)
+{
+	SVUT_ASSERT_EQUAL(0,globalInt);
+}
+
+//another one
+SVUT_DECLARE_FLAT_TEST(TestCase1,testMethod2)
+{
+	SVUT_ASSERT_EQUAL(0,globalInt);
+}
+
+//use default main implementation
+SVUT_USE_DEFAULT_MAIN
+@endcode
+
+@section UsingsetUpslashtearDown Using setUp/tearDown
+
+You can declare a setUp/tearDown function like for standard class test mode with some macros :
+
+@code
+#include <svUnitTest.h>
+
+//a global var to test
+static int globalInt = 0;
+
+//enable svUnitTest namespace
+using namespace svUnitTest;
+
+//define setUp for TestCase2
+//the method will be named TestCase2_setUp to avoid collisions.
+SVUT_DECLARE_FLAT_SETUP(TestCase2)
+{
+	SVUT_ASSERT_EQUAL(0,globalInt);
+	globalInt = 1;
+}
+
+//define tearDown for testCase2
+//the method will be named TestCase2_tearDown to avoid collisions.
+SVUT_DECLARE_FLAT_TEAR_DOWN(TestCase2)
+{
+	SVUT_ASSERT_EQUAL(2,globalInt);
+	globalInt = 0;
+}
+
+//declar a first test method (testMethod1) in flat test case TestCase2.
+SVUT_DECLARE_FLAT_TEST(TestCase2,testMethod1)
+{
+	SVUT_ASSERT_EQUAL(1,globalInt);
+	globalInt = 2;
+	SVUT_ASSERT_EQUAL(2,globalInt);
+}
+
+//another one
+SVUT_DECLARE_FLAT_TEST(TestCase2,testMethod2)
+{
+	SVUT_ASSERT_EQUAL(0,globalInt);
+}
+
+//use default main implementation
+SVUT_USE_DEFAULT_MAIN
+@endcode
+
+@section Possibilitytoregisteryourownfunctions Possibility to register your own functions
+
+The declaration macro prefix the test case name of your function name. Maybe you prefer to keep you names and use a more compliant macro usage. To do so, your can use the <em>_REGISTER_</em> macros instead of <em>_DECLARE_</em> onces.
+
+Caution, it's your own responsibility to avoid function name collision at link time. You can use simple names if you use one executable for one test case, but otherwise you need to prefix your functions like in example..
+
+Also remark that you must have declare your test function before calling the REGISTER macro otherwise you will get a compilation error (prototype declaration is also valid).
+
+@code
+#include <svUnitTest.h>
+
+//a global var to test
+static int globalInt = 0;
+
+//enable svUnitTest namespace
+using namespace svUnitTest;
+
+//define setUp for TestCase3
+void testCase3_setup(void)
+{
+	SVUT_ASSERT_EQUAL(0,globalInt);
+	globalInt = 1;
+}
+SVUT_REGISTER_FLAT_SETUP(TestCase3,testCase3_setup)
+
+//define tearDown for testCase3
+void testCase3_tearDown(void)
+{
+	SVUT_ASSERT_EQUAL(2,globalInt);
+	globalInt = 0;
+}
+SVUT_REGISTER_FLAT_TEAR_DOWN(TestCase3,testCase3_tearDown)
+
+//declar a first test method (testMethod1) in flat test case TestCase3.
+void testCase3_testMethod1(void)
+{
+	SVUT_ASSERT_EQUAL(1,globalInt);
+	globalInt = 2;
+	SVUT_ASSERT_EQUAL(2,globalInt);
+}
+SVUT_REGISTER_FLAT_TEST(TestCase1,testCase3_testMethod1)
+
+//another one
+void testCase3_testMethod2(void)
+{
+	SVUT_ASSERT_EQUAL(1,globalInt);
+	globalInt = 2;
+	SVUT_ASSERT_EQUAL(2,globalInt);
+}
+SVUT_REGISTER_FLAT_TEST(TestCase1,testCase3_testMethod2)
+
+//use default main implementation
+SVUT_USE_DEFAULT_MAIN
+@endcode
+**/

@@ -26,4 +26,55 @@ cp -rv ${prefix}/share/svUnitTest_html ./svUnitTest_html
 
 @section Directlyinfirefox Directly in firefox
 
-If you want to view your file in firefox or IE, you can directly open the XML file in your browser. If the svUnitTest_html is in the same directory than your xml file, you will automatically get the HTML view instead of the XML content as firefox will convert the file on the fly for you.**/
+If you want to view your file in firefox or IE, you can directly open the XML file in your browser. If the svUnitTest_html is in the same directory than your xml file, you will automatically get the HTML view instead of the XML content as firefox will convert the file on the fly for you.
+
+@section Quickgeneration Quick generation
+
+svUnitTest provide some script to quicly manage XML output. You can use svutxmlrun to generate html report :
+
+@code
+svutxmlrun --html ./test1
+@endcode
+
+Notice that you can use it to merge multiple executable output into one XML file or HTML file :
+
+@verbatim
+#to get XML :
+svutxmlrun ./test1 ./test2 ./subdir/test*
+#to get HTML :
+svutxmlrun --html ./test1 ./test2 ./subdir/test*
+#to not get absolute path for HTML ressources (css/images) :
+svutxmlrun --html --no-full-path ./test1 ./test2 ./subdir/test*
+@endverbatim
+
+@section MergesomeXMLfiles Merge some XML files
+
+You can merge some XML files with svutxmlmerger command :
+
+@code
+./test1 -m xml > test1-out.xml
+./test2 -m xml > test2-out.xml
+./test3 -m xml > test3-out.xml
+svutxmlmerger test1-out.xml test2-out.xml test3-out.xml > merged.xml
+@endcode
+@section Automaticre-runwhiledointF5inyourbrowser Automatic re-run while doint F5 in your browser
+
+svUnitTest provide a basic script to run the test as a 'server' by using FIFO. In backend it use the command <em>svutxmlrun</em> so get the same user interface :
+
+@verbatim
+user$ svutserver ./test1 ./test2 ./subdir/test*
+============= svUnitTest server ===============
+
+Use this URL in your favorite brower and use F5
+to re-run the tests :
+
+file:///tmp/svutserver-ils3/index.html
+
+To stop the server, use CTRL+C
+
+===============================================
+Test commands are : ./svutStandeloneMain ./svutDefaultMain ./svutDefaultMainAllMessages
+Work done.
+@endverbatim
+
+Copy/past the URL in your browser and use F5 to re-run the tests.**/

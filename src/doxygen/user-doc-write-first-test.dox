@@ -10,11 +10,17 @@
 
 Here, we will explain briefly how to write a simple test case. We will test the std string class.
 
-You can ginf the source of this example into src/examples/std_string.
+You can get the source of this example into <em>src/examples/std_string</em>.
+
+@section Aboutobjectvsfunctionapproach About object vs function approach
+
+svUnitTest provide two ways to implements tests. The original one is bases on classes (explained here) and another one based on flat C like functions. You can find documentation on this mode on page : @subpage user-doc-no-class.
+
+The flat function approach may be easier for quick tests in simple projects.
 
 @section Methodstotest Methods to test
 
-For our example, we will simply test the methods :
+For our example, we will test the methods :
 
  - std::string::size()
  - std::string::clear()
@@ -22,12 +28,11 @@ For our example, we will simply test the methods :
 
 @section Testdeclaration Test declaration
 
-For this example, we will place all the lines into the same <em>testString.cpp</em> file, we don't need to declare headers and the class will not be shared between multiple C++ files.
+For this example, we will place all the lines into the same <em>testString.cpp</em> file. We don't need to declare headers and the class will not be shared between multiple C++ files.
 
-@subsection Includesfilesandenablenamespaces Includes files and enable namespaces
+@subsection Includefilesandenablenamespaces Include files and enable namespaces
 
-First, we need to include the svutTestCase.h file and enable the svUnitTest namespace. You may prefer to simply include svUnitTest.h which include all required files (svutTestCase.h and svutDefaultMain.h)
-
+First, we need to include the svUnitTest.h file and enable the svUnitTest namespace. 
 
 @code
 //needed to build a new test case.
@@ -38,7 +43,10 @@ using namespace svUnitTest;
 
 @subsection Declarethetestcase Declare the test case
 
-A test case is represented by a simple class based on svutTestCase. It require the implementation of methods setUp and tearDown which is called before and after each test method.
+A test case is represented by a class based on svutTestCase. It require the implementation of methods :
+
+- <em>setUp</em>, <em>tearDown</em> which are called before and after each test method.
+- <em>testMethodsRegistration</em> which will be used to register unit tests.
 
 @code
 class testString : public svutTestCase
@@ -47,6 +55,7 @@ class testString : public svutTestCase
        testString(void);
        virtual void setUp(void);
        virtual void tearDown(void);
+       virtual void testMethodsRegistration(void);
 };
 @endcode
 
@@ -61,6 +70,7 @@ class testString : public svutTestCase
        testString(void);
        virtual void setUp(void);
        virtual void tearDown(void);
+       virtual void testMethodsRegistration(void);
    protected:
        void testSize(void);
        void testClear(void);
@@ -70,14 +80,21 @@ class testString : public svutTestCase
 
 @section Basictestimplementation Basic test implementation
 
-For moment, we will simply implement the strict minimum requirement to compile the testCase and check his declaration, so we will not implement the test content.
+For moment, we will implement the strict minimum requirement to compile the testCase and check declaration, so we will not implement the test content.
 
-First, we registered all tests into the constructor by calling the macro SVUT_REG_TEST_METHOD(method) and name the test by calling explicitly the svutTestCase(name) constructor.
-
+First, setup the test name by calling explicitly call the svutTestCase(name) constructor.
 
 @code
 testString::testString(void) 
            :svutTestCase(testString)
+{
+}
+@endcode
+
+Now register all tests into <em>testMethodsRegistration()</em> by calling the macro SVUT_REG_TEST_METHOD(method) :
+
+@code
+void testString::testMethodsRegistration(void)
 {
      SVUT_REG_TEST_METHOD(testSize);
      SVUT_REG_TEST_METHOD(testClear);
@@ -85,16 +102,14 @@ testString::testString(void)
 };
 @endcode
 
-The setUp and tearDown methods stay empty for moment :
-
+The <em>setUp()</em> and <em>tearDown()</em> methods stay empty for moment :
 
 @code
 void testString::setUp(void)    {};
 void testString::tearDown(void) {};
 @endcode
 
-To mark the tests as not implement, we will firstly use the macro SVUT_ASSERT_TODO(message) to mark them as non implemented, this may help to clearly evaluate our advancement in the test writing.
-
+To mark the tests as not implement, we will firstly use the macro SVUT_ASSERT_TODO(message) to mark them as non implemented, this may help to clearly evaluate our progression in test writing.
 
 @code
 void testString::testSize(void)           { SVUT_ASSERT_TODO("Need implementation");};
@@ -102,9 +117,9 @@ void testString::testClear(void)           { SVUT_ASSERT_TODO("Need implementati
 void testString::testOperatorPlus(void   ) { SVUT_ASSERT_TODO("Need implementation");};
 @endcode
 
-@section Mainfunctionforstandelonetests Main function for standelone tests
+@section Mainfunctionforstandalonetests Main function for standalone tests
 
-If you consider a standelone test (one executable per test case), you can register the test case by calling the macro SVUT_REGISTER_STANDELONE(test_case_name) from svutDefaultMain.h :
+If you consider a standalone test (one executable per test case), you can register the test case by calling the macro SVUT_REGISTER_STANDELONE(test_case_name) from svutDefaultMain.h :
 
 
 @code
@@ -113,8 +128,10 @@ If you consider a standelone test (one executable per test case), you can regist
 //Declare class testString before this line
 
 ////Now register the test case and generate the default main function
-SVUT_REGISTER_STANDELONE(testString);
+SVUT_REGISTER_STANDALONE(testString);
 @endcode
+
+To register mutiple test in the same executable, please check documentation of macros <em>SVUT_REGISTER_TEST_CASE()</em> and <em>SVUT_USE_DEFAULT_MAIN</em>.
 
 @section Compileandrun Compile and run
 
@@ -126,6 +143,7 @@ g++ -o testString testString.cpp -lsvUnitTest
 @endcode
 
 If the library isn't installed into /usr, you may use :
+
 @code
 g++ -Iyour/prefix/include -o testString testString.cpp -Lyour/prefix/lib/ -lsvUnitTest 
 @endcode
@@ -182,11 +200,11 @@ So you get :
 
 Now we can implement each tests, step by step.
 
-@subsection Instanciateastringobject Instanciate a string object
+@subsection Instantiateastringobject Instantiate a string object
 
-To test the string class, we need to instanciate a string object. To do this, we declare a string pointer into the class and allocate it into setUp, then destroy it into tearDown. So the object will be a new object for each tests as we mustn't condier a specific order in test execution.
+To test the string class, we need to instantiate a string object. To do this, we declare a string pointer into the class and allocate it into setUp, then destroy it into tearDown. So the object will be a new object for each tests which ensure no requirement on test ordering.
 
-The fac to not reuse the same object between tests also avoid error propagation. If a test fail, we didn't want to propagate the error to others test by using an object in bad state.
+To not reuse the same object between tests also avoid error propagation. If a test fail, we didn't want to propagate the error to others test by using a corrupted object.
 
 @code
 #include <string>
@@ -215,7 +233,7 @@ void testString::tearDown(void)
 
 @subsection Implementthetests Implement the tests
 
-Now we implement the methods :
+Now we implement the tests methods :
 
 @code
 void testString::testSize(void)

@@ -19,13 +19,28 @@ namespace svUnitTest
 {
 
 /********************* STRUCT ***********************/
+/**
+ * Temporary buffer to aggregate the XML output. At then end we can generate
+ * the root XML element and print the body part stored in that buffer.
+ * It solve the issue due to the fact that JUnit format write it's summary
+ * counters in the open tag which is the first line to write...
+**/
 struct svutResultFormatterJUnitXmlBuffer
 {
 	svutResultFormatterJUnitXmlBuffer(void);
+	/**
+	 * Buffer to aggregate the core of XML file as open balis must contain the
+	 * number of tests, failres and success. So need to execute, aggregate,
+	 * then print.
+	**/
 	std::stringstream buffer;
+	/** Count the number of tests. **/
 	int tests;
+	/** Count the number of errors. **/
 	int errors;
+	/** Count the number of failures. **/
 	int failures;
+	/** Store the start time (in seconds). **/
 	double start;
 };
 
@@ -36,7 +51,6 @@ struct svutResultFormatterJUnitXmlBuffer
  * the XSD : http://windyroad.org/dl/Open%20Source/JUnit.xsd.
  * @brief Class used to format the results into JUnit XML format.
  * @author Sébastien Valat
- * @TODO Test the class.
 **/
 class svutResultFormatterJUnitXml : public svutResultFormatter
 {

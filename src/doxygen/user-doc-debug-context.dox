@@ -41,6 +41,23 @@ void testBuffer::testElements(void)
 }
 @endcode
 
+You can clear a specific entry, for example when exiting loops with :
+@code
+SVUT_UNSET_CONTEXT("iteration");
+@endcode
+
+You can remove all entries with :
+@code
+for (int i = 0 ; i < BUFFER_SIZE ; ++i)
+{
+          SVUT_SET_CONTEXT("iteration",i);
+          SVUT_ASSERT_EQUAL(i,buffer[i]);
+}
+//remove the context before using assertions out of the loop context.
+SVUT_RESET_CONTEXT();
+SVUT_ASSERT_EQUAL(0,buffer[0]);
+@endcode
+
 @section Typesupport Type support
 
 The macro use a template function to support all types for parameter value by calling asserterToString() method which can rewrite for your types if needed. By default this method convert types using the ostream << operator.

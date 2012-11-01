@@ -27,6 +27,8 @@ Currently the library support the next assertions :
     <tr><th> Assertion name </th><th> Assertion parameters </th><th> Tested condition </th><th> Final status on error</th></tr>
    <tr><td><em>SVUT_ASSERT_TRUE</em></td><td>x</td><td>x == true</td><td> FAILED</td></tr>
    <tr><td><em>SVUT_ASSERT_FALSE</em></td><td>x</td><td>x != false</td><td> FAILED</td></tr>
+   <tr><td><em>SVUT_ASSERT_ZERO</em></td><td>x</td><td>x == 0</td><td> FAILED</td></tr>
+   <tr><td><em>SVUT_ASSERT_ZEROS</em></td><td>x , size</td><td>foreach(i -> size) x[i] == 0</td><td> FAILED</td></tr>
    <tr><td><em>SVUT_ASSERT_NULL</em></td><td>x</td><td>x == NULL</td><td> FAILED</td></tr>
   <tr><td><em>SVUT_ASSERT_NOT_NULL</em></td><td>x</td><td>x != NULL</td><td> FAILED</td></tr>
   <tr><td><em>SVUT_ASSERT_EQUAL</em></td><td>expected, actual</td><td>expected == actual</td><td> FAILED</td></tr>

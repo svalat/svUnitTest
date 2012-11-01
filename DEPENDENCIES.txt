@@ -9,10 +9,10 @@
 Current dependencies for this project are :
 
  - BUILD \
-         + gcc             (tested version 4.4,4.5,4.6)
-         + g++             (tested version 4.3,4.4,4.5)
-         + cmake           (tested version 2.8)
-         + make            (tested version 3.81)
+         + gcc             (tested version 3.4, 4.2, 4.4, 4.5, 4.6, 4.7)
+         + g++             (tested version 3.4, 4.2, 4.4, 4.5, 4.6, 4.7)
+         + cmake           (tested version 2.6, 2.8.6, 2.8.7, 2.8.9)
+         + make            (tested version 3.82)
          + cppunit         (tested version 1.12.1) [Optional]
  - RUN svUnitTest unit tests \
          + cppunit         (tested version 1.12.1) [Optional]
@@ -25,15 +25,19 @@ Current dependencies for this project are :
 
 Tested systèmes are :
 
- - Gentoo x86_64 (2009-2010)
- - Ubuntu 10.04 x86_64
- - Fedora 14 x86
- - FreeBSD 8.2 x86_64
- - Windows XP x86 (Visual Studio Express 2010)
+ - Gentoo x86_64 (2012)
+ - Ubuntu 12.04 x86_64
+ - Fedora 17 x86_64
+ - FreeBSD 9.0 x86_64
+ - Windows 7 x86_64 (Visual Studio Express 2010)
 
 Tested compilers are :
 
- - gcc/g++ 4.3,4.4,4.5
- - icc 12.0.3
- - clang 2.8
- - vcc 10
+ - gcc/g++ 3.4, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7
+ - icc 2013
+ - clang 3.0, 3.1
+ - vcc 2010
+
+Here I only provide the recently tested environnements. As for 0.4.0 release I didn't
+made major changes, the code may still work on previous versions listed in
+DEPDENDENCIES.txt of revision 0.3.0.

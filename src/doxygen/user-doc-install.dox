@@ -36,4 +36,14 @@ If you want to change the compiler, you can use :
 cmake .. -DCMAKE_INSTALL_PREFIX=/yourprefix/ -DCMAKE_CXX_COMPILER=icc
 @endcode
 
-**/
+@subsection Usingcmakewrapper Using cmake wrapper
+
+If you are more familiar with autotools, you may prefer to use the classic configure/make/make install procedure. So you can use the configure wrapper script provided by svUnitTest to manage standard cases :
+
+@code
+mkdir build
+cd build
+../configure --prefix=/yourprefix/
+@endcode
+
+You can use some options like for autotools, but for really advanced management prefer to use cmake directly.**/

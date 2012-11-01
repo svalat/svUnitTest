@@ -1,6 +1,26 @@
-svunittest (0.3.0~git1) unstable; urgency=low
+svunittest (0.4.0) unstable; urgency=low
 
-  * CURRENT DEVEL VERSION FROM GIT REPOSITORY (branch master)
+  * Many bug fixes.
+  * Add some packaging example files (Gentoo, Arch Linux and Fedora)
+  * Add new assertion SVUT_ASSERT_ZERO/SVUT_ASSERT_NO_ZERO
+  * Add support of flat test with C like functions.
+  * Add missing character escaping in XML formats.
+  * Add support of JUnit XML output format.
+  * Provide some scripts to quicly generate HTML reports.
+  * Capture printf/puts/cout in tests (not in external libs up to now).
+
+ -- Sébastien Valat <sebastien.valat.dev@orange.fr>  Thu, 1 Nov 2012 19:32:08 +0100
+
+svunittest (0.3.0) unstable; urgency=low
+
+   * Code cleanup to pass -pednatic on Linux gcc and icc.
+   * SVUT_REGISTER_TEST_METHOD() do not need class name now.
+   * Base files for ubuntu package.
+   * Add some assertions : SVUT_ASSERT_GE, GT, LE, LT ...
+   * Add macro SVUT_SET_CONTEXT() to help debugging failed tests.
+   * Split sources into multiple directory to be more readable.
+   * Bugfix problem with test case empty name.
+   * Check C++0x compatibility on gcc, icc and clang.
 
  -- Sébastien Valat <sebastien.valat.dev@orange.fr>  Sun, 13 Mar 2011 14:04:34 +0100
 

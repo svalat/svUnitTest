@@ -17,14 +17,15 @@ This is another unit test framework for C++. There are already many functional f
  - To generate nice reports (color in console text mode, nice XML+XSLT output...)
  - Integrate it to KDevelop without using qttestlib (It seems to be removed in newer Kdevelop version ???).
  - Light library.
- - SIMPLE to use.
  - OpenSource.
+ - SIMPLE to use.
  - CppUnit is not really friendly (in my point of view, even if it a good library strictly speaking) to use and seems to be really limited (without extended it), for example  : 
      - the default ASSERT macro are really limited, 
      - ASSERT_EQUAL force the type equality, so can't simply compare a string object to const C string, or other string classes.
      - No ASSERT_TRUE/FALSE, we got 0 or 1 as display.
      - No ASSERT to quickly check exceptions
-     - To complex main method to build the test
+     - Too complex main method to build the test
+     - At writing time, google unit didn't exist... :(
 
 @subpage user-doc-screenshots
 
@@ -39,16 +40,27 @@ This is another unit test framework for C++. There are already many functional f
 \endhtmlonly
 
 
-@section ChangeLogofversion030May152011 ChangeLog of version 0.3.0 (May 15, 2011)
+@section Features Features
 
- - Code cleanup to pass -pednatic on Linux gcc and icc.
- - SVUT_REGISTER_TEST_METHOD() do not need class name now.
- - Base files for ubuntu package.
- - Add some assertions : SVUT_ASSERT_GE, GT, LE, LT ...
- - Add macro SVUT_SET_CONTEXT() to help debugging failed tests.
- - Split sources into multiple directory to be more readable.
- - Bugfix problem with test case empty name.
- - Check C++0x compatibility on gcc, icc and clang.
+Here a short list of svUnitTest features :
+
+ - Declare tests with objects or flat C-like functions.
+ - Support output format : text, text with color, xml, qt_xml, junit_xml
+ - Conversion to static webpages from XML format.
+ - Run and display from webbrowser.
+ - Basic help for integration in cmake / autotools / Makefile + pkg-config.
+ - Supported compilers : ICC, GCC, CLANG and VCC (maybe others will work).
+
+@section Version040November22012 Version 0.4.0 (November 2, 2012)
+
+ - Many bug fixes.
+ - Add some packaging example files (Gentoo, Arch Linux and Fedora)
+ - Add new assertion SVUT_ASSERT_ZERO/SVUT_ASSERT_NO_ZERO
+ - Add support of flat test with C like functions.
+ - Add missing character escaping in XML formats.
+ - Add support of JUnit XML output format.
+ - Provide some scripts to quicly generate HTML reports.
+ - Capture printf/puts/cout in tests (not in external libs up to now).
 
 You can get the full change log here : @subpage user-doc-changelog
 
@@ -63,13 +75,15 @@ Related tools and libs required or optional to use and develop svUnitTest :
  - GCC        : http://gcc.gnu.org/
  - ICC        : http://software.intel.com/en-us/intel-compilers/
  - CLand      : http://clang.llvm.org/
+ - xsltproc   : http://xmlsoft.org/XSLT/
 
 Extra development tools used :
 
- - Trac       : http://trac.edgewall.org/
+ - GitHub     : http://github.com/
  - Kdevelop 4 : http://www.kdevelop.org/
  - GDB        : http://www.gnu.org/software/gdb/
  - valgrind   : http://valgrind.org/
+ - Jenkins    : http://jenkins-ci.org/
 
 As a user, you may be interested by :
 
@@ -80,83 +94,90 @@ As a user, you may be interested by :
 
 @section Testedenvironments Tested environments
 
+This is the list of tested environnements for version 0.4.0 :
+
 <table>
 	<tr>
 		<th>OS</th>
 		<th>OS Version</th>
 		<th>Architecture</th>
-		<th>compiler</th>
-		<th>status</th>
+		<th>gcc</th>
+		<th>clang</th>
+		<th>vcc</th>
+		<th>icc</th>
 		<th>Last test date</th>
 		<th>Lib. version</th>
-        </tr><tr>
-		<td>Ubuntu Linux</td>
-		<td>10.04</td>
-		<td>x86_64</td>
-		<td>gcc-4.3.5</td>
-		<td>SUCCESS</td>
-		<td>May. 2011</td>
-		<td>0.2.0 - 0.3.0</td>
-        </tr><tr>
-		<td>Ubuntu Linux</td>
-		<td>10.04</td>
-		<td>x86_64</td>
-		<td>gcc-4.4.4</td>
-		<td>SUCCESS</td>
-		<td>May. 2011</td>
-		<td>0.2.0 - 0.3.0</td>
 	</tr><tr>
-		<td>Ubuntu Linux</td>
-		<td>10.04</td>
+		<td>Gentoo</td>
+		<td>20121016</td>
 		<td>x86_64</td>
-		<td>gcc-4.5.1</td>
-		<td>SUCCESS</td>
-		<td>May. 2011</td>
-		<td>0.2.0 - 0.3.0</td>
+		<td>4.4.6, 4.5.3, 4.6.2, 4.7.2</td>
+		<td>3.1</td>
+		<td>-</td>
+		<td>-</td>
+		<td>Oct. 2012</td>
+		<td>0.4.0</td>
 	</tr><tr>
-		<td>Ubuntu Linux</td>
-		<td>10.04</td>
+		<td>Ubuntu</td>
+		<td>12.04</td>
 		<td>x86_64</td>
-		<td>icc-12.0.3</td>
-		<td>SUCCESS</td>
-		<td>May. 2011</td>
-		<td>0.2.0 - 0.3.0</td>
+		<td>4.4.7, 4.5.3, 4.6.3</td>
+		<td>3.0</td>
+		<td>2013</td>
+		<td>-</td>
+		<td>Oct. 2012</td>
+		<td>0.4.0</td>
 	</tr><tr>
-		<td>Ubuntu Linux</td>
-		<td>10.04</td>
+		<td>Fedora</td>
+		<td>17</td>
 		<td>x86_64</td>
-		<td>clang-2.8</td>
-		<td>SUCCESS</td>
-		<td>May. 2011</td>
-		<td>0.2.0 - 0.3.0</td>
+		<td>4.7.2</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>Oct. 2012</td>
+		<td>0.4.0</td>
+	</tr><tr>
+		<td>Centos</td>
+		<td>6.3</td>
+		<td>x86_64</td>
+		<td>4.4.6</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>Oct. 2012</td>
+		<td>0.4.0</td>
 	</tr><tr>
 		<td>FreeBSD</td>
-		<td>8.2</td>
+		<td>9.0</td>
 		<td>x86_64</td>
-		<td>gcc-4.2.1</td>
-		<td>SUCCESS</td>
-		<td>May. 2011</td>
-		<td>0.2.0 - 0.3.0</td>
+		<td>3.4.6, 4.2.5, 4.4.7</td>
+		<td>3.0</td>
+		<td>-</td>
+		<td>-</td>
+		<td>Oct. 2012</td>
+		<td>0.4.0</td>
 	</tr><tr>
 		<td>Windows</td>
-		<td>XP</td>
-		<td>x86</td>
-		<td>VCC-10</td>
-		<td>SUCCESS</td>
-		<td>May. 2011</td>
-		<td>0.2.0 - 0.3.0</td>
-	</tr><tr>
-		<td>Windows</td>
-		<td>XP</td>
-		<td>x86</td>
-		<td>cygwin gcc-4.3.4</td>
-		<td>SUCCESS</td>
-		<td>May. 2011</td>
-		<td>0.2.0 - 0.3.0</td>
+		<td>7</td>
+		<td>x86_64</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>2010</td>
+		<td>Oct. 2012</td>
+		<td>0.4.0</td>
 	</tr>
 </table>
 
-Notice that version 0.2.0 and 0.3.0 support compiling with <em>-std=c++0x</em> on Linux gcc, icc and clang. Since 0.3.0 it fully passed gcc and icc with <em>-pedantic</em> / <em>-Wcheck</em> and <em>-Werror</em>.
+Notice that version it support compiling with <em>-std=c++0x</em> or <em>-std=c++11</em> on Linux gcc, icc and clang. 
+Since 0.3.0 it fully passed gcc and icc with <em>-pedantic</em> / <em>-Wcheck</em> and <em>-Werror</em>.
+
+Known incompatibilities :
+
+ - <em>gcc -std=c++98</em> : Due to lack of typeof() keyword.
+ - Clang require <em>-Wno-language-extension-token</em> or <em>-std=c++0x</em> to use <em>-Werror -pedantic</em>
+ - Depending on your system, using clang may require to add <em>-U__GXX_EXPERIMENTAL_CXX0X__</em> due to a bug with some stdc++ headers.
 
 You can get old test reports on : @subpage user-doc-old-tested-env.
 
@@ -166,6 +187,7 @@ You can access to a doxygen at http://svunittest.pagesperso-orange.fr/index.html
 
  - @subpage user-doc-install
  - @subpage user-doc-write-first-test
+ - @subpage user-doc-no-class
  - @subpage user-doc-build-makefile
  - @subpage user-doc-build-pkg-config
  - @subpage user-doc-build-cmake
@@ -180,6 +202,9 @@ You can access to a doxygen at http://svunittest.pagesperso-orange.fr/index.html
  - @subpage user-doc-kdevelop4
  - @subpage user-doc-debug-context
  - @subpage user-doc-inherit
+ - @subpage  user-doc-stdout
+ - @subpage  user-doc-jenkins
+ - @subpage  user-doc-eclipse
 
 @section Developerdocumentation Developer documentation
 
@@ -200,4 +225,5 @@ You can access to a doxygen at http://svunittest.pagesperso-orange.fr/index.html
  - @subpage dev-doc-filtering
  - @subpage dev-doc-defaultMain
  - @subpage dev-doc-updateVersion
+ - @subpage dev-doc-jenkins
 **/

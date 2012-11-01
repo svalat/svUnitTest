@@ -1,0 +1,38 @@
+/*****************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.3.0
+             DATE     : 05/2011
+             AUTHOR   : Valat Sébastien
+             LICENSE  : CeCILL-C
+*****************************************************/
+/**
+@page user-doc-stdout Debug with printf, std::cout and puts
+
+While trying to debug your tests, you may be interested to print some values. To do so, svUnitTest reimplement printf/cout in svutTestCase class, so all call to thoses output system in your tests will be captured and merged in test output only on errors.
+
+To be cleaner you can use the macros SVUT_COUT, SVUT_PRINTF(), SVUT_PUTS() :
+
+@code
+MayTestCase::test1()
+{
+    //using printf :
+    printf("Printf message %d\n",155);
+    SVUT_PRINTF("Printf message %d\n",157);
+
+    //using puts :
+    puts("Message with puts");
+    SVUT_PUTS("Message with puts");
+
+    //using cout :
+    cout << "Message with cout : " << 1234 << endl;
+    SVUT_COUT << "Message with cout : " << 1234 << endl;
+
+    //made failure. Previous call will be shown only on failure
+    //on test success they will be ignored.
+    SVUT_ASSERT_FALSE(true);
+}
+@endcode
+
+You will get the output only on test failure as for SVUT_SET_CONTEXT.
+
+<b>Limitation</b> : Caution, for now it only capture the printf/puts/cout usage in svutTestCase method, not others. The output of all libs, external functions are not captured for now. It will be done when svUnitTest will support fork mode, but not done up to now.**/

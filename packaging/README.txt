@@ -24,7 +24,7 @@ sudo pbuilder create
 If you work with git version you can build the archive with :
 
 --------------------------------------------------------------------
-$user> git archive --prefix=svUnitTest_0.3.0/ v0.3.0 | gzip > svUnitTest_0.3.0.orig.tar.gz
+$user> git archive --prefix=svUnitTest-0.3.0/ v0.3.0 | gzip > svUnitTest_0.3.0.orig.tar.gz
 --------------------------------------------------------------------
 
 Go to your directory and extract svUnitTest_0.3.0.orig.tar.gz with and go in the directory.

@@ -1,0 +1,233 @@
+/*****************************************************
+             PROJECT  : svUnitTest
+             VERSION  : 0.3.0
+             DATE     : 05/2011
+             AUTHOR   : Valat Sébastien
+             LICENSE  : CeCILL-C
+*****************************************************/
+/**
+@page dev-doc-jenkins svUnitTest validation with Jenkins
+
+This page aims to list the steps required to validate svUnitTest with <a href='http://jenkins-ci.org/' target='_blank'>Jenkins</a> before doing a new release. This is more to be used as a memo for myself.
+
+@section Installsystemtools Install system tools
+
+For this validation procedure we need to install :
+ - Install java.
+ - <a href='https://www.virtualbox.org/' target='_blank'>VirtualBox</a> with vboxsrv enabled
+ - <a href='http://valgrind.org/' target='_blank'>Valgrind</a>
+ - <a href='http://cppcheck.sourceforge.net/' target='_blank'>Cppcheck</a>
+ - Optionally : <a href='http://vagrantup.com/' target='_blank'>Vagrant</a> and <a href='https://github.com/jedi4ever/veewee' target='_blank'>Veewee</a> to quickly rebuild VM's
+
+@section InstallJenkins Install Jenkins :
+
+As a first step we must download and setup jenkins :
+ - Download the last version of <a href='http://jenkins-ci.org/' target='_blank'>Jenkins</a>
+ - Download the last version of <a href='http://tomcat.apache.org/' target='_blank'>Tomcat</a>
+
+Now you can setup the apache/jenkins in a directory :
+
+@code
+mkdir ~/Tools
+tar -xvzf apache-tomcat-7.0.32.tar.gz
+mv apache-tomcat-7.0.32 ~/Tools/Jenkins
+mv jenkins.war ~/Tools/Jenkins/webapps/jenkins.war
+@endcode
+
+You can configure tomcat if you want. By default the minimum requirement is only to setup UTF-8 support on http listener. Edit <em>conf/server.xml</em> and add the missing option <em>URIEncoding="UTF-8"</em> to HTTP connector:
+
+@code
+<Connector port="8080" protocol="HTTP/1.1"
+           connectionTimeout="20000"
+           redirectPort="8443" URIEncoding="UTF-8" />
+@endcode
+
+Now start tomcat with 
+
+@code
+./bin/startup.sh
+@endcode
+
+You can watch you running jenkins at http://localhost:8080.
+
+By default it will store the Jenkins files in ~/.jenkins, you must play with <em>$JENKINS_HOME</em> to change this behavior.
+
+@section Jenkinsplugins Jenkins plugins
+
+For our usage we will need at list to install plugins :
+
+ - <a href='https://wiki.jenkins-ci.org/display/JENKINS/xUnit+Plugin' target='_blank'>xUnit</a> : to parse unit test files and generate report.
+ - <a href='https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin' target='_blank'>git</a> : to fetch the files from git.
+ - <a href='https://wiki.jenkins-ci.org/display/JENKINS/Warnings+Plugin' target='_blank'>warnings</a> : to extract gcc/clang warnings and build a report.
+ - <a href='https://wiki.jenkins-ci.org/display/JENKINS/Valgrind+Plugin' target='_blank'>valgrind</a> : to aggregate valgrind reports.
+ - <a href='https://wiki.jenkins-ci.org/display/JENKINS/VirtualBox+Plugin' target='_blank'>VirtualBox</a> : to support slaves based on VirtualBox.
+ - <a href='https://wiki.jenkins-ci.org/display/JENKINS/Cppcheck+Plugin' target='_blank'>Cppcheck</a> : to aggregate Cppcheck reports.
+ - <a href='https://wiki.jenkins-ci.org/display/JENKINS/cmakebuilder+Plugin' target='_blank'>cmakebuilder</a> : to build cmake projects with jenkins.
+
+@section Jobforsimplevalidation Job for simple validation
+
+Now we can create a first job to validate that we can compile, run the tests, have no memory-leak or remarks from 
+ccpcheck. Crate a new standard project in Jenkins web-interface and name it <em>svUnitTest</em>.
+
+ - Enable automatic deletion for old build (I limit to 40 builds).
+ - Setup Git as source manager with parameters :
+<table>
+	<tr><td>Repository URL</td><td>git://github.com/svalat/svUnitTest.git</td></tr>
+	<tr><td>Branch Specifier</td><td>master</td></tr>
+</table>
+If you have a local working copy, it may be a better idea to point this one instead of the common server. This way you
+can validate your commit before push.
+ - Add a cmake build task with parameters :
+<table>
+	<tr><td>Source Diretory</td><td>./</td></tr>
+	<tr><td>Build Directory</td><td>build</td></tr>
+	<tr><td>Install Directory</td><td>install</td></tr>
+	<tr><td>Build Type</td><td>Debug</td></tr>
+	<tr><td>Other CMake Arguments</td><td>-DCMAKE_CXX_FLAGS="-Wall -Werror" -DENABLE_SELF_TEST=yes -DENABLE_JUNIT_OUTPUT=yes -DENABLE_VALGRIND=yes</td></tr>
+</table>
+ - Add a shell execution to run all unit tests and generate reports :
+@code
+cd build
+ctest -D ExperimentalTest --no-compress-output
+cp Testing/`head -n 1 Testing/TAG`/Test.xml ./CTestResults.xml
+@endcode
+ - Add another shell execution to run cppcheck :
+@code
+cppcheck --enable=all --report-progress --std=c++03 --inline-suppr src/ --xml \
+         --suppress=duplicateBreak:src/tests/UnitTest_svUnitTestFake.cpp \
+         2> svUnitTest.cppcheck.xml
+@endcode
+ - In post action add a scan for compiler warning with GCC parser.
+ - Add a valgrind result publisher by using report pattern :
+@verbatim
+**/*.memcheck.xml
+@endverbatim
+ - Add a cppcheck result publisher by using report XMLs :
+@verbatim
+svUnittest.cppcheck.xml
+@endverbatim
+ - Add a xUnit publisher with two entries :
+     - A first one for ctest global results (thanks to user rpavlik on github for the solution):
+<table>
+	<tr><td>Custom Tool Pattern</td><td>build/CTestResults.xml</td></tr>
+	<tr><td>Custom stylesheet</td><td>./dev-scripts/jenkins/[ctest-to-junit.xsl|https://github.com/rpavlik/jenkins-ctest-plugin/blob/master/ctest-to-junit.xsl]</td></tr>
+</table>
+     - A second one for detailed unit test results usign junit files :
+@verbatim
+**/*.junit.xml
+@endverbatim
+
+Another solution is to stop your jenkins and manually create the project in <em>$JENKINS_HOME/jobs</em> :
+
+@code
+#skip first line if already setup
+JENKINS_HOME="~/.jenkins"
+mkdir "$JENKINS_HOME/jobs/svUnitTest"
+cp dev-scripts/jenkins/svUnitTest-config.xml $JENKINS_HOME/jobs/svUnitTest/config.xml
+@endcode
+
+Now restart your jenkins you may have the task in place and ready to run. Just ensure that you have previously installed all 
+required plugins.
+
+@section Multi-compilersvalidation Multi-compilers validation
+
+The goal of this second jenkins job if to validate svUnitTest for various compilers (and version). The first step is to 
+install all desired versions in your system. Basically I install on my gentoo : g++-4.4.6, g++-4.5.3, g++-4.6.2, g++-4.7.2, 
+clang++-3.1. We can also install Intel ICC but due to a bug I didn't to it the last time I validate svUnitTest. So you will 
+get :
+
+@image html jenkins-multi-compilers.png
+
+
+Then create a new multi-configuration job named <em>svUnitTest-Gentoo</em> (or replace gentoo by your current OS) :
+ - Enable automatic deletion for old build (I limit to 40 builds).
+ - Setup Git as source manager with parameters :
+<table>
+	<tr><td>Repository URL</td><td>git://github.com/svalat/svUnitTest.git</td></tr>
+	<tr><td>Branch Specifier</td><td>master</td></tr>
+</table>
+If you have a local working copy, it may be a better idea to point this one instead of the common server. This way you
+can validate your commit before push.
+ - You can setup the configuration matrix as (following the argument order) :
+<table>
+	<tr><td>BUILD_MODE</td><td>std pedantic pedantic-werror</td></tr>
+	<tr><td>COMPILER</td><td>g++-4.4.6 g++-4.5.3 g++-4.6.2 g++-4.7.2 clang++</td></tr>
+	<tr><td>STANDARD</td><td>default c++0x c++11</td></tr>
+</table>
+You can adapt the compiler list depending on your current system.
+ - Enable filter on combinaison as for example c++11 is supported only since g++-4.7 :
+@verbatim
+!(STANDARD=="c++11" && COMPILER!="clang++" && COMPILER!="g++-4.7.2")
+@endverbatim
+ - Now use a script execution with :
+@code
+./dev-scripts/jenkins/validate-compilers.sh --cxx=${COMPILER} --std=${STANDARD} --mode=${BUILD_MODE}
+@endcode
+ - Finally add a compiler log parser for GCC and CLANG.
+
+As previously, another solution is to stop your jenkins and manually create the project in <em>$JENKINS_HOME/jobs</em> :
+
+@code
+#skip first line if already setup
+JENKINS_HOME="~/.jenkins"
+mkdir "$JENKINS_HOME/jobs/svUnitTest-Gentoo"
+cp dev-scripts/jenkins/svUnitTest-Gentoo-config.xml $JENKINS_HOME/jobs/svUnitTest-Gentoo/config.xml
+@endcode
+
+Now restart your jenkins you may have the task in place and ready to run. Just ensure that you have previously installed all 
+required plugins.
+
+@section UsingVirtualBoxtovalidateonubuntu Using VirtualBox to validate on ubuntu
+
+Now we want to validate the library on different unix, we started with Ubuntu.
+
+Start to create a new virtual machine based on ubuntu server, we just need an ssh. You need to install :
+@code
+#Install tools to access to sources
+apt-get install git
+
+#Install optional deps of cppunit
+apt-get install libcppunit-dev
+apt-get install libxslt1.1
+
+#Install build tools of cppunit
+apt-get install cmake
+apt-get install g++-4.4 g++-4.5 g++-4.6
+apt-get install clang
+
+#to build packages
+apt-get install pbuilder debootstrap devscripts
+
+#Java is needed to use the VM with jenkins (without vagrant)
+apt-get install openjdk-7-jre-headless
+@endcode
+
+If you run locally, you can disable auth on virtualbox server with :
+@verbatim
+$ VBoxManage setproperty websrvauthlibrary null
+@endverbatim
+Then launch the server. If you want more security, read the pages from VirtualBox : http://www.virtualbox.org/manual/ch07.html#vbox-auth
+@code
+$ vboxwebsrv
+@endcode
+
+Setup the VirtualBox plugin in Jenkins configuration. Then add a new node which point on the ubuntu virtual machine, we can 
+name it <em>ubuntu-12.04.1-server-amd64</em>.
+
+Now clone the svUnitTest-Gentoo projet as svUnitTest-Ubuntu and add an axis to map the job on a particular server. Select the 
+ubuntu one. On ubuntu you have compiler g++-4.4 g++-4.5 g++-4.6 and clang++.
+
+TODO : finish and polish this doc.
+
+@section UsingVirtualBoxtovalidateonFreeBSD Using VirtualBox to validate on FreeBSD
+
+@verbatim
+g++34 g++42 g++44 clang++
+@endverbatim
+
+@verbatim
+!(STANDARD=="c++11" && COMPILER!="clang++" && COMPILER!="g++-47") && !(STANDARD=="c++0x" && COMPILER!="g++-44" && COMPILER!="clang++")
+@endverbatim
+
+TODO : finish and polish this doc.
+**/

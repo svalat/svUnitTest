@@ -17,6 +17,10 @@ user-doc-kdevelop4.md
 user-doc-screenshots.md
 user-doc-old-tested-env.md
 user-doc-changelog.md
+user-doc-eclipse.md
+user-doc-jenkins.md
+user-doc-no-class.md
+user-doc-stdout.md
 
 dev-doc-style.md
 dev-doc-defs.md
@@ -35,4 +39,4 @@ dev-doc-auto-register.md
 dev-doc-filtering.md
 dev-doc-defaultMain.md
 dev-doc-updateVersion.md
-
+dev-doc-jenkins.md

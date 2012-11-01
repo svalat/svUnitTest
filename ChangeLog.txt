@@ -6,6 +6,17 @@
 #            LICENSE  : CeCILL-C                     #
 ######################################################
 
+Version 0.4.0 (November 2, 2012)
+
+ * Many bug fixes.
+ * Add some packaging example files (Gentoo, Arch Linux and Fedora)
+ * Add new assertion SVUT_ASSERT_ZERO/SVUT_ASSERT_NO_ZERO
+ * Add support of flat test with C like functions.
+ * Add missing character escaping in XML formats.
+ * Add support of JUnit XML output format.
+ * Provide some scripts to quicly generate HTML reports.
+ * Capture printf/puts/cout in tests (not in external libs up to now).
+
 Version 0.3.0 (May 15, 2011)
 
  * Code cleanup to pass -pednatic on Linux gcc and icc.

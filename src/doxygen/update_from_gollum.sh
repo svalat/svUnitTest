@@ -69,14 +69,39 @@ done
 echo
 
 #Now import all the pages
-for tmp in `cat pagelist.txt | grep .md`
+for tmp in `grep .md ./pagelist.txt`
 do
+	#check if file exist
+	if [ ! -f "${GOLLUM_DIR}/$tmp" ]; then
+		echo "ERROR : file doesn't exist : ${GOLLUM_DIR}/$tmp" 1>&2
+		exit 1
+	fi
+
+	#compute names
 	outname=`echo $tmp | sed -e s/.md/.dox/g`
 	echo " * Convert $tmp to $outname ..."
 
+	#do conversion
 	print_header > $outname || exit 1
 	./golum_to_doxygen ${GOLLUM_DIR}/$tmp >> $outname || exit 1
 done
+
+echo
+
+#Print ignored pages
+for tmp in ${GOLLUM_DIR}/*.md
+do
+	name=`basename $tmp`
+	if [ -z "`grep $name pagelist.txt`" ]; then
+		echo " * Ignore $name"
+	fi
+done
+
+echo
+
+#cleanup tmp exe
+echo " * Cleanup tmp ./golum_to_doxygen"
+rm -f ./golum_to_doxygen
 
 #Finish
 echo " * DONE"

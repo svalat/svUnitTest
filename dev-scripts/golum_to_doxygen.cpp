@@ -442,6 +442,7 @@ int convert_file(FILE * fp, const char * filename)
 			////////////////////   ERROR   /////////////////////
 			} else {
 				cerr << "Parsing error : " << buffer << endl;
+				cerr << "Current mode is " << mode << endl;
 				abort();
 			}
 			++i;
