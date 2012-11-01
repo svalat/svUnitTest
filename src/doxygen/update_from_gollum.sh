@@ -1,12 +1,32 @@
 #!/bin/bash
+######################################################
+#            PROJECT  : svUnitTest                   #
+#            VERSION  : 0.3.0                        #
+#            DATE     : 10/2012                      #
+#            AUTHOR   : Valat Sébastien              #
+#            LICENSE  : CeCILL-C                     #
+######################################################
 
+######################################################
+#Store args
 GOLLUM_DIR="$1"
 
+######################################################
+#Check args
 if [ -z "$GOLLUM_DIR" ]; then
-	echo "USAGE: $0 {gollum_dir}"
+	echo "USAGE: $0 {gollum_dir}" 1>&2
 	exit 1
 fi
 
+######################################################
+#check exec dir
+if [ ! -f './update_from_gollum.sh' ]; then
+	echo "Need to be executed in doxygen directory." 1>&2
+	exit 1
+fi
+
+######################################################
+#Add header to all .dox files
 function print_header()
 {
 	echo "/*****************************************************"
@@ -18,10 +38,19 @@ function print_header()
 	echo "*****************************************************/"
 }
 
+######################################################
 echo " * GOLLUM_DIR : ${GOLLUM_DIR}"
+
+######################################################
+#Compile the gollum_to_doxygen exe
+g++ ../../dev-scripts/golum_to_doxygen.cpp -o ./golum_to_doxygen
+
+#Cleanup old files to ensure full sync
 echo " * Cleanup"
 rm -f -v *.dox
 rm -rf -v images/*
+
+#Import DOT images
 echo " * Import DOT images from gollum..."
 for tmp in ${GOLLUM_DIR}/images/*.dot
 do
@@ -29,6 +58,7 @@ do
 	cp $tmp images/`basename $tmp`
 done
 
+#Import images/screenshots
 echo " * Import PNG images from gollum..."
 for tmp in screenshots
 do
@@ -38,13 +68,15 @@ done
 
 echo
 
+#Now import all the pages
 for tmp in `cat pagelist.txt | grep .md`
 do
 	outname=`echo $tmp | sed -e s/.md/.dox/g`
 	echo " * Convert $tmp to $outname ..."
 
 	print_header > $outname || exit 1
-	golum_to_doxygen ${GOLLUM_DIR}/$tmp >> $outname || exit 1
+	./golum_to_doxygen ${GOLLUM_DIR}/$tmp >> $outname || exit 1
 done
 
+#Finish
 echo " * DONE"

@@ -84,6 +84,9 @@ if [ "${STANDARD}" = 'default' ] && [ "${COMPILER}" = 'clang++' ] && [ "${BUILD_
     cflags="-Wno-language-extension-token"
 fi
 
+#Display compiler version
+${COMPILER} --version || echo "Can't get compiler version with --version"
+
 #Configure for build
 cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${COMPILER} -DCMAKE_CXX_FLAGS="${cflags}" -DENABLE_SELF_TEST='yes' -DCMAKE_INSTALL_PREFIX=$PWD/../install -DENABLE_JUNIT_OUTPUT='yes'
 
