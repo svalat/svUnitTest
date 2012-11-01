@@ -55,7 +55,9 @@ Context :\n\
 static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?>\n\
 <TestCase name='svUnitTest'>\n\
 	<Environment>\n\
-		<svUnitTestVersion>" SVUT_LIBARY_VERSION "</svUnitTestVersion>\n\
+		<QtVersion>4.8.2</QtVersion>\n\
+		<QTestVersion>4.8.2</QTestVersion>\n\
+		<!--<svUnitTestVersion>" SVUT_LIBARY_VERSION "</svUnitTestVersion>-->\n\
 	</Environment>\n\
 	<TestFunction name='MyTest::testMethod'>\n\
 		<Incident type='pass' file='unknown' line='0'></Incident>\n\
@@ -91,7 +93,9 @@ static const char * CST_STRING_SEQ_1    = "<?xml version='1.0' encoding='UTF-8'?
 static const char * CST_STRING_SEQ_2    = "<?xml version='1.0' encoding='UTF-8'?>\n\
 <TestCase name='svUnitTest'>\n\
 	<Environment>\n\
-		<svUnitTestVersion>" SVUT_LIBARY_VERSION "</svUnitTestVersion>\n\
+		<QtVersion>4.8.2</QtVersion>\n\
+		<QTestVersion>4.8.2</QTestVersion>\n\
+		<!--<svUnitTestVersion>" SVUT_LIBARY_VERSION "</svUnitTestVersion>-->\n\
 	</Environment>\n\
 	<TestFunction name='testMethod'>\n\
 		<Incident type='pass' file='unknown' line='0'></Incident>\n\
@@ -127,7 +131,9 @@ static const char * CST_STRING_SEQ_2    = "<?xml version='1.0' encoding='UTF-8'?
 static const char * CST_STRING_OPEN = "<?xml version='1.0' encoding='UTF-8'?>\n\
 <TestCase name='svUnitTest'>\n\
 	<Environment>\n\
-		<svUnitTestVersion>" SVUT_LIBARY_VERSION "</svUnitTestVersion>\n\
+		<QtVersion>4.8.2</QtVersion>\n\
+		<QTestVersion>4.8.2</QTestVersion>\n\
+		<!--<svUnitTestVersion>" SVUT_LIBARY_VERSION "</svUnitTestVersion>-->\n\
 	</Environment>\n";
 static const char * CST_STRING_CLOSE = "</TestCase>\n";
 static const char * CST_STRING_CLOSE_TC = "";
