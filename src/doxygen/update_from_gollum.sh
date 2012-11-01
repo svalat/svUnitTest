@@ -1,8 +1,8 @@
 #!/bin/bash
 ######################################################
 #            PROJECT  : svUnitTest                   #
-#            VERSION  : 0.3.0                        #
-#            DATE     : 10/2012                      #
+#            VERSION  : 0.4.0                        #
+#            DATE     : 11/2012                      #
 #            AUTHOR   : Valat Sébastien              #
 #            LICENSE  : CeCILL-C                     #
 ######################################################
@@ -31,8 +31,8 @@ function print_header()
 {
 	echo "/*****************************************************"
 	echo "             PROJECT  : svUnitTest"
-	echo "             VERSION  : 0.3.0"
-	echo "             DATE     : 05/2011"
+	echo "             VERSION  : 0.4.0"
+	echo "             DATE     : 11/2012"
 	echo "             AUTHOR   : Valat Sébastien"
 	echo "             LICENSE  : CeCILL-C"
 	echo "*****************************************************/"
@@ -43,7 +43,7 @@ echo " * GOLLUM_DIR : ${GOLLUM_DIR}"
 
 ######################################################
 #Compile the gollum_to_doxygen exe
-g++ ../../dev-scripts/golum_to_doxygen.cpp -o ./golum_to_doxygen
+g++ ../../dev-scripts/gollum_to_doxygen.cpp -o ./gollum_to_doxygen
 
 #Cleanup old files to ensure full sync
 echo " * Cleanup"

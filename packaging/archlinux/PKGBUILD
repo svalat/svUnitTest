@@ -1,6 +1,6 @@
 # Maintainer: Sebastien Valat <sebastien.valat-dev@orange.fr>
 pkgname=svUnitTest
-pkgver=0.3.0
+pkgver=0.4.0
 pkgrel=1
 pkgdesc="C++ test suite library, similar to CPPunit."
 arch=('i686' 'x86_64')

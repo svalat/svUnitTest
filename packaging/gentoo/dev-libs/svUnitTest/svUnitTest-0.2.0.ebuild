@@ -1,7 +1,7 @@
 ######################################################
 #            PROJECT  : svUnitTest                   #
-#            VERSION  : 0.3.0                        #
-#            DATE     : 10/2011                      #
+#            VERSION  : 0.4.0                        #
+#            DATE     : 11/2012                      #
 #            AUTHOR   : Valat Sébastien              #
 #            LICENSE  : CeCILL-C                     #
 ######################################################
@@ -13,7 +13,7 @@ inherit cmake-utils
 RESTRICT="primaryuri"
 DESCRIPTION="A C++ test suite library, similar to CPPunit."
 HOMEPAGE="https://github.com/svalat/svUnitTest"
-SRC_URI="https://github.com/downloads/svalat/svUnitTest/svUnitTest-0.3.0.tar.bz2"
+SRC_URI="https://github.com/downloads/svalat/svUnitTest/svUnitTest-0.2.0.tar.bz2"
 
 LICENSE="CeCILL-C"
 SLOT="0"

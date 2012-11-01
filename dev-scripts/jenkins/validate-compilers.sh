@@ -1,8 +1,8 @@
 #!/bin/sh
 ######################################################
 #            PROJECT  : svUnitTest                   #
-#            VERSION  : 0.3.0                        #
-#            DATE     : 10/2012                      #
+#            VERSION  : 0.4.0                        #
+#            DATE     : 11/2012                      #
 #            AUTHOR   : Valat Sébastien              #
 #            LICENSE  : CeCILL-C                     #
 ######################################################

@@ -1,7 +1,7 @@
 /*****************************************************
              PROJECT  : svUnitTest
-             VERSION  : 0.3.0
-             DATE     : 05/2011
+             VERSION  : 0.4.0
+             DATE     : 11/2012
              AUTHOR   : Valat Sébastien
              LICENSE  : CeCILL-C
 *****************************************************/
@@ -46,7 +46,7 @@ In your makefile, it will give :
 ######################################################
 #            PROJECT  : svUnitTest                   #
 #            VERSION  : 0.1.0                        #
-#            DATE     : 01/2011                      #
+#            DATE     : 11/2012                      #
 #            AUTHOR   : Valat Sébastien              #
 #            LICENCE  : CeCILL-C                     #
 ######################################################

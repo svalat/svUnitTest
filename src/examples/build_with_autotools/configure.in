@@ -1,7 +1,7 @@
 ######################################################
 #            PROJECT  : svUnitTest                   #
-#            VERSION  : 0.3.0                        #
-#            DATE     : 05/2011                      #
+#            VERSION  : 0.4.0                        #
+#            DATE     : 11/2012                      #
 #            AUTHOR   : Valat Sébastien              #
 #            LICENSE  : CeCILL-C                     #
 ######################################################
@@ -10,7 +10,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.65])
-AC_INIT(svUnitTestExampleAutotools, 0.3.0, sebastien.valat.dev@orange.fr)
+AC_INIT(svUnitTestExampleAutotools, 0.4.0, sebastien.valat.dev@orange.fr)
 AC_CONFIG_SRCDIR([src/testString.cpp])
 
 #init automake
@@ -24,7 +24,7 @@ AC_PROG_CXX
 #Check for optional svUnitTest
 #To force usage, keep only the line PKG_CHECK_MODULES(...).
 
-WANT_SVUNITTEST_VERSION=0.3.0
+WANT_SVUNITTEST_VERSION=0.4.0
 
 AC_ARG_WITH([svUnitTest], AS_HELP_STRING([--with-svUnitTest], [Build with the svUnitTest support]))
 

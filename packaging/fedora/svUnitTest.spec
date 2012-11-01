@@ -1,13 +1,13 @@
 ######################################################
 #            PROJECT  : svUnitTest                   #
-#            VERSION  : 0.3.0                        #
-#            DATE     : 10/2011                      #
+#            VERSION  : 0.4.0                        #
+#            DATE     : 11/2012                      #
 #            AUTHOR   : Valat Sébastien              #
 #            LICENSE  : CeCILL-C                     #
 ######################################################
 
 Name:           svUnitTest
-Version:        0.3.0
+Version:        0.4.0
 Release:        1%{?dist}
 Summary:        A C++ test suite library, similar to CPPunit.
 
