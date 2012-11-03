@@ -32,7 +32,9 @@ enum svutOutputMode
 	/** Format the output in XML QT format to emulate their system. **/
 	SVUT_OUT_QT_XML,
 	/** Format the output in JUNIT format to be compatible with tools. **/
-	SVUT_OUT_JUNIT_XML
+	SVUT_OUT_JUNIT_XML,
+	/** Format the output in Boost Unit XML format to be compatible with tools. **/
+	SVUT_OUT_BOOST_XML
 };
 
 /*********************  ENUM  ************************/

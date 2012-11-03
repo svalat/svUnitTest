@@ -40,7 +40,8 @@ set(svUnitTest_SRC
 	formatters/svutResultFormatterJUnitXml.cpp
 	formatters/svutResultFormatter.cpp
 	formatters/svutResultFormatterXml.cpp
-	formatters/svutResultFormatterStdColored.cpp)
+	formatters/svutResultFormatterStdColored.cpp
+	formatters/svutResultFormatterBoostXml.cpp)
 
 set(svUnitTest_INC
 	svUnitTest.h
