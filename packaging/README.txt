@@ -1,6 +1,6 @@
 ######################################################
 #            PROJECT  : svUnitTest                   #
-#            VERSION  : 0.4.0                        #
+#            VERSION  : 0.5.0-dev                    #
 #            DATE     : 11/2012                      #
 #            AUTHOR   : Valat Sébastien              #
 #            LICENSE  : CeCILL-C                     #
@@ -12,7 +12,7 @@ I. UBUNTU / DEBIAN :
 ____________________
 
 This project support the ubuntu packing to build .dev files. To build such package you may use the files in packaging/ubuntu.
-First create a directory in your home dir, place the project archive in it and rename it to svUnitTest_0.4.0.orig.tar.gz.
+First create a directory in your home dir, place the project archive in it and rename it to svUnitTest_0.5.0-dev.orig.tar.gz.
 
 To setup your working environneemnt, you will found documentation on https://wiki.ubuntu.com/PbuilderHowto. We mosly need :
 
@@ -24,14 +24,14 @@ sudo pbuilder create
 If you work with git version you can build the archive with :
 
 --------------------------------------------------------------------
-$user> git archive --prefix=svUnitTest-0.4.0/ v0.4.0 | gzip > svUnitTest_0.4.0.orig.tar.gz
+$user> git archive --prefix=svUnitTest-0.5.0-dev/ v0.5.0-dev | gzip > svUnitTest_0.5.0-dev.orig.tar.gz
 --------------------------------------------------------------------
 
-Go to your directory and extract svUnitTest_0.4.0.orig.tar.gz with and go in the directory.
+Go to your directory and extract svUnitTest_0.5.0-dev.orig.tar.gz with and go in the directory.
 
 --------------------------------------------------------------------
-$user> tar -xvzf svUnitTest-0.4.0.orig.tar.gz
-$user> cd svUnitTest-0.4.0
+$user> tar -xvzf svUnitTest-0.5.0-dev.orig.tar.gz
+$user> cd svUnitTest-0.5.0-dev
 --------------------------------------------------------------------
 
 Now go to the svUnitTest-0.3 directory and move the packaging/ubunt into debian :
@@ -78,7 +78,7 @@ $user> rpmdev-setuptree
 Now generate the archive file (or download it from internet) :
 
 --------------------------------------------------------------------
-$user> git archive --prefix=svUnitTest-0.4.0/ v0.4.0 | bzip2 > ~/rpmbuild/SOURCES/svUnitTest-0.4.0.tar.bz2
+$user> git archive --prefix=svUnitTest-0.5.0-dev/ v0.5.0-dev | bzip2 > ~/rpmbuild/SOURCES/svUnitTest-0.5.0-dev.tar.bz2
 --------------------------------------------------------------------
 
 And build the package :
@@ -110,25 +110,25 @@ Now get the project archive and place it in /usr/portage/distfiles (or correspon
 you work on the git version, you can build the project archive with :
 
 --------------------------------------------------------------------
-$user> git archive --prefix=svUnitTest-0.4.0/ v0.4.0 | gzip > svUnitTest-0.4.0.tar.gz
+$user> git archive --prefix=svUnitTest-0.5.0-dev/ v0.5.0-dev | gzip > svUnitTest-0.5.0-dev.tar.gz
 --------------------------------------------------------------------
 
 Now got to the /usr/local/portage/myoverlay/dev-libs and build the Manifest file :
 
 --------------------------------------------------------------------
-#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.4.0.ebuild manifest
+#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.5.0-dev.ebuild manifest
 --------------------------------------------------------------------
 
 Ok now you can test the build septs one by one :
 
 --------------------------------------------------------------------
-#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.4.0.ebuild clean
-#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.4.0.ebuild fetch
-#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.4.0.ebuild unpack
-#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.4.0.ebuild prepare
-#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.4.0.ebuild configure
-#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.4.0.ebuild compile
-#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.4.0.ebuild test
+#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.5.0-dev.ebuild clean
+#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.5.0-dev.ebuild fetch
+#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.5.0-dev.ebuild unpack
+#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.5.0-dev.ebuild prepare
+#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.5.0-dev.ebuild configure
+#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.5.0-dev.ebuild compile
+#root> ebuild /usr/local/portage/myoverlay/dev-libs/svUnitTest-0.5.0-dev.ebuild test
 --------------------------------------------------------------------
 
 ... (I don't do install here bu you also can do preinst, install, postinst, qmerge (maybe qmerge is not a goot idea for the 
@@ -137,7 +137,7 @@ fist testings steps).
 Or you can simply run :
 
 --------------------------------------------------------------------
-#root> echo "=dev-libs/svUnitTest-0.4.0" >> /etc/portage/package.keywords
+#root> echo "=dev-libs/svUnitTest-0.5.0-dev" >> /etc/portage/package.keywords
 #root> emerge -a svUnitTest
 --------------------------------------------------------------------
 

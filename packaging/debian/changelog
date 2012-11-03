@@ -1,3 +1,9 @@
+svunittest (0.5.0~dev) unstable; urgency=low
+
+  * In developpement...
+
+ -- Sébastien Valat <sebastien.valat.dev@orange.fr>  Thu, 1 Nov 2012 19:32:08 +0100
+
 svunittest (0.4.0) unstable; urgency=low
 
   * Many bug fixes.

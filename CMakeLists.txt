@@ -1,6 +1,6 @@
 ######################################################
 #            PROJECT  : svUnitTest                   #
-#            VERSION  : 0.4.0                        #
+#            VERSION  : 0.5.0-dev                    #
 #            DATE     : 11/2012                      #
 #            AUTHOR   : Valat Sébastien              #
 #            LICENSE  : CeCILL-C                     #
@@ -10,7 +10,7 @@
 #project definition
 cmake_minimum_required (VERSION 2.6)
 project(svUnitTest CXX)
-set(svUnitTest_VERSION "0.4.0")
+set(svUnitTest_VERSION "0.5.0-dev")
 
 ######################################################
 #load cmake modules
@@ -80,7 +80,7 @@ SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "C++ unit test library.")
 SET(CPACK_PACKAGE_VENDOR "Sébastien Valat")
 #SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/ReadMe.txt")
 SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING-EN.txt")
-SET(CPACK_PACKAGE_VERSION "0.4.0")
+SET(CPACK_PACKAGE_VERSION "0.5.0-dev")
 SET(CPACK_PACKAGE_VERSION_MAJOR "0")
 SET(CPACK_PACKAGE_VERSION_MINOR "3")
 SET(CPACK_PACKAGE_VERSION_PATCH "0")
