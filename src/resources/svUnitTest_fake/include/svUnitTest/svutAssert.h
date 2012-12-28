@@ -33,7 +33,7 @@ inline std::string getLocationString(int line,const char * filename,const char *
 #define SVUT_CODE_LOCATION getLocationString(__LINE__,__FILE__,__FUNCTION__)
 
 /********************  MACROS  **********************/
-#define SVUT_CODE_LOCATION_STATIC svUnitTest::svutCodeLocation(__FILE__,"[none]",__LINE__)
+#define SVUT_CODE_LOCATION_STATIC svUnitTest::getLocationString(__LINE__,__FILE__,"[none]")
 
 /********************  MACRO  ***********************/
 #define SVUT_CAPTURE_ASSERT_EXCEPTIONS(x) \
