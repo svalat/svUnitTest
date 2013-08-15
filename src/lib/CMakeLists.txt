@@ -94,7 +94,9 @@ IF (TEST_COVERAGE)
 ENDIF (TEST_COVERAGE)
 
 #define targets
-add_library (svunittest ${svUnitTest_SRC})
+#It didn't seems usefull to made it dynamic for such code validation usage
+add_library (svunittest STATIC ${svUnitTest_SRC})
+
 #install
 INSTALL(TARGETS svunittest
 	ARCHIVE DESTINATION lib${LIB_SUFFIX}
