@@ -32,10 +32,12 @@ class svutObjectMethod;
 class svutTestMethod
 {
 	public:
-		svutTestMethod(std::string name,svutObjectMethod * methode,svutCodeLocation location);
+		svutTestMethod(std::string name,svutCodeLocation location,svutObjectMethod * testMethod,svutObjectMethod * setupMeth = NULL,svutObjectMethod * tearDownMeth = NULL);
 		virtual ~svutTestMethod();
 		std::string getName(void) const;
-		void call(void);
+		void callSetup(void);
+		void callTest(void);
+		void callTearDown(void);
 		svutCodeLocation getLocation(void) const;
 	protected:
 		/**
@@ -47,7 +49,15 @@ class svutTestMethod
 		 * Pointer to svutObjectMethode object wich permit to dynamicly call the function on the
 		 * test case object.
 		**/
-		svutObjectMethod * methode;
+		svutObjectMethod * testMethod;
+		/**
+		 * Pointer to svutObjectMethod to run the setup step.
+		**/
+		svutObjectMethod * setupMethod;
+		/**
+		 * Pointer to svutObjectMethod to run the tearDown step.
+		**/
+		svutObjectMethod * tearDownMethod;
 		/**
 		 * Define the source location of the methode. For moment, the position correspond the the
 		 * declaration line with SVUT_REG_TEST_FUNCTION macro which is not the implementation
@@ -55,6 +65,11 @@ class svutTestMethod
 		 * location informations.
 		**/
 		svutCodeLocation location;
+	private:
+		/** Copy is forbidden. **/
+		svutTestMethod(const svutTestMethod & orig);
+		/** Copy is forbidden. **/
+		svutTestMethod & operator = (const svutObjectMethod & orig);
 };
 
 }

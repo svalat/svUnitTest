@@ -11,6 +11,7 @@
 
 /********************  HEADERS  *********************/
 #include "svutTestCase.h"
+#include "svutFlatFixture.h"
 #include <vector>
 #include <set>
 #include <map>
@@ -112,6 +113,7 @@ struct svutFlatRegistryEntry
 	std::string testName;
 	svutCodeLocation location;
 	svutTestMethodPtr methodPtr;
+	svutFlatFixture * fixture;
 };
 
 /*********************  CLASS  **********************/
@@ -144,6 +146,7 @@ class svutFlatTestCase : public svutTestCase
 	    inline svutFlatTestCase(std::string name = "Undefined");
 	    inline virtual void testMethodsRegistration(void );
 		inline void registerFlatTestMethod(std::string name,svutTestMethodPtr methodPtr,const svutCodeLocation & location);
+		inline void registerFlatTestMethod(std::string name,svutFlatFixture * fixture,const svutCodeLocation & location);
 	protected:
 		inline virtual void setUp(void );
 		inline virtual void tearDown(void );
@@ -178,6 +181,31 @@ static inline bool registerFlatTestCaseMethod(const char* testCaseName, const ch
 	entry.testCaseName = testCaseName;
 	entry.testName = functionName;
 	entry.methodPtr = methodPtr;
+	entry.location = location;
+	entry.fixture = NULL;
+	svUnitTest::__fake_svut_test_flat_test_registry__->push_back(entry);
+	return true;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Function used to register a new methe by link time trick.
+ * @param testCaseName Define the name of test case to create.
+ * @param functionName Define the name of the function to use as test case.
+ * @param methodPtr Define the pointer of C method to call.
+ * @param location Define the location of the method.
+ * @return Return always true, this is the trick to call the method at init time without depending
+ * on compilers/linker keywords, see SVUT_REGISTER_FLAT_TEST macro.
+**/
+static inline bool registerFlatTestCaseMethod(const char* testCaseName, const char* functionName, svutFlatFixture * flatFixture,const svutCodeLocation & location)
+{
+	if (svUnitTest::__fake_svut_test_flat_test_registry__ == NULL)
+		svUnitTest::__fake_svut_test_flat_test_registry__ = new std::vector<svutFlatRegistryEntry>;
+	svutFlatRegistryEntry entry;
+	entry.testCaseName = testCaseName;
+	entry.testName = functionName;
+	entry.methodPtr = NULL;
+	entry.fixture = flatFixture;
 	entry.location = location;
 	svUnitTest::__fake_svut_test_flat_test_registry__->push_back(entry);
 	return true;
@@ -216,8 +244,27 @@ inline void svutFlatTestCase::registerFlatTestMethod(std::string name, svutTestM
 		entry.methodPtr = methodPtr;
 		entry.testCaseName = this->getName();
 		entry.testName = name;
+		entry.fixture = NULL;
 		tests.push_back(entry);
 	}
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Register a new test method to the current flat test case.
+ * @param name Define the name of the test.
+ * @param methodPtr Define the test function to use.
+ * @param location Define the location of the function in source code.
+**/
+inline void svutFlatTestCase::registerFlatTestMethod(std::string name, svutFlatFixture * fixture, const svUnitTest::svutCodeLocation& location)
+{
+	svutFlatRegistryEntry entry;
+	entry.location = location;
+	entry.methodPtr = NULL;
+	entry.testCaseName = this->getName();
+	entry.testName = name;
+	entry.fixture = fixture;
+	tests.push_back(entry);
 }
 
 /*******************  FUNCTION  *********************/
@@ -227,15 +274,33 @@ inline void svutFlatTestCase::registerFlatTestMethod(std::string name, svutTestM
 inline void svutFlatTestCase::testMethodsRegistration(void )
 {
 	if (svUnitTest::__fake_svut_test_flat_test_registry__ != NULL)
+	{
 		for (std::vector<svutFlatRegistryEntry>::const_iterator it = svUnitTest::__fake_svut_test_flat_test_registry__->begin() ; it != svUnitTest::__fake_svut_test_flat_test_registry__->end() ; ++it)
+		{
 			if (it->testCaseName == getName())
-				this->registerFlatTestMethod(it->testName,it->methodPtr,it->location);
+			{
+				if (it->fixture != NULL)
+					this->registerFlatTestMethod(it->testName,it->fixture,it->location);
+				else if (it->methodPtr != NULL)
+					this->registerFlatTestMethod(it->testName,it->methodPtr,it->location);
+				else
+					abort();
+			}
+		}
+	}
 
 	//run all
 	for (std::vector<svutFlatRegistryEntry>::iterator it = tests.begin() ; it != tests.end() ; ++it)
 	{
 		markStartTest(it->testName);
-		SVUT_CAPTURE_ASSERT_EXCEPTIONS(setUp();it->methodPtr();tearDown(););
+		if (it->methodPtr != NULL)
+		{
+			SVUT_CAPTURE_ASSERT_EXCEPTIONS(setUp();it->methodPtr();tearDown(););
+		} else if (it->fixture != NULL) {
+			SVUT_CAPTURE_ASSERT_EXCEPTIONS(it->fixture->setUp();it->fixture->run();it->fixture->tearDown(););
+		} else {
+			abort();
+		}
 		markStatus();
 	}
 }

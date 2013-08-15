@@ -145,7 +145,7 @@ void UnitTest_svutListenerMultiplexer::testOnTestMethodStart(void )
 	CPPUNIT_ASSERT_EQUAL(0,mock2->mockTime);
 
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("test",NULL,SVUT_CODE_LOCATION);
+	svutTestMethod meth("test",SVUT_CODE_LOCATION,NULL);
 	obj->onTestMethodStart(testCase,meth);
 
 	CPPUNIT_ASSERT_EQUAL(1,mock1->mockTime);
@@ -161,7 +161,7 @@ void UnitTest_svutListenerMultiplexer::testOnTestMethodEnd(void )
 	CPPUNIT_ASSERT_EQUAL(0,mock2->mockTime);
 
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("test",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("test",SVUT_NO_LOCATION,NULL);
 	svutStatusInfo status(svUnitTest::SVUT_STATUS_INDEV,"test",SVUT_NO_LOCATION);
 	obj->onTestMethodEnd(testCase,meth,status);
 
@@ -234,7 +234,7 @@ void UnitTest_svutListenerMultiplexer::testOnListMethod(void )
 	CPPUNIT_ASSERT_EQUAL(-1,mock2->mockEvents.list_method);
 
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("test",NULL,SVUT_CODE_LOCATION);
+	svutTestMethod meth("test",SVUT_CODE_LOCATION,NULL);
 	obj->onListMethod(testCase,meth);
 
 	CPPUNIT_ASSERT_EQUAL(1,mock1->mockTime);

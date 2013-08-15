@@ -77,6 +77,31 @@ bool registerFlatTestCaseMethod(const char* testCaseName, const char* functionNa
 	entry.testCaseName = testCaseName;
 	entry.testName = functionName;
 	entry.methodPtr = methodPtr;
+	entry.fixtureTest = NULL;
+	entry.location = location;
+	globalFlatTestRegistry->push_back(entry);
+	return true;
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Function used to register a new method by link time trick.
+ * @param testCaseName Define the name of test case to create.
+ * @param functionName Define the name of the function to use as test case.
+ * @param fixture Define the pointer to fixture object to find seutp/run/teardown methods.
+ * @param location Define the location of the method.
+ * @return Return always true, this is the trick to call the method at init time without depending
+ * on compilers/linker keywords, see SVUT_REGISTER_FLAT_TEST_F macro.
+**/
+bool registerFlatTestCaseMethod(const char* testCaseName, const char* functionName, svutFlatFixture * fixtureTest, const svutCodeLocation& location)
+{
+	if (globalFlatTestRegistry == NULL)
+		initGlobalFlatTestRegistry();
+	svutFlatRegistryEntry entry;
+	entry.testCaseName = testCaseName;
+	entry.testName = functionName;
+	entry.methodPtr = NULL;
+	entry.fixtureTest = fixtureTest;
 	entry.location = location;
 	globalFlatTestRegistry->push_back(entry);
 	return true;
@@ -111,9 +136,27 @@ void svutFlatTestCase::registerFlatTestMethod(string name, svutTestMethodPtr met
 		this->tearDownPtr = methodPtr;
 	} else {
 		svutObjectMethod * meth = new svutFlatObjectMethod(methodPtr);
-		svutTestMethod * test = new svutTestMethod(name,meth,location);
+		svutObjectMethod * setupMeth = new svutObjectMethodGeneric<svutFlatTestCase>(this,&svutFlatTestCase::setUp);
+		svutObjectMethod * tearDown = new svutObjectMethodGeneric<svutFlatTestCase>(this,&svutFlatTestCase::tearDown);
+		svutTestMethod * test = new svutTestMethod(name,location,meth,setupMeth,tearDown);
 		this->registerTestMethod(test);
 	}
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Register a new test method to the current flat test case.
+ * @param name Define the name of the test.
+ * @param fixtureTest Define the fixture test to register.
+ * @param location Define the location of the function in source code.
+**/
+void svutFlatTestCase::registerFlatTestMethod(string name, svutFlatFixture* fixtureTest, const svutCodeLocation& location)
+{
+	svutObjectMethod * meth = new svutObjectMethodGeneric<svutFlatFixture>(fixtureTest,&svutFlatFixture::run);
+	svutObjectMethod * setupMeth = new svutObjectMethodGeneric<svutFlatFixture>(fixtureTest,&svutFlatFixture::setUp);
+	svutObjectMethod * tearDown = new svutObjectMethodGeneric<svutFlatFixture>(fixtureTest,&svutFlatFixture::tearDown);
+	svutTestMethod * test = new svutTestMethod(name,location,meth,setupMeth,tearDown);
+	this->registerTestMethod(test);
 }
 
 /*******************  FUNCTION  *********************/
@@ -124,8 +167,17 @@ void svutFlatTestCase::testMethodsRegistration(void )
 {
 	if (globalFlatTestRegistry != NULL)
 	for (std::vector<svutFlatRegistryEntry>::const_iterator it = globalFlatTestRegistry->begin() ; it != globalFlatTestRegistry->end() ; ++it)
+	{
 		if (it->testCaseName == getName())
-			registerFlatTestMethod(it->testName,it->methodPtr,it->location);
+		{
+			assert(it->methodPtr != NULL || it->fixtureTest != NULL);
+
+			if (it->methodPtr != NULL)
+				registerFlatTestMethod(it->testName,it->methodPtr,it->location);
+			else if (it->fixtureTest != NULL)
+				registerFlatTestMethod(it->testName,it->fixtureTest,it->location);
+		}
+	}
 }
 
 /*******************  FUNCTION  *********************/

@@ -131,6 +131,14 @@ target_link_libraries (svutDefaultMainAllMessages svutUnitTestBase svunittest)
 add_executable(flatMode UnitTest_flatMode.cpp)
 target_link_libraries (flatMode svutUnitTestBase svunittest)
 
+############# BUILD MAIN TESTS ##################
+add_executable(flatFixtures UnitTest_flatFixtures.cpp)
+target_link_libraries (flatFixtures svutUnitTestBase svunittest)
+
+############# BUILD MAIN TESTS ##################
+add_executable(fakeFlatFixture UnitTest_fakeFlatFixture.cpp)
+target_link_libraries (fakeFlatFixture svutUnitTestBase svunittest)
+
 ################ SVUNITTESTFAKE #################
 add_executable(svUnitTestFake UnitTest_svUnitTestFake.cpp)
 add_test(svUnitTestFake ${CMAKE_CURRENT_BINARY_DIR}/svUnitTestFake)

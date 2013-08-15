@@ -132,14 +132,14 @@ svutStatusInfo svutTestCase::runTestMethod(svutTestMethod * test)
 		this->context.clear();
 		this->cout.str("");
 		
-		this->setUp();
+		test->callSetup();
 		needTearDown = true;
-		test->call();
-		this->tearDown();
+		test->callTest();
+		test->callTearDown();
 		needTearDown = false;
 	} catch (const svutExTestStatus & e) {
 		if (needTearDown)
-			this->tearDown();
+			test->callTearDown();
 		res = e.getInfos();
 	} catch (std::exception & e) {
 		string tmp = "Unexpected std exception : ";

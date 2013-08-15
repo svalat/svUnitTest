@@ -55,9 +55,8 @@ UnitTest_svutTestMethod::UnitTest_svutTestMethod()
 void UnitTest_svutTestMethod::setUp(void)
 {
 	called = false;
-	meth = new svutTestMethod("theTest",
-		new svutObjectMethodGeneric<UnitTest_svutTestMethod>(this,&UnitTest_svutTestMethod::methToCall),
-		loc);
+	meth = new svutTestMethod("theTest",loc,
+		new svutObjectMethodGeneric<UnitTest_svutTestMethod>(this,&UnitTest_svutTestMethod::methToCall));
 }
 
 /*******************  FUNCTION  *********************/
@@ -82,7 +81,7 @@ void UnitTest_svutTestMethod::testGetLocation(void )
 void UnitTest_svutTestMethod::testCall(void )
 {
 	CPPUNIT_ASSERT_EQUAL(false,called);
-	meth->call();
+	meth->callTest();
 	CPPUNIT_ASSERT_EQUAL(true,called);
 }
 
@@ -97,11 +96,10 @@ void UnitTest_svutTestMethod::testUsageOfTypeof(void )
 {
 	svutTestMethod * obj;
 	typedef SVUT_TYPEOF(this) CURRENT_CLASS;
-	obj = new svutTestMethod("theTest",
-		new svutObjectMethodGeneric<UnitTest_svutTestMethod>(this,&CURRENT_CLASS::methToCall),
-		loc);
+	obj = new svutTestMethod("theTest",loc,
+		new svutObjectMethodGeneric<UnitTest_svutTestMethod>(this,&CURRENT_CLASS::methToCall));
 	CPPUNIT_ASSERT_EQUAL(false,called);
-	obj->call();
+	obj->callTest();
 	CPPUNIT_ASSERT_EQUAL(true,called);
 	delete obj;
 }

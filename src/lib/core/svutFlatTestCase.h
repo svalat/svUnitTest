@@ -12,6 +12,7 @@
 /********************  HEADERS  *********************/
 #include "svutTestCase.h"
 #include "svutTestCaseBuilder.h"
+#include "svutFlatFixture.h"
 #include <set>
 
 /********************  NAMESPACE  *******************/
@@ -109,6 +110,8 @@ struct svutFlatRegistryEntry
 	svutCodeLocation location;
 	/** Pointer to the method which implement the test. **/
 	svutTestMethodPtr methodPtr;
+	/** For fixture method. **/
+	svutFlatFixture * fixtureTest;
 };
 
 /*********************  CLASS  **********************/
@@ -141,6 +144,7 @@ class svutFlatTestCase : public svutTestCase
 	    svutFlatTestCase(std::string name = "Undefined");
 	    virtual void testMethodsRegistration(void );
 		void registerFlatTestMethod(std::string name,svutTestMethodPtr methodPtr,const svutCodeLocation & location);
+		void registerFlatTestMethod(std::string name,svutFlatFixture * fixtureTest,const svutCodeLocation & location);
 	protected:
 		virtual void setUp(void );
 		virtual void tearDown(void );
@@ -153,6 +157,7 @@ class svutFlatTestCase : public svutTestCase
 
 /*******************  FUNCTION  *********************/
 bool registerFlatTestCaseMethod(const char* testCaseName, const char* functionName, svUnitTest::svutTestMethodPtr methodPtr, const svUnitTest::svutCodeLocation& location);
+bool registerFlatTestCaseMethod(const char* testCaseName, const char* functionName, svUnitTest::svutFlatFixture * fixtureTest, const svUnitTest::svutCodeLocation& location);
 const std::set<class svutTestCaseBuilder *> getRegistredFlatTestCases(void);
 svutTestCase & getCurrentSvutTestCase(void);
 

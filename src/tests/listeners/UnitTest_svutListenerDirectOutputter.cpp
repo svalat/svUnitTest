@@ -107,7 +107,7 @@ void UnitTest_svutListenerDirectOutputter::testOnGlobalEnd_2(void )
 	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
 
 	UnitTestMockTestCase testCase;
-	svutTestMethod testMethod("test",NULL,SVUT_CODE_LOCATION);
+	svutTestMethod testMethod("test",SVUT_CODE_LOCATION,NULL);
 	listener->onTestMethodEnd(testCase,testMethod,SVUT_STATUS_SUCCESS);
 	listener->onTestMethodEnd(testCase,testMethod,SVUT_STATUS_UNKNOWN);
 	listener->onTestMethodEnd(testCase,testMethod,SVUT_STATUS_UNKNOWN);
@@ -155,7 +155,7 @@ void UnitTest_svutListenerDirectOutputter::testOnTestMethodStart()
 	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
 
 	UnitTestMockTestCase testCase;
-	svutTestMethod testMethod("test",NULL,SVUT_CODE_LOCATION);
+	svutTestMethod testMethod("test",SVUT_CODE_LOCATION,NULL);
 	listener->onTestMethodStart(testCase,testMethod);
 	ref->openTestMethod(testCase,testMethod);
 
@@ -169,7 +169,7 @@ void UnitTest_svutListenerDirectOutputter::testOnTestMethodEnd(void )
 	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
 
 	UnitTestMockTestCase testCase;
-	svutTestMethod testMethod("test",NULL,SVUT_CODE_LOCATION);
+	svutTestMethod testMethod("test",SVUT_CODE_LOCATION,NULL);
 	listener->onTestMethodEnd(testCase,testMethod,SVUT_STATUS_TODO);
 	ref->closeTestMethod(testCase,testMethod,SVUT_STATUS_TODO);
 
@@ -207,7 +207,7 @@ void UnitTest_svutListenerDirectOutputter::testOnListMethod(void )
 	CPPUNIT_ASSERT_EQUAL(true,formatter->isEmpty());
 
 	UnitTestMockTestCase testCase;
-	svutTestMethod testMethod("test",NULL,SVUT_CODE_LOCATION);
+	svutTestMethod testMethod("test",SVUT_CODE_LOCATION,NULL);
 	listener->onListMethod(testCase,testMethod);
 	ref->onListMethod(testCase,testMethod);
 

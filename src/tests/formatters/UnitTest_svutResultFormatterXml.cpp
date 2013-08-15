@@ -271,7 +271,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestCase(void )
 void UnitTest_svutResultFormatterXml::testCloseTestMethod_success_1(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	formatter->closeTestMethod(testCase,meth,SVUT_STATUS_SUCCESS);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SUCCESS_1,out->str());
 }
@@ -280,7 +280,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_success_1(void )
 void UnitTest_svutResultFormatterXml::testCloseTestMethod_success_2(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	formatter->setDisplaySuccess(true);
 	formatter->closeTestMethod(testCase,meth,SVUT_STATUS_SUCCESS);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SUCCESS_1,out->str());
@@ -290,7 +290,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_success_2(void )
 void UnitTest_svutResultFormatterXml::testCloseTestMethod_fullname(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	formatter->setDisplaySuccess(true);
 	formatter->setDisplayFullName(true);
 	formatter->closeTestMethod(testCase,meth,SVUT_STATUS_SUCCESS);
@@ -301,7 +301,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_fullname(void )
 void UnitTest_svutResultFormatterXml::testCloseTestMethod_todo(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	formatter->closeTestMethod(testCase,meth,SVUT_STATUS_TODO);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_TODO,out->str());
 }
@@ -310,7 +310,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_todo(void )
 void UnitTest_svutResultFormatterXml::testCloseTestMethod_indev(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	formatter->closeTestMethod(testCase,meth,SVUT_STATUS_INDEV);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_INDEV,out->str());
 }
@@ -319,7 +319,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_indev(void )
 void UnitTest_svutResultFormatterXml::testCloseTestMethod_skiped(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	formatter->closeTestMethod(testCase,meth,SVUT_STATUS_SKIPED);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_SKIPED,out->str());
 }
@@ -328,7 +328,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_skiped(void )
 void UnitTest_svutResultFormatterXml::testCloseTestMethod_unknown_1(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	formatter->closeTestMethod(testCase,meth,SVUT_STATUS_UNKNOWN);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_UNKNOWN_1,out->str());
 }
@@ -337,7 +337,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_unknown_1(void )
 void UnitTest_svutResultFormatterXml::testCloseTestMethod_unknown_2(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	formatter->setDisplayDetails(false);
 	formatter->closeTestMethod(testCase,meth,SVUT_STATUS_UNKNOWN);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_UNKNOWN_1,out->str());
@@ -347,7 +347,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_unknown_2(void )
 void UnitTest_svutResultFormatterXml::testCloseTestMethod_unknown_3(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	svutCodeLocation location("file.cpp","methode",33);
 	svutStatusInfo info(SVUT_STATUS_UNKNOWN,"message for unknown status",location);
 	formatter->closeTestMethod(testCase,meth,info);
@@ -358,7 +358,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_unknown_3(void )
 void UnitTest_svutResultFormatterXml::testCloseTestMethod_failed_1(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	svutCodeLocation location("file.cpp","methode",33);
 	svutStatusInfo info(SVUT_STATUS_FAILED,"message for failed status",location);
 	info.addEntry("expected","toto");
@@ -371,7 +371,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_failed_1(void )
 void UnitTest_svutResultFormatterXml::testCloseTestMethod_failed_2(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	svutCodeLocation location("file.cpp","methode",33);
 	svutStatusInfo info(SVUT_STATUS_FAILED,"message for failed status",location);
 	info.addEntry("expected","toto");
@@ -386,7 +386,7 @@ void UnitTest_svutResultFormatterXml::runTotalSequence(void )
 {
 	UnitTestMockTestCase testCase;
 	svutCodeLocation location("file.cpp","methode",33);
-	svutTestMethod meth("testMethod",NULL,location);
+	svutTestMethod meth("testMethod",location,NULL);
 	svutStatusInfo infoFailed(SVUT_STATUS_FAILED,"message for unknown status",location);
 	infoFailed.addEntry("expected","toto");
 	infoFailed.addEntry("actual","duck");
@@ -473,7 +473,7 @@ void UnitTest_svutResultFormatterXml::testOpenTestCase(void )
 void UnitTest_svutResultFormatterXml::testOpenTestMethod(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_CODE_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_CODE_LOCATION,NULL);
 	formatter->openTestMethod(testCase,meth);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_OPEN_METH,out->str());
 }
@@ -504,7 +504,7 @@ void UnitTest_svutResultFormatterXml::testListingStart(void )
 void UnitTest_svutResultFormatterXml::testListMethod_1(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	formatter->onListMethod(testCase,meth);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_LIST_METHOD,out->str());
 }
@@ -513,7 +513,7 @@ void UnitTest_svutResultFormatterXml::testListMethod_1(void )
 void UnitTest_svutResultFormatterXml::testListMethod_2(void )
 {
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	formatter->setDisplayFullName(true);
 	formatter->onListMethod(testCase,meth);
 	CPPUNIT_ASSERT_EQUAL(CST_STRING_LIST_METHOD,out->str());
@@ -527,7 +527,7 @@ void UnitTest_svutResultFormatterXml::testCloseTestMethod_debugContext(void )
 	debug.insert(pair<string,string>("name2","value2"));
 
 	UnitTestMockTestCase testCase;
-	svutTestMethod meth("testMethod",NULL,SVUT_NO_LOCATION);
+	svutTestMethod meth("testMethod",SVUT_NO_LOCATION,NULL);
 	svutCodeLocation location("file.cpp","methode",33);
 	svutStatusInfo info(SVUT_STATUS_FAILED,"message for failed status",location);
 	info.addEntry("expected","toto");

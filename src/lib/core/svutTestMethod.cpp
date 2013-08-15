@@ -19,15 +19,19 @@ namespace svUnitTest
 /**
  * Class constructor of the test.
  * @param name Define the name of the test (which the name of the function by convention).
- * @param methode Define the caller used to call the test on the test cas object as it's C++ function.
+ * @param testMethod Define the caller used to call the test on the test cas object as it's C++ function.
  * the pointer given here will be destroy by the svutTestMethod objet.
+ * @param setupMethod Define the setup method to call before running the test method.
+ * @param teatDownMethod Define the tear down method to call befire running the test method.
  * @param location Define the source location the the test.
 **/
-svutTestMethod::svutTestMethod(std::string name,svutObjectMethod * methode,svutCodeLocation location)
+svutTestMethod::svutTestMethod(std::string name,  svutCodeLocation location,svutObjectMethod* testMethod, svutObjectMethod* setupMethod, svutObjectMethod* tearDownMethod)
 	:location(location)
 {
 	this->name = name;
-	this->methode = methode;
+	this->testMethod = testMethod;
+	this->setupMethod = setupMethod;
+	this->tearDownMethod = tearDownMethod;
 }
 
 /*******************  FUNCTION  *********************/
@@ -36,8 +40,12 @@ svutTestMethod::svutTestMethod(std::string name,svutObjectMethod * methode,svutC
 **/
 svutTestMethod::~svutTestMethod()
 {
-	if (this->methode!=NULL)
-		delete this->methode;
+	if (this->testMethod!=NULL)
+		delete this->testMethod;
+	if (this->setupMethod != NULL)
+		delete this->setupMethod;
+	if (this->tearDownMethod != NULL)
+		delete this->tearDownMethod;
 }
 
 /*******************  FUNCTION  *********************/
@@ -53,9 +61,29 @@ std::string svutTestMethod::getName(void) const
 /**
  * Call the test to made it run.
 **/
-void svutTestMethod::call(void)
+void svutTestMethod::callTest(void)
 {
-	this->methode->call();
+	this->testMethod->call();
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Call the setup method.
+**/
+void svutTestMethod::callSetup(void )
+{
+	if (setupMethod != NULL)
+		setupMethod->call();
+}
+
+/*******************  FUNCTION  *********************/
+/**
+ * Call the tear down method.
+**/
+void svutTestMethod::callTearDown(void )
+{
+	if (tearDownMethod != NULL)
+		tearDownMethod->call();
 }
 
 /*******************  FUNCTION  *********************/

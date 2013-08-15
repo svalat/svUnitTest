@@ -59,8 +59,10 @@ namespace svUnitTest
 **/
 #define SVUT_REG_TEST_METHOD(func) do{\
 	typedef SVUT_TYPEOF(this) __SVUT_CURRENT_CLASS__;\
-	svUnitTest::svutObjectMethod * __svut__meth__ = new svUnitTest::svutObjectMethodGeneric<__SVUT_CURRENT_CLASS__>(this,&__SVUT_CURRENT_CLASS__::func);\
-	svUnitTest::svutTestMethod * __svut__testMeth__ = new svUnitTest::svutTestMethod(#func,__svut__meth__,SVUT_CODE_LOCATION); \
+	svUnitTest::svutObjectMethod * __svut__test__ = new svUnitTest::svutObjectMethodGeneric<__SVUT_CURRENT_CLASS__>(this,&__SVUT_CURRENT_CLASS__::func);\
+	svUnitTest::svutObjectMethod * __svut__setupMeth__ = new svUnitTest::svutObjectMethodGeneric<__SVUT_CURRENT_CLASS__>(this,&__SVUT_CURRENT_CLASS__::setUp);\
+	svUnitTest::svutObjectMethod * __svut__tearDownMeth__ = new svUnitTest::svutObjectMethodGeneric<__SVUT_CURRENT_CLASS__>(this,&__SVUT_CURRENT_CLASS__::tearDown);\
+	svUnitTest::svutTestMethod * __svut__testMeth__ = new svUnitTest::svutTestMethod(#func,SVUT_CODE_LOCATION,__svut__test__,__svut__setupMeth__,__svut__tearDownMeth__); \
 	this->registerTestMethod(__svut__testMeth__);\
 } while(0)
 
