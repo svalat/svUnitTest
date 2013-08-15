@@ -4,7 +4,7 @@
              VERSION  : 0.5.0-dev
              DATE     : 11/2012
              AUTHOR   : Valat Sébastien
-             LICENSE  : CeCILL-C
+             LICENSE  : CeCILL-C 2.1
 ***************************************************-->
 <xsl:stylesheet version="1.0"
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">

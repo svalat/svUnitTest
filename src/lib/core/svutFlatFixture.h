@@ -3,7 +3,7 @@
              VERSION  : 0.5.0-dev
              DATE     : 08/2013
              AUTHOR   : Valat Sébastien
-             LICENSE  : CeCILL-C
+             LICENSE  : CeCILL-C 2.1
 *****************************************************/
 
 #ifndef SVUT_FLAT_FIXTURE_HEADER
