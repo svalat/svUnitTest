@@ -48,82 +48,82 @@ inline std::string getLocationString(int line,const char * filename,const char *
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_TRUE(value) \
-	if (((bool)(value)) ==  false) throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " == true"),SVUT_CODE_LOCATION)
+	do { if (((bool)(value)) ==  false) throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " == true"),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_FALSE(value) \
-	if (((bool)(value)) ==  true) throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " == false"),SVUT_CODE_LOCATION)
+	do {if (((bool)(value)) ==  true) throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " == false"),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_NULL(value)\
-	if (((void*)(value)) != NULL) \
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " == NULL"),SVUT_CODE_LOCATION)
+	do { if (((void*)(value)) != NULL) \
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " == NULL"),SVUT_CODE_LOCATION); } while(0)
 
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_NOT_NULL(value)\
-	if (((void*)(value)) == NULL) \
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " != NULL"),SVUT_CODE_LOCATION)
+	do { if (((void*)(value)) == NULL) \
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " != NULL"),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_EQUAL(expected,actual) \
-	if (asserterOperatorEqual(expected,actual) == false)\
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " == " #expected),SVUT_CODE_LOCATION)
+	do { if (asserterOperatorEqual(expected,actual) == false)\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " == " #expected),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_NOT_EQUAL(expected,actual) \
-	if (asserterOperatorNotEqual(expected,actual) == false)\
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " != " #expected),SVUT_CODE_LOCATION)
+	do { if (asserterOperatorNotEqual(expected,actual) == false)\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " != " #expected),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_ZERO(value) \
-	if (asserterOperatorEqualZero((value)) == false)\
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " != 0"),SVUT_CODE_LOCATION)
+	do { if (asserterOperatorEqualZero((value)) == false)\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #value " != 0"),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_ZEROS(value,size) \
-	if (asserterOperatorEqualZeros((value),(size)) == false)\
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : each of " #value "[" #size "] != 0"),SVUT_CODE_LOCATION)
+	do { if (asserterOperatorEqualZeros((value),(size)) == false)\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : each of " #value "[" #size "] != 0"),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_EQUAL_STRICT(expected,actual)\
-	if (asserterOperatorEqualStrict(expected,actual) == false)\
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " == " #expected),SVUT_CODE_LOCATION)
+	do { if (asserterOperatorEqualStrict(expected,actual) == false)\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " == " #expected),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_NOT_EQUAL_STRICT(expected,actual)\
-	if (asserterOperatorNotEqualStrict(expected,actual) == false)\
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " != " #expected),SVUT_CODE_LOCATION)
+	do { if (asserterOperatorNotEqualStrict(expected,actual) == false)\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " != " #expected),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_GT(expectedLimit,actual)\
-	if (asserterOperatorGT((actual),(expectedLimit)) == false) \
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " >= " #expectedLimit),SVUT_CODE_LOCATION)
+	do { if (asserterOperatorGT((actual),(expectedLimit)) == false) \
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " >= " #expectedLimit),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_GE(expectedLimit,actual)\
-	if (asserterOperatorGE((actual),(expectedLimit)) == false) \
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " >= " #expectedLimit),SVUT_CODE_LOCATION)
+	do { if (asserterOperatorGE((actual),(expectedLimit)) == false) \
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " >= " #expectedLimit),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_LT(expectedLimit,actual)\
-	if (asserterOperatorLT((actual),(expectedLimit)) == false) \
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " >= " #expectedLimit),SVUT_CODE_LOCATION)
+	do { if (asserterOperatorLT((actual),(expectedLimit)) == false) \
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " >= " #expectedLimit),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_LE(expectedLimit,actual)\
-	if (asserterOperatorLE((actual),(expectedLimit)) == false) \
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " >= " #expectedLimit),SVUT_CODE_LOCATION)
+	do { if (asserterOperatorLE((actual),(expectedLimit)) == false) \
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " >= " #expectedLimit),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_SAME(expected,actual)\
-	if ((void*)(expected) != (void*)(actual))\
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " == " #expected),SVUT_CODE_LOCATION)
+	do { if ((void*)(expected) != (void*)(actual))\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " == " #expected),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_NOT_SAME(expected,actual)\
-	if ((void*)(expected) == (void*)(actual))\
-		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " != " #expected),SVUT_CODE_LOCATION)
+	do { if ((void*)(expected) == (void*)(actual))\
+		throw svUnitTest::svutExAssertFake("FAILED",("Assert fail : " #actual " != " #expected),SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 #define SVUT_ASSERT_FAIL(message) \

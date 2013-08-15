@@ -27,7 +27,7 @@ namespace svUnitTest
  * @param value Define the current boolean value to test.
 **/
 #define SVUT_ASSERT_TRUE(value) \
-	if (((bool)(value)) ==  false) throw svUnitTest::svutExAssertFailBool(true,SVUT_CODE_LOCATION)
+	do { if (((bool)(value)) ==  false) throw svUnitTest::svutExAssertFailBool(true,SVUT_CODE_LOCATION); } while(0)
 
 
 /********************  MACRO  ***********************/
@@ -38,7 +38,7 @@ namespace svUnitTest
  * @param value Define the current boolean value to test.
 **/
 #define SVUT_ASSERT_FALSE(value) \
-	if (((bool)(value)) ==  true) throw svUnitTest::svutExAssertFailBool(false,SVUT_CODE_LOCATION)
+	do { if (((bool)(value)) ==  true) throw svUnitTest::svutExAssertFailBool(false,SVUT_CODE_LOCATION); }  while(0)
 
 /********************  MACRO  ***********************/
 /**
@@ -48,8 +48,8 @@ namespace svUnitTest
  * @param value Define the pointer value.
 **/
 #define SVUT_ASSERT_NULL(value) \
-	if (((void*)(value)) != NULL) \
-		throw svUnitTest::svutExAssertFailNullPointer(true,SVUT_CODE_LOCATION)
+	do { if (((void*)(value)) != NULL) \
+		throw svUnitTest::svutExAssertFailNullPointer(true,SVUT_CODE_LOCATION); } while(0)
 
 /********************  MACRO  ***********************/
 /**
@@ -80,8 +80,8 @@ namespace svUnitTest
  * @param value Define the pointer value.
 **/
 #define SVUT_ASSERT_NOT_NULL(value) \
-	if (((void*)(value)) == NULL) \
-		throw svUnitTest::svutExAssertFailNullPointer(false,SVUT_CODE_LOCATION)
+	do { if (((void*)(value)) == NULL) \
+		throw svUnitTest::svutExAssertFailNullPointer(false,SVUT_CODE_LOCATION); } while (0)
 
 /********************  MACRO  ***********************/
 /**
