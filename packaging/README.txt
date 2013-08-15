@@ -3,7 +3,7 @@
 #            VERSION  : 0.5.0-dev                    #
 #            DATE     : 11/2012                      #
 #            AUTHOR   : Valat Sébastien              #
-#            LICENSE  : CeCILL-C                     #
+#            LICENSE  : CeCILL-C 2.1                 #
 ######################################################
 
 This directory contain some files to help you to build a package on distributions, please read this file before using it.

@@ -4,7 +4,7 @@
 #            VERSION  : 0.5.0-dev                    #
 #            DATE     : 11/2012                      #
 #            AUTHOR   : Valat Sébastien              #
-#            LICENSE  : CeCILL-C                     #
+#            LICENSE  : CeCILL-C 2.1                 #
 ######################################################
 
 ######################################################
@@ -176,7 +176,7 @@ do
 			EXTRA_CXXFLAGS="`get_arg_value \"$arg\" CXXFLAGS`"
 			;;
 		LDFLAGS=*)
-			EXTRA_LDFLAGS="`get_arg_value \"$arg\" CFLAGS`"
+			EXTRA_LDFLAGS="`get_arg_value \"$arg\" LDFLAGS`"
 			;;
 		*)
 			echo "Invalid argument : $arg, please check in --help." 1>&2

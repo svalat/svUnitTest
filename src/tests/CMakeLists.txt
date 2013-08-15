@@ -3,7 +3,7 @@
 #            VERSION  : 0.5.0-dev                    #
 #            DATE     : 11/2012                      #
 #            AUTHOR   : Valat Sébastien              #
-#            LICENSE  : CeCILL-C                     #
+#            LICENSE  : CeCILL-C 2.1                 #
 ######################################################
 
 include_directories (../lib/ ../lib/formatters ../lib/listeners ../lib/core ../lib/runner ./ ./helper)
