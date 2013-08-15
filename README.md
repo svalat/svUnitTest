@@ -1,6 +1,8 @@
 How to install svUnitTest
 =========================
 
+[![Build Status](https://travis-ci.org/svalat/svUnitTest.png?branch=master)](https://travis-ci.org/svalat/svUnitTest)
+
 Basic compilation using cmake
 -----------------------------
 
