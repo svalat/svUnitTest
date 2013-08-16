@@ -7,7 +7,5 @@
 ######################################################
 
 ######################################################
-#install ressources in ${prefix}/share/svUnitTest
-install(DIRECTORY svUnitTest_html DESTINATION ${CMAKE_INSTALL_PREFIX}/share/svUnitTest)
-install(DIRECTORY svUnitTest_fake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/svUnitTest)
-install(FILES ../lib/compat/svutGTest.h DESTINATION ${CMAKE_INSTALL_PREFIX}/share/svUnitTest/svUnitTest_fake/include/svUnitTest)
+add_executable(UnitTest_svutGTest UnitTest_svutGTest.cpp)
+target_link_libraries (UnitTest_svutGTest svutUnitTestBase svunittest)

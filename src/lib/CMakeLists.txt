@@ -80,10 +80,12 @@ set(svUnitTest_INC
 	formatters/svutResultFormatterStdBW.h
 	formatters/svutResultFormatterStdColored.h
 	formatters/svutResultFormatterStd.h
-	formatters/svutResultFormatterXml.h)
+	formatters/svutResultFormatterXml.h
+
+	compat/svutGTest.h)
 
 #include subdir headers
-include_directories(./ ./formatters ./listeners ./runner ./core)
+include_directories(./ ./formatters ./listeners ./runner ./core ./compat)
 
 #enable coverage profiling
 set(TEST_COVERAGE no CACHE BOOL "Compile svUnitTest library with coverage CFLAGS.")

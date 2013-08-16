@@ -6,7 +6,7 @@
 #            LICENSE  : CeCILL-C 2.1                 #
 ######################################################
 
-include_directories (../lib/ ../lib/formatters ../lib/listeners ../lib/core ../lib/runner ./ ./helper)
+include_directories (../lib/ ../lib/formatters ../lib/listeners ../lib/core ../lib/runner ../lib/compat ./ ./helper)
 
 add_definitions(-DTEST_SRC_BASE_PATH="${CMAKE_CURRENT_SOURCE_DIR}/helper")
 
@@ -104,6 +104,7 @@ add_subdirectory(formatters)
 add_subdirectory(listeners)
 add_subdirectory(core)
 add_subdirectory(runner)
+add_subdirectory(compat)
 
 ############# BUILD MAIN TESTS ##################
 add_executable(svutDefaultMain UnitTest_defaultMain.cpp)

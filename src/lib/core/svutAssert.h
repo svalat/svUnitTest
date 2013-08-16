@@ -278,7 +278,7 @@ namespace svUnitTest
  * @param what Define the piece of code to run and on which to catch the exception.
 **/
 #define SVUT_ASSERT_THROW(name,what) \
-	try {\
+	do { try {\
 		what;\
 		throw svUnitTest::svutExAssertFailThrow(#name,"NONE",SVUT_CODE_LOCATION);\
 	} catch(name) {\
@@ -286,7 +286,10 @@ namespace svUnitTest
 		throw; \
 	} catch(...) {\
 		throw svUnitTest::svutExAssertFailThrow(#name,"UNKNOWN",SVUT_CODE_LOCATION);\
-	}
+	} } while(0)
+
+/********************  MACRO  ***********************/
+typedef int svutSpecialTmpException;
 
 /********************  MACRO  ***********************/
 /**
@@ -294,13 +297,13 @@ namespace svUnitTest
  * @param what Define the piece of code to run and on which to catch the exception.
 **/
 #define SVUT_ASSERT_THROW_SOMETHING(what) \
-	try {\
+	do { try {\
 		what;\
-		throw svUnitTest::svutExAssertFailThrow("...","NONE",SVUT_CODE_LOCATION);\
-	}  catch(svUnitTest::svutExAssertFailThrow &) { \
-		throw; \
+		throw svUnitTest::svutSpecialTmpException(10);\
+	}  catch(svUnitTest::svutSpecialTmpException &) { \
+		svUnitTest::svutExAssertFailThrow("...","NONE",SVUT_CODE_LOCATION);\
 	} catch(...) {\
-	}
+	} } while(0)
 
 /********************  MACRO  ***********************/
 /**
@@ -310,12 +313,12 @@ namespace svUnitTest
  * @param what Define the piece of code to run and on which to catch the exception.
  **/
 #define SVUT_ASSERT_NOT_THROW(name,what) \
-	try {\
+	do { try {\
 		what;\
 	} catch(name) {\
 		throw svUnitTest::svutExAssertFailThrow("NONE",#name,SVUT_CODE_LOCATION);\
 	} catch(...) {\
-	}
+	} } while(0)
 
 /********************  MACRO  ***********************/
 /**
@@ -324,11 +327,11 @@ namespace svUnitTest
  * @param what Define the piece of code to run and on which to catch the exception.
  **/
 #define SVUT_ASSERT_MAY_NOT_THROW(what) \
-	try {\
+	do { try {\
 		what;\
 	} catch(...) {\
 		throw svUnitTest::svutExAssertFailThrow("NONE","...",SVUT_CODE_LOCATION);\
-	}
+	} } while(0)
 
 }
 
