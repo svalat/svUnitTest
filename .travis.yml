@@ -2,4 +2,4 @@ language: cpp
 compiler:
   - clang
   - gcc
-script: mkdir -p build && cd build && ../configure && make && make test
+script: mkdir -p build && cd build && ../configure --enable-debug && make && make test
