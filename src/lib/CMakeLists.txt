@@ -68,6 +68,7 @@ set(svUnitTest_INC
 	core/svutStatusInfo.h
 	core/svutTestCase.h
 	core/svutFlatTestCase.h
+	core/svutFlatFixture.h
 
 	listeners/svutListener.h
 	listeners/svutListenerMultiplexer.h
