@@ -289,7 +289,10 @@ namespace svUnitTest
 	} } while(0)
 
 /********************  MACRO  ***********************/
-typedef int svutSpecialTmpException;
+struct svutSpecialTmpException
+{
+	svutSpecialTmpException() {};
+};
 
 /********************  MACRO  ***********************/
 /**
@@ -299,9 +302,9 @@ typedef int svutSpecialTmpException;
 #define SVUT_ASSERT_THROW_SOMETHING(what) \
 	do { try {\
 		what;\
-		throw svUnitTest::svutSpecialTmpException(10);\
+		throw svUnitTest::svutSpecialTmpException();\
 	}  catch(svUnitTest::svutSpecialTmpException &) { \
-		svUnitTest::svutExAssertFailThrow("...","NONE",SVUT_CODE_LOCATION);\
+		throw svUnitTest::svutExAssertFailThrow("...","NONE",SVUT_CODE_LOCATION);\
 	} catch(...) {\
 	} } while(0)
 

@@ -855,6 +855,8 @@ void UnitTest_svutAssert::testMacroAssertThrowSomething_bad(void)
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("...",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("NONE",e.getInfos().getEntry("Actual"));
+	} catch ( svutExAssertFail & e ) {
+		throw e;
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
 	}
@@ -883,6 +885,8 @@ void UnitTest_svutAssert::testMacroAssertNotThrow_bad(void)
 		CPPUNIT_ASSERT_EQUAL(loc,e.getInfos().getLocation());
 		CPPUNIT_ASSERT_EQUAL("NONE",e.getInfos().getEntry("Expected"));
 		CPPUNIT_ASSERT_EQUAL("int",e.getInfos().getEntry("Actual"));
+	} catch(int) {
+		CPPUNIT_FAIL("Fail to capture the exception.");
 	} catch (...) {
 		CPPUNIT_FAIL("Thow unexpected exception.");
 	}
