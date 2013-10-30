@@ -213,6 +213,8 @@ TEST(svutGTest,assert_death_if_supported)
 
 	ASSERT_DEATH_IF_SUPPORTED(*tmp=20,"segfault");
 	EXPECT_DEATH_IF_SUPPORTED(*tmp=20,"segfault");
+
+	SVUT_ASSERT_EQUAL((int*)NULL,tmp);
 }
 
 /*******************  FUNCTION  *********************/
