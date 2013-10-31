@@ -89,7 +89,7 @@ echo "------------------- TESTED VERSION -------------------"
 uname -a
 ${COMPILER} --version
 cmake --version
-make --version
+make --version || echo "Fail to get version of make"
 xsltproc --version  || echo "No xsltproc found"
 cppunit-config --version  || echo "No cppunit found"
 icpc --version || echo "No icpc found"
