@@ -15,4 +15,4 @@ script:
   - make test
 
 after_success:
-  - if [ "$CXX" == "g++" ]; then coveralls --exclude lib --exclude tests --gcov-options '\-lp'; fi
+  - if [ "$CXX" == "g++" ]; then coveralls --gcov-options '\-lp'; fi
