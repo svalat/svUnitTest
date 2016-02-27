@@ -2,6 +2,7 @@ How to install svUnitTest
 =========================
 
 [![Build Status](https://travis-ci.org/svalat/svUnitTest.png?branch=master)](https://travis-ci.org/svalat/svUnitTest)
+[![Coverage Status](https://coveralls.io/repos/github/svalat/svUnitTest/badge.svg?branch=master)](https://coveralls.io/github/svalat/svUnitTest?branch=master)
 
 Basic compilation using cmake
 -----------------------------
