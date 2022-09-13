@@ -272,7 +272,7 @@ void svutTestCase::testMethodsRegistration(void )
  * @throw svutExInternalError This exception is thrown when tying to change the test case name
  * after test execution start point.
 **/
-void svutTestCase::setTestCaseName(std::string name) throw (svutExInternalError)
+void svutTestCase::setTestCaseName(std::string name)
 {
 	if (this->nameLocked)
 	{

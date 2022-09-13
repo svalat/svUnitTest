@@ -64,9 +64,9 @@ class svutRunnerConfigArgp : public svutArgp
 	public:
 		svutRunnerConfigArgp(class svutRunnerConfig & config);
 	protected:
-		virtual void parseInit(void)  throw (svutExArgpError);
-		virtual void parseOption(char key,std::string arg,std::string value) throw (svutExArgpError);
-		virtual void parseTerminate(void)  throw (svutExArgpError);
+		virtual void parseInit(void);
+		virtual void parseOption(char key,std::string arg,std::string value);
+		virtual void parseTerminate(void);
 		/** Keep reference to svutRunnerConfig object to set parameters from parsed arguement. **/
 		svutRunnerConfig * config;
 };

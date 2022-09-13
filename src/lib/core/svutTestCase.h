@@ -172,7 +172,7 @@ class svutTestCase
 		double getTestTotalCaseDuration(void) const;
 	protected:
 		virtual void testMethodsRegistration(void);
-		void setTestCaseName(std::string name) throw (svutExInternalError);
+		void setTestCaseName(std::string name);
 		void registerTestMethod(svutTestMethod * test);
 		svutStatusInfo runTestMethod(svutTestMethod * test);
 		void MARK_AS_KNOWN_ERROR(std::string message);

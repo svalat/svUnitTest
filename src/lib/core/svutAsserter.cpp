@@ -46,7 +46,6 @@ bool assertOperatorNotEqual(const char * expected,const char * actual)
  * @param location Define the code location which call this test.
 **/
 void assertEqualStrict(const char * expected,const char * actual,svutCodeLocation location)
-	throw(svutExAssertFailEqual)
 {
 	assertEqual(expected, actual, location);
 }
@@ -59,7 +58,6 @@ void assertEqualStrict(const char * expected,const char * actual,svutCodeLocatio
  * @param location Define the code location which call this test.
 **/
 void assertNotEqualStrict(const char * expected,const char * actual,svutCodeLocation location)
-	throw(svutExAssertFailEqual)
 {
 	assertNotEqual(expected, actual, location);
 }
@@ -73,7 +71,6 @@ void assertNotEqualStrict(const char * expected,const char * actual,svutCodeLoca
  * @param location Define the code location which call this test.
 **/
 void assertSame(const void * expected,const void * actual,svutCodeLocation  location)
-	throw(svutExAssertFailEqual)
 {
 	if ((expected == actual) == false)
 	{
@@ -92,7 +89,6 @@ void assertSame(const void * expected,const void * actual,svutCodeLocation  loca
  * @param location Define the code location which call this test.
 **/
 void assertNotSame(const void * expected,const void * actual,svutCodeLocation  location)
-	throw(svutExAssertFailEqual)
 {
 	if ((expected != actual) == false)
 	{
@@ -103,7 +99,7 @@ void assertNotSame(const void * expected,const void * actual,svutCodeLocation  l
 }
 
 /*******************  FUNCTION  *********************/
-void assertGT(const char * expectedLimit,const char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+void assertGT(const char * expectedLimit,const char * actual,svutCodeLocation location)
 {
 	if (asserterOperatorGT(actual,expectedLimit) == false)
 	{
@@ -113,7 +109,7 @@ void assertGT(const char * expectedLimit,const char * actual,svutCodeLocation lo
 }
 
 /*******************  FUNCTION  *********************/
-void assertGE(const char * expectedLimit,const char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+void assertGE(const char * expectedLimit,const char * actual,svutCodeLocation location)
 {
 	if (asserterOperatorGE(actual,expectedLimit) == false)
 	{
@@ -123,7 +119,7 @@ void assertGE(const char * expectedLimit,const char * actual,svutCodeLocation lo
 }
 
 /*******************  FUNCTION  *********************/
-void assertLT(const char * expectedLimit,const char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+void assertLT(const char * expectedLimit,const char * actual,svutCodeLocation location)
 {
 	if (asserterOperatorLT(actual,expectedLimit) == false)
 	{
@@ -133,7 +129,7 @@ void assertLT(const char * expectedLimit,const char * actual,svutCodeLocation lo
 }
 
 /*******************  FUNCTION  *********************/
-void assertLE(const char * expectedLimit,const char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+void assertLE(const char * expectedLimit,const char * actual,svutCodeLocation location)
 {
 	if (asserterOperatorLE(actual,expectedLimit) == false)
 	{
@@ -143,7 +139,7 @@ void assertLE(const char * expectedLimit,const char * actual,svutCodeLocation lo
 }
 
 /*******************  FUNCTION  *********************/
-void assertGT(char * expectedLimit,char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+void assertGT(char * expectedLimit,char * actual,svutCodeLocation location)
 {
 	if (asserterOperatorGT(actual,expectedLimit) == false)
 	{
@@ -153,7 +149,7 @@ void assertGT(char * expectedLimit,char * actual,svutCodeLocation location) thro
 }
 
 /*******************  FUNCTION  *********************/
-void assertGE(char * expectedLimit,char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+void assertGE(char * expectedLimit,char * actual,svutCodeLocation location)
 {
 	if (asserterOperatorGE(actual,expectedLimit) == false)
 	{
@@ -163,7 +159,7 @@ void assertGE(char * expectedLimit,char * actual,svutCodeLocation location) thro
 }
 
 /*******************  FUNCTION  *********************/
-void assertLT(char * expectedLimit,char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+void assertLT(char * expectedLimit,char * actual,svutCodeLocation location)
 {
 	if (asserterOperatorLT(actual,expectedLimit) == false)
 	{
@@ -173,7 +169,7 @@ void assertLT(char * expectedLimit,char * actual,svutCodeLocation location) thro
 }
 
 /*******************  FUNCTION  *********************/
-void assertLE(char * expectedLimit,char * actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+void assertLE(char * expectedLimit,char * actual,svutCodeLocation location)
 {
 	if (asserterOperatorLE(actual,expectedLimit) == false)
 	{

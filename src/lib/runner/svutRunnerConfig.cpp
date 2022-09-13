@@ -62,7 +62,7 @@ svutRunnerConfigArgp::svutRunnerConfigArgp ( svutRunnerConfig& config )
 }
 
 /*******************  FUNCTION  *********************/
-void svutRunnerConfigArgp::parseInit ( void ) throw (svutExArgpError)
+void svutRunnerConfigArgp::parseInit ( void )
 {
 }
 
@@ -77,7 +77,7 @@ void svutRunnerConfigArgp::parseInit ( void ) throw (svutExArgpError)
  * @throw svutExArgpError On error, throw such exception to notify the arguement paror.
  * It will redirecte the related message to error output, please don't use cerr direclty here.
 **/
-void svutRunnerConfigArgp::parseOption ( char key, std::string arg, std::string value ) throw (svutExArgpError)
+void svutRunnerConfigArgp::parseOption ( char key, std::string arg, std::string value )
 {
 	stringstream err;
 	switch (key)
@@ -130,7 +130,7 @@ void svutRunnerConfigArgp::parseOption ( char key, std::string arg, std::string 
 }
 
 /*******************  FUNCTION  *********************/
-void svutRunnerConfigArgp::parseTerminate ( void ) throw (svutExArgpError)
+void svutRunnerConfigArgp::parseTerminate ( void )
 {
 }
 

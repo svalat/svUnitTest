@@ -97,9 +97,9 @@ class UnitTest_MyArgp : public svutArgp
 	public:
 		UnitTest_MyArgp(void);
 		void resetMock(void);
-		virtual void parseInit(void) throw (svutExArgpError);
-		virtual void parseOption(char key,std::string arg,std::string value) throw (svutExArgpError);
-		virtual void parseTerminate(void) throw (svutExArgpError);
+		virtual void parseInit(void);
+		virtual void parseOption(char key,std::string arg,std::string value);
+		virtual void parseTerminate(void);
 		bool hasDoneParseInit;
 		bool hasDoneParseTerminate;
 		std::string parsedOptions;
@@ -447,13 +447,13 @@ UnitTest_MyArgp::UnitTest_MyArgp(void ): svutArgp()
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_MyArgp::parseInit(void )  throw (svutExArgpError)
+void UnitTest_MyArgp::parseInit(void )
 {
 	this->hasDoneParseInit = true;
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_MyArgp::parseOption( char key, string arg, string value) throw (svutExArgpError)
+void UnitTest_MyArgp::parseOption( char key, string arg, string value)
 {
 	if ( ! this->parsedOptions.empty() )
 		this->parsedOptions += " ; ";
@@ -472,7 +472,7 @@ void UnitTest_MyArgp::parseOption( char key, string arg, string value) throw (sv
 }
 
 /*******************  FUNCTION  *********************/
-void UnitTest_MyArgp::parseTerminate(void )  throw (svutExArgpError)
+void UnitTest_MyArgp::parseTerminate(void )
 {
 	this->hasDoneParseTerminate = true;
 }

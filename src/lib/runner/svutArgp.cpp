@@ -110,7 +110,7 @@ void svutArgp::setProjectBugAddress(std::string projectBugAddress)
  * @param descr Define a short description for the new option.
  * @throw svutExArgpDuplicateKey The given key already exist and can't be added.
 **/
-void svutArgp::decalareOption(char key, std::string name, std::string valueType, std::string descr) throw (svutExArgpDuplicateKey)
+void svutArgp::decalareOption(char key, std::string name, std::string valueType, std::string descr)
 {
 	svutArgDef arg;
 	arg.key = key;
@@ -299,7 +299,7 @@ string svutArgp::breakLines ( std::string value, unsigned int columns , std::str
  * @param value Define the value given with the arguement if available.
  * @throw svutExArgpError Exception used to notify arguement error.
 **/
-void svutArgp::callParseOption ( char key, std::string arg, std::string value )  throw (svutExArgpError)
+void svutArgp::callParseOption ( char key, std::string arg, std::string value )
 {
 	switch (key)
 	{
@@ -486,7 +486,7 @@ bool svutArgp::parse(int argc, const char* argv[],std::ostream & err)
  *         the arguement use a value.
  * @throw svutExArgpError Transmet error caming from parseOption.
 **/
-int svutArgp::scanLongOption(std::string name, int argc, const char* argv[]) throw (svutExArgpError)
+int svutArgp::scanLongOption(std::string name, int argc, const char* argv[])
 {
 	size_t cut = name.find_first_of("=");
 	svutArgpOptionMap::const_iterator it = options.begin();
@@ -533,7 +533,7 @@ int svutArgp::scanLongOption(std::string name, int argc, const char* argv[]) thr
  *         the arguement use a value.
  * @throw svutExArgpError Transmet error caming from parseOption or multiple arguments with values.
 **/
-int svutArgp::scanShortOptions(std::string list, int argc, const char* argv[]) throw (svutExArgpError)
+int svutArgp::scanShortOptions(std::string list, int argc, const char* argv[])
 {
 	int res = 1;
 	svutArgpOptionMap::const_iterator it;
@@ -569,7 +569,7 @@ int svutArgp::scanShortOptions(std::string list, int argc, const char* argv[]) t
  * @throw svutExArgpError Transmet error caming from parseOption
  * @return Return 2 if use the next arguement to read related value, 1 otherwise.
 **/
-int svutArgp::scanCheckedOption(const svutArgDef& option, int shortKey, int argc, const char* argv[])  throw (svutExArgpError)
+int svutArgp::scanCheckedOption(const svutArgDef& option, int shortKey, int argc, const char* argv[])
 {
 	char arg[] = {'-',option.key,'\0'};
 	if (option.valueType == "NONE") {

@@ -83,7 +83,7 @@ class svutArgp
 		svutArgp(bool autoExit = false);
 		virtual ~svutArgp(void);
 		bool parse(int argc, const char * argv[],std::ostream & err = std::cerr);
-		void decalareOption(char key,std::string name,std::string valueType,std::string descr) throw (svutExArgpDuplicateKey);
+		void decalareOption(char key,std::string name,std::string valueType,std::string descr);
 		void clearOptions(void);
 		void showHelp(std::ostream & out = std::cout) const;
 		std::string getHelp(int columns = 80) const;
@@ -100,7 +100,7 @@ class svutArgp
 		 * Methode called while starting to parse arguements.
 		 * @throw svutExArgpError Use exception to repot error in initialisation.
 		**/
-		virtual void parseInit(void)  throw (svutExArgpError) = 0;
+		virtual void parseInit(void) = 0;
 		/**
 		 * Methode called while reading each arguement.
 		 * @param key Define the key of arguement (the short name, eg. -v)
@@ -109,22 +109,22 @@ class svutArgp
 		 * @param value Define the value given with the arguement if available.
 		 * @throw svutExArgpError Exception used to notify arguement error.
 		**/
-		virtual void parseOption(char key,std::string arg,std::string value) throw (svutExArgpError) = 0;
+		virtual void parseOption(char key,std::string arg,std::string value) = 0;
 		/**
 		 * Method called while ending to parse arguements.
 		 * @throw svutExArgpError Use exception to repot error in termination.
 		**/
-		virtual void parseTerminate(void)  throw (svutExArgpError) = 0;
+		virtual void parseTerminate(void) = 0;
 	private:
 		int getTermColumns(void) const;
 		std::string formatArgumentHelp(svutArgDef arg,int columns) const;
 		bool isValidKey(char key) const;
 		void setupDefaultOptions(void);
 		bool hasLongName(std::string name) const;
-		int scanLongOption(std::string name,int argc, const char * argv[]) throw (svutExArgpError);
-		int scanShortOptions(std::string list,int argc, const char * argv[]) throw (svutExArgpError);
-		int scanCheckedOption(const svutArgDef & option,int shortKey,int argc, const char * argv[]) throw (svutExArgpError);
-		void callParseOption(char key,std::string arg,std::string value) throw (svutExArgpError);
+		int scanLongOption(std::string name,int argc, const char * argv[]);
+		int scanShortOptions(std::string list,int argc, const char * argv[]);
+		int scanCheckedOption(const svutArgDef & option,int shortKey,int argc, const char * argv[]);
+		void callParseOption(char key,std::string arg,std::string value);
 		std::string genUsageParam(const svutArgDef & arg,bool useShort) const;
 		std::string breakLines( std::string pad, unsigned int columns, std::string value) const;
 		

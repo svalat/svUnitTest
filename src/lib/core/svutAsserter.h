@@ -144,7 +144,7 @@ static std::string asserterToString(const T & value)
  * @param location Define the code location which call this test.
 **/
 template <class T1,class T2>
-static void assertEqual(const T1 & expected,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+static void assertEqual(const T1 & expected,const T2 & actual,svutCodeLocation location)
 {
 	if (asserterOperatorEqual(expected,actual) == false)
 	{
@@ -167,7 +167,7 @@ static void assertEqual(const T1 & expected,const T2 & actual,svutCodeLocation l
  * @param location Define the code location which call this test.
 **/
 template <class T1,class T2>
-static void assertNotEqual(const T1 & expected,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+static void assertNotEqual(const T1 & expected,const T2 & actual,svutCodeLocation location)
 {
 	if (asserterOperatorNotEqual(expected,actual) == false)
 	{
@@ -189,7 +189,7 @@ static void assertNotEqual(const T1 & expected,const T2 & actual,svutCodeLocatio
  * @param location Define the code location which call this test.
 **/
 template <class T>
-static void assertEqualStrict(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+static void assertEqualStrict(const T & expected,const T & actual,svutCodeLocation location)
 {
 	assertEqual(expected,actual,location);
 }
@@ -208,7 +208,7 @@ static void assertEqualStrict(const T & expected,const T & actual,svutCodeLocati
  * @param location Define the code location which call this test.
 **/
 template <class T>
-static void assertNotEqualStrict(const T & expected,const T & actual,svutCodeLocation location) throw(svutExAssertFailEqual)
+static void assertNotEqualStrict(const T & expected,const T & actual,svutCodeLocation location)
 {
 	assertNotEqual(expected,actual,location);
 }
@@ -227,7 +227,7 @@ static void assertNotEqualStrict(const T & expected,const T & actual,svutCodeLoc
  * @param location Define the code location which call this test.
 **/
 template <class T1,class T2>
-static void assertGT(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+static void assertGT(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location)
 {
 	if (asserterOperatorGT(actual,expectedLimit) == false)
 	{
@@ -250,7 +250,7 @@ static void assertGT(const T1 & expectedLimit,const T2 & actual,svutCodeLocation
  * @param location Define the code location which call this test.
 **/
 template <class T1,class T2>
-static void assertGE(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+static void assertGE(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location)
 {
 	if (asserterOperatorGE(actual,expectedLimit) == false)
 	{
@@ -273,7 +273,7 @@ static void assertGE(const T1 & expectedLimit,const T2 & actual,svutCodeLocation
  * @param location Define the code location which call this test.
 **/
 template <class T1,class T2>
-static void assertLT(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+static void assertLT(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location)
 {
 	if (asserterOperatorLT(actual,expectedLimit) == false)
 	{
@@ -304,7 +304,7 @@ static bool asserterOperatorEqualZero(const T & value)
  * @param location Define the code location which call this test.
 **/
 template <class T>
-static void assertZero(const T & value,svutCodeLocation location) throw (svutExAssertFailZero)
+static void assertZero(const T & value,svutCodeLocation location)
 {
 	if (asserterOperatorEqualZero(value) == false)
 		throw svutExAssertFailZero(asserterToString(value),location);
@@ -338,7 +338,7 @@ static bool asserterOperatorEqualZeros(const T * value,size_t size)
  * @param location Define the code location which call this test.
 **/
 template <class T>
-static void assertZeros(const T & value,size_t size,svutCodeLocation location) throw (svutExAssertFailZeros)
+static void assertZeros(const T & value,size_t size,svutCodeLocation location)
 {
 	if (asserterOperatorEqualZeros(value,size) == false)
 	{
@@ -360,7 +360,7 @@ static void assertZeros(const T & value,size_t size,svutCodeLocation location) t
  * @param location Define the code location which call this test.
 **/
 template <class T1,class T2>
-static void assertLE(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location) throw(svutExAssertFailLimit)
+static void assertLE(const T1 & expectedLimit,const T2 & actual,svutCodeLocation location)
 {
 	if (asserterOperatorLE(actual,expectedLimit) == false)
 	{
@@ -372,18 +372,18 @@ static void assertLE(const T1 & expectedLimit,const T2 & actual,svutCodeLocation
 /*******************  FUNCTION  *********************/
 bool assertOperatorEqual(const char * expected,const char * actual);
 bool assertOperatorNotEqual(const char * expected,const char * actual);
-void assertGT(const char* expectedLimit,const char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
-void assertGE(const char* expectedLimit,const char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
-void assertLT(const char* expectedLimit,const char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
-void assertLE(const char* expectedLimit,const char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
-void assertGT(char* expectedLimit,char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
-void assertGE(char* expectedLimit,char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
-void assertLT(char* expectedLimit,char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
-void assertLE(char* expectedLimit,char* actual,svutCodeLocation location) throw(svutExAssertFailLimit);
-void assertEqualStrict(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
-void assertNotEqualStrict(const char * expected,const char * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
-void assertSame(const void * expected,const void * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
-void assertNotSame(const void * expected,const void * actual,svutCodeLocation location) throw(svutExAssertFailEqual);
+void assertGT(const char* expectedLimit,const char* actual,svutCodeLocation location);
+void assertGE(const char* expectedLimit,const char* actual,svutCodeLocation location);
+void assertLT(const char* expectedLimit,const char* actual,svutCodeLocation location);
+void assertLE(const char* expectedLimit,const char* actual,svutCodeLocation location);
+void assertGT(char* expectedLimit,char* actual,svutCodeLocation location);
+void assertGE(char* expectedLimit,char* actual,svutCodeLocation location);
+void assertLT(char* expectedLimit,char* actual,svutCodeLocation location);
+void assertLE(char* expectedLimit,char* actual,svutCodeLocation location);
+void assertEqualStrict(const char * expected,const char * actual,svutCodeLocation location);
+void assertNotEqualStrict(const char * expected,const char * actual,svutCodeLocation location);
+void assertSame(const void * expected,const void * actual,svutCodeLocation location);
+void assertNotSame(const void * expected,const void * actual,svutCodeLocation location);
 
 }
 
